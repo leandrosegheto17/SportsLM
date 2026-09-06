@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.bloco {
+  display: block;
+  border-radius: var(--raio-md);
+  background: var(--cor-superficie-2);
+}
+
+.bloco[data-variante='cartao'] {
+  height: var(--esp-8);
+  width: 100%;
+}
+
+.bloco[data-variante='linha-tabela'] {
+  height: var(--esp-6);
+  width: 100%;
+  border-radius: var(--raio-sm);
+}
+
+.bloco[data-variante='faixa'] {
+  height: 72px;
+  width: 100%;
+}
+
+.bloco[data-variante='bloco'] {
+  height: var(--esp-7);
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bloco {
+    animation: pulsar var(--duracao-transicao-rapida) ease-in-out infinite alternate;
+  }
+}
+
+@keyframes pulsar {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.6;
+  }
+}

@@ -1,0 +1,171 @@
+/*
+ * PainelTime.module.css — UI-T05-01 (UX-SPEC §2 "T-05 · Painel do time")
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4).
+ *
+ * Uma única lista de cartões (`.listaCampeonatos`), em coluna no mobile e em
+ * grade de 2 colunas a partir do breakpoint de desktop — a ORDEM dos
+ * elementos nunca muda entre os dois, só o `grid-template-columns`
+ * (garantindo "ordenação idêntica em mobile e desktop", CA-07.4, por não
+ * haver dois DOMs a manter sincronizados).
+ */
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  max-width: var(--largura-container);
+  margin: 0 auto;
+  padding: var(--esp-4) var(--margem-lateral) var(--esp-8);
+}
+
+.trocarTime {
+  align-self: flex-end;
+}
+
+.proximoJogoDataHora {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+  margin: 0 0 var(--esp-2) 0;
+}
+
+.proximoJogoConfronto {
+  font: var(--txt-manchete) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-tracking);
+  color: var(--cor-tinta);
+  margin: 0 0 var(--esp-1) 0;
+}
+
+.proximoJogoMeta {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+.cabecalhoLista {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--esp-2);
+  margin-top: var(--esp-2);
+}
+
+.tituloLista {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+  margin: 0;
+}
+
+.listaCampeonatos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* Duas variáveis (clara/escura) definidas inline pelo componente a partir
+   * da `PaletaClube` do torcedor — mesmo mecanismo de duas camadas que
+   * `FaixaClube.module.css`/`SecaoIdentidade.module.css` já usam para
+   * escolher a cor certa por tema sem o componente ler `data-tema`. */
+  --clube-identidade: var(--pt-identidade-clara, var(--cor-tinta));
+}
+
+:global(html[data-tema='escuro']) .listaCampeonatos {
+  --clube-identidade: var(--pt-identidade-escura, var(--cor-superficie-2));
+}
+
+@media (min-width: 1024px) {
+  .listaCampeonatos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+  }
+}
+
+.cartao {
+  min-width: 0;
+}
+
+.cartaoLink {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  min-height: var(--alvo-toque-minimo);
+  padding: var(--esp-3) var(--esp-4);
+  background: var(--cor-superficie);
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-left-width: var(--barra-cartao-espessura);
+  border-left-style: solid;
+  /* Cor da barra: identidade do clube nas linhas em andamento/não iniciado,
+   * `--cor-esmaecido` (cinza) quando o campeonato já se encerrou (eliminado/
+   * concluído) — nunca a única pista, o texto do status sempre acompanha. */
+  border-left-color: var(--clube-identidade, var(--cor-esmaecido));
+  border-radius: var(--raio-md);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--duracao-transicao-rapida) var(--easing-padrao);
+}
+
+.cartaoLink:hover {
+  border-color: var(--cor-borda-forte);
+}
+
+.cartaoLink[data-status='eliminado'],
+.cartaoLink[data-status='concluido'] {
+  border-left-color: var(--cor-esmaecido);
+}
+
+.cartaoNome {
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-sec-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+}
+
+.cartaoStatus {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.cartaoMeta {
+  font: var(--txt-dado) var(--fonte-sistema);
+  letter-spacing: var(--txt-dado-tracking);
+  font-variant-numeric: var(--numero-tabular);
+  color: var(--cor-tinta);
+}
+
+/* CA-07.2 — cartão "sem dados": tracejado, sem barra de cor, nunca omitido. */
+.cartaoSemDados {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  min-height: var(--alvo-toque-minimo);
+  padding: var(--esp-3) var(--esp-4);
+  border: var(--borda-fina) dashed var(--cor-borda-forte);
+  border-radius: var(--raio-md);
+}
+
+.cartaoSemDadosTitulo {
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-sec-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+  margin: 0;
+}
+
+.cartaoSemDadosTexto {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}

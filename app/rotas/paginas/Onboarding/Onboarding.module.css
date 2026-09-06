@@ -1,0 +1,46 @@
+/*
+ * Onboarding.module.css — UI-T01-01 (TASK.md Lote 8)
+ *
+ * Layout do estado "Erro" (UX-SPEC §4/T-01) — o layout do estado
+ * vazio/preenchido vive em `PassoFavoritos.module.css`. Nenhum valor literal
+ * de cor/tamanho/espaçamento fora de `tokens.css` (Diretriz de Implementação #4).
+ */
+
+.tela {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.conteudoErro {
+  max-width: var(--largura-container);
+  margin: 0 auto;
+  padding: var(--esp-5) var(--margem-lateral);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  .conteudoErro {
+    max-width: 640px;
+  }
+}
+
+/* UI-T01-02 — transição da faixa neutra para a faixa do clube ao confirmar
+ * (UX-SPEC §2/T-01 passo 2: "150 ms, desligada sob prefers-reduced-motion").
+ * `--duracao-transicao` já zera sob `prefers-reduced-motion: reduce`
+ * (`tokens.css`), então este `@keyframes` puramente CSS já respeita a
+ * preferência sem checagem adicional aqui — a checagem em JS
+ * (`Onboarding.tsx`) só decide se esta tela chega a ser montada. */
+.transicao {
+  animation: aparecerFaixaClube var(--duracao-transicao) var(--easing-padrao);
+}
+
+@keyframes aparecerFaixaClube {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

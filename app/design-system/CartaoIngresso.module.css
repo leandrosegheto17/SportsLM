@@ -1,0 +1,111 @@
+/*
+ * CartaoIngresso.module.css — UI-DS-03 (UX-SPEC §3.8.3)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento aqui além de tokens de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4). A única
+ * exceção documentada é `--cartao-cor-barra`, custom property recebida via
+ * `style` inline do componente (cor de esporte/clube já resolvida por quem
+ * chama `CartaoIngresso` — mesmo padrão de `--clube-*` descrito em
+ * `app/design-system/README.md`).
+ */
+
+.cartao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  min-height: var(--alvo-toque-minimo);
+  padding: var(--esp-3) var(--esp-4);
+  background: var(--cor-superficie);
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-left-width: var(--barra-cartao-espessura);
+  border-left-style: solid;
+  border-radius: var(--raio-md);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--duracao-transicao-rapida) var(--easing-padrao);
+}
+
+.cartao:hover {
+  border-color: var(--cor-borda-forte);
+}
+
+/* Cor da barra (UX-SPEC §3.8.3): "esporte" ou "clube" usam a custom property
+ * `--cartao-cor-barra` resolvida pelo chamador; sem valor, cai no cinza de
+ * "sem informação" para nunca deixar a barra sem contorno perceptível. */
+.barraEsporte,
+.barraClube {
+  border-left-color: var(--cartao-cor-barra, var(--cor-esmaecido));
+}
+
+/* "cinza quando encerrado ou bloqueado" — cor fixa, não a custom property do
+ * chamador, e sempre acompanhada do rótulo textual "encerrado" (WCAG 1.4.1,
+ * Diretriz de Implementação #7). */
+.barraEncerrada {
+  border-left-color: var(--cor-esmaecido);
+}
+
+/* "tracejado sem barra quando é 'sem dados'" — traço, não preenchimento de
+ * cor, e sempre acompanhado do rótulo textual "sem dados". */
+.barraSemDados {
+  border-left-style: dashed;
+  border-left-color: var(--cor-borda-forte);
+}
+
+.linhaSuperior {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--esp-2);
+}
+
+.etiqueta {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+  background: var(--cor-superficie-2);
+  border-radius: var(--raio-sm);
+  padding: 0 var(--esp-2);
+}
+
+.fonte,
+.tempo {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  color: var(--cor-texto-secundario);
+}
+
+.horarioEstimado {
+  margin-left: var(--esp-1);
+}
+
+.rotuloEstado {
+  align-self: flex-start;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.titulo {
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-sec-tracking);
+  color: var(--cor-tinta);
+}
+
+.resumo {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  color: var(--cor-texto-secundario);
+}
+
+.tambemEm {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}

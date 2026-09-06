@@ -1,0 +1,11 @@
+.etiqueta {
+  display: inline-block;
+  padding: 0 var(--esp-2);
+  border-radius: var(--raio-sm);
+  background: var(--clube-suave);
+  color: var(--cor-tinta);
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  white-space: nowrap;
+}

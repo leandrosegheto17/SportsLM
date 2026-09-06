@@ -1,0 +1,40 @@
+.selo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+}
+
+.ponto {
+  width: var(--esp-2);
+  height: var(--esp-2);
+  border-radius: var(--raio-pill);
+  background: var(--cor-esmaecido);
+}
+
+.selo[data-estado='ativa'] .ponto {
+  background: var(--cor-vitoria);
+}
+
+.selo[data-estado='bloqueada'] .ponto {
+  background: var(--cor-derrota);
+}
+
+.selo[data-estado='instavel'] .ponto {
+  background: var(--cor-aviso-texto);
+}
+
+.selo[data-estado='fixa'] .ponto {
+  background: var(--cor-tinta);
+}
+
+.nome {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+}
+
+.texto {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}

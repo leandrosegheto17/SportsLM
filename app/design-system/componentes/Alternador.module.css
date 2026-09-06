@@ -1,0 +1,49 @@
+/* Alternador.module.css — UI-DS-07A. UX-SPEC §3.8: "44 px, rótulo à esquerda". */
+
+.linha {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-3);
+  min-height: var(--alvo-toque-minimo);
+}
+
+.rotulo {
+  font: var(--txt-corpo) var(--fonte-sistema);
+  color: var(--cor-tinta);
+}
+
+.trilho {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  min-height: var(--alvo-toque-minimo);
+  padding: var(--esp-1) var(--esp-2);
+  border-radius: var(--raio-pill);
+  border: 1px solid var(--cor-borda-forte);
+  background: var(--cor-superficie-2);
+  color: var(--cor-tinta);
+  cursor: pointer;
+}
+
+.trilho:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.trilho.ligado {
+  background: var(--clube-identidade);
+  color: var(--clube-identidade-texto);
+}
+
+.bolinha {
+  width: var(--esp-4);
+  height: var(--esp-4);
+  border-radius: var(--raio-pill);
+  background: currentColor;
+}
+
+.textoEstado {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  text-transform: uppercase;
+}

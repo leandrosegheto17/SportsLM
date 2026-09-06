@@ -1,0 +1,211 @@
+[
+  {
+    "id": "ge",
+    "nome": "GE — ge.globo",
+    "fixa": true,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "termos": {
+      "url": null,
+      "verificadoEm": null,
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "espn-brasil",
+    "nome": "ESPN Brasil",
+    "fixa": false,
+    "esportesCobertos": ["futebol", "formula1", "mma", "basquete", "tenis"],
+    "termos": {
+      "url": null,
+      "verificadoEm": "2026-09-05",
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "espn-top",
+        "url": "https://www.espn.com.br/espn/rss/news",
+        "formato": "rss",
+        "esporteFixado": null
+      }
+    ],
+    "verificacao": {
+      "estado": "verificada",
+      "em": "2026-09-05",
+      "por": "coordenador"
+    }
+  },
+  {
+    "id": "gazeta-esportiva",
+    "nome": "Gazeta Esportiva",
+    "fixa": false,
+    "esportesCobertos": [
+      "basquete",
+      "tenis",
+      "volei-quadra",
+      "formula1",
+      "futsal",
+      "natacao",
+      "atletismo"
+    ],
+    "termos": {
+      "url": null,
+      "verificadoEm": "2026-09-05",
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "gazeta-basquete",
+        "url": "https://www.gazetaesportiva.com/editorias/basquete/feed/",
+        "formato": "rss",
+        "esporteFixado": "basquete"
+      },
+      {
+        "id": "gazeta-tenis",
+        "url": "https://www.gazetaesportiva.com/editorias/tenis/feed/",
+        "formato": "rss",
+        "esporteFixado": "tenis"
+      },
+      {
+        "id": "gazeta-volei",
+        "url": "https://www.gazetaesportiva.com/editorias/volei/feed/",
+        "formato": "rss",
+        "esporteFixado": "volei-quadra"
+      },
+      {
+        "id": "gazeta-automobilismo",
+        "url": "https://www.gazetaesportiva.com/editorias/automobilismo/feed/",
+        "formato": "rss",
+        "esporteFixado": "formula1"
+      },
+      {
+        "id": "gazeta-futsal",
+        "url": "https://www.gazetaesportiva.com/editorias/futsal/feed/",
+        "formato": "rss",
+        "esporteFixado": "futsal"
+      },
+      {
+        "id": "gazeta-natacao",
+        "url": "https://www.gazetaesportiva.com/editorias/natacao/feed/",
+        "formato": "rss",
+        "esporteFixado": "natacao"
+      },
+      {
+        "id": "gazeta-atletismo",
+        "url": "https://www.gazetaesportiva.com/editorias/atletismo/feed/",
+        "formato": "rss",
+        "esporteFixado": "atletismo"
+      }
+    ],
+    "verificacao": {
+      "estado": "verificada",
+      "em": "2026-09-05",
+      "por": "ba"
+    }
+  },
+  {
+    "id": "terra-esportes",
+    "nome": "Terra Esportes",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "termos": {
+      "url": null,
+      "verificadoEm": "2026-09-05",
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "terra-esportes",
+        "url": "https://www.terra.com.br/esportes/feed/",
+        "formato": "rss",
+        "esporteFixado": null
+      }
+    ],
+    "verificacao": {
+      "estado": "verificada",
+      "em": "2026-09-05",
+      "por": "ba"
+    }
+  },
+  {
+    "id": "uol-esporte",
+    "nome": "UOL Esporte",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "termos": {
+      "url": null,
+      "verificadoEm": null,
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "uol-esporte",
+        "url": "https://rss.uol.com.br/feed/esporte.xml",
+        "formato": "rss",
+        "esporteFixado": null
+      }
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    },
+    "substitutos": ["folha-esporte", "placar"]
+  }
+]

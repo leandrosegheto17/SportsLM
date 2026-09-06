@@ -1,0 +1,338 @@
+/*
+ * tokens.css — FUND-05
+ *
+ * Fonte única de verdade de todo valor literal de cor, tipografia, espaçamento,
+ * raio, sombra e alvo de toque da SPA (UX-SPEC §3.2-3.6, TASK.md Diretriz #4,
+ * GUARDRAILS.md §6). Nenhum outro arquivo de estilo do projeto declara um valor
+ * literal de cor/tamanho/espaçamento — exceção única e documentada: cor de
+ * clube, que chega como `custom property` já resolvida a partir de
+ * `clubes-2026.json` (ADR-017), nunca literal no CSS (--clube-* é declarado
+ * *aqui* só como fallback neutro de "sem time"; o valor real é injetado inline
+ * pelo componente que lê a configuração do clube, ainda não implementado nesta
+ * tarefa — Lote 7+).
+ *
+ * Estratégia de tema (UX-SPEC §3.3): resolução de tema ("sistema" | "claro" |
+ * "escuro") é feita em JS (`app/tema/tema.ts`), não em CSS — o valor efetivo
+ * ("claro" | "escuro") é escrito no atributo `data-tema` de `<html>`. Isso
+ * evita duplicar a lógica de "sistema" tanto em `@media (prefers-color-scheme)`
+ * quanto em atributo, e permite alternância em tempo real sem F5 (a mudança de
+ * atributo já dispara recálculo de cascata do navegador). `:root` guarda os
+ * valores do tema claro (padrão); `:root[data-tema='escuro']` sobrescreve com
+ * os valores do tema escuro. Zonas de classificação (RF-18) são cores fixas do
+ * sistema e não variam por tema (UX-SPEC §3.2 é a única tabela que as define).
+ */
+
+:root {
+  /* === 3.2 Cores do sistema — tema claro (padrão) === */
+  --cor-fundo: #faf7f2;
+  --cor-superficie: #ffffff;
+  --cor-superficie-2: #f1ece4;
+  --cor-borda: #e4dfd6;
+  --cor-borda-forte: #16181a;
+  --cor-tinta: #16181a;
+  --cor-texto-secundario: #5c6570;
+  --cor-nav: #16181a;
+  --cor-nav-texto: #a8b0ba;
+  --cor-nav-texto-ativo: #ffffff;
+  --cor-aviso-fundo: #fff3d1;
+  --cor-aviso-texto: #7a5300;
+  --cor-erro-fundo: #fdecea;
+  --cor-erro-texto: #b3261e;
+  --cor-vitoria: #0e6b45;
+  --cor-empate: #5c6570;
+  --cor-derrota: #b3261e;
+  --cor-foco: #1f6fb2;
+  --cor-esmaecido: #8a9099;
+
+  /* UX-SPEC §3.8.2 (`BlocoPreto`): "tira superior de 32px ... com o rótulo em
+     --txt-rotulo na cor #FFFFFF" — cor de texto fixa, que não muda com o tema
+     (só o fundo da tira muda entre claro/escuro, UX-SPEC §3.3). Token dedicado
+     para não deixar o literal #FFFFFF solto em CSS de componente (Diretriz de
+     Implementação #4). */
+  --cor-texto-sobre-tinta: #ffffff;
+
+  /* Zonas da tabela de classificação (RF-18) — cores fixas do sistema, nunca
+     do clube; não variam por tema. */
+  --zona-libertadores: #0e6b45;
+  --zona-pre-libertadores: #1f6fb2;
+  --zona-sul-americana: #5c6570;
+  --zona-rebaixamento: #b3261e;
+
+  /* === 3.4 Cores de clube — fallback "sem time escolhido" ===
+     UX-SPEC §3.4: "identidade neutra, idêntica ao tratamento acromático —
+     tinta com listras em #3A3F45". O componente que conhece o clube do
+     usuário (Lote 7+) sobrescreve estas custom properties inline a partir de
+     `clubes-2026.json`/`PaletaClube` (ADR-017) — nunca literal no CSS. */
+  --clube-identidade: var(--cor-tinta);
+  --clube-faixa-b: #3a3f45;
+  --clube-identidade-texto: var(--cor-superficie);
+  --clube-acento: var(--cor-tinta);
+  --clube-acento-sobre-escuro: var(--cor-nav-texto-ativo);
+  --clube-suave: var(--cor-superficie-2);
+  --clube-suave-escuro: var(--cor-superficie-2);
+
+  /* === 3.5 Tipografia ===
+     Cada token combina peso + tamanho/entrelinha no formato aceito pelo
+     shorthand `font` (`font: var(--txt-x) var(--fonte-sistema)`); tracking
+     fica em custom property irmã porque não faz parte do shorthand `font`. */
+  --fonte-sistema: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --numero-tabular: tabular-nums;
+
+  --txt-camisa: 800 72px/64px;
+  --txt-camisa-tracking: -0.04em;
+  --txt-camisa-sm: 800 48px/44px;
+  --txt-camisa-sm-tracking: -0.03em;
+  /* UX-SPEC §3.8.4 (UI-DS-04) só define "reduz de 72 para 56px abaixo de
+     340px de largura" para o número do `NumeroCamisa` — não é uma variante
+     de tamanho com tabela própria em §3.5 (diferente de --txt-camisa-sm, que
+     tem tabela própria), nem se aplica a outros componentes que usam
+     --txt-camisa (ex. o número de posição do `FaixaClube`, UX-SPEC §3.8.1).
+     Token extra registrado aqui pela mesma regra de "nenhum literal fora do
+     arquivo de tokens" que já vale para --z-pular-conteudo/
+     --deslocamento-oculto — mas usado só dentro de
+     `app/design-system/NumeroCamisa.module.css`, sob
+     `@media (max-width: 339px)`, para não alterar o comportamento de nenhum
+     outro consumidor de --txt-camisa. */
+  --txt-camisa-compacta: 800 56px/52px;
+  --txt-camisa-compacta-tracking: -0.03em;
+  --txt-display: 800 32px/34px;
+  --txt-display-tracking: -0.03em;
+  --txt-titulo: 800 28px/32px;
+  --txt-titulo-tracking: -0.02em;
+  --txt-manchete: 800 24px/30px;
+  --txt-manchete-tracking: -0.01em;
+  --txt-manchete-sec: 700 18px/24px;
+  --txt-manchete-sec-tracking: -0.01em;
+  --txt-dado: 700 15px/20px;
+  --txt-dado-tracking: 0;
+  --txt-corpo: 400 16px/24px;
+  --txt-corpo-tracking: 0;
+  --txt-corpo-sm: 400 14px/20px;
+  --txt-corpo-sm-tracking: 0;
+  --txt-rotulo: 700 12px/16px;
+  --txt-rotulo-tracking: 1.2px;
+  --txt-meta: 600 12px/16px;
+  --txt-meta-tracking: 0.6px;
+
+  --texto-largura-maxima: 68ch;
+  --texto-tamanho-minimo: 12px;
+  --campo-tamanho-minimo: 16px;
+
+  /* === 3.6 Espaçamento, raio, sombra, alvo === */
+  --esp-1: 4px;
+  --esp-2: 8px;
+  --esp-3: 12px;
+  --esp-4: 16px;
+  --esp-5: 24px;
+  --esp-6: 32px;
+  --esp-7: 48px;
+  --esp-8: 64px;
+
+  /* Margem lateral responsiva (mobile-first) e largura do contêiner de
+     desktop — breakpoints escolhidos como detalhe de implementação
+     (TASK.md §6): tablet ≥768px, desktop ≥1024px, alinhados ao RNF-01
+     (mobile-first, sem matriz formal de dispositivos). */
+  --margem-lateral: var(--esp-4);
+  --largura-container: 1120px;
+
+  --raio-sm: 4px;
+  --raio-md: 6px;
+  --raio-pill: 999px;
+
+  /* Espessura de contorno de 1 px, citada repetidamente na anatomia dos
+     componentes de UX-SPEC §3.8 (ex.: "contorno de 1 px" em `FaixaClube`,
+     "borda de 1 px" em `CartaoIngresso`) mas nunca tabelada como token
+     próprio até FUND-05 — adicionado por UI-DS-03 (Lote 7) para que nenhum
+     componente do design system precise de um valor de tamanho literal fora
+     deste arquivo (Diretriz de Implementação #4). */
+  --borda-fina: 1px;
+
+  /* Espessura de contorno de 2 px, usada pelo sublinhado da aba ativa de
+     `Abas` (UX-SPEC §3.8: "ativa sublinhada em --clube-acento") — mesma regra
+     de "nenhum literal fora do arquivo de tokens" já aplicada a
+     --borda-fina (UI-DS-03/REFAT-07-01). */
+  --borda-media: 2px;
+
+  --sombra-overlay: 0 8px 24px rgba(22, 24, 26, 0.18);
+
+  /* Cor do véu de `Sobreposicao` (UX-SPEC §3.8: fundo escurecido atrás do
+     modal/folha) — mesmo par R/G/B de --sombra-overlay, alfa diferente
+     (0.5 em vez de 0.18) porque é um véu de tela cheia, não uma sombra de
+     elevação. Token dedicado adicionado por REFAT-07-01 para não deixar o
+     literal `rgba(22, 24, 26, 0.5)` solto em CSS de componente (Diretriz de
+     Implementação #4). */
+  --cor-veu: rgba(22, 24, 26, 0.5);
+
+  --barra-cartao-espessura: 6px;
+  --clube-listra-passo: 18px;
+  --clube-listra-angulo: 135deg;
+
+  --alvo-toque-minimo: 44px;
+  --alvo-toque-espacamento: 8px;
+
+  --duracao-transicao: 150ms;
+  --duracao-transicao-rapida: 120ms;
+  --easing-padrao: ease-out;
+
+  --foco-espessura: 3px;
+  --foco-deslocamento: 2px;
+
+  /* Utilitários de posicionamento sem equivalente na tabela do UX-SPEC, mas
+     sujeitos à mesma regra de "nenhum literal fora do arquivo de tokens"
+     (Diretriz de Implementação #4) — usados pelo link "Pular para o
+     conteúdo" (WCAG 2.4.1) em `app/rotas/Layout.module.css`. */
+  --z-pular-conteudo: 1000;
+  --deslocamento-oculto: -999px;
+
+  /* UI-DS-02 (`BlocoPreto`, UX-SPEC §3.8.2): "tira superior de 32px" não tem
+     tabela própria em §3.6 (é anatomia específica deste componente) — mesma
+     regra de "nenhum literal fora do arquivo de tokens" já aplicada acima a
+     --z-pular-conteudo/--txt-camisa-compacta. `--z-bloco-fixo` fica abaixo de
+     `--z-pular-conteudo` (o link "pular para o conteúdo" nunca pode ficar
+     coberto por um bloco de conteúdo). `--bloco-preto-projecao-altura` é
+     escrito em tempo real por `BlocoPreto` (variante "projecao", medição via
+     `ResizeObserver`/evento `resize`) para que qualquer elemento focável da
+     tela use `scroll-margin-bottom: var(--bloco-preto-projecao-altura)`
+     (técnica citada literalmente em UX-SPEC §5.2, WCAG 2.4.11); `0px` aqui é
+     só o valor de repouso antes do componente montar/depois de desmontar. */
+  --bloco-preto-tira-altura: 32px;
+  --z-bloco-fixo: 500;
+  --bloco-preto-projecao-altura: 0px;
+
+  /* UI-DS-01 (`FaixaClube`, UX-SPEC §3.8.1): alturas de anatomia específicas
+     do componente ("116 px no celular, 140 px no desktop" para a variante
+     completa; "72 px" para a compacta) sem tabela própria em §3.6 — mesma
+     regra de "nenhum literal fora do arquivo de tokens" já aplicada acima a
+     --bloco-preto-tira-altura/--txt-camisa-compacta. A variante compacta
+     reaproveita o mesmo valor de --z-bloco-fixo/--alvo-toque-minimo sempre
+     que a anatomia coincide (avatar de 44 px = --alvo-toque-minimo, sem novo
+     token). */
+  --faixaclube-altura-completa: 116px;
+  --faixaclube-altura-compacta: 72px;
+
+  /* UI-T02-04 (`Navegacao`, UX-SPEC §2/T-02: "nav preta #16181A, 56px, fixa" /
+     "barra inferior preta fixa, 64px") — alturas de anatomia específicas sem
+     tabela própria em §3.6, mesma regra já aplicada acima a
+     --faixaclube-altura-completa/--bloco-preto-tira-altura. `--z-nav` fica
+     abaixo de `--z-bloco-fixo`/`--z-pular-conteudo` (a barra de navegação
+     nunca deve cobrir o link "pular para o conteúdo" nem o bloco PROJEÇÃO
+     fixo de UI-DS-02, que já reservam 1000/500). */
+  --altura-nav-topo: 56px;
+  --altura-nav-inferior: 64px;
+  --z-nav: 400;
+
+  /* UI-DS-07A (`Sobreposicao`, UX-SPEC §3.8) — véu do modal/folha precisa
+     ficar acima da navegação e de qualquer bloco fixo comuns
+     (--z-nav/--z-bloco-fixo), mas nunca acima do link "Pular para o
+     conteúdo" (--z-pular-conteudo), que deve continuar acessível mesmo com
+     um modal aberto. Token dedicado adicionado por REFAT-07-01: antes,
+     `Sobreposicao` reusava --z-pular-conteudo para o véu, o que os deixava
+     na mesma camada por coincidência, não por design. */
+  --z-modal: 900;
+
+  /* Largura fixa do rótulo de clube em `BarraPontuacao` (UX-SPEC §3.8.6: "A
+     BRIGA") para os rótulos alinharem verticalmente em lista comparativa —
+     anatomia específica do componente, sem tabela própria em §3.6, mesma
+     regra de "nenhum literal fora do arquivo de tokens" já aplicada acima a
+     --faixaclube-altura-completa/--bloco-preto-tira-altura. Adicionado por
+     REFAT-07-01. */
+  --barrapontuacao-rotulo-largura: 96px;
+
+  /* REFAT-08-01 (`Home`, UX-SPEC §2/T-02 "Desktop (1280)"): grade de 2
+     colunas a partir de 1024px — coluna fixa de 336px (`SecaoIdentidade`) +
+     feed largo de 748px (`SecaoSeusEsportes`/`SecaoUltimasNoticias`)
+     empilhadas. Anatomia específica do wireframe desktop, sem tabela
+     própria em §3.6 — mesma regra de "nenhum literal fora do arquivo de
+     tokens" já aplicada acima a --barrapontuacao-rotulo-largura/
+     --faixaclube-altura-completa. */
+  --home-coluna-fixa-largura: 336px;
+  --home-feed-largura: 748px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --margem-lateral: var(--esp-5);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    /* Só os dois tokens com valor de desktop divergente do mobile
+       (UX-SPEC §3.5): --txt-camisa e --txt-display. */
+    --txt-camisa: 800 96px/88px;
+    --txt-display: 800 40px/40px;
+
+    /* UI-DS-01 (`FaixaClube`, UX-SPEC §3.8.1): variante completa cresce para
+       140 px no desktop. */
+    --faixaclube-altura-completa: 140px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duracao-transicao: 0ms;
+    --duracao-transicao-rapida: 0ms;
+  }
+}
+
+/* === 3.3 Cores do sistema — tema escuro ===
+   Ativado por `data-tema="escuro"` em `<html>`, escrito por
+   `app/tema/tema.ts` a partir da preferência salva (`sportslm.tema.v1`) ou de
+   `prefers-color-scheme` quando a preferência é "sistema" (UX-SPEC §3.3). */
+:root[data-tema='escuro'] {
+  --cor-fundo: #121316;
+  --cor-superficie: #1a1c20;
+  --cor-superficie-2: #24272c;
+  --cor-borda: #2c3037;
+  --cor-borda-forte: #7a828c;
+  --cor-tinta: #f2efea;
+  --cor-texto-secundario: #a8b0ba;
+  --cor-nav: #0a0b0d;
+  --cor-nav-texto: #a8b0ba;
+  --cor-nav-texto-ativo: #ffffff;
+  --cor-aviso-fundo: #33290f;
+  --cor-aviso-texto: #f5c860;
+  --cor-erro-texto: #f2857c;
+  --cor-vitoria: #4fc98d;
+  --cor-empate: #a8b0ba;
+  --cor-derrota: #f2857c;
+  --cor-foco: #7fc0f0;
+
+  /* UX-SPEC §3.3: "no tema escuro, elevação é feita por borda, nunca por
+     sombra, e os 'blocos pretos' viram blocos de --cor-superficie-2 com
+     contorno de 2px em --cor-borda-forte — o preto sobre preto não
+     funcionaria." Sombra deixa de ser usada para elevação nesse tema; o
+     token de overlay/modal permanece porque modal continua flutuando sobre
+     o conteúdo em ambos os temas. */
+  --sombra-overlay: none;
+
+  /* UX-SPEC §3.4: "sem time escolhido" no tema escuro usa o mesmo tratamento
+     acromático, mas apoiado nos tokens de tema escuro (nunca preto puro
+     sobre preto). */
+  --clube-identidade: var(--cor-superficie-2);
+  --clube-faixa-b: var(--cor-borda-forte);
+  --clube-identidade-texto: var(--cor-tinta);
+  --clube-acento: var(--cor-tinta);
+  --clube-acento-sobre-escuro: var(--cor-nav-texto-ativo);
+  --clube-suave: var(--cor-superficie-2);
+  --clube-suave-escuro: var(--cor-superficie-2);
+}
+
+/* === Base global derivada dos tokens de foco (UX-SPEC §3.6) ===
+   "outline: 3px solid var(--cor-foco); outline-offset: 2px. Nunca removido,
+   nunca na cor do clube." Definido uma única vez aqui para que nenhum
+   componente futuro precise repetir (ou, pior, remover) o anel de foco. */
+:focus-visible {
+  outline: var(--foco-espessura) solid var(--cor-foco);
+  outline-offset: var(--foco-deslocamento);
+}
+
+/* UX-SPEC §1.3 (base clara e quente, não branco clínico) e §3.1: papel e
+   texto padrão da aplicação inteira. */
+body {
+  background: var(--cor-fundo);
+  color: var(--cor-tinta);
+  font: var(--txt-corpo) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-tracking);
+}

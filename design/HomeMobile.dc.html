@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #E30613; } a:hover { color: #8E0B20; }
+    .num { font-variant-numeric: tabular-nums; }
+    .tag { font-size: 11px; line-height: 14px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; padding: 5px 9px; border-radius: 4px; }
+    .kicker { font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #5C6570; }
+  </style>
+</helmet>
+
+<div style="width: 360px; background: #FAF7F2; color: #16181A; display: flex; flex-direction: column;">
+
+  <div style="display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 16px; background: #16181A; color: #FAF7F2;">
+    <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.3px;">SportsLM</div>
+    <div style="flex-grow: 1;"></div>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8B0B8" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M20.5 12a8.5 8.5 0 0 0-.2-1.8l2-1.6-2-3.5-2.4 1a8.5 8.5 0 0 0-3-1.8L14.5 1.5h-4l-.4 2.8a8.5 8.5 0 0 0-3 1.8l-2.4-1-2 3.5 2 1.6a8.5 8.5 0 0 0 0 3.6l-2 1.6 2 3.5 2.4-1a8.5 8.5 0 0 0 3 1.8l.4 2.8h4l.4-2.8a8.5 8.5 0 0 0 3-1.8l2.4 1 2-3.5-2-1.6c.13-.58.2-1.19.2-1.8z"/></svg>
+  </div>
+
+  <div style="height: 150px; background: #E30613; background-image: repeating-linear-gradient(135deg, #E30613 0 18px, #16181A 18px 36px); display: flex; align-items: center; gap: 14px; padding: 0 16px;">
+    <div style="width: 62px; height: 62px; border-radius: 999px; background: #FAF7F2; color: #E30613; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; box-shadow: 0 4px 14px rgba(0,0,0,.25); flex-shrink: 0;">SPA</div>
+    <div style="display: flex; flex-direction: column; gap: 2px; color: #FFFFFF;">
+      <div class="kicker" style="color: rgba(255,255,255,.85);">Time do coração</div>
+      <div style="font-size: 32px; line-height: 34px; font-weight: 800; letter-spacing: -0.03em;">São Paulo</div>
+      <div class="num" style="font-size: 13px; line-height: 18px; color: rgba(255,255,255,.9);">23 J · 12V 6E 5D</div>
+    </div>
+    <div style="flex-grow: 1;"></div>
+    <div class="num" style="display: flex; align-items: flex-end; color: #FFFFFF;">
+      <div style="font-size: 72px; line-height: 64px; font-weight: 800; letter-spacing: -0.04em;">6</div>
+      <div style="display: flex; flex-direction: column; padding-bottom: 6px;">
+        <div style="font-size: 18px; line-height: 18px; font-weight: 800;">º</div>
+        <div class="kicker" style="color: rgba(255,255,255,.85); font-size: 11px;">42 pts</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: flex-start; gap: 10px; padding: 11px 16px; background: #FFF3D1;">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7A5300" stroke-width="1.8" stroke-linecap="round" style="flex-shrink: 0; margin-top: 1px;"><path d="M12 3.5 2.5 20h19L12 3.5z"/><path d="M12 10v4"/><circle cx="12" cy="17.2" r="0.9" fill="#7A5300" stroke="none"/></svg>
+    <div style="font-size: 13px; line-height: 18px; color: #7A5300;">GE indisponível — notícias das outras quatro fontes.</div>
+  </div>
+
+  <div style="margin: 16px; background: #FFFFFF; border: 2px solid #16181A; border-radius: 6px; overflow: hidden;">
+    <div style="padding: 9px 14px; background: #16181A;"><div class="kicker" style="color: #FAF7F2;">Próximo jogo</div></div>
+    <div style="display: flex; align-items: baseline; gap: 10px; padding: 14px;">
+      <div class="num" style="font-size: 20px; line-height: 26px; font-weight: 800;">dom, 13/09</div>
+      <div class="num" style="font-size: 26px; line-height: 28px; font-weight: 800; color: #E30613; letter-spacing: -0.8px;">16h00</div>
+    </div>
+    <div style="padding: 0 14px 14px 14px; display: flex; flex-direction: column; gap: 3px;">
+      <div style="font-size: 16px; line-height: 22px; font-weight: 700;">Fluminense × São Paulo</div>
+      <div style="font-size: 13px; line-height: 18px; color: #5C6570;">Fora · Brasileirão · 24ª rodada</div>
+    </div>
+  </div>
+
+  <div style="padding: 0 16px; display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <h2 style="margin: 0; font-size: 24px; line-height: 28px; font-weight: 800; letter-spacing: -0.5px;">Seus esportes</h2>
+    </div>
+    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 16px; border-radius: 4px; background: #16181A; color: #FAF7F2; font-size: 13px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase;">Todos</span>
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 16px; border-radius: 4px; background: #FFFFFF; border: 1px solid #D8D2C7; color: #5C6570; font-size: 13px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase;">Futebol</span>
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 16px; border-radius: 4px; background: #FFFFFF; border: 1px solid #D8D2C7; color: #5C6570; font-size: 13px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase;">Vôlei</span>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid #E4DFD6; border-left: 6px solid #E30613; border-radius: 4px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="tag" style="background: #FCE9EA; color: #E30613;">Futebol</span>
+        <span class="kicker" style="letter-spacing: 0.5px;">ge · há 8 min</span>
+      </div>
+      <div style="font-size: 21px; line-height: 27px; font-weight: 800; letter-spacing: -0.4px; text-wrap: pretty;">São Paulo vence o Atlético-MG por 2 a 1 e encosta no G-6</div>
+      <div style="font-size: 14px; line-height: 20px; color: #5C6570; text-wrap: pretty;">Tricolor chegou aos 42 pontos e ficou a um do Botafogo.</div>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid #E4DFD6; border-left: 6px solid #16181A; border-radius: 4px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="tag" style="background: #EDEFF1; color: #16181A;">Vôlei</span>
+        <span class="kicker" style="letter-spacing: 0.5px;">Terra · há 21 min</span>
+      </div>
+      <div style="font-size: 19px; line-height: 25px; font-weight: 800; letter-spacing: -0.3px; text-wrap: pretty;">Brasil bate a Itália e vai à final do Mundial feminino</div>
+    </div>
+  </div>
+
+  <div style="padding: 24px 16px 20px 16px; display: flex; flex-direction: column; gap: 14px;">
+    <h2 style="margin: 0; font-size: 24px; line-height: 28px; font-weight: 800; letter-spacing: -0.5px;">Últimas notícias</h2>
+    <div class="kicker" style="color: #7A5300;">1 fonte instável: UOL Esporte</div>
+
+    <div style="background: #FFFFFF; border: 1px solid #E4DFD6; border-radius: 4px; padding: 14px 16px; display: flex; flex-direction: column; gap: 7px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="tag" style="background: #EDEFF1; color: #16181A;">F1</span>
+        <span class="kicker" style="letter-spacing: 0.5px;">ESPN · há 3 min</span>
+      </div>
+      <div style="font-size: 17px; line-height: 23px; font-weight: 700; text-wrap: pretty;">Verstappen crava a pole em Monza e supera Norris</div>
+    </div>
+    <div style="background: #FFFFFF; border: 1px solid #E4DFD6; border-radius: 4px; padding: 14px 16px; display: flex; flex-direction: column; gap: 7px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="tag" style="background: #FCE9EA; color: #E30613;">Futebol</span>
+        <span class="kicker" style="letter-spacing: 0.5px;">ge +2 fontes · há 34 min</span>
+      </div>
+      <div style="font-size: 17px; line-height: 23px; font-weight: 700; text-wrap: pretty;">Palmeiras confirma lesão de zagueiro por três semanas</div>
+      <div style="font-size: 13px; line-height: 18px; color: #5C6570;">Também em: <a href="#">ESPN</a> · <a href="#">Gazeta</a></div>
+    </div>
+    <div style="background: #FFFFFF; border: 1px solid #E4DFD6; border-radius: 4px; padding: 14px 16px; display: flex; flex-direction: column; gap: 7px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="tag" style="background: #EDEFF1; color: #16181A;">Geral</span>
+        <span class="kicker" style="letter-spacing: 0.5px;">Gazeta · 05/09 14h02</span>
+      </div>
+      <div style="font-size: 17px; line-height: 23px; font-weight: 700; text-wrap: pretty;">COB divulga calendário de seletivas para os Jogos de 2028</div>
+    </div>
+    <div class="kicker">··· 30 itens</div>
+  </div>
+
+  <div style="display: flex; align-items: stretch; height: 66px; border-top: 1px solid #E4DFD6; background: #FFFFFF;">
+    <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #E30613;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#E30613" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9h7M7 13h10M7 16.5h6"/></svg>
+      <div class="kicker" style="color: #E30613; font-size: 11px;">Notícias</div>
+    </div>
+    <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#5C6570" stroke-width="1.7" stroke-linecap="round"><path d="M5 4.5h14l-1.5 4-2 1v10h-7v-10l-2-1z"/></svg>
+      <div class="kicker" style="font-size: 11px;">Meu time</div>
+    </div>
+    <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#5C6570" stroke-width="1.7" stroke-linecap="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>
+      <div class="kicker" style="font-size: 11px;">Comparativo</div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

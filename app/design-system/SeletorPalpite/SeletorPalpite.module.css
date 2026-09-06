@@ -1,0 +1,103 @@
+/*
+ * SeletorPalpite.module.css — UI-DS-05 (UX-SPEC §3.8.5)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4) — tudo aqui
+ * referencia custom property.
+ */
+
+.seletor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.legenda {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+  padding: 0;
+}
+
+.opcoes {
+  display: flex;
+  gap: var(--esp-2);
+}
+
+/* Cada opção é o alvo de toque inteiro (label), não só o input nativo — o
+   input fica visualmente reduzido mas continua acessível/clicável dentro do
+   label, satisfazendo o alvo mínimo de 44px pelo próprio label. */
+.opcao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--alvo-toque-minimo);
+  height: var(--alvo-toque-minimo);
+  border-radius: var(--raio-sm);
+  border: 2px solid var(--cor-borda);
+  background: var(--cor-superficie);
+  cursor: pointer;
+  transition:
+    background var(--duracao-transicao-rapida) var(--easing-padrao),
+    border-color var(--duracao-transicao-rapida) var(--easing-padrao);
+}
+
+/* Pista 1: preenchimento. Pista 2: contorno. A 3ª pista (a letra) é a mesma
+   `.letra` sempre visível abaixo — nenhuma das três depende só de cor
+   (WCAG 1.4.1, Diretriz de Implementação #7). */
+.opcaoSelecionada {
+  background: var(--clube-identidade);
+  border-color: var(--cor-borda-forte);
+}
+
+.opcaoSelecionada .letra {
+  color: var(--clube-identidade-texto);
+}
+
+.entrada {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.letra {
+  font: var(--txt-dado) var(--fonte-sistema);
+  letter-spacing: var(--txt-dado-tracking);
+  color: var(--cor-tinta);
+  pointer-events: none;
+}
+
+.travado {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+.resultadoReal {
+  color: var(--cor-tinta);
+}
+
+.confrontoDireto {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+.confrontoDiretoRotulo {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+}

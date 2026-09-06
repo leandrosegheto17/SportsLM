@@ -1,0 +1,52 @@
+/* CampoBusca.module.css — UI-DS-07A. UX-SPEC §3.8: "lupa, entrada, ✕". */
+
+.campo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--alvo-toque-minimo);
+  padding: 0 var(--esp-3);
+  border-radius: var(--raio-md);
+  border: 1px solid var(--cor-borda);
+  background: var(--cor-superficie);
+}
+
+.lupa {
+  margin-right: var(--esp-2);
+  color: var(--cor-texto-secundario);
+}
+
+.entrada {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--alvo-toque-minimo);
+  border: none;
+  background: transparent;
+  color: var(--cor-tinta);
+  font: var(--txt-corpo) var(--fonte-sistema);
+}
+
+.entrada::-webkit-search-cancel-button {
+  display: none;
+}
+
+.botaoLimpar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--alvo-toque-minimo);
+  min-height: var(--alvo-toque-minimo);
+  border: none;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  cursor: pointer;
+}
+
+.semResultado {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: var(--esp-1);
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  color: var(--cor-texto-secundario);
+}

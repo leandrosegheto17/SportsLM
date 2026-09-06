@@ -1,0 +1,180 @@
+{
+  "temporada": 2026,
+  "campeonatos": [
+    {
+      "id": "brasileirao-serie-a",
+      "nome": "Campeonato Brasileiro Série A",
+      "temporada": 2026,
+      "categoria": "brasileirao",
+      "formato": "pontos-corridos",
+      "janela": { "inicio": "2026-03-28", "fim": "2026-12-06" },
+      "provedor": "football-data-org",
+      "clubes": [
+        "atletico-mg",
+        "bahia",
+        "botafogo",
+        "ceara",
+        "corinthians",
+        "criciuma",
+        "cruzeiro",
+        "flamengo",
+        "fluminense",
+        "fortaleza",
+        "gremio",
+        "internacional",
+        "juventude",
+        "mirassol",
+        "palmeiras",
+        "santos",
+        "sao-paulo",
+        "sport",
+        "vasco",
+        "vitoria"
+      ]
+    },
+    {
+      "id": "copa-do-brasil",
+      "nome": "Copa do Brasil",
+      "temporada": 2026,
+      "categoria": "copa-do-brasil",
+      "formato": "mata-mata",
+      "janela": { "inicio": "2026-02-18", "fim": "2026-11-04" },
+      "provedor": null,
+      "clubes": [
+        "atletico-mg",
+        "bahia",
+        "botafogo",
+        "ceara",
+        "corinthians",
+        "criciuma",
+        "cruzeiro",
+        "flamengo",
+        "fluminense",
+        "fortaleza",
+        "gremio",
+        "internacional",
+        "juventude",
+        "mirassol",
+        "palmeiras",
+        "santos",
+        "sao-paulo",
+        "sport",
+        "vasco",
+        "vitoria"
+      ]
+    },
+    {
+      "id": "supercopa-do-brasil",
+      "nome": "Supercopa do Brasil",
+      "temporada": 2026,
+      "categoria": "supercopa",
+      "formato": "mata-mata",
+      "janela": { "inicio": "2026-01-18", "fim": "2026-01-18" },
+      "provedor": null,
+      "clubes": [],
+      "observacao": "Disputada entre o campeão do Brasileirão 2025 e o campeão da Copa do Brasil 2025; participantes só entram nesta lista quando o provedor confirmar (RN-05)."
+    },
+    {
+      "id": "libertadores",
+      "nome": "Copa Libertadores da América",
+      "temporada": 2026,
+      "categoria": "continental",
+      "formato": "misto",
+      "janela": { "inicio": "2026-02-03", "fim": "2026-11-28" },
+      "provedor": null,
+      "clubes": [],
+      "observacao": "Vagas definidas pela classificação final do Brasileirão 2025 e pelo campeão da Copa do Brasil 2025; participantes só entram nesta lista quando o provedor confirmar (RN-05)."
+    },
+    {
+      "id": "sul-americana",
+      "nome": "Copa Sul-Americana",
+      "temporada": 2026,
+      "categoria": "continental",
+      "formato": "misto",
+      "janela": { "inicio": "2026-03-03", "fim": "2026-11-21" },
+      "provedor": null,
+      "clubes": [],
+      "observacao": "Vagas definidas pela classificação final do Brasileirão 2025 e pelas fases finais da Copa do Brasil 2025; participantes só entram nesta lista quando o provedor confirmar (RN-05)."
+    },
+    {
+      "id": "paulista",
+      "nome": "Campeonato Paulista",
+      "temporada": 2026,
+      "categoria": "estadual",
+      "formato": "grupos",
+      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "provedor": null,
+      "clubes": ["corinthians", "mirassol", "palmeiras", "santos", "sao-paulo"]
+    },
+    {
+      "id": "carioca",
+      "nome": "Campeonato Carioca",
+      "temporada": 2026,
+      "categoria": "estadual",
+      "formato": "grupos",
+      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "provedor": null,
+      "clubes": ["botafogo", "flamengo", "fluminense", "vasco"]
+    },
+    {
+      "id": "mineiro",
+      "nome": "Campeonato Mineiro",
+      "temporada": 2026,
+      "categoria": "estadual",
+      "formato": "grupos",
+      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "provedor": null,
+      "clubes": ["atletico-mg", "cruzeiro"]
+    },
+    {
+      "id": "gaucho",
+      "nome": "Campeonato Gaúcho",
+      "temporada": 2026,
+      "categoria": "estadual",
+      "formato": "grupos",
+      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "provedor": null,
+      "clubes": ["gremio", "internacional", "juventude"]
+    },
+    {
+      "id": "baiano",
+      "nome": "Campeonato Baiano",
+      "temporada": 2026,
+      "categoria": "estadual",
+      "formato": "grupos",
+      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "provedor": null,
+      "clubes": ["bahia", "vitoria"]
+    },
+    {
+      "id": "cearense",
+      "nome": "Campeonato Cearense",
+      "temporada": 2026,
+      "categoria": "estadual",
+      "formato": "grupos",
+      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "provedor": null,
+      "clubes": ["ceara", "fortaleza"]
+    },
+    {
+      "id": "pernambucano",
+      "nome": "Campeonato Pernambucano",
+      "temporada": 2026,
+      "categoria": "estadual",
+      "formato": "grupos",
+      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "provedor": null,
+      "clubes": ["sport"]
+    },
+    {
+      "id": "copa-do-nordeste",
+      "nome": "Copa do Nordeste",
+      "temporada": 2026,
+      "categoria": "regional",
+      "formato": "grupos",
+      "janela": { "inicio": "2026-01-14", "fim": "2026-04-05" },
+      "provedor": null,
+      "clubes": ["bahia", "ceara", "fortaleza", "sport", "vitoria"]
+    }
+  ]
+}

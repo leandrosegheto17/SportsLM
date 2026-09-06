@@ -1,0 +1,247 @@
+/*
+ * Simulacao.module.css — UI-T09-01/UI-T09-02 (UX-SPEC §2 "T-09 · Simulação de
+ * cenário") + REFAT-11-01 (matriz rodada×clube ≥900px, UX-SPEC §6)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4).
+ *
+ * Abaixo de 900px: `.grade` (lista por rodada, inalterada desde UI-T09-01).
+ * A partir de 900px: `.matriz` (uma coluna por clube comparado + barras de
+ * acumulado no rodapé) — as duas estruturas ficam sempre no DOM; a regra
+ * `@media (min-width: 900px)` abaixo esconde `.grade` e sobrepõe o atributo
+ * `hidden` de `.matriz` com `!important`, mesma técnica sem `matchMedia` em
+ * JS já usada por `DetalheCampeonato.module.css`/UI-T06-02.
+ */
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  max-width: var(--largura-container);
+  margin: 0 auto;
+  padding: var(--esp-4) var(--margem-lateral) var(--esp-8);
+}
+
+.cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  flex-wrap: wrap;
+}
+
+.voltar {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+}
+
+.voltar a {
+  color: inherit;
+}
+
+.titulo {
+  margin: 0;
+  font: var(--txt-titulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-titulo-tracking);
+  text-transform: uppercase;
+}
+
+.grade {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+}
+
+.blocoRodada {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.cabecalhoRodada {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.listaPartidas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .listaPartidas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+  }
+}
+
+.itemPartida {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  padding: var(--esp-3);
+  background: var(--cor-superficie);
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-left-width: var(--barra-cartao-espessura);
+  border-left-style: solid;
+  border-left-color: var(--cor-borda-forte);
+  border-radius: var(--raio-md);
+}
+
+.confrontoDiretoRotulo {
+  margin: 0;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  color: var(--cor-texto-secundario);
+}
+
+/*
+ * Ranking do bloco PROJEÇÃO (UI-T09-02, UX-SPEC §2/T-09) — nenhum literal
+ * fora de tokens.css (Diretriz #4). A reserva de espaço para o bloco fixo em
+ * si (WCAG 2.4.11) é responsabilidade de `BlocoPreto`/UI-DS-02, não daqui.
+ */
+.rankingProjecao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  margin: 0 0 var(--esp-3);
+  padding: 0;
+  list-style: none;
+}
+
+.linhaRankingProjecao {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  font: var(--txt-dado) var(--fonte-sistema);
+  letter-spacing: var(--txt-dado-tracking);
+}
+
+.nomeRankingProjecao {
+  flex: 1;
+  text-transform: uppercase;
+}
+
+.disclaimerProjecao {
+  margin: 0;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+}
+
+/*
+ * Matriz rodada×clube de desktop (REFAT-11-01, UX-SPEC §6/wireframe
+ * "Desktop (1280)"). `display: none` por padrão (mesmo com `hidden` já
+ * escondendo via folha do user-agent, redundante de propósito — deixa a
+ * intenção explícita mesmo se o atributo for removido futuramente); só a
+ * media query abaixo mostra, com `!important` batendo o `hidden`.
+ */
+.matriz {
+  display: none;
+  grid-template-columns: 88px repeat(var(--matriz-colunas, 1), minmax(0, 1fr));
+  gap: var(--esp-2) var(--esp-3);
+  align-items: start;
+}
+
+.matrizCabecalhoRotulo,
+.matrizCabecalhoClube {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+  padding: var(--esp-2) 0;
+  border-bottom: var(--borda-fina) solid var(--cor-borda-forte);
+}
+
+.matrizCabecalhoClube {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  color: var(--cor-tinta);
+}
+
+.matrizRotuloRodada {
+  display: flex;
+  flex-direction: column;
+  font: var(--txt-dado) var(--fonte-sistema);
+  letter-spacing: var(--txt-dado-tracking);
+  font-variant-numeric: var(--numero-tabular);
+  color: var(--cor-tinta);
+  padding: var(--esp-2) 0;
+  border-top: var(--borda-fina) solid var(--cor-borda);
+}
+
+.matrizRotuloData {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  color: var(--cor-texto-secundario);
+}
+
+.matrizCelula {
+  padding: var(--esp-2) 0;
+  border-top: var(--borda-fina) solid var(--cor-borda);
+}
+
+.matrizCelulaVazia {
+  padding: var(--esp-2) 0;
+  border-top: var(--borda-fina) solid var(--cor-borda);
+  color: var(--cor-texto-secundario);
+  text-align: center;
+}
+
+.matrizAcumulado {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  margin-top: var(--esp-4);
+  padding-top: var(--esp-4);
+  border-top: var(--barra-cartao-espessura) solid var(--cor-borda-forte);
+}
+
+.matrizAcumuladoTitulo {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+}
+
+.matrizAcumuladoLista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Duas variáveis (clara/escura) por linha, mesmo mecanismo de duas camadas de
+ * `SecaoIdentidade.module.css`/".aBrigaLinha" para alimentar
+ * `--clube-identidade` de `BarraPontuacao` (UI-DS-06) sem ler `data-tema`
+ * diretamente aqui. */
+.matrizAcumuladoLinha {
+  --clube-identidade: var(--acumulado-identidade-clara, var(--cor-tinta));
+}
+
+:global(html[data-tema='escuro']) .matrizAcumuladoLinha {
+  --clube-identidade: var(--acumulado-identidade-escura, var(--cor-superficie-2));
+}
+
+@media (min-width: 900px) {
+  .grade {
+    display: none;
+  }
+
+  .matriz {
+    display: grid !important;
+  }
+}

@@ -1,0 +1,86 @@
+/*
+ * Sobreposicao.module.css — UI-DS-07A. UX-SPEC §3.8: "cabeçalho preto com
+ * título e ✕, corpo rolável, barra de ação"; variantes folha (celular) ·
+ * modal (desktop).
+ */
+
+.veu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: var(--cor-veu);
+}
+
+.dialogo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 90vh;
+  background: var(--cor-superficie);
+  border-radius: var(--raio-md) var(--raio-md) 0 0;
+  box-shadow: var(--sombra-overlay);
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .veu {
+    align-items: center;
+  }
+
+  .automatica,
+  .modal {
+    width: min(560px, calc(100vw - var(--esp-8)));
+    max-height: 80vh;
+    border-radius: var(--raio-md);
+  }
+}
+
+.folha {
+  border-radius: var(--raio-md) var(--raio-md) 0 0;
+}
+
+.cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--esp-7);
+  padding: var(--esp-3) var(--esp-4);
+  background: var(--cor-tinta);
+}
+
+.titulo {
+  margin: 0;
+  color: var(--cor-superficie);
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-sec-tracking);
+}
+
+.botaoFechar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--alvo-toque-minimo);
+  min-height: var(--alvo-toque-minimo);
+  border: none;
+  background: transparent;
+  color: var(--cor-superficie);
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  cursor: pointer;
+}
+
+.corpo {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--esp-4);
+}
+
+.barraDeAcao {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--esp-3);
+  padding: var(--esp-3) var(--esp-4);
+  border-top: 1px solid var(--cor-borda);
+}

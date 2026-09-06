@@ -1,0 +1,59 @@
+.linha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  padding: var(--esp-2) var(--esp-3);
+  border-left: var(--esp-1) solid transparent;
+  list-style: none;
+}
+
+.cabecalho {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.corpo {
+  font: var(--txt-corpo) var(--fonte-sistema);
+}
+
+.linha[data-resultado='V'] {
+  border-color: var(--cor-vitoria);
+}
+
+.linha[data-resultado='E'] {
+  border-color: var(--cor-empate);
+}
+
+.linha[data-resultado='D'] {
+  border-color: var(--cor-derrota);
+}
+
+.linha[data-resultado='V'] .marcadorResultado {
+  color: var(--cor-vitoria);
+}
+
+.linha[data-resultado='E'] .marcadorResultado {
+  color: var(--cor-empate);
+}
+
+.linha[data-resultado='D'] .marcadorResultado {
+  color: var(--cor-derrota);
+}
+
+.marcadorResultado {
+  font-weight: 700;
+}
+
+.somenteLeitorDeTela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

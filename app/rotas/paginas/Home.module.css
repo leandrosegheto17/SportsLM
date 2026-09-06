@@ -1,0 +1,47 @@
+/*
+ * Home.module.css — UI-T02-04 (UX-SPEC §2/T-02), grade de 2 colunas por
+ * REFAT-08-01.
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4).
+ *
+ * Abaixo de 1024px: coluna única (`.pagina` em flex column), igual ao
+ * wireframe mobile de UX-SPEC §2/T-02 — `.blocoIdentidade` e `.feed` são os
+ * dois únicos filhos diretos de `.pagina`, cada um com seu próprio gap
+ * interno (`.feed`) reproduzindo exatamente o espaçamento que havia entre as
+ * 3 seções antes de `.feed` existir como agrupador.
+ *
+ * A partir de 1024px: `.pagina` vira grade de 2 colunas — coluna fixa de
+ * `--home-coluna-fixa-largura` (336px, `.blocoIdentidade`/`SecaoIdentidade`)
+ * + coluna de `--home-feed-largura` (748px, `.feed` — `SecaoSeusEsportes` +
+ * `SecaoUltimasNoticias` empilhadas), lado a lado, conforme UX-SPEC §2/T-02
+ * "Desktop (1280)". A ordem relativa das 3 seções e os 4 estados de cada uma
+ * não mudam — só o container ao redor.
+ */
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-6);
+  max-width: var(--largura-container);
+  margin: 0 auto;
+}
+
+.blocoIdentidade {
+  padding: var(--esp-4) var(--margem-lateral) 0;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-6);
+}
+
+@media (min-width: 1024px) {
+  .pagina {
+    display: grid;
+    grid-template-columns: var(--home-coluna-fixa-largura) var(--home-feed-largura);
+    align-items: start;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,176 @@
+/*
+ * PassoTime.module.css — UI-T01-02 (TASK.md Lote 8, UX-SPEC §2/T-01 passo 2)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de `tokens.css`
+ * (Diretriz de Implementação #4) — exceto a cor de clube de cada avatar da
+ * lista, injetada via `AvatarClube`/`corIdentidade` (custom property inline,
+ * nunca literal aqui).
+ */
+
+.tela {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  max-width: var(--largura-container);
+  margin: 0 auto;
+  padding: var(--esp-5) var(--margem-lateral) var(--esp-7);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  .conteudo {
+    max-width: 640px;
+  }
+}
+
+.cabecalho {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+}
+
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--alvo-toque-minimo);
+  min-height: var(--alvo-toque-minimo);
+  border: none;
+  background: transparent;
+  color: var(--cor-tinta);
+  font-size: var(--esp-4);
+  cursor: pointer;
+}
+
+.passoRotulo {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.barra {
+  height: var(--esp-1);
+  border-radius: var(--raio-pill);
+  background: var(--cor-superficie-2);
+  overflow: hidden;
+}
+
+.barraPreenchida {
+  height: 100%;
+  width: 100%;
+  border-radius: var(--raio-pill);
+  background: var(--clube-identidade);
+}
+
+.titulo {
+  margin: 0;
+  font: var(--txt-titulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-titulo-tracking);
+  color: var(--cor-tinta);
+}
+
+.subtitulo {
+  margin: 0;
+  font: var(--txt-corpo) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-tracking);
+  color: var(--cor-texto-secundario);
+}
+
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.somenteLeitorDeTela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--borda-fina) solid var(--cor-borda);
+}
+
+@media (min-width: 1024px) {
+  .lista {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: none;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  min-height: 56px;
+  padding: var(--esp-2) var(--esp-1);
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
+  cursor: pointer;
+}
+
+.radio {
+  width: var(--esp-4);
+  height: var(--esp-4);
+  accent-color: var(--cor-tinta);
+  flex: none;
+}
+
+.nomeClube {
+  /* 18/24 peso 700 (UX-SPEC §2/T-01 passo 2: "nome 18/24 peso 700") —
+   * `--txt-manchete-sec` é o token com essa combinação exata. */
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-sec-tracking);
+  color: var(--cor-tinta);
+}
+
+.rodape {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-4);
+  padding: var(--esp-4) var(--margem-lateral);
+  border-top: var(--borda-fina) solid var(--cor-borda);
+  background: var(--cor-fundo);
+}
+
+.botaoConfirmar {
+  flex: 1;
+  max-width: 320px;
+}
+
+.pular {
+  border: none;
+  background: transparent;
+  color: var(--cor-tinta);
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  text-decoration: underline;
+  cursor: pointer;
+  min-height: var(--alvo-toque-minimo);
+  padding: 0 var(--esp-2);
+}

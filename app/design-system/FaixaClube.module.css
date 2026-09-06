@@ -1,0 +1,163 @@
+/*
+ * FaixaClube.module.css — UI-DS-01 (UX-SPEC §3.8.1)
+ *
+ * Todo valor literal de cor/tamanho vem de `tokens.css` (Diretriz de
+ * Implementação #4) — a única exceção documentada é cor de clube, que chega
+ * como `custom property` já resolvida (ver comentário em FaixaClube.tsx sobre
+ * `--fc-*-clara`/`--fc-*-escura`).
+ *
+ * Estratégia de tema: as três custom properties que a listra/o texto usam
+ * (`--clube-identidade`, `--clube-faixa-b`, `--clube-identidade-texto`) são
+ * redefinidas *localmente*, dentro de `.raiz`, a partir das variáveis
+ * intermediárias que o componente injeta — puro CSS, reage à troca de
+ * `data-tema` em `<html>` sem re-render (mesmo mecanismo "sem F5" de
+ * `tokens.css`). Quando o componente não injeta nada (variante `neutra`), o
+ * `var(..., fallback)` cai no valor ambiente de `tokens.css`, que já é o
+ * tratamento acromático "sem time" correto para o tema atual.
+ */
+
+.raiz {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  overflow: hidden;
+  box-sizing: border-box;
+  min-height: var(--faixaclube-altura-compacta);
+  padding: 0 var(--esp-4);
+  border: var(--borda-fina) solid var(--cor-borda-forte);
+  border-radius: var(--raio-md);
+  text-decoration: none;
+
+  /* Redefinição local (tema claro / padrão): usa a variável "clara" injetada
+     pelo componente, com fallback para o token ambiente (caso `neutra`). */
+  --clube-identidade: var(--fc-identidade-clara, var(--clube-identidade));
+  --clube-faixa-b: var(--fc-faixab-clara, var(--clube-faixa-b));
+  --clube-identidade-texto: var(
+    --fc-identidade-texto-clara,
+    var(--clube-identidade-texto)
+  );
+  --clube-acento: var(--fc-acento, var(--clube-acento));
+
+  background: repeating-linear-gradient(
+    var(--clube-listra-angulo),
+    var(--clube-identidade) 0 var(--clube-listra-passo),
+    var(--clube-faixa-b) var(--clube-listra-passo) calc(var(--clube-listra-passo) * 2)
+  );
+  color: var(--clube-identidade-texto);
+}
+
+:global(html[data-tema='escuro']) .raiz {
+  /* Redefinição local (tema escuro): usa a variável "escura" injetada pelo
+     componente, mesmo fallback ambiente quando ausente. */
+  --clube-identidade: var(--fc-identidade-escura, var(--clube-identidade));
+  --clube-faixa-b: var(--fc-faixab-escura, var(--clube-faixa-b));
+  --clube-identidade-texto: var(
+    --fc-identidade-texto-escura,
+    var(--clube-identidade-texto)
+  );
+}
+
+.completa {
+  min-height: var(--faixaclube-altura-completa);
+}
+
+.compacta {
+  min-height: var(--faixaclube-altura-compacta);
+}
+
+.neutra {
+  min-height: var(--faixaclube-altura-compacta);
+  justify-content: center;
+}
+
+/* UX-SPEC §3.6/§5.1: "o padrão de listras é aria-hidden" — elemento
+ * puramente decorativo, cobre o fundo da faixa (o `background` de `.raiz` já
+ * é o próprio padrão de listras; este `<span>` existe só para que o critério
+ * de aceite "listras aria-hidden" tenha um nó explícito na árvore de
+ * acessibilidade a marcar como oculto, mesmo o padrão já não sendo exposto
+ * por ser `background`). */
+.listras {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.avatar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--alvo-toque-minimo);
+  height: var(--alvo-toque-minimo);
+  border-radius: var(--raio-pill);
+  background: var(--cor-superficie);
+  color: var(--clube-acento);
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-sec-tracking);
+}
+
+.identidade {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.nome {
+  overflow: hidden;
+  font: var(--txt-display) var(--fonte-sistema);
+  letter-spacing: var(--txt-display-tracking);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: inherit;
+}
+
+.linhaSecundaria {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.marca {
+  font: var(--txt-display) var(--fonte-sistema);
+  letter-spacing: var(--txt-display-tracking);
+  color: inherit;
+}
+
+.numeroBloco {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+  gap: var(--esp-1);
+}
+
+.numero {
+  margin: 0;
+  font: var(--txt-camisa) var(--fonte-sistema);
+  letter-spacing: var(--txt-camisa-tracking);
+  font-variant-numeric: var(--numero-tabular);
+  color: inherit;
+}
+
+/* UI-DS-04 (`NumeroCamisa`) já registrou este mesmo breakpoint/token em
+ * `tokens.css` prevendo o reaproveitamento por `FaixaClube` — mesmo critério
+ * de acessibilidade de UX-SPEC §5.5 ("o número de camisa em 72 px reduz para
+ * 56 px abaixo de 340 px"), aplicado aqui ao número de posição da faixa. */
+@media (max-width: 339px) {
+  .numero {
+    font: var(--txt-camisa-compacta) var(--fonte-sistema);
+    letter-spacing: var(--txt-camisa-compacta-tracking);
+  }
+}
+
+.pontos {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: inherit;
+}

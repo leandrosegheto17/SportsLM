@@ -1,0 +1,87 @@
+# .github/workflows/build-publish.yml — FUND-03
+#
+# Build do Vite (ADR-004) + publicação no hosting estático do mesmo
+# fornecedor do CI (SDD §2.1, ADR-002) via GitHub Pages. Portões bloqueantes
+# (SDD §7.2/§7.7, GUARDRAILS.md §2/§4, PUB-03): varredura de padrão de
+# segredo no diretório publicado e auditoria de dependências de runtime
+# (alta/crítica bloqueia) antes de qualquer publicação — sem exceção.
+#
+# Ações fixadas por versão exata, nunca `@latest` nem branch (GUARDRAILS.md
+# §2 / SDD §7.7).
+name: build-publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# Um único fluxo de publicação por vez — evita publicação concorrente do
+# mesmo hosting estático (mesmo espírito de ADR-002 para o workflow de
+# ingestão).
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    name: Build + verificação de segredo
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Node.js 22
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Instalação determinística
+        run: npm ci
+
+      - name: Checagem de tipos
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Formatação (Prettier)
+        run: npm run format:check
+
+      - name: Testes
+        run: npm run test
+
+      - name: Auditoria de dependências de runtime (SDD §7.7, GUARDRAILS §2)
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Build (Vite)
+        run: npm run build
+
+      - name: Verificação de segredo no artefato publicado (bloqueante — SDD §7.2)
+        run: npm run verificar-segredos
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+
+      - name: Empacotar artefato do Pages
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: dist
+
+  publish:
+    name: Publicação (GitHub Pages)
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

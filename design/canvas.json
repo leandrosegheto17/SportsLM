@@ -1,0 +1,161 @@
+{
+  "pages": [
+    {
+      "id": "page-1",
+      "name": "Telas"
+    },
+    {
+      "id": "page-2",
+      "name": "Design system"
+    }
+  ],
+  "artboards": [
+    {
+      "file": "OnboardingDesktop.dc.html",
+      "title": "Onboarding 1 de 2 · desktop 1280",
+      "page": "page-1",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 760
+    },
+    {
+      "file": "OnboardingMobile.dc.html",
+      "title": "Onboarding 1 de 2 · mobile 360",
+      "page": "page-1",
+      "x": 1400,
+      "y": 0,
+      "w": 360,
+      "h": 900
+    },
+    {
+      "file": "EscolherTimeDesktop.dc.html",
+      "title": "Onboarding 2 de 2 · desktop 1280",
+      "page": "page-1",
+      "x": 0,
+      "y": 1060,
+      "w": 1280,
+      "h": 780
+    },
+    {
+      "file": "EscolherTimeMobile.dc.html",
+      "title": "Onboarding 2 de 2 · mobile 360",
+      "page": "page-1",
+      "x": 1400,
+      "y": 1060,
+      "w": 360,
+      "h": 900
+    },
+    {
+      "file": "Main.dc.html",
+      "title": "Home · desktop 1280 · Direção B",
+      "page": "page-1",
+      "x": 0,
+      "y": 2120,
+      "w": 1280,
+      "h": 1280
+    },
+    {
+      "file": "HomeMobile.dc.html",
+      "title": "Home · mobile 360 · Direção B",
+      "page": "page-1",
+      "x": 1400,
+      "y": 2120,
+      "w": 360,
+      "h": 1600
+    },
+    {
+      "file": "PainelDesktop.dc.html",
+      "title": "Painel do time · desktop 1280",
+      "page": "page-1",
+      "x": 0,
+      "y": 3880,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "PainelMobile.dc.html",
+      "title": "Painel do time · mobile 360",
+      "page": "page-1",
+      "x": 1400,
+      "y": 3880,
+      "w": 360,
+      "h": 1260
+    },
+    {
+      "file": "ComparativoDesktop.dc.html",
+      "title": "Comparativo · desktop 1280",
+      "page": "page-1",
+      "x": 0,
+      "y": 5300,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "ComparativoMobile.dc.html",
+      "title": "Comparativo · mobile 360",
+      "page": "page-1",
+      "x": 1400,
+      "y": 5300,
+      "w": 360,
+      "h": 1340
+    },
+    {
+      "file": "SimulacaoDesktop.dc.html",
+      "title": "Simulação · desktop 1280",
+      "page": "page-1",
+      "x": 0,
+      "y": 6800,
+      "w": 1280,
+      "h": 1140
+    },
+    {
+      "file": "SimulacaoMobile.dc.html",
+      "title": "Simulação · mobile 360",
+      "page": "page-1",
+      "x": 1400,
+      "y": 6800,
+      "w": 360,
+      "h": 1160
+    },
+    {
+      "file": "DesignSystem.dc.html",
+      "title": "Design system · Camisa",
+      "page": "page-2",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 2100
+    }
+  ],
+  "annotations": [
+    {
+      "id": "nota-fonte",
+      "page": "page-1",
+      "x": -440,
+      "y": 0,
+      "w": 320,
+      "text": "Mockup estático do SportsLM.\n\nCada tela em duas larguras: desktop 1280 (contêiner de 1120) e mobile 360.\n\nAs cores de clube são provisórias: o spec diz que vêm de um arquivo de configuração por temporada, que ainda não existe."
+    },
+    {
+      "id": "nota-simulacao",
+      "page": "page-1",
+      "x": -440,
+      "y": 6800,
+      "w": 320,
+      "text": "A simulação é o diferencial declarado pelo stakeholder.\n\nO aviso de que a projeção vale só entre os clubes comparados, e não para a tabela, aparece fixo no topo das duas larguras.\n\nAs barras de pontuação usam a cor de identidade de cada clube, com contorno de 1 px em tinta, conforme a nova Seção 3."
+    },
+    {
+      "id": "nota-camisa",
+      "page": "page-1",
+      "x": -440,
+      "y": 2120,
+      "w": 320,
+      "text": "DIREÇÃO B · CAMISA — aplicada\n\nTodas as telas seguem a Seção 3 reescrita do UX-SPEC: base clara e quente, navegação e contornos em tinta, cor vinda do clube.\n\nA faixa listrada usa os tokens derivados do clube. São Paulo passa sem ajuste; a prancha do design system mostra como o amarelo do Mirassol e o acromático do Corinthians se resolvem."
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "page-1"
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "porEsporte": [
+    {
+      "esporte": "futebol",
+      "termos": [
+        { "termo": "futebol", "peso": 3 },
+        { "termo": "brasileirao", "peso": 2 },
+        { "termo": "campeonato brasileiro", "peso": 2 },
+        { "termo": "copa do brasil", "peso": 2 },
+        { "termo": "libertadores", "peso": 2 },
+        { "termo": "sul-americana", "peso": 2 },
+        { "termo": "flamengo", "peso": 2 },
+        { "termo": "palmeiras", "peso": 2 },
+        { "termo": "sao paulo", "peso": 2 },
+        { "termo": "mirassol", "peso": 2 },
+        { "termo": "corinthians", "peso": 2 },
+        { "termo": "botafogo", "peso": 2 },
+        { "termo": "santos", "peso": 2 },
+        { "termo": "vasco", "peso": 2 },
+        { "termo": "atletico-mg", "peso": 2 },
+        { "termo": "ceara", "peso": 2 },
+        { "termo": "cruzeiro", "peso": 2 },
+        { "termo": "fluminense", "peso": 2 },
+        { "termo": "bahia", "peso": 2 },
+        { "termo": "internacional", "peso": 2 },
+        { "termo": "gremio", "peso": 2 },
+        { "termo": "fortaleza", "peso": 2 },
+        { "termo": "vitoria", "peso": 2 },
+        { "termo": "sport", "peso": 2 },
+        { "termo": "juventude", "peso": 2 },
+        { "termo": "criciuma", "peso": 2 },
+        { "termo": "tecnico", "peso": 1 },
+        { "termo": "selecao", "peso": 1 },
+        { "termo": "final", "peso": 1 }
+      ]
+    },
+    {
+      "esporte": "volei-quadra",
+      "termos": [
+        { "termo": "volei de quadra", "peso": 3 },
+        { "termo": "superliga", "peso": 2 },
+        { "termo": "cravada", "peso": 2 },
+        { "termo": "levantador", "peso": 1 }
+      ]
+    },
+    {
+      "esporte": "formula1",
+      "termos": [
+        { "termo": "formula 1", "peso": 3 },
+        { "termo": "f1", "peso": 3 },
+        { "termo": "pole position", "peso": 3 },
+        { "termo": "grande premio", "peso": 2 },
+        { "termo": "pilotos", "peso": 1 }
+      ]
+    },
+    {
+      "esporte": "basquete",
+      "termos": [
+        { "termo": "basquete", "peso": 3 },
+        { "termo": "cestinha", "peso": 3 },
+        { "termo": "nba", "peso": 2 },
+        { "termo": "cesta de tres", "peso": 2 }
+      ]
+    },
+    {
+      "esporte": "tenis",
+      "termos": [
+        { "termo": "tenis", "peso": 3 },
+        { "termo": "atp", "peso": 2 },
+        { "termo": "wta", "peso": 2 },
+        { "termo": "saque e voleio", "peso": 2 }
+      ]
+    },
+    {
+      "esporte": "volei-praia",
+      "termos": [
+        { "termo": "volei de praia", "peso": 3 },
+        { "termo": "circuito mundial de volei de praia", "peso": 2 },
+        { "termo": "dupla de praia", "peso": 2 }
+      ]
+    },
+    {
+      "esporte": "natacao",
+      "termos": [
+        { "termo": "natacao", "peso": 3 },
+        { "termo": "nado livre", "peso": 2 },
+        { "termo": "piscina olimpica", "peso": 2 }
+      ]
+    },
+    {
+      "esporte": "mma",
+      "termos": [
+        { "termo": "mma", "peso": 3 },
+        { "termo": "nocaute tecnico", "peso": 3 },
+        { "termo": "ufc", "peso": 2 },
+        { "termo": "octogono", "peso": 2 }
+      ]
+    },
+    {
+      "esporte": "ginastica-artistica",
+      "termos": [
+        { "termo": "ginastica artistica", "peso": 3 },
+        { "termo": "barras assimetricas", "peso": 2 },
+        { "termo": "trave de equilibrio", "peso": 2 }
+      ]
+    },
+    {
+      "esporte": "surfe",
+      "termos": [
+        { "termo": "surfe", "peso": 3 },
+        { "termo": "circuito mundial de surfe", "peso": 2 },
+        { "termo": "onda", "peso": 1 }
+      ]
+    },
+    {
+      "esporte": "skate",
+      "termos": [
+        { "termo": "skate", "peso": 3 },
+        { "termo": "skatista", "peso": 2 },
+        { "termo": "street league", "peso": 2 }
+      ]
+    },
+    {
+      "esporte": "judo",
+      "termos": [
+        { "termo": "judo", "peso": 3 },
+        { "termo": "faixa preta", "peso": 2 },
+        { "termo": "tatame", "peso": 1 }
+      ]
+    },
+    {
+      "esporte": "atletismo",
+      "termos": [
+        { "termo": "atletismo", "peso": 3 },
+        { "termo": "maratona", "peso": 2 },
+        { "termo": "salto em distancia", "peso": 2 }
+      ]
+    },
+    {
+      "esporte": "futsal",
+      "termos": [
+        { "termo": "futsal", "peso": 3 },
+        { "termo": "liga nacional de futsal", "peso": 2 },
+        { "termo": "quadra de futsal", "peso": 2 }
+      ]
+    },
+    {
+      "esporte": "futebol-americano",
+      "termos": [
+        { "termo": "futebol americano", "peso": 3 },
+        { "termo": "nfl", "peso": 2 },
+        { "termo": "touchdown", "peso": 2 }
+      ]
+    }
+  ],
+  "foraDoRecorte": [
+    { "nome": "handebol", "termos": [{ "termo": "handebol", "peso": 3 }] },
+    {
+      "nome": "boxe",
+      "termos": [
+        { "termo": "boxe", "peso": 3 },
+        { "termo": "nocaute", "peso": 2 }
+      ]
+    },
+    {
+      "nome": "ciclismo",
+      "termos": [
+        { "termo": "ciclismo", "peso": 3 },
+        { "termo": "tour de france", "peso": 2 }
+      ]
+    },
+    {
+      "nome": "e-sports",
+      "termos": [
+        { "termo": "e-sports", "peso": 3 },
+        { "termo": "esports", "peso": 3 },
+        { "termo": "league of legends", "peso": 2 }
+      ]
+    },
+    {
+      "nome": "xadrez",
+      "termos": [
+        { "termo": "xadrez", "peso": 3 },
+        { "termo": "xeque-mate", "peso": 2 }
+      ]
+    },
+    {
+      "nome": "golfe",
+      "termos": [
+        { "termo": "golfe", "peso": 3 },
+        { "termo": "pga tour", "peso": 2 }
+      ]
+    },
+    { "nome": "criquete", "termos": [{ "termo": "criquete", "peso": 3 }] },
+    {
+      "nome": "rugby",
+      "termos": [
+        { "termo": "rugby", "peso": 3 },
+        { "termo": "scrum", "peso": 2 }
+      ]
+    },
+    {
+      "nome": "hipismo",
+      "termos": [
+        { "termo": "hipismo", "peso": 3 },
+        { "termo": "hipica", "peso": 2 }
+      ]
+    },
+    {
+      "nome": "beisebol",
+      "termos": [
+        { "termo": "beisebol", "peso": 3 },
+        { "termo": "home run", "peso": 2 }
+      ]
+    }
+  ]
+}

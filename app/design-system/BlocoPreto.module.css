@@ -1,0 +1,66 @@
+/*
+ * BlocoPreto.module.css — UI-DS-02 (UX-SPEC §3.8.2)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento aqui (Diretriz de
+ * Implementação #4 do TASK.md) — tudo vem de `../design-system/tokens.css`
+ * (FUND-05), incluindo os tokens específicos deste componente
+ * (--bloco-preto-tira-altura, --z-bloco-fixo, --bloco-preto-projecao-altura,
+ * --cor-texto-sobre-tinta).
+ */
+
+.bloco {
+  background: var(--cor-superficie);
+  border: 2px solid var(--cor-borda-forte);
+  border-radius: var(--raio-md);
+  overflow: hidden;
+}
+
+/* UX-SPEC §3.3: "No tema escuro: corpo em --cor-superficie-2, tira em
+   --cor-superficie, contorno em --cor-borda-forte." */
+:global(:root[data-tema='escuro']) .bloco {
+  background: var(--cor-superficie-2);
+}
+
+.tira {
+  display: flex;
+  align-items: center;
+  height: var(--bloco-preto-tira-altura);
+  padding: 0 var(--esp-3);
+  background: var(--cor-tinta);
+  color: var(--cor-texto-sobre-tinta);
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+}
+
+:global(:root[data-tema='escuro']) .tira {
+  background: var(--cor-superficie);
+}
+
+.corpo {
+  padding: var(--esp-4);
+}
+
+/* UX-SPEC §3.8.2: variante "projeção" é "fixo ao rolar" — permanece visível
+   independentemente da posição de rolagem (diferente de `position: sticky`,
+   que só gruda quando a posição natural alcançaria a borda). Fixar ao
+   viewport exige a contrapartida de WCAG 2.4.11 (foco nunca obscurecido):
+   ver `BlocoPreto.tsx`, que mede a própria altura em tempo real e publica
+   `--bloco-preto-projecao-altura` em `:root` para reserva de espaço
+   (`scroll-margin`/`scroll-padding`, técnica citada em UX-SPEC §5.2). */
+.projecao {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-bloco-fixo);
+}
+
+/* UX-SPEC §3.8.2: "campeonatos (lista compacta no desktop)" — corpo mais
+   denso a partir do breakpoint de desktop já usado pelos demais tokens
+   responsivos de tokens.css (1024px). */
+@media (min-width: 1024px) {
+  .campeonatos .corpo {
+    padding: var(--esp-3);
+  }
+}

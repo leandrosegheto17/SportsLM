@@ -1,0 +1,210 @@
+# DEPLOY.md
+
+Skill: `deploy-report-drafting` (chapéu DevOps, Validador). Preparação de
+infraestrutura/CI-CD que precede o primeiro `/deploy` real — confirmação e
+documentação sobre infraestrutura já construída como código (Lotes 1/6:
+FUND-02/03, REFAT-01-02, REFAT-06-01), não provisionamento novo. Nenhum
+`git push` nem alteração de configuração real do GitHub foi feito por este
+agente — só leitura e documentação.
+
+Autor: Validador (chapéu DevOps) · Data: 2026-09-06
+
+---
+
+## 1. Infraestrutura confirmada
+
+Contexto de arquitetura (ADR-001, ADR-002, SDD §2.1): sem backend em runtime,
+sem banco de dados. Toda a "infraestrutura" do protótipo é CI/CD como código —
+dois workflows do GitHub Actions — publicando em hosting estático do mesmo
+fornecedor (GitHub Pages). Não há Cloudflare Pages, Vercel ou Netlify em uso;
+não é objeto desta tarefa avaliar troca de provedor (decisão já fechada em
+SDD.md, linha "Agendamento e publicação", e ADR-002).
+
+### 1.1 `.github/workflows/build-publish.yml` (FUND-03)
+
+- Gatilho: `push` em `main` + `workflow_dispatch` manual.
+- `concurrency: group: pages, cancel-in-progress: false` — evita publicação
+  concorrente no mesmo hosting.
+- `permissions`: `contents: read`, `pages: write`, `id-token: write` — mínimo
+  necessário para publicar via OIDC no Pages, sem escopo de escrita no
+  repositório.
+- Todas as ações de terceiros pinadas por SHA de commit (não por tag/branch),
+  conforme GUARDRAILS §2 / SDD §7.7: `actions/checkout@11bd719...` (v4.2.2),
+  `actions/setup-node@39370e3...` (v4.1.0), `actions/configure-pages@983d773...`
+  (v5.0.0), `actions/upload-pages-artifact@56afc60...` (v3.0.1),
+  `actions/deploy-pages@d6db901...` (v4.0.5).
+- `runs-on: ubuntu-24.04` fixo (não `ubuntu-latest`) nos dois jobs.
+- Portões de qualidade bloqueantes antes do build: `typecheck`, `lint`,
+  `format:check`, `test`, `npm audit --omit=dev --audit-level=high`.
+- Verificação de segredo bloqueante no artefato publicado
+  (`npm run verificar-segredos`, que varre `dist/`) antes de `configure-pages`
+  — SDD §7.2.
+- Job `publish` depende de `build` (`needs: build`), roda só em `main`
+  (`if: github.ref == 'refs/heads/main'`), usa o `environment: github-pages`
+  nativo do GitHub, e publica via `actions/deploy-pages`.
+
+Confirmado: consistente com SDD §7.2/§7.7 e GUARDRAILS §2/§4. Hosting-alvo é
+GitHub Pages via GitHub Actions, não outro provedor.
+
+### 1.2 `.github/workflows/ingestao.yml` (REFAT-06-01)
+
+- Gatilho: `schedule` a cada 30 minutos (`*/30 * * * *`) + `workflow_dispatch`
+  manual.
+- `concurrency: group: ingestao-agendada, cancel-in-progress: false`.
+- `permissions: contents: write` — escopo mínimo declarado para escrever na
+  branch órfã `dados` (ADR-002); nada além.
+- Mesmas ações pinadas por SHA que `build-publish.yml`
+  (`actions/checkout@11bd719...`, `actions/setup-node@39370e3...`),
+  `runs-on: ubuntu-24.04`, `timeout-minutes: 15`.
+- Mesmos portões de qualidade bloqueantes (`typecheck`, `lint`,
+  `format:check`, `test`, `npm audit --omit=dev --audit-level=high`) antes de
+  executar a ingestão.
+- `FOOTBALL_DATA_API_TOKEN` injetado só como variável de ambiente do passo
+  "Executa pipeline de ingestão" (`env:`), nunca ecoado em log, mascarado
+  automaticamente pelo GitHub Actions a partir da primeira referência —
+  conforme SDD §7.2 / GUARDRAILS §4.
+- Comportamento de dry-run gracioso em duas condições, sem falhar o job:
+  (a) nenhum coletor implementado (`npm run ingestao` ainda não existe no
+  `package.json` — não é mais o caso hoje, já existe: `"ingestao": "tsx
+  pipeline/ingestao-cli.ts"`); (b) coletor existe mas
+  `FOOTBALL_DATA_API_TOKEN` não está cadastrado no cofre de secrets do
+  repositório — o Fluxo 2 (futebol) exige o token real
+  (`executarIngestaoFutebolEmDisco` lança erro sem ele).
+- Verificação de segredo bloqueante no diretório de dados publicado
+  (`npm run verificar-segredos:dados`, aponta para `dist-dados/`), só quando
+  há algo a publicar (`steps.ingestao.outputs.publica == 'true'`).
+- Publicação por commit direto na branch órfã `dados` (`git checkout --orphan
+  dados` na primeira vez, `git checkout dados` depois), só se o conteúdo
+  realmente mudou (`git diff --cached --quiet`) — evita publicar sem mudança
+  de hash, conforme SDD §2.2.
+
+Confirmado: consistente com ADR-002, SDD §7.2/§7.7, GUARDRAILS §2/§4. O script
+`npm run ingestao` já existe no `package.json` (`tsx pipeline/ingestao-cli.ts`)
+desde REFAT-06-01 — o dry-run hoje em produção, quando ocorrer, será pelo
+motivo (b) (token ausente), não (a).
+
+**Nenhuma inconsistência encontrada** entre os dois workflows e o que
+SDD.md/GUARDRAILS.md exigem. Ambos já foram validados nos Lotes 1/6
+(QA-REPORT.md e SECURITY-REVIEW.md correspondentes).
+
+---
+
+## 2. Ações operacionais pendentes do stakeholder (fora do escopo de código)
+
+O Validador não tem acesso às configurações reais do repositório no GitHub —
+as ações abaixo precisam ser feitas manualmente pelo usuário/stakeholder antes
+do primeiro deploy real funcionar de ponta a ponta:
+
+1. **Habilitar GitHub Pages** no repositório
+   `https://github.com/leandrosegheto17/SportsLM`, em Settings → Pages,
+   com a fonte definida como **"GitHub Actions"** (não "Deploy from a
+   branch"). Sem isso, o job `publish` de `build-publish.yml` falha ao tentar
+   publicar via `actions/deploy-pages`.
+2. **Cadastrar o secret `FOOTBALL_DATA_API_TOKEN`** em Settings → Secrets and
+   variables → Actions, com o token do provedor football-data.org. Sem esse
+   secret, `ingestao.yml` continua rodando em dry-run gracioso a cada 30
+   minutos (sem falhar, sem publicar dados de futebol) — o Fluxo 1 (notícias)
+   não depende deste token.
+3. **Confirmar acesso de escrita do workflow** ao repositório remoto: a
+   branch `dados` (destino da ingestão, `contents: write`) e o ambiente
+   `github-pages` nativo (destino da SPA, `pages: write` + `id-token: write`)
+   precisam estar acessíveis às permissões padrão do `GITHUB_TOKEN` do
+   próprio repositório — nenhuma configuração adicional de token pessoal é
+   esperada, mas vale confirmar que nenhuma política de organização (se
+   houver) restringe `id-token: write` ou push para branches órfãs.
+
+Nenhuma dessas três ações foi executada por este agente. `git push` para
+`main` (que dispara `build-publish.yml` pela primeira vez em produção) também
+não foi feito — é ação do orquestrador/usuário, fora desta tarefa.
+
+---
+
+## 3. Observabilidade
+
+Protótipo estático sem backend (RNF-11, nível protótipo, ADR-015 §"Perfil de
+protótipo"): observabilidade é necessariamente limitada, documentada aqui sem
+inventar ferramenta ou métrica que não existe no projeto.
+
+**O que existe:**
+
+- **Logs de execução do próprio GitHub Actions**, por run de cada um dos dois
+  workflows (`build-publish.yml`, `ingestao.yml`) — histórico de sucesso/falha,
+  duração, e output de cada step, disponível no painel Actions do repositório.
+- **`/dados/ingestao/status.json`** (SDD §5.4): único mecanismo de diagnóstico
+  do pipeline de dados em runtime. Por fonte/provedor, registra
+  `ultimaTentativa`, `resultado` (`ok`/`falha`/`pulado`), `itensNovos`,
+  `falhasConsecutivas`, `instavel`, `instavelDesde`, `severidade` (`alta` só
+  para o GE); globalmente, `geradoEm`, `pausadoPorCota`,
+  `distribuicaoClassificacao`, `gruposFormados`. É público, consumido
+  diretamente pela SPA (`esquemaStatusPublico`, validado com Zod) para
+  alimentar o carimbo de frescor (RF-17) e o estado "pausado por cota"
+  (CA-16.4/CA-17.4) — já auditado em SECURITY-REVIEW.md.
+
+**O que não existe** (e não deve ser inventado):
+
+- Sem APM (Application Performance Monitoring) — não há aplicação de
+  servidor para instrumentar.
+- Sem alerta automático de falha de ingestão ou de publicação — uma falha em
+  `ingestao.yml` ou `build-publish.yml` aparece só no painel do GitHub
+  Actions (e, se o usuário configurar notificação por e-mail do próprio
+  GitHub para falha de workflow, o que é configuração de conta/notificação do
+  GitHub, não deste projeto). Não há painel de observabilidade externo
+  (Datadog, Grafana, Sentry ou equivalente) no escopo deste protótipo — ADR-015
+  §"Perfil de protótipo": "Monitoramento, alertas, painéis de observabilidade"
+  está explicitamente em nível protótipo, coberto por "Log do agendador +
+  `status.json` + estados visíveis na tela".
+- Sem histórico agregado de disponibilidade/uptime do hosting — GitHub Pages
+  não expõe isso nativamente ao projeto.
+
+---
+
+## 4. Estratégia de rollback
+
+GitHub Pages publicado via `actions/deploy-pages` não versiona múltiplos
+releases simultâneos — a estratégia natural de rollback para este tipo de
+hosting estático é **republicar a partir de um commit anterior**:
+
+1. Identificar o último commit em `main` conhecido como estável (anterior ao
+   que introduziu a regressão).
+2. `git revert` do(s) commit(s) problemático(s) em `main` (preferível — mantém
+   histórico linear e não reescreve o que já foi publicado) **ou**, se
+   necessário reverter rapidamente sem revert de código,
+   `workflow_dispatch` manual de `build-publish.yml` apontando/rodando a
+   partir de um commit anterior específico (re-run via UI do Actions,
+   selecionando o commit).
+3. O job `publish` de `build-publish.yml` roda os mesmos portões de qualidade
+   e verificação de segredo antes de publicar — o rollback não pula essas
+   checagens, mesmo sendo uma reversão.
+4. Para dados (branch `dados`, produzida por `ingestao.yml`): como cada
+   publicação é um commit na branch órfã só quando o conteúdo muda
+   (SDD §2.2), reverter dados problemáticos segue o mesmo princípio —
+   `git revert` do commit de dados na branch `dados`, ou aguardar a próxima
+   execução agendada (30 min) corrigir o snapshot, dependendo da severidade.
+
+Não há infraestrutura adicional a testar (sem servidor, sem orquestrador de
+container) — a estratégia é a natureza do próprio GitHub Pages + Git, não uma
+ferramenta a ser implementada. Ainda não foi exercida em produção (ver Seção 5,
+histórico vazio); será validada na prática no primeiro incidente real, se
+ocorrer.
+
+---
+
+## 5. Histórico de Deploys
+
+_Nenhum deploy foi realizado até o momento desta preparação de infraestrutura
+(2026-09-06). Esta seção será preenchida a partir do primeiro `/deploy` que
+publicar de fato, após a dupla aprovação (QA + DevSecOps) do lote correspondente
+e a conclusão das ações operacionais pendentes listadas na Seção 2._
+
+| Data | Ambiente | Commit | Resultado | Observações |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+---
+
+## Log de Alterações
+
+| Data | Autor | Mudança |
+|---|---|---|
+| 2026-09-06 | Validador (chapéu DevOps) | Criação do documento: confirmação da infraestrutura de CI/CD já construída (Lotes 1/6), ações operacionais pendentes do stakeholder, estratégia de observabilidade e rollback, histórico de deploys vazio. |
+| 2026-09-06 | Validador (dupla aprovação QA + DevSecOps) | Confirmação final pré-deploy (primeira publicação conjunta, Lotes 1-11+13): regressão do zero limpa, integração pipeline↔SPA verificada manualmente sem divergência, workflows confirmados aptos sem depender de tarefa `Pendente`. Ver seção correspondente em `.md/QA-REPORT.md` e `.md/SECURITY-REVIEW.md`. Dupla aprovação **completa** — nenhuma alteração às ações operacionais pendentes da Seção 2 (ainda dependem do stakeholder); Seção 5 (histórico de deploys) segue vazia até o `git push`/execução real do `/deploy`. |

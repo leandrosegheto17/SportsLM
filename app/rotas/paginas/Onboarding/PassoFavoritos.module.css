@@ -1,0 +1,132 @@
+/*
+ * PassoFavoritos.module.css — UI-T01-01 (TASK.md Lote 8, UX-SPEC §3.8/T-01)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de `tokens.css`
+ * (Diretriz de Implementação #4).
+ */
+
+.tela {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  max-width: var(--largura-container);
+  margin: 0 auto;
+  padding: var(--esp-5) var(--margem-lateral) var(--esp-7);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  .conteudo {
+    max-width: 640px;
+  }
+}
+
+.passoRotulo {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.barra {
+  height: var(--esp-1);
+  border-radius: var(--raio-pill);
+  background: var(--cor-superficie-2);
+  overflow: hidden;
+}
+
+.barraPreenchida {
+  height: 100%;
+  width: 50%;
+  border-radius: var(--raio-pill);
+  background: var(--clube-identidade);
+}
+
+.titulo {
+  margin: 0;
+  font: var(--txt-titulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-titulo-tracking);
+  color: var(--cor-tinta);
+}
+
+.subtitulo {
+  margin: 0;
+  font: var(--txt-corpo) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-tracking);
+  color: var(--cor-texto-secundario);
+}
+
+.grade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+  margin: var(--esp-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grade li {
+  display: flex;
+}
+
+.itemNoLimite {
+  opacity: 0.5;
+}
+
+.contador {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.somenteLeitorDeTela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.rodape {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-4);
+  padding: var(--esp-4) var(--margem-lateral);
+  border-top: var(--borda-fina) solid var(--cor-borda);
+  background: var(--cor-fundo);
+}
+
+.botaoContinuar {
+  flex: 1;
+  max-width: 320px;
+}
+
+.pular {
+  border: none;
+  background: transparent;
+  color: var(--cor-tinta);
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  text-decoration: underline;
+  cursor: pointer;
+  min-height: var(--alvo-toque-minimo);
+  padding: 0 var(--esp-2);
+}

@@ -1,0 +1,44 @@
+/*
+ * SecaoSeusEsportes.module.css — UI-T02-02 (UX-SPEC §2/T-02)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4).
+ */
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  padding: var(--esp-4) var(--margem-lateral);
+}
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--esp-2);
+}
+
+.titulo {
+  margin: 0;
+  font: var(--txt-titulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-titulo-tracking);
+  color: var(--cor-tinta);
+  text-transform: uppercase;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

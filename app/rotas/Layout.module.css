@@ -1,0 +1,49 @@
+/*
+ * Layout.module.css — FUND-04 (shell) / FUND-05 (tokens)
+ *
+ * FUND-04 deixou valores literais de propósito, documentados como
+ * placeholder até FUND-05 existir (ver histórico do TASK.md). FUND-05
+ * substitui todos eles pelas custom properties de
+ * `app/design-system/tokens.css` — nenhum valor literal de cor/tamanho/
+ * espaçamento permanece aqui (Diretriz de Implementação #4).
+ */
+
+.linkPularConteudo {
+  position: absolute;
+  top: var(--deslocamento-oculto);
+  left: 0;
+  z-index: var(--z-pular-conteudo);
+  padding: var(--esp-3) var(--esp-4);
+  background: var(--cor-tinta);
+  color: var(--cor-superficie);
+  font: var(--txt-corpo) var(--fonte-sistema);
+}
+
+.linkPularConteudo:focus {
+  top: 0;
+}
+
+/*
+ * UI-T02-04: reserva espaço para a barra de navegação fixa (`Navegacao`,
+ * `--altura-nav-topo`/`--altura-nav-inferior`) só nas rotas em que ela
+ * aparece (`deveExibirNavegacao`, `Navegacao.tsx`) — nunca aplicado às
+ * demais rotas (T-01/T-06/T-09, cabeçalho próprio), então não empurra
+ * conteúdo que não tem barra fixa para empurrar.
+ *
+ * WCAG 2.4.11 ("foco nunca obscurecido pela navegação fixa nem pela barra
+ * inferior", UX-SPEC §5.2): `scroll-padding` garante que `:target`/foco por
+ * teclado nunca fiquem escondidos atrás das barras fixas.
+ */
+.comNavegacao {
+  padding-top: var(--altura-nav-topo);
+  padding-bottom: var(--altura-nav-inferior);
+  scroll-padding-top: var(--altura-nav-topo);
+  scroll-padding-bottom: var(--altura-nav-inferior);
+}
+
+@media (min-width: 1024px) {
+  .comNavegacao {
+    padding-bottom: 0;
+    scroll-padding-bottom: 0;
+  }
+}

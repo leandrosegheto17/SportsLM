@@ -1,0 +1,45 @@
+/*
+ * SecaoMeuTime.module.css — UI-T03-02 (UX-SPEC §3/T-03)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4) — exceto a
+ * cor de clube do avatar, injetada via `AvatarClube`/`corIdentidade`.
+ */
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.titulo {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  color: var(--cor-tinta);
+  text-transform: uppercase;
+}
+
+.linha {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  min-height: var(--alvo-toque-minimo);
+}
+
+.nome {
+  flex: 1;
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-sec-tracking);
+  color: var(--cor-tinta);
+}
+
+.semTime {
+  flex: 1;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  color: var(--cor-texto-secundario);
+}
+
+.botao {
+  flex: none;
+}

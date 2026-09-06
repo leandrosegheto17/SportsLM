@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      SEC-01 (TASK.md Lote 12) / ADR-011 passo 9: Política de Segurança de
+      Conteúdo declarada via <meta http-equiv>, já que o hosting estático
+      escolhido não permite cabeçalhos HTTP próprios (limitação aceita no
+      ADR-011: `frame-ancestors`/`X-Frame-Options` não funcionam por <meta> e
+      ficam de fora — débito registrado RT-13).
+
+      `connect-src`: 'self' cobre a leitura dos snapshots estáticos do
+      próprio produto (`/dados/*.json`, SDD §2.2). O host de telemetria fica
+      como placeholder comentado — TEL-01/SPK-04 ainda não define o provedor
+      real (TASK.md Lote 12/13); quando TEL-01 escolher o provedor, adicionar
+      o host real à diretiva `connect-src` abaixo (nunca remover 'self').
+
+      Desvio pequeno de detalhe registrado (TASK.md §6, SEC-01): ADR-011
+      escreve `style-src 'self'` sem `'unsafe-inline'`. Isso quebraria, em
+      qualquer navegador que aplique a CSP à risca, o padrão já estabelecido
+      e validado do design system de injetar cor por custom property CSS via
+      atributo `style` inline (`--cartao-cor-barra`, `--bloco-preto-*`,
+      `--clube-*` — ver `app/design-system/README.md`/`tokens.css`, usado por
+      >10 componentes já concluídos: CartaoIngresso, BlocoPreto, FaixaClube,
+      AvatarClube, BarraPontuacao etc.). O vetor de ameaça real do ADR-011
+      (execução de `<script>`/`javascript:` vindo do feed) não passa por
+      `style-src`: o valor de `style` nesses componentes é sempre resolvido
+      internamente a partir de tokens confiáveis do próprio app, nunca de
+      texto de terceiro (título/resumo são sempre nó de texto, nunca viram
+      atributo `style`). Por isso `'unsafe-inline'` foi adicionado só a
+      `style-src` (não a `script-src`, que segue estrito) — mantém o design
+      system funcional sem reabrir o vetor que o ADR-011 realmente mitiga.
+      Se o Coordenador preferir a leitura literal do ADR, a alternativa é
+      migrar os >10 componentes para nonce/hash de `<style>` — fora do
+      escopo desta tarefa de auditoria.
+    -->
+    <!-- connect-src 'self' https://<host-de-telemetria-a-definir-por-TEL-01>; -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none';"
+    />
+    <title>SportsLM</title>
+  </head>
+  <body>
+    <div id="raiz"></div>
+    <script type="module" src="/main.tsx"></script>
+  </body>
+</html>

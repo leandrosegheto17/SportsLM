@@ -1,0 +1,160 @@
+/*
+ * Navegacao.module.css — UI-T02-04 (UX-SPEC §2/T-02)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de `tokens.css`
+ * (Diretriz de Implementação #4) — a exceção documentada é a cor de acento
+ * do clube, injetada via `--nav-acento-sobre-escuro` (ver `Navegacao.tsx`),
+ * com fallback para o token ambiente `--clube-acento-sobre-escuro`.
+ *
+ * "navegação nunca duplicada por largura de tela" (critério de aceite): as
+ * duas regras `@media (min-width: 1024px)` abaixo são espelhadas e mutuamente
+ * exclusivas — `.navDesktop` só existe (`display: flex`) a partir de 1024px,
+ * `.inferior` só existe (`display: flex`) abaixo de 1024px. Nunca as duas ao
+ * mesmo tempo, no mesmo breakpoint.
+ */
+
+.topo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  gap: var(--esp-4);
+  height: var(--altura-nav-topo);
+  padding: 0 var(--margem-lateral);
+  background: var(--cor-nav);
+}
+
+.logo {
+  flex: none;
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-sec-tracking);
+  color: var(--cor-nav-texto-ativo);
+  text-decoration: none;
+}
+
+.navDesktop {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .navDesktop {
+    display: flex;
+    margin-right: auto;
+  }
+}
+
+.lista,
+.listaInferior {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista {
+  gap: var(--esp-5);
+}
+
+.listaInferior {
+  width: 100%;
+  justify-content: space-around;
+}
+
+.itemNav {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  min-height: var(--alvo-toque-minimo);
+  padding: 0 var(--esp-1);
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-nav-texto);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+/* WCAG 1.4.1 (Diretriz #7): o item ativo nunca depende só da cor do
+ * sublinhado — o peso da fonte muda também (mesmo padrão de `Abas.module.css`,
+ * UI-DS-07A), e `aria-current="page"` (aplicado por `NavLink`, `Navegacao.tsx`)
+ * é a terceira pista, não-visual. */
+.itemNavAtivo {
+  color: var(--cor-nav-texto-ativo);
+  font-weight: 800;
+  border-bottom-color: var(--nav-acento-sobre-escuro, var(--clube-acento-sobre-escuro));
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  flex: none;
+}
+
+.botaoIcone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  min-width: var(--alvo-toque-minimo);
+  min-height: var(--alvo-toque-minimo);
+  padding: 0 var(--esp-2);
+  border: none;
+  background: transparent;
+  color: var(--cor-nav-texto-ativo);
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.botaoIcone:focus-visible {
+  outline: var(--foco-espessura) solid var(--cor-foco);
+  outline-offset: var(--foco-deslocamento);
+}
+
+/* "◐" sozinho no mobile (UX-SPEC §2, wireframe mobile: "◐   ⚙"); "◐ TEMA" no
+ * desktop (wireframe desktop: "◐ TEMA"). O ícone já é `aria-hidden` e o
+ * `aria-label` do próprio botão comunica o estado — este rótulo textual é só
+ * a pista visual redundante em telas largas, não a única fonte do nome
+ * acessível. */
+.rotuloTema {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .rotuloTema {
+    display: inline;
+  }
+}
+
+.somenteLeitorDeTela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.inferior {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  height: var(--altura-nav-inferior);
+  background: var(--cor-nav);
+}
+
+@media (min-width: 1024px) {
+  .inferior {
+    display: none;
+  }
+}

@@ -1,0 +1,52 @@
+.banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--esp-3);
+  padding: var(--esp-3) var(--esp-4);
+  border-radius: var(--raio-md);
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+}
+
+.banner[data-variante='alerta'] {
+  background: var(--cor-aviso-fundo);
+  color: var(--cor-aviso-texto);
+}
+
+.banner[data-variante='erro'] {
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro-texto);
+}
+
+.banner[data-variante='informacao'] {
+  background: var(--cor-superficie-2);
+  color: var(--cor-tinta);
+}
+
+.icone {
+  flex: 0 0 auto;
+  line-height: 1;
+}
+
+.texto {
+  flex: 1 1 auto;
+  margin: 0;
+}
+
+.prefixo {
+  text-transform: uppercase;
+  letter-spacing: var(--txt-rotulo-tracking);
+}
+
+.acao {
+  flex: 0 0 auto;
+  min-height: var(--alvo-toque-minimo);
+  padding: 0 var(--esp-3);
+  border: var(--borda-fina) solid currentColor;
+  border-radius: var(--raio-md);
+  background: transparent;
+  color: inherit;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  cursor: pointer;
+}

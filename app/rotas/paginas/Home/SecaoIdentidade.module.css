@@ -1,0 +1,104 @@
+/*
+ * SecaoIdentidade.module.css — UI-T02-01 (UX-SPEC §2 "T-02 · Home")
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `../../../design-system/tokens.css` (Diretriz de Implementação #4).
+ */
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+}
+
+/* CA-14.3: bloco único de convite, no lugar de PRÓXIMO JOGO + A BRIGA. */
+.convite {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--esp-3);
+  padding: var(--esp-4);
+  min-height: 96px;
+  justify-content: center;
+}
+
+.conviteTexto {
+  font: var(--txt-corpo) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-tracking);
+  color: var(--cor-tinta);
+  margin: 0;
+}
+
+.proximoJogoDataHora {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+  margin: 0 0 var(--esp-2) 0;
+}
+
+.proximoJogoConfronto {
+  font: var(--txt-manchete) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-tracking);
+  color: var(--cor-tinta);
+  margin: 0 0 var(--esp-1) 0;
+}
+
+.proximoJogoMeta {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+.aBrigaLista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  margin: 0 0 var(--esp-4) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aBrigaLinha {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  padding: var(--esp-1) var(--esp-2);
+  border-radius: var(--raio-sm);
+  /* Duas variáveis (clara/escura) definidas inline pelo componente a partir
+     da `PaletaClube` do clube desta linha; o seletor de tema abaixo escolhe
+     qual delas alimenta `--clube-identidade`, lida por
+     `BarraPontuacao.module.css` — mesmo mecanismo de duas camadas que
+     `FaixaClube.module.css` já usa para a faixa principal. */
+  --clube-identidade: var(--abriga-identidade-clara, var(--cor-tinta));
+}
+
+:global(html[data-tema='escuro']) .aBrigaLinha {
+  --clube-identidade: var(--abriga-identidade-escura, var(--cor-superficie-2));
+}
+
+/* CA (linha do próprio time): fundo em destaque, nunca só a cor da barra
+   (Diretriz de Implementação #7 — pista redundante: o rótulo "seu" também
+   aparece como texto visível, ver `.aBrigaSeu`). */
+.aBrigaLinha[data-seu-time='true'] {
+  background: var(--clube-suave);
+}
+
+.aBrigaPosicao {
+  flex: 0 0 auto;
+  font: var(--txt-dado) var(--fonte-sistema);
+  letter-spacing: var(--txt-dado-tracking);
+  font-variant-numeric: var(--numero-tabular);
+  color: var(--cor-tinta);
+  min-width: 2.5ch;
+}
+
+.aBrigaSeu {
+  flex: 0 0 auto;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}

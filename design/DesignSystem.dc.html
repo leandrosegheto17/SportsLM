@@ -1,0 +1,253 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #E30613; } a:hover { color: #16181A; }
+    .num { font-variant-numeric: tabular-nums; }
+    .sw { display: flex; flex-direction: column; gap: 8px; }
+    .tok { font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #16181A; }
+    .val { font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.6px; color: #5C6570; }
+    .h2 { margin: 0; font-size: 28px; line-height: 32px; font-weight: 800; letter-spacing: -0.02em; }
+    .rot { font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; background: #FAF7F2; color: #16181A;">
+
+  <div style="display: flex; align-items: center; gap: 36px; height: 68px; padding: 0 64px; background: #16181A; color: #FAF7F2;">
+    <div style="font-size: 21px; font-weight: 800; letter-spacing: -0.3px;">SportsLM</div>
+    <div style="font-size: 14px; font-weight: 700; padding-bottom: 3px; border-bottom: 3px solid #E30613;">Design system</div>
+    <div style="flex-grow: 1;"></div>
+    <div class="rot" style="color: #A8B0BA;">Direção Camisa</div>
+  </div>
+
+  <div style="padding: 40px 64px 56px 64px; display: flex; flex-direction: column; gap: 40px;">
+
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <h1 style="margin: 0; font-size: 40px; line-height: 40px; font-weight: 800; letter-spacing: -0.03em;">Design system — Camisa</h1>
+      <div style="font-size: 16px; line-height: 24px; color: #5C6570; max-width: 720px;">Preto estrutura, cor identifica. A base é clara e quente, a navegação e os contornos são tinta, e a cor vem do clube do torcedor. É o que mantém a tela legível com 20 paletas diferentes.</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 class="h2">Cores do sistema — tema claro</h2>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px;">
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #FAF7F2; border: 1px solid #E4DFD6;"></div><div class="tok">Fundo</div><div class="val">#FAF7F2</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #FFFFFF; border: 1px solid #E4DFD6;"></div><div class="tok">Superfície</div><div class="val">#FFFFFF</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #F1ECE4; border: 1px solid #E4DFD6;"></div><div class="tok">Superfície 2</div><div class="val">#F1ECE4</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #E4DFD6;"></div><div class="tok">Borda</div><div class="val">#E4DFD6</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #16181A;"></div><div class="tok">Tinta · borda forte</div><div class="val">#16181A · 16,8:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #5C6570;"></div><div class="tok">Texto secundário</div><div class="val">#5C6570 · 5,5:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #FFF3D1; border: 1px solid #E4DFD6;"></div><div class="tok">Aviso fundo</div><div class="val">#FFF3D1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #7A5300;"></div><div class="tok">Aviso texto</div><div class="val">#7A5300 · 6,2:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #FDECEA; border: 1px solid #E4DFD6;"></div><div class="tok">Erro fundo</div><div class="val">#FDECEA</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #B3261E;"></div><div class="tok">Erro · derrota</div><div class="val">#B3261E · 6,1:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #0E6B45;"></div><div class="tok">Vitória</div><div class="val">#0E6B45 · 6,1:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #1F6FB2;"></div><div class="tok">Foco</div><div class="val">#1F6FB2 · 4,9:1</div></div>
+      </div>
+      <div style="font-size: 14px; line-height: 20px; color: #5C6570;">O anel de foco nunca usa cor de clube: ela desapareceria sobre a superfície do próprio clube.</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 class="h2">Cores do sistema — tema escuro</h2>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; padding: 20px; background: #121316; border-radius: 6px;">
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #121316; border: 1px solid #2C3037;"></div><div class="tok" style="color: #A8B0BA;">Fundo</div><div class="val">#121316</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #1A1C20; border: 1px solid #2C3037;"></div><div class="tok" style="color: #A8B0BA;">Superfície</div><div class="val">#1A1C20</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #24272C; border: 1px solid #2C3037;"></div><div class="tok" style="color: #A8B0BA;">Superfície 2</div><div class="val">#24272C</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #7A828C;"></div><div class="tok" style="color: #A8B0BA;">Borda forte</div><div class="val">#7A828C · 4,8:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #F2EFEA;"></div><div class="tok" style="color: #A8B0BA;">Tinta</div><div class="val">#F2EFEA · 16,3:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #A8B0BA;"></div><div class="tok" style="color: #A8B0BA;">Secundário</div><div class="val">#A8B0BA · 8,6:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #F5C860;"></div><div class="tok" style="color: #A8B0BA;">Aviso texto</div><div class="val">#F5C860 · 12,0:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #4FC98D;"></div><div class="tok" style="color: #A8B0BA;">Vitória</div><div class="val">#4FC98D · 9,1:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #F2857C;"></div><div class="tok" style="color: #A8B0BA;">Derrota · erro</div><div class="val">#F2857C · 7,5:1</div></div>
+        <div class="sw"><div style="height: 56px; border-radius: 6px; background: #7FC0F0;"></div><div class="tok" style="color: #A8B0BA;">Foco</div><div class="val">#7FC0F0 · 9,5:1</div></div>
+        <div class="sw" style="grid-column: span 2;">
+          <div style="height: 56px; border-radius: 6px; background: #24272C; border: 2px solid #7A828C; display: flex; align-items: center; justify-content: center;">
+            <span class="rot" style="color: #F2EFEA;">Bloco preto no escuro</span>
+          </div>
+          <div class="tok" style="color: #A8B0BA;">Preto sobre preto não funciona</div>
+        </div>
+      </div>
+      <div style="font-size: 14px; line-height: 20px; color: #5C6570;">No tema escuro a elevação é feita por borda, nunca por sombra, e os blocos pretos viram superfície 2 com contorno de 2 px.</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 class="h2">Cores de clube — os seis tokens derivados</h2>
+      <div style="font-size: 15px; line-height: 22px; color: #5C6570; max-width: 760px;">A cor crua fica onde ela é reconhecida, em superfície grande. A cor ajustada fica onde ela precisa ser legível, em tamanho de texto. Toda superfície na cor do clube carrega contorno de 1 px em tinta.</div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+
+        <div style="border: 1px solid #E4DFD6; border-radius: 6px; overflow: hidden; background: #FFFFFF;">
+          <div style="height: 92px; background: repeating-linear-gradient(135deg, #E30613 0 18px, #16181A 18px 36px); border-bottom: 1px solid #16181A; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 48px; line-height: 44px; font-weight: 800; letter-spacing: -0.03em; color: #FFFFFF;">6</span>
+          </div>
+          <div style="padding: 14px; display: flex; flex-direction: column; gap: 6px;">
+            <div class="tok">São Paulo</div>
+            <div class="val">identidade #E30613</div>
+            <div class="val">texto #FFFFFF · 4,9:1</div>
+            <div style="font-size: 15px; font-weight: 700; color: #E30613;">acento 4,6:1</div>
+          </div>
+        </div>
+
+        <div style="border: 1px solid #E4DFD6; border-radius: 6px; overflow: hidden; background: #FFFFFF;">
+          <div style="height: 92px; background: repeating-linear-gradient(135deg, #FFDD00 0 18px, #16181A 18px 36px); border-bottom: 1px solid #16181A; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 48px; line-height: 44px; font-weight: 800; letter-spacing: -0.03em; color: #16181A; background: #FFDD00; padding: 0 10px;">9</span>
+          </div>
+          <div style="padding: 14px; display: flex; flex-direction: column; gap: 6px;">
+            <div class="tok">Mirassol</div>
+            <div class="val">identidade #FFDD00</div>
+            <div class="val">texto #16181A · 13,3:1</div>
+            <div style="font-size: 15px; font-weight: 700; color: #7A5B00;">acento escurecido</div>
+          </div>
+        </div>
+
+        <div style="border: 1px solid #E4DFD6; border-radius: 6px; overflow: hidden; background: #FFFFFF;">
+          <div style="height: 92px; background: repeating-linear-gradient(135deg, #16181A 0 18px, #3A3F45 18px 36px); border-bottom: 1px solid #16181A; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 48px; line-height: 44px; font-weight: 800; letter-spacing: -0.03em; color: #FFFFFF;">5</span>
+          </div>
+          <div style="padding: 14px; display: flex; flex-direction: column; gap: 6px;">
+            <div class="tok">Corinthians</div>
+            <div class="val">acromático · faixa-b #3A3F45</div>
+            <div class="val">texto #FFFFFF · 18,0:1</div>
+            <div style="font-size: 15px; font-weight: 700; color: #16181A;">acento em tinta</div>
+          </div>
+        </div>
+
+        <div style="border: 1px solid #E4DFD6; border-radius: 6px; overflow: hidden; background: #FFFFFF;">
+          <div style="height: 92px; background: repeating-linear-gradient(135deg, #006437 0 18px, #16181A 18px 36px); border-bottom: 1px solid #16181A; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 48px; line-height: 44px; font-weight: 800; letter-spacing: -0.03em; color: #FFFFFF;">1</span>
+          </div>
+          <div style="padding: 14px; display: flex; flex-direction: column; gap: 6px;">
+            <div class="tok">Palmeiras</div>
+            <div class="val">identidade #006437</div>
+            <div class="val">texto #FFFFFF · 7,4:1</div>
+            <div style="font-size: 15px; font-weight: 700; color: #006437;">acento sem ajuste</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 16px; padding: 16px; background: #FFFFFF; border: 2px solid #16181A; border-radius: 6px;">
+        <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px;">
+          <div class="tok">Regra dura 1</div>
+          <div style="font-size: 14px; line-height: 20px; color: #5C6570;">Cor de clube nunca é a única pista de significado.</div>
+        </div>
+        <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px;">
+          <div class="tok">Regra dura 2</div>
+          <div style="font-size: 14px; line-height: 20px; color: #5C6570;">Cor de clube nunca entra no anel de foco.</div>
+        </div>
+        <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px;">
+          <div class="tok">Regra dura 3</div>
+          <div style="font-size: 14px; line-height: 20px; color: #5C6570;">Zonas da tabela e V/E/D são fixas do sistema. Informação não muda de cor conforme o time.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 48px; align-items: flex-start;">
+      <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 16px;">
+        <h2 class="h2">Tipografia</h2>
+        <div style="font-size: 14px; line-height: 20px; color: #5C6570;">Pilha do sistema, sem webfont. Onde o peso 800 não existe, o aparelho renderiza 700. Perda aceita para preservar o orçamento de rede.</div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">camisa 96/88 · 800</span><span class="num" style="font-size: 72px; line-height: 64px; font-weight: 800; letter-spacing: -0.04em;">6º</span></div>
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">display 40/40 · 800</span><span style="font-size: 40px; line-height: 40px; font-weight: 800; letter-spacing: -0.03em;">São Paulo</span></div>
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">título 28/32 · 800</span><span style="font-size: 28px; line-height: 32px; font-weight: 800; letter-spacing: -0.02em;">Seus esportes</span></div>
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">manchete 24/30 · 800</span><span style="font-size: 24px; line-height: 30px; font-weight: 800; letter-spacing: -0.01em;">São Paulo vence e encosta no G-6</span></div>
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">secundária 18/24 · 700</span><span style="font-size: 18px; line-height: 24px; font-weight: 700; letter-spacing: -0.01em;">Brasileirão Série A</span></div>
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">dado 15/20 · 700</span><span class="num" style="font-size: 15px; line-height: 20px; font-weight: 700;">23 J · 12V 6E 5D · SG +14</span></div>
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">corpo 16/24 · 400</span><span style="font-size: 16px; line-height: 24px;">Corpo padrão da interface</span></div>
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">corpo sm 14/20 · 400</span><span style="font-size: 14px; line-height: 20px;">Resumo da notícia e texto de apoio</span></div>
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">rótulo 12/16 · 700</span><span class="rot">Próximo jogo</span></div>
+          <div style="display: flex; align-items: baseline; gap: 20px;"><span class="val" style="width: 130px;">meta 12/16 · 600</span><span class="val">ge · há 8 min</span></div>
+        </div>
+      </div>
+
+      <div style="width: 400px; flex-grow: 0; display: flex; flex-direction: column; gap: 16px;">
+        <h2 class="h2">Forma</h2>
+        <div style="display: flex; align-items: flex-end; gap: 10px;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 4px; height: 4px; background: #16181A;"></div><span class="val">4</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 8px; height: 8px; background: #16181A;"></div><span class="val">8</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 12px; height: 12px; background: #16181A;"></div><span class="val">12</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 16px; height: 16px; background: #16181A;"></div><span class="val">16</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 24px; height: 24px; background: #16181A;"></div><span class="val">24</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 32px; height: 32px; background: #16181A;"></div><span class="val">32</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 48px; height: 48px; background: #16181A;"></div><span class="val">48</span></div>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 72px; height: 44px; background: #FFFFFF; border: 1px solid #E4DFD6; border-radius: 4px;"></div><span class="val">4 · etiqueta</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 72px; height: 44px; background: #FFFFFF; border: 1px solid #E4DFD6; border-radius: 6px;"></div><span class="val">6 · cartão</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 44px; height: 44px; background: #E30613; border: 1px solid #16181A; border-radius: 999px;"></div><span class="val">avatar</span></div>
+        </div>
+        <div style="font-size: 14px; line-height: 20px; color: #5C6570;">Raio pequeno de propósito: linguagem de ingresso, não de bolha. A direção estrutura por contorno, então a única sombra do sistema é a de sobreposição. Alvo de toque de 44 px, com 8 px entre alvos.</div>
+        <div style="display: flex; align-items: center; justify-content: center; height: 44px; border-radius: 6px; background: #E30613; border: 1px solid #16181A; color: #FFFFFF; font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; outline: 3px solid #1F6FB2; outline-offset: 2px;">Botão com foco</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 class="h2">Componentes da direção</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="tok">Bloco preto</div>
+          <div style="background: #FFFFFF; border: 2px solid #16181A; border-radius: 6px; overflow: hidden;">
+            <div style="padding: 10px 14px; background: #16181A;"><div class="rot" style="color: #FAF7F2;">Próximo jogo</div></div>
+            <div style="padding: 14px; display: flex; flex-direction: column; gap: 4px;">
+              <div class="num" style="font-size: 24px; line-height: 30px; font-weight: 800; letter-spacing: -0.01em;">dom, 13/09</div>
+              <div class="num" style="font-size: 28px; line-height: 32px; font-weight: 800; color: #E30613; letter-spacing: -0.02em;">16h00</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="tok">Cartão ingresso</div>
+          <div style="background: #FFFFFF; border: 1px solid #E4DFD6; border-left: 6px solid #E30613; border-radius: 4px; padding: 14px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="padding: 5px 9px; border-radius: 4px; background: #FCE9EA; color: #16181A; font-size: 11px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;">Futebol</span>
+              <span class="val">ge · há 8 min</span>
+            </div>
+            <div style="font-size: 18px; line-height: 24px; font-weight: 700; letter-spacing: -0.01em;">A barra de 6 px sempre vem com etiqueta textual</div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="tok">Seletor de palpite · barra de pontuação</div>
+          <div style="display: flex; gap: 8px;">
+            <span style="width: 44px; height: 44px; border-radius: 6px; border: 2px solid #E30613; background: #FCE9EA; color: #16181A; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800;">V</span>
+            <span style="width: 44px; height: 44px; border-radius: 6px; border: 1px solid #E4DFD6; background: #FFFFFF; color: #5C6570; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;">E</span>
+            <span style="width: 44px; height: 44px; border-radius: 6px; border: 1px solid #E4DFD6; background: #FFFFFF; color: #5C6570; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;">D</span>
+            <span style="width: 44px; height: 44px; border-radius: 6px; border: 1px solid #E4DFD6; background: #FFFFFF; color: #5C6570; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;">—</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="val" style="width: 34px;">SPA</span>
+            <span style="flex-grow: 1; height: 20px; background: #F1ECE4; border-radius: 6px; display: flex;"><span style="width: 60%; background: #E30613; border: 1px solid #16181A; border-radius: 6px;"></span></span>
+            <span class="num" style="font-size: 15px; font-weight: 800;">55</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 class="h2">Cores fixas de informação</h2>
+      <div style="font-size: 14px; line-height: 20px; color: #5C6570;">Estas nunca mudam com o clube. Zona sempre acompanha legenda textual, e forma recente sempre traz a letra.</div>
+      <div style="display: flex; gap: 32px; flex-wrap: wrap; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 10px;"><div style="width: 4px; height: 28px; background: #0E6B45;"></div><span style="font-size: 14px;">Libertadores</span></div>
+        <div style="display: flex; align-items: center; gap: 10px;"><div style="width: 4px; height: 28px; background: #1F6FB2;"></div><span style="font-size: 14px;">Pré-Libertadores</span></div>
+        <div style="display: flex; align-items: center; gap: 10px;"><div style="width: 4px; height: 28px; background: #5C6570;"></div><span style="font-size: 14px;">Sul-Americana</span></div>
+        <div style="display: flex; align-items: center; gap: 10px;"><div style="width: 4px; height: 28px; background: #B3261E;"></div><span style="font-size: 14px;">Rebaixamento</span></div>
+        <div style="flex-grow: 1;"></div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="width: 24px; height: 24px; border-radius: 4px; background: #0E6B45; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;">V</span>
+          <span style="width: 24px; height: 24px; border-radius: 4px; background: #5C6570; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;">E</span>
+          <span style="width: 24px; height: 24px; border-radius: 4px; background: #B3261E; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;">D</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

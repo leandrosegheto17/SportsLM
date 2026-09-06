@@ -1,0 +1,130 @@
+name: Ingestão agendada
+
+# ADR-002: ingestão periódica em CI agendado, com estado versionado na branch
+# `dados`. Enquanto os coletores (ING-N-*/ING-F-*, Lotes 4/5 do TASK.md) não
+# existem, este workflow roda em modo dry-run: valida agendamento, cofre de
+# segredo e alvo de publicação sem erro de configuração, sem publicar nada.
+#
+# Segredo esperado (a cadastrar em Settings > Secrets and variables > Actions,
+# ação operacional fora deste arquivo): FOOTBALL_DATA_API_TOKEN — token do
+# provedor de futebol (football-data.org), nunca em código nem em log
+# (SDD §7.2, GUARDRAILS §2/§4).
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch: {}
+
+concurrency:
+  group: ingestao-agendada
+  cancel-in-progress: false
+
+permissions:
+  contents: write # escopo mínimo: escrever na branch `dados` (SDD §7.2). Nada além.
+
+jobs:
+  ingestao:
+    name: Ingestão de notícias e futebol (dry-run até Lotes 4/5)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Configura Node.js 22 LTS
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Instala dependências (determinístico)
+        run: npm ci
+
+      - name: Portões de qualidade (tsc / lint / format / test)
+        run: |
+          npm run typecheck
+          npm run lint
+          npm run format:check
+          npm run test
+
+      - name: Auditoria de dependências de runtime (GUARDRAILS §2)
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Executa pipeline de ingestão
+        id: ingestao
+        env:
+          # SDD §7.2 / GUARDRAILS §4: segredo só como variável de ambiente do
+          # job, nunca em código, arquivo de configuração ou artefato. O
+          # GitHub Actions mascara automaticamente qualquer ocorrência do
+          # valor do secret nos logs a partir do momento em que é referenciado
+          # aqui — por isso ele nunca é ecoado (`echo`) neste workflow.
+          FOOTBALL_DATA_API_TOKEN: ${{ secrets.FOOTBALL_DATA_API_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if ! npm run | grep -qE '^\s+ingestao$'; then
+            echo "Nenhum coletor implementado ainda (ING-N-*/ING-F-*, Lotes 4/5 do TASK.md)."
+            echo "Dry-run: schedule, cofre de segredo e alvo de publicação (branch dados) validados sem erro de configuração."
+            echo "publica=false" >> "$GITHUB_OUTPUT"
+          elif [ -z "${FOOTBALL_DATA_API_TOKEN:-}" ]; then
+            # REFAT-06-01: o script existe, mas o Fluxo 2 (futebol) exige o
+            # token real (`executarIngestaoFutebolEmDisco` lança erro sem
+            # ele) — sem o secret cadastrado, mantém o dry-run informativo em
+            # vez de falhar o job a cada execução agendada.
+            echo "Aviso: FOOTBALL_DATA_API_TOKEN ainda não cadastrado no cofre de segredo deste repositório."
+            echo "Dry-run: pipeline pronto (npm run ingestao existe), aguardando o secret ser cadastrado para publicar de fato."
+            echo "publica=false" >> "$GITHUB_OUTPUT"
+          else
+            npm run ingestao
+            echo "publica=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Verificação de segredo no diretório de dados publicado (bloqueante — SDD §7.2, PUB-03)
+        if: steps.ingestao.outputs.publica == 'true'
+        run: |
+          set -euo pipefail
+
+          if [ ! -d "dist-dados" ]; then
+            echo "Diretório dist-dados não encontrado; nada a verificar."
+            exit 0
+          fi
+
+          # Reaproveita o mesmo módulo genérico de varredura de segredo
+          # usado no build da SPA (FUND-03), apontado para o diretório de
+          # dados publicado em vez do artefato do Vite — mesma bateria de
+          # padrões (`token`, `api_key`, `Bearer`, chave hex 32+), sem
+          # duplicar a lógica de detecção.
+          npm run verificar-segredos:dados
+
+      - name: Publica snapshots na branch dados
+        if: steps.ingestao.outputs.publica == 'true'
+        run: |
+          set -euo pipefail
+
+          if [ ! -d "dist-dados" ]; then
+            echo "Diretório dist-dados não encontrado; nada a publicar."
+            exit 0
+          fi
+
+          git config user.name "sportslm-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git fetch origin dados || true
+          if git ls-remote --exit-code --heads origin dados > /dev/null 2>&1; then
+            git checkout dados
+            git rm -rf . > /dev/null 2>&1 || true
+          else
+            git checkout --orphan dados
+            git rm -rf . > /dev/null 2>&1 || true
+          fi
+
+          cp -r dist-dados/. .
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Sem mudança de conteúdo; nenhuma publicação necessária (SDD §2.2 — publica só se o hash mudou)."
+          else
+            git commit -m "chore(dados): atualiza snapshots de ingestão [skip ci]"
+            git push origin dados
+          fi

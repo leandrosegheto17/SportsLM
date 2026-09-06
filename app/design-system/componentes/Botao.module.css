@@ -1,0 +1,59 @@
+/*
+ * Botao.module.css — UI-DS-07A
+ *
+ * UX-SPEC §3.8: "44 px, raio md, rótulo em --txt-rotulo". Nenhum valor
+ * literal de cor/tamanho/espaçamento — só custom properties de
+ * app/design-system/tokens.css (Diretriz de Implementação #4).
+ */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-2);
+  min-height: var(--alvo-toque-minimo);
+  padding: var(--esp-2) var(--esp-4);
+  border-radius: var(--raio-md);
+  border: none;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--duracao-transicao-rapida) var(--easing-padrao);
+}
+
+.botao:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.primario {
+  background: var(--clube-identidade);
+  color: var(--clube-identidade-texto);
+}
+
+.secundario {
+  background: transparent;
+  color: var(--cor-tinta);
+  border: 1px solid var(--cor-tinta);
+}
+
+.terciario {
+  background: transparent;
+  color: var(--cor-tinta);
+  padding-left: var(--esp-1);
+  padding-right: var(--esp-1);
+  text-decoration: underline;
+}
+
+.destrutivo {
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro-texto);
+  border: 1px solid var(--cor-erro-texto);
+}
+
+.fantasma {
+  background: transparent;
+  color: var(--clube-identidade-texto);
+  border: 1px solid var(--clube-identidade-texto);
+}

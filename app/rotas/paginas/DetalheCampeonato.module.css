@@ -1,0 +1,117 @@
+/*
+ * DetalheCampeonato.module.css — UI-T06-01 (TASK.md Lote 10)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de `tokens.css`
+ * (Diretriz de Implementação #4).
+ */
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  max-width: var(--largura-container);
+  margin: 0 auto;
+  padding: var(--esp-4);
+}
+
+.voltar {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+}
+
+.voltar a {
+  color: inherit;
+}
+
+.titulo {
+  margin: 0;
+  font: var(--txt-titulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-titulo-tracking);
+}
+
+.resumo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.resumoDestaque {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--esp-3);
+  margin: 0;
+  font: var(--txt-camisa-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-camisa-sm-tracking);
+  font-variant-numeric: var(--numero-tabular);
+}
+
+.resumoLinha {
+  margin: 0;
+  font: var(--txt-dado) var(--fonte-sistema);
+  letter-spacing: var(--txt-dado-tracking);
+  font-variant-numeric: var(--numero-tabular);
+}
+
+.semTabela {
+  margin: 0;
+  font: var(--txt-corpo) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-tracking);
+  color: var(--cor-texto-secundario);
+}
+
+.tabelaScroll {
+  overflow-x: auto;
+}
+
+.confrontoLinha {
+  margin: 0;
+  font: var(--txt-manchete) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-tracking);
+}
+
+/*
+ * UI-T06-02 — abas Disputadas/Próximas (UX-SPEC §6: "sem abas" a partir de
+ * 900px, resumo/tabela em largura total e Disputadas/Próximas lado a lado em
+ * colunas de 540px). Os dois painéis ficam sempre no DOM; abaixo de 900px o
+ * atributo `hidden` (controlado pelo estado de aba ativa) esconde o inativo;
+ * a partir de 900px, a regra abaixo sobrepõe o `hidden` com `!important` e
+ * esconde a lista de abas — sem nenhuma lógica de `matchMedia` em JS.
+ */
+.abasContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.painel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.listaPartidas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 900px) {
+  .abasContainer [role='tablist'] {
+    display: none;
+  }
+
+  .abasContainer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 540px));
+    gap: var(--esp-4);
+  }
+
+  .painel {
+    display: flex !important;
+  }
+}

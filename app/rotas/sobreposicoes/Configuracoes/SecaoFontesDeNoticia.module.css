@@ -1,0 +1,88 @@
+/*
+ * SecaoFontesDeNoticia.module.css — UI-T03-01 (UX-SPEC §3/T-03)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4).
+ */
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.titulo {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  color: var(--cor-tinta);
+  text-transform: uppercase;
+}
+
+.ajuda {
+  margin: 0;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  color: var(--cor-texto-secundario);
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.linha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  padding: var(--esp-3) var(--esp-4);
+  border-left: var(--esp-1) solid var(--cor-tinta);
+  border-radius: var(--raio-sm);
+  background: var(--cor-superficie);
+}
+
+.linha[data-estado='bloqueada'] {
+  border-left-color: var(--cor-esmaecido);
+}
+
+.cabecalhoFixa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  min-height: var(--alvo-toque-minimo);
+}
+
+.nomeFixa {
+  font: var(--txt-dado) var(--fonte-sistema);
+  color: var(--cor-tinta);
+}
+
+.subtitulo {
+  margin: 0;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  color: var(--cor-texto-secundario);
+}
+
+.verificando {
+  margin: 0;
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.instavel {
+  margin: 0;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  color: var(--cor-aviso-texto);
+}
+
+.explicacao {
+  margin: 0;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  color: var(--cor-texto-secundario);
+}

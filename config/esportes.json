@@ -1,0 +1,17 @@
+[
+  { "id": "futebol", "nome": "Futebol", "ordem": 1 },
+  { "id": "volei-quadra", "nome": "Vôlei (quadra)", "ordem": 2 },
+  { "id": "formula1", "nome": "Fórmula 1 / automobilismo", "ordem": 3 },
+  { "id": "basquete", "nome": "Basquete", "ordem": 4 },
+  { "id": "tenis", "nome": "Tênis", "ordem": 5 },
+  { "id": "volei-praia", "nome": "Vôlei de praia", "ordem": 6 },
+  { "id": "natacao", "nome": "Natação", "ordem": 7 },
+  { "id": "mma", "nome": "MMA / UFC", "ordem": 8 },
+  { "id": "ginastica-artistica", "nome": "Ginástica artística", "ordem": 9 },
+  { "id": "surfe", "nome": "Surfe", "ordem": 10 },
+  { "id": "skate", "nome": "Skate", "ordem": 11 },
+  { "id": "judo", "nome": "Judô", "ordem": 12 },
+  { "id": "atletismo", "nome": "Atletismo", "ordem": 13 },
+  { "id": "futsal", "nome": "Futsal", "ordem": 14 },
+  { "id": "futebol-americano", "nome": "Futebol americano (NFL)", "ordem": 15 }
+]

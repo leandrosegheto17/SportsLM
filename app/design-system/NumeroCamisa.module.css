@@ -1,0 +1,63 @@
+/*
+ * NumeroCamisa.module.css — UI-DS-04
+ *
+ * Todo valor literal de cor/tamanho vem de `tokens.css` (Diretriz de
+ * Implementação #4) — nenhum literal aqui, incluindo o breakpoint de 339px
+ * (mesma convenção de `tokens.css`: breakpoint é valor de condição de media
+ * query, não uma custom property, então é escrito por extenso; o *valor de
+ * tipografia* que ele troca é sempre uma custom property).
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--esp-1);
+}
+
+.numero {
+  margin: 0;
+  font: var(--txt-camisa) var(--fonte-sistema);
+  letter-spacing: var(--txt-camisa-tracking);
+  font-variant-numeric: var(--numero-tabular);
+}
+
+/* UX-SPEC §3.8.4: "sobre a faixa" usa a cor de texto que já garante contraste
+   sobre a identidade do clube (--clube-identidade-texto). */
+.sobreFaixa {
+  color: var(--clube-identidade-texto);
+}
+
+/* UX-SPEC §3.8.4: "sobre fundo claro" usa --clube-acento, que já garante
+   4,5:1 (derivado por PUB-01/ADR-017) — nunca a cor de identidade bruta. */
+.sobreFundoClaro {
+  color: var(--clube-acento);
+}
+
+.rotulo {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: inherit;
+}
+
+/* UX-SPEC §3.8.4: "sem posição" (mata-mata) mostra a fase em --txt-manchete
+   no lugar do número — já é texto, não precisa de rótulo secundário à parte
+   para satisfazer "número não é decorativo". */
+.fase {
+  margin: 0;
+  font: var(--txt-manchete) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-tracking);
+  color: inherit;
+}
+
+/* Critério de aceite de UI-DS-04: "reduz de 72 para 56px abaixo de 340px de
+   largura" — escopado só a `.numero` (nunca ao `--txt-camisa` global, que
+   outros componentes como `FaixaClube`/UI-DS-01 também consomem). */
+@media (max-width: 339px) {
+  .numero {
+    font: var(--txt-camisa-compacta) var(--fonte-sistema);
+    letter-spacing: var(--txt-camisa-compacta-tracking);
+  }
+}

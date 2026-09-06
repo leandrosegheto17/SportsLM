@@ -1,0 +1,256 @@
+/*
+ * Comparativo.module.css — UI-T08-01 (UX-SPEC §2 "T-08 · Comparativo no Brasileirão")
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4).
+ *
+ * Uma "coluna" por clube comparado (cartão + calendário) — coluna única no
+ * mobile, grade de até 3 colunas no desktop, mesma ordem de elementos nas
+ * duas larguras (ver nota de decisão no topo de `Comparativo.tsx`).
+ */
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  max-width: var(--largura-container);
+  margin: 0 auto;
+  padding: var(--esp-4) var(--margem-lateral) var(--esp-8);
+}
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--esp-2);
+}
+
+.titulo {
+  font: var(--txt-titulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-titulo-tracking);
+  color: var(--cor-tinta);
+  margin: 0;
+}
+
+.avisoNaoIniciado {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+.colunas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  /* Duas variáveis (clara/escura) por coluna, mesmo mecanismo de duas camadas
+   * de `FaixaClube.module.css`/`PainelTime.module.css` para variar por tema
+   * sem o componente ler `data-tema` diretamente. */
+  --clube-identidade: var(--cmp-identidade-clara, var(--cor-tinta));
+}
+
+:global(html[data-tema='escuro']) .colunas {
+  --clube-identidade: var(--cmp-identidade-escura, var(--cor-superficie-2));
+}
+
+@media (min-width: 1024px) {
+  .colunas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+}
+
+.coluna {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  min-width: 0;
+}
+
+.cartao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  padding: var(--esp-4);
+  background: var(--cor-superficie);
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-left-width: var(--barra-cartao-espessura);
+  border-left-style: solid;
+  border-left-color: var(--clube-identidade);
+  border-radius: var(--raio-md);
+}
+
+.cartaoNome {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  font: var(--txt-manchete-sec) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-sec-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+  margin: 0;
+}
+
+.seloSeuTime {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+  background: var(--clube-suave);
+  padding: 2px var(--esp-2);
+  border-radius: var(--raio-pill);
+}
+
+.cartaoLinhaPrincipal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--esp-3);
+}
+
+.cartaoPosicao {
+  font: var(--txt-camisa-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-camisa-sm-tracking);
+  font-variant-numeric: var(--numero-tabular);
+  color: var(--cor-tinta);
+}
+
+.cartaoPontos {
+  font: var(--txt-manchete) var(--fonte-sistema);
+  letter-spacing: var(--txt-manchete-tracking);
+  font-variant-numeric: var(--numero-tabular);
+  color: var(--cor-tinta);
+}
+
+.cartaoAproveitamento {
+  font: var(--txt-dado) var(--fonte-sistema);
+  letter-spacing: var(--txt-dado-tracking);
+  font-variant-numeric: var(--numero-tabular);
+  color: var(--cor-texto-secundario);
+}
+
+.cartaoDiferenca {
+  font: var(--txt-dado) var(--fonte-sistema);
+  letter-spacing: var(--txt-dado-tracking);
+  font-variant-numeric: var(--numero-tabular);
+  color: var(--cor-texto-secundario);
+}
+
+.cartaoDiferenca[data-sinal='positivo'] {
+  color: var(--cor-vitoria);
+}
+
+.cartaoDiferenca[data-sinal='negativo'] {
+  color: var(--cor-derrota);
+}
+
+.cartaoResumo {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  font-variant-numeric: var(--numero-tabular);
+  color: var(--cor-texto-secundario);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.cartaoUltimos {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  color: var(--cor-texto-secundario);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.cartaoRestantes {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+.somenteLeitorDeTela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.calendario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.calendarioTitulo {
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+  margin: 0;
+}
+
+.calendarioVazio {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  color: var(--cor-texto-secundario);
+  margin: 0;
+}
+
+.calendarioLista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calendarioLinha {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--esp-2) var(--esp-3);
+  border-left: var(--barra-cartao-espessura) solid var(--clube-identidade);
+  background: var(--cor-superficie);
+  border-radius: var(--raio-sm);
+}
+
+.calendarioLinha[data-confronto-direto='true'] {
+  border-left-color: var(--cor-tinta);
+}
+
+.calendarioCabecalho {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.calendarioCorpo {
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-corpo-sm-tracking);
+  color: var(--cor-tinta);
+}
+
+.calendarioConfronto {
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+  font-weight: 800;
+}
+
+.acaoSimulacao {
+  align-self: stretch;
+}
+
+@media (min-width: 1024px) {
+  .acaoSimulacao {
+    align-self: flex-end;
+  }
+}

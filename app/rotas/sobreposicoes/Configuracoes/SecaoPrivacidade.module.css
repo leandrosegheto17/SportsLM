@@ -1,0 +1,45 @@
+/*
+ * SecaoPrivacidade.module.css — UI-T03-02 (UX-SPEC §3/T-03)
+ *
+ * Nenhum valor literal de cor/tamanho/espaçamento fora de
+ * `app/design-system/tokens.css` (Diretriz de Implementação #4).
+ */
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.titulo {
+  margin: 0;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  color: var(--cor-tinta);
+  text-transform: uppercase;
+}
+
+.texto {
+  margin: 0;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  color: var(--cor-texto-secundario);
+}
+
+.eventos {
+  margin: 0;
+  padding-left: var(--esp-5);
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  color: var(--cor-texto-secundario);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+}
+
+.confirmacao {
+  margin: 0;
+  font: var(--txt-corpo-sm) var(--fonte-sistema);
+  color: var(--cor-tinta);
+}

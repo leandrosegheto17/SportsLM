@@ -1,0 +1,12 @@
+.carimbo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  font: var(--txt-meta) var(--fonte-sistema);
+  letter-spacing: var(--txt-meta-tracking);
+  color: var(--cor-texto-secundario);
+}
+
+.carimbo[data-estado='alerta'] {
+  color: var(--cor-aviso-texto);
+}

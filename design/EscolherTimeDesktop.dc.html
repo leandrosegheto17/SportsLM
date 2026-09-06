@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #E30613; } a:hover { color: #16181A; }
+    .av { width: 28px; height: 28px; border-radius: 999px; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .li { display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 8px; border-radius: 6px; font-size: 16px; line-height: 24px; }
+    .rd { width: 20px; height: 20px; border-radius: 999px; border: 2px solid #5C6570; flex-shrink: 0; }
+    .rd-on { width: 20px; height: 20px; border-radius: 999px; border: 6px solid #E30613; flex-shrink: 0; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; min-height: 720px; background: #FAF7F2; color: #16181A; display: flex; flex-direction: column;">
+
+  <div style="display: flex; align-items: center; height: 64px; padding: 0 80px;">
+    <div style="font-size: 18px; line-height: 26px; font-weight: 700; letter-spacing: -0.2px;">SportsLM</div>
+  </div>
+
+  <div style="display: flex; justify-content: center; padding: 32px 80px 64px 80px;">
+    <div style="width: 640px; display: flex; flex-direction: column; gap: 24px;">
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16181A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+          <div style="font-size: 12px; line-height: 16px; font-weight: 500; color: #5C6570; letter-spacing: 0.4px;">PASSO 2 DE 2</div>
+        </div>
+        <div style="height: 6px; border-radius: 999px; background: #F1ECE4; display: flex;">
+          <div style="width: 100%; background: #E30613; border-radius: 999px;"></div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <h1 style="margin: 0; font-size: 32px; line-height: 40px; font-weight: 700; letter-spacing: -0.4px;">Qual é o seu time?</h1>
+        <div style="font-size: 16px; line-height: 24px; color: #5C6570;">Clubes da Série A de 2026.</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 16px; border: 1px solid #E4DFD6; border-radius: 6px; background: #FFFFFF;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5C6570" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        <span style="font-size: 16px; line-height: 24px; color: #5C6570;">Buscar time</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px;">
+        <div class="li" style="background: #FCE9EA;"><span class="rd-on"></span><span class="av" style="background: #E30613;">SPA</span><span style="font-weight: 600;">São Paulo</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #046A38;">PAL</span><span>Palmeiras</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #1A1A1A;">COR</span><span>Corinthians</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #C52613;">FLA</span><span>Flamengo</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #235AA6;">CRU</span><span>Cruzeiro</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #1A1A1A;">BOT</span><span>Botafogo</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #1A1A1A;">CAM</span><span>Atlético-MG</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #7A0026;">FLU</span><span>Fluminense</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #0D80BF;">GRE</span><span>Grêmio</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #C4161C;">INT</span><span>Internacional</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #1A1A1A;">VAS</span><span>Vasco</span></div>
+        <div class="li"><span class="rd"></span><span class="av" style="background: #1A5EA8;">BAH</span><span>Bahia</span></div>
+      </div>
+
+      <div style="font-size: 13px; line-height: 18px; color: #5C6570;">··· 20 clubes</div>
+
+      <div style="display: flex; align-items: center; gap: 24px; padding-top: 8px;">
+        <div style="display: flex; align-items: center; justify-content: center; height: 44px; padding: 0 32px; border-radius: 6px; background: #E30613; color: #FFFFFF; font-size: 16px; line-height: 24px; font-weight: 600;">Confirmar</div>
+        <div style="font-size: 16px; line-height: 24px; color: #E30613; text-decoration: underline;">Pular</div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

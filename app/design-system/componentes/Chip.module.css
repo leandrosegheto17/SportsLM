@@ -1,0 +1,54 @@
+/* Chip.module.css — UI-DS-07A. UX-SPEC §3.8: "44 px, raio sm, caixa alta". */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  min-height: var(--alvo-toque-minimo);
+  padding: var(--esp-2) var(--esp-3);
+  border-radius: var(--raio-sm);
+  border: 1px solid var(--cor-borda);
+  background: var(--cor-superficie);
+  color: var(--cor-tinta);
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  letter-spacing: var(--txt-rotulo-tracking);
+  text-transform: uppercase;
+}
+
+.selecionavel {
+  cursor: pointer;
+}
+
+.selecionavel.selecionado {
+  background: var(--clube-identidade);
+  color: var(--clube-identidade-texto);
+  border-color: var(--clube-identidade);
+}
+
+.selecionavel:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.removivel {
+  padding-right: var(--esp-2);
+}
+
+.botaoRemover {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--alvo-toque-minimo);
+  min-height: var(--alvo-toque-minimo);
+  margin: calc(var(--esp-2) * -1) calc(var(--esp-2) * -1) calc(var(--esp-2) * -1) 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: var(--txt-rotulo) var(--fonte-sistema);
+  cursor: pointer;
+}
+
+.informativo {
+  background: var(--cor-superficie-2);
+  color: var(--cor-texto-secundario);
+}
