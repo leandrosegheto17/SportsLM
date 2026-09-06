@@ -116,3 +116,40 @@
   referenciando `.md/TASK.md`, tabela do Lote 13, nota de SPK-03.
 - Status: Aberto, não bloqueante (catálogo já reflete a decisão correta;
   achado é insumo para decisão futura, não correção de erro atual).
+
+## Bloqueio 004 — 2026-09-06
+- Reportado por: orquestrador (usuário), durante `/deploy` — confirmação final
+  de CI real após `git push` do commit `43d26e9` para `origin/main`
+- Escalado para: executor (correção de código/teste); decisão de produto
+  (qual das duas correções, ver abaixo) pode exigir confirmação do
+  coordenador/gestor antes de implementar
+- Artefato/trecho afetado: `app/rotas/sobreposicoes/Configuracoes/SecaoFontesDeNoticia.test.tsx`
+  (caso "CA-01.2"), e possivelmente todo padrão de formatação de hora local
+  que dependa do fuso do processo (`CarimboFrescor`, `avaliador-fontes`,
+  qualquer teste/tela com "instavelDesde"/timestamp formatado)
+- Descrição: primeira execução real do workflow `build-publish.yml` em CI
+  (GitHub Actions, run `34056870754`, disparado pelo push do commit `43d26e9`)
+  reprovou no job `build`, step "Testes": 1 de 1099 testes falhou —
+  `SecaoFontesDeNoticia.test.tsx` espera `"⚠ Instável desde 04/09, 09h12"`
+  para o instante `2026-09-04T09:12:00-03:00`, mas o runner (UTC, sem `TZ`
+  setado) formatou `"12h12"`. O teste (e possivelmente o componente) depende
+  implicitamente do fuso horário do processo que executa — verdade por acaso
+  no ambiente local usado até aqui (`TZ=America/Sao_Paulo`), falso no runner
+  real do GitHub Actions. Detalhe completo e as duas opções de correção
+  documentadas em `.md/DEPLOY.md`, Seção 6.
+- Impacto se não resolvido: `main` no repositório real
+  (`github.com/leandrosegheto17/SportsLM`) fica com CI vermelho; nenhum
+  deploy real (`/deploy`) consegue publicar enquanto este teste falhar no job
+  `build` (o job `publish` depende de `build` ter sucesso). **Nenhum conteúdo
+  quebrado foi ao ar** — o job `publish` nunca rodou, GitHub Pages não foi
+  tocado.
+- Sugestão (opcional): (a) fixar `TZ=America/Sao_Paulo` no ambiente de teste
+  (`vitest.config.ts` ou variável de ambiente do workflow) para tornar a
+  suíte determinística, mantendo o componente formatando no fuso de quem
+  visita em produção normal; ou (b) formatar explicitamente em
+  `America/Sao_Paulo` (`timeZone` fixo) se a intenção de produto for sempre
+  mostrar horário de Brasília a qualquer visitante — esta segunda opção é
+  uma decisão de produto, não escolha livre do Executor.
+- Status: Aberto, bloqueante para publicação (não afeta nenhum lote já
+  `Validado` retroativamente — é achado da confirmação final de `/deploy`,
+  não de nenhuma validação de lote anterior).

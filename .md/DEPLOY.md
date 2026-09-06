@@ -198,7 +198,57 @@ e a conclusão das ações operacionais pendentes listadas na Seção 2._
 
 | Data | Ambiente | Commit | Resultado | Observações |
 |---|---|---|---|---|
-| — | — | — | — | — |
+| 2026-09-06 | GitHub Pages (via Actions) | `43d26e9` | **Falhou** — job `build` reprovado no step "Testes"; job `publish` nunca rodou (`needs: build`) | `gh run` `34056870754`. 1/1099 testes falhou só no runner real (Linux/UTC), não localmente (sandbox em `America/Sao_Paulo`) — achado bloqueante, ver Seção 6 abaixo. GitHub Pages **não foi publicado** (nada foi ao ar). |
+
+---
+
+## 6. Achado bloqueante — primeira tentativa de deploy real (2026-09-06)
+
+**Run**: `gh run view 34056870754` (`build-publish`, push do commit `43d26e9` em `main`).
+
+**O que aconteceu**: o job `build` reprovou no step "Testes" — 1 de 1099 testes
+falhou: `app/rotas/sobreposicoes/Configuracoes/SecaoFontesDeNoticia.test.tsx`,
+caso `mostra "instável desde <data/hora>" sem remover a fonte (CA-01.2)`.
+O job `publish` nunca chegou a rodar (`needs: build`) — **GitHub Pages não foi
+publicado**, nenhum conteúdo quebrado foi ao ar.
+
+**Causa raiz**: o teste injeta `instavelDesde: '2026-09-04T09:12:00-03:00'` e
+espera o texto renderizado `"⚠ Instável desde 04/09, 09h12"` — ou seja, o
+teste assume que o horário será formatado no fuso `America/Sao_Paulo`
+(-03:00), reproduzindo literalmente o offset do próprio dado de entrada. Isso
+só é verdade quando o processo Node que roda o teste tem `TZ=America/Sao_Paulo`
+(verdade no ambiente local usado até aqui, por acaso do sandbox — confirmado
+via `Intl.DateTimeFormat().resolvedOptions().timeZone`). O runner do GitHub
+Actions roda em UTC por padrão (sem `TZ` setado); no mesmo instante
+(`2026-09-04T12:12:00Z`), o componente formata `"12h12"`, não `"09h12"` —
+daí a falha real só em CI. **Nenhum código local foi alterado**: o mesmo
+padrão de formatação de hora provavelmente existe em outros testes/telas que
+lidam com `instavelDesde`/timestamps (`CarimboFrescor`, `avaliador-fontes`,
+etc.) e nunca foi exercitado contra um ambiente sem `TZ=America/Sao_Paulo`
+antes desta primeira execução real em CI.
+
+**Isto não é um erro de infraestrutura/CI** (os workflows em si estão
+corretos, ver Seção 1) — é uma lacuna de determinismo na suíte de testes
+(e possivelmente no próprio comportamento do componente, se a intenção do
+produto for sempre exibir horário de Brasília independente do fuso do
+navegador/máquina de quem roda — decisão de produto que caberia ao
+Coordenador/Gestor confirmar, não a este Validador decidir sozinho).
+
+**Escala para**: `executor` (correção de código/teste) — não decidido aqui
+qual das duas correções é a certa:
+(a) fixar `TZ=America/Sao_Paulo` no `vitest.config.ts`/ambiente de teste, se a
+intenção é só tornar a suíte determinística mostrando o fuso do
+visitante em produção normalmente; ou
+(b) formatar explicitamente em `America/Sao_Paulo` (`timeZone` fixo no
+`Intl.DateTimeFormat`/`toLocaleTimeString`) se a intenção de produto é sempre
+mostrar horário de Brasília a qualquer visitante, em qualquer fuso.
+Depois da correção, o(s) lote(s) afetado(s) (provável Lote 9, onde
+`SecaoFontesDeNoticia`/UI-T03-01 vive — e qualquer outro lote com padrão
+similar) precisa(m) passar por `/validar` de novo antes de nova tentativa de
+`/deploy`.
+
+**Status**: Aberto, bloqueante para publicação (registrado também em
+`.md/BLOCKERS.md`, Bloqueio 004).
 
 ---
 
