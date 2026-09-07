@@ -14,6 +14,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { executarIngestaoCompleta, type DependenciasIngestaoCli } from './ingestao-cli';
 import type { ResultadoFluxoNoticias } from './noticias/orquestrador';
 import type { ResultadoFluxoFutebol } from './futebol/orquestrador';
+import type { InconsistenciaClube } from './futebol/adaptador-football-data';
 import type { SnapshotsPublicados } from './publicacao/gerador-snapshots';
 
 function resultadoNoticiasMock(
@@ -34,6 +35,7 @@ function resultadoNoticiasMock(
 function resultadoFutebolMock(
   futebol: ResultadoFluxoFutebol['status']['futebol'] = {},
   pausadoPorCota = false,
+  inconsistenciasClube: readonly InconsistenciaClube[] = [],
 ): ResultadoFluxoFutebol {
   return {
     novoEstado: { competicoes: {} },
@@ -43,6 +45,7 @@ function resultadoFutebolMock(
       provedores: {},
       pausadoPorCota,
     },
+    inconsistenciasClube,
   };
 }
 
@@ -178,6 +181,68 @@ describe('executarIngestaoCompleta', () => {
     expect(resumo.futebol.competicoesTotal).toBe(2);
     expect(resumo.futebol.pausadoPorCota).toBe(true);
     expect(resumo.publicacao.arquivosGerados).toBeGreaterThan(0);
+  });
+
+  it('agrega e deduplica (por idProvedor) as inconsistências de clube não mapeado do futebol (Bloqueio 009)', async () => {
+    const inconsistenciasClube: InconsistenciaClube[] = [
+      {
+        tipo: 'clube-nao-mapeado',
+        competicaoId: 'brasileirao-serie-a',
+        idProvedor: 1776,
+        nomeProvedorDiagnostico: 'EC Bahia',
+        contexto: 'classificacao:posicao 3',
+      },
+      // Mesmo clube reaparecendo em outro contexto (partida) — deve deduplicar.
+      {
+        tipo: 'clube-nao-mapeado',
+        competicaoId: 'brasileirao-serie-a',
+        idProvedor: 1776,
+        nomeProvedorDiagnostico: 'EC Bahia',
+        contexto: 'partida:123:mandante',
+      },
+      {
+        tipo: 'clube-nao-mapeado',
+        competicaoId: 'brasileirao-serie-a',
+        idProvedor: 1837,
+        nomeProvedorDiagnostico: 'SE Palmeiras',
+        contexto: 'classificacao:posicao 1',
+      },
+    ];
+    const deps: DependenciasIngestaoCli = {
+      executarNoticias: vi.fn(async () => resultadoNoticiasMock()),
+      executarFutebol: vi.fn(async () =>
+        resultadoFutebolMock(
+          {
+            'brasileirao-serie-a': {
+              resultado: 'atualizada',
+              ultimaAtualizacao: '2026-09-06T00:00:00.000Z',
+            },
+          },
+          false,
+          inconsistenciasClube,
+        ),
+      ),
+      gerarSnapshots: vi.fn(() => snapshotsMock()),
+    };
+
+    const resumo = await executarIngestaoCompleta(deps);
+
+    expect(resumo.futebol.clubesNaoMapeados).toEqual([
+      { idProvedor: 1776, nome: 'EC Bahia' },
+      { idProvedor: 1837, nome: 'SE Palmeiras' },
+    ]);
+  });
+
+  it('não aponta clube não mapeado quando `inconsistenciasClube` está vazio', async () => {
+    const deps: DependenciasIngestaoCli = {
+      executarNoticias: vi.fn(async () => resultadoNoticiasMock()),
+      executarFutebol: vi.fn(async () => resultadoFutebolMock()),
+      gerarSnapshots: vi.fn(() => snapshotsMock()),
+    };
+
+    const resumo = await executarIngestaoCompleta(deps);
+
+    expect(resumo.futebol.clubesNaoMapeados).toEqual([]);
   });
 
   it('propaga erro de `executarNoticias` sem chamar futebol nem snapshots', async () => {

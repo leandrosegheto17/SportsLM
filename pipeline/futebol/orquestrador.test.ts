@@ -28,7 +28,10 @@ import {
 import { registrarProvedor, type ProvedorFutebolPort } from './coletor-futebol';
 import { carregarClubesSerieA2026 } from '../config/clubes';
 import type { LinhaClassificacao, Partida } from '../../dominio/tipos/futebol';
-import type { InconsistenciaClube } from './adaptador-football-data';
+import type {
+  InconsistenciaClube,
+  InconsistenciaPartida,
+} from './adaptador-football-data';
 
 const AGORA = new Date('2026-06-01T12:00:00-03:00');
 
@@ -120,16 +123,29 @@ function loteBrasileiraoConsistente(): {
   return { linhas, partidas };
 }
 
-function criarProvedorMockBrasileirao(lote: {
-  linhas: LinhaClassificacao[];
-  partidas: Partida[];
-}) {
-  const inconsistencias: InconsistenciaClube[] = [];
+function criarProvedorMockBrasileirao(
+  lote: {
+    linhas: LinhaClassificacao[];
+    partidas: Partida[];
+  },
+  opcoes: {
+    inconsistenciasClassificacao?: InconsistenciaClube[];
+    inconsistenciasPartidas?: InconsistenciaPartida[];
+  } = {},
+) {
+  const inconsistenciasClassificacao = opcoes.inconsistenciasClassificacao ?? [];
+  const inconsistenciasPartidas = opcoes.inconsistenciasPartidas ?? [];
   const adaptador: ProvedorFutebolPort<RefTeste> = {
     id: 'football-data-mock',
     orcamento: { porMinuto: 10 },
-    obterClassificacao: async () => ({ linhas: lote.linhas, inconsistencias }),
-    obterPartidas: async () => ({ partidas: lote.partidas, inconsistencias }),
+    obterClassificacao: async () => ({
+      linhas: lote.linhas,
+      inconsistencias: inconsistenciasClassificacao,
+    }),
+    obterPartidas: async () => ({
+      partidas: lote.partidas,
+      inconsistencias: inconsistenciasPartidas,
+    }),
   };
   return registrarProvedor<RefTeste>(adaptador, (campeonato) => ({
     competicaoId: campeonato.id,
@@ -262,6 +278,52 @@ describe('executarFluxoFutebol — ponta a ponta com provedor mockado (SDD §2.4
     expect(status?.resultado).toBe('inconsistente');
     expect(status?.motivosInconsistencia).toContain('linha-aritmetica-invalida');
     expect(status?.ultimaAtualizacao).toBe(AGORA.toISOString());
+  });
+
+  it('expõe inconsistenciasClube (classificacao + partidas) coletadas do lote — Bloqueio 009', async () => {
+    const lote = loteBrasileiraoConsistente();
+    const inconsistenciaClassificacao: InconsistenciaClube = {
+      tipo: 'clube-nao-mapeado',
+      competicaoId: 'brasileirao-serie-a',
+      idProvedor: 1776,
+      nomeProvedorDiagnostico: 'EC Bahia',
+      contexto: 'classificacao:posicao 3',
+    };
+    const inconsistenciaPartidaClube: InconsistenciaClube = {
+      tipo: 'clube-nao-mapeado',
+      competicaoId: 'brasileirao-serie-a',
+      idProvedor: 1837,
+      nomeProvedorDiagnostico: 'SE Palmeiras',
+      contexto: 'partida:123:mandante',
+    };
+    // Não é um clube não mapeado — não deve aparecer em `inconsistenciasClube`
+    // (Bloqueio 008, fora do escopo do Bloqueio 009).
+    const inconsistenciaStatusDesconhecido: InconsistenciaPartida = {
+      tipo: 'partida-status-desconhecido',
+      competicaoId: 'brasileirao-serie-a',
+      idPartidaProvedor: 456,
+      statusBrutoDiagnostico: '2026-08-29 20:30:00Z',
+      contexto: 'partida:456:status',
+    };
+    const registro = criarProvedorMockBrasileirao(lote, {
+      inconsistenciasClassificacao: [inconsistenciaClassificacao],
+      inconsistenciasPartidas: [
+        inconsistenciaPartidaClube,
+        inconsistenciaStatusDesconhecido,
+      ],
+    });
+
+    const resultado = await executarFluxoFutebol({
+      campeonatos: CAMPEONATOS,
+      provedores: { 'football-data-org': registro },
+      estadoAnterior: estadoFutebolVazio(),
+      agora: AGORA,
+    });
+
+    expect(resultado.inconsistenciasClube).toEqual([
+      inconsistenciaClassificacao,
+      inconsistenciaPartidaClube,
+    ]);
   });
 
   it('primeira execução com lote já inconsistente ainda garante participação para os 20 clubes (CA-07.2), sem Competicao.ultimaAtualizacao', async () => {

@@ -81,6 +81,11 @@ export interface ResumoIngestao {
     readonly competicoesAtualizadas: number;
     readonly competicoesTotal: number;
     readonly pausadoPorCota: boolean;
+    /** Clubes distintos (por `idProvedor`) que o provedor devolveu sem
+     * mapeamento em `config/clubes-2026.json` nesta execução (Bloqueio 009,
+     * `.md/BLOCKERS.md`) — nunca inclui o token do provedor, só id/nome de
+     * time (dado público). */
+    readonly clubesNaoMapeados: readonly { idProvedor: string | number; nome: string }[];
   };
   readonly publicacao: { readonly arquivosGerados: number };
 }
@@ -104,6 +109,22 @@ export async function executarIngestaoCompleta(
 
   const competicoes = Object.values(resultadoFutebol.status.futebol);
 
+  // Dedup por `idProvedor` (o mesmo clube não mapeado normalmente aparece
+  // repetido — uma vez por posição na classificação, várias vezes em
+  // partidas). Nunca inclui o token do provedor — só id/nome de time, que já
+  // é dado público em qualquer resposta da API (Bloqueio 009).
+  const clubesNaoMapeadosPorId = new Map<string | number, string>();
+  for (const inconsistencia of resultadoFutebol.inconsistenciasClube) {
+    clubesNaoMapeadosPorId.set(
+      inconsistencia.idProvedor,
+      inconsistencia.nomeProvedorDiagnostico,
+    );
+  }
+  const clubesNaoMapeados = [...clubesNaoMapeadosPorId].map(([idProvedor, nome]) => ({
+    idProvedor,
+    nome,
+  }));
+
   return {
     noticias: { itensPublicaveis: resultadoNoticias.itensPublicaveis.length },
     futebol: {
@@ -111,6 +132,7 @@ export async function executarIngestaoCompleta(
         .length,
       competicoesTotal: competicoes.length,
       pausadoPorCota: resultadoFutebol.status.pausadoPorCota,
+      clubesNaoMapeados,
     },
     publicacao: {
       arquivosGerados: Object.keys(mapaDeArquivosPublicos(snapshots)).length,
@@ -132,6 +154,26 @@ function formatarResumo(resumo: ResumoIngestao): string {
   ].join('\n');
 }
 
+/**
+ * Linhas de alerta para clubes que o provedor devolveu sem mapeamento em
+ * `config/clubes-2026.json` (Bloqueio 009, `.md/BLOCKERS.md`) — nunca inclui
+ * o token do provedor, só `idProvedor`/`nome` (dado público). Sem isso, essa
+ * inconsistência era computada e descartada silenciosamente; agora é a via
+ * segura para descobrir o id real de cada clube a partir do log de CI
+ * (`.github/workflows/ingestao.yml`), sem precisar do segredo do provedor.
+ */
+function formatarAlertaClubesNaoMapeados(
+  clubesNaoMapeados: ResumoIngestao['futebol']['clubesNaoMapeados'],
+): string | null {
+  if (clubesNaoMapeados.length === 0) return null;
+  return [
+    `Atenção: ${String(clubesNaoMapeados.length)} clube(s) sem mapeamento em config/clubes-2026.json (idsProvedor['football-data']) — motivo provável de "clube-nao-mapeado"/"numero-de-clubes-incorreto":`,
+    ...clubesNaoMapeados.map(
+      (c) => `  idProvedor=${String(c.idProvedor)} nome="${c.nome}"`,
+    ),
+  ].join('\n');
+}
+
 /** Ponto de entrada do processo (`npm run ingestao`). Nunca engole falha:
  * qualquer erro real vira `process.exit(1)` com mensagem clara, para que
  * `.github/workflows/ingestao.yml` falhe corretamente (Diretriz de nunca
@@ -140,6 +182,8 @@ async function main(): Promise<void> {
   try {
     const resumo = await executarIngestaoCompleta();
     console.log(formatarResumo(resumo));
+    const alerta = formatarAlertaClubesNaoMapeados(resumo.futebol.clubesNaoMapeados);
+    if (alerta !== null) console.warn(alerta);
   } catch (erro) {
     console.error('Falha na execução do pipeline de ingestão (npm run ingestao).');
     console.error(erro instanceof Error ? (erro.stack ?? erro.message) : String(erro));

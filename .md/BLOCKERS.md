@@ -586,3 +586,91 @@
   `pipeline/futebol/coletor-futebol.ts` (só ajuste de tipo, sem mudança de
   lógica), `.md/BLOCKERS.md` (esta entrada).
 - Status: Resolvido
+
+## Bloqueio 009 — 2026-09-07
+- Reportado por: orquestrador (usuário), a partir da primeira execução real
+  do Fluxo 2 (futebol) contra a API real do football-data.org, já com o
+  Bloqueio 008 resolvido
+- Escalado para: executor (chapéu Backend), correção direta — bloqueio
+  pontual resolvido diretamente, mesmo padrão dos Bloqueios 001/004/005/007/008
+- Artefato/trecho afetado: `pipeline/futebol/orquestrador.ts`
+  (`executarFluxoFutebol`, `ResultadoFluxoFutebol`); `pipeline/ingestao-cli.ts`
+  (`executarIngestaoCompleta`, `main`, `ResumoIngestao`)
+- Descrição: a execução real trouxe `resultado: 'inconsistente'`,
+  `motivosInconsistencia: ['numero-de-clubes-incorreto']` para o Brasileirão
+  — causa raiz já documentada em `pipeline/futebol/adaptador-football-data.ts`
+  ("Débito operacional conhecido (REFAT-02-01)"): `config/clubes-2026.json`
+  tem 19 dos 20 clubes com `idsProvedor['football-data']` na sentinela
+  `SENTINELA_ID_PENDENTE` — só o Flamengo (`1783`) tem id real confirmado.
+  `traduzirClassificacao`/`traduzirPartidas` já computavam corretamente uma
+  `InconsistenciaClube` (`tipo: 'clube-nao-mapeado'`, com `idProvedor`/
+  `nomeProvedorDiagnostico`) para cada um dos 19 clubes não casados — mas
+  `executarFluxoFutebol` recebia `resultado.classificacao.inconsistencias`/
+  `resultado.partidas.inconsistencias` e nunca as usava (nem logava, nem
+  expunha em nenhum retorno), contrariando a disciplina de "nunca ignora
+  silenciosamente" já seguida no restante do projeto (mesmo espírito do
+  Bloqueio 008). Isso também bloqueava a resolução prática de REFAT-02-01: o
+  log do GitHub Actions (`.github/workflows/ingestao.yml`) é a única fonte
+  segura para descobrir o mapeamento id↔nome real dos 19 clubes pendentes
+  (sem acesso ao `FOOTBALL_DATA_API_TOKEN`, que nunca deve aparecer em log),
+  e sem esta correção nenhuma dessas informações chegava ao log.
+- Impacto se não resolvido: toda execução real do Fluxo 2 contra o
+  Brasileirão continuaria sendo descartada por
+  `numero-de-clubes-incorreto`/`clube-nao-mapeado` sem nenhuma pista visível
+  de qual clube/id está faltando — REFAT-02-01 (preencher os 19 ids reais)
+  ficaria bloqueado indefinidamente por falta de dado de diagnóstico
+  acessível.
+- Resolução (2026-09-07, executor/chapéu Backend):
+  - `ResultadoFluxoFutebol` ganhou o campo `inconsistenciasClube:
+    readonly InconsistenciaClube[]`. Dentro de `executarFluxoFutebol`, para
+    toda competição com `resultado.tipo === 'atualizada'`, as inconsistências
+    são coletadas de `resultado.classificacao.inconsistencias` (sempre
+    `InconsistenciaClube[]`) e da fatia `tipo === 'clube-nao-mapeado'` de
+    `resultado.partidas.inconsistencias` (superconjunto `InconsistenciaPartida`
+    que também inclui `partida-status-desconhecido`, Bloqueio 008, fora do
+    escopo aqui) — coletadas **antes** da checagem de
+    `verificarConsistenciaCompeticao`, para que o diagnóstico sobreviva mesmo
+    quando o lote inteiro acaba sendo descartado por inconsistência (exatamente
+    o caso real observado).
+  - `pipeline/ingestao-cli.ts`: `executarIngestaoCompleta` agora agrega
+    `resultadoFutebol.inconsistenciasClube` em `ResumoIngestao.futebol.
+    clubesNaoMapeados` (dedup por `idProvedor` — o mesmo clube aparece
+    repetido entre classificação e partidas), e `main` emite um
+    `console.warn` com `idProvedor`/`nome` de cada clube não mapeado
+    (`formatarAlertaClubesNaoMapeados`), separado do `console.log` de resumo
+    normal. Nunca loga o token do provedor — só id/nome de time, que já é
+    dado público em qualquer resposta da API (confirmado por leitura de todo
+    o trecho alterado: nenhuma variável de ambiente/segredo passa perto do
+    log).
+  - Decisão de escopo: optou-se por expor via `ResultadoFluxoFutebol` (em vez
+    de só logar dentro de `ingestao-cli.ts` a partir de um dado já implícito)
+    porque `executarFluxoFutebol` é a camada pura/testável — expor o dado ali
+    permite testar a coleta sem precisar de I/O real, e `ingestao-cli.ts`
+    consome o dado já pronto só para decidir o que fazer com ele (log), sem
+    reimplementar a lógica de coleta/filtro.
+- Prova:
+  - `pipeline/futebol/orquestrador.test.ts`: novo caso "expõe
+    inconsistenciasClube (classificacao + partidas) coletadas do lote —
+    Bloqueio 009" — confirma que uma `InconsistenciaClube` da classificação e
+    uma das partidas aparecem em `resultado.inconsistenciasClube`, e que uma
+    `InconsistenciaStatusPartidaDesconhecido` (Bloqueio 008) no mesmo array de
+    partidas **não** aparece (filtro por `tipo` correto).
+  - `pipeline/ingestao-cli.test.ts`: dois novos casos — agregação com dedup
+    por `idProvedor` (duas ocorrências do mesmo clube em contextos diferentes
+    → uma entrada em `clubesNaoMapeados`) e caso vazio (nenhuma inconsistência
+    → `clubesNaoMapeados: []`). Ambos os arquivos de teste tiveram seus
+    helpers de mock atualizados para o novo campo/parâmetro sem alterar o
+    comportamento esperado dos casos já existentes.
+  - Portões: `npm run typecheck`, `npm run lint`, `npm run format:check`
+    (arquivos tocados nesta tarefa limpos — 3 arquivos pré-existentes fora do
+    escopo desta tarefa, `pipeline/futebol/adaptador-football-data.ts`/
+    `.test.ts` e `pipeline/futebol/coletor-futebol.ts`, já reprovavam
+    `format:check` antes desta mudança, confirmado via `git status`; não
+    tocados) limpos; suíte completa (`npm run test`) 97 arquivos / 1115
+    testes passando (1112 anteriores + 3 novos casos).
+- Arquivos alterados: `pipeline/futebol/orquestrador.ts`,
+  `pipeline/futebol/orquestrador.test.ts`, `pipeline/ingestao-cli.ts`,
+  `pipeline/ingestao-cli.test.ts`, `.md/BLOCKERS.md` (esta entrada). Nenhuma
+  alteração em `config/clubes-2026.json` (fora de escopo desta tarefa,
+  aguarda o mapeamento real via log do próximo run do workflow — REFAT-02-01).
+- Status: Resolvido

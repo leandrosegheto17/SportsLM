@@ -56,6 +56,7 @@ import {
 import {
   criarAdaptadorFootballData,
   type RefCompeticaoFootballData,
+  type InconsistenciaClube,
 } from './adaptador-football-data';
 import { carregarClubesSerieA2026, type ClubeBase } from '../config/clubes';
 import {
@@ -140,6 +141,22 @@ export interface StatusIngestaoFutebol {
 export interface ResultadoFluxoFutebol {
   readonly novoEstado: EstadoFutebol;
   readonly status: StatusIngestaoFutebol;
+  /**
+   * Inconsistências de clube não mapeado (CA-16.6/ADR-006 item 3) coletadas
+   * em toda competição com `resultado.tipo === 'atualizada'` nesta execução —
+   * de `classificacao.inconsistencias` (sempre `InconsistenciaClube[]`) e da
+   * fatia `tipo === 'clube-nao-mapeado'` de `partidas.inconsistencias`
+   * (superconjunto que também inclui `partida-status-desconhecido`, Bloqueio
+   * 008, fora do escopo aqui).
+   *
+   * Bloqueio 009 (`.md/BLOCKERS.md`): antes desta mudança, essas
+   * inconsistências eram computadas por `adaptador-football-data.ts` mas
+   * nunca ficavam visíveis em lugar nenhum — quem chama este orquestrador
+   * (`pipeline/ingestao-cli.ts`) agora loga `idProvedor`/
+   * `nomeProvedorDiagnostico` de cada uma, nunca o token do provedor (que
+   * nunca circula por aqui).
+   */
+  readonly inconsistenciasClube: readonly InconsistenciaClube[];
 }
 
 export interface OpcoesFluxoFutebol {
@@ -278,6 +295,7 @@ export async function executarFluxoFutebol(
     ...opcoes.estadoAnterior.competicoes,
   };
   const statusFutebol: Record<string, StatusCompeticaoFutebol> = {};
+  const inconsistenciasClube: InconsistenciaClube[] = [];
 
   for (const resultado of coleta.resultados) {
     const config = configPorId.get(resultado.competicaoId);
@@ -306,6 +324,18 @@ export async function executarFluxoFutebol(
           : statusEntry;
       continue;
     }
+
+    // Coleta as inconsistências de clube não mapeado deste lote (Bloqueio
+    // 009) independentemente de o lote acabar sendo aceito ou descartado por
+    // `verificarConsistenciaCompeticao` a seguir — o diagnóstico de "qual
+    // clube o provedor manda com que id" vale mesmo quando o lote como um
+    // todo é inconsistente por outro motivo.
+    inconsistenciasClube.push(...resultado.classificacao.inconsistencias);
+    inconsistenciasClube.push(
+      ...resultado.partidas.inconsistencias.filter(
+        (i): i is InconsistenciaClube => i.tipo === 'clube-nao-mapeado',
+      ),
+    );
 
     // tipo === 'atualizada': verifica consistência (ING-F-04) antes de
     // aceitar o lote (CA-16.6).
@@ -372,7 +402,7 @@ export async function executarFluxoFutebol(
     pausadoPorCota: coleta.provedoresPausadosPorCota.length > 0,
   };
 
-  return { novoEstado: { competicoes }, status };
+  return { novoEstado: { competicoes }, status, inconsistenciasClube };
 }
 
 // ---------------------------------------------------------------------------
