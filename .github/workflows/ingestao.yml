@@ -1,9 +1,16 @@
 name: Ingestão agendada
 
-# ADR-002: ingestão periódica em CI agendado, com estado versionado na branch
-# `dados`. Enquanto os coletores (ING-N-*/ING-F-*, Lotes 4/5 do TASK.md) não
-# existem, este workflow roda em modo dry-run: valida agendamento, cofre de
-# segredo e alvo de publicação sem erro de configuração, sem publicar nada.
+# ADR-002: ingestão periódica em CI agendado. Enquanto os coletores
+# (ING-N-*/ING-F-*, Lotes 4/5 do TASK.md) não existem, este workflow roda em
+# modo dry-run: valida agendamento, cofre de segredo e alvo de publicação sem
+# erro de configuração, sem publicar nada.
+#
+# ADR-018: os snapshots públicos (contrato do SDD §2.2, `dist-dados/`) são
+# publicados direto em `app/public/dados/`, em `main` — não mais na branch
+# órfã `dados` — porque o hosting da SPA passou a ser o Vercel (integração
+# Git com `origin/main`, sem GitHub Pages), que só builda/serve o conteúdo de
+# `main`. A branch órfã `dados` deixou de ser destino dos snapshots públicos
+# a partir desta versão (ver nota de supersessão no topo do ADR-002).
 #
 # Segredo esperado (a cadastrar em Settings > Secrets and variables > Actions,
 # ação operacional fora deste arquivo): FOOTBALL_DATA_API_TOKEN — token do
@@ -20,7 +27,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write # escopo mínimo: escrever na branch `dados` (SDD §7.2). Nada além.
+  contents: write # escopo mínimo: comitar app/public/dados/ direto em `main` (ADR-018). Nada além.
 
 jobs:
   ingestao:
@@ -74,7 +81,7 @@ jobs:
             # ele) — sem o secret cadastrado, mantém o dry-run informativo em
             # vez de falhar o job a cada execução agendada.
             echo "Aviso: FOOTBALL_DATA_API_TOKEN ainda não cadastrado no cofre de segredo deste repositório."
-            echo "Dry-run: pipeline pronto (npm run ingestao existe), aguardando o secret ser cadastrado para publicar de fato."
+            echo "Dry-run: pipeline pronto (npm run ingestao existe), aguardando o secret ser cadastrado para publicar de fato (ADR-018: destino é app/public/dados/ em main)."
             echo "publica=false" >> "$GITHUB_OUTPUT"
           else
             npm run ingestao
@@ -98,7 +105,7 @@ jobs:
           # duplicar a lógica de detecção.
           npm run verificar-segredos:dados
 
-      - name: Publica snapshots na branch dados
+      - name: Publica snapshots públicos em app/public/dados (main — ADR-018)
         if: steps.ingestao.outputs.publica == 'true'
         run: |
           set -euo pipefail
@@ -111,20 +118,24 @@ jobs:
           git config user.name "sportslm-bot"
           git config user.email "actions@users.noreply.github.com"
 
-          git fetch origin dados || true
-          if git ls-remote --exit-code --heads origin dados > /dev/null 2>&1; then
-            git checkout dados
-            git rm -rf . > /dev/null 2>&1 || true
-          else
-            git checkout --orphan dados
-            git rm -rf . > /dev/null 2>&1 || true
-          fi
+          # ADR-018: permanece em `main` (nunca troca de branch) — o Vercel só
+          # builda/serve o conteúdo de `main`, e este passo publica os
+          # snapshots públicos (contrato do SDD §2.2) direto em
+          # `app/public/dados/`, sobrescrevendo o que houver.
+          rm -rf app/public/dados
+          mkdir -p app/public/dados
+          cp -r dist-dados/. app/public/dados/
 
-          cp -r dist-dados/. .
-          git add -A
+          git add app/public/dados
           if git diff --cached --quiet; then
             echo "Sem mudança de conteúdo; nenhuma publicação necessária (SDD §2.2 — publica só se o hash mudou)."
           else
             git commit -m "chore(dados): atualiza snapshots de ingestão [skip ci]"
-            git push origin dados
+
+            # `main` pode ter avançado desde o checkout deste job (outro push
+            # concorrente, improvável mas possível) — rebase antes do push
+            # evita falha por non-fast-forward.
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi

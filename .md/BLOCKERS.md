@@ -344,3 +344,93 @@
   - `dist/` gerado durante a verificação foi removido ao final; confirmado
     via `git status` que nada ficou staged/pendente (já coberto por
     `.gitignore`).
+
+## Bloqueio 006 — 2026-09-07
+- Reportado por: orquestrador (usuário), decisão de infraestrutura tomada
+  diretamente fora do fluxo normal de `TASK.md`
+- Escalado para: executor (implementação direta, sem passar por
+  coordenador/gestor — decisão de hosting já fechada pelo stakeholder)
+- Artefato/trecho afetado: `.github/workflows/ingestao.yml` (passo "Publica
+  snapshots na branch dados"); `.md/adr/002-ingestao-periodica-em-ci-agendado-com-estado-versionado.md`
+  (decisão de destino dos snapshots públicos)
+- Descrição: o projeto passou a usar **Vercel** como hosting principal da SPA
+  (`https://sports-lm.vercel.app`), conectado por integração Git a
+  `origin/main` — todo push em `main` já dispara build+deploy automático do
+  Vercel, sem depender de nenhum workflow do GitHub Actions. `vercel.json`
+  (rewrite de SPA) já commitado. Achado: o pipeline de ingestão publicava os
+  snapshots públicos (`/dados/*.json`, SDD §2.2) na branch órfã `dados`
+  (ADR-002), mecanismo pensado para GitHub Pages que nunca chegou a
+  funcionar de ponta a ponta (Pages nunca foi habilitado — `.md/DEPLOY.md`
+  Seção 2). O Vercel só builda/serve o conteúdo de `main`, então
+  `/dados/*.json` nunca existia lá — confirmado por
+  `curl https://sports-lm.vercel.app/dados/versao.json` → 404 antes desta
+  mudança. A SPA carregava, mas sem notícia/futebol real.
+- Impacto se não resolvido: produção no Vercel permanece sem dado real
+  (notícias/futebol) indefinidamente — a SPA funciona, mas o feed/tabelas
+  ficam vazios/desatualizados para sempre, já que o destino de publicação
+  nunca alcança o host real.
+- Decisão do stakeholder: os snapshots públicos passam a ser commitados
+  direto em `app/public/dados/`, na própria `main` — o Vercel já auto-deploya
+  a cada push, resolvendo a entrega sem precisar de integração nova com a API
+  do Vercel. Trade-off aceito: histórico de `main` cresce um commit por
+  execução em que o hash muda (mesma cadência de 30 min, só quando o
+  conteúdo muda — comportamento de "publica só se mudou" preservado).
+- Status: Resolvido
+- Resolução (2026-09-07, executor/chapéu Backend):
+  - `.github/workflows/ingestao.yml`, passo final: deixou de trocar de
+    branch (`git checkout dados`/`--orphan dados`); agora permanece em
+    `main`, copia `dist-dados/` para `app/public/dados/` (sobrescrevendo o
+    que houver), `git add app/public/dados`, e comita/push direto em `main`
+    só quando o conteúdo muda (mesma checagem `git diff --cached --quiet` já
+    existente, adaptada ao novo caminho). Mensagem de commit mantida
+    (`chore(dados): atualiza snapshots de ingestão [skip ci]`). Antes do
+    `git push`, `git fetch origin main` + `git rebase origin/main`, para não
+    falhar por non-fast-forward se `main` tiver avançado desde o checkout do
+    job. A verificação de segredo bloqueante (`npm run verificar-segredos:dados`)
+    continua rodando sobre `dist-dados/` antes da cópia, sem mudança de
+    ordem/lógica. `permissions.contents: write` mantido (mesmo escopo,
+    agora usado para comitar em `main` em vez da branch `dados`).
+  - `.md/adr/018-publicacao-de-snapshots-publicos-direto-em-main-para-vercel.md`
+    criado (formato MADR, mesmo padrão dos ADRs existentes), registrando
+    contexto, alternativas descartadas (segundo projeto Vercel para a branch
+    `dados`, integração via API do Vercel, reabilitar GitHub Pages) e a
+    decisão. `.md/adr/002-...md` recebeu nota de supersessão parcial no
+    topo: só a parte de destino dos **snapshots públicos** foi substituída;
+    a branch órfã `dados` continua sendo a decisão vigente (documentada)
+    para o **estado interno** do pipeline.
+  - **Observação separada, não resolvida aqui** (achado colateral da
+    investigação, conforme guardrail explícito da tarefa): confirmado, lendo
+    `pipeline/noticias/orquestrador.ts`/`pipeline/futebol/orquestrador.ts` e
+    o próprio `ingestao.yml`, que `SPORTSLM_DIR_ESTADO` nunca é setado no
+    workflow (usa o default local `estado/` na raiz do checkout) e que o
+    workflow **nunca** teve um passo que restaure `estado/` de alguma branch
+    antes de `npm run ingestao`, nem que o commite de volta depois — só o
+    passo de publicação dos snapshots públicos (agora corrigido) existe.
+    Ou seja, **o estado interno não persiste entre execuções agendadas
+    hoje**, contrariando a premissa original de ADR-002 ("branch órfã
+    `dados`... commitada ao final de cada execução" — essa parte nunca foi
+    implementada, é lacuna pré-existente e separada do que este bloqueio
+    resolve). Nenhuma correção foi aplicada a este ponto nesta tarefa —
+    fica registrado aqui e no `ADR-018` para decisão futura do
+    Coordenador/gestor sobre como (e se) implementar a persistência real do
+    estado interno entre execuções (ex.: passo dedicado de
+    restore/commit na branch `dados`, ou outro mecanismo).
+  - Validação: sintaxe YAML confirmada via `js-yaml` (parse bem-sucedido, 8
+    steps no job `ingestao`, mesma técnica já usada no Lote 1/QA-REPORT.md);
+    `npm run typecheck`, `npm run lint`, `npm run format:check` limpos;
+    suíte completa (`npm run test`) 97 arquivos / 1107 testes passando (sem
+    nenhuma alteração de comportamento de produção — mudança é só no
+    workflow). Não foi feito nenhum `git push`/execução real do workflow
+    nesta tarefa (não testável de dentro desta sessão sem afetar o
+    repositório de produção) — prova é revisão cuidadosa do YAML +
+    validação de sintaxe, mesmo padrão já aceito em rodadas anteriores
+    (Bloqueios 004/005).
+  - Arquivos alterados: `.github/workflows/ingestao.yml`,
+    `.md/adr/018-publicacao-de-snapshots-publicos-direto-em-main-para-vercel.md`
+    (novo), `.md/adr/002-ingestao-periodica-em-ci-agendado-com-estado-versionado.md`
+    (nota de topo), `.md/BLOCKERS.md` (esta entrada). Nenhum arquivo de
+    domínio/pipeline de geração de dado tocado
+    (`pipeline/publicacao/gerador-snapshots.ts`,
+    `pipeline/noticias/orquestrador.ts`, `pipeline/futebol/orquestrador.ts`
+    permanecem inalterados, conforme guardrail da tarefa);
+    `.github/workflows/build-publish.yml` não removido nem desabilitado.

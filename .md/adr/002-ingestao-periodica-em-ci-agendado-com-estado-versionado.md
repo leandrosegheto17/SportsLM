@@ -1,5 +1,18 @@
 # ADR-002 — Ingestão periódica em CI agendado, com estado versionado em branch de dados
 
+> **Superseded by [ADR-018](018-publicacao-de-snapshots-publicos-direto-em-main-para-vercel.md)**
+> — só a parte que trata a branch órfã `dados` como destino dos **snapshots
+> públicos** (contrato do SDD §2.2, seção "Decisão", item 3/"Passo
+> publicação" e o trecho "publica no hosting estático apenas se algo
+> mudou"). Com a adoção do Vercel como hosting da SPA, os snapshots públicos
+> passaram a ser commitados direto em `app/public/dados/`, em `main` — o
+> Vercel só builda/serve o conteúdo de `main`, nunca a branch `dados`. A
+> branch órfã `dados` continua sendo a decisão vigente para o **estado
+> interno** do pipeline (`estado/noticias.json`, `estado/futebol.json`,
+> `estado/ingestao/status.json`) — nada muda nesse ponto por ADR-018. Todo o
+> restante deste ADR (cadência, priorização de cota, alternativas de
+> agendador) permanece vigente.
+
 - **Status**: Aceito
 - **Data**: 2026-09-05
 - **Decisor**: Coordenador (chapéu Software Architect)
