@@ -398,4 +398,125 @@ describe('SecaoSeusEsportes (UI-T02-02)', () => {
     ).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Tentar de novo' })).toBeTruthy();
   });
+
+  describe('aba "Meu time" (busca de texto — ajuste a pedido do usuário, 2026-09-07)', () => {
+    it('aparece mesmo com um único favorito, quando `nomeTime` está definido', async () => {
+      const cliente = criarClienteComItens([item({ esporte: 'futebol' })]);
+
+      render(
+        <MemoryRouter>
+          <SecaoSeusEsportes
+            favoritos={['futebol']}
+            nomesEsportes={NOMES_ESPORTES}
+            aoEscolherEsportes={vi.fn()}
+            agora={AGORA}
+            cliente={cliente}
+            nomeTime="Flamengo"
+          />
+        </MemoryRouter>,
+      );
+
+      await esvaziarMicrotarefas();
+
+      expect(
+        screen.getByRole('group', { name: 'Filtrar por esporte favorito' }),
+      ).toBeTruthy();
+      expect(screen.getByRole('button', { name: 'Meu time' })).toBeTruthy();
+    });
+
+    it('não aparece quando `nomeTime` é `null` (torcedor sem time salvo)', async () => {
+      const cliente = criarClienteComItens([
+        item({ esporte: 'futebol' }),
+        item({ esporte: 'volei-quadra' }),
+      ]);
+
+      render(
+        <MemoryRouter>
+          <SecaoSeusEsportes
+            favoritos={['futebol', 'volei-quadra']}
+            nomesEsportes={NOMES_ESPORTES}
+            aoEscolherEsportes={vi.fn()}
+            agora={AGORA}
+            cliente={cliente}
+          />
+        </MemoryRouter>,
+      );
+
+      await esvaziarMicrotarefas();
+
+      expect(screen.queryByRole('button', { name: 'Meu time' })).toBeNull();
+    });
+
+    it('filtra por título/resumo mencionando o time, tolerante a acento e caixa', async () => {
+      const itens = [
+        item({
+          id: 'flamengo-1'.padEnd(20, '0'),
+          esporte: 'futebol',
+          titulo: 'FLAMENGO vence clássico no fim do jogo',
+        }),
+        item({
+          id: 'flamengo-2'.padEnd(20, '0'),
+          esporte: 'futebol',
+          titulo: 'Técnico do rubro-negro projeta próxima rodada',
+          resumo: 'Comentário sobre o flamengo antes do jogo decisivo.',
+        }),
+        item({
+          id: 'outro-1'.padEnd(20, '0'),
+          esporte: 'futebol',
+          titulo: 'Corinthians anuncia reforço para a próxima temporada',
+        }),
+      ];
+      const cliente = criarClienteComItens(itens);
+
+      render(
+        <MemoryRouter>
+          <SecaoSeusEsportes
+            favoritos={['futebol']}
+            nomesEsportes={NOMES_ESPORTES}
+            aoEscolherEsportes={vi.fn()}
+            agora={AGORA}
+            cliente={cliente}
+            nomeTime="Flamengo"
+          />
+        </MemoryRouter>,
+      );
+
+      await esvaziarMicrotarefas();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Meu time' }));
+
+      expect(screen.getByText('FLAMENGO vence clássico no fim do jogo')).toBeTruthy();
+      expect(
+        screen.getByText('Técnico do rubro-negro projeta próxima rodada'),
+      ).toBeTruthy();
+      expect(
+        screen.queryByText('Corinthians anuncia reforço para a próxima temporada'),
+      ).toBeNull();
+    });
+
+    it('estado vazio da aba "Meu time" cita o nome do time, não "seu time" genérico', async () => {
+      const cliente = criarClienteComItens([
+        item({ esporte: 'futebol', titulo: 'Corinthians anuncia reforço' }),
+      ]);
+
+      render(
+        <MemoryRouter>
+          <SecaoSeusEsportes
+            favoritos={['futebol']}
+            nomesEsportes={NOMES_ESPORTES}
+            aoEscolherEsportes={vi.fn()}
+            agora={AGORA}
+            cliente={cliente}
+            nomeTime="Flamengo"
+          />
+        </MemoryRouter>,
+      );
+
+      await esvaziarMicrotarefas();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Meu time' }));
+
+      expect(screen.getByText(/Sem notícias recentes de Flamengo/)).toBeTruthy();
+    });
+  });
 });

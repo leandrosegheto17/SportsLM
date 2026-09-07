@@ -99,6 +99,26 @@ export interface PropriedadesSecaoSeusEsportes {
   readonly nomesFontes?: Readonly<Record<string, string>>;
   /** Atalho de CA-05.4 — leva para a escolha de esportes favoritos (RF-03). */
   readonly aoEscolherEsportes: () => void;
+  /**
+   * Nome de exibição do time do torcedor (ex.: `"Flamengo"`, o `nomeCurto`
+   * do clube publicado), resolvido por quem monta a tela a partir de
+   * `preferencias.timeId` + `useClubesPublicos` — mesmo padrão de
+   * `nomesEsportes`/`nomesFontes` (este componente não decide o catálogo
+   * vigente, só exibe o que foi injetado). `null`/ausente quando o torcedor
+   * não tem time escolhido — nesse caso a aba "MEU TIME" não aparece.
+   *
+   * Achado registrado (ajuste a pedido do usuário, 2026-09-07): o dado de
+   * notícia (`ItemNoticia`, `dominio/tipos/noticias.ts`) não tem nenhum
+   * campo de clube — só de esporte. Sem uma etapa de classificação por
+   * clube no pipeline de ingestão (mudança de domínio/pipeline, fora do
+   * escopo desta tela), o filtro "MEU TIME" é necessariamente uma busca de
+   * texto (título/resumo contém o nome do time) — aproximada por natureza:
+   * perde notícia que só usa apelido ("Rubro-Negro") ou cita só o técnico/
+   * jogador, e pode incluir uma menção incidental. Aceito como solução
+   * provisória (decisão do usuário); a solução correta é marcar clube na
+   * ingestão, registrada como item futuro.
+   */
+  readonly nomeTime?: string | null;
   /** Relógio injetado (Diretriz de Implementação #2/GUARDRAILS.md §5) —
    * nunca `Date.now()` direto neste componente. */
   readonly agora?: Date;
@@ -107,7 +127,30 @@ export interface PropriedadesSecaoSeusEsportes {
   readonly cliente?: ClienteSnapshot;
 }
 
-type FiltroSecao = 'todos' | EsporteId;
+type FiltroSecao = 'todos' | 'meu-time' | EsporteId;
+
+/** Remove acentuação e caixa para comparação de texto tolerante ("Grêmio" ===
+ * "gremio") — usado só pelo filtro "MEU TIME" (busca de texto, ver nota em
+ * `nomeTime` acima). */
+const PADRAO_MARCAS_DIACRITICAS = new RegExp('[\\u0300-\\u036f]', 'g');
+
+function normalizarTexto(texto: string): string {
+  return texto.normalize('NFD').replace(PADRAO_MARCAS_DIACRITICAS, '').toLowerCase();
+}
+
+/** `true` quando título ou resumo do item mencionam `nomeTime` (busca de
+ * texto tolerante a acento/caixa — aproximada por natureza, ver nota em
+ * `nomeTime` acima). */
+function mencionaTime(item: ItemNoticia, nomeTime: string): boolean {
+  const alvo = normalizarTexto(nomeTime);
+  if (alvo.length === 0) {
+    return false;
+  }
+  return (
+    normalizarTexto(item.titulo).includes(alvo) ||
+    (item.resumo !== null && normalizarTexto(item.resumo).includes(alvo))
+  );
+}
 
 /** Junta nomes em português: "Futebol", "Futebol e Vôlei", "Futebol, Vôlei e
  * Fórmula 1" — usado por CA-05.3 ("Sem notícias recentes de <favoritos>"). */
@@ -201,6 +244,7 @@ export function SecaoSeusEsportes({
   aoEscolherEsportes,
   agora = new Date(),
   cliente,
+  nomeTime = null,
 }: PropriedadesSecaoSeusEsportes): ReactElement {
   const [filtro, setFiltro] = useState<FiltroSecao>('todos');
 
@@ -239,7 +283,11 @@ export function SecaoSeusEsportes({
   }, [snapshot.dados, favoritosSet, fontesBloqueadasSet]);
 
   const itensExibidos =
-    filtro === 'todos' ? pool : pool.filter((item) => item.esporte === filtro);
+    filtro === 'todos'
+      ? pool
+      : filtro === 'meu-time'
+        ? pool.filter((item) => nomeTime !== null && mencionaTime(item, nomeTime))
+        : pool.filter((item) => item.esporte === filtro);
 
   const carregandoInicial = snapshot.carregando && snapshot.dados === null;
   const erroSemDados = snapshot.erro !== null && snapshot.dados === null;
@@ -268,7 +316,9 @@ export function SecaoSeusEsportes({
   const nomesDoEscopoAtual =
     filtro === 'todos'
       ? favoritos.map((esporte) => nomesEsportes[esporte] ?? esporte)
-      : [nomesEsportes[filtro] ?? filtro];
+      : filtro === 'meu-time'
+        ? [nomeTime ?? 'seu time']
+        : [nomesEsportes[filtro] ?? filtro];
 
   function reexecutarBusca(): void {
     void (cliente ?? clienteSnapshotPadrao).garantir(
@@ -299,7 +349,7 @@ export function SecaoSeusEsportes({
           ))}
       </div>
 
-      {favoritos.length > 1 && (
+      {(favoritos.length > 1 || nomeTime !== null) && (
         <div
           role="group"
           aria-label="Filtrar por esporte favorito"
@@ -313,6 +363,16 @@ export function SecaoSeusEsportes({
               setFiltro('todos');
             }}
           />
+          {nomeTime !== null && (
+            <Chip
+              variante="selecionavel"
+              rotulo="Meu time"
+              selecionado={filtro === 'meu-time'}
+              aoAlternar={() => {
+                setFiltro('meu-time');
+              }}
+            />
+          )}
           {favoritos.map((esporte) => (
             <Chip
               key={esporte}

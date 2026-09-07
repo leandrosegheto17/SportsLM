@@ -36,16 +36,21 @@
 // artefato publicado; qualquer dado que seja só id/nome/ordem usa o bundle
 // estático já presente no carregamento inicial, sem round-trip de rede.
 //
-// REFAT-08-01 (reabre a lacuna registrada por UI-T02-04 abaixo): a partir de
-// 1024px, `Home.module.css` vira grade de 2 colunas — coluna fixa de 336px
-// com `SecaoIdentidade` inteira (faixa+próximo-jogo+a-briga, sem separar a
-// faixa do restante — `SecaoIdentidade` continua um único bloco vertical,
-// UI-T02-01) + feed largo de 748px com `SecaoSeusEsportes`/
-// `SecaoUltimasNoticias` empilhadas (`estilos['feed']`), conforme UX-SPEC
-// §2/T-02 "Desktop (1280)". Abaixo de 1024px, mantém a coluna única
-// centrada num contêiner de `--largura-container` (mesma largura de
-// UX-SPEC §3.6). A ordem de conteúdo e os 4 estados de cada seção não
-// mudam — só o container/grade ao redor.
+// REFAT-08-01/REFAT-10-01: a partir de 1024px, `Home.module.css` vira grade
+// de 2 colunas — mas, diferente da primeira versão de REFAT-08-01, a faixa
+// do clube (`FaixaClubeDoTime`, extraída de dentro de `SecaoIdentidade`) fica
+// FORA da grade de colunas, numa linha própria (`estilos['faixaTopo']`) que
+// ocupa a largura cheia das duas colunas somadas — apertar a faixa nos 336px
+// da coluna fixa cortava praticamente todo o conteúdo dela (nome/posição/
+// pontos), degradando a experiência (achado do usuário, 2026-09-07). Abaixo
+// da faixa: coluna fixa de 336px com o restante de `SecaoIdentidade`
+// (próximo-jogo+a-briga, `ocultarFaixaClube`) + feed largo de 748px com
+// `SecaoSeusEsportes`/`SecaoUltimasNoticias` empilhadas (`estilos['feed']`).
+// Abaixo de 1024px, mantém a coluna única centrada num contêiner de
+// `--largura-container` (mesma largura de UX-SPEC §3.6) — a faixa continua
+// sendo o primeiro elemento visual, agora renderizada por um componente
+// próprio em vez de nascer dentro de `SecaoIdentidade`. A ordem de conteúdo
+// e os 4 estados de cada seção não mudam — só o container/grade ao redor.
 
 import {
   useEffect,
@@ -64,11 +69,15 @@ import {
   obterVersaoPreferencias,
 } from '../../armazenamento/preferencias';
 import type { ClienteSnapshot } from '../../dados/clienteSnapshot';
-import type { OpcoesUseClubesPublicos } from '../../dados/useClubesPublicos';
+import {
+  useClubesPublicos,
+  type OpcoesUseClubesPublicos,
+} from '../../dados/useClubesPublicos';
 import {
   construirCatalogoOnboarding,
   type CatalogoOnboarding,
 } from './Onboarding/catalogoOnboarding';
+import { FaixaClubeDoTime } from './Home/FaixaClubeDoTime';
 import { SecaoIdentidade } from './Home/SecaoIdentidade';
 import { SecaoSeusEsportes } from './Home/SecaoSeusEsportes';
 import { SecaoUltimasNoticias } from './Home/SecaoUltimasNoticias';
@@ -193,6 +202,20 @@ export function Home({
   }, [catalogo, armazenamento, versaoPreferencias]);
   const preferencias = resultadoLeituraPreferencias.preferencias;
 
+  // REFAT-10-02 (a pedido do usuário): nome de exibição do time do
+  // torcedor, para a aba "MEU TIME" de `SecaoSeusEsportes` — reaproveita
+  // `useClubesPublicos` (mesmo cache module-level de `FaixaClubeDoTime`/
+  // `SecaoIdentidade`, sem 2ª requisição real) só para resolver
+  // `timeId` → `nomeCurto`.
+  const { clubes } = useClubesPublicos(opcoesClubesPublicos);
+  const timeId = 'timeId' in preferencias ? preferencias.timeId : null;
+  const nomeTime = useMemo(() => {
+    if (timeId === null || !clubes) {
+      return null;
+    }
+    return clubes.find((clube) => clube.id === timeId)?.nomeCurto ?? null;
+  }, [clubes, timeId]);
+
   // REFAT-09-02 (FL-01: "ramo de virada de temporada em T-04"): quando o
   // torcedor retorna com o time salvo fora da lista de clubes da temporada
   // corrente (RN-12), `EscolherTime` (T-04) já trata corretamente o banner
@@ -216,12 +239,21 @@ export function Home({
 
   return (
     <div className={estilos['pagina']}>
+      <div className={estilos['faixaTopo']}>
+        <FaixaClubeDoTime
+          {...(armazenamento ? { armazenamento } : {})}
+          {...(opcoesClubesPublicos ? { opcoesClubesPublicos } : {})}
+          {...(clienteSnapshot ? { clienteSnapshot } : {})}
+        />
+      </div>
+
       <div className={estilos['blocoIdentidade']}>
         <SecaoIdentidade
           {...(armazenamento ? { armazenamento } : {})}
           {...(opcoesClubesPublicos ? { opcoesClubesPublicos } : {})}
           {...(clienteSnapshot ? { clienteSnapshot } : {})}
           aoEscolherTime={abrirEscolherTime}
+          ocultarFaixaClube
         />
       </div>
 
@@ -232,6 +264,7 @@ export function Home({
           fontesBloqueadas={preferencias.fontesBloqueadas}
           nomesFontes={nomesFontes}
           aoEscolherEsportes={abrirConfiguracoes}
+          nomeTime={nomeTime}
           {...(clienteSnapshot ? { cliente: clienteSnapshot } : {})}
         />
 

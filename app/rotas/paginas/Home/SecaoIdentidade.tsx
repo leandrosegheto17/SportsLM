@@ -91,7 +91,7 @@ import estilos from './SecaoIdentidade.module.css';
  * decidir entre "sem time" (CA-14.3) e a faixa completa). JSON/esquema
  * inválido ⇒ `null` (mesmo comportamento de "sem time salvo").
  */
-function lerTimeIdSalvo(
+export function lerTimeIdSalvo(
   armazenamento: Pick<Storage, 'getItem'> | undefined = globalThis.localStorage,
 ): string | null {
   const bruto = lerBrutoSemLancar(CHAVE_ARMAZENAMENTO_PREFERENCIAS, armazenamento);
@@ -242,6 +242,16 @@ export interface PropriedadesSecaoIdentidade {
    * time — em vez de deixar o botão sem efeito.
    */
   readonly aoEscolherTime?: () => void;
+  /**
+   * REFAT-10-01: quando `true`, esta seção não renderiza `FaixaClube` (nem a
+   * variante `completa` nem a `neutra`) — usado pela Home quando a faixa já
+   * é renderizada por `FaixaClubeDoTime`, full-width, fora da grade de duas
+   * colunas (ver `Home.tsx`/`Home.module.css`). Sozinha (uso isolado desta
+   * seção, ex.: os testes existentes) o padrão continua `false`, preservando
+   * o comportamento anterior — a faixa faz parte do bloco único de
+   * identidade, como antes de REFAT-10-01.
+   */
+  readonly ocultarFaixaClube?: boolean;
 }
 
 /** UI-T02-01 — bloco de identidade + PRÓXIMO JOGO + A BRIGA da Home (T-02). */
@@ -250,6 +260,7 @@ export function SecaoIdentidade({
   opcoesClubesPublicos,
   clienteSnapshot,
   aoEscolherTime,
+  ocultarFaixaClube = false,
 }: PropriedadesSecaoIdentidade): ReactElement {
   const navegar = useNavigate();
   const timeId = useMemo(() => lerTimeIdSalvo(armazenamento), [armazenamento]);
@@ -281,7 +292,7 @@ export function SecaoIdentidade({
   if (timeId === null) {
     return (
       <section className={estilos['secao']} aria-label="Meu time">
-        <FaixaClube variante="neutra" />
+        {ocultarFaixaClube ? null : <FaixaClube variante="neutra" />}
         <div className={estilos['convite']}>
           <p className={estilos['conviteTexto']}>
             Escolha seu time para ver o painel com todos os campeonatos do ano.
@@ -328,7 +339,7 @@ export function SecaoIdentidade({
 
   return (
     <section className={estilos['secao']} aria-label="Meu time">
-      {clubeParaFaixa ? (
+      {ocultarFaixaClube ? null : clubeParaFaixa ? (
         <FaixaClube
           variante="completa"
           clube={clubeParaFaixa}

@@ -1,22 +1,23 @@
 /*
  * Home.module.css — UI-T02-04 (UX-SPEC §2/T-02), grade de 2 colunas por
- * REFAT-08-01.
+ * REFAT-08-01/REFAT-10-01.
  *
  * Nenhum valor literal de cor/tamanho/espaçamento fora de
  * `app/design-system/tokens.css` (Diretriz de Implementação #4).
  *
- * Abaixo de 1024px: coluna única (`.pagina` em flex column), igual ao
- * wireframe mobile de UX-SPEC §2/T-02 — `.blocoIdentidade` e `.feed` são os
- * dois únicos filhos diretos de `.pagina`, cada um com seu próprio gap
- * interno (`.feed`) reproduzindo exatamente o espaçamento que havia entre as
- * 3 seções antes de `.feed` existir como agrupador.
+ * Abaixo de 1024px: coluna única (`.pagina` em flex column) — `.faixaTopo`,
+ * `.blocoIdentidade` e `.feed` são os três filhos diretos de `.pagina`, na
+ * ordem do wireframe mobile de UX-SPEC §2/T-02 (faixa → próximo-jogo/
+ * a-briga → seus-esportes/últimas-notícias).
  *
- * A partir de 1024px: `.pagina` vira grade de 2 colunas — coluna fixa de
- * `--home-coluna-fixa-largura` (336px, `.blocoIdentidade`/`SecaoIdentidade`)
- * + coluna de `--home-feed-largura` (748px, `.feed` — `SecaoSeusEsportes` +
- * `SecaoUltimasNoticias` empilhadas), lado a lado, conforme UX-SPEC §2/T-02
- * "Desktop (1280)". A ordem relativa das 3 seções e os 4 estados de cada uma
- * não mudam — só o container ao redor.
+ * A partir de 1024px: `.pagina` vira grade de 2 colunas, mas `.faixaTopo`
+ * ocupa as DUAS colunas numa linha própria, acima do resto (REFAT-10-01,
+ * achado do usuário: apertar a faixa do clube na coluna fixa de 336px
+ * cortava praticamente todo o conteúdo dela). Abaixo da faixa: coluna fixa
+ * de `--home-coluna-fixa-largura` (336px, `.blocoIdentidade` — resto de
+ * `SecaoIdentidade`, sem a faixa) + coluna de `--home-feed-largura` (748px,
+ * `.feed` — `SecaoSeusEsportes` + `SecaoUltimasNoticias` empilhadas),
+ * conforme UX-SPEC §2/T-02 "Desktop (1280)".
  */
 
 .pagina {
@@ -27,8 +28,12 @@
   margin: 0 auto;
 }
 
-.blocoIdentidade {
+.faixaTopo {
   padding: var(--esp-4) var(--margem-lateral) 0;
+}
+
+.blocoIdentidade {
+  padding: 0 var(--margem-lateral);
 }
 
 .feed {
@@ -41,7 +46,24 @@
   .pagina {
     display: grid;
     grid-template-columns: var(--home-coluna-fixa-largura) var(--home-feed-largura);
+    grid-template-areas:
+      'faixa faixa'
+      'identidade feed';
     align-items: start;
     justify-content: center;
+  }
+
+  .faixaTopo {
+    grid-area: faixa;
+    padding: 0;
+  }
+
+  .blocoIdentidade {
+    grid-area: identidade;
+    padding: 0;
+  }
+
+  .feed {
+    grid-area: feed;
   }
 }
