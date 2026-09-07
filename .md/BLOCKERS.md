@@ -674,3 +674,48 @@
   alteração em `config/clubes-2026.json` (fora de escopo desta tarefa,
   aguarda o mapeamento real via log do próximo run do workflow — REFAT-02-01).
 - Status: Resolvido
+
+## Bloqueio 010 — 2026-09-07
+- Reportado por: orquestrador (usuário), ao aplicar o mapeamento id↔nome
+  capturado no log do Bloqueio 009 para completar `REFAT-02-01`
+  (`.md/TASK.md`, Refatoração Lote-2)
+- Escalado para: coordenador (decisão de conteúdo/configuração — qual
+  elenco publicar); gestor em paralelo (é decisão visível ao usuário final,
+  não só técnica)
+- Artefato/trecho afetado: `config/clubes-2026.json` (5 entradas:
+  `ceara`, `fortaleza`, `sport`, `juventude`, `criciuma`)
+- Descrição: dos 19 clubes pendentes, 15 foram confirmados com sucesso
+  contra a resposta real da API do football-data.org para o Brasileirão
+  Série A 2026 (ver Bloqueio 009 para o log de origem) — atualizados
+  diretamente em `config/clubes-2026.json`. Os outros 5
+  (`ceara`/`fortaleza`/`sport`/`juventude`/`criciuma`) **não apareceram** na
+  resposta real: o elenco de 20 clubes que a API devolveu para a
+  competição inclui, em vez desses 5, estes outros times, com seus ids
+  reais confirmados no mesmo log: Athletico Paranaense/"CA Paranaense"
+  (id 1768), Coritiba FBC (id 4241), RB Bragantino (id 4286), Clube do Remo
+  (id 4287), Chapecoense AF (id 1772). Ou seja, a configuração original
+  deste projeto (escrita antes de qualquer chamada real à API, na fase de
+  planejamento) chutou um elenco de acesso/queda que diverge do elenco real
+  da temporada 2026 segundo o provedor.
+- Impacto se não resolvido: os 5 clubes configurados (`ceara` etc.) nunca
+  terão dado real do Brasileirão (não existem na competição real, segundo
+  o provedor) — suas telas de painel/detalhe de campeonato continuam
+  mostrando "SEM DADOS" para sempre, mesmo com o pipeline funcionando
+  perfeitamente. Os 5 clubes reais que substituiriam essas vagas (Athletico
+  Paranaense, Coritiba, RB Bragantino, Remo, Chapecoense) nunca aparecem em
+  nenhuma tela do produto (onboarding, favoritos, painel), porque não têm
+  entrada em `config/clubes-2026.json` — cada partida deles contra um dos
+  15 clubes confirmados perde, do lado deles, a contagem de v/e/d que
+  aquele confronto deveria gerar (mas o lado confirmado do confronto é
+  registrado normalmente, já que a checagem é por clube, não por partida).
+- Sugestão (opcional): substituir as 5 entradas por Athletico Paranaense,
+  Coritiba, RB Bragantino, Clube do Remo e Chapecoense (nome/nome curto/
+  sigla/cor base reais de cada clube, ids já confirmados acima),
+  preservando a estrutura e o total de 20 clubes. Cor base e paleta
+  (ADR-017, validação de contraste) precisam ser definidas com cuidado
+  para os 5 novos clubes — não decidido aqui, por ser identidade visual do
+  produto, não um detalhe técnico livre para o Executor decidir sozinho.
+- Status: Aberto, não bloqueante (o pipeline já funciona corretamente para
+  os 15 clubes confirmados; os 5 pendentes continuam com a sentinela
+  explícita, nunca um id inventado — CA-16.6 — e são descartados/registrados
+  como inconsistência, sem risco de dado incorreto publicado).

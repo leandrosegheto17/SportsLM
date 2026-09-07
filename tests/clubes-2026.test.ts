@@ -91,11 +91,42 @@ describe('config/clubes-2026.json (dado real)', () => {
     expect(flamengo?.idsProvedor[ID_PROVEDOR_FOOTBALL_DATA]).toBe(1783);
   });
 
-  it('clubes ainda não confirmados usam a sentinela explícita, nunca um número inventado', () => {
-    const pendentes = clubes.filter((clube) => clube.id !== 'flamengo');
-    expect(pendentes.length).toBe(19);
-    for (const clube of pendentes) {
-      expect(clube.idsProvedor[ID_PROVEDOR_FOOTBALL_DATA]).toBe(SENTINELA_ID_PENDENTE);
+  // REFAT-02-01 (parcialmente resolvido, 2026-09-07): com o token real
+  // cadastrado, 15/20 ids foram confirmados contra a API real do
+  // football-data.org (Bloqueio 009/BLOCKERS.md). Os 5 clubes abaixo
+  // permanecem pendentes não por falta de token, mas porque o elenco real
+  // da Série A 2026 devolvido pela API diverge do que este arquivo assumiu
+  // na configuração original (5 clubes daqui não apareceram na resposta
+  // real; 5 outros clubes reais — Athletico-PR, Coritiba, RB Bragantino,
+  // Clube do Remo, Chapecoense — apareceram na API mas não têm entrada
+  // aqui). Decisão sobre corrigir o elenco pendente do Coordenador/gestor.
+  const IDS_CLUBES_COM_ELENCO_DIVERGENTE = [
+    'ceara',
+    'fortaleza',
+    'sport',
+    'juventude',
+    'criciuma',
+  ];
+
+  it('clubes confirmados contra a API real usam o id numérico verificado (REFAT-02-01)', () => {
+    const confirmados = clubes.filter(
+      (clube) => !IDS_CLUBES_COM_ELENCO_DIVERGENTE.includes(clube.id),
+    );
+    expect(confirmados.length).toBe(15);
+    for (const clube of confirmados) {
+      const idProvedor = clube.idsProvedor[ID_PROVEDOR_FOOTBALL_DATA];
+      expect(idProvedor, `clube '${clube.id}' deveria ter id confirmado`).not.toBe(
+        SENTINELA_ID_PENDENTE,
+      );
+      expect(typeof idProvedor).toBe('number');
+    }
+  });
+
+  it('clubes com elenco divergente da API real seguem com a sentinela explícita (achado Bloqueio 009)', () => {
+    expect(IDS_CLUBES_COM_ELENCO_DIVERGENTE.length).toBe(5);
+    for (const id of IDS_CLUBES_COM_ELENCO_DIVERGENTE) {
+      const clube = obterClubePorId(clubes, id);
+      expect(clube?.idsProvedor[ID_PROVEDOR_FOOTBALL_DATA]).toBe(SENTINELA_ID_PENDENTE);
     }
   });
 

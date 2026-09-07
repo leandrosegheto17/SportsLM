@@ -245,7 +245,7 @@ describe('traduzirClassificacao', () => {
     ).toThrow();
   });
 
-  it('débito conhecido (REFAT-02-01): com a configuração REAL de clubes-2026.json, só Flamengo casa hoje', () => {
+  it('débito conhecido (REFAT-02-01, atualizado pelo Bloqueio 009): com a configuração REAL de clubes-2026.json, 15/20 clubes já casam — os 5 com elenco divergente da API real seguem descartados', () => {
     const clubesReais = carregarClubesSerieA2026();
     const resposta = {
       standings: [
@@ -267,10 +267,29 @@ describe('traduzirClassificacao', () => {
               goalDifference: 2,
             },
             {
-              // Palmeiras real está com idsProvedor pendente-confirmacao —
-              // qualquer id numérico do provedor é descartado até a confirmação.
+              // Palmeiras já foi confirmado pelo Bloqueio 009 (id real 1769)
+              // — deveria casar normalmente agora.
               position: 2,
               team: timeProvedor(1769, 'SE Palmeiras'),
+              playedGames: 1,
+              form: null,
+              won: 1,
+              draw: 0,
+              lost: 0,
+              points: 3,
+              goalsFor: 1,
+              goalsAgainst: 0,
+              goalDifference: 1,
+            },
+            {
+              // Ceará: um dos 5 clubes cujo elenco real 2026 diverge do que
+              // este arquivo assume — idsProvedor ainda é a sentinela
+              // pendente, então qualquer id numérico do provedor (mesmo que
+              // pareça plausível) é descartado até uma decisão do
+              // Coordenador/gestor sobre o elenco real (achado do Bloqueio
+              // 009/BLOCKERS.md).
+              position: 3,
+              team: timeProvedor(9999, 'Ceará SC'),
               playedGames: 1,
               form: null,
               won: 1,
@@ -292,10 +311,10 @@ describe('traduzirClassificacao', () => {
       clubesReais,
     );
 
-    expect(linhas).toHaveLength(1);
-    expect(linhas[0]?.clubeId).toBe('flamengo');
+    expect(linhas).toHaveLength(2);
+    expect(linhas.map((l) => l.clubeId)).toEqual(['flamengo', 'palmeiras']);
     expect(inconsistencias).toHaveLength(1);
-    expect(inconsistencias[0]?.contexto).toBe('classificacao:posicao 2');
+    expect(inconsistencias[0]?.contexto).toBe('classificacao:posicao 3');
   });
 });
 

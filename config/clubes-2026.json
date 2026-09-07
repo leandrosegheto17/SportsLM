@@ -13,7 +13,7 @@
     "nomeCurto": "Palmeiras",
     "sigla": "PAL",
     "corBase": "#006437",
-    "idsProvedor": { "football-data": "pendente-confirmacao" },
+    "idsProvedor": { "football-data": 1769 },
     "paletaManual": { "faixaB": "#004526" }
   },
   {
@@ -22,7 +22,7 @@
     "nomeCurto": "São Paulo",
     "sigla": "SPA",
     "corBase": "#E30613",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1776 }
   },
   {
     "id": "mirassol",
@@ -30,7 +30,7 @@
     "nomeCurto": "Mirassol",
     "sigla": "MIR",
     "corBase": "#FFDD00",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 4364 }
   },
   {
     "id": "corinthians",
@@ -38,7 +38,7 @@
     "nomeCurto": "Corinthians",
     "sigla": "COR",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1779 }
   },
   {
     "id": "botafogo",
@@ -46,7 +46,7 @@
     "nomeCurto": "Botafogo",
     "sigla": "BOT",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1770 }
   },
   {
     "id": "santos",
@@ -54,7 +54,7 @@
     "nomeCurto": "Santos",
     "sigla": "SAN",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 6685 }
   },
   {
     "id": "vasco",
@@ -62,7 +62,7 @@
     "nomeCurto": "Vasco",
     "sigla": "VAS",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1780 }
   },
   {
     "id": "atletico-mg",
@@ -70,7 +70,7 @@
     "nomeCurto": "Atlético-MG",
     "sigla": "CAM",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1766 }
   },
   {
     "id": "ceara",
@@ -86,7 +86,7 @@
     "nomeCurto": "Cruzeiro",
     "sigla": "CRU",
     "corBase": "#0033A0",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1771 }
   },
   {
     "id": "fluminense",
@@ -94,7 +94,7 @@
     "nomeCurto": "Fluminense",
     "sigla": "FLU",
     "corBase": "#7A0026",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1765 }
   },
   {
     "id": "bahia",
@@ -102,7 +102,7 @@
     "nomeCurto": "Bahia",
     "sigla": "BAH",
     "corBase": "#1C3F94",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1777 }
   },
   {
     "id": "internacional",
@@ -110,7 +110,7 @@
     "nomeCurto": "Internacional",
     "sigla": "INT",
     "corBase": "#C8102E",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 6684 }
   },
   {
     "id": "gremio",
@@ -118,7 +118,7 @@
     "nomeCurto": "Grêmio",
     "sigla": "GRE",
     "corBase": "#004B87",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1767 }
   },
   {
     "id": "fortaleza",
@@ -134,7 +134,7 @@
     "nomeCurto": "Vitória",
     "sigla": "VIT",
     "corBase": "#A6192E",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "idsProvedor": { "football-data": 1782 }
   },
   {
     "id": "sport",
