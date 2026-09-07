@@ -80,6 +80,36 @@ export interface InconsistenciaClube {
   contexto: string;
 }
 
+/**
+ * Inconsistência de `status` de partida fora dos 11 valores documentados de
+ * `STATUS_PARTIDA_PROVEDOR` (Bloqueio 008, `.md/BLOCKERS.md`). Observada em
+ * produção (2026-09-07, execução real contra a API do football-data.org):
+ * 72 de ~380 partidas do Brasileirão vieram com `status` no formato de
+ * timestamp (`"2026-08-29 20:30:00Z"`), nunca visto na documentação pública.
+ * Causa raiz do lado do provedor é desconhecida — não interpretamos o
+ * significado do valor (CA-16.6, "nunca um palpite apresentado como fato"):
+ * a partida é descartada individualmente e esta ocorrência registrada, em
+ * vez de invalidar a resposta inteira (que era o bug original — `.parse()`
+ * de array inteiro derrubava as demais ~308 partidas válidas junto).
+ */
+export interface InconsistenciaStatusPartidaDesconhecido {
+  tipo: 'partida-status-desconhecido';
+  competicaoId: string;
+  idPartidaProvedor: number;
+  /** Valor bruto de `status` recebido do provedor, fora do enum conhecido —
+   * só para diagnóstico humano; nunca traduzido para um status de domínio. */
+  statusBrutoDiagnostico: string;
+  contexto: string;
+}
+
+/** Superconjunto de inconsistências que `traduzirPartidas` pode registrar —
+ * casamento de clube (ADR-006 item 3) ou status de partida fora do enum
+ * conhecido (Bloqueio 008). `traduzirClassificacao` continua devolvendo só
+ * `InconsistenciaClube[]` (não lida com `status` de partida). */
+export type InconsistenciaPartida =
+  | InconsistenciaClube
+  | InconsistenciaStatusPartidaDesconhecido;
+
 // --- Schemas da resposta bruta do provedor -----------------------------
 // Toda entrada externa passa por Zod antes de entrar no domínio (TASK.md §1,
 // diretriz 6). Os schemas abaixo cobrem só os campos que este adaptador usa
@@ -135,15 +165,31 @@ const STATUS_PARTIDA_PROVEDOR = [
 
 type StatusPartidaProvedor = (typeof STATUS_PARTIDA_PROVEDOR)[number];
 
+const CONJUNTO_STATUS_PARTIDA_PROVEDOR: ReadonlySet<string> = new Set(
+  STATUS_PARTIDA_PROVEDOR,
+);
+
+/** `true` quando `status` é um dos 11 valores documentados da API. */
+function ehStatusPartidaConhecido(status: string): status is StatusPartidaProvedor {
+  return CONJUNTO_STATUS_PARTIDA_PROVEDOR.has(status);
+}
+
 const placarProvedorSchema = z.object({
   home: z.number().int().nullable(),
   away: z.number().int().nullable(),
 });
 
+// `status` é validado como `z.string()` (permissivo), não `z.enum(...)`
+// estrito — Bloqueio 008 (`.md/BLOCKERS.md`): um `.enum()` estrito dentro de
+// `z.array(...)` faz UMA partida com valor fora do enum invalidar a resposta
+// INTEIRA (todas as partidas, inclusive as válidas). A validação de "é um
+// dos 11 valores conhecidos" passa a ser feita partida a partida, dentro de
+// `traduzirPartidas`/`ehStatusPartidaConhecido`, para que só a partida
+// problemática seja descartada — nunca as demais.
 const partidaProvedorSchema = z.object({
   id: z.number().int(),
   utcDate: z.string(),
-  status: z.enum(STATUS_PARTIDA_PROVEDOR),
+  status: z.string(),
   matchday: z.number().int().nullable().optional(),
   stage: z.string().nullable().optional(),
   homeTeam: timeProvedorSchema,
@@ -176,7 +222,7 @@ function resolverClube(
   time: TimeProvedor,
   competicaoId: string,
   contexto: string,
-  inconsistencias: InconsistenciaClube[],
+  inconsistencias: InconsistenciaPartida[],
 ): ClubeBase | null {
   const clube = indice.get(String(time.id));
   if (clube === undefined) {
@@ -320,18 +366,35 @@ function traduzirStatusEHorario(
  * Traduz a resposta de `/competitions/<codigo>/matches` para `Partida[]`
  * (SDD §5.2). Partida com mandante e/ou visitante não mapeado é descartada e
  * registrada (CA-16.6/ADR-006 item 3) — nunca meio-preenchida.
+ *
+ * Partida com `status` fora dos 11 valores documentados (Bloqueio 008,
+ * `.md/BLOCKERS.md`) também é descartada e registrada individualmente —
+ * nunca invalida a resposta inteira. Verificação de status vem antes da
+ * resolução de clube: uma partida com status desconhecido é descartada por
+ * esse motivo mesmo que mandante/visitante estejam mapeados corretamente.
  */
 export function traduzirPartidas(
   respostaBruta: unknown,
   competicaoId: string,
   clubes: ClubeBase[],
-): { partidas: Partida[]; inconsistencias: InconsistenciaClube[] } {
+): { partidas: Partida[]; inconsistencias: InconsistenciaPartida[] } {
   const resposta = matchesProvedorSchema.parse(respostaBruta);
   const indice = indiceClubesPorIdProvedor(clubes);
-  const inconsistencias: InconsistenciaClube[] = [];
+  const inconsistencias: InconsistenciaPartida[] = [];
   const partidas: Partida[] = [];
 
   for (const partida of resposta.matches) {
+    if (!ehStatusPartidaConhecido(partida.status)) {
+      inconsistencias.push({
+        tipo: 'partida-status-desconhecido',
+        competicaoId,
+        idPartidaProvedor: partida.id,
+        statusBrutoDiagnostico: partida.status,
+        contexto: `partida:${partida.id}:status`,
+      });
+      continue; // descartada individualmente — nunca invalida as demais
+    }
+
     const mandante = resolverClube(
       indice,
       partida.homeTeam,

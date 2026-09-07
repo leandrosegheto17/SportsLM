@@ -62,7 +62,10 @@ import type {
   CategoriaCampeonato,
 } from '../../config/campeonatos.schema';
 import type { LinhaClassificacao, Partida } from '../../dominio/tipos/futebol';
-import type { InconsistenciaClube } from './adaptador-football-data';
+import type {
+  InconsistenciaClube,
+  InconsistenciaPartida,
+} from './adaptador-football-data';
 
 /** Custo fixo, em requisições, de coletar uma competição — chamar
  * `obterClassificacao` e `obterPartidas` uma vez cada (ADR-006 item 1). */
@@ -83,7 +86,7 @@ export interface ProvedorFutebolPort<TRef = unknown> {
   ): Promise<{ linhas: LinhaClassificacao[]; inconsistencias: InconsistenciaClube[] }>;
   obterPartidas(
     ref: TRef,
-  ): Promise<{ partidas: Partida[]; inconsistencias: InconsistenciaClube[] }>;
+  ): Promise<{ partidas: Partida[]; inconsistencias: InconsistenciaPartida[] }>;
 }
 
 /** Entrada opaca do registro de provedores — ver `registrarProvedor`. */
@@ -96,7 +99,7 @@ export interface ProvedorRegistrado {
     }>;
     obterPartidas: (
       ref: unknown,
-    ) => Promise<{ partidas: Partida[]; inconsistencias: InconsistenciaClube[] }>;
+    ) => Promise<{ partidas: Partida[]; inconsistencias: InconsistenciaPartida[] }>;
   };
   readonly construirReferencia: (campeonato: CampeonatoConfig) => unknown;
 }
@@ -130,7 +133,7 @@ export interface ResultadoCompeticaoAtualizada {
   categoria: CategoriaCampeonato;
   tipo: 'atualizada';
   classificacao: { linhas: LinhaClassificacao[]; inconsistencias: InconsistenciaClube[] };
-  partidas: { partidas: Partida[]; inconsistencias: InconsistenciaClube[] };
+  partidas: { partidas: Partida[]; inconsistencias: InconsistenciaPartida[] };
 }
 
 /** Fora da janela de calendário da competição (não consome requisição, ADR-002)

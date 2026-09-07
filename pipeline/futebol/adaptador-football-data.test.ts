@@ -447,6 +447,115 @@ describe('traduzirPartidas', () => {
       ),
     ).toThrow();
   });
+
+  describe('Bloqueio 008 (.md/BLOCKERS.md): status fora dos 11 valores documentados', () => {
+    it('descarta e registra individualmente uma partida com status desconhecido, SEM invalidar as demais partidas válidas do mesmo array', () => {
+      const partidaValidaAgendada = {
+        ...baseMatch,
+        id: 1,
+        status: 'TIMED',
+        score: { fullTime: { home: null, away: null } },
+      };
+      const partidaComStatusDesconhecido = {
+        ...baseMatch,
+        id: 2,
+        // valor real observado em produção (2026-09-07, run 34149687651) —
+        // parecido com timestamp, nunca documentado pela API para `status`.
+        status: '2026-08-29 20:30:00Z',
+        score: { fullTime: { home: null, away: null } },
+      };
+      const partidaValidaFinalizada = {
+        ...baseMatch,
+        id: 3,
+        status: 'FINISHED',
+        score: { fullTime: { home: 2, away: 1 } },
+      };
+
+      const resposta = {
+        matches: [
+          partidaValidaAgendada,
+          partidaComStatusDesconhecido,
+          partidaValidaFinalizada,
+        ],
+      };
+
+      // Prova (a)+(b): a resposta inteira não é descartada (diferente do bug
+      // original, onde `.parse()` sobre o array inteiro derrubava as 380
+      // partidas por causa de 72 com este mesmo tipo de valor) — e não
+      // lança.
+      const { partidas, inconsistencias } = traduzirPartidas(
+        resposta,
+        'brasileirao-serie-a',
+        CLUBES_TESTE,
+      );
+
+      // (a) as partidas válidas continuam traduzidas normalmente.
+      expect(partidas).toHaveLength(2);
+      expect(partidas.map((p) => p.id)).toEqual(['1', '3']);
+      expect(partidas[0]?.status).toBe('agendada');
+      expect(partidas[1]?.status).toBe('finalizada');
+      expect(partidas[1]?.placar).toEqual({ mandante: 2, visitante: 1 });
+
+      // (b) a partida com status desconhecido não aparece no resultado.
+      expect(partidas.some((p) => p.id === '2')).toBe(false);
+
+      // (c) a ocorrência é registrada de forma rastreável (nunca
+      // silenciosamente ignorada) — descarte individual, não palpite sobre
+      // o significado do valor (CA-16.6).
+      expect(inconsistencias).toEqual([
+        {
+          tipo: 'partida-status-desconhecido',
+          competicaoId: 'brasileirao-serie-a',
+          idPartidaProvedor: 2,
+          statusBrutoDiagnostico: '2026-08-29 20:30:00Z',
+          contexto: 'partida:2:status',
+        },
+      ]);
+    });
+
+    it('mais de uma partida com status desconhecido no mesmo array: cada uma é registrada individualmente, sem afetar as demais', () => {
+      const resposta = {
+        matches: [
+          {
+            ...baseMatch,
+            id: 10,
+            status: '2026-08-29 20:30:00Z',
+            score: { fullTime: { home: null, away: null } },
+          },
+          {
+            ...baseMatch,
+            id: 11,
+            status: 'TIMED',
+            score: { fullTime: { home: null, away: null } },
+          },
+          {
+            ...baseMatch,
+            id: 12,
+            status: '2026-08-30 13:00:00Z',
+            score: { fullTime: { home: null, away: null } },
+          },
+        ],
+      };
+
+      const { partidas, inconsistencias } = traduzirPartidas(
+        resposta,
+        'brasileirao-serie-a',
+        CLUBES_TESTE,
+      );
+
+      expect(partidas).toHaveLength(1);
+      expect(partidas[0]?.id).toBe('11');
+      expect(inconsistencias).toHaveLength(2);
+      expect(inconsistencias.map((i) => i.tipo)).toEqual([
+        'partida-status-desconhecido',
+        'partida-status-desconhecido',
+      ]);
+      const idsProvedorRegistrados = inconsistencias
+        .filter((i) => i.tipo === 'partida-status-desconhecido')
+        .map((i) => i.idPartidaProvedor);
+      expect(idsProvedorRegistrados).toEqual([10, 12]);
+    });
+  });
 });
 
 describe('criarAdaptadorFootballData', () => {

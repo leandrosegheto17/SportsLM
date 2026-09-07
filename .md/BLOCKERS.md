@@ -491,3 +491,98 @@
     `npm run build` + `npm run verificar-segredos` (bundle real da SPA)
     seguem limpos.
 - Status: Resolvido
+
+## Bloqueio 008 — 2026-09-07
+- Reportado por: orquestrador (usuário), a partir da primeira execução real
+  do Fluxo 2 (futebol) contra a API real do football-data.org
+  (`ingestao.yml`, run 34149687651, token cadastrado pela primeira vez)
+- Escalado para: executor (chapéu Backend), correção direta — bloqueio
+  pontual resolvido diretamente, mesmo padrão dos Bloqueios 001/004/005/007
+- Artefato/trecho afetado: `pipeline/futebol/adaptador-football-data.ts`
+  (`partidaProvedorSchema.status`, `traduzirStatusEHorario`,
+  `traduzirPartidas`); `pipeline/futebol/coletor-futebol.ts` (tipo do campo
+  `inconsistencias` de partidas, ajustado em decorrência)
+- Descrição: a ingestão do Brasileirão Série A falhou por completo nesta
+  execução. Causa raiz confirmada: `traduzirPartidas` →
+  `matchesProvedorSchema.parse(respostaBruta)` usava
+  `z.array(partidaProvedorSchema)`, com `status: z.enum(STATUS_PARTIDA_PROVEDOR)`
+  (os 11 valores documentados: SCHEDULED/TIMED/IN_PLAY/PAUSED/EXTRA_TIME/
+  PENALTY_SHOOTOUT/FINISHED/SUSPENDED/POSTPONED/CANCELLED/AWARDED). A
+  resposta real trouxe 72 de ~380 partidas com um valor de `status` fora
+  desses 11 — uma string parecida com timestamp (`"2026-08-29 20:30:00Z"`,
+  `"2026-08-30 13:00:00Z"`, etc.), sempre no campo `status`, nunca em outro
+  campo. Como `.parse()` é estrito sobre o array inteiro de uma vez, uma
+  única partida com valor inesperado invalidava a resposta inteira — as 380
+  partidas (incluindo as ~308 com status válido) foram descartadas de uma
+  vez, e a competição inteira caiu para `'falha'`. Isso contrariava a
+  própria filosofia de CA-16.6 já estabelecida no SDD/GUARDRAILS para este
+  tipo de situação: "inconsistente → descarta, mantém o anterior, registra"
+  — degradar com granularidade fina, nunca perder tudo por causa de uma
+  parte.
+- Impacto se não resolvido: qualquer execução real em que pelo menos uma
+  partida do provedor trouxesse esse valor de `status` (o que já ocorreu na
+  primeira execução real e pode se repetir) descartaria a competição
+  inteira — inclusive centenas de partidas com dado perfeitamente válido —,
+  em vez de perder só a(s) partida(s) realmente problemática(s).
+- Decisão tomada (resiliência de parsing, não interpretação do valor):
+  - `partidaProvedorSchema.status` deixou de ser `z.enum(STATUS_PARTIDA_PROVEDOR)`
+    estrito e passou a `z.string()` — validação permissiva no nível do
+    schema Zod da partida individual, para que uma partida com valor
+    inesperado não impeça o Zod de validar as demais 379 dentro do mesmo
+    array.
+  - Novo helper `ehStatusPartidaConhecido` (type guard sobre
+    `STATUS_PARTIDA_PROVEDOR`) verifica, dentro de `traduzirPartidas`, se o
+    `status` de cada partida é um dos 11 valores documentados — a
+    verificação continua exatamente tão estrita quanto antes, só que por
+    partida individual, não pelo array inteiro de uma vez.
+  - Partida com `status` desconhecido: **descartada individualmente do
+    resultado final e registrada como ocorrência rastreável** — novo tipo
+    `InconsistenciaStatusPartidaDesconhecido` (`tipo:
+    'partida-status-desconhecido'`, ao lado de `InconsistenciaClube`, unidos
+    em `InconsistenciaPartida`), com `idPartidaProvedor`,
+    `statusBrutoDiagnostico` (valor bruto recebido, só para diagnóstico
+    humano) e `contexto`. Optou-se por descartar (em vez de mapear para um
+    status de domínio "seguro" tipo `'agendada'`) porque não há confiança
+    sobre o que aquele valor realmente significa — inventar uma tradução
+    seria expor um palpite como fato, o que CA-16.6 já proíbe para casos
+    análogos (ex. `FINISHED` sem placar completo).
+  - Os 11 valores documentados de `STATUS_PARTIDA_PROVEDOR` e o switch de
+    `traduzirStatusEHorario` não foram alterados — a mudança é só sobre como
+    um valor **fora** dessa lista é tratado.
+  - `coletor-futebol.ts`: `ProvedorFutebolPort.obterPartidas` e os tipos de
+    resultado correspondentes passaram a tipar `inconsistencias` como
+    `InconsistenciaPartida[]` (antes `InconsistenciaClube[]`), refletindo o
+    novo tipo possível; nenhuma lógica de orquestração/cota foi alterada.
+- **Nota honesta sobre a causa raiz**: não sabemos por que o
+  football-data.org devolveu um valor parecido com timestamp no campo
+  `status` — pode ser uma peculiaridade real da API (ex. para partida
+  remarcada), um bug pontual do provedor, ou outra coisa que só ficará clara
+  em execuções futuras se o padrão se repetir. Esta correção torna o sistema
+  **resiliente** a esse tipo de valor inesperado (nunca perde as demais
+  partidas por causa dele, e nunca inventa um significado para ele) — não é
+  uma correção "do lado da API", nem uma interpretação do que aquele valor
+  quer dizer.
+- Prova:
+  - `pipeline/futebol/adaptador-football-data.test.ts`, novo bloco "Bloqueio
+    008": (a) array misto com partida válida agendada + partida com
+    `status` desconhecido (`"2026-08-29 20:30:00Z"`, valor real observado em
+    produção) + partida válida finalizada com placar — confirma que as duas
+    partidas válidas continuam traduzidas normalmente
+    (`'agendada'`/`'finalizada'`), a partida com status desconhecido não
+    aparece no resultado, e a inconsistência é registrada com
+    `tipo: 'partida-status-desconhecido'`, `idPartidaProvedor`,
+    `statusBrutoDiagnostico` e `contexto` corretos; (b) caso com duas
+    partidas de status desconhecido e uma válida no mesmo array — confirma
+    que cada ocorrência é registrada individualmente e só a partida válida
+    sobrevive. Nenhum caso de tabela existente (os 11 valores documentados,
+    `FINISHED` sem placar completo, descarte por clube não mapeado) foi
+    alterado ou teve seu resultado esperado modificado.
+  - Portões: `npm run typecheck`, `npm run lint`, `npm run format:check`
+    limpos; suíte completa (`npm run test`) 97 arquivos / 1112 testes
+    passando (1110 anteriores + 2 novos casos de tabela contabilizados como
+    parte do arquivo do adaptador, que foi de 21 para 23 testes).
+- Arquivos alterados: `pipeline/futebol/adaptador-football-data.ts`,
+  `pipeline/futebol/adaptador-football-data.test.ts`,
+  `pipeline/futebol/coletor-futebol.ts` (só ajuste de tipo, sem mudança de
+  lógica), `.md/BLOCKERS.md` (esta entrada).
+- Status: Resolvido
