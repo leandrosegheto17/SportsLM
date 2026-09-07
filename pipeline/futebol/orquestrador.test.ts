@@ -171,7 +171,7 @@ describe('executarFluxoFutebol — ponta a ponta com provedor mockado (SDD §2.4
       nome: 'Campeonato Brasileiro Série A',
       temporada: 2026,
       formato: 'pontos-corridos',
-      janela: { inicio: '2026-03-28', fim: '2026-12-06' },
+      janela: { inicio: '2026-01-28', fim: '2026-12-02' },
       provedor: 'football-data-org',
       ultimaAtualizacao: AGORA.toISOString(),
     });
