@@ -64,7 +64,9 @@ function buscadorFixo(
   return async () => ({
     ok: status >= 200 && status < 300,
     status,
-    headers: { get: (nome: string) => (nome.toLowerCase() === 'content-type' ? contentType : null) },
+    headers: {
+      get: (nome: string) => (nome.toLowerCase() === 'content-type' ? contentType : null),
+    },
     arrayBuffer: async () => new TextEncoder().encode(corpo).buffer,
   });
 }
@@ -232,7 +234,12 @@ describe('coletarFeed', () => {
 </rss>`;
     const bytesLatin1 = Uint8Array.from(feedLatin1, (c) => c.charCodeAt(0));
     const resultado = await coletarFeed(
-      { id: 'feed-1', url: 'https://rss.uol.com.br/feed/esporte.xml', formato: 'rss', esporteFixado: null },
+      {
+        id: 'feed-1',
+        url: 'https://rss.uol.com.br/feed/esporte.xml',
+        formato: 'rss',
+        esporteFixado: null,
+      },
       'uol',
       {
         buscar: async () => ({
@@ -240,14 +247,18 @@ describe('coletarFeed', () => {
           status: 200,
           headers: {
             get: (nome: string) =>
-              nome.toLowerCase() === 'content-type' ? 'text/xml;charset=ISO-8859-1' : null,
+              nome.toLowerCase() === 'content-type'
+                ? 'text/xml;charset=ISO-8859-1'
+                : null,
           },
           arrayBuffer: async () => bytesLatin1.buffer,
         }),
       },
     );
     expect(resultado.itens[0]?.titulo).toBe('Alex Michelsen não se incomoda');
-    expect(resultado.itens[0]?.resumoBruto).toBe('Últimas Notícias sobre o G.P. da Itália');
+    expect(resultado.itens[0]?.resumoBruto).toBe(
+      'Últimas Notícias sobre o G.P. da Itália',
+    );
   });
 
   it('CA-15.5: registra "falha" (nunca lança) quando a busca lança exceção de rede', async () => {
@@ -426,8 +437,9 @@ describe('coletarCatalogo', () => {
         status: 200,
         headers: { get: () => null },
         arrayBuffer: async () =>
-          new TextEncoder().encode(url.includes('rss') ? FEED_RSS_VALIDO : FEED_ATOM_VALIDO)
-            .buffer,
+          new TextEncoder().encode(
+            url.includes('rss') ? FEED_RSS_VALIDO : FEED_ATOM_VALIDO,
+          ).buffer,
       }),
     });
     expect(resultados).toHaveLength(2);

@@ -97,9 +97,7 @@ export interface ResultadoColetaFonte {
  * por exemplo, serve `text/xml;charset=ISO-8859-1`. Decodificar bytes crus
  * respeitando o charset declarado é o que evita título/resumo virarem
  * "V�DEO"/"n�o" (mojibake) na ingestão. */
-export type BuscadorHttp = (
-  url: string,
-) => Promise<{
+export type BuscadorHttp = (url: string) => Promise<{
   ok: boolean;
   status: number;
   headers: { get(nome: string): string | null };
