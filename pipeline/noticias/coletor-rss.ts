@@ -89,10 +89,43 @@ export interface ResultadoColetaFonte {
 }
 
 /** Buscador HTTP injetável (testabilidade — feed mockado). Compatível com o
- * `fetch` nativo do Node 22 (SDD §3), sem exigir a assinatura completa. */
+ * `fetch` nativo do Node 22 (SDD §3), sem exigir a assinatura completa.
+ *
+ * Expõe `headers`/`arrayBuffer()` (em vez de só `text()`) porque `Body.text()`
+ * do WHATWG Fetch sempre decodifica como UTF-8, ignorando o `charset`
+ * declarado no header `Content-Type` da resposta (RFC 7231 §3.1.1.5) — o UOL,
+ * por exemplo, serve `text/xml;charset=ISO-8859-1`. Decodificar bytes crus
+ * respeitando o charset declarado é o que evita título/resumo virarem
+ * "V�DEO"/"n�o" (mojibake) na ingestão. */
 export type BuscadorHttp = (
   url: string,
-) => Promise<{ ok: boolean; status: number; text: () => Promise<string> }>;
+) => Promise<{
+  ok: boolean;
+  status: number;
+  headers: { get(nome: string): string | null };
+  arrayBuffer: () => Promise<ArrayBuffer>;
+}>;
+
+/** Extrai o `charset` do valor de um header `Content-Type` (ex.:
+ * `"text/xml;charset=ISO-8859-1"` → `"ISO-8859-1"`). `null` quando ausente. */
+function extrairCharset(contentType: string | null): string | null {
+  if (contentType === null) return null;
+  const match = /charset\s*=\s*"?([^;"\s]+)"?/i.exec(contentType);
+  return match?.[1] ?? null;
+}
+
+/** Decodifica os bytes crus da resposta respeitando o charset declarado no
+ * `Content-Type` (default UTF-8, o mais comum entre as fontes do catálogo).
+ * Charset desconhecido pelo `TextDecoder` (ex.: grafia não padronizada) cai
+ * para UTF-8 em vez de lançar — a busca não deve falhar por isso. */
+function decodificarCorpo(bytes: ArrayBuffer, contentType: string | null): string {
+  const charset = extrairCharset(contentType) ?? 'utf-8';
+  try {
+    return new TextDecoder(charset).decode(bytes);
+  } catch {
+    return new TextDecoder('utf-8').decode(bytes);
+  }
+}
 
 export interface OpcoesColeta {
   agora?: Date;
@@ -232,7 +265,8 @@ export async function coletarFeed(
         itens: [],
       };
     }
-    const corpo = await resposta.text();
+    const bytes = await resposta.arrayBuffer();
+    const corpo = decodificarCorpo(bytes, resposta.headers.get('content-type'));
     const itens = analisarFeed(corpo, feed, fonteId);
     return {
       registro: {

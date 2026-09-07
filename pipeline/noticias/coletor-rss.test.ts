@@ -56,11 +56,16 @@ const FEED_ATOM_VALIDO = `<?xml version="1.0" encoding="UTF-8"?>
   </entry>
 </feed>`;
 
-function buscadorFixo(status: number, corpo: string): BuscadorHttp {
+function buscadorFixo(
+  status: number,
+  corpo: string,
+  contentType: string | null = 'text/xml;charset=UTF-8',
+): BuscadorHttp {
   return async () => ({
     ok: status >= 200 && status < 300,
     status,
-    text: async () => corpo,
+    headers: { get: (nome: string) => (nome.toLowerCase() === 'content-type' ? contentType : null) },
+    arrayBuffer: async () => new TextEncoder().encode(corpo).buffer,
   });
 }
 
@@ -213,6 +218,38 @@ describe('coletarFeed', () => {
     expect(resultado.itens).toEqual([]);
   });
 
+  it('decodifica o corpo respeitando o charset ISO-8859-1 declarado no Content-Type (ex.: feed do UOL), evitando mojibake', async () => {
+    const feedLatin1 = `<?xml version="1.0" encoding="ISO-8859-1"?>
+<rss version="2.0">
+  <channel>
+    <item>
+      <title>Alex Michelsen n\xe3o se incomoda</title>
+      <link>https://exemplo.com/n1</link>
+      <description>\xdaltimas Not\xedcias sobre o G.P. da It\xe1lia</description>
+      <guid>https://exemplo.com/n1</guid>
+    </item>
+  </channel>
+</rss>`;
+    const bytesLatin1 = Uint8Array.from(feedLatin1, (c) => c.charCodeAt(0));
+    const resultado = await coletarFeed(
+      { id: 'feed-1', url: 'https://rss.uol.com.br/feed/esporte.xml', formato: 'rss', esporteFixado: null },
+      'uol',
+      {
+        buscar: async () => ({
+          ok: true,
+          status: 200,
+          headers: {
+            get: (nome: string) =>
+              nome.toLowerCase() === 'content-type' ? 'text/xml;charset=ISO-8859-1' : null,
+          },
+          arrayBuffer: async () => bytesLatin1.buffer,
+        }),
+      },
+    );
+    expect(resultado.itens[0]?.titulo).toBe('Alex Michelsen não se incomoda');
+    expect(resultado.itens[0]?.resumoBruto).toBe('Últimas Notícias sobre o G.P. da Itália');
+  });
+
   it('CA-15.5: registra "falha" (nunca lança) quando a busca lança exceção de rede', async () => {
     const resultado = await coletarFeed(
       {
@@ -261,7 +298,12 @@ describe('coletarFonte', () => {
       agora,
       buscar: async () => {
         buscou = true;
-        return { ok: true, status: 200, text: async () => FEED_RSS_VALIDO };
+        return {
+          ok: true,
+          status: 200,
+          headers: { get: () => null },
+          arrayBuffer: async () => new TextEncoder().encode(FEED_RSS_VALIDO).buffer,
+        };
       },
     });
     expect(buscou).toBe(false);
@@ -310,9 +352,19 @@ describe('coletarFonte', () => {
     const resultado = await coletarFonte(fonteComDoisFeeds, undefined, {
       buscar: async (url) => {
         if (url.endsWith('a.xml')) {
-          return { ok: true, status: 200, text: async () => FEED_RSS_VALIDO };
+          return {
+            ok: true,
+            status: 200,
+            headers: { get: () => null },
+            arrayBuffer: async () => new TextEncoder().encode(FEED_RSS_VALIDO).buffer,
+          };
         }
-        return { ok: false, status: 500, text: async () => '' };
+        return {
+          ok: false,
+          status: 500,
+          headers: { get: () => null },
+          arrayBuffer: async () => new TextEncoder().encode('').buffer,
+        };
       },
     });
     expect(resultado.registros).toHaveLength(2);
@@ -372,7 +424,10 @@ describe('coletarCatalogo', () => {
       buscar: async (url) => ({
         ok: true,
         status: 200,
-        text: async () => (url.includes('rss') ? FEED_RSS_VALIDO : FEED_ATOM_VALIDO),
+        headers: { get: () => null },
+        arrayBuffer: async () =>
+          new TextEncoder().encode(url.includes('rss') ? FEED_RSS_VALIDO : FEED_ATOM_VALIDO)
+            .buffer,
       }),
     });
     expect(resultados).toHaveLength(2);

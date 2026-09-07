@@ -134,7 +134,12 @@ function buscadorPorUrl(
   return async (url: string) => {
     const resultado = mapa[url];
     if (resultado === undefined) {
-      return { ok: false, status: 404, text: async () => '' };
+      return {
+        ok: false,
+        status: 404,
+        headers: { get: () => null },
+        arrayBuffer: async () => new TextEncoder().encode('').buffer,
+      };
     }
     if (resultado instanceof Error) {
       throw resultado;
@@ -142,7 +147,8 @@ function buscadorPorUrl(
     return {
       ok: resultado.status >= 200 && resultado.status < 300,
       status: resultado.status,
-      text: async () => resultado.corpo,
+      headers: { get: () => null },
+      arrayBuffer: async () => new TextEncoder().encode(resultado.corpo).buffer,
     };
   };
 }
@@ -351,7 +357,12 @@ describe('executarFluxoNoticias — Fluxo 1 de ponta a ponta (ING-N-07)', () => 
     let chamadas = 0;
     const buscar: BuscadorHttp = async () => {
       chamadas += 1;
-      return { ok: true, status: 200, text: async () => FEED_RSS([]) };
+      return {
+        ok: true,
+        status: 200,
+        headers: { get: () => null },
+        arrayBuffer: async () => new TextEncoder().encode(FEED_RSS([])).buffer,
+      };
     };
 
     const primeira = await executarFluxoNoticias(
@@ -404,14 +415,17 @@ describe('executarIngestaoNoticiasEmDisco — camada de I/O (ING-N-07)', () => {
     const buscar: BuscadorHttp = async () => ({
       ok: true,
       status: 200,
-      text: async () =>
-        FEED_RSS([
-          {
-            titulo: 'Notícia de teste da camada de disco',
-            link: 'https://exemplo.disco/noticia-1',
-            pubDate: 'Sun, 06 Sep 2026 10:00:00 -0300',
-          },
-        ]),
+      headers: { get: () => null },
+      arrayBuffer: async () =>
+        new TextEncoder().encode(
+          FEED_RSS([
+            {
+              titulo: 'Notícia de teste da camada de disco',
+              link: 'https://exemplo.disco/noticia-1',
+              pubDate: 'Sun, 06 Sep 2026 10:00:00 -0300',
+            },
+          ]),
+        ).buffer,
     });
 
     const caminhoEstado = join(dirTemp, 'noticias.json');
@@ -462,7 +476,8 @@ describe('executarIngestaoNoticiasEmDisco — camada de I/O (ING-N-07)', () => {
     const buscar: BuscadorHttp = async () => ({
       ok: true,
       status: 200,
-      text: async () => FEED_RSS([]),
+      headers: { get: () => null },
+      arrayBuffer: async () => new TextEncoder().encode(FEED_RSS([])).buffer,
     });
 
     await executarIngestaoNoticiasEmDisco({
