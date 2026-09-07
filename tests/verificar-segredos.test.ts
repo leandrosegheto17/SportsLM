@@ -77,6 +77,14 @@ describe('encontrarSegredos (função pura)', () => {
       'token com valor curto de enum de domínio, hífen, sem dígito (Bloqueio 005)',
       "token: 'pre-libertadores'",
     ],
+    [
+      'id de notícia sha256 (64 hex chars) — conteúdo público, não segredo (Bloqueio 007)',
+      '{"id":"a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2","titulo":"x"}',
+    ],
+    [
+      'hash de versão sha256 (64 hex chars) em versao.json — conteúdo público, não segredo (Bloqueio 007)',
+      '{"hashes":{"noticias":"a23f05a8cf4f083c108e530f21426e6b02e99a4cb89b55a861d5a0507d55284d"}}',
+    ],
   ];
 
   it.each(casosLimpos)(
@@ -128,6 +136,32 @@ describe('varrerDiretorio (integração com o artefato publicado)', () => {
         'const cor=o.zona?Xd[o.zona.token]:void 0;',
         'React.createElement("td",{"data-zona":(u=o.zona)==null?void 0:u.token},o.rotulo);',
       ].join('\n'),
+    );
+
+    expect(varrerDiretorio(diretorioTemporario)).toEqual([]);
+  });
+
+  it('não falsifica positivo com noticias.json/versao.json reais (ids sha256, Bloqueio 007)', () => {
+    writeFileSync(
+      join(diretorioTemporario, 'noticias.json'),
+      JSON.stringify([
+        {
+          id: 'a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2',
+          titulo: 'Notícia de exemplo',
+        },
+      ]),
+    );
+    writeFileSync(
+      join(diretorioTemporario, 'versao.json'),
+      JSON.stringify({
+        geradoEm: '2026-09-07T00:00:00.000Z',
+        hashes: {
+          noticias: 'a23f05a8cf4f083c108e530f21426e6b02e99a4cb89b55a861d5a0507d55284d',
+          futebol: '64a3b25eef7252bcd2a224efceeca5a3d4234c194058b2277b14dbcf1d0add85',
+          catalogo: '4c5ba4e084702dd24ac1fe86666b3ae1a5b81aefcf5753fe1fb3c9178d000001',
+          status: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b850',
+        },
+      }),
     );
 
     expect(varrerDiretorio(diretorioTemporario)).toEqual([]);

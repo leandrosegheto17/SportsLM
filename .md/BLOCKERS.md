@@ -434,3 +434,60 @@
     `pipeline/noticias/orquestrador.ts`, `pipeline/futebol/orquestrador.ts`
     permanecem inalterados, conforme guardrail da tarefa);
     `.github/workflows/build-publish.yml` não removido nem desabilitado.
+
+## Bloqueio 007 — 2026-09-07
+- Reportado por: orquestrador (usuário), ao gerar o primeiro snapshot real
+  em `app/public/dados/` para validar o Bloqueio 006 (ADR-018) de ponta a
+  ponta
+- Escalado para: executor (correção do verificador); resolvido diretamente
+  pelo orquestrador, mesmo padrão dos Bloqueios 004/005
+- Artefato/trecho afetado: `pipeline/ci/verificar-segredos.mjs` (padrão
+  `chave-hex-32+`); `ItemNoticia.id`/`versao.json.hashes` (sha256 de 64
+  caracteres hex, contrato público do SDD §2.2)
+- Descrição: ao rodar `verificar-segredos` contra o primeiro `app/public/dados/`
+  real (Fluxo 1, feeds reais), o padrão `chave-hex-32+`
+  (`/\b[0-9a-fA-F]{32,}\b/`) bloqueou `versao.json` e `noticias.json`. É
+  **falso positivo estrutural, não pontual**: `id` de cada notícia é
+  literalmente definido como "sha256 do link canônico" (CA-15.3), e cada
+  entrada de `versao.hashes` também é um digest sha256 — ambos sempre
+  exatamente 64 caracteres hex, presentes em **todo** snapshot público que o
+  pipeline já produz, por contrato. Sem correção, **nenhuma publicação de
+  dado real jamais passaria** por este portão (bloqueio permanente, mesma
+  classe do Bloqueio 005, mas no verificador de dados em vez do bundle da
+  SPA).
+- Impacto se não resolvido: `ingestao.yml` nunca conseguiria publicar
+  nenhum dado real em `app/public/dados/`/`main` (Bloqueio 006/ADR-018),
+  mesmo com `FOOTBALL_DATA_API_TOKEN` cadastrado — o passo de verificação de
+  segredo falharia sempre, antes de qualquer commit.
+- Resolução (2026-09-07, orquestrador): `chave-hex-32+` passou de regex pura
+  para uma função de teste que ainda casa qualquer trecho hex de 32+
+  caracteres, mas **exclui exatamente 64 caracteres** (comprimento fixo de
+  um digest sha256, nunca outro) da lista de achados — qualquer outro
+  comprimento de 32+ (a maioria dos formatos reais de chave de API/token
+  opaco não usa exatamente 64) continua bloqueando. Os padrões `token`
+  (Bloqueio 005), `api_key` e `Bearer` não foram alterados — continuam
+  cobrindo um vazamento real de segredo mesmo que ele, por coincidência,
+  tenha 64 caracteres hex e não seja pego pela exceção do sha256 (ex.
+  `Bearer <64-hex-chars>` ainda dispara pelo padrão `Bearer`, independente
+  do comprimento do valor).
+  - `tests/verificar-segredos.test.ts`: 3 casos novos (id de notícia sha256
+    isolado, `versao.json` real com os 4 hashes, e um `noticias.json`/
+    `versao.json` completo via `varrerDiretorio`) confirmando ausência de
+    falso positivo; nenhum caso existente (incluindo os que provam detecção
+    real de segredo, ex. chave hex de 32 caracteres — comprimento diferente
+    de 64) foi removido ou teve seu resultado esperado alterado.
+  - Prova real: `node pipeline/ci/verificar-segredos.mjs app/public/dados`
+    contra o primeiro snapshot real gerado (Fluxo 1, feeds reais,
+    2026-09-07) passou limpo depois da correção (falhava antes).
+  - Achado colateral fechado no mesmo commit: `app/public/dados/` (agora
+    versionado em `main`, ADR-018) não estava no `.prettierignore` —
+    `format:check` falharia a cada execução da ingestão por divergência de
+    formatação entre o `JSON.stringify` do gerador e o Prettier. Adicionado
+    `app/public/dados/` ao `.prettierignore` (dado gerado, não
+    código-fonte — mesma lógica já aplicada a `dist/`/`.md/`/`design/`).
+  - Portões: `npx vitest run tests/verificar-segredos.test.ts` (24/24);
+    `npm run typecheck`, `npm run lint`, `npm run format:check` limpos;
+    suíte completa (`npm run test`) 97 arquivos / 1110 testes passando;
+    `npm run build` + `npm run verificar-segredos` (bundle real da SPA)
+    seguem limpos.
+- Status: Resolvido

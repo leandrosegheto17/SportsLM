@@ -1,0 +1,55 @@
+{
+  "geradoEm": "2026-09-07T17:36:11.420Z",
+  "fontes": {
+    "ge": {
+      "ultimaTentativa": "2026-09-07T17:36:11.420Z",
+      "resultado": "pulado",
+      "itensNovos": 0,
+      "falhasConsecutivas": 0,
+      "instavel": false,
+      "instavelDesde": null
+    },
+    "espn-brasil": {
+      "ultimaTentativa": "2026-09-07T17:36:11.420Z",
+      "resultado": "ok",
+      "itensNovos": 25,
+      "falhasConsecutivas": 0,
+      "instavel": false,
+      "instavelDesde": null
+    },
+    "gazeta-esportiva": {
+      "ultimaTentativa": "2026-09-07T17:36:11.420Z",
+      "resultado": "falha",
+      "itensNovos": 0,
+      "falhasConsecutivas": 1,
+      "instavel": false,
+      "instavelDesde": null
+    },
+    "terra-esportes": {
+      "ultimaTentativa": "2026-09-07T17:36:11.420Z",
+      "resultado": "falha",
+      "itensNovos": 0,
+      "falhasConsecutivas": 1,
+      "instavel": false,
+      "instavelDesde": null
+    },
+    "uol-esporte": {
+      "ultimaTentativa": "2026-09-07T17:36:11.420Z",
+      "resultado": "ok",
+      "itensNovos": 15,
+      "falhasConsecutivas": 0,
+      "instavel": false,
+      "instavelDesde": null
+    }
+  },
+  "distribuicaoClassificacao": {
+    "futebol": 22,
+    "geral": 12,
+    "mma": 3,
+    "formula1": 3
+  },
+  "gruposFormados": 0,
+  "futebol": {},
+  "provedores": {},
+  "pausadoPorCota": false
+}

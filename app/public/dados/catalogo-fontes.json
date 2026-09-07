@@ -1,0 +1,114 @@
+[
+  {
+    "id": "ge",
+    "nome": "GE — ge.globo",
+    "fixa": true,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "espn-brasil",
+    "nome": "ESPN Brasil",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "formula1",
+      "mma",
+      "basquete",
+      "tenis"
+    ],
+    "verificacao": {
+      "estado": "verificada",
+      "em": "2026-09-05"
+    }
+  },
+  {
+    "id": "gazeta-esportiva",
+    "nome": "Gazeta Esportiva",
+    "fixa": false,
+    "esportesCobertos": [
+      "basquete",
+      "tenis",
+      "volei-quadra",
+      "formula1",
+      "futsal",
+      "natacao",
+      "atletismo"
+    ],
+    "verificacao": {
+      "estado": "verificada",
+      "em": "2026-09-05"
+    }
+  },
+  {
+    "id": "terra-esportes",
+    "nome": "Terra Esportes",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "verificacao": {
+      "estado": "verificada",
+      "em": "2026-09-05"
+    }
+  },
+  {
+    "id": "uol-esporte",
+    "nome": "UOL Esporte",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  }
+]

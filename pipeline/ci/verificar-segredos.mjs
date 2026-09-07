@@ -24,18 +24,41 @@
 // design system nunca têm. O padrão `Bearer` (que não depende do valor,
 // só da palavra) continua cobrindo o caso de um segredo vazado sem dígito
 // atrás de `Authorization: Bearer`, preservando a margem de segurança.
+//
+// Padrão `chave-hex-32+` (Bloqueio 007, `.md/BLOCKERS.md`): a varredura do
+// diretório de dados públicos (`app/public/dados/`, ADR-018) bloqueava toda
+// publicação real, porque `id` de notícia (`ItemNoticia.id`, sha256 do link
+// canônico — CA-15.3/SDD §2.2) e cada entrada de `versao.json.hashes` são,
+// por definição do próprio contrato, hex de exatamente 64 caracteres — não
+// segredo, conteúdo público documentado. Exatamente 64 hex chars (o
+// comprimento fixo de um digest sha256, nunca outro) passa a ser exceção
+// aceita; qualquer outro comprimento de 32+ (a maioria dos formatos reais de
+// chave de API/token opaco não usa exatamente 64) continua bloqueando.
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
+const REGEX_HEX_32_MAIS = /\b[0-9a-fA-F]{32,}\b/g;
+const COMPRIMENTO_DIGEST_SHA256 = 64;
+
 export const PADROES_SEGREDO = [
   {
     nome: 'token',
-    regex: /\btoken["']?\s*[:=]\s*["'](?=[A-Za-z0-9_\-.]*[0-9])[A-Za-z0-9_\-.]{16,}["']/i,
+    testar: (conteudo) =>
+      /\btoken["']?\s*[:=]\s*["'](?=[A-Za-z0-9_\-.]*[0-9])[A-Za-z0-9_\-.]{16,}["']/i.test(
+        conteudo,
+      ),
   },
-  { nome: 'api_key', regex: /\bapi[_-]?key\b/i },
-  { nome: 'Bearer', regex: /\bBearer\b/ },
-  { nome: 'chave-hex-32+', regex: /\b[0-9a-fA-F]{32,}\b/ },
+  { nome: 'api_key', testar: (conteudo) => /\bapi[_-]?key\b/i.test(conteudo) },
+  { nome: 'Bearer', testar: (conteudo) => /\bBearer\b/.test(conteudo) },
+  {
+    nome: 'chave-hex-32+',
+    testar: (conteudo) => {
+      const casadas = conteudo.match(REGEX_HEX_32_MAIS);
+      if (casadas === null) return false;
+      return casadas.some((hex) => hex.length !== COMPRIMENTO_DIGEST_SHA256);
+    },
+  },
 ];
 
 const EXTENSOES_TEXTO = new Set([
@@ -57,7 +80,7 @@ const EXTENSOES_TEXTO = new Set([
  * @returns {{ nome: string }[]}
  */
 export function encontrarSegredos(conteudo) {
-  return PADROES_SEGREDO.filter((padrao) => padrao.regex.test(conteudo));
+  return PADROES_SEGREDO.filter((padrao) => padrao.testar(conteudo));
 }
 
 /**

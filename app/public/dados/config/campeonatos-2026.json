@@ -1,0 +1,158 @@
+[
+  {
+    "id": "brasileirao-serie-a",
+    "nome": "Campeonato Brasileiro Série A",
+    "temporada": 2026,
+    "categoria": "brasileirao",
+    "formato": "pontos-corridos",
+    "janela": {
+      "inicio": "2026-03-28",
+      "fim": "2026-12-06"
+    },
+    "provedor": "football-data-org"
+  },
+  {
+    "id": "copa-do-brasil",
+    "nome": "Copa do Brasil",
+    "temporada": 2026,
+    "categoria": "copa-do-brasil",
+    "formato": "mata-mata",
+    "janela": {
+      "inicio": "2026-02-18",
+      "fim": "2026-11-04"
+    },
+    "provedor": null
+  },
+  {
+    "id": "supercopa-do-brasil",
+    "nome": "Supercopa do Brasil",
+    "temporada": 2026,
+    "categoria": "supercopa",
+    "formato": "mata-mata",
+    "janela": {
+      "inicio": "2026-01-18",
+      "fim": "2026-01-18"
+    },
+    "provedor": null
+  },
+  {
+    "id": "libertadores",
+    "nome": "Copa Libertadores da América",
+    "temporada": 2026,
+    "categoria": "continental",
+    "formato": "misto",
+    "janela": {
+      "inicio": "2026-02-03",
+      "fim": "2026-11-28"
+    },
+    "provedor": null
+  },
+  {
+    "id": "sul-americana",
+    "nome": "Copa Sul-Americana",
+    "temporada": 2026,
+    "categoria": "continental",
+    "formato": "misto",
+    "janela": {
+      "inicio": "2026-03-03",
+      "fim": "2026-11-21"
+    },
+    "provedor": null
+  },
+  {
+    "id": "paulista",
+    "nome": "Campeonato Paulista",
+    "temporada": 2026,
+    "categoria": "estadual",
+    "formato": "grupos",
+    "janela": {
+      "inicio": "2026-01-14",
+      "fim": "2026-03-22"
+    },
+    "provedor": null
+  },
+  {
+    "id": "carioca",
+    "nome": "Campeonato Carioca",
+    "temporada": 2026,
+    "categoria": "estadual",
+    "formato": "grupos",
+    "janela": {
+      "inicio": "2026-01-14",
+      "fim": "2026-03-22"
+    },
+    "provedor": null
+  },
+  {
+    "id": "mineiro",
+    "nome": "Campeonato Mineiro",
+    "temporada": 2026,
+    "categoria": "estadual",
+    "formato": "grupos",
+    "janela": {
+      "inicio": "2026-01-14",
+      "fim": "2026-03-22"
+    },
+    "provedor": null
+  },
+  {
+    "id": "gaucho",
+    "nome": "Campeonato Gaúcho",
+    "temporada": 2026,
+    "categoria": "estadual",
+    "formato": "grupos",
+    "janela": {
+      "inicio": "2026-01-14",
+      "fim": "2026-03-22"
+    },
+    "provedor": null
+  },
+  {
+    "id": "baiano",
+    "nome": "Campeonato Baiano",
+    "temporada": 2026,
+    "categoria": "estadual",
+    "formato": "grupos",
+    "janela": {
+      "inicio": "2026-01-14",
+      "fim": "2026-03-22"
+    },
+    "provedor": null
+  },
+  {
+    "id": "cearense",
+    "nome": "Campeonato Cearense",
+    "temporada": 2026,
+    "categoria": "estadual",
+    "formato": "grupos",
+    "janela": {
+      "inicio": "2026-01-14",
+      "fim": "2026-03-22"
+    },
+    "provedor": null
+  },
+  {
+    "id": "pernambucano",
+    "nome": "Campeonato Pernambucano",
+    "temporada": 2026,
+    "categoria": "estadual",
+    "formato": "grupos",
+    "janela": {
+      "inicio": "2026-01-14",
+      "fim": "2026-03-22"
+    },
+    "provedor": null
+  },
+  {
+    "id": "copa-do-nordeste",
+    "nome": "Copa do Nordeste",
+    "temporada": 2026,
+    "categoria": "regional",
+    "formato": "grupos",
+    "janela": {
+      "inicio": "2026-01-14",
+      "fim": "2026-04-05"
+    },
+    "provedor": null
+  }
+]
