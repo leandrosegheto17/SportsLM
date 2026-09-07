@@ -715,7 +715,19 @@
   (ADR-017, validação de contraste) precisam ser definidas com cuidado
   para os 5 novos clubes — não decidido aqui, por ser identidade visual do
   produto, não um detalhe técnico livre para o Executor decidir sozinho.
-- Status: Aberto, não bloqueante (o pipeline já funciona corretamente para
-  os 15 clubes confirmados; os 5 pendentes continuam com a sentinela
-  explícita, nunca um id inventado — CA-16.6 — e são descartados/registrados
-  como inconsistência, sem risco de dado incorreto publicado).
+- Status: **Resolvido (2026-09-07)**. Com aprovação explícita do usuário
+  (decisão de conteúdo/configuração visível ao usuário final, conforme
+  escalado), as 5 entradas divergentes foram substituídas em
+  `config/clubes-2026.json` pelos 5 clubes reais (Athletico Paranaense id
+  1768, Coritiba id 4241, RB Bragantino id 4286, Clube do Remo id 4287,
+  Chapecoense id 1772) — mesma sugestão registrada acima. Os 20 clubes de
+  CFG-02 têm hoje id de provedor real confirmado (REFAT-02-01 totalmente
+  resolvido, nenhuma sentinela restante). `config/campeonatos-2026.json` foi
+  atualizado em conjunto: Brasileirão e Copa do Brasil usam o elenco novo;
+  as listas de estadual/regional que citavam os 5 clubes removidos (gaucho,
+  cearense, pernambucano, copa-do-nordeste) tiveram essas entradas retiradas
+  e documentadas via `observacao` (RN-05 só rastreia clube que está no
+  Brasileirão — ver nota de decisão em `pipeline/futebol/adaptador-football-data.ts`).
+  Efeito esperado: a verificação de consistência (CA-16.6) deixa de descartar
+  o lote do Brasileirão por `numero-de-clubes-incorreto` na próxima execução
+  real da ingestão — a confirmar contra o `football-data.org` de verdade.
