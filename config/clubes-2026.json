@@ -73,14 +73,6 @@
     "idsProvedor": { "football-data": 1766 }
   },
   {
-    "id": "ceara",
-    "nome": "Ceará Sporting Club",
-    "nomeCurto": "Ceará",
-    "sigla": "CEA",
-    "corBase": "#000000",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
-  },
-  {
     "id": "cruzeiro",
     "nome": "Cruzeiro Esporte Clube",
     "nomeCurto": "Cruzeiro",
@@ -121,14 +113,6 @@
     "idsProvedor": { "football-data": 1767 }
   },
   {
-    "id": "fortaleza",
-    "nome": "Fortaleza Esporte Clube",
-    "nomeCurto": "Fortaleza",
-    "sigla": "FOR",
-    "corBase": "#003DA5",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
-  },
-  {
     "id": "vitoria",
     "nome": "Esporte Clube Vitória",
     "nomeCurto": "Vitória",
@@ -137,28 +121,45 @@
     "idsProvedor": { "football-data": 1782 }
   },
   {
-    "id": "sport",
-    "nome": "Sport Club do Recife",
-    "nomeCurto": "Sport",
-    "sigla": "SPT",
-    "corBase": "#9A1D24",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "id": "athletico-pr",
+    "nome": "Club Athletico Paranaense",
+    "nomeCurto": "Athletico-PR",
+    "sigla": "CAP",
+    "corBase": "#E4062A",
+    "idsProvedor": { "football-data": 1768 }
   },
   {
-    "id": "juventude",
-    "nome": "Esporte Clube Juventude",
-    "nomeCurto": "Juventude",
-    "sigla": "JUV",
-    "corBase": "#1E7A34",
-    "idsProvedor": { "football-data": "pendente-confirmacao" },
-    "paletaManual": { "faixaB": "#18612A" }
+    "id": "coritiba",
+    "nome": "Coritiba Foot Ball Club",
+    "nomeCurto": "Coritiba",
+    "sigla": "CFC",
+    "corBase": "#0F6B3A",
+    "idsProvedor": { "football-data": 4241 },
+    "paletaManual": { "faixaB": "#004526" }
   },
   {
-    "id": "criciuma",
-    "nome": "Criciúma Esporte Clube",
-    "nomeCurto": "Criciúma",
-    "sigla": "CRI",
-    "corBase": "#FFD100",
-    "idsProvedor": { "football-data": "pendente-confirmacao" }
+    "id": "rb-bragantino",
+    "nome": "Red Bull Bragantino",
+    "nomeCurto": "Bragantino",
+    "sigla": "RBB",
+    "corBase": "#E30613",
+    "idsProvedor": { "football-data": 4286 }
+  },
+  {
+    "id": "remo",
+    "nome": "Clube do Remo",
+    "nomeCurto": "Remo",
+    "sigla": "REM",
+    "corBase": "#0B3D91",
+    "idsProvedor": { "football-data": 4287 }
+  },
+  {
+    "id": "chapecoense",
+    "nome": "Associação Chapecoense de Futebol",
+    "nomeCurto": "Chapecoense",
+    "sigla": "CHA",
+    "corBase": "#0C6B3D",
+    "idsProvedor": { "football-data": 1772 },
+    "paletaManual": { "faixaB": "#004526" }
   }
 ]

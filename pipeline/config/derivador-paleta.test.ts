@@ -40,14 +40,15 @@ describe('derivarPaletasClubes — os 20 clubes reais de CFG-02', () => {
     }
   });
 
-  it('os 6 clubes acromáticos de TR-14 recebem a paleta acromática fixa do ADR-017', () => {
+  it('os 5 clubes acromáticos de TR-14 recebem a paleta acromática fixa do ADR-017', () => {
+    // Era 6 antes do Bloqueio 010 (.md/BLOCKERS.md): 'ceara' saiu do elenco
+    // real de CFG-02 e nenhum dos 5 clubes que o substituíram é acromático.
     const acromaticosEsperados = [
       'corinthians',
       'botafogo',
       'santos',
       'vasco',
       'atletico-mg',
-      'ceara',
     ];
     const comPaleta = derivarPaletasClubes(clubes);
     for (const id of acromaticosEsperados) {
@@ -57,12 +58,15 @@ describe('derivarPaletasClubes — os 20 clubes reais de CFG-02', () => {
     }
   });
 
-  it('Palmeiras e Juventude usam `paletaManual.faixaB` para passar na validação (achado real desta tarefa)', () => {
+  it('Palmeiras e Coritiba usam `paletaManual.faixaB` para passar na validação (achado real desta tarefa)', () => {
+    // Coritiba substituiu Juventude neste teste após o Bloqueio 010: mesma
+    // necessidade de override (verde com contraste insuficiente na faixaB
+    // derivada), achado ao adicionar o clube real em config/clubes-2026.json.
     const comPaleta = derivarPaletasClubes(clubes);
     const palmeiras = comPaleta.find((c) => c.id === 'palmeiras');
-    const juventude = comPaleta.find((c) => c.id === 'juventude');
+    const coritiba = comPaleta.find((c) => c.id === 'coritiba');
     expect(palmeiras?.paleta.faixaB).toBe('#004526');
-    expect(juventude?.paleta.faixaB).toBe('#18612A');
+    expect(coritiba?.paleta.faixaB).toBe('#004526');
   });
 
   it('nenhum clube real fica sem o bloco `paleta` completo (11 campos do schema)', () => {

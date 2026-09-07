@@ -11,23 +11,23 @@
       "provedor": "football-data-org",
       "clubes": [
         "atletico-mg",
+        "athletico-pr",
         "bahia",
         "botafogo",
-        "ceara",
+        "chapecoense",
         "corinthians",
-        "criciuma",
+        "coritiba",
         "cruzeiro",
         "flamengo",
         "fluminense",
-        "fortaleza",
         "gremio",
         "internacional",
-        "juventude",
         "mirassol",
         "palmeiras",
+        "rb-bragantino",
+        "remo",
         "santos",
         "sao-paulo",
-        "sport",
         "vasco",
         "vitoria"
       ]
@@ -42,23 +42,23 @@
       "provedor": null,
       "clubes": [
         "atletico-mg",
+        "athletico-pr",
         "bahia",
         "botafogo",
-        "ceara",
+        "chapecoense",
         "corinthians",
-        "criciuma",
+        "coritiba",
         "cruzeiro",
         "flamengo",
         "fluminense",
-        "fortaleza",
         "gremio",
         "internacional",
-        "juventude",
         "mirassol",
         "palmeiras",
+        "rb-bragantino",
+        "remo",
         "santos",
         "sao-paulo",
-        "sport",
         "vasco",
         "vitoria"
       ]
@@ -134,7 +134,8 @@
       "formato": "grupos",
       "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
       "provedor": null,
-      "clubes": ["gremio", "internacional", "juventude"]
+      "clubes": ["gremio", "internacional"],
+      "observacao": "Juventude disputa este estadual, mas não está na Série A 2026 confirmada pelo provedor (Bloqueio 010, .md/BLOCKERS.md) — RN-05 só rastreia clube que está no Brasileirão."
     },
     {
       "id": "baiano",
@@ -154,7 +155,8 @@
       "formato": "grupos",
       "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
       "provedor": null,
-      "clubes": ["ceara", "fortaleza"]
+      "clubes": [],
+      "observacao": "Ceará e Fortaleza disputam este estadual, mas não estão na Série A 2026 confirmada pelo provedor (Bloqueio 010, .md/BLOCKERS.md) — RN-05 só rastreia clube que está no Brasileirão."
     },
     {
       "id": "pernambucano",
@@ -164,7 +166,8 @@
       "formato": "grupos",
       "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
       "provedor": null,
-      "clubes": ["sport"]
+      "clubes": [],
+      "observacao": "Sport disputa este estadual, mas não está na Série A 2026 confirmada pelo provedor (Bloqueio 010, .md/BLOCKERS.md) — RN-05 só rastreia clube que está no Brasileirão."
     },
     {
       "id": "copa-do-nordeste",
@@ -174,7 +177,8 @@
       "formato": "grupos",
       "janela": { "inicio": "2026-01-14", "fim": "2026-04-05" },
       "provedor": null,
-      "clubes": ["bahia", "ceara", "fortaleza", "sport", "vitoria"]
+      "clubes": ["bahia", "vitoria"],
+      "observacao": "Ceará, Fortaleza e Sport disputam esta copa, mas não estão na Série A 2026 confirmada pelo provedor (Bloqueio 010, .md/BLOCKERS.md) — RN-05 só rastreia clube que está no Brasileirão."
     }
   ]
 }

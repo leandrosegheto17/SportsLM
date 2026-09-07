@@ -91,29 +91,19 @@ describe('config/clubes-2026.json (dado real)', () => {
     expect(flamengo?.idsProvedor[ID_PROVEDOR_FOOTBALL_DATA]).toBe(1783);
   });
 
-  // REFAT-02-01 (parcialmente resolvido, 2026-09-07): com o token real
-  // cadastrado, 15/20 ids foram confirmados contra a API real do
-  // football-data.org (Bloqueio 009/BLOCKERS.md). Os 5 clubes abaixo
-  // permanecem pendentes não por falta de token, mas porque o elenco real
-  // da Série A 2026 devolvido pela API diverge do que este arquivo assumiu
-  // na configuração original (5 clubes daqui não apareceram na resposta
-  // real; 5 outros clubes reais — Athletico-PR, Coritiba, RB Bragantino,
-  // Clube do Remo, Chapecoense — apareceram na API mas não têm entrada
-  // aqui). Decisão sobre corrigir o elenco pendente do Coordenador/gestor.
-  const IDS_CLUBES_COM_ELENCO_DIVERGENTE = [
-    'ceara',
-    'fortaleza',
-    'sport',
-    'juventude',
-    'criciuma',
-  ];
-
-  it('clubes confirmados contra a API real usam o id numérico verificado (REFAT-02-01)', () => {
-    const confirmados = clubes.filter(
-      (clube) => !IDS_CLUBES_COM_ELENCO_DIVERGENTE.includes(clube.id),
-    );
-    expect(confirmados.length).toBe(15);
-    for (const clube of confirmados) {
+  // REFAT-02-01 (resolvido, 2026-09-07): Bloqueio 009 confirmou 15/20 ids
+  // contra a API real do football-data.org; Bloqueio 010 revelou que os 5
+  // clubes restantes da configuração original (ceara/fortaleza/sport/
+  // juventude/criciuma) não jogam a Série A 2026 de verdade — a API devolveu,
+  // em seus lugares, Athletico-PR/Coritiba/RB Bragantino/Clube do Remo/
+  // Chapecoense (ids também confirmados nesse mesmo log). Com aprovação do
+  // usuário, o elenco de CFG-02 foi corrigido para o real: os 20 clubes têm
+  // agora id numérico confirmado, nenhuma sentinela restante. Os 5 clubes
+  // substituídos continuam existindo como identidade de clube em outras
+  // competições que realmente disputam (ver `config/campeonatos-2026.json`),
+  // só não fazem mais parte do universo de 20 de CFG-02/Série A.
+  it('todos os 20 clubes têm id numérico confirmado (Bloqueio 010 resolvido — nenhuma sentinela restante)', () => {
+    for (const clube of clubes) {
       const idProvedor = clube.idsProvedor[ID_PROVEDOR_FOOTBALL_DATA];
       expect(idProvedor, `clube '${clube.id}' deveria ter id confirmado`).not.toBe(
         SENTINELA_ID_PENDENTE,
@@ -122,11 +112,18 @@ describe('config/clubes-2026.json (dado real)', () => {
     }
   });
 
-  it('clubes com elenco divergente da API real seguem com a sentinela explícita (achado Bloqueio 009)', () => {
-    expect(IDS_CLUBES_COM_ELENCO_DIVERGENTE.length).toBe(5);
-    for (const id of IDS_CLUBES_COM_ELENCO_DIVERGENTE) {
+  it('os 5 clubes reais confirmados no Bloqueio 010 estão presentes com o id certo', () => {
+    const esperados: Record<string, number> = {
+      'athletico-pr': 1768,
+      coritiba: 4241,
+      'rb-bragantino': 4286,
+      remo: 4287,
+      chapecoense: 1772,
+    };
+    for (const [id, idProvedorEsperado] of Object.entries(esperados)) {
       const clube = obterClubePorId(clubes, id);
-      expect(clube?.idsProvedor[ID_PROVEDOR_FOOTBALL_DATA]).toBe(SENTINELA_ID_PENDENTE);
+      expect(clube, `clube '${id}' deveria existir`).toBeDefined();
+      expect(clube?.idsProvedor[ID_PROVEDOR_FOOTBALL_DATA]).toBe(idProvedorEsperado);
     }
   });
 
@@ -140,14 +137,16 @@ describe('config/clubes-2026.json (dado real)', () => {
     expect(new Set(siglas).size).toBe(siglas.length);
   });
 
-  it('os 6 clubes acromáticos de UX-SPEC TR-14 têm corBase preto (entrada da derivação, ADR-017)', () => {
+  it('os 5 clubes acromáticos de UX-SPEC TR-14 têm corBase preto (entrada da derivação, ADR-017)', () => {
+    // Era 6 antes do Bloqueio 010: 'ceara' saiu do elenco de CFG-02 (não
+    // disputa a Série A 2026 de verdade) e nenhum dos 5 clubes reais que o
+    // substituíram é acromático.
     const acromaticosEsperados = [
       'corinthians',
       'botafogo',
       'santos',
       'vasco',
       'atletico-mg',
-      'ceara',
     ];
     for (const id of acromaticosEsperados) {
       const clube = obterClubePorId(clubes, id);

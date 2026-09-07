@@ -245,7 +245,7 @@ describe('traduzirClassificacao', () => {
     ).toThrow();
   });
 
-  it('débito conhecido (REFAT-02-01, atualizado pelo Bloqueio 009): com a configuração REAL de clubes-2026.json, 15/20 clubes já casam — os 5 com elenco divergente da API real seguem descartados', () => {
+  it('com a configuração REAL de clubes-2026.json (Bloqueio 010 resolvido, 20/20 confirmados): time desconhecido do provedor é descartado e registrado, nunca casado por acaso', () => {
     const clubesReais = carregarClubesSerieA2026();
     const resposta = {
       standings: [
@@ -282,14 +282,11 @@ describe('traduzirClassificacao', () => {
               goalDifference: 1,
             },
             {
-              // Ceará: um dos 5 clubes cujo elenco real 2026 diverge do que
-              // este arquivo assume — idsProvedor ainda é a sentinela
-              // pendente, então qualquer id numérico do provedor (mesmo que
-              // pareça plausível) é descartado até uma decisão do
-              // Coordenador/gestor sobre o elenco real (achado do Bloqueio
-              // 009/BLOCKERS.md).
+              // Time sem entrada em clubes-2026.json (id de provedor
+              // inventado para o teste) — descartado e registrado, nunca
+              // casado por acaso (CA-16.6).
               position: 3,
-              team: timeProvedor(9999, 'Ceará SC'),
+              team: timeProvedor(9999, 'Time Desconhecido'),
               playedGames: 1,
               form: null,
               won: 1,

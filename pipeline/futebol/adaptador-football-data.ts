@@ -23,15 +23,18 @@
 // adaptador, decide o que fazer com `inconsistencias` (log/estado de
 // ingestão) — fora do escopo desta tarefa.
 //
-// Débito operacional conhecido (REFAT-02-01, ver TASK.md/QA-REPORT.md, Lote
-// 2): hoje, `config/clubes-2026.json` tem 19 dos 20 clubes com
-// `idsProvedor['football-data']` na sentinela `SENTINELA_ID_PENDENTE` — só o
-// Flamengo (`1783`) tem id real confirmado. Este adaptador está correto e
-// genérico (funciona assim que os ids reais forem preenchidos); com o dado
-// de configuração de hoje, ele descarta (e registra) 19 dos 20 clubes em
-// qualquer execução real — comportamento intencional de CA-16.6/ADR-006 item
-// 3, não um bug deste módulo. Resolver os 19 ids pendentes não é escopo de
-// ING-F-01 (ver nota em `pipeline/config/clubes.ts`).
+// Débito operacional REFAT-02-01 resolvido (2026-09-07, Bloqueios 009/010,
+// ver `.md/BLOCKERS.md`): os 20 clubes de `config/clubes-2026.json` têm hoje
+// `idsProvedor['football-data']` numérico confirmado contra a API real —
+// nenhuma sentinela `SENTINELA_ID_PENDENTE` restante. No caminho, o Bloqueio
+// 010 revelou que 5 clubes da configuração original (definida no
+// planejamento, antes de qualquer chamada real à API) não jogam a Série A
+// 2026 de verdade; o elenco de CFG-02 foi corrigido para o real (Athletico
+// Paranaense/Coritiba/RB Bragantino/Clube do Remo/Chapecoense no lugar de
+// Ceará/Fortaleza/Sport/Juventude/Criciúma — que saíram de
+// `config/clubes-2026.json` (RN-05: só rastreia clube que está no
+// Brasileirão) e das listas de estadual/regional que os citavam em
+// `config/campeonatos-2026.json`, documentado ali via `observacao`).
 //
 // `pipeline/` faz I/O de rede — mora fora de `dominio/` (que é puro,
 // GUARDRAILS.md §5). Token do provedor nunca é lido de `process.env` por

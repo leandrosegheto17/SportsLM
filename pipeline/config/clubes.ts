@@ -109,21 +109,15 @@ export function obterClubePorId(clubes: ClubeBase[], id: string): ClubeBase | un
   return clubes.find((clube) => clube.id === id);
 }
 
-// Decisão de detalhe registrada (TASK.md §6, ADR-006 item 3): nesta rodada, só
-// o id de `flamengo` no provedor `football-data` foi confirmado — é o exemplo
-// já citado literalmente no próprio ADR-006 (`1783`). Para os demais 19
-// clubes, o ambiente deste Executor não tem o token do provedor (ele só existe
-// como segredo de CI, GUARDRAILS.md §4/FUND-02) e a API pública devolve 403
-// sem autenticação — não há como confirmar o id real com confiança. Em vez de
-// inventar um número plausível (proibido por instrução explícita desta
-// tarefa), esses 19 clubes usam `SENTINELA_ID_PENDENTE`, uma string que:
-// (a) satisfaz o critério de aceite "nenhum idsProvedor vazio";
-// (b) nunca é confundida com um id numérico real;
-// (c) já tem comportamento definido a jusante: ADR-006 item 3 determina que
-//     "clube sem id mapeado ... é registrado como inconsistência e o dado é
-//     descartado" (CA-16.6) — exatamente o que ING-F-01 fará até alguém com
-//     acesso ao token confirmar os ids reais e substituir a sentinela.
-// Sinalização ao Coordenador: recomendo uma tarefa dedicada (ou nota em
-// BLOCKERS.md, a critério do Coordenador) para confirmar os 19 ids restantes
-// antes de ING-F-01 (Lote 5) entrar em execução real — spike ou passo manual
-// com o token de produção, fora do alcance deste Executor.
+// Decisão de detalhe registrada (TASK.md §6, ADR-006 item 3): `SENTINELA_ID_PENDENTE`
+// existe pra nunca inventar um id de provedor plausível quando não há como
+// confirmá-lo com confiança (CA-16.6) — em vez disso, o clube é registrado
+// como inconsistência e descartado (ADR-006 item 3) até alguém confirmar o
+// id real e substituir a sentinela. Histórico (REFAT-02-01, Bloqueios
+// 009/010, `.md/BLOCKERS.md`, 2026-09-07): usada inicialmente para 19 dos 20
+// clubes (só `flamengo` tinha id confirmado, o exemplo literal do ADR-006);
+// com o token real, 15 foram confirmados diretamente, e os 5 restantes
+// revelaram um elenco divergente da Série A 2026 real — resolvido trocando
+// esses 5 pelos clubes reais em `config/clubes-2026.json`. Hoje nenhum dos
+// 20 clubes de CFG-02 usa a sentinela; ela continua disponível pro próximo
+// provedor (`thesportsdb`, por ex.) que ainda não tiver clube mapeado.
