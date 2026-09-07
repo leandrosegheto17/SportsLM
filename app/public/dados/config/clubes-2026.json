@@ -180,26 +180,6 @@
     }
   },
   {
-    "id": "ceara",
-    "nome": "Ceará Sporting Club",
-    "nomeCurto": "Ceará",
-    "sigla": "CEA",
-    "corBase": "#000000",
-    "paleta": {
-      "acromatico": true,
-      "identidade": "#16181A",
-      "faixaB": "#3A3F45",
-      "identidadeTexto": "#FFFFFF",
-      "acento": "#16181A",
-      "acentoSobreEscuro": "#F2EFEA",
-      "suave": "#EDEAE4",
-      "suaveEscuro": "#24272C",
-      "identidadeEscuro": "#F2EFEA",
-      "faixaBEscuro": "#C9C3B8",
-      "identidadeTextoEscuro": "#16181A"
-    }
-  },
-  {
     "id": "cruzeiro",
     "nome": "Cruzeiro Esporte Clube",
     "nomeCurto": "Cruzeiro",
@@ -300,26 +280,6 @@
     }
   },
   {
-    "id": "fortaleza",
-    "nome": "Fortaleza Esporte Clube",
-    "nomeCurto": "Fortaleza",
-    "sigla": "FOR",
-    "corBase": "#003DA5",
-    "paleta": {
-      "acromatico": false,
-      "identidade": "#003DA5",
-      "faixaB": "#002E7C",
-      "identidadeTexto": "#FFFFFF",
-      "acento": "#003DA5",
-      "acentoSobreEscuro": "#3580FF",
-      "suave": "#E9EEF7",
-      "suaveEscuro": "#16243B",
-      "identidadeEscuro": "#003DA5",
-      "faixaBEscuro": "#002E7C",
-      "identidadeTextoEscuro": "#FFFFFF"
-    }
-  },
-  {
     "id": "vitoria",
     "nome": "Esporte Clube Vitória",
     "nomeCurto": "Vitória",
@@ -340,63 +300,103 @@
     }
   },
   {
-    "id": "sport",
-    "nome": "Sport Club do Recife",
-    "nomeCurto": "Sport",
-    "sigla": "SPT",
-    "corBase": "#9A1D24",
+    "id": "athletico-pr",
+    "nome": "Club Athletico Paranaense",
+    "nomeCurto": "Athletico-PR",
+    "sigla": "CAP",
+    "corBase": "#E4062A",
     "paleta": {
       "acromatico": false,
-      "identidade": "#9A1D24",
-      "faixaB": "#78171C",
+      "identidade": "#E4062A",
+      "faixaB": "#BC0523",
       "identidadeTexto": "#FFFFFF",
-      "acento": "#9A1D24",
-      "acentoSobreEscuro": "#DF535B",
+      "acento": "#E4062A",
+      "acentoSobreEscuro": "#F92446",
+      "suave": "#F7E9EB",
+      "suaveEscuro": "#3B161C",
+      "identidadeEscuro": "#E4062A",
+      "faixaBEscuro": "#BC0523",
+      "identidadeTextoEscuro": "#FFFFFF"
+    }
+  },
+  {
+    "id": "coritiba",
+    "nome": "Coritiba Foot Ball Club",
+    "nomeCurto": "Coritiba",
+    "sigla": "CFC",
+    "corBase": "#0F6B3A",
+    "paleta": {
+      "acromatico": false,
+      "identidade": "#0F6B3A",
+      "faixaB": "#004526",
+      "identidadeTexto": "#FFFFFF",
+      "acento": "#0F6B3A",
+      "acentoSobreEscuro": "#159852",
+      "suave": "#E9F7EF",
+      "suaveEscuro": "#163B28",
+      "identidadeEscuro": "#0F6B3A",
+      "faixaBEscuro": "#148F4D",
+      "identidadeTextoEscuro": "#FFFFFF"
+    }
+  },
+  {
+    "id": "rb-bragantino",
+    "nome": "Red Bull Bragantino",
+    "nomeCurto": "Bragantino",
+    "sigla": "RBB",
+    "corBase": "#E30613",
+    "paleta": {
+      "acromatico": false,
+      "identidade": "#E30613",
+      "faixaB": "#BB0510",
+      "identidadeTexto": "#FFFFFF",
+      "acento": "#E30613",
+      "acentoSobreEscuro": "#F9232F",
       "suave": "#F7E9EA",
-      "suaveEscuro": "#3B1618",
-      "identidadeEscuro": "#9A1D24",
-      "faixaBEscuro": "#78171C",
+      "suaveEscuro": "#3B1619",
+      "identidadeEscuro": "#E30613",
+      "faixaBEscuro": "#BB0510",
       "identidadeTextoEscuro": "#FFFFFF"
     }
   },
   {
-    "id": "juventude",
-    "nome": "Esporte Clube Juventude",
-    "nomeCurto": "Juventude",
-    "sigla": "JUV",
-    "corBase": "#1E7A34",
+    "id": "remo",
+    "nome": "Clube do Remo",
+    "nomeCurto": "Remo",
+    "sigla": "REM",
+    "corBase": "#0B3D91",
     "paleta": {
       "acromatico": false,
-      "identidade": "#1E7A34",
-      "faixaB": "#18612A",
+      "identidade": "#0B3D91",
+      "faixaB": "#082D6B",
       "identidadeTexto": "#FFFFFF",
-      "acento": "#1E7A34",
-      "acentoSobreEscuro": "#24933E",
-      "suave": "#E9F7EC",
-      "suaveEscuro": "#163B1F",
-      "identidadeEscuro": "#1E7A34",
-      "faixaBEscuro": "#269B42",
+      "acento": "#0B3D91",
+      "acentoSobreEscuro": "#3B7EF0",
+      "suave": "#E9EEF7",
+      "suaveEscuro": "#16243B",
+      "identidadeEscuro": "#0B3D91",
+      "faixaBEscuro": "#082D6B",
       "identidadeTextoEscuro": "#FFFFFF"
     }
   },
   {
-    "id": "criciuma",
-    "nome": "Criciúma Esporte Clube",
-    "nomeCurto": "Criciúma",
-    "sigla": "CRI",
-    "corBase": "#FFD100",
+    "id": "chapecoense",
+    "nome": "Associação Chapecoense de Futebol",
+    "nomeCurto": "Chapecoense",
+    "sigla": "CHA",
+    "corBase": "#0C6B3D",
     "paleta": {
       "acromatico": false,
-      "identidade": "#FFD100",
-      "faixaB": "#D6B000",
-      "identidadeTexto": "#16181A",
-      "acento": "#856D00",
-      "acentoSobreEscuro": "#FFD100",
-      "suave": "#F7F4E9",
-      "suaveEscuro": "#3B3516",
-      "identidadeEscuro": "#FFD100",
-      "faixaBEscuro": "#D6B000",
-      "identidadeTextoEscuro": "#16181A"
+      "identidade": "#0C6B3D",
+      "faixaB": "#004526",
+      "identidadeTexto": "#FFFFFF",
+      "acento": "#0C6B3D",
+      "acentoSobreEscuro": "#119957",
+      "suave": "#E9F7F0",
+      "suaveEscuro": "#163B29",
+      "identidadeEscuro": "#0C6B3D",
+      "faixaBEscuro": "#109052",
+      "identidadeTextoEscuro": "#FFFFFF"
     }
   }
 ]

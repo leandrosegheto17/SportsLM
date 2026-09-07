@@ -1,0 +1,48 @@
+[
+  {
+    "competicao": {
+      "id": "brasileirao-serie-a",
+      "nome": "Campeonato Brasileiro Série A",
+      "temporada": 2026,
+      "formato": "pontos-corridos",
+      "janela": {
+        "inicio": "2026-03-28",
+        "fim": "2026-12-06"
+      },
+      "provedor": "football-data-org",
+      "ultimaAtualizacao": null
+    },
+    "participacao": {
+      "competicaoId": "brasileirao-serie-a",
+      "clubeId": "athletico-pr",
+      "status": "sem-dados",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": []
+  },
+  {
+    "competicao": {
+      "id": "copa-do-brasil",
+      "nome": "Copa do Brasil",
+      "temporada": 2026,
+      "formato": "mata-mata",
+      "janela": {
+        "inicio": "2026-02-18",
+        "fim": "2026-11-04"
+      },
+      "provedor": null,
+      "ultimaAtualizacao": null
+    },
+    "participacao": {
+      "competicaoId": "copa-do-brasil",
+      "clubeId": "athletico-pr",
+      "status": "sem-dados",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": []
+  }
+]

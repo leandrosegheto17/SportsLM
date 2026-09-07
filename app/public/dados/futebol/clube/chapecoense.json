@@ -14,7 +14,7 @@
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
-      "clubeId": "juventude",
+      "clubeId": "chapecoense",
       "status": "sem-dados",
       "faseAtual": null,
       "resultadoFinal": null,
@@ -37,30 +37,7 @@
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
-      "clubeId": "juventude",
-      "status": "sem-dados",
-      "faseAtual": null,
-      "resultadoFinal": null,
-      "resumo": null
-    },
-    "partidas": []
-  },
-  {
-    "competicao": {
-      "id": "gaucho",
-      "nome": "Campeonato Gaúcho",
-      "temporada": 2026,
-      "formato": "grupos",
-      "janela": {
-        "inicio": "2026-01-14",
-        "fim": "2026-03-22"
-      },
-      "provedor": null,
-      "ultimaAtualizacao": null
-    },
-    "participacao": {
-      "competicaoId": "gaucho",
-      "clubeId": "juventude",
+      "clubeId": "chapecoense",
       "status": "sem-dados",
       "faseAtual": null,
       "resultadoFinal": null,
