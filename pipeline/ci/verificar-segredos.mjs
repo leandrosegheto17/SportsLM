@@ -8,12 +8,31 @@
 // Padrões verificados: `token`, `api_key`, `Bearer`, chave hexadecimal de
 // 32+ caracteres. Só varre extensões de texto (o artefato do Vite é
 // HTML/JS/CSS/JSON/mapa de origem); binário é ignorado.
+//
+// Padrão `token` (Bloqueio 005, `.md/BLOCKERS.md`): a palavra isolada
+// `\btoken\b` gerava falso positivo permanente contra `zona.token` (campo de
+// domínio das zonas de classificação, RN-15/RF-18 — `dominio/tipos/futebol.ts`
+// / `config/zonas.ts`), presente no bundle real como acesso de propriedade
+// (`o.token`, `zona.token`, `token:S.enum(...)`), nunca como atribuição de
+// valor de segredo. O padrão agora exige o formato real de um segredo
+// vazado — `token` seguido de `:`/`=` e um valor entre aspas — e, para não
+// confundir um valor curto de enum de domínio (ex. `token: 'libertadores'`,
+// `token: 'pre-libertadores'`, 12–17 caracteres, só letras/hífen) com um
+// segredo real, exige (a) valor com 16+ caracteres e (b) pelo menos um
+// dígito no valor — segredos reais (chave de API, JWT, token opaco) são
+// tipicamente strings pseudo-aleatórias com dígitos; os 4 tokens de zona do
+// design system nunca têm. O padrão `Bearer` (que não depende do valor,
+// só da palavra) continua cobrindo o caso de um segredo vazado sem dígito
+// atrás de `Authorization: Bearer`, preservando a margem de segurança.
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const PADROES_SEGREDO = [
-  { nome: 'token', regex: /\btoken\b/i },
+  {
+    nome: 'token',
+    regex: /\btoken["']?\s*[:=]\s*["'](?=[A-Za-z0-9_\-.]*[0-9])[A-Za-z0-9_\-.]{16,}["']/i,
+  },
   { nome: 'api_key', regex: /\bapi[_-]?key\b/i },
   { nome: 'Bearer', regex: /\bBearer\b/ },
   { nome: 'chave-hex-32+', regex: /\b[0-9a-fA-F]{32,}\b/ },

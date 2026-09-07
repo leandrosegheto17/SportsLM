@@ -275,6 +275,30 @@ build limpos. Detalhe completo em `.md/BLOCKERS.md`, Bloqueio 004
 (Resolvido). Bloqueio de publicação removido — próxima tentativa de
 `/deploy` pode prosseguir.
 
+**Achado bloqueante seguinte (2026-09-07, Bloqueio 005)**: com o Bloqueio 004
+corrigido, o job `build` passou por todos os portões de qualidade em CI real
+pela primeira vez, mas reprovou no passo seguinte, "Verificação de segredo no
+artefato publicado" (`npm run verificar-segredos`, FUND-03):
+`dist/assets/index-*.js: padrão 'token'`. Falso positivo — o padrão
+`/\btoken\b/i` casava `zona.token` (campo de domínio das zonas de
+classificação, RN-15/RF-18), não nenhum segredo real. **Resolução
+(2026-09-07, executor)**: o padrão `token` em
+`pipeline/ci/verificar-segredos.mjs` passou a exigir o formato real de um
+segredo vazado — `token` seguido de `:`/`=`, um valor entre aspas de 16+
+caracteres contendo ao menos um dígito — em vez de casar a palavra isolada.
+Isso distingue um segredo real (`token: "sk_live_..."`) de um acesso de
+propriedade de domínio (`zona.token`, `o.zona.token`) e de um valor curto de
+enum (`token: 'libertadores'`, `token: 'pre-libertadores'`), sem enfraquecer
+os outros 3 padrões (`api_key`, `Bearer`, `chave-hex-32+`). Prova de ponta a
+ponta: `npm run build` (dist real) seguido de `npm run verificar-segredos
+dist` → limpo; teste de injeção manual de um segredo real no mesmo bundle
+real confirmou detecção mantida. Suíte de testes (21 casos em
+`tests/verificar-segredos.test.ts`, incluindo os novos que reproduzem este
+achado), typecheck, lint, format:check e suíte completa (97 arquivos, 1107
+testes) limpos. Detalhe completo em `.md/BLOCKERS.md`, Bloqueio 005
+(Resolvido). Bloqueio de publicação removido — próxima tentativa de
+`/deploy` pode prosseguir até o próximo passo do pipeline.
+
 ---
 
 ## Log de Alterações
@@ -284,3 +308,4 @@ build limpos. Detalhe completo em `.md/BLOCKERS.md`, Bloqueio 004
 | 2026-09-06 | Validador (chapéu DevOps) | Criação do documento: confirmação da infraestrutura de CI/CD já construída (Lotes 1/6), ações operacionais pendentes do stakeholder, estratégia de observabilidade e rollback, histórico de deploys vazio. |
 | 2026-09-06 | Validador (dupla aprovação QA + DevSecOps) | Confirmação final pré-deploy (primeira publicação conjunta, Lotes 1-11+13): regressão do zero limpa, integração pipeline↔SPA verificada manualmente sem divergência, workflows confirmados aptos sem depender de tarefa `Pendente`. Ver seção correspondente em `.md/QA-REPORT.md` e `.md/SECURITY-REVIEW.md`. Dupla aprovação **completa** — nenhuma alteração às ações operacionais pendentes da Seção 2 (ainda dependem do stakeholder); Seção 5 (histórico de deploys) segue vazia até o `git push`/execução real do `/deploy`. |
 | 2026-09-07 | Executor | Resolução do Bloqueio 004 (Seção 6): `TZ=America/Sao_Paulo` fixado em `vitest.config.ts` (`test.env`), tornando a suíte determinística em CI sem alterar nenhum componente de produção — decisão do stakeholder confirmou que RNF-02/RN-07 cobrem só cálculo interno, não apresentação na tela. Ver `.md/BLOCKERS.md`, Bloqueio 004 (Resolvido). |
+| 2026-09-07 | Executor | Resolução do Bloqueio 005 (Seção 6): padrão `token` de `pipeline/ci/verificar-segredos.mjs` deixou de casar a palavra isolada e passou a exigir formato real de segredo vazado (valor entre aspas, 16+ caracteres, com dígito), eliminando o falso positivo contra `zona.token` sem enfraquecer os outros 3 padrões. Prova de ponta a ponta contra o `dist/` real (`npm run build` + `npm run verificar-segredos`) limpa. Ver `.md/BLOCKERS.md`, Bloqueio 005 (Resolvido). |

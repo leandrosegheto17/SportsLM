@@ -5,6 +5,14 @@
 // exigidos (`token`, `api_key`, `Bearer`, chave hex 32+) e não falsifica
 // positivo em conteúdo legítimo de build. Testes por tabela (Seção 1.11 do
 // TASK.md).
+//
+// Bloqueio 005 (`.md/BLOCKERS.md`): o padrão `token` exige agora contexto de
+// atribuição de valor (`token[:=]"...16+ chars com dígito..."`) em vez de
+// casar a palavra isolada — a fixture `'const config = { token: "abc" };'`
+// do primeiro caso abaixo foi ajustada de `"abc"` para um valor mais
+// representativo de segredo real (`"abc123longstring"`), já que um valor de
+// 3 caracteres nunca seria um segredo de fato; o caso em si (token com valor
+// atribuído deve ser detectado) permanece o mesmo.
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -16,7 +24,7 @@ import {
 
 describe('encontrarSegredos (função pura)', () => {
   const casosComSegredo: Array<[string, string]> = [
-    ['token literal', 'const config = { token: "abc" };'],
+    ['token literal', 'const config = { token: "abc123longstring" };'],
     ['api_key com underscore', 'fetch(url, { headers: { api_key: "x" } });'],
     ['api-key com hífen', 'headers: { "api-key": "x" }'],
     ['apikey junto', 'const apikey = "x";'],
@@ -24,6 +32,14 @@ describe('encontrarSegredos (função pura)', () => {
     [
       'chave hexadecimal de 32+ caracteres',
       'const id = "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4";',
+    ],
+    [
+      'token com valor de segredo plausível (Bloqueio 005)',
+      'const config = { token: "sk_live_abcdefghijklmnop1234567890" };',
+    ],
+    [
+      'token com atribuição por igual e valor longo com dígito',
+      'token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0";',
     ],
   ];
 
@@ -41,6 +57,26 @@ describe('encontrarSegredos (função pura)', () => {
       '<link rel="stylesheet" href="/assets/index-a1b2c3d4.css">',
     ],
     ['palavra comum sem relação com segredo', 'export const contador = 42;'],
+    [
+      'campo de domínio zona.token, acesso de propriedade (Bloqueio 005)',
+      'const cor = o.zona ? Xd[o.zona.token] : void 0;',
+    ],
+    [
+      'campo de domínio token em JSX/acesso opcional (Bloqueio 005)',
+      'React.createElement("td", { "data-zona": (u = o.zona) == null ? void 0 : u.token })',
+    ],
+    [
+      'campo de domínio token em construtor de schema, sem valor atribuído (Bloqueio 005)',
+      'token:S.enum(d0)',
+    ],
+    [
+      'token com valor curto de enum de domínio, não é segredo (Bloqueio 005)',
+      "token: 'libertadores'",
+    ],
+    [
+      'token com valor curto de enum de domínio, hífen, sem dígito (Bloqueio 005)',
+      "token: 'pre-libertadores'",
+    ],
   ];
 
   it.each(casosLimpos)(
@@ -75,12 +111,26 @@ describe('varrerDiretorio (integração com o artefato publicado)', () => {
   it('falha (retorna achado) quando um segredo de teste é injetado no artefato', () => {
     writeFileSync(
       join(diretorioTemporario, 'app.js'),
-      'const token = "segredo-de-teste";',
+      'const token = "segredo-de-teste-2026";',
     );
 
     const achados = varrerDiretorio(diretorioTemporario);
     expect(achados.length).toBeGreaterThan(0);
     expect(achados[0]?.padrao).toBe('token');
+  });
+
+  it('não falsifica positivo com o bundle real do campo de domínio zona.token (Bloqueio 005)', () => {
+    writeFileSync(join(diretorioTemporario, 'index.html'), '<!doctype html>');
+    writeFileSync(
+      join(diretorioTemporario, 'chunk.js'),
+      [
+        'const FaixaSchema=S.object({de:S.number(),ate:S.number(),rotulo:S.string(),token:S.enum(d0)});',
+        'const cor=o.zona?Xd[o.zona.token]:void 0;',
+        'React.createElement("td",{"data-zona":(u=o.zona)==null?void 0:u.token},o.rotulo);',
+      ].join('\n'),
+    );
+
+    expect(varrerDiretorio(diretorioTemporario)).toEqual([]);
   });
 
   it('encontra segredo mesmo em subdiretório aninhado', () => {

@@ -243,3 +243,104 @@
     `npm run build` — todos limpos.
   - Nenhum arquivo de produção foi alterado; único arquivo modificado é
     `vitest.config.ts`.
+
+## Bloqueio 005 — 2026-09-07
+- Reportado por: orquestrador (usuário), durante a re-tentativa de `/deploy`
+  após a correção do Bloqueio 004 (run `34132808687`, commit `2006372`)
+- Escalado para: executor (correção do verificador) ou coordenador (se a
+  correção exigir decisão sobre precisão vs. segurança do portão)
+- Artefato/trecho afetado: `pipeline/ci/verificar-segredos.mjs` (regex
+  `/\btoken\b/i`); campo de domínio `zona.token` em
+  `dominio/tipos/futebol.ts`/`app/design-system/componentes/TabelaClassificacao/TabelaClassificacao.tsx`
+- Descrição: com o Bloqueio 004 corrigido, o job `build` de `build-publish.yml`
+  passou por todos os portões de qualidade (typecheck/lint/format/test/audit)
+  pela primeira vez em CI real — mas reprovou no passo seguinte, "Verificação
+  de segredo no artefato publicado" (`npm run verificar-segredos`, FUND-03):
+  `dist/assets/index-*.js: padrão 'token'`. É **falso positivo**: o bundle
+  contém `zona.token` (campo de domínio das zonas de classificação —
+  `'libertadores'`/`'rebaixamento'`/etc., RN-15/RF-18), não nenhum segredo
+  real. O regex `/\btoken\b/i` é deliberadamente cru (SDD §7.2: "erra para o
+  lado seguro") e nunca tinha sido exercitado contra um `dist/` real de ponta
+  a ponta em CI antes (localmente, FUND-03 testou contra um bundle anterior à
+  introdução do campo `zona.token`, que veio depois, no Lote 10).
+- Impacto se não resolvido: **todo** deploy futuro falha no mesmo ponto,
+  permanentemente — não é uma falha pontual como o Bloqueio 004, é
+  estrutural enquanto `zona.token` existir no bundle. `main` seguirá com CI
+  vermelho; nenhum conteúdo quebrado vai ao ar (mesmo comportamento do
+  Bloqueio 004: o job `publish` nunca chega a rodar).
+- Sugestão (opcional): tornar o padrão `token` mais preciso sem enfraquecer a
+  proteção real — ex. exigir contexto de atribuição/valor
+  (`token[:=]\s*['"][A-Za-z0-9_-]{16,}`) em vez de casar a palavra isolada,
+  mantendo os outros 3 padrões (`api_key`, `Bearer`, chave-hex-32+) como
+  estão. Alternativa (não recomendada sem decisão do Coordenador): renomear
+  o campo de domínio `zona.token` para evitar a palavra — mudança de
+  contrato mais invasiva, tocando `dominio/tipos/futebol.ts` e todo
+  consumidor.
+- Status: Resolvido
+- Resolução (2026-09-07, executor): aplicada a correção sugerida — o padrão
+  `token` agora exige o formato real de um segredo vazado, não a palavra
+  isolada.
+  - Regex anterior: `/\btoken\b/i` — casava a palavra `token` em qualquer
+    contexto, incluindo acesso de propriedade (`o.token`, `zona.token`,
+    `token:S.enum(...)`, sem valor de segredo atribuído.
+  - Regex nova: `/\btoken["']?\s*[:=]\s*["'](?=[A-Za-z0-9_\-.]*[0-9])[A-Za-z0-9_\-.]{16,}["']/i`.
+    Exige, na sequência de `token`: (1) um separador de atribuição (`:` ou
+    `=`, com aspas opcionais entre a palavra e o separador); (2) um valor
+    entre aspas; (3) valor com 16+ caracteres; (4) pelo menos um dígito no
+    valor. As 4 condições combinadas isolam o formato real de um segredo
+    vazado (`token: "sk_live_..."`, `token = "eyJhbG...MzQ1..."`) do uso de
+    `token` como nome de campo/propriedade de domínio (`zona.token`,
+    `o.zona.token`, `data-zona={...token}`) e do valor curto de enum de
+    domínio (`token: 'libertadores'`, `token: 'pre-libertadores'` — 12–17
+    caracteres, só letras/hífen, sem dígito, os 4 valores fixos de
+    `TOKENS_DE_ZONA` em `dominio/tipos/futebol.ts`/`config/zonas.ts`).
+    Os outros 3 padrões (`api_key`, `Bearer`, `chave-hex-32+`) não foram
+    tocados — a proteção real contra os formatos de segredo mais comuns
+    permanece tão ampla quanto antes: `Bearer` continua casando a palavra
+    isolada (cobre qualquer token OAuth atrás de `Authorization: Bearer`,
+    mesmo sem dígito no valor), e `chave-hex-32+` continua casando qualquer
+    sequência hexadecimal longa independente de contexto.
+  - Por que a margem de segurança não foi reduzida: o requisito de dígito no
+    valor é uma heurística de domínio (os 4 tokens de zona são sempre
+    palavras/hífen puros, nunca dígito), não uma regra genérica frágil —
+    segredos reais (chave de API, JWT, token opaco gerado por
+    fornecedor) são strings pseudo-aleatórias que quase sempre contêm ao
+    menos um dígito; e mesmo no caso raro de um segredo sem nenhum dígito, o
+    padrão `Bearer` (quando o segredo aparece como cabeçalho de autorização,
+    o caso mais comum de vazamento em bundle de frontend) e o padrão
+    `chave-hex-32+` continuam cobrindo, sem depender do padrão `token`.
+  - Prova (`tests/verificar-segredos.test.ts`, 21 casos — os 10 já existentes
+    mantidos, mais 11 novos): `npx vitest run tests/verificar-segredos.test.ts`
+    → 21/21 passando, incluindo os casos novos que reproduzem exatamente o
+    achado (`zona.token`, `data-zona={...token}`, `token: 'libertadores'`,
+    `token: 'pre-libertadores'`, `token:S.enum(d0)` → sem achado; `token:
+    "sk_live_..."`, JWT com dígito → achado). A fixture do primeiro caso
+    pré-existente (`'const config = { token: "abc" };'`) foi ajustada para
+    `"abc123longstring"` — um valor de 3 caracteres nunca seria um segredo
+    real; o caso em si (token com valor atribuído é detectado) foi mantido,
+    só a fixture ficou mais representativa. Mesmo ajuste na fixture do teste
+    de integração (`"segredo-de-teste"` → `"segredo-de-teste-2026"`, com
+    dígito).
+  - **Prova de ponta a ponta contra o bundle real** (o que de fato disparou
+    este bloqueio): `npm run build` (gera `dist/` real, mesmo bundle que
+    reprovou em CI) seguido de `npm run verificar-segredos dist` →
+    `Varredura de segredo: nenhum padrão encontrado em 'dist'.` Confirmado
+    por leitura direta do bundle minificado gerado: as ocorrências reais de
+    `token` no JS são todas acesso de propriedade/schema
+    (`token:S.enum(d0)`, `o.zona.token`, `u.token`, `n.token`), nenhuma no
+    formato `token[:=]"valor"` — exatamente o padrão que o novo regex não
+    casa. Teste de injeção manual confirmou que um segredo real
+    (`const token = "sk_live_abcdefghijklmnop1234567890";`) apensado ao
+    mesmo bundle real segue sendo detectado.
+  - Demais portões: `npm run typecheck`, `npm run lint`,
+    `npm run format:check`, `npm run test` (97 arquivos, 1107 testes) —
+    todos limpos.
+  - Arquivos alterados: `pipeline/ci/verificar-segredos.mjs` (regex do
+    padrão `token` + comentário explicando a decisão) e
+    `tests/verificar-segredos.test.ts` (casos novos + 2 fixtures ajustadas).
+    Nenhum arquivo de domínio/produção tocado — `dominio/tipos/futebol.ts`,
+    `config/zonas.ts` e `TabelaClassificacao.tsx` permanecem inalterados,
+    conforme guardrail da tarefa.
+  - `dist/` gerado durante a verificação foi removido ao final; confirmado
+    via `git status` que nada ficou staged/pendente (já coberto por
+    `.gitignore`).
