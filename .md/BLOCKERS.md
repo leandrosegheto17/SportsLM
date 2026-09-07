@@ -153,3 +153,93 @@
 - Status: Aberto, bloqueante para publicação (não afeta nenhum lote já
   `Validado` retroativamente — é achado da confirmação final de `/deploy`,
   não de nenhuma validação de lote anterior).
+- Atualização (2026-09-07, executor): antes de aplicar a correção (a) sugerida
+  (fixar `TZ=America/Sao_Paulo` só no ambiente de teste, mantendo o componente
+  formatando no fuso local do processo/visitante), confirmei rapidamente
+  `.md/UX-SPEC.md`/`.md/PRD-TECNICO.md` conforme pedido nos guardrails da
+  tarefa — e encontrei evidência formal, não ambígua, de que a intenção de
+  produto é o caso (b), não o (a):
+  - **RNF-02** (`PRD-TECNICO.md`, Seção 2, tabela de RNFs): "Idioma/localidade
+    — Só pt-BR; dd/mm/aaaa; **America/Sao_Paulo**" — requisito não-funcional
+    explícito de que a localidade/fuso é **fixo** em America/Sao_Paulo, não
+    derivado do navegador/máquina de quem visita.
+  - **RN-07** ("Feed = 30 mais recentes; fuso; retenção", `PRD-TECNICO.md`):
+    "30 itens mais recentes por data de publicação [...] sem janela de horas;
+    **America/Sao_Paulo**; descarte de armazenamento após 7 dias" — mesma
+    âncora de fuso fixo, aplicada à regra de negócio do feed (RF-04/RF-05/
+    RF-15/RF-19), não só a um detalhe visual isolado.
+  Isso contraria a premissa com a qual a tarefa foi aberta (de que "mostrar a
+  hora no fuso do visitante" seria o comportamento correto e intencional de
+  produto, cabendo só corrigir o determinismo do teste). Ao contrário: os dois
+  achados acima são evidência forte de que `formatarDataHora` (e qualquer
+  outro ponto do código com o mesmo padrão — `getDate()`/`getHours()`/
+  `getMonth()` lendo o fuso do processo/runtime) deveria formatar
+  explicitamente em `America/Sao_Paulo` (via `timeZone` fixo no
+  `Intl.DateTimeFormat`), não no fuso do visitante — ou seja, a opção (b) da
+  Seção 6 do `DEPLOY.md`, que é mudança de **comportamento de produto**, fora
+  da autoridade do Executor decidir sozinho.
+  - Conforme guardrail explícito desta tarefa ("se... a intenção de produto É
+    sempre mostrar horário de Brasília... pare e escale para o
+    coordenador/gestor em vez de decidir sozinho"), **não apliquei nenhuma
+    correção** (nem (a) no `vitest.config.ts`, nem (b) no componente) e não
+    alterei nenhum arquivo de produção/teste. O comando corrente deve pausar
+    aqui para o usuário/orquestrador decidir com o coordenador/gestor.
+  - Pergunta objetiva para o coordenador/gestor decidir: RNF-02/RN-07 foram
+    escritos pensando em **dados** (data de publicação, ordenação do feed,
+    janela de frescor/retenção) calculados a partir de timestamps do
+    provedor/pipeline — cenário em que "fuso fixo America/Sao_Paulo" faz
+    sentido óbvio para consistência de dados server-side — ou também cobrem
+    explicitamente a **apresentação/renderização** na tela para qualquer
+    visitante, em qualquer fuso onde ele esteja fisicamente? Se for só o
+    primeiro (dado/ordenação), a opção (a) (fixar TZ só no ambiente de teste,
+    sem tocar no componente) permanece correta e este bloqueio pode ser
+    resolvido como planejado originalmente. Se for o segundo, a correção certa
+    é a opção (b) — `timeZone: 'America/Sao_Paulo'` explícito em
+    `formatarDataHora` e em todo ponto equivalente (`CarimboFrescor`,
+    `avaliador-fontes`, `DetalheCampeonato.tsx`, etc.) — tarefa de
+    Frontend/Backend maior que uma correção de `vitest.config.ts`, com
+    ADR/nota de RNF-02 atualizada para deixar isso explícito e testes
+    reescritos para fixar o `timeZone` no assert em vez de depender do TZ do
+    processo.
+- Status: Resolvido
+- Decisão do stakeholder (2026-09-07, orquestrador/usuário): RNF-02/RN-07
+  (`.md/PRD-TECNICO.md`) cobrem **só o cálculo interno** do pipeline/domínio
+  (janelas de dedup/frescor/retenção, ordenação do feed) — que já usam
+  `agora: Date` recebido por parâmetro, nunca leem o relógio do sistema
+  diretamente. A **apresentação na tela continua no fuso do navegador do
+  próprio visitante** (comportamento padrão web) — isso não muda. A pergunta
+  levantada na atualização anterior está resolvida: nenhum componente de
+  produção (`formatarDataHora`, `CarimboFrescor`, `DetalheCampeonato.tsx`,
+  etc.) precisa mudar; a opção (b) da Seção 6 do `DEPLOY.md` não se aplica.
+- Resolução (2026-09-07, executor): aplicada a opção (a), como planejada
+  originalmente antes da escalada.
+  - Causa raiz confirmada: `formatarDataHora` em
+    `app/rotas/sobreposicoes/Configuracoes/SecaoFontesDeNoticia.tsx` usa
+    `new Date(iso).getDate()`/`getHours()`/etc., que lê o fuso horário do
+    processo — correto para produção (fuso do visitante), mas fazia o teste
+    `SecaoFontesDeNoticia.test.tsx` (caso "CA-01.2") depender implicitamente
+    do fuso da máquina que roda a suíte.
+  - Correção: `vitest.config.ts` agora fixa `test.env.TZ =
+    'America/Sao_Paulo'`, tornando a suíte determinística em qualquer
+    máquina/CI, sem tocar em nenhum componente de produção.
+  - Prova (reprodução antes/depois, simulando a diferença entre o ambiente
+    local original e o runner do GitHub Actions):
+    - Antes da correção, `TZ=UTC npm run test -- app/rotas/sobreposicoes/
+      Configuracoes/SecaoFontesDeNoticia.test.tsx` reproduziu a falha real
+      vista em CI (esperado `"⚠ Instável desde 04/09, 09h12"`, obtido
+      `"12h12"` — mesmo sintoma do run `34056870754`).
+    - Depois da correção, o mesmo comando (`TZ=UTC` ainda setado no shell
+      externo) passou com os 6 testes do arquivo — prova de que o Vitest
+      sobrescreve a timezone internamente, independente do TZ do shell.
+  - Suíte completa (`npm run test`, sem forçar `TZ` no shell):
+    1099/1099 testes passando (97 arquivos), incluindo os demais pontos que
+    dependem do mesmo padrão de formatação de data/hora (`LinhaPartida.test.tsx`,
+    `SecaoUltimasNoticias.test.tsx`), agora determinísticos pela mudança no
+    ambiente de teste inteiro, sem alteração pontual por arquivo.
+  - Grep de confirmação: `DetalheCampeonato.tsx`, `Comparativo.tsx`,
+    `PainelTime.tsx` e `SecaoIdentidade.tsx` não usam `getHours()`/`getDate()`/
+    `getMonth()` — nenhuma alteração necessária neles.
+  - Portões: `npm run typecheck`, `npm run lint`, `npm run format:check` e
+    `npm run build` — todos limpos.
+  - Nenhum arquivo de produção foi alterado; único arquivo modificado é
+    `vitest.config.ts`.

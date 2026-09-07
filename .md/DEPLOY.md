@@ -250,6 +250,31 @@ similar) precisa(m) passar por `/validar` de novo antes de nova tentativa de
 **Status**: Aberto, bloqueante para publicação (registrado também em
 `.md/BLOCKERS.md`, Bloqueio 004).
 
+**Atualização (2026-09-07, executor)**: antes de aplicar a correção (a), a
+checagem rápida de `.md/PRD-TECNICO.md` pedida nos guardrails da tarefa
+encontrou evidência formal (RNF-02 e RN-07, ambos citando explicitamente
+"America/Sao_Paulo" como fuso fixo de localidade/regra de negócio do feed) que
+contraria a premissa de que "mostrar a hora no fuso do visitante" seria o
+comportamento de produto pretendido. Nenhuma correção foi aplicada — decisão
+foi escalada ao coordenador/gestor (ver detalhe e pergunta objetiva na
+atualização de 2026-09-07 do Bloqueio 004 em `.md/BLOCKERS.md`) para
+confirmar se RNF-02/RN-07 cobrem só cálculo/ordenação de dados (caso em que a
+opção (a) permanece correta) ou também a apresentação na tela para qualquer
+visitante (caso em que a correção certa é a opção (b), maior escopo). Nenhum
+arquivo de código (produção ou teste) foi alterado nesta passagem.
+
+**Resolução (2026-09-07, executor)**: stakeholder decidiu que RNF-02/RN-07
+cobrem só o cálculo interno do pipeline/domínio (janelas de dedup/frescor/
+retenção, ordenação do feed), que já recebem `agora: Date` por parâmetro; a
+apresentação na tela continua no fuso do navegador do visitante. Aplicada a
+opção (a): `TZ=America/Sao_Paulo` fixado em `test.env` do `vitest.config.ts`,
+sem alterar nenhum componente de produção. Reproduzida a falha real sob
+`TZ=UTC` antes da correção e confirmada a correção sob o mesmo `TZ=UTC`
+depois; suíte completa (1099/1099 testes), typecheck, lint, format:check e
+build limpos. Detalhe completo em `.md/BLOCKERS.md`, Bloqueio 004
+(Resolvido). Bloqueio de publicação removido — próxima tentativa de
+`/deploy` pode prosseguir.
+
 ---
 
 ## Log de Alterações
@@ -258,3 +283,4 @@ similar) precisa(m) passar por `/validar` de novo antes de nova tentativa de
 |---|---|---|
 | 2026-09-06 | Validador (chapéu DevOps) | Criação do documento: confirmação da infraestrutura de CI/CD já construída (Lotes 1/6), ações operacionais pendentes do stakeholder, estratégia de observabilidade e rollback, histórico de deploys vazio. |
 | 2026-09-06 | Validador (dupla aprovação QA + DevSecOps) | Confirmação final pré-deploy (primeira publicação conjunta, Lotes 1-11+13): regressão do zero limpa, integração pipeline↔SPA verificada manualmente sem divergência, workflows confirmados aptos sem depender de tarefa `Pendente`. Ver seção correspondente em `.md/QA-REPORT.md` e `.md/SECURITY-REVIEW.md`. Dupla aprovação **completa** — nenhuma alteração às ações operacionais pendentes da Seção 2 (ainda dependem do stakeholder); Seção 5 (histórico de deploys) segue vazia até o `git push`/execução real do `/deploy`. |
+| 2026-09-07 | Executor | Resolução do Bloqueio 004 (Seção 6): `TZ=America/Sao_Paulo` fixado em `vitest.config.ts` (`test.env`), tornando a suíte determinística em CI sem alterar nenhum componente de produção — decisão do stakeholder confirmou que RNF-02/RN-07 cobrem só cálculo interno, não apresentação na tela. Ver `.md/BLOCKERS.md`, Bloqueio 004 (Resolvido). |
