@@ -31,6 +31,10 @@ const ESQUEMA_SIGLA = /^[A-Z]{3}$/;
  */
 export const ID_PROVEDOR_FOOTBALL_DATA = 'football-data';
 
+/** Id do adaptador TheSportsDB (spike, ver `adaptador-thesportsdb.ts`) — mesma
+ * convenção de `ID_PROVEDOR_FOOTBALL_DATA`, chave em `idsProvedor`. */
+export const ID_PROVEDOR_THESPORTSDB = 'thesportsdb';
+
 /**
  * Sentinela explícita para id de provedor ainda não confirmado (ver nota de
  * decisão no final deste arquivo e em TASK.md/CFG-02). Nunca um número
