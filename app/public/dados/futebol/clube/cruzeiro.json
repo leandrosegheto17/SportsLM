@@ -6,21 +6,605 @@
       "temporada": 2026,
       "formato": "pontos-corridos",
       "janela": {
-        "inicio": "2026-03-28",
-        "fim": "2026-12-06"
+        "inicio": "2026-01-28",
+        "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": null
+      "ultimaAtualizacao": "2026-09-07T21:03:41.122Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
       "clubeId": "cruzeiro",
-      "status": "sem-dados",
+      "status": "em-andamento",
       "faseAtual": null,
       "resultadoFinal": null,
-      "resumo": null
+      "resumo": {
+        "jogos": 26,
+        "v": 12,
+        "e": 6,
+        "d": 8,
+        "gp": 38,
+        "gc": 37,
+        "sg": 1,
+        "pontos": 42,
+        "aproveitamento": 53.84615384615385,
+        "posicao": 6
+      }
     },
-    "partidas": []
+    "partidas": [
+      {
+        "id": "554741",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 1,
+        "fase": null,
+        "mandanteId": "botafogo",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-01-30T00:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 4,
+          "visitante": 0
+        }
+      },
+      {
+        "id": "554753",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 2,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "coritiba",
+        "dataHora": "2026-02-06T00:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 1,
+          "visitante": 2
+        }
+      },
+      {
+        "id": "554766",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 3,
+        "fase": null,
+        "mandanteId": "mirassol",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-02-11T22:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 2,
+          "visitante": 2
+        }
+      },
+      {
+        "id": "554774",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 4,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "corinthians",
+        "dataHora": "2026-02-25T23:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 1,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554784",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 5,
+        "fase": null,
+        "mandanteId": "flamengo",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-03-12T00:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 2,
+          "visitante": 0
+        }
+      },
+      {
+        "id": "554794",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 6,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "vasco",
+        "dataHora": "2026-03-15T23:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 3,
+          "visitante": 3
+        }
+      },
+      {
+        "id": "554800",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 7,
+        "fase": null,
+        "mandanteId": "athletico-pr",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-03-18T22:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 2,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554813",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 8,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "santos",
+        "dataHora": "2026-03-22T19:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 0,
+          "visitante": 0
+        }
+      },
+      {
+        "id": "554825",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 9,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "vitoria",
+        "dataHora": "2026-04-01T23:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 3,
+          "visitante": 0
+        }
+      },
+      {
+        "id": "554838",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 10,
+        "fase": null,
+        "mandanteId": "sao-paulo",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-04-04T21:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 4,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554843",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 11,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "rb-bragantino",
+        "dataHora": "2026-04-12T21:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 2,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554853",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 12,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "gremio",
+        "dataHora": "2026-04-18T23:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 2,
+          "visitante": 0
+        }
+      },
+      {
+        "id": "554868",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 13,
+        "fase": null,
+        "mandanteId": "remo",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-04-25T21:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 0,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554873",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 14,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "atletico-mg",
+        "dataHora": "2026-05-03T00:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 1,
+          "visitante": 3
+        }
+      },
+      {
+        "id": "554881",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 15,
+        "fase": null,
+        "mandanteId": "bahia",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-05-10T00:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 1,
+          "visitante": 2
+        }
+      },
+      {
+        "id": "554898",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 16,
+        "fase": null,
+        "mandanteId": "palmeiras",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-05-17T00:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 1,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554902",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 17,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "chapecoense",
+        "dataHora": "2026-05-24T19:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 2,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554913",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 18,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "fluminense",
+        "dataHora": "2026-05-31T23:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 1,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554926",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 19,
+        "fase": null,
+        "mandanteId": "internacional",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-07-23T00:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 1,
+          "visitante": 2
+        }
+      },
+      {
+        "id": "554933",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 20,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "botafogo",
+        "dataHora": "2026-07-26T19:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 0,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554944",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 21,
+        "fase": null,
+        "mandanteId": "coritiba",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-07-31T00:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 0,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554954",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 22,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "mirassol",
+        "dataHora": "2026-08-09T14:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 3,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554963",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 23,
+        "fase": null,
+        "mandanteId": "corinthians",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-08-16T22:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 1,
+          "visitante": 2
+        }
+      },
+      {
+        "id": "554974",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 24,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "flamengo",
+        "dataHora": "2026-08-22T23:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 2,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554989",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 25,
+        "fase": null,
+        "mandanteId": "vasco",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-08-30T00:20:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 3,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "554994",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 26,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "athletico-pr",
+        "dataHora": "2026-09-06T19:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "finalizada",
+        "placar": {
+          "mandante": 3,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "555009",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 27,
+        "fase": null,
+        "mandanteId": "santos",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-09-13T00:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555019",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 28,
+        "fase": null,
+        "mandanteId": "vitoria",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-09-19T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555023",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 29,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "sao-paulo",
+        "dataHora": "2026-10-07T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555032",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 30,
+        "fase": null,
+        "mandanteId": "rb-bragantino",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-10-10T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555046",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 31,
+        "fase": null,
+        "mandanteId": "gremio",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-10-17T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555052",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 32,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "remo",
+        "dataHora": "2026-10-24T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555060",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 33,
+        "fase": null,
+        "mandanteId": "atletico-mg",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-10-28T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555074",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 34,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "bahia",
+        "dataHora": "2026-11-04T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555082",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 35,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "palmeiras",
+        "dataHora": "2026-11-18T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555095",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 36,
+        "fase": null,
+        "mandanteId": "chapecoense",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-11-21T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555105",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 37,
+        "fase": null,
+        "mandanteId": "fluminense",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-11-28T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555113",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 38,
+        "fase": null,
+        "mandanteId": "cruzeiro",
+        "visitanteId": "internacional",
+        "dataHora": "2026-12-02T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      }
+    ]
   },
   {
     "competicao": {

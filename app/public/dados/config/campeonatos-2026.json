@@ -6,8 +6,8 @@
     "categoria": "brasileirao",
     "formato": "pontos-corridos",
     "janela": {
-      "inicio": "2026-03-28",
-      "fim": "2026-12-06"
+      "inicio": "2026-01-28",
+      "fim": "2026-12-02"
     },
     "provedor": "football-data-org"
   },
