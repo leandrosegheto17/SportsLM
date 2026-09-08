@@ -154,3 +154,88 @@ comercial); R5 **encerrada**. Gatilhos condicionais de reabertura ativos: apenas
 P-GE.
 
 Veredito do Gate 1: **inalterado — Aprovado com ressalvas.**
+
+---
+
+## Gate 4 — Registro de fechamento de deploy — 2026-09-08
+
+**Skill**: `deploy-report-drafting` não é deste chapéu — este é o registro de
+governança do Gate 4 (chapéu CTO), que só documenta o fechamento; **sem poder de
+veto** (ver `.claude/agents/gestor.md` e PIPELINE-CONVENTIONS.md §1). Input:
+`.md/DEPLOY.md` (Seção 5, Histórico de Deploys) e `.md/TASK.md` (linha
+`REFAT-12-03`), ambos já atualizados pelo Validador antes deste registro.
+
+### Resultado
+
+**Sucesso.** Nenhum rollback, nenhum incidente na confirmação imediata
+pós-deploy.
+
+| Item | Valor |
+|---|---|
+| Ambiente | Vercel, produção real (`https://sports-lm.vercel.app`) |
+| Commit publicado | `cd747b6` (+ `72bee20`, commit de documentação subsequente) |
+| Deployment | `dpl_HLy1ATndKaDwaUxSD9MCrYDW9C78`, status `Ready`, `target: production` |
+| Confirmação | `vercel inspect` direto + `curl` retornando `200`; auto-deploy via integração Git a `origin/main` |
+| Data | 2026-09-08 |
+
+### O que foi publicado
+
+- Fechamento de **Refatoração Lote-2** (`REFAT-02-01`, sem achado novo).
+- **Refatoração Lote-7 completo** (`REFAT-07-01`/`02`/`03`) — consolidação de
+  tokens de borda/espaçamento no design system, achados `QA-7-03`/`QA-7-04`
+  encerrados.
+- Primeira validação formal do **Lote 12** (Telemetria, acessibilidade e
+  segurança transversal), que gerou **Refatoração Lote-12**, com 3 novas
+  tarefas de débito abertas: `REFAT-12-01`, `REFAT-12-02`, `REFAT-12-03`.
+
+### Nota de relevância estratégica — débito de acessibilidade aceito
+
+`REFAT-12-03` (sessão manual real de acessibilidade — percurso só-teclado,
+leitor de tela real, zoom 200%, roteiro `UX-SPEC.md` §5.8) segue **Pendente**.
+O chapéu DevSecOps do Validador classificou o achado correspondente
+(`SEC-12-03`) como severidade média, e o registrou como o que bloquearia o
+próximo `/deploy` real se não resolvido.
+
+O orquestrador/usuário **aceitou esse débito explicitamente em 2026-09-08**
+para liberar esta publicação — decisão já registrada em `.md/TASK.md` (linha
+`REFAT-12-03`) e em `.md/DEPLOY.md` (Seção 5). O argumento aceito: o conteúdo
+efetivamente publicado neste commit (CSS de tokens de borda/espaçamento +
+documentação) não toca superfície de acessibilidade, então o risco de regressão
+imediata é baixo.
+
+O chapéu CTO registra esta nota **sem veto** — o Gate 4 não tem poder de
+bloqueio retroativo, e a decisão já foi tomada e executada. A relevância
+estratégica a documentar é que o produto tem, desde **ADR-014** (`WCAG 2.2,
+nível AA` como "critério não negociável de toda tela"), um compromisso de
+acessibilidade que vai além de boa prática — em qualquer cenário de evolução do
+protótipo para produto com uso público real, WCAG 2.2 AA tende a se tornar
+também expectativa legal (acessibilidade digital, incluindo mas não limitada à
+LBI — Lei Brasileira de Inclusão). O débito de `REFAT-12-03` não invalida
+ADR-014 nem indica que critérios de acessibilidade automatizáveis tenham
+regredido (o achado é especificamente sobre a sessão *manual* — teclado, leitor
+de tela real, zoom 200% — que ferramentas automatizadas não cobrem); mas
+enquanto pendente, o produto não tem confirmação humana de que os critérios
+mais frágeis identificados no próprio ADR-014 (2.4.11 Foco não obscurecido,
+2.5.8 Tamanho do alvo, 4.1.3 Mensagens de status via `aria-live`) funcionam de
+fato para um usuário real de tecnologia assistiva.
+
+**Recomendação de acompanhamento (não é bloqueio retroativo, é recomendação)**:
+priorizar `REFAT-12-03` antes do próximo `/deploy` que inclua qualquer mudança
+de superfície (componentes interativos, layout, foco, live regions) — não
+necessariamente antes de publicações que, como esta, sejam comprovadamente
+restritas a tokens/documentação. Quem decide prioridade e sequenciamento
+continua sendo o Coordenador/usuário via `TASK.md`.
+
+### Checklist do Gate 4
+
+- [x] `DEPLOY.md` recebido do Validador, com resultado sucesso/rollback/incidente
+      declarado (sucesso)
+- [x] Commit e ambiente publicado identificados
+- [x] Lotes/tarefas incluídos nesta publicação nomeados
+- [x] Débito de risco aceito (`REFAT-12-03`) registrado com relevância
+      estratégica, sem veto retroativo
+
+### Veredito
+
+**Registrado.** Gate 4 é só fechamento — não há veredito de aprovação/reprovação
+aqui, conforme PIPELINE-CONVENTIONS.md §1 e `.claude/agents/gestor.md`.
