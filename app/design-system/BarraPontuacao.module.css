@@ -29,7 +29,7 @@
   flex: 1 1 auto;
   height: var(--esp-4);
   background: var(--cor-superficie-2);
-  border: 1px solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   border-radius: var(--raio-pill);
   overflow: hidden;
 }
@@ -40,7 +40,7 @@
      próprio de 1px garante a pista de delimitação exigida por ADR-017 quando
      a cor de identidade do clube coincide com a cor de fundo do trilho. */
   background: var(--clube-identidade);
-  border-right: 1px solid var(--cor-borda-forte);
+  border-right: var(--borda-fina) solid var(--cor-borda-forte);
   transition: width var(--duracao-transicao) var(--easing-padrao);
 }
 

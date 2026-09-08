@@ -10,7 +10,7 @@
 
 .bloco {
   background: var(--cor-superficie);
-  border: 2px solid var(--cor-borda-forte);
+  border: var(--borda-media) solid var(--cor-borda-forte);
   border-radius: var(--raio-md);
   overflow: hidden;
 }

@@ -38,7 +38,7 @@
   width: var(--alvo-toque-minimo);
   height: var(--alvo-toque-minimo);
   border-radius: var(--raio-sm);
-  border: 2px solid var(--cor-borda);
+  border: var(--borda-media) solid var(--cor-borda);
   background: var(--cor-superficie);
   cursor: pointer;
   transition:

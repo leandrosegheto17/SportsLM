@@ -7,7 +7,7 @@
   min-height: var(--alvo-toque-minimo);
   padding: var(--esp-2) var(--esp-3);
   border-radius: var(--raio-sm);
-  border: 1px solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   background: var(--cor-superficie);
   color: var(--cor-tinta);
   font: var(--txt-rotulo) var(--fonte-sistema);

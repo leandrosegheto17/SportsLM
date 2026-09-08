@@ -7,18 +7,69 @@ FUND-02/03, REFAT-01-02, REFAT-06-01), não provisionamento novo. Nenhum
 `git push` nem alteração de configuração real do GitHub foi feito por este
 agente — só leitura e documentação.
 
-Autor: Validador (chapéu DevOps) · Data: 2026-09-06
+Autor: Validador (chapéu DevOps) · Data: 2026-09-06 (última atualização: 2026-09-08 — correção de Seção 1/histórico, ver Log de Alterações)
 
 ---
 
 ## 1. Infraestrutura confirmada
 
-Contexto de arquitetura (ADR-001, ADR-002, SDD §2.1): sem backend em runtime,
-sem banco de dados. Toda a "infraestrutura" do protótipo é CI/CD como código —
-dois workflows do GitHub Actions — publicando em hosting estático do mesmo
-fornecedor (GitHub Pages). Não há Cloudflare Pages, Vercel ou Netlify em uso;
-não é objeto desta tarefa avaliar troca de provedor (decisão já fechada em
-SDD.md, linha "Agendamento e publicação", e ADR-002).
+**Atualização (2026-09-08, Validador — chapéu DevOps)**: esta seção estava
+desatualizada — descrevia GitHub Pages como único hosting-alvo. A decisão de
+hosting real mudou (fora do fluxo normal de `TASK.md`, ver
+`.md/BLOCKERS.md` Bloqueio 006 e `.md/adr/018-publicacao-de-snapshots-
+publicos-direto-em-main-para-vercel.md`) e esta seção foi corrigida para
+refletir a realidade confirmada por leitura direta de `vercel.json` e dos
+dois workflows do GitHub Actions — não é decisão do Validador, só documentação
+do que já existe.
+
+Contexto de arquitetura (ADR-001, ADR-002, ADR-018, SDD §2.1): sem backend em
+runtime, sem banco de dados. **Hosting real confirmado: Vercel**
+(`https://sports-lm.vercel.app`), via integração Git a `origin/main` — todo
+push em `main` dispara build (`npm run build`, `vercel.json` na raiz do
+repositório) e deploy automático do Vercel, fora do controle de qualquer
+workflow do GitHub Actions. `vercel.json` confirmado por leitura direta:
+
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+```
+
+`outputDirectory: "dist"` e o único `rewrite` (`/(.*)`→`/index.html`) são
+consistentes com uma SPA estática de página única (ADR-001) — nenhum detalhe
+adicional de configuração Vercel (variáveis de ambiente, regiões,
+`vercel.json` estendido) existe no repositório além do que está reproduzido
+acima.
+
+O pipeline de ingestão (`.github/workflows/ingestao.yml`, agendado a cada 30
+minutos) continua rodando no GitHub Actions, mas seu destino de publicação
+mudou: em vez de commitar os snapshots públicos (`/dados/*.json`, contrato
+SDD §2.2) numa branch órfã `dados` separada (a decisão original de ADR-002,
+pensada para GitHub Pages com fonte "Deploy from a branch"), o passo final do
+workflow agora copia `dist-dados/` para `app/public/dados/` e comita/faz push
+direto em `main` — só quando o conteúdo muda (mesma checagem de hash de
+ADR-002). Como `app/public/` é o `publicDir` do Vite (`root: 'app'`), todo o
+conteúdo de `app/public/dados/` é copiado verbatim para `dist/dados/` a cada
+build — inclusive o build que o Vercel dispara automaticamente a cada push,
+incluindo os pushes de dados do próprio `ingestao.yml`. Isso significa que a
+atualização de dado só fica visível em produção depois do build do Vercel
+terminar (não é instantâneo) — aceitável para a cadência de 30 min do
+pipeline (detalhe completo, alternativas descartadas e dívida aceita em
+ADR-018).
+
+`.github/workflows/build-publish.yml` (GitHub Pages) **continua existindo e
+sendo disparado a cada push em `main` sem `[skip ci]`** — não foi removido
+nem desabilitado por esta mudança (confirmado por leitura direta:
+`.github/workflows/build-publish.yml` presente, gatilho `push` em `main`
+inalterado). GitHub Pages nunca foi habilitado no repositório (ver Seção 2,
+item 1 — ação operacional pendente do stakeholder, ainda não confirmada como
+feita) — ou seja, esse workflow roda os portões de qualidade a cada push, mas
+seu job `publish` provavelmente segue falhando ou sendo pulado por falta do
+ambiente `github-pages` configurado. Decidir se desliga esse workflow (Vercel
+já é o hosting real) é decisão de infraestrutura fora do escopo desta
+confirmação — fica registrado aqui para o Coordenador/gestor avaliar.
 
 ### 1.1 `.github/workflows/build-publish.yml` (FUND-03)
 
@@ -43,8 +94,13 @@ SDD.md, linha "Agendamento e publicação", e ADR-002).
   (`if: github.ref == 'refs/heads/main'`), usa o `environment: github-pages`
   nativo do GitHub, e publica via `actions/deploy-pages`.
 
-Confirmado: consistente com SDD §7.2/§7.7 e GUARDRAILS §2/§4. Hosting-alvo é
-GitHub Pages via GitHub Actions, não outro provedor.
+Confirmado: consistente com SDD §7.2/§7.7 e GUARDRAILS §2/§4 enquanto
+workflow. **Atualização (2026-09-08)**: este workflow publica em GitHub
+Pages, mas GitHub Pages **não é** o hosting real do produto — ver correção da
+Seção 1 acima. Este workflow segue existindo e disparando a cada push em
+`main` (sem `[skip ci]`), mas seu resultado real (se GitHub Pages nunca foi
+habilitado, ver Seção 2 item 1) não afeta o que o usuário final acessa em
+`https://sports-lm.vercel.app`.
 
 ### 1.2 `.github/workflows/ingestao.yml` (REFAT-06-01)
 
@@ -73,15 +129,29 @@ GitHub Pages via GitHub Actions, não outro provedor.
 - Verificação de segredo bloqueante no diretório de dados publicado
   (`npm run verificar-segredos:dados`, aponta para `dist-dados/`), só quando
   há algo a publicar (`steps.ingestao.outputs.publica == 'true'`).
-- Publicação por commit direto na branch órfã `dados` (`git checkout --orphan
-  dados` na primeira vez, `git checkout dados` depois), só se o conteúdo
-  realmente mudou (`git diff --cached --quiet`) — evita publicar sem mudança
-  de hash, conforme SDD §2.2.
+- **Atualização (2026-09-08, ADR-018, Bloqueio 006)**: o passo final deixou
+  de publicar na branch órfã `dados` — confirmado por leitura direta do
+  `ingestao.yml` real (`.github/workflows/ingestao.yml`, passo "Publica
+  snapshots públicos em app/public/dados (main — ADR-018)"). Hoje o workflow
+  permanece em `main`, copia `dist-dados/` para `app/public/dados/`
+  (sobrescrevendo o que houver) e comita/`git push origin HEAD:main`, só se o
+  conteúdo realmente mudou (mesma checagem de hash de antes, adaptada ao novo
+  caminho) — evita publicar sem mudança de hash, conforme SDD §2.2. A branch
+  órfã `dados` de ADR-002 continua sendo a decisão vigente só para o
+  **estado interno** do pipeline (não os snapshots públicos) — mas, conforme
+  achado colateral registrado no próprio ADR-018/Bloqueio 006, o workflow
+  real **nunca** teve um passo que de fato restaure/commite esse estado
+  interno na branch `dados` — lacuna pré-existente, não corrigida por esta
+  confirmação, registrada para decisão futura do Coordenador/gestor.
 
-Confirmado: consistente com ADR-002, SDD §7.2/§7.7, GUARDRAILS §2/§4. O script
-`npm run ingestao` já existe no `package.json` (`tsx pipeline/ingestao-cli.ts`)
-desde REFAT-06-01 — o dry-run hoje em produção, quando ocorrer, será pelo
-motivo (b) (token ausente), não (a).
+Confirmado: consistente com ADR-002 (parcialmente superado por ADR-018 para o
+destino dos snapshots públicos), ADR-018, SDD §7.2/§7.7, GUARDRAILS §2/§4. O
+script `npm run ingestao` já existe no `package.json` (`tsx
+pipeline/ingestao-cli.ts`) desde REFAT-06-01 — o dry-run hoje em produção,
+quando ocorrer, será pelo motivo (b) (token ausente), não (a). Múltiplos
+snapshots reais já foram publicados com sucesso por este workflow desde
+ADR-018 (ver Seção 5, histórico de deploys, e Bloqueios 007/008/009/010 em
+`.md/BLOCKERS.md`).
 
 **Nenhuma inconsistência encontrada** entre os dois workflows e o que
 SDD.md/GUARDRAILS.md exigem. Ambos já foram validados nos Lotes 1/6
@@ -120,6 +190,13 @@ não foi feito — é ação do orquestrador/usuário, fora desta tarefa.
 ---
 
 ## 3. Observabilidade
+
+**Nota (2026-09-08)**: esta seção foi escrita quando GitHub Pages ainda era
+tratado como hosting-alvo único. O hosting real é o Vercel (Seção 1) — o
+Vercel tem seu próprio painel de build/deploy logs (não documentado aqui em
+detalhe por falta de acesso direto deste Validador ao console da conta), além
+do que já está descrito abaixo (GitHub Actions + `status.json`), que segue
+válido para o pipeline de ingestão.
 
 Protótipo estático sem backend (RNF-11, nível protótipo, ADR-015 §"Perfil de
 protótipo"): observabilidade é necessariamente limitada, documentada aqui sem
@@ -160,6 +237,18 @@ inventar ferramenta ou métrica que não existe no projeto.
 
 ## 4. Estratégia de rollback
 
+**Nota (2026-09-08)**: mesma ressalva da Seção 3 — o texto abaixo foi escrito
+para GitHub Pages. Com o Vercel como hosting real (Seção 1), o princípio
+("reverter via commit/`git revert` em `main`, não republicação manual de
+artefato") continua válido e é, na prática, a estratégia mais simples possível
+— o Vercel também rebuilda automaticamente a cada push, então um `git revert`
+em `main` já é, por si só, o mecanismo de rollback (o Vercel também mantém
+histórico de deployments anteriores navegável pelo próprio painel, promovendo
+um deployment anterior sem novo commit — não confirmado em detalhe aqui por
+falta de acesso a esse painel, citado apenas como possibilidade adicional
+plausível de qualquer hosting Git-integrado como o Vercel, não como fato
+verificado).
+
 GitHub Pages publicado via `actions/deploy-pages` não versiona múltiplos
 releases simultâneos — a estratégia natural de rollback para este tipo de
 hosting estático é **republicar a partir de um commit anterior**:
@@ -175,17 +264,23 @@ hosting estático é **republicar a partir de um commit anterior**:
 3. O job `publish` de `build-publish.yml` roda os mesmos portões de qualidade
    e verificação de segredo antes de publicar — o rollback não pula essas
    checagens, mesmo sendo uma reversão.
-4. Para dados (branch `dados`, produzida por `ingestao.yml`): como cada
-   publicação é um commit na branch órfã só quando o conteúdo muda
-   (SDD §2.2), reverter dados problemáticos segue o mesmo princípio —
-   `git revert` do commit de dados na branch `dados`, ou aguardar a próxima
-   execução agendada (30 min) corrigir o snapshot, dependendo da severidade.
+4. Para dados: **atualizado (2026-09-08, ADR-018)** — os snapshots públicos
+   não vivem mais na branch órfã `dados`, e sim em `app/public/dados/`, na
+   própria `main` (confirmado por leitura direta de `ingestao.yml`, Seção 1).
+   Reverter dados problemáticos segue o mesmo princípio de código: `git
+   revert` do commit de dados em `main` (o Vercel rebuilda a partir dele
+   normalmente), ou aguardar a próxima execução agendada (30 min) corrigir o
+   snapshot, dependendo da severidade. A branch órfã `dados` de ADR-002
+   segue existindo só como destino conceitual do **estado interno** do
+   pipeline — que, por lacuna pré-existente registrada em ADR-018/Bloqueio
+   006, hoje não é de fato persistido por nenhum passo do workflow.
 
 Não há infraestrutura adicional a testar (sem servidor, sem orquestrador de
-container) — a estratégia é a natureza do próprio GitHub Pages + Git, não uma
-ferramenta a ser implementada. Ainda não foi exercida em produção (ver Seção 5,
-histórico vazio); será validada na prática no primeiro incidente real, se
-ocorrer.
+container) — a estratégia é a natureza do próprio Git + hosting Git-integrado
+(GitHub Pages e/ou Vercel), não uma ferramenta a ser implementada. Ainda não
+foi formalmente exercida como incidente real de rollback (nenhum dos deploys
+registrados na Seção 5 precisou de reversão) — será validada na prática no
+primeiro incidente real, se ocorrer.
 
 ---
 
@@ -199,6 +294,51 @@ e a conclusão das ações operacionais pendentes listadas na Seção 2._
 | Data | Ambiente | Commit | Resultado | Observações |
 |---|---|---|---|---|
 | 2026-09-06 | GitHub Pages (via Actions) | `43d26e9` | **Falhou** — job `build` reprovado no step "Testes"; job `publish` nunca rodou (`needs: build`) | `gh run` `34056870754`. 1/1099 testes falhou só no runner real (Linux/UTC), não localmente (sandbox em `America/Sao_Paulo`) — achado bloqueante, ver Seção 6 abaixo. GitHub Pages **não foi publicado** (nada foi ao ar). |
+
+**Atualização (2026-09-08, Validador — chapéu DevOps)**: entre a linha acima
+(primeira tentativa real, falha) e hoje, múltiplos pushes reais em `main`
+chegaram a produção — confirmado por leitura direta de `git log` e de
+`.md/BLOCKERS.md` (Bloqueios 004-010), não por nota de terceiro. Resumo, sem
+inventar data/número de execução não documentado (o histórico completo,
+run-a-run, não está disponível a este Validador sem acesso ao painel do
+Vercel/GitHub Actions):
+
+- `2006372` — correção do Bloqueio 004 (`TZ=America/Sao_Paulo` fixado em
+  `vitest.config.ts`), primeiro push depois da falha registrada acima.
+- `8d932f5` — correção do Bloqueio 005 (padrão `token` do verificador de
+  segredo deixou de casar `zona.token` como falso positivo).
+- `88e471c` — adiciona `vercel.json`, marcando a adoção do Vercel como
+  hosting real (contexto do Bloqueio 006/ADR-018).
+- `efa8d72` — ajusta `ingestao.yml` para publicar snapshots direto em
+  `app/public/dados/` na própria `main`, em vez da branch órfã `dados`
+  (resolução do Bloqueio 006/ADR-018).
+- `982124d` — exclui sha256 de 64 caracteres do verificador de segredo
+  (falso positivo estrutural) e **publica o primeiro snapshot real de dados**
+  em `app/public/dados/` (resolução do Bloqueio 007) — primeira vez que
+  `/dados/*.json` existiu de fato no host servido pelo Vercel.
+- `c4d639f` — torna `traduzirPartidas` resiliente a status de partida
+  desconhecido do provedor, sem descartar a competição inteira (resolução do
+  Bloqueio 008, primeira execução real do Fluxo 2/futebol contra a API real).
+- `972df4b` — expõe clubes não mapeados no log da ingestão (resolução do
+  Bloqueio 009), viabilizando o diagnóstico usado a seguir.
+- `cbfd337` — confirma 15/20 ids reais de clube (`REFAT-02-01`) a partir do
+  log do Bloqueio 009; identifica divergência nos 5 restantes.
+- `5cd50e8` (com `7ee34e0` registrando a resolução em `BLOCKERS.md`) —
+  corrige o elenco da Série A 2026 em `config/clubes-2026.json`/
+  `config/campeonatos-2026.json` (resolução do Bloqueio 010), fechando
+  `REFAT-02-01` com os 20 clubes reais confirmados.
+- Diversos commits `chore(dados): atualiza snapshots de ingestão [skip ci]`
+  (visíveis no `git log`, cadência do agendamento a cada 30 min do
+  `ingestao.yml`, só quando o conteúdo muda) — evidência de execução
+  recorrente real do pipeline publicando em `main`/Vercel desde a resolução
+  do Bloqueio 006.
+
+Nenhum destes pushes teve resultado de build/deploy do Vercel confirmado
+diretamente por este Validador (sem acesso ao painel da conta Vercel) — a
+evidência disponível é a presença desses commits em `main`
+(`origin/main`, mesmo branch que o Vercel monitora, `vercel.json` confirmado
+na Seção 1) e a ausência de qualquer novo bloqueio registrado em
+`.md/BLOCKERS.md` depois do Bloqueio 010 até esta confirmação.
 
 ---
 
@@ -309,3 +449,4 @@ testes) limpos. Detalhe completo em `.md/BLOCKERS.md`, Bloqueio 005
 | 2026-09-06 | Validador (dupla aprovação QA + DevSecOps) | Confirmação final pré-deploy (primeira publicação conjunta, Lotes 1-11+13): regressão do zero limpa, integração pipeline↔SPA verificada manualmente sem divergência, workflows confirmados aptos sem depender de tarefa `Pendente`. Ver seção correspondente em `.md/QA-REPORT.md` e `.md/SECURITY-REVIEW.md`. Dupla aprovação **completa** — nenhuma alteração às ações operacionais pendentes da Seção 2 (ainda dependem do stakeholder); Seção 5 (histórico de deploys) segue vazia até o `git push`/execução real do `/deploy`. |
 | 2026-09-07 | Executor | Resolução do Bloqueio 004 (Seção 6): `TZ=America/Sao_Paulo` fixado em `vitest.config.ts` (`test.env`), tornando a suíte determinística em CI sem alterar nenhum componente de produção — decisão do stakeholder confirmou que RNF-02/RN-07 cobrem só cálculo interno, não apresentação na tela. Ver `.md/BLOCKERS.md`, Bloqueio 004 (Resolvido). |
 | 2026-09-07 | Executor | Resolução do Bloqueio 005 (Seção 6): padrão `token` de `pipeline/ci/verificar-segredos.mjs` deixou de casar a palavra isolada e passou a exigir formato real de segredo vazado (valor entre aspas, 16+ caracteres, com dígito), eliminando o falso positivo contra `zona.token` sem enfraquecer os outros 3 padrões. Prova de ponta a ponta contra o `dist/` real (`npm run build` + `npm run verificar-segredos`) limpa. Ver `.md/BLOCKERS.md`, Bloqueio 005 (Resolvido). |
+| 2026-09-08 | Validador (confirmação final pré-`/deploy`, chapéus QA + DevSecOps + DevOps) | Correção de Seção 1 (infraestrutura): documento estava desatualizado, ainda descrevia GitHub Pages como hosting único. Corrigido para refletir a realidade real confirmada por leitura de `vercel.json` e dos dois workflows: hosting real é **Vercel** (`https://sports-lm.vercel.app`, auto-deploy a cada push em `main`), com o pipeline de ingestão publicando snapshots públicos direto em `app/public/dados/` na própria `main` (ADR-018, Bloqueio 006) em vez da branch órfã `dados` de ADR-002. `build-publish.yml` (GitHub Pages) segue existindo mas não é mais o hosting real. Seções 3/4 (observabilidade/rollback) receberam nota apontando a mesma correção sem reescrita completa. Seção 5 (histórico de deploys) ganhou entrada resumindo, com evidência de `git log` e `.md/BLOCKERS.md` (Bloqueios 004-010), os múltiplos pushes reais que chegaram a produção desde a primeira tentativa falha (`43d26e9`), incluindo a primeira publicação real de dados (`982124d`) e a correção do elenco do Brasileirão (`5cd50e8`/Bloqueio 010). Rodada completa de portões sobre o working tree (incluindo mudanças não commitadas de `REFAT-07-02`/`REFAT-07-03`): `npm run test` 99 arquivos/1135 testes, `typecheck`/`lint`/`format:check` limpos, `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades — confirmando que `SEC-11-01`/`REFAT-01-03` (`react-router`) segue fechado (Refatoração Lote-1, 2026-09-06), sem regressão. Único achado ainda bloqueante para o próximo `/deploy` real: `REFAT-12-03`/`SEC-12-03` (sessão manual de acessibilidade), inalterado por esta rodada — ver veredito no relatório de confirmação correspondente. Nenhum `git commit`/`git push`/alteração de configuração real feita por este agente. |

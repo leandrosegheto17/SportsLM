@@ -35,7 +35,7 @@
 .secundario {
   background: transparent;
   color: var(--cor-tinta);
-  border: 1px solid var(--cor-tinta);
+  border: var(--borda-fina) solid var(--cor-tinta);
 }
 
 .terciario {
@@ -49,11 +49,11 @@
 .destrutivo {
   background: var(--cor-erro-fundo);
   color: var(--cor-erro-texto);
-  border: 1px solid var(--cor-erro-texto);
+  border: var(--borda-fina) solid var(--cor-erro-texto);
 }
 
 .fantasma {
   background: transparent;
   color: var(--clube-identidade-texto);
-  border: 1px solid var(--clube-identidade-texto);
+  border: var(--borda-fina) solid var(--clube-identidade-texto);
 }

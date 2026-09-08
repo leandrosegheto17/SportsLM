@@ -6,7 +6,7 @@
 .lista {
   display: flex;
   gap: var(--esp-4);
-  border-bottom: 1px solid var(--cor-borda);
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
 }
 
 .aba {

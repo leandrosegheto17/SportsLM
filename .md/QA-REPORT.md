@@ -2435,6 +2435,152 @@ Lote 12 ou se exige uma sessão manual real antes do primeiro deploy.
 
 ---
 
+## Lote 12 — validação de fechamento
+
+**Base específica**: `.md/TASK.md` (Lote 12: `TEL-01`, `QA-02`, `SEC-01`,
+`QA-01`, todas `Concluída`), `.md/PRD-TECNICO.md` (RNF-07, CA-03/04/05/07/08/
+09/10/11/18/19), `adr/ADR-011.md`, `adr/ADR-012.md`, `.md/UX-SPEC.md` §5.8,
+`.md/COBERTURA-DOMINIO.md`, `.md/BLOCKERS.md` (Bloqueio 001). Este é o
+veredito formal de fechamento do lote — a seção acima ("Lote 12 —
+Telemetria, acessibilidade e segurança transversal" › QA-01) é o auto-relato
+do Executor, ponto de partida, não a base da aprovação.
+
+Comandos executados por mim, do zero, no estado atual do repositório, antes
+de qualquer veredito: `npm run test` — **99 arquivos / 1135 testes
+passando**, sem falha, sem skip; `npm run typecheck` (limpo, sem saída);
+`npm run lint` (limpo, sem saída); `npm run format:check` (limpo, "All
+matched files use Prettier code style!"); `npm audit --omit=dev
+--audit-level=high` — **0 vulnerabilidades**. Não usei a nota de
+implementação do Executor como prova: li `app/telemetria/eventos.ts`,
+`app/telemetria/buildEliminacao.test.ts`, `app/index.html`,
+`dominio/noticias/sec-01-sanitizacao-csp.test.tsx`,
+`app/rotas/acessibilidade-consolidada.test.tsx`,
+`app/rotas/paginas/DetalheCampeonato.tsx` e `.md/COBERTURA-DOMINIO.md` por
+inteiro (ou nas seções relevantes), e rodei os testes reais em vez de aceitar
+a alegação.
+
+### TEL-01 — Módulo `telemetria`
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| Só os 5 eventos de RNF-07/ADR-012, sem duplicata | `NOMES_EVENTOS_TELEMETRIA` em `eventos.ts` — lista fechada de exatamente 5 nomes (`primeira_sessao`, `retorno`, `personalizacao_concluida`, `primeira_interacao_util`, `comparativo_aberto`); `eventos.test.ts` confirma ausência de duplicata | Conforme |
+| Nenhuma carga contém conteúdo/preferência | Tipos de carga (`CargaRetorno`, `CargaPersonalizacaoConcluida`, `CargaPrimeiraInteracaoUtil`, `CargaComparativoAberto`) restritos a contagem/booleano/enum fechado de rota — nenhum campo de texto livre, id de favorito, nome de fonte ou conteúdo de palpite; `nucleoTelemetria.test.ts` confirma que cada evento só tem as chaves exatas autorizadas | Conforme |
+| Interruptor de build remove o módulo do bundle (não só um `if` em runtime) | `buildEliminacao.test.ts` builda de verdade um entry-point sintético com `vite build` real (não mock), duas vezes — uma com `VITE_TELEMETRIA=on`, outra com a variável ausente — e inspeciona o artefato final por 4 marcadores (nomes de evento + função interna). Executado por mim: **passa nas duas direções** (marcadores ausentes com "off"/ausente, presentes com "on"), 3.4s de runtime real (dois builds Vite completos, não um teste unitário mockado) | Conforme, com prova real de build, não só de comportamento em runtime |
+
+**Veredito**: **Aprovado**, sem achado.
+
+### QA-02 — Testes de domínio por tabela
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| Relatório de cobertura existe e é consistente | `.md/COBERTURA-DOMINIO.md` lido por inteiro: cobre RF-03/04/05/07/08/09/10/11/18/19, 61/62 CA-xx com pelo menos um caso de tabela citado, 7 casos novos discriminados por CA | Conforme |
+| 1 lacuna sinalizada (CA-08.5) tratada corretamente como achado de implementação, não de teste | Confirmado na seção "Gaps" do relatório e no Bloqueio 001 — raciocínio consistente (nenhuma fonte real aciona hoje o caminho `formato === 'mata-mata'` com classificação prévia, só o Brasileirão publica classificação e é sempre `pontos-corridos`) | Conforme |
+| Bloqueio 001 está de fato Resolvido | `.md/BLOCKERS.md` linha 31: `Status: Resolvido`. Implementação em `app/rotas/paginas/DetalheCampeonato.tsx` confirmada por leitura direta: campo `classificacaoFinalDoGrupo` lido da entrada do campeonato (linha 758), usado só quando `ehMataMata` é verdadeiro e o campo está presente e não vazio (linhas 760-761) — comportamento aditivo, não quebra o caminho sem o campo | Conforme |
+
+**Veredito**: **Aprovado**, sem achado novo (Bloqueio 001 já fechado pelo
+próprio Executor antes desta validação).
+
+### SEC-01 — Sanitização e CSP na prática
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| `ING-N-02` remove marcação; SPA renderiza como texto | `sec-01-sanitizacao-csp.test.tsx` — payload de injeção completo (`<script>`, `onerror`, `onload`, `javascript:` href) normalizado e depois renderizado em `CartaoIngresso` real via `@testing-library/react` (DOM/jsdom, não mock); confirma zero `<script>`/`<img>`/`<svg>` no DOM final e nenhum handler executado (flag global `__xss` nunca setada). Executado por mim: passa | Conforme, com prova de DOM real |
+| `rel="noopener noreferrer"` em links externos | Teste dedicado confirma `target="_blank"` + `rel="noopener noreferrer"` em todo link externo de `CartaoIngresso` | Conforme |
+| Meta CSP do ADR-011 | Lida diretamente em `app/index.html` linha 39-42: `default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none';` — bate exatamente com o que os testes de `sec-01-sanitizacao-csp.test.tsx` (bloco "meta CSP em app/index.html") verificam por regex sobre o arquivo real, não sobre uma constante duplicada no teste | Conforme |
+| Desvio documentado (`style-src 'unsafe-inline'`) é aceitável | Comentário inline em `app/index.html` (linhas 25-37) explica que o valor de custom property CSS vem sempre de tokens internos, nunca de conteúdo de terceiro — `script-src` continua estrito (sem `unsafe-inline`/`unsafe-eval`), que é o vetor real do ADR-011. Concordo com a leitura: risco residual é de estilo, não de execução de script | Aceito como decisão de implementação razoável, não achado |
+
+**Veredito**: **Aprovado**, sem achado.
+
+### QA-01 — Verificação de acessibilidade consolidada
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| Zero violações críticas/sérias em qualquer combinação tela×tema×paleta | `acessibilidade-consolidada.test.tsx` lido por inteiro: `semViolacoesGraves` filtra por `impact === 'critical' \|\| impact === 'serious'` (não qualquer severidade, conforme o critério de aceite exato). 48 casos, 9 telas × 2 temas, amostragem de paleta documentada e justificada por risco (Home/Painel do time com as 4 paletas completas — maior risco por PR-03; demais 7 telas com amostra de 2 extremos, Corinthians acromática + Mirassol clara-ajustada). Executado por mim como parte da suíte completa: os 48 casos passam | Conforme |
+| Amostragem reduzida (não 9×2×4=72) é aceitável | O par cor×contraste em si já tem cobertura exaustiva isolada em `FaixaClube.test.tsx` (24 casos, 3 variantes × 2 temas × 4 paletas); a matriz consolidada cobre o risco de composição (cor colidindo com chrome ao redor), que é o risco novo introduzido pelas 9 telas. Redução justificada por engenharia de risco, não por atalho | Aceito, critério de aceite satisfeito pela cobertura combinada |
+| Roteiro manual (6 itens) documentado com resultado | Tabela completa na seção acima: item 3 e 6 conformes por evidência real (teste existente/matriz automatizada); itens 1, 2, 5 e parte do 4 documentados como "verificação estrutural equivalente"/"não executado", com a limitação de ambiente headless declarada explicitamente, não escondida atrás de um "passou" | Documentado com honestidade, conforme exigido pelo critério de aceite ("documentados com resultado", não "todos aprovados") |
+
+**Decisão do Validador sobre a ressalva de acessibilidade manual (itens 1, 2,
+5 e parte do 4 do roteiro)**: **aceitável para fechar o portão de saída do
+Lote 12 nesta validação, não bloqueante para o veredito funcional — mas
+tratada como pré-condição obrigatória antes do primeiro deploy em
+produção**, pelos seguintes motivos:
+
+1. A lacuna é de **infraestrutura de verificação** (sem navegador/leitor de
+   tela reais neste ambiente de CLI headless), não de **produto** — nenhuma
+   violação de acessibilidade foi de fato encontrada; o que falta é o meio de
+   observá-la de um jeito que este ambiente não tem.
+2. A cobertura automatizada substituta é real e não trivial: 48 execuções de
+   `axe-core` (que reprova especificamente `button-name`/`link-name`/`aria-*`
+   ausentes — a causa mais comum de item 1/2 falhar), mais leitura de código
+   confirmando `scroll-margin` (item 4) e ausência de bloqueio de zoom (item
+   5) — reduz o risco real de o item 1/2/4/5 esconder um problema grave, sem
+   eliminá-lo.
+3. O próprio guardrail deste agente veta bloquear por achado que não é
+   alto/crítico sem oferecer aprovação condicional — uma limitação de
+   ambiente de teste, sem violação real observada, não atinge o padrão de
+   "crítico" que o Definition of Done exige para reprovar; equivale, na
+   prática, a um débito de verificação de severidade baixa/média.
+4. Uma sessão manual real (percurso só-teclado nos 7 fluxos, VoiceOver +
+   NVDA nas 4 telas de maior risco, zoom 200% em 320px, verificação visual de
+   foco obscurecido no celular) continua **necessária antes de expor o
+   produto a usuários reais** — reprovar o lote inteiro agora não a produz
+   mais rápido, só atrasa TEL-01/SEC-01/QA-02 (já corretos) sem necessidade.
+   O ponto certo de exigi-la é como gate do chapéu DevOps antes do deploy em
+   produção (não do QA de lote), quando um navegador/dispositivo real estiver
+   disponível.
+
+**Achado registrado** (não é reprovação, é condição de saída pré-produção):
+a sessão manual real de acessibilidade (itens 1, 2, 5 e parte do 4 de
+UX-SPEC §5.8) precisa ocorrer com navegador/dispositivo real antes do
+primeiro `/deploy` em produção deste projeto — não é débito de código
+(não cabe em `Refatoração Lote-X`), é uma verificação pendente de ambiente.
+Sinalizo ao Coordenador/Gestor para que fique registrada como pré-condição
+explícita do Gate de produção (junto ao chapéu DevOps), não perdida entre um
+lote aprovado e o próximo `/deploy`.
+
+**Veredito**: **Aprovado (com ressalva de infraestrutura de verificação, não
+de produto)** — a ressalva não reabre a tarefa nem gera item em
+`Refatoração Lote-12` (não é código a corrigir); é uma pré-condição de
+processo para o primeiro deploy em produção.
+
+### Fechamento estrutural do Lote 12
+
+- Todas as 4 tarefas (`TEL-01`, `QA-02`, `SEC-01`, `QA-01`) estão
+  `Concluída` em `.md/TASK.md`.
+- Dependências da Seção 4 relativas a este lote (Lotes 8, 9, 10 e 11 como
+  pré-requisito de `QA-01`) confirmadas concluídas, sem órfã: os quatro lotes
+  de tela já têm veredito **Aprovado (com ressalvas)** anterior neste mesmo
+  `QA-REPORT.md`.
+- Nenhuma tarefa `Bloqueada` no lote.
+- Achados desta validação: nenhum achado simples/débito de código novo —
+  TEL-01, QA-02 e SEC-01 aprovados sem ressalva; a única ressalva (QA-01,
+  sessão manual real de acessibilidade) é pré-condição de deploy, não débito
+  de código, portanto **não** vira tarefa em `Refatoração Lote-12`.
+- Bloqueio 001 (achado durante QA-02) já está `Resolvido` em
+  `.md/BLOCKERS.md`, com implementação confirmada nesta validação — nenhuma
+  ação adicional necessária.
+
+### Veredito — Lote 12
+
+**Aprovado (com ressalvas)**. 4/4 tarefas aprovadas (TEL-01, QA-02, SEC-01
+sem ressalva; QA-01 com a ressalva de infraestrutura de verificação descrita
+acima). 99 arquivos / 1135 testes, `tsc`/`eslint`/`format:check` limpos,
+`npm audit --omit=dev --audit-level=high` 0 vulnerabilidades. Os 5 eventos de
+telemetria e a ausência de conteúdo/preferência na carga confirmados por
+leitura direta de tipo + teste; eliminação do módulo por build confirmada por
+prova real de dois builds Vite (não simulação); CA-08.5 (Bloqueio 001)
+confirmado resolvido com implementação real em `DetalheCampeonato.tsx`; meta
+CSP do ADR-011 confirmada literal em `app/index.html`, com teste de injeção
+XSS até o DOM real; 48 casos de `axe-core` confirmados sem violação
+crítica/séria em nenhuma combinação tela×tema×paleta. Nenhum achado vira
+tarefa em `Refatoração Lote-12`. Único item pendente: sessão manual real de
+acessibilidade (itens 1, 2, 5 e parte do 4 de UX-SPEC §5.8), registrada como
+pré-condição do Gate de deploy em produção, não como débito de código —
+sinalizada ao Coordenador/Gestor para acompanhamento. **Libera para
+auditoria do chapéu DevSecOps.**
+
+---
+
 ## Nota de resolução — Bloqueio 001 (CA-08.5, achado de QA-02 durante o Lote 12)
 
 Durante a auditoria de QA-02 (Lote 12, consolidação de testes das telas contra
@@ -2756,13 +2902,223 @@ abertas por este Validador.
 Nenhuma inconsistência que exija redesenho de dependência/decomposição —
 sem escalonamento ao Coordenador nesta rodada.
 
-**Veredito**: **Aprovado (com ressalvas)**. `Refatoração Lote-7` fechada —
+**Veredito (parcial, só `REFAT-07-01`)**: **Aprovado (com ressalvas)**.
 `REFAT-07-01` resolve de fato os 6 pontos do achado original `QA-7-01`,
 confirmado por leitura de código, execução real dos testes e conferência
 de valor de cada token novo, não pela nota do Executor; 1 achado adicional
 de mesma categoria (`QA-7-03`) registrado como débito não bloqueante em
-`REFAT-07-02`; libera para auditoria do chapéu DevSecOps (nenhum dos
-achados tem implicação de segurança — mudança puramente de CSS/tokens).
+`REFAT-07-02`. O veredito de fechamento do lote inteiro (`REFAT-07-01` +
+`REFAT-07-02`) está na seção abaixo, após a validação específica de
+`REFAT-07-02`.
+
+### Fechamento de `REFAT-07-02` — validação específica (achado `QA-7-03`)
+
+**Base específica**: achado `QA-7-03` (acima) e a tarefa `REFAT-07-02`
+(`.md/TASK.md`, lote `Refatoração Lote-7`), `Concluída`.
+
+Comandos executados por mim, do zero, no estado atual do repositório, antes
+de qualquer veredito: `npm run test -- --run` (**99 arquivos/1135 testes
+passam**, suíte inteira, 0 falhas), `npm run typecheck` (limpo), `npm run
+lint` (limpo), `npm run format:check` (limpo). Não usei a nota de
+implementação do Executor como base de aprovação: li diretamente os 12
+arquivos `.module.css` listados no critério de aceite e `tokens.css`.
+
+- **Grep de confirmação** (`(border[a-zA-Z-]*|box-shadow|outline)[^;]*\b\d+px\b`
+  em todo `*.module.css` de `app/`): a única ocorrência remanescente no
+  projeto inteiro (não só nos 12 arquivos do escopo) é
+  `app/rotas/Navegacao/Navegacao.module.css:77`
+  (`border-bottom: 2px solid transparent`) — fora do escopo nomeado de
+  `REFAT-07-02` (que cobria só `app/design-system/**`), registrado abaixo
+  como achado novo, não bloqueante. Dentro dos 12 arquivos listados, `grep`
+  confirma zero literais de borda/box-shadow fora de `var(...)`: todos os
+  pontos catalogados (`BlocoPreto:13`, `SeletorPalpite:41`, `Alternador:22`,
+  `AvatarClube:7`, `Botao:38/52/58`, `CampoBusca:10`, `Chip:10`,
+  `EstadoVazio:33`, `TabelaClassificacao:18` e `:37/44/50/51`,
+  `BarraPontuacao:32/43`, `Abas:9`, `Sobreposicao:85`) usam agora
+  `var(--borda-fina)`/`var(--borda-media)`/`var(--esp-1)`/`var(--esp-2)`,
+  lidos arquivo por arquivo (não em lote): confirmado em
+  `BlocoPreto.module.css:13` (`border: var(--borda-media) solid ...`),
+  `Botao.module.css:38/52/58` (os 3 pontos, `border: var(--borda-fina) solid
+  ...` em `.secundario`/`.destrutivo`/`.fantasma`),
+  `TabelaClassificacao.module.css:37/44/49-51` (`box-shadow: inset
+  var(--esp-1) 0 0 ...` nas 2 faixas simples, e o `box-shadow` combinado de
+  `.linha[data-time-do-usuario='true'][data-zona]` usa `inset var(--esp-1)`
+  **e** `inset var(--esp-2)` nas duas camadas, confirmando a leitura de
+  "4px→--esp-1, 8px→--esp-2" da nota do Executor por inspeção direta, não
+  por aceitação da nota), `BarraPontuacao.module.css:32/43`,
+  `Abas.module.css:9`, `Sobreposicao.module.css:85` — todos `var(--borda-fina)
+  solid ...`. Únicos `px` remanescentes nos 12 arquivos são o padrão sr-only
+  (`width: 1px; height: 1px; margin: -1px`, em `SeletorPalpite.module.css` e
+  `TabelaClassificacao.module.css`) — exceção aceita pelo critério.
+- **Valores dos tokens usados conferidos por leitura direta de
+  `tokens.css`** (não pela nota): `--borda-fina: 1px` (linha 149),
+  `--borda-media: 2px` (linha 155), `--esp-1: 4px` (linha 123), `--esp-2:
+  8px` (linha 124) — todos idênticos ao literal que substituíram em cada
+  ponto tocado (confirmado ponto a ponto acima); nenhuma mudança de
+  comportamento visual, só de mecanismo.
+- **Testes**: `vitest run app/design-system` (escopado): 99 testes de
+  `app/design-system` incluídos na suíte completa (99 arquivos/1135 testes,
+  0 falhas) — nenhuma asserção alterada nos componentes tocados por
+  `REFAT-07-02`. Comparação com o número reportado no fechamento de
+  `REFAT-07-01` (97 arquivos/1098 testes): o aumento para 99 arquivos/1135
+  testes é esperado — reflete trabalho de outros lotes já mesclados ao
+  repositório desde então (ex. `REFAT-08-01`, que já reportava 97
+  arquivos/1099 testes em seu próprio fechamento), não uma regressão nem um
+  efeito de `REFAT-07-02`; nenhum teste de componente do escopo desta tarefa
+  foi removido ou teve asserção alterada, e a contagem de testes por
+  componente citada pela nota do Executor bate com a leitura direta dos
+  arquivos de teste (`app/design-system` sozinho soma aos 99 testes citados
+  na nota, sem divergência).
+- **Verificação do item 4 (escopo esgotado o achado `QA-7-03`)**: varredura
+  ampla (`grep -rE` do mesmo padrão em todo `app/**/*.module.css`, não só
+  `app/design-system/`) encontrou **1 ocorrência não coberta**:
+  `Navegacao.module.css:77` (`border-bottom: 2px solid transparent`, usado
+  pelo item de navegação inativo — `.itemNavAtivo` na linha 87 já usa
+  `border-bottom-color: var(--nav-acento-sobre-escuro, ...)`, então só a
+  largura do traço em si ficou literal). Não estava no escopo nomeado de
+  `QA-7-03`/`REFAT-07-02` (que catalogou só `app/design-system/**`, não
+  `app/rotas/**`) — é um achado novo, não uma falha desta tarefa.
+
+### Achado QA-7-04 — Literal de borda (`2px`) fora de `var(...)` em `Navegacao.module.css`, fora do escopo de `REFAT-07-02`
+
+**Severidade**: **simples** (mesma categoria de `QA-7-01`/`QA-7-03`; não
+compromete nenhum critério de aceite — `.itemNavAtivo` já usa
+`var(--nav-acento-sobre-escuro, var(--clube-acento-sobre-escuro))` para a
+cor, só a espessura do traço ficou literal; nenhum teste afetado).
+
+`app/rotas/Navegacao/Navegacao.module.css:77` declara
+`border-bottom: 2px solid transparent` — mesmo padrão de "espessura de
+borda literal em vez de `var(--borda-media)`" já corrigido em 13 pontos do
+design system por `REFAT-07-01`/`REFAT-07-02`, desta vez fora de
+`app/design-system/` (é CSS de rota, `app/rotas/Navegacao/`), por isso não
+coberto pelo escopo nomeado de nenhuma das duas tarefas. `2px` é
+exatamente o valor de `--borda-media` (`tokens.css:155`) — mesma
+substituição mecânica das demais, sem risco de mudança visual.
+
+**Avaliação**: não é um problema de decomposição/diretriz — é o mesmo tipo
+de execução incompleta já registrado em `QA-7-03`, desta vez porque o
+escopo nomeado de `REFAT-07-02` foi limitado a `app/design-system/**` (como
+o próprio critério de aceite da tarefa definia) e não incluiu `app/rotas/`.
+Não bloqueia: sem impacto de comportamento/acessibilidade, todos os testes
+de `Navegacao` continuam passando.
+
+**Ação tomada**: nenhuma por mim aqui — registro o achado para o
+orquestrador decidir, na checagem estrutural do lote, se abre uma
+`REFAT-07-03` (ou inclui no próximo lote de refatoração já aberto) para
+este ponto residual, conforme instrução explícita de escopo desta rodada
+(não decido sozinho sobre criar `Refatoração Lote-X` nesta validação).
+
+### Fechamento estrutural de `Refatoração Lote-7` (REFAT-07-01 + REFAT-07-02)
+
+- [x] Ambas as tarefas (`REFAT-07-01`, `REFAT-07-02`) estão `Concluída` no
+      `TASK.md`.
+- [x] Nenhuma dependência órfã/inconsistente: `REFAT-07-02` dependia de
+      `REFAT-07-01` (mesmo arquivo `tokens.css`, sequencial para evitar
+      edição concorrente) — satisfeita; nenhuma tarefa de lote posterior
+      depende de `REFAT-07-02`.
+- [x] Nenhuma tarefa `Bloqueada` em todo o `TASK.md`.
+- [x] 1 achado novo de código encontrado durante esta verificação
+      (`QA-7-04`, `Navegacao.module.css:77`) — registrado neste relatório,
+      não retorno ao Executor, sem reabrir o Coordenador; decisão de
+      abrir/onde alocar a tarefa de correção fica com o orquestrador nesta
+      rodada, conforme instrução explícita.
+
+Nenhuma inconsistência que exija redesenho de dependência/decomposição —
+sem escalonamento ao Coordenador nesta rodada.
+
+**Veredito (lote completo, `REFAT-07-01` + `REFAT-07-02`)**: **Aprovado
+com ressalvas**. As duas tarefas resolvem de fato o achado `QA-7-01`
+original e o achado derivado `QA-7-03`, confirmado por leitura de código,
+execução real de `tsc`/`eslint`/`format:check`/suíte completa (99
+arquivos/1135 testes, 0 falhas) e conferência valor a valor de cada token
+usado (`--borda-fina`=1px, `--borda-media`=2px, `--esp-1`=4px,
+`--esp-2`=8px) contra o literal substituído — nenhuma mudança de
+comportamento visual, só de mecanismo (literal → token), em nenhum dos 18
+pontos tocados pelas duas tarefas. 1 achado novo de mesma categoria
+(`QA-7-04`) fora do escopo nomeado das duas tarefas, registrado como
+débito simples não bloqueante. Libera para auditoria do chapéu DevSecOps
+(nenhum dos achados tem implicação de segurança — mudança puramente de
+CSS/tokens, sem superfície nova).
+
+### Fechamento de `REFAT-07-03` — validação específica (achado `QA-7-04`)
+
+**Base específica**: achado `QA-7-04` (acima) e a tarefa `REFAT-07-03`
+(`.md/TASK.md`, lote `Refatoração Lote-7`), `Concluída`.
+
+Comandos executados por mim, do zero, no estado atual do repositório, antes
+de qualquer veredito: `npx vitest run app/rotas/Navegacao` (isolado),
+`npx vitest run` (suíte completa), `npm run typecheck`, `npm run lint`,
+`npm run format:check`. Não usei a nota de implementação do Executor como
+base de aprovação: li diretamente `Navegacao.module.css` e `tokens.css`.
+
+- **`Navegacao.module.css` lido por inteiro**: a linha 77
+  (`.itemNav`) hoje declara `border-bottom: var(--borda-media) solid
+  transparent` — o literal `2px` que originou `QA-7-04` foi substituído
+  pelo token, não reescrito com outro valor.
+- **Token conferido em `tokens.css:155`**: `--borda-media: 2px` — mesmo
+  valor numérico do literal substituído, confirmando ausência de mudança
+  visual (mesma verificação valor a valor já aplicada em `REFAT-07-01`/
+  `REFAT-07-02`).
+- **Nenhum outro literal de espessura de borda restante no arquivo**:
+  `grep -nE '\d+px' Navegacao.module.css` só retorna `1024px` (dentro de
+  `@media (min-width: ...)`, não é espessura) e `1px`/`-1px` dentro de
+  `.somenteLeitorDeTela` (padrão `sr-only` já existente antes desta tarefa,
+  fora do escopo do achado — não é `border`/`outline`/`box-shadow`).
+- **`vitest run app/rotas/Navegacao` isolado**: 9/9 passam, sem novo caso
+  de teste específico para esta mudança (correção é puramente mecânica de
+  CSS, mesmo padrão de `REFAT-07-01`/`REFAT-07-02` — nenhum teste de
+  snapshot visual no projeto que exigisse atualização).
+- **Suíte completa**: `npx vitest run` — **99 arquivos de teste, 1135
+  testes, todos passando**. Número idêntico ao reportado no fechamento de
+  `REFAT-07-02` (99 arquivos/1135 testes) — nenhuma regressão, nenhum teste
+  novo, nenhum teste quebrado.
+- **Portões**: `npm run typecheck` limpo (sem erro), `npm run lint` limpo
+  (sem erro), `npm run format:check` limpo ("All matched files use
+  Prettier code style!").
+- **Varredura final ampla (não só `app/design-system/**`)**: `grep -rnE
+  "(border(-[a-z]+)?|outline|box-shadow)\s*:\s*[^;]*[0-9]+px" --include=
+  "*.module.css" app` em todo o diretório `app/` retorna **zero
+  ocorrências** — nenhum literal de espessura de borda/outline/box-shadow
+  fora de `var(...)` sobra em nenhum `*.module.css` do projeto, dentro ou
+  fora de `app/design-system/`. Confirma que `REFAT-07-01` +
+  `REFAT-07-02` + `REFAT-07-03` fecham o padrão por completo, sem achado
+  novo desta vez.
+
+**Avaliação**: `REFAT-07-03` resolve o achado `QA-7-04` de forma pontual e
+mecânica, mesma técnica das duas tarefas anteriores do lote, sem introduzir
+mudança visual, comportamental ou de teste. Nenhum achado novo nesta
+rodada.
+
+### Fechamento estrutural de `Refatoração Lote-7` (REFAT-07-01 + REFAT-07-02 + REFAT-07-03) — completo
+
+- [x] As 3 tarefas (`REFAT-07-01`, `REFAT-07-02`, `REFAT-07-03`) estão
+      `Concluída` no `TASK.md`.
+- [x] Nenhuma dependência órfã/inconsistente: `REFAT-07-02` dependia de
+      `REFAT-07-01` (satisfeita); `REFAT-07-03` era independente das duas
+      (arquivo próprio, `Navegacao.module.css`, não tocado por nenhuma
+      delas) — confirmado por leitura do `TASK.md` e do próprio arquivo;
+      nenhuma tarefa de lote posterior depende de nenhuma das 3.
+- [x] Nenhuma tarefa `Bloqueada` em todo o `TASK.md`.
+- [x] Nenhum achado novo de código nesta verificação — a varredura final
+      ampla (acima) não encontrou mais nenhuma ocorrência do padrão em
+      lugar nenhum do projeto.
+
+Nenhuma inconsistência que exija redesenho de dependência/decomposição —
+sem escalonamento ao Coordenador.
+
+**Veredito (lote completo, `REFAT-07-01` + `REFAT-07-02` + `REFAT-07-03`)**:
+**Aprovado**. As três tarefas resolvem de fato os achados originais
+(`QA-7-01`, `QA-7-03`, `QA-7-04`), confirmado por leitura de código,
+execução real de `tsc`/`eslint`/`format:check`/suíte completa (99
+arquivos/1135 testes, 0 falhas, sem regressão em relação ao fechamento
+anterior) e conferência valor a valor de cada token usado contra o literal
+substituído em todos os pontos tocados pelas três tarefas — nenhuma
+mudança de comportamento visual, só de mecanismo (literal → token). A
+varredura final ampla em todo `app/**/*.module.css` (não só
+`app/design-system/**`) não encontrou nenhum achado novo do mesmo padrão —
+o lote fecha sem ressalva pendente. Libera para auditoria do chapéu
+DevSecOps (nenhum dos achados tem implicação de segurança — mudança
+puramente de CSS/tokens, sem superfície nova).
 
 ---
 
@@ -2981,6 +3337,131 @@ SPK-03, também ao Gestor em paralelo), não decididos por este Validador.
 
 ---
 
+## Refatoração Lote-2 — validação de fechamento
+
+**Base específica**: `REFAT-02-01` (`.md/TASK.md`, lote `Refatoração Lote-2`),
+`Concluída` (2026-09-07, atualização de status a partir do `Bloqueio 010` em
+`.md/BLOCKERS.md`, `Status: Resolvido`). Contexto necessário lido por inteiro
+antes de validar: `Bloqueio 009` e `Bloqueio 010` (`.md/BLOCKERS.md`) — 15/20
+`idsProvedor.football-data` confirmados contra a resposta real da API do
+football-data.org; os 5 clubes da configuração original que não jogam a
+Série A 2026 de verdade (`ceara`, `fortaleza`, `sport`, `juventude`,
+`criciuma`) foram substituídos, com aprovação explícita do
+usuário/stakeholder (decisão de conteúdo/configuração, não técnica), pelos 5
+clubes reais confirmados no mesmo log: Athletico Paranaense (1768), Coritiba
+(4241), RB Bragantino (4286), Clube do Remo (4287), Chapecoense (1772).
+
+Comandos executados por mim, do zero, no estado atual do repositório, antes
+de qualquer veredito: `npm run test -- --run` (**99 arquivos / 1135 testes,
+todos passando**), `npm run typecheck` (limpo), `npm run lint` (limpo),
+`npm run format:check` (limpo — "All matched files use Prettier code style!").
+
+Não usei a nota de implementação do orquestrador como base de aprovação —
+conferi cada afirmação por leitura direta de arquivo/execução real:
+
+- **`config/clubes-2026.json` sem sentinela**: lido o arquivo inteiro (20
+  entradas). Nenhuma ocorrência de `"pendente-confirmacao"` (grep confirmado
+  — as únicas 6 ocorrências da string no repositório são histórico legítimo
+  em `.md/TASK.md`, `.md/QA-REPORT.md`, `.md/SECURITY-REVIEW.md`, testes que
+  exercitam a sentinela como caso negativo (`pipeline/config/clubes.ts`,
+  `pipeline/futebol/adaptador-football-data.test.ts`,
+  `pipeline/publicacao/gerador-snapshots.test.ts`), e a constante
+  `SENTINELA_ID_PENDENTE` em `pipeline/config/clubes.ts` — nenhuma no dado
+  real). Todos os 20 `idsProvedor.football-data` são numéricos. Os 5 clubes
+  novos estão presentes com os ids exatos do Bloqueio 010: `athletico-pr`
+  (1768), `coritiba` (4241), `rb-bragantino` (4286), `remo` (4287),
+  `chapecoense` (1772) — conferido campo a campo por leitura direta do JSON,
+  não só pela nota.
+- **Identidade visual completa e contraste do ADR-017**: os 5 clubes novos
+  têm `nome`/`nomeCurto`/`sigla`/`corBase` preenchidos em
+  `config/clubes-2026.json`. Quanto à exigência de validação de contraste do
+  ADR-017 (a paleta derivada precisa passar nos 6 alvos de contraste da §3
+  do ADR ou o build quebra, `ErroPaletaInvalida`): confirmei que
+  `pipeline/config/derivador-paleta.test.ts` roda `derivarPaletasClubes`
+  sobre **todos os 20 clubes reais** carregados de `config/clubes-2026.json`
+  (não uma lista fixa hardcoded) e afirma que nenhum lança — isso cobre os 5
+  clubes novos automaticamente, sem precisar de teste nomeado por clube.
+  Rodei esse teste isoladamente
+  (`npx vitest run pipeline/config/derivador-paleta.test.ts`) e confirmei
+  passando. Também li `app/public/dados/config/clubes-2026.json` (snapshot
+  publicado) e confirmei que os 5 clubes novos têm o bloco `paleta` completo
+  (11 campos) com valores coerentes com a derivação do ADR-017 a partir da
+  `corBase` de cada um — só `coritiba` precisou de `paletaManual.faixaB`
+  (`#004526`, mesmo remédio já usado por `palmeiras` e antes por
+  `juventude`, verde com contraste insuficiente na faixa derivada); os
+  outros 4 clubes novos (Athletico-PR, RB Bragantino, Remo, Chapecoense)
+  convergem sem override. Ou seja, a checagem de contraste **foi feita** para
+  os 5 clubes novos — não por decisão manual clube a clube, mas pelo próprio
+  mecanismo estrutural do ADR-017 (validação genérica sobre o dado real, que
+  quebraria o teste/build se algum dos 5 falhasse). Não é uma lacuna.
+- **`config/campeonatos-2026.json`**: lido o arquivo inteiro. As referências
+  aos 5 clubes removidos foram retiradas das listas de `gaucho` (Juventude),
+  `cearense` (Ceará/Fortaleza), `pernambucano` (Sport) e `copa-do-nordeste`
+  (Ceará/Fortaleza/Sport) — cada uma com `observacao` explicando a ausência
+  e citando o Bloqueio 010, exatamente como a nota descreve. Brasileirão e
+  Copa do Brasil usam a lista nova de 20 clubes (com `athletico-pr`,
+  `coritiba`, `rb-bragantino`, `remo`, `chapecoense` no lugar dos 5
+  removidos). `config/campeonatos.test.ts` lê `config/clubes-2026.json`
+  dinamicamente (não uma lista hardcoded) e prova, nas duas direções, que o
+  conjunto de clubes do Brasileirão é exatamente igual ao conjunto de ids de
+  `config/clubes-2026.json` — teste real, não alegação, e passa.
+- **Grep por slugs antigos em todo o repositório** (`ceara`, `fortaleza`,
+  `sport`, `juventude`, `criciuma`, case-insensitive, fora de
+  `.md/BLOCKERS.md`/`.md/TASK.md`, histórico legítimo): as únicas ocorrências
+  encontradas fora do histórico são falsos positivos — "Sport Club" como
+  parte do nome oficial de Corinthians (`Sport Club Corinthians Paulista`) e
+  Internacional (`Sport Club Internacional`), e "Esporte"/"Esportiva" dentro
+  de nomes de clube (Palmeiras, Cruzeiro, Bahia, Vitória) e de arquivos de
+  configuração de esporte (`config/lexico-esportes.json`). Nenhuma ocorrência
+  residual real de `ceara`/`fortaleza`/`sport` (clube)/`juventude`/`criciuma`
+  encontrada em código, config, teste ou fixture de nenhum lote — incluindo
+  Lotes 8/9 (onboarding/seleção de time) e Lote 10 (painel/detalhe de
+  campeonato), que consomem a lista de clubes dinamicamente via
+  `useClubesPublicos`/snapshot, não por lista hardcoded, então a troca dos 5
+  clubes não deixou fixture desatualizada nesses lotes. Os arquivos
+  publicados por clube em `app/public/dados/futebol/clube/` já têm os 5
+  arquivos novos (`athletico-pr.json`, `coritiba.json`,
+  `rb-bragantino.json`, `remo.json`, `chapecoense.json`) e não têm mais os 5
+  antigos — confirma que a geração de snapshot (PUB-02/03) já rodou sobre a
+  configuração corrigida.
+- **`tests/clubes-2026.test.ts` atualizado**: li o arquivo inteiro. Existem,
+  e passam de fato (`npx vitest run tests/clubes-2026.test.ts`, isolado): o
+  caso "todos os 20 clubes têm id numérico confirmado (Bloqueio 010
+  resolvido — nenhuma sentinela restante)" (rejeita `SENTINELA_ID_PENDENTE`
+  e exige `typeof === 'number'` para os 20) e o caso "os 5 clubes reais
+  confirmados no Bloqueio 010 estão presentes com o id certo" (tabela
+  literal com os 5 ids esperados, batendo exatamente com o Bloqueio 010).
+  Também confirmei que o teste de clubes acromáticos (ADR-017/TR-14) foi
+  ajustado corretamente para 5 (não mais 6, já que `ceara` saiu da lista e
+  nenhum dos 5 novos é acromático) — mudança correta, não descuido.
+
+**Nenhum achado de severidade alta/crítica, nenhuma reprovação (crítica ou
+simples).**
+
+### Fechamento estrutural de `Refatoração Lote-2`
+
+- [x] A única tarefa (`REFAT-02-01`) está `Concluída` no `TASK.md`.
+- [x] Nenhuma dependência órfã/inconsistente: `REFAT-02-01` dependia de
+  `CFG-02` (Lote 2, já `Validado`) — satisfeita; nenhum lote a jusante
+  (`ING-F-01`/Lote 5, já `Validado`) ficou com pré-requisito pendente por
+  causa desta tarefa.
+- [x] Nenhuma tarefa `Bloqueada`.
+- [x] Nenhum achado novo de código encontrado durante esta verificação que
+  justifique nova tarefa de refatoração — a substituição dos 5 clubes foi
+  aplicada de ponta a ponta (dado base, campeonatos, paleta, snapshots
+  publicados, testes), sem ponta solta.
+
+Nenhuma inconsistência que exija redesenho de dependência/decomposição — sem
+escalonamento ao Coordenador nesta rodada.
+
+**Veredito**: **Aprovado**. `Refatoração Lote-2` fechada — libera para
+auditoria do chapéu DevSecOps (o achado original que originou esta tarefa era
+puramente de dado/configuração, sem implicação de segurança; a substituição
+de conteúdo, embora visível ao usuário final, já teve aprovação explícita do
+usuário/stakeholder registrada no Bloqueio 010, então não é reaberta aqui).
+
+---
+
 ## Confirmação final pré-deploy — primeira publicação (chapéu QA)
 
 **Escopo**: todos os lotes com `**Status do lote**: Validado`/`Validado (com
@@ -3081,4 +3562,6 @@ antes do `/deploy` real.
 | 2026-09-06 | Refatoração Lote-6 (débito técnico) | Aprovado | 1/1 tarefa aprovada (REFAT-06-01); 97 arquivos/1098 testes, `tsc`/`eslint`/`format:check` limpos, `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades, YAML de `ingestao.yml` validado; ordem sequencial notícias→futebol→snapshots confirmada por teste real (inclusive prova contra regressão para `Promise.all`); propagação de erro dos 3 passos sem engolir nada confirmada; 3 ramos do step "Executa pipeline de ingestão" cobrem dry-run sem script/sem token e execução real com token; ramo (c) fim-a-fim contra rede real não exercitável neste ambiente (sem `FOOTBALL_DATA_API_TOKEN`, limitação de ambiente registrada, não pendência de critério de aceite); fechamento estrutural confirmado, sem nova tarefa |
 | 2026-09-06 | Refatoração Lote-8 (débito técnico) | Aprovado | 1/1 tarefa aprovada (REFAT-08-01); 97 arquivos/1099 testes (projeto inteiro), `tsc`/`eslint`/`format:check`/`build` limpos; QA-8-01 (layout desktop de 2 colunas de T-02) confirmado resolvido por conferência número a número contra UX-SPEC §2/T-02 (336px/748px, wireframe e tabela-resumo) e leitura direta de `Home.module.css`/`Home.tsx`; breakpoint 1024px confirmado como a mesma convenção já usada em todo o projeto (UX-SPEC não declara valor numérico); novo `<div className={estilos['feed']}>` confirmado sem `role`/`aria-*` e sem alterar ordem/conteúdo/estado das 3 seções; nenhum literal fora de `var(...)` introduzido (sem colisão com o escopo de bordas de REFAT-07-02); fechamento estrutural confirmado, sem nova tarefa |
 | 2026-09-06 | Lote 13 — Spikes técnicos | Aprovado, sem reprovação | 5/5 spikes (SPK-01 a 05) com conclusão fundamentada em fonte/evidência real, nenhuma inventada; nenhum código de produção alterado (confirmado por leitura direta: `config/fontes.json` intocado — 5 fontes, GE/UOL `pendente`; `dominio/dedup/similaridade.ts` com `LIMIAR_DICE=0.82` inalterado; `app/telemetria/` sem SDK de terceiro; `pipeline/futebol/` sem adaptador novo); 97 arquivos/1099 testes, `tsc`/`eslint` limpos, idêntico ao estado anterior; 2 achados sem autoridade deste Validador para decidir (troca de alternativa do ADR-012 regra 4, e achado de termos do Placar relevante para ADR-013/P-GE) registrados em `Bloqueio 002`/`Bloqueio 003` de `BLOCKERS.md`, escalados ao coordenador (SPK-03 também ao gestor, em paralelo); nenhuma tarefa em Refatoração Lote-13 (nenhum achado é débito de código) |
+| 2026-09-07 | Refatoração Lote-2 (débito operacional/dado) | Aprovado | 1/1 tarefa aprovada (REFAT-02-01); 99 arquivos/1135 testes (projeto inteiro), `tsc`/`eslint`/`format:check` limpos; `config/clubes-2026.json` confirmado sem nenhuma ocorrência de `"pendente-confirmacao"`, 20/20 `idsProvedor.football-data` numéricos, os 5 clubes novos (Athletico-PR/Coritiba/RB Bragantino/Remo/Chapecoense) com os ids exatos do Bloqueio 010; validação de contraste do ADR-017 confirmada estruturalmente coberta pelo teste genérico de `derivador-paleta.test.ts` sobre os 20 clubes reais (só Coritiba precisou de `paletaManual`, mesmo padrão de Palmeiras); `config/campeonatos-2026.json` confirmado com as referências aos 5 clubes removidos retiradas e documentadas; grep por slugs antigos em todo o repositório sem ocorrência residual real (só falsos positivos de "Sport Club"/"Esporte" em nomes de outros clubes); `tests/clubes-2026.test.ts` confirmado com os 2 casos novos, ambos passando; fechamento estrutural confirmado, sem nova tarefa |
 | 2026-09-06 | **Confirmação final pré-deploy** (Lotes 1-11+13, primeira publicação conjunta) | **Aprovado** | Regressão do zero: 97/1099 testes, `tsc`/`eslint`/`format:check`/`build` limpos, `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades, `git status` sem edição solta fora do processo; integração entre lotes confirmada manualmente — `gerarSnapshotsEmDisco` com config real (20 clubes/Brasileirão) gerando arquivos validados com sucesso contra os schemas reais da SPA (`app/dados/{versao,futebol,configPublico}.ts`), não só contra o schema do próprio pipeline; `react-router-dom@7.18.3` sem regressão nas telas dos Lotes 8-11; workflows aptos sem depender de tarefa `Pendente`; 1 observação não bloqueante (estender teste cruzado pipeline↔SPA aos 3 arquivos que só têm checagem tautológica hoje), sem tarefa aberta; nenhum achado alto/crítico |
+| 2026-09-08 | Lote 12 — Telemetria, acessibilidade e segurança transversal | Aprovado (com ressalvas) | 4/4 tarefas aprovadas (TEL-01, QA-02, SEC-01 sem ressalva; QA-01 com ressalva de infraestrutura de verificação); 99 arquivos/1135 testes, `tsc`/`eslint`/`format:check` limpos, `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; 5 eventos de telemetria e ausência de conteúdo/preferência na carga confirmados por tipo + teste; eliminação do módulo por build confirmada por prova real de 2 builds Vite (não simulação); CA-08.5/Bloqueio 001 confirmado resolvido com implementação real (`classificacaoFinalDoGrupo`); meta CSP do ADR-011 confirmada literal em `app/index.html` com teste de injeção XSS até o DOM real; 48 casos `axe-core` confirmados sem violação crítica/séria em nenhuma combinação tela×tema×paleta; nenhum achado vira `Refatoração Lote-12` (nenhum é débito de código); ressalva de QA-01 (sessão manual real de acessibilidade — teclado, leitor de tela, zoom 200%) registrada como pré-condição do Gate de deploy em produção, não como reprovação, sinalizada ao Coordenador/Gestor; primeiro veredito de fechamento formal deste lote — libera para auditoria do chapéu DevSecOps |

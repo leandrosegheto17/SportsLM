@@ -30,7 +30,7 @@
   min-height: var(--alvo-toque-minimo);
   padding: 0 var(--esp-5);
   margin-top: var(--esp-2);
-  border: 1px solid var(--cor-borda-forte);
+  border: var(--borda-fina) solid var(--cor-borda-forte);
   border-radius: var(--raio-md);
   background: transparent;
   color: var(--cor-tinta);

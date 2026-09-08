@@ -82,5 +82,5 @@
   justify-content: flex-end;
   gap: var(--esp-3);
   padding: var(--esp-3) var(--esp-4);
-  border-top: 1px solid var(--cor-borda);
+  border-top: var(--borda-fina) solid var(--cor-borda);
 }

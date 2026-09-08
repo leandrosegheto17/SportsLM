@@ -15,7 +15,7 @@
 .tabela th,
 .tabela td {
   padding: var(--esp-2) var(--esp-2);
-  border-bottom: 1px solid var(--cor-borda);
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
   text-align: right;
 }
 
@@ -34,21 +34,21 @@
 /* Faixa de zona: 4px na borda esquerda da linha (UX-SPEC §3.8), sempre
    acompanhada da legenda textual (.listaLegendaZonas) — nunca só a cor. */
 .linha[data-zona] {
-  box-shadow: inset 4px 0 0 var(--cor-zona-linha);
+  box-shadow: inset var(--esp-1) 0 0 var(--cor-zona-linha);
 }
 
 /* Linha do time do usuário: fundo tonal + barra na cor do clube — reforçada
    pelo marcador textual "▸" e por ".somenteLeitorDeTela" (nunca só cor). */
 .linha[data-time-do-usuario='true'] {
   background: var(--clube-suave);
-  box-shadow: inset 4px 0 0 var(--clube-identidade);
+  box-shadow: inset var(--esp-1) 0 0 var(--clube-identidade);
   font-weight: 700;
 }
 
 .linha[data-time-do-usuario='true'][data-zona] {
   box-shadow:
-    inset 4px 0 0 var(--clube-identidade),
-    inset 8px 0 0 var(--cor-zona-linha);
+    inset var(--esp-1) 0 0 var(--clube-identidade),
+    inset var(--esp-2) 0 0 var(--cor-zona-linha);
 }
 
 .marcador {

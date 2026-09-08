@@ -1300,7 +1300,7 @@ do Executor):
 
 Nenhum requisito operacional novo surge desta tarefa.
 
-### Achados por severidade — Refatoração Lote-7
+### Achados por severidade — REFAT-07-01
 
 | Severidade | Achado | Bloqueia deploy? | Ação |
 |---|---|---|---|
@@ -1312,9 +1312,170 @@ além do registro de rotina do Gate 4. O achado `QA-7-03` (débito de higiene
 de token em outros arquivos, `REFAT-07-02`) é puramente de CSS/tokens, sem
 implicação de segurança — mesma avaliação desta seção se aplicaria.
 
-**Veredito**: **Aprovado, sem débito de segurança**. Mudança confirmada
-como puramente de CSS/tokens, sem superfície de segurança nova; `Refatoração
-Lote-7` liberada para a checagem estrutural final do Validador.
+**Veredito (parcial, só `REFAT-07-01`)**: **Aprovado, sem débito de
+segurança**. Mudança confirmada como puramente de CSS/tokens, sem
+superfície de segurança nova. O veredito de fechamento do lote inteiro
+(`REFAT-07-01` + `REFAT-07-02`) está na subseção abaixo, após a validação
+específica de `REFAT-07-02`.
+
+### Fechamento de `REFAT-07-02` — validação de segurança específica
+
+**Base específica**: tarefa `REFAT-07-02` (`.md/TASK.md`, lote `Refatoração
+Lote-7`), `Concluída` e já aprovada funcionalmente pelo chapéu QA com
+ressalvas (ver `.md/QA-REPORT.md`, seção "Refatoração Lote-7 — validação de
+fechamento de débito técnico", subseção "Fechamento de `REFAT-07-02`",
+incluindo o achado simples `QA-7-04` fora do escopo desta tarefa).
+
+`REFAT-07-02` consolida `--borda-fina`/`--borda-media`/`--esp-1`/`--esp-2`
+(4 tokens já existentes em `tokens.css`, nenhum token novo) em 12 arquivos
+`.module.css` de `app/design-system/`, trocando literais de espessura de
+borda/box-shadow por `var(...)` — mesma categoria mecânica de
+`REFAT-07-01`, sem mudança de lógica JS/TS. Confirmado por leitura direta
+do estado atual dos arquivos (não pela nota do Executor nem só pelo
+`QA-REPORT.md`):
+
+- **Nenhuma superfície nova de XSS/CSP**: `grep -r dangerouslySetInnerHTML`
+  em `app/design-system/` encontra 1 ocorrência, mas é um comentário em
+  `BlocoPreto.tsx:31` documentando a Diretriz de Implementação #5 (nunca
+  usar essa API) — não é uso real, e o arquivo não é um dos 12
+  `.module.css` tocados por `REFAT-07-02` (a tarefa não editou nenhum
+  `.tsx`). `grep -r 'style={'` em `app/design-system/` encontra 5
+  componentes (`TabelaClassificacao.tsx`, `FaixaClube.tsx`,
+  `CartaoIngresso.tsx`, `AvatarClube.tsx`, `BarraPontuacao.tsx`) usando
+  `style={estiloInline}` para injetar variáveis CSS — padrão pré-existente
+  e fora do escopo desta tarefa (`REFAT-07-02` só tocou `.module.css`, não
+  os `.tsx` correspondentes), já coberto pelo vetor de XSS/CSP auditado em
+  `SEC-01`. Nenhuma interpolação de dado externo em `style` foi introduzida
+  por esta tarefa.
+- `grep -nE '(border[a-zA-Z-]*|box-shadow|outline)[^;]*\b\d+px\b'` em
+  `app/design-system/**/*.module.css`: **0 ocorrências** — confirma, por
+  leitura direta e independente, o mesmo resultado já reportado pelo QA
+  (13 pontos catalogados agora usam `var(...)`, exceção sr-only
+  preservada).
+- Nenhuma dependência de runtime nova (`package.json` não muda) — mesma
+  observação de `REFAT-07-01`.
+- Nenhuma entrada externa, `fetch`, `localStorage`, log ou payload de API
+  envolvidos — `sensitive-data-exposure-check` não se aplica, mesma
+  avaliação de `REFAT-07-01`.
+- Nenhuma mudança de autenticação/autorização/isolamento multi-tenant.
+- **Segredos**: `grep -i` por `password|secret|apikey|api_key|token=|BEGIN
+  RSA/PRIVATE|AKIA...` nos 12 arquivos `.module.css` do escopo: **nenhuma
+  ocorrência** — confere por disciplina de rotina, como esperado para CSS
+  puro de tokens de design.
+- `npm audit --omit=dev --audit-level=high`, rodado do zero por mim: **0
+  vulnerabilidades**.
+
+**Nenhum achado de segurança nesta tarefa.** O achado `QA-7-04`
+(`Navegacao.module.css:77`, `border-bottom: 2px` literal fora do escopo
+nomeado de `REFAT-07-02`) é da mesma categoria puramente de CSS/tokens — se
+uma futura `REFAT-07-03` cobrir esse ponto, a mesma avaliação de ausência
+de superfície de segurança nova se aplica; não há necessidade de nova
+auditoria de segurança dedicada só para essa substituição mecânica.
+
+### Requisitos de segurança operacional para o chapéu DevOps — sem mudança (REFAT-07-02)
+
+Nenhum requisito operacional novo surge desta tarefa.
+
+### Achados por severidade — REFAT-07-02
+
+| Severidade | Achado | Bloqueia deploy? | Ação |
+|---|---|---|---|
+| — | Nenhum | — | — |
+
+Nenhum achado novo de qualquer severidade. Nenhum vazamento de
+segredo/dado pessoal. Nada com relevância estratégica de negócio a
+sinalizar ao Gestor além do registro de rotina do Gate 4.
+
+**Veredito (lote completo, `REFAT-07-01` + `REFAT-07-02`)**: **Aprovado,
+sem débito de segurança**. As duas tarefas confirmadas, por leitura direta
+independente da nota do Executor e do `QA-REPORT.md`, como mudança
+puramente de CSS/tokens em 18 pontos do design system — nenhuma
+dependência nova, nenhuma superfície de XSS/CSP nova, nenhum segredo
+exposto, `npm audit` limpo em ambas as verificações. `Refatoração Lote-7`
+(REFAT-07-01 + REFAT-07-02) liberada para a checagem estrutural final do
+Validador e, em conjunto com a aprovação funcional do QA já registrada,
+apta para o chapéu DevOps prosseguir com deploy.
+
+> Atualização: o veredito acima cobria só `REFAT-07-01` + `REFAT-07-02`. A
+> subseção abaixo fecha `REFAT-07-03` (achado `QA-7-04`) e substitui este
+> veredito parcial pelo veredito consolidado do lote completo (3 tarefas), ao
+> final desta seção.
+
+### Fechamento de `REFAT-07-03` — validação de segurança específica
+
+**Base específica**: tarefa `REFAT-07-03` (`.md/TASK.md`, lote `Refatoração
+Lote-7`), `Concluída` e já aprovada funcionalmente pelo chapéu QA sem
+ressalvas (ver `.md/QA-REPORT.md`, seção "Refatoração Lote-7 — validação de
+fechamento de débito técnico", subseção "Fechamento de `REFAT-07-03`").
+
+`REFAT-07-03` resolve o achado `QA-7-04`: em
+`app/rotas/Navegacao/Navegacao.module.css`, a regra `.itemNav` trocou
+`border-bottom: 2px solid transparent` por
+`border-bottom: var(--borda-media) solid transparent` — 1 token já existente
+em `tokens.css` (o mesmo `--borda-media` já usado por `REFAT-07-01`/
+`REFAT-07-02` em outros arquivos), nenhum token novo. Confirmado por leitura
+direta do diff real (não pela nota do Executor nem só pelo `QA-REPORT.md`):
+
+- `git diff --stat -- app/rotas/Navegacao/Navegacao.module.css`: **1 file
+  changed, 1 insertion(+), 1 deletion(-)** — confirma, por evidência
+  independente, que a mudança é exatamente a 1 linha descrita, sem nenhuma
+  superfície nova (nenhum outro arquivo `.tsx`/`.ts`/`.css` tocado por esta
+  tarefa).
+- Nenhuma dependência de runtime nova: `git diff --stat -- package.json
+  package-lock.json` **sem saída** (nenhuma mudança) — mesma observação de
+  `REFAT-07-01`/`REFAT-07-02`.
+- Nenhum código JS/TS tocado — só o arquivo `.css` acima, e só a propriedade
+  `border-bottom`. `Navegacao.tsx` (componente que consome esta classe) não
+  foi tocado por esta tarefa.
+- Nenhuma entrada externa, `fetch`, `localStorage`, log ou payload de API
+  envolvidos — `sensitive-data-exposure-check` não se aplica, mesma
+  avaliação das duas tarefas anteriores do lote.
+- Nenhuma mudança de autenticação/autorização/isolamento multi-tenant.
+- **Segredos**: `grep -inE
+  'password|secret|apikey|api_key|token=|BEGIN RSA|BEGIN PRIVATE|AKIA'` em
+  `app/rotas/Navegacao/Navegacao.module.css`: **nenhuma ocorrência**.
+- `npm audit --omit=dev --audit-level=high`, rodado do zero por mim: **0
+  vulnerabilidades** — mesmo estado já registrado desde `Refatoração
+  Lote-1`, sem regressão.
+
+**Nenhum achado de segurança nesta tarefa.** Escopo mínimo e classe de
+mudança idêntica às duas tarefas anteriores do lote (literal → token em
+CSS), sem introduzir superfície nova de qualquer tipo.
+
+### Requisitos de segurança operacional para o chapéu DevOps — sem mudança (REFAT-07-03)
+
+Nenhum requisito operacional novo surge desta tarefa.
+
+### Achados por severidade — REFAT-07-03
+
+| Severidade | Achado | Bloqueia deploy? | Ação |
+|---|---|---|---|
+| — | Nenhum | — | — |
+
+Nenhum achado novo de qualquer severidade. Nenhum vazamento de
+segredo/dado pessoal. Nada com relevância estratégica de negócio a
+sinalizar ao Gestor além do registro de rotina do Gate 4.
+
+### Veredito consolidado — `Refatoração Lote-7` completo (`REFAT-07-01` + `REFAT-07-02` + `REFAT-07-03`)
+
+**Aprovado (sem achado)**. As três tarefas, auditadas individualmente por
+leitura direta do diff real de cada uma (nunca pela nota do Executor), são
+todas da mesma classe: substituição mecânica de literal de
+cor/tamanho/espessura por `var(...)` já existente em `tokens.css`, em CSS
+Modules puro — sem código JS/TS tocado (exceto a troca de token de z-index
+em `REFAT-07-01`, também sem implicação de segurança), sem dependência de
+runtime nova em nenhuma das três (`package.json`/`package-lock.json`
+inalterados do início ao fim do lote), sem superfície nova de
+autenticação/autorização/multi-tenant/XSS/CSP/exposição de dado sensível, e
+sem segredo introduzido em nenhum dos arquivos tocados. `npm audit
+--omit=dev --audit-level=high` retornou **0 vulnerabilidades** nas três
+verificações independentes (uma por tarefa), sem regressão em relação ao
+estado registrado desde `Refatoração Lote-1`. Nenhum achado de nenhuma
+severidade nas 3 tarefas — não há débito de segurança a registrar.
+`Refatoração Lote-7` (as 3 tarefas) libera para o fechamento estrutural
+final do Validador e, em conjunto com a aprovação funcional do QA sem
+ressalvas já registrada (`.md/QA-REPORT.md`), está apta para o chapéu DevOps
+prosseguir com deploy.
 
 ---
 
@@ -1487,7 +1648,308 @@ desta publicação por decisão prévia, não por achado novo deste chapéu.
 
 ---
 
-## Log de Auditorias
+## Refatoração Lote-2 — validação de fechamento de débito técnico (chapéu DevSecOps)
+
+**Base específica**: débito `REFAT-02-01` (`idsProvedor.football-data` com
+`SENTINELA_ID_PENDENTE` em 19/20 clubes, achado original de dado/configuração
+sem implicação de segurança — ver linhas 188-213 acima, Lote 2), rastreado
+desde então em todo lote intermediário (linhas 466, 607, 795, 881, 963, 1059)
+e explicitamente excluído da "Confirmação final pré-deploy" (linha 1424) por
+estar pendente naquele ponto de corte. Fechado via `Bloqueio 009`/`Bloqueio
+010` (`.md/BLOCKERS.md`) e aprovado funcionalmente pelo chapéu QA em
+`.md/QA-REPORT.md`, seção "Refatoração Lote-2 — validação de fechamento"
+(2026-09-07, veredito **Aprovado**). Auditoria feita **depois** dessa
+aprovação funcional, conforme a regra de sincronização QA→DevSecOps — não
+aceito a nota de fechamento do QA nem a nota do orquestrador como prova de
+segurança; recolho evidência própria abaixo.
+
+### 1. Varredura de segredo (foco 1 do escopo desta auditoria)
+
+- Li `config/clubes-2026.json` por inteiro (20 entradas): cada `idsProvedor`
+  contém só `{ "football-data": <número inteiro> }` — nenhuma string, nenhum
+  campo de credencial, nenhum header/URL de autenticação. Dado público de
+  identidade de clube (id do provedor, nome, sigla, cor), o mesmo tipo de dado
+  que qualquer resposta pública da API do football-data.org já expõe.
+- Li `config/campeonatos-2026.json` por inteiro: só ids de clube (strings-slug
+  já existentes no domínio) e texto de observação — nenhum segredo.
+- Li `Bloqueio 009` e `Bloqueio 010` (`.md/BLOCKERS.md`) por inteiro,
+  incluindo as transcrições/descrições do log do GitHub Actions usadas para
+  capturar o mapeamento id↔nome: grep por `FOOTBALL_DATA_API_TOKEN`,
+  `X-Auth-Token`, `Bearer`, `api_key`/`apikey` e por padrão de token
+  alfanumérico longo (15+ caracteres) dentro do arquivo inteiro — as únicas
+  ocorrências de `FOOTBALL_DATA_API_TOKEN` são texto descritivo ("token nunca
+  deve aparecer em log", "sem acesso ao `FOOTBALL_DATA_API_TOKEN`"), nunca o
+  valor do token; as ocorrências de `api_key`/`Bearer` no arquivo pertencem a
+  outras entradas de bloqueio (evolução do próprio verificador de segredos,
+  linhas 274-471), não a esta tarefa. Nenhum valor de segredo real ou
+  verossímil em nenhuma das duas entradas.
+- Confirmei por leitura de `pipeline/futebol/orquestrador.ts`/
+  `pipeline/ingestao-cli.ts` (trecho tocado pelo Bloqueio 009, que criou o
+  `console.warn` de diagnóstico usado para obter o mapeamento) que o log de
+  clube não mapeado emite só `idProvedor`/`nome` — nenhuma variável de
+  ambiente nem referência a `process.env` no trecho de log. Mesma conclusão já
+  registrada pelo próprio executor no Bloqueio 009 e reconfirmada aqui por
+  mim, não aceita por alegação.
+- `diff` entre `config/clubes-2026.json` e o snapshot publicado
+  `app/public/dados/config/clubes-2026.json`: a única diferença é o bloco
+  `paleta` derivado (PUB-01/ADR-017), já existente no fluxo de publicação
+  normal — nenhum campo novo, nenhum segredo introduzido pela publicação.
+- Inspecionei os 5 novos arquivos publicados por clube em
+  `app/public/dados/futebol/clube/` (`athletico-pr.json`, `coritiba.json`,
+  `rb-bragantino.json`, `remo.json`, `chapecoense.json`): mesmo formato dos
+  demais 15, só dado de competição público.
+
+### 2. `npm audit` (foco 2)
+
+`npm audit --omit=dev --audit-level=high` (executado por mim, do zero, no
+estado atual do repositório, após o merge de `REFAT-02-01`): **0
+vulnerabilidades**. Sem regressão em relação à Confirmação final pré-deploy.
+
+### 3. Conformidade com SDD.md §7 (foco 3) — premissa de "sem superfície nova" confirmada, não assumida
+
+- Li `.md/SDD.md` §7 (Requisitos de Segurança) por inteiro. A mudança se
+  encaixa em §7.4 ("Validação de entrada e conteúdo de terceiros"): embora
+  `config/clubes-2026.json` seja config estática versionada (não uma resposta
+  de rede em tempo real), ela é consumida pelo mesmo schema Zod estrito que já
+  valida qualquer alteração no arquivo — confirmado por leitura de
+  `pipeline/config/clubes.ts`: `EsquemaClubeBase` é `.strict()` (rejeita campo
+  desconhecido), `id` restrito a slug (`^[a-z0-9]+(-[a-z0-9]+)*$`), `sigla`
+  restrita a 3 letras maiúsculas, `corBase` restrita a hex `#RRGGBB`,
+  `idsProvedor` é um `record<string, string|number>` não vazio. Os 5 clubes
+  novos e os 15 ids atualizados passam por essa mesma validação — não há
+  campo novo, tipo novo ou relaxamento de schema introduzido por
+  `REFAT-02-01`.
+- `idsProvedor.football-data` é usado só como chave de correlação para casar
+  a resposta do provedor com o clube local (`obterClubePorId`,
+  `traduzirClassificacao`/`traduzirPartidas`) — nunca interpolado em URL,
+  comando de shell ou query; não é vetor de injeção. Confirmado por leitura de
+  `pipeline/config/clubes.ts` (só comparação de valor) — nenhum uso de
+  `idsProvedor` em concatenação de string encontrado no restante do
+  repositório (grep).
+- §7.1 (Superfície de ataque) permanece correta sem alteração: a mudança não
+  cria banco de dados, endpoint mutável, sessão, upload ou qualquer novo tipo
+  de entrada de usuário — é substituição de conteúdo dentro do mesmo dado
+  público de identidade de clube já coberto por §7.1(a). Premissa do escopo
+  desta tarefa ("é dado público de identidade de clube, não deveria introduzir
+  superfície nova") **confirmada** por esta verificação, não apenas aceita.
+- §7.6 (Privacidade): nenhum dado pessoal envolvido — nome/sigla/cor/id de
+  clube são dados públicos de competição, mesma classificação já usada em todo
+  o restante do contrato publicado.
+
+### 4. Varredura de segredo pós-build (foco 4)
+
+- `npm run build` (do zero) seguido de `npm run verificar-segredos` (varre
+  `dist/`): **"nenhum padrão encontrado em 'dist'"**.
+- `node pipeline/ci/verificar-segredos.mjs app/public/dados` (equivalente ao
+  script `verificar-segredos:dados`, apontado diretamente para o diretório de
+  snapshots publicados que inclui a mudança desta tarefa): **"nenhum padrão
+  encontrado em 'app/public/dados'"**.
+- Nenhum falso positivo novo disparado pelos 5 clubes novos (nomes/siglas sem
+  caractere que colida com os 4 padrões do verificador — `token`, `api_key`,
+  `Bearer`, chave-hex-32+) e nenhum segredo real escondido — os dois comandos
+  rodaram limpos, cobrindo tanto o bundle da SPA quanto os dados publicados.
+
+### Requisitos de segurança operacional para o chapéu DevOps
+
+Nenhum requisito novo. Os já registrados em `.md/DEPLOY.md` §1 (gestão de
+`FOOTBALL_DATA_API_TOKEN` como secret do GitHub Actions, pinagem por SHA,
+permissões mínimas por job) continuam válidos sem alteração — esta tarefa não
+mexeu em workflow, pipeline de CI/CD nem em código de acesso ao provedor.
+
+### Achados por severidade — Refatoração Lote-2
+
+| Severidade | Achado | Bloqueia deploy? | Ação |
+|---|---|---|---|
+| — | `REFAT-02-01` (`idsProvedor` com sentinela pendente) | Não — fechado | Nenhuma; achado encerrado, confirmado sem sentinela restante e sem segredo introduzido |
+
+Nenhum achado novo de severidade alta/crítica. Nenhuma questão de
+compliance/negócio nova a sinalizar ao Gestor além do já registrado no
+Bloqueio 010 (decisão de conteúdo, aprovada pelo usuário/stakeholder, sem
+implicação de segurança).
+
+**Veredito**: **Aprovado (sem achado)**. O débito de dado/configuração que
+vinha sendo rastreado como `REFAT-02-01` desde o Lote 2 está fechado de fato
+— confirmado por leitura direta de config/schema/log, `npm audit` limpo e
+varredura de segredo limpa em bundle e dados publicados, não pela nota do
+orquestrador ou do chapéu QA. `Refatoração Lote-2` liberada do lado de
+segurança; nenhum novo requisito operacional para o chapéu DevOps; nenhuma
+mudança na dupla aprovação já concedida na Confirmação final pré-deploy para
+os demais lotes.
+
+---
+
+## Lote 12 — Telemetria, acessibilidade e segurança transversal
+
+**Base específica**: `.md/TASK.md` (Lote 12: `TEL-01`, `QA-02`, `SEC-01`,
+`QA-01`, todas `Concluída`), `.md/PRD-TECNICO.md` (RNF-07, RNF-04, CA-13.5),
+`.md/SDD.md` §7, `adr/ADR-011.md`, `adr/ADR-012.md`, `adr/ADR-014.md`,
+`.md/GUARDRAILS.md` §4/§6, `.md/QA-REPORT.md` (seção "Lote 12 — validação de
+fechamento", veredito **Aprovado com ressalvas** — QA-01 tem pendência de
+verificação manual de acessibilidade documentada, tratada pelo chapéu QA como
+pré-condição obrigatória antes do primeiro deploy, não como bloqueio deste
+lote). Auditoria feita **depois** dessa aprovação funcional, conforme a regra
+de sincronização QA→DevSecOps — não aceitei a nota de implementação do
+Executor nem a nota de fechamento do chapéu QA como prova de segurança: reli
+eu mesmo `app/telemetria/id.ts`, `app/telemetria/eventos.ts`,
+`app/telemetria/nucleoTelemetria.ts`, `app/telemetria/index.ts`,
+`app/telemetria/coletor.ts`, `app/index.html`,
+`dominio/noticias/sec-01-sanitizacao-csp.test.tsx`,
+`app/rotas/sobreposicoes/Configuracoes/SecaoPrivacidade.tsx`, e rodei os
+comandos abaixo eu mesmo, do zero, no estado atual do repositório.
+
+### 1. TEL-01 — identificador anônimo e conteúdo dos eventos
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| Identificador não é derivado de/correlacionável com dado pessoal | `gerarIdAnonimo` (`app/telemetria/id.ts`) usa só `crypto.randomUUID`/`getRandomValues`/`Math.random` — nenhuma entrada de IP, user agent, dispositivo, rede ou comportamento; persistido em `sportslm.anonimo.v1` (chave já convencionada por `armazenamento/telemetriaId.ts`, ADR-005), apagável e reiniciável (`obterOuCriarIdAnonimo` gera um novo quando a chave está ausente) | Conforme — id opaco, sem vínculo a PII, mesma leitura do ADR-012 regra 2 |
+| Os 5 eventos (ADR-012) não carregam conteúdo/preferência/URL/favorito | Li `eventos.ts` por inteiro: `CargaRetorno` (`diasDesdePrimeiraSessao: number`), `CargaPersonalizacaoConcluida` (`quantidadeFavoritos: number`, `temTimeDefinido: boolean` — nunca a lista de favoritos nem o id do time), `CargaPrimeiraInteracaoUtil` (`milissegundosAteInteracao: number`), `CargaComparativoAberto` (`rota: 'comparativo'\|'simulacao'`, enum fechado, nunca o conteúdo do comparativo/palpite), `primeira_sessao` sem carga. `nucleoTelemetria.ts` confirma que `criarEvento` só monta `{ nome, timestampMs, idAnonimo, carga }` — nenhum campo extra em nenhuma das 5 funções de registro | Conforme — nenhuma carga excede a tabela do ADR-012 |
+| `VITE_TELEMETRIA` desliga tudo por padrão (opt-in, não opt-out) | `index.ts`: cada função pública guarda a chamada real atrás de `if (import.meta.env.VITE_TELEMETRIA === 'on')` — variável **ausente** (não só `'off'`) já resulta em condição falsa; grep em `.github/workflows/*.yml` confirma que nenhum workflow define `VITE_TELEMETRIA`, então o build de produção atual não habilita telemetria; `.env`/`.env.local` (únicos lugares que poderiam setar a variável localmente) estão listados em `.gitignore` (confirmado via `git check-ignore -v`), não versionados. Prova de build real (não só de runtime): `buildEliminacao.test.ts` builda duas vezes com Vite de verdade e confirma que o artefato "off"/ausente não contém nenhum dos 4 marcadores (nomes de evento + função interna) — executado por mim, passa nas duas direções | Conforme — comportamento padrão é desligado; habilitar exige ação explícita de quem builda (nunca opt-out de usuário final) |
+| Sumidouro (`coletor.ts`) não faz I/O de rede | Lido por inteiro: buffer em memória + `Set` de ouvintes, sem `fetch`/`XMLHttpRequest`/`navigator.sendBeacon` — SPK-04 (qual SDK/host real) segue em aberto, nenhuma requisição sai do navegador hoje mesmo com `VITE_TELEMETRIA=on` | Conforme, e reduz o risco residual: mesmo se alguém builda com a flag ligada antes de SPK-04 concluir, nada é de fato transmitido a terceiro |
+
+**Nenhum achado.**
+
+### 2. SEC-01 — CSP e sanitização na prática (tarefa mais crítica do lote)
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| Meta CSP completa (`app/index.html`, linha 41) | Lida diretamente: `default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none';` — `script-src` estrito (sem `unsafe-inline`/`unsafe-eval`, o vetor real do ADR-011), `object-src`/`base-uri` travados a `'none'` (defesa em profundidade), `connect-src` restrito a `'self'` (host de telemetria fica só como placeholder comentado, linha 38, até TEL-01/SPK-04 escolher provedor) | Conforme com ADR-011 passo 9, exceto o desvio documentado abaixo |
+| Ressalva `style-src 'unsafe-inline'` é aceitável | Comentário inline (linhas 19-36) explica: >10 componentes do design system injetam cor via custom property CSS (`style` inline), sempre resolvida de tokens internos, nunca de texto de terceiro (título/resumo de notícia são sempre nó de texto, nunca viram atributo `style`); `script-src` continua estrito. Concordo com a leitura técnica: o vetor de XSS real (`<script>`/`javascript:`/handler inline vindo do feed) não passa por `style-src` — confirmei eu mesmo, por leitura de `CartaoIngresso.tsx`/`BlocoPreto.tsx`/`FaixaClube.tsx`, que nenhum desses componentes interpola texto de terceiro dentro do atributo `style` | Aceito como decisão de implementação razoável — risco residual é de estilo (poluição visual no limite), não de execução de script. Registrado como débito de hardening de baixa severidade (ver achados) |
+| `dangerouslySetInnerHTML` ausente do uso real | `grep -rn "dangerouslySetInnerHTML" --include="*.ts*"` no projeto inteiro (fora `node_modules`): as únicas 5 ocorrências são em comentário de prosa (`BlocoPreto.tsx`, explicando que o componente *não* usa) e no próprio teste `sec-01-sanitizacao-csp.test.tsx` que varre o repositório por `dangerouslySetInnerHTML\s*=\s*\{` (uso real de JSX) e falha se encontrar — nenhuma ocorrência de uso real em `app/`/`dominio/`. Executei o teste eu mesmo: passa | Conforme, confirmado por grep próprio, não só pela suíte |
+| `rel="noopener noreferrer"` em todo link externo de notícia | `grep -rn "<a\b\|href="` em `app/`/`dominio/` (fora testes): único `<a target="_blank">` real do projeto é `CartaoIngresso.tsx` (linhas 187-197), com `rel="noopener noreferrer"` presente incondicionalmente no ramo `destino === 'interno' ? <Link> : <a ... rel="noopener noreferrer">`; os dois pontos de consumo de notícia (`SecaoUltimasNoticias.tsx`, `SecaoSeusEsportes.tsx`) sempre passam `destino="externo"` para `CartaoIngresso`, nunca renderizam `<a>` próprio. Os demais `href=`/`<a>` do projeto (`Layout.tsx` skip-link, `FaixaClubeDoTime.tsx`/`SecaoIdentidade.tsx` para `/time`) são navegação interna, sem `target="_blank"` | Conforme — todo link externo de conteúdo de terceiro passa pelo único ponto de saída auditado |
+| Teste de injeção XSS de ponta a ponta contra `ING-N-02` | `sec-01-sanitizacao-csp.test.tsx` já cobre isso com prova de DOM real (não mock): payload com `<script>`, `onerror`, `onload` e `href` `javascript:` no mesmo item; `linkBruto: 'javascript:...'` é descartado na normalização (ADR-011 passo 2); com link válido, título/resumo maliciosos nunca sobrevivem (`normalizarItem`), e renderizado em `CartaoIngresso` real via `@testing-library/react`, confirma zero `<script>`/`<img>`/`<svg>` no DOM e a flag global `__xss` nunca setada. Executei a suíte eu mesmo (não aceitei a alegação do Executor/QA): passa. Considero esta prova automatizada suficiente — não vi necessidade de um teste manual adicional além do que já roda em CI | Conforme, com prova de DOM real já suficiente |
+
+**Achado `SEC-12-01`** (severidade baixa, débito de hardening, não bloqueia):
+`style-src 'unsafe-inline'` é um desvio documentado e tecnicamente
+justificado do texto literal do ADR-011, mas ainda é uma superfície maior do
+que o necessário enquanto os >10 componentes do design system dependem de
+`style` inline para cor dinâmica. Migrar para nonce/hash de `<style>` (ou
+para classes CSS geradas em vez de custom property inline) eliminaria a
+ressalva por completo. Não bloqueia — o vetor real de execução de script
+(`script-src`) segue estrito, e a fonte da cor é sempre interna, nunca de
+conteúdo de terceiro.
+
+### 3. Dependências de runtime
+
+`npm audit --omit=dev --audit-level=high` (executado por mim, do zero):
+**0 vulnerabilidades**. Nenhuma dependência nova introduzida pelo Lote 12
+(`package.json` inalterado desde o Lote 11).
+
+### 4. Compliance regulatória (LGPD/RNF-07) aplicável à telemetria
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| Aviso de consentimento simples existe e está correto | `SecaoPrivacidade.tsx` (Lote 9, wired em `Configuracoes.tsx` linha 314): texto canônico "Suas preferências ficam só neste navegador. Não usamos conta nem cookies. Enviamos 5 eventos anônimos de uso.", botão "Ver quais" revela os 5 nomes de evento (mesmos nomes/ordem do RNF-07/ADR-012), botão "Desativar e apagar id" chama `apagarIdentificadorAnonimo` | Conforme ADR-012 regra 6 ("consentimento simples se a ferramenta exigir") — RNF-07 pede telemetria mínima com aviso simples para o estágio de protótipo, não LGPD completa (base legal formal/política publicada só "se virar produto", ADR-012 e ADR-015) |
+| Nenhum cookie usado | Confirmado por leitura de `coletor.ts`/`id.ts` — persistência é só `localStorage` (`sportslm.anonimo.v1`), sem `document.cookie` em nenhum módulo de telemetria | Conforme — texto do aviso ("não usamos cookies") é factualmente verdadeiro, não só marketing |
+| Rótulo do botão "Desativar e apagar id" corresponde ao comportamento real | Li `SecaoPrivacidade.tsx`/`telemetriaId.ts`: o botão só chama `apagarIdentificadorAnonimo` (remove a chave). Não existe, hoje, um interruptor de runtime que impeça a próxima chamada de `obterOuCriarIdAnonimo` de gerar um novo id e continuar registrando eventos (a única forma real de desligar telemetria é o interruptor de **build**, `VITE_TELEMETRIA`, não algo que o usuário final controla em runtime) | **Achado `SEC-12-02`** (severidade baixa — transparência de consentimento, não vazamento de dado): o rótulo "Desativar e apagar id" pode sugerir ao usuário que a telemetria para de rodar, quando na prática só o identificador é trocado (evento seguinte usa um id novo, se `VITE_TELEMETRIA=on`). Não é dado pessoal exposto nem descumprimento de RNF-07 (que exige só "consentimento simples", não um toggle real de opt-out em runtime) — é uma imprecisão de copy que vale ajustar antes de qualquer sessão real com usuários, para o texto não prometer mais do que o mecanismo entrega |
+| Nenhum outro requisito de compliance aplicável não atendido | Reli RNF-07/RNF-15/ADR-012/ADR-015 por inteiro: enquanto RNF-15 mantém o produto em "contexto de protótipo, sem compromisso de lançamento comercial", a barra de compliance declarada é "mínima" (sem conta, sem PII, telemetria anonimizada, consentimento simples) — integralmente atendida. Base legal LGPD formal, política de privacidade publicada e consentimento formal são gatilhos explícitos de "Se virar produto" (ADR-012/ADR-015), não exigíveis nesta fase | Conforme ao escopo declarado do protótipo — nenhum requisito de compliance obrigatório em aberto para o estágio atual |
+
+**Nenhum achado bloqueante de compliance.** `SEC-12-02` registrado como débito
+de baixa severidade (ajuste de copy), não como violação de LGPD/RNF-07.
+
+### 5. Ressalva de acessibilidade manual do chapéu QA (QA-01) — implicação de segurança/compliance
+
+O chapéu QA aprovou QA-01 com ressalva: os itens 1, 2, 5 e parte do 4 do
+roteiro manual de UX-SPEC §5.8 (percurso só-teclado real, leitor de tela
+real, zoom 200%/320px, verificação visual de `scroll-margin`) não foram
+executados por falta de navegador/leitor de tela reais neste ambiente —
+documentados como pendência de infraestrutura de verificação, não como
+achado de produto, e tratados como **pré-condição obrigatória antes do
+primeiro deploy em produção**.
+
+Avaliação deste chapéu sobre a implicação de segurança/compliance dessa
+ressalva:
+
+- `GUARDRAILS.md` §6 declara "WCAG 2.2 AA é critério de aceite, não
+  recomendação" e fixa `axe-core` com zero violações críticas/sérias como
+  **portão de CI** — esse portão está integralmente atendido (48/48 casos,
+  confirmado nesta auditoria e na validação de fechamento do chapéu QA). O
+  portão de CI não inclui, por definição, o percurso manual — a própria
+  ADR-014 ("Verificação") registra que o automatizado cobre "cerca de um
+  terço dos critérios" e que a lista manual da Seção 5 do UX-SPEC "existe
+  justamente para o resto". Ou seja, a lacuna hoje em aberto (itens 1/2/5 e
+  parte do 4) não é um desvio do critério de aceite automatizado — é a parte
+  do critério de aceite completo (WCAG 2.2 AA de fato, não só o subconjunto
+  automatizável) que ainda não tem prova real.
+- ADR-014 (seção "Consequências") liga explicitamente WCAG 2.2 AA à
+  "expectativa legal brasileira (LBI/eMAG) **caso o protótipo avance**" — ou
+  seja, o próprio ADR já delimita quando essa lacuna vira exposição legal
+  real: não neste estágio de protótipo/coorte de teste (RNF-15), mas no
+  momento em que o produto avança para uso mais amplo. Isso está alinhado
+  com a decisão do chapéu QA de não bloquear o lote, mas de exigir a
+  verificação manual real como pré-condição do primeiro deploy.
+- Concordo com a leitura do chapéu QA: **isto não é puramente
+  funcional/UX, fora do meu chapéu** — tem implicação de compliance
+  (WCAG como critério de aceite não-negociável do próprio GUARDRAILS, e como
+  expectativa legal condicional do ADR-014), mas essa implicação já está
+  corretamente endereçada como um gate de pré-deploy, não como algo a
+  ignorar. Meu papel aqui, como chapéu DevSecOps com poder de bloquear
+  deploy, é **reforçar** que este é um bloqueio real de deploy (não uma nota
+  solta) — ver achado `SEC-12-03` abaixo.
+
+**Achado `SEC-12-03`** (severidade média — compliance condicional, não
+bloqueia a aprovação deste lote, **bloqueia o próximo `/deploy` real que
+exponha o produto além deste ambiente de desenvolvimento**): sessão manual
+real (percurso só-teclado nos 7 fluxos, VoiceOver + NVDA nas 4 telas de
+maior risco — T-02/T-06/T-08/T-09, zoom 200% em 320px, verificação visual de
+`scroll-margin` no celular) pendente de execução em ambiente com
+navegador/leitor de tela reais. Prazo: antes do próximo `/deploy` real
+(mesmo padrão de backstop já usado para `SEC-01-03`/`REFAT-01-03`). Registrado
+também em `.md/TASK.md` (nota da tarefa `QA-01`) para visibilidade do
+Coordenador/Gestor.
+
+### 6. Requisitos de segurança operacional para o chapéu DevOps (definidos aqui)
+
+- Nenhum secret novo: o coletor de telemetria não faz I/O de rede ainda
+  (SPK-04 em aberto); quando um provedor for escolhido, a URL/host real deve
+  entrar em `connect-src` (substituindo o placeholder comentado) e qualquer
+  chave pública de projeto (não secreta, por definição de GoatCounter/
+  Cloudflare Web Analytics) deve ser tratada como configuração, não como
+  `secret` do GitHub Actions — nenhuma credencial de telemetria é esperada.
+- Nenhuma mudança em `build-publish.yml`/`ingestao.yml` requerida por este
+  lote — CSP é servida via `<meta>` no próprio HTML publicado (limitação já
+  aceita em ADR-011: `frame-ancestors`/`X-Frame-Options` não funcionam por
+  `<meta>`, débito RT-13 já registrado, sem mudança).
+- Reforço do requisito já vigente (`SEC-11-01`/`REFAT-01-03`): backstop de
+  `react-router`/`react-router-dom` continua bloqueando o próximo `/deploy`
+  real, junto com o novo `SEC-12-03` (sessão manual de acessibilidade) — o
+  chapéu DevOps não deve executar deploy de produção enquanto qualquer um dos
+  dois estiver em aberto.
+
+### Achados por severidade — Lote 12
+
+| Severidade | Achado | Bloqueia deploy? | Ação |
+|---|---|---|---|
+| — | Nenhum achado alto/crítico | — | — |
+| Baixa | `SEC-12-01` — `style-src 'unsafe-inline'`, desvio documentado e tecnicamente aceito do ADR-011 | Não | Débito de hardening; migrar para nonce/hash de `<style>` quando o design system permitir, sem prazo fixado (severidade baixa) |
+| Baixa | `SEC-12-02` — rótulo "Desativar e apagar id" sugere mais do que o mecanismo entrega (só troca o id, não desliga telemetria em runtime) | Não | Ajustar copy antes de qualquer sessão real com usuários; sem prazo fixado (severidade baixa, transparência de consentimento) |
+| Média | `SEC-12-03` — sessão manual real de acessibilidade (itens 1/2/5 e parte do 4 do roteiro UX-SPEC §5.8) ainda não executada, WCAG 2.2 AA é critério de aceite não-negociável (GUARDRAILS §6) e liga a expectativa legal LBI/eMAG condicional (ADR-014) | **Sim — bloqueia o próximo `/deploy` real** | Executar a sessão manual (teclado, VoiceOver/NVDA, zoom 200%/320px, verificação visual de `scroll-margin`) antes do primeiro deploy que exponha o produto além deste ambiente de desenvolvimento; prazo: antes do próximo `/deploy` real |
+| Média | `SEC-11-01`/`REFAT-01-03` — reafirmação, sem mudança neste lote | Sim — já bloqueava | Inalterado |
+
+Nenhum achado deste lote tem, isoladamente, relevância estratégica de
+negócio que exija decisão do Gestor além do registro de rotina do Gate 4 —
+mas sinalizo ao Gestor, em paralelo (não como pré-requisito deste veredito),
+que `SEC-12-03` soma-se a `SEC-11-01` como segundo motivo concreto para o
+`/deploy` real permanecer bloqueado até ambos fecharem.
+
+## Veredito — Lote 12
+
+**Aprovado (com débito registrado)**. TEL-01 confirmado sem dado pessoal em
+identificador ou carga de evento, com interruptor de build desligado por
+padrão (opt-in, não opt-out) e prova real de eliminação do bundle. SEC-01
+confirmado com CSP completa, `dangerouslySetInnerHTML` ausente do uso real,
+`rel="noopener noreferrer"` em todo link externo de notícia, e prova de DOM
+real contra payload de injeção — a única ressalva (`style-src
+'unsafe-inline'`) é aceita como decisão técnica razoável, registrada como
+débito de baixa severidade. `npm audit` sem vulnerabilidade alta/crítica.
+Nenhum requisito de compliance obrigatório em aberto para o estágio de
+protótipo declarado (RNF-15) — a ressalva de acessibilidade manual do
+chapéu QA **tem**, sim, implicação de compliance (WCAG como critério de
+aceite não-negociável e expectativa legal condicional), por isso elevada
+aqui a achado de severidade média (`SEC-12-03`) que **bloqueia o próximo
+`/deploy` real**, junto com o débito já vigente de `react-router`
+(`SEC-11-01`). O Lote 12 em si está liberado para a checagem estrutural
+final do Validador — o achado bloqueante é sobre o **deploy**, não sobre a
+aprovação deste lote.
 
 | Data | Lote | Veredito | Observação |
 |---|---|---|---|
@@ -1504,7 +1966,9 @@ desta publicação por decisão prévia, não por achado novo deste chapéu.
 | 2026-09-06 | Lote 11 — Rivais, comparativo e simulação | Aprovado, sem débito novo | Nenhum dado pessoal em `Cenario`/`Preferencias.rivais`; toda fronteira de entrada externa consumida (`Cenario`/`Preferencias` de `localStorage`, `/dados/futebol/brasileirao.json`, `/dados/ingestao/status.json`) validada com Zod; isolamento de escopo do cenário (time+rivais) confirmado sem vazamento entre escopos; `dangerouslySetInnerHTML` ausente; nenhuma dependência de runtime nova; `npm audit` com as mesmas 2 vulnerabilidades moderadas de `react-router`, achado `SEC-11-01` (reafirmação de `REFAT-01-03`, prazo inalterado, não vencido); o achado do chapéu QA (QA-11-01) não tem implicação de segurança — último lote de tela antes do Lote 12 |
 | 2026-09-06 | Refatoração Lote-1 (débito técnico) | Aprovado, sem débito em aberto | Fecha `SEC-01-02` (5 ações de `build-publish.yml` confirmadas por SHA de commit via GitHub API, batendo exatamente com as tags `v5.0.0`/`v3.0.1`/`v4.0.5` reivindicadas, `object.type=="commit"`; `runs-on: ubuntu-24.04` alinhado) e `SEC-01-03`/`SEC-08-01` (`react-router-dom@7.18.3`, `npm audit --omit=dev` 0 vulnerabilidades, sem superfície nova — SPA client-side sem SSR/loader de servidor); remove o backstop que bloqueava o próximo `/deploy` real desde o Lote 6 |
 | 2026-09-06 | Refatoração Lote-6 (débito técnico) | Aprovado, sem débito bloqueante | `tsx` (devDependency) confirmado sem vulnerabilidade de runtime (`npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; as 7 vulnerabilidades da árvore completa são pré-existentes em eslint/vite/vitest, sem `tsx` na cadeia); token `FOOTBALL_DATA_API_TOKEN` confirmado nunca logado (leitura só via `process.env` em `orquestrador.ts`, mensagem de erro estática, `ingestao-cli.ts` nunca referencia o token, secret do workflow nunca ecoado); nenhum requisito operacional novo para o chapéu DevOps |
-| 2026-09-06 | Refatoração Lote-7 (débito técnico) | Aprovado, sem débito | `REFAT-07-01` confirmada como mudança puramente de CSS/tokens, sem dependência de runtime nova, sem entrada externa/fetch/localStorage/log envolvidos; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades, sem regressão; nenhum achado de qualquer severidade; nenhum requisito operacional novo para o chapéu DevOps |
+| 2026-09-08 | Refatoração Lote-7 (débito técnico) — completo (`REFAT-07-01` + `REFAT-07-02` + `REFAT-07-03`) | Aprovado (sem achado) | As 3 tarefas confirmadas, cada uma por leitura direta do diff real, como mudança puramente de CSS/tokens (literal → `var(...)` já existente em `tokens.css`, incluindo a troca de token de z-index em `REFAT-07-01`), sem dependência de runtime nova em nenhuma das três, sem entrada externa/fetch/localStorage/log envolvidos, sem superfície de XSS/CSP nova, sem segredo introduzido; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades nas 3 verificações independentes, sem regressão; nenhum achado de qualquer severidade nas 3 tarefas; nenhum requisito operacional novo para o chapéu DevOps; apto para dupla aprovação (QA + DevSecOps) e deploy |
 | 2026-09-06 | Refatoração Lote-8 (débito técnico) | Aprovado, sem débito novo | `REFAT-08-01` confirmada como mudança puramente de CSS/estrutura de container (grade de 2 colunas em `Home.module.css` + 2 tokens de largura), sem dependência de runtime nova, sem prop/estado/fetch/`localStorage` novo nas 3 seções; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades, sem regressão; nenhum achado de qualquer severidade novo; débito `SEC-08-01`/`REFAT-01-03` (react-router, backstop do próximo `/deploy` real) permanece inalterado; nenhum requisito operacional novo para o chapéu DevOps |
 | 2026-09-06 | Lote 13 — Spikes técnicos | Aprovado, sem achado, sem débito novo | Auditoria leve (lote de investigação, sem código novo); `config/fontes.json` confirmado intocado byte a byte (SPK-03), `config/fontes.test.ts` limpo; nenhuma dependência de runtime nova (SPK-04, `app/telemetria/` sem SDK de terceiro plugado, `connect-src` inalterado); 97 arquivos/1099 testes, `tsc`/`eslint` limpos; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; achado de termos do Placar (SPK-03) é conformidade/negócio, não vulnerabilidade técnica — registrado no `QA-REPORT.md`/`BLOCKERS.md`, não como achado de segurança aqui; nenhum requisito operacional novo para o chapéu DevOps |
 | 2026-09-06 | **Confirmação final pré-deploy** (Lotes 1-11+13, primeira publicação conjunta) | **Aprovado (com débito já registrado, nenhum novo)** | `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; segredo/isolamento `dominio/pipeline/app` reconfirmados sem novo artefato de produção; achado de hardening não bloqueante sobre sincronia manual de schema pipeline↔SPA (mesmo achado do chapéu QA, sem vulnerabilidade real hoje); requisitos operacionais para o chapéu DevOps inalterados (já em `.md/DEPLOY.md`); dupla aprovação QA+DevSecOps completa para este conjunto de lotes |
+| 2026-09-07 | Refatoração Lote-2 (débito técnico) | Aprovado, sem achado | `REFAT-02-01` (sentinela `idsProvedor` pendente em 19/20 clubes, mais substituição de 5 clubes por Bloqueio 010) fechado; nenhum segredo em `config/clubes-2026.json`, `config/campeonatos-2026.json`, snapshots publicados ou nas transcrições de log dos Bloqueios 009/010 (grep dedicado, sem ocorrência de token real); schema Zod `.strict()` de `pipeline/config/clubes.ts` confirma ausência de campo/superfície nova; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; `verificar-segredos` limpo em `dist/` e em `app/public/dados/`; nenhum requisito operacional novo para o chapéu DevOps |
+| 2026-09-08 | Lote 12 — Telemetria, acessibilidade e segurança transversal | Aprovado (com débito registrado) | TEL-01: identificador anônimo sem PII, 5 eventos sem conteúdo/preferência (relidos por inteiro), `VITE_TELEMETRIA` desligado por padrão (nenhum workflow define a variável, `.env*` gitignorado), eliminação do bundle provada por build real; SEC-01: CSP completa lida em `app/index.html`, `dangerouslySetInnerHTML` ausente do uso real (grep próprio), `rel="noopener noreferrer"` confirmado no único ponto de saída externa (`CartaoIngresso`), teste de injeção XSS de ponta a ponta com DOM real executado; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; achados novos de baixa severidade `SEC-12-01` (`style-src 'unsafe-inline'`, aceito, débito de hardening) e `SEC-12-02` (rótulo "Desativar e apagar id" impreciso, débito de copy); achado de severidade média `SEC-12-03` (sessão manual real de acessibilidade pendente, WCAG 2.2 AA é critério de aceite não-negociável do GUARDRAILS e liga expectativa legal condicional do ADR-014) **bloqueia o próximo `/deploy` real**, somando-se ao débito já vigente `SEC-11-01`/`REFAT-01-03` (react-router) |

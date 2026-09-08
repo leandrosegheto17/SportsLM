@@ -4,7 +4,7 @@
   justify-content: center;
   flex: 0 0 auto;
   border-radius: var(--raio-pill);
-  border: 1px solid var(--cor-borda-forte);
+  border: var(--borda-fina) solid var(--cor-borda-forte);
   background: var(--clube-identidade);
   color: var(--clube-identidade-texto);
   font: var(--txt-rotulo) var(--fonte-sistema);
