@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-07T22:27:51.514Z"
+    "ultimaAtualizacao": "2026-09-08T00:37:06.382Z"
   },
   "classificacao": [
     {
@@ -176,6 +176,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 11,
+      "clubeId": "vitoria",
+      "pontos": 32,
+      "jogos": 26,
+      "v": 9,
+      "e": 5,
+      "d": 12,
+      "gp": 25,
+      "gc": 37,
+      "sg": -12,
+      "aproveitamento": 41.02564102564102,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 12,
       "clubeId": "corinthians",
       "pontos": 32,
       "jogos": 26,
@@ -191,7 +207,7 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 12,
+      "posicao": 13,
       "clubeId": "santos",
       "pontos": 32,
       "jogos": 25,
@@ -207,7 +223,7 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 13,
+      "posicao": 14,
       "clubeId": "botafogo",
       "pontos": 31,
       "jogos": 25,
@@ -223,33 +239,17 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 14,
-      "clubeId": "vitoria",
-      "pontos": 29,
-      "jogos": 25,
-      "v": 8,
-      "e": 5,
-      "d": 12,
-      "gp": 24,
-      "gc": 37,
-      "sg": -13,
-      "aproveitamento": 38.666666666666664,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
       "posicao": 15,
       "clubeId": "gremio",
       "pontos": 28,
-      "jogos": 24,
+      "jogos": 25,
       "v": 7,
       "e": 7,
-      "d": 10,
+      "d": 11,
       "gp": 27,
-      "gc": 32,
-      "sg": -5,
-      "aproveitamento": 38.88888888888889,
+      "gc": 33,
+      "sg": -6,
+      "aproveitamento": 37.333333333333336,
       "ultimosCinco": []
     },
     {
@@ -4463,7 +4463,7 @@
       "dataHora": "2026-09-07T23:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
