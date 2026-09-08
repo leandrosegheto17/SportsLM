@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-08T10:27:50.291Z"
+      "ultimaAtualizacao": "2026-09-08T14:42:26.930Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -455,8 +455,8 @@
         "fase": null,
         "mandanteId": "bahia",
         "visitanteId": "remo",
-        "dataHora": "2026-09-12T00:00:00Z",
-        "horarioDefinido": false,
+        "dataHora": "2026-09-14T23:00:00Z",
+        "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
         "placar": null
@@ -468,8 +468,8 @@
         "fase": null,
         "mandanteId": "athletico-pr",
         "visitanteId": "bahia",
-        "dataHora": "2026-09-19T00:00:00Z",
-        "horarioDefinido": false,
+        "dataHora": "2026-09-20T22:30:00Z",
+        "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
         "placar": null
@@ -481,8 +481,8 @@
         "fase": null,
         "mandanteId": "palmeiras",
         "visitanteId": "bahia",
-        "dataHora": "2026-10-07T00:00:00Z",
-        "horarioDefinido": false,
+        "dataHora": "2026-10-09T00:30:00Z",
+        "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
         "placar": null
@@ -494,8 +494,8 @@
         "fase": null,
         "mandanteId": "bahia",
         "visitanteId": "mirassol",
-        "dataHora": "2026-10-10T00:00:00Z",
-        "horarioDefinido": false,
+        "dataHora": "2026-10-11T22:30:00Z",
+        "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
         "placar": null
