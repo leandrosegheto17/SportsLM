@@ -110,5 +110,34 @@
       "estado": "pendente",
       "em": null
     }
+  },
+  {
+    "id": "ogol",
+    "nome": "ogol.com.br",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol"
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "superesportes",
+    "nome": "Superesportes",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "basquete",
+      "tenis",
+      "volei-quadra",
+      "formula1",
+      "mma"
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
   }
 ]
