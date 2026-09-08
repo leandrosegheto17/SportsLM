@@ -1,8 +1,8 @@
 {
-  "geradoEm": "2026-09-08T05:33:16.386Z",
+  "geradoEm": "2026-09-08T10:27:50.291Z",
   "fontes": {
     "ge": {
-      "ultimaTentativa": "2026-09-08T05:33:14.342Z",
+      "ultimaTentativa": "2026-09-08T10:27:47.066Z",
       "resultado": "pulado",
       "itensNovos": 0,
       "falhasConsecutivas": 0,
@@ -10,7 +10,7 @@
       "instavelDesde": null
     },
     "espn-brasil": {
-      "ultimaTentativa": "2026-09-08T05:33:14.342Z",
+      "ultimaTentativa": "2026-09-08T10:27:47.066Z",
       "resultado": "ok",
       "itensNovos": 0,
       "falhasConsecutivas": 0,
@@ -18,7 +18,7 @@
       "instavelDesde": null
     },
     "gazeta-esportiva": {
-      "ultimaTentativa": "2026-09-08T05:33:14.342Z",
+      "ultimaTentativa": "2026-09-08T10:27:47.066Z",
       "resultado": "falha",
       "itensNovos": 0,
       "falhasConsecutivas": 1,
@@ -26,7 +26,7 @@
       "instavelDesde": null
     },
     "terra-esportes": {
-      "ultimaTentativa": "2026-09-08T05:33:14.342Z",
+      "ultimaTentativa": "2026-09-08T10:27:47.066Z",
       "resultado": "falha",
       "itensNovos": 0,
       "falhasConsecutivas": 1,
@@ -34,7 +34,7 @@
       "instavelDesde": null
     },
     "uol-esporte": {
-      "ultimaTentativa": "2026-09-08T05:33:14.342Z",
+      "ultimaTentativa": "2026-09-08T10:27:47.066Z",
       "resultado": "ok",
       "itensNovos": 15,
       "falhasConsecutivas": 0,
@@ -43,14 +43,16 @@
     }
   },
   "distribuicaoClassificacao": {
-    "geral": 7,
-    "futebol": 8
+    "geral": 4,
+    "mma": 2,
+    "futebol": 8,
+    "formula1": 1
   },
   "gruposFormados": 0,
   "futebol": {
     "brasileirao-serie-a": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-09-08T05:33:16.386Z"
+      "ultimaAtualizacao": "2026-09-08T10:27:50.291Z"
     },
     "libertadores": {
       "resultado": "sem-cobertura",
