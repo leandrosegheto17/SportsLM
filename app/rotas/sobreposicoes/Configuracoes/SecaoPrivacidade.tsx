@@ -15,13 +15,19 @@
 // ordem, do texto de RNF-07 (PRD-TECNICO.md Seção 2) e da tabela do ADR-012 —
 // nada inventado aqui, só exibido.
 //
-// "Desativar e apagar id" (ADR-012 regra 2/regra 6): apaga
+// "Trocar identificador anônimo" (ADR-012 regra 2/regra 6): apaga
 // `sportslm.anonimo.v1` via `armazenamento/telemetriaId.ts` — TEL-01 (módulo
-// `telemetria`, Lote 12, ainda não implementado) é quem de fato grava esse
-// identificador; o botão já funciona corretamente quando TEL-01 existir,
-// sem precisar tocar nesta tela de novo (ver comentário de topo do módulo
-// de armazenamento). Nenhum mecanismo de telemetria é criado aqui — só a
-// limpeza da chave já convencionada em ADR-012.
+// `telemetria`, Lote 12) é quem de fato grava esse identificador; ao apagar a
+// chave, a próxima leitura de `obterOuCriarIdAnonimo` (TEL-01) gera um novo
+// UUID. Nenhum mecanismo de telemetria é criado aqui — só a limpeza da chave
+// já convencionada em ADR-012.
+//
+// REFAT-12-02 (achado SEC-12-02, DevSecOps no fechamento do Lote 12): o
+// rótulo original ("Desativar e apagar id") dava a entender que o botão
+// desliga a telemetria em runtime — na verdade ele só troca o identificador
+// anônimo local; a coleta continua rodando normalmente com um novo id. O
+// rótulo e o texto de apoio abaixo foram ajustados para refletir esse
+// comportamento real, sem nenhuma mudança funcional.
 
 import { useState, type ReactElement } from 'react';
 import { Botao } from '../../../design-system/componentes/Botao';
@@ -44,6 +50,10 @@ export const EVENTOS_TELEMETRIA_RNF07: readonly string[] = [
 
 export const TEXTO_CONFIRMACAO_ID_APAGADO = 'Identificador local apagado.';
 
+/** REFAT-12-02: rótulo do botão — reflete a troca do identificador anônimo
+ * local, não o desligamento da telemetria (achado SEC-12-02). */
+export const TEXTO_BOTAO_TROCAR_ID = 'Trocar identificador anônimo';
+
 export interface PropriedadesSecaoPrivacidade {
   /** Injeção de teste; padrão é `globalThis.localStorage`. */
   readonly armazenamento?: Pick<Storage, 'removeItem'>;
@@ -55,7 +65,7 @@ export function SecaoPrivacidade({
   const [mostrarEventos, setMostrarEventos] = useState(false);
   const [idApagado, setIdApagado] = useState(false);
 
-  function aoDesativarEApagarId(): void {
+  function aoTrocarIdAnonimo(): void {
     apagarIdentificadorAnonimo(armazenamento);
     setIdApagado(true);
   }
@@ -86,10 +96,15 @@ export function SecaoPrivacidade({
         >
           {mostrarEventos ? 'Ocultar' : 'Ver quais'}
         </Botao>
-        <Botao variante="secundario" onClick={aoDesativarEApagarId}>
-          Desativar e apagar id
+        <Botao variante="secundario" onClick={aoTrocarIdAnonimo}>
+          {TEXTO_BOTAO_TROCAR_ID}
         </Botao>
       </div>
+
+      <p className={estilos['texto']}>
+        A telemetria continua ativa; isto só troca o identificador anônimo local por um
+        novo.
+      </p>
 
       <p aria-live="polite" className={estilos['confirmacao']}>
         {idApagado ? TEXTO_CONFIRMACAO_ID_APAGADO : ''}

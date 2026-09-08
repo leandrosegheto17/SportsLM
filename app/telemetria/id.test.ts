@@ -57,7 +57,7 @@ describe('obterOuCriarIdAnonimo (ADR-012 regra 2)', () => {
     expect(obterOuCriarIdAnonimo(armazenamento)).toBe('id-fake-existente');
   });
 
-  it('depois de apagado (botão "Desativar e apagar id"), a próxima chamada reinicia com um novo id', () => {
+  it('depois de apagado (botão "Trocar identificador anônimo"), a próxima chamada reinicia com um novo id', () => {
     const armazenamento = criarArmazenamentoFalso({
       [CHAVE_ARMAZENAMENTO_ANONIMO]: 'id-antigo',
     });

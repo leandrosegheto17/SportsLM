@@ -1,6 +1,7 @@
 // app/armazenamento/telemetriaId.ts — apoio a UI-T03-02 (TASK.md Lote 9)
 //
-// "Desativar e apagar id" (UX-SPEC §3/T-03, RNF-07/ADR-012 regra 2): o
+// "Trocar identificador anônimo" (rótulo corrigido em REFAT-12-02/SEC-12-02;
+// UX-SPEC §3/T-03, RNF-07/ADR-012 regra 2): o
 // identificador anônimo de telemetria vive em `sportslm.anonimo.v1` — chave
 // já definida por ADR-012 ("UUID v4 gerado no dispositivo, guardado em
 // `sportslm.anonimo.v1` [...] reiniciável por um botão nas configurações"),

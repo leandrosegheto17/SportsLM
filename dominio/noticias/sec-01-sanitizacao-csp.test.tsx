@@ -12,6 +12,13 @@
 // unidade) — este arquivo fecha a lacuna que faltava: um teste que vai até o
 // DOM renderizado de verdade (`CartaoIngresso`, `@testing-library/react`)
 // com um payload de injeção completo, e a verificação da meta CSP publicada.
+//
+// REFAT-12-01 (achado SEC-12-01, TASK.md "Refatoração Lote-12"): estendido
+// para cobrir o fechamento do débito de `style-src 'unsafe-inline'` —
+// confirma que a diretiva ficou estrita (`style-src 'self'`, sem
+// `'unsafe-inline'`) e que isso não quebra os componentes do design system
+// que usam `style={{...}}` para custom properties CSS de cor por clube (ver
+// `app/index.html` para a explicação técnica completa da decisão).
 
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
@@ -198,5 +205,116 @@ describe('SEC-01 — meta CSP em app/index.html (ADR-011 passo 9)', () => {
 
   it('host de telemetria fica documentado como placeholder comentado, não ativo (TEL-01 ainda não define o provedor)', () => {
     expect(indexHtml).toMatch(/<!--\s*connect-src 'self' https:\/\/<host-de-telemetria/);
+  });
+
+  // REFAT-12-01 (achado SEC-12-01): fecha o débito aceito em SEC-01 —
+  // style-src agora segue a leitura literal do ADR-011, sem 'unsafe-inline'.
+  it("style-src estrito ('self', sem unsafe-inline) — REFAT-12-01 fecha o débito de SEC-12-01", () => {
+    expect(csp).toMatch(/style-src 'self';/);
+    expect(csp).not.toMatch(/style-src[^;]*unsafe-inline/);
+  });
+});
+
+describe("REFAT-12-01 — style-src sem 'unsafe-inline' não quebra o design system", () => {
+  // A remoção de 'unsafe-inline' de style-src só é segura porque nenhum
+  // arquivo do projeto manipula o ATRIBUTO HTML `style` diretamente
+  // (`Element.setAttribute('style', ...)` ou `CSSStyleDeclaration.cssText`)
+  // — que é o que a diretiva de fato restringe. A prop `style={{...}}` do
+  // React (usada por CartaoIngresso/BlocoPreto/FaixaClube/AvatarClube/
+  // BarraPontuacao/Navegacao/TabelaClassificacao/Comparativo/PainelTime/
+  // Simulacao/SecaoIdentidade para custom properties CSS de cor por clube)
+  // é aplicada via CSSOM propriedade a propriedade
+  // (`style.setProperty()`/`style[nome] = valor`, ver `setValueForStyles`
+  // em `node_modules/react-dom`), que style-src NÃO bloqueia (MDN,
+  // content-security-policy.com). Este teste é a guarda de regressão: se
+  // algum dia alguém introduzir `setAttribute('style', ...)`/`.cssText =`
+  // em produção, este teste falha ANTES de virar um bug silencioso só
+  // visível num navegador real com a CSP aplicada.
+  it('nenhum arquivo de produção usa setAttribute("style", ...) ou .cssText = (romperia style-src sem unsafe-inline)', async () => {
+    const { readdirSync, readFileSync: lerArquivo, statSync } = await import('node:fs');
+    const raizApp = resolve(diretorioAtual, '../../app');
+    const raizDominio = resolve(diretorioAtual, '../../dominio');
+
+    function coletarArquivos(dir: string): string[] {
+      const entradas = readdirSync(dir);
+      const arquivos: string[] = [];
+      for (const entrada of entradas) {
+        const caminho = resolve(dir, entrada);
+        const stat = statSync(caminho);
+        if (stat.isDirectory()) {
+          arquivos.push(...coletarArquivos(caminho));
+        } else if (
+          /\.(tsx?|jsx?)$/.test(entrada) &&
+          !entrada.endsWith('.test.tsx') &&
+          !entrada.endsWith('.test.ts')
+        ) {
+          arquivos.push(caminho);
+        }
+      }
+      return arquivos;
+    }
+
+    const arquivos = [...coletarArquivos(raizApp), ...coletarArquivos(raizDominio)];
+    const usosArriscados: string[] = [];
+    const padraoArriscado = /\.setAttribute\(\s*['"]style['"]|\.cssText\s*=/;
+
+    for (const arquivo of arquivos) {
+      const conteudo = lerArquivo(arquivo, 'utf-8');
+      if (padraoArriscado.test(conteudo)) {
+        usosArriscados.push(arquivo);
+      }
+    }
+
+    expect(usosArriscados).toEqual([]);
+  });
+
+  it('nenhum arquivo de produção usa CSS-in-JS de runtime (styled-components/emotion) que exigiria unsafe-inline via <style> dinâmico', async () => {
+    const { readFileSync: lerArquivo } = await import('node:fs');
+    const pkgJson = JSON.parse(
+      lerArquivo(resolve(diretorioAtual, '../../package.json'), 'utf-8'),
+    ) as {
+      dependencies?: Record<string, string>;
+      devDependencies?: Record<string, string>;
+    };
+    const todasDeps = { ...pkgJson.dependencies, ...pkgJson.devDependencies };
+    const bibliotecasCssInJsRuntime = [
+      'styled-components',
+      'emotion',
+      '@emotion/react',
+      '@emotion/styled',
+      'goober',
+      '@stitches/react',
+    ];
+
+    const encontradas = bibliotecasCssInJsRuntime.filter((lib) => lib in todasDeps);
+    expect(encontradas).toEqual([]);
+  });
+
+  it('AvatarClube (custom property CSS via style prop) renderiza e aplica a cor de fundo sem erro, mesmo com style-src estrito (React usa CSSOM, não o atributo HTML)', async () => {
+    const { AvatarClube } = await import(
+      '../../app/design-system/componentes/AvatarClube/AvatarClube'
+    );
+    const { render: renderizar, cleanup: limpar } = await import(
+      '@testing-library/react'
+    );
+    const { default: React } = await import('react');
+
+    const { container } = renderizar(
+      React.createElement(AvatarClube, {
+        sigla: 'PAL',
+        nomeClube: 'Palmeiras',
+        corIdentidade: '#00693c',
+        tamanho: 44,
+      }),
+    );
+
+    const raiz = container.firstElementChild as HTMLElement | null;
+    expect(raiz).not.toBeNull();
+    // A prop `style` do React foi aplicada via CSSOM (getPropertyValue lê o
+    // CSSStyleDeclaration já resolvido, independente de como foi setado) —
+    // prova de que o componente segue funcional sem `unsafe-inline`.
+    expect(raiz?.style.width).toBe('44px');
+    expect(raiz?.style.getPropertyValue('--clube-identidade')).toBe('#00693c');
+    limpar();
   });
 });

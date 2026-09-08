@@ -16,29 +16,41 @@
       real (TASK.md Lote 12/13); quando TEL-01 escolher o provedor, adicionar
       o host real à diretiva `connect-src` abaixo (nunca remover 'self').
 
-      Desvio pequeno de detalhe registrado (TASK.md §6, SEC-01): ADR-011
-      escreve `style-src 'self'` sem `'unsafe-inline'`. Isso quebraria, em
-      qualquer navegador que aplique a CSP à risca, o padrão já estabelecido
-      e validado do design system de injetar cor por custom property CSS via
-      atributo `style` inline (`--cartao-cor-barra`, `--bloco-preto-*`,
-      `--clube-*` — ver `app/design-system/README.md`/`tokens.css`, usado por
-      >10 componentes já concluídos: CartaoIngresso, BlocoPreto, FaixaClube,
-      AvatarClube, BarraPontuacao etc.). O vetor de ameaça real do ADR-011
-      (execução de `<script>`/`javascript:` vindo do feed) não passa por
-      `style-src`: o valor de `style` nesses componentes é sempre resolvido
-      internamente a partir de tokens confiáveis do próprio app, nunca de
-      texto de terceiro (título/resumo são sempre nó de texto, nunca viram
-      atributo `style`). Por isso `'unsafe-inline'` foi adicionado só a
-      `style-src` (não a `script-src`, que segue estrito) — mantém o design
-      system funcional sem reabrir o vetor que o ADR-011 realmente mitiga.
-      Se o Coordenador preferir a leitura literal do ADR, a alternativa é
-      migrar os >10 componentes para nonce/hash de `<style>` — fora do
-      escopo desta tarefa de auditoria.
+      REFAT-12-01 (achado SEC-12-01, fecha o débito aceito em SEC-01):
+      `style-src` agora segue a leitura literal do ADR-011 — **sem**
+      `'unsafe-inline'`. O débito anterior partia de uma premissa que não se
+      confirmou: `style-src` bloqueia a manipulação do **atributo HTML**
+      `style` (markup, `Element.setAttribute('style', ...)`,
+      `CSSStyleDeclaration.cssText`), mas **não** bloqueia a manipulação do
+      CSSOM feita propriedade a propriedade
+      (`CSSStyleDeclaration.setProperty()` / `estilo[propriedade] = valor`)
+      — comportamento documentado (MDN, content-security-policy.com) e
+      confirmado lendo o próprio código-fonte do React usado neste projeto
+      (`setValueForStyles` em `react-dom`, `node_modules/react-dom/cjs/
+      react-dom.development.js`): toda prop `style={{...}}` do React,
+      incluindo custom properties CSS (`--cartao-cor-barra`,
+      `--bloco-preto-*`, `--clube-*` etc., usadas por CartaoIngresso,
+      BlocoPreto, FaixaClube, AvatarClube, BarraPontuacao, Navegacao,
+      TabelaClassificacao, Comparativo, PainelTime, Simulacao,
+      SecaoIdentidade — ver `app/design-system/README.md`/`tokens.css`) é
+      aplicada via `style.setProperty(nome, valor)` (propriedades `--*`) ou
+      `style[nome] = valor` (demais propriedades) — nunca via
+      `setAttribute('style', ...)`/`cssText` (confirmado por busca: nenhuma
+      ocorrência real no projeto). Por isso remover `'unsafe-inline'` de
+      `style-src` **não** exige nonce/hash nem reescrever componente algum:
+      o vetor que a diretiva restringe (atributo `style` vindo de
+      HTML/markup) nunca foi o mecanismo usado aqui. Não há CSS-in-JS de
+      runtime no projeto (`styled-components`/`emotion`/similar — só CSS
+      Modules, que viram arquivo `.css` externo servido por
+      `<link rel="stylesheet">`, já coberto por `style-src 'self'`), então
+      não há `<style>`/`textContent` dinâmico a se preocupar. Prova
+      automatizada em `dominio/noticias/sec-01-sanitizacao-csp.test.tsx`
+      (suíte "REFAT-12-01").
     -->
     <!-- connect-src 'self' https://<host-de-telemetria-a-definir-por-TEL-01>; -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none';"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none';"
     />
     <title>SportsLM</title>
   </head>

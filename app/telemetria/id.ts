@@ -5,9 +5,10 @@
 // convencionada por `armazenamento/telemetriaId.ts` (UI-T03-02), reutilizada
 // aqui em vez de duplicada. Não deriva de IP, dispositivo, rede ou
 // comportamento; é apagado ao limpar o navegador (chave comum de
-// `localStorage`) ou pelo botão "Desativar e apagar id" das configurações
-// (`apagarIdentificadorAnonimo`); é reiniciável — a próxima chamada deste
-// módulo, sem o valor salvo, gera um novo.
+// `localStorage`) ou pelo botão "Trocar identificador anônimo" das
+// configurações (`apagarIdentificadorAnonimo`, rótulo corrigido em
+// REFAT-12-02/SEC-12-02 — a telemetria em si continua ativa); é reiniciável —
+// a próxima chamada deste módulo, sem o valor salvo, gera um novo.
 //
 // Fica em `app/telemetria/`, não em `dominio/` (SDD §2.1): usa
 // `localStorage` e a API `crypto` do navegador.
