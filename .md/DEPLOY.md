@@ -340,6 +340,8 @@ evidência disponível é a presença desses commits em `main`
 na Seção 1) e a ausência de qualquer novo bloqueio registrado em
 `.md/BLOCKERS.md` depois do Bloqueio 010 até esta confirmação.
 
+| 2026-09-08 | Vercel (produção, auto-deploy via integração Git) | `cd747b6` | **Sucesso** — confirmado diretamente via `vercel inspect` (não por nota de terceiro): deployment `dpl_HLy1ATndKaDwaUxSD9MCrYDW9C78`, criado ~26s após o `git push`, `status: ● Ready`, `target: production`, com o alias `https://sports-lm.vercel.app` já apontando para ele; `curl` a `https://sports-lm.vercel.app` retornou `200`. | Commit publica o fechamento de Refatoração Lote-2 (REFAT-02-01, sem achado novo), Refatoração Lote-7 completo (REFAT-07-01/02/03, consolidação de tokens de borda) e a validação do Lote 12 com a criação de Refatoração Lote-12 (REFAT-12-01/02/03). **Débito aceito explicitamente pelo orquestrador/usuário em 2026-09-08**: `REFAT-12-03` (sessão manual real de acessibilidade, WCAG 2.2 AA, achado `SEC-12-03`) segue pendente — publicação liberada porque as mudanças deste commit são só CSS de tokens (sem alteração de valor visual) e documentação, não tocam superfície de acessibilidade. `REFAT-12-01`/`REFAT-12-02` também seguem pendentes, sem prazo vencido nesta rodada. Nenhum incidente na confirmação imediata pós-deploy; janela de observação de 24h ainda não fechada no momento deste registro. |
+
 ---
 
 ## 6. Achado bloqueante — primeira tentativa de deploy real (2026-09-06)
