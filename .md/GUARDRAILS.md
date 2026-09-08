@@ -42,9 +42,12 @@ decisão arquitetural já tomada, um novo ADR.
   Executor, do Validador nem do Coordenador sozinho.
 - **Só feed oficial (RSS/Atom) ou API com termos públicos** (RN-01). Proibido:
   scraping de HTML, API não documentada, "engenharia reversa" de endpoint.
-- **Catálogo de notícias tem exatamente 5 fontes**, com o GE sempre presente e
-  não-bloqueável (RN-03, RN-19). Trocar a 5ª fonte é alteração de configuração
-  (`config/fontes.json`), nunca mudança de código.
+- **Catálogo de notícias tem exatamente 7 fontes** (ampliado de 5 por decisão
+  direta do stakeholder, 2026-09-08 — `.md/BLOCKERS.md` Bloqueio 011), com o GE
+  sempre presente e não-bloqueável (RN-03, RN-19). Adicionar/trocar fonte é
+  alteração de configuração (`config/fontes.json`) + schema (`.length(N)` em
+  `config/fontes.schema.ts`/`pipeline/publicacao/gerador-snapshots.ts`), nunca
+  mudança de lógica de coleta.
 - **Nunca texto integral nem imagem de terceiro** (RN-02, I-14). Só título, fonte,
   esporte, data/hora, resumo curto (≤ 300 caracteres) e link para o original.
 - **Atribuição de fonte sempre visível** (RN-17); respeitar `frequenciaMaximaMin`

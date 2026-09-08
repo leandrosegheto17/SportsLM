@@ -1,21 +1,23 @@
 // config/fontes.test.ts — CFG-05
 //
 // Valida `config/fontes.json` contra o schema Zod de `Fonte` (SDD §5.1/ADR-007)
-// e confere os critérios de aceite explícitos da tarefa: exatamente 5 fontes,
-// GE com `fixa: true`, UOL com `verificacao.estado: 'pendente'` (SDD §3.1).
+// e confere os critérios de aceite explícitos da tarefa: exatamente 7 fontes
+// (ampliado de 5 por decisão direta do stakeholder, 2026-09-08 — ver
+// `.md/BLOCKERS.md` Bloqueio 011), GE com `fixa: true`, UOL com
+// `verificacao.estado: 'pendente'` (SDD §3.1).
 
 import { describe, expect, it } from 'vitest';
 import fontesJson from './fontes.json';
 import { catalogoFontesSchema, fonteSchema } from './fontes.schema';
 
 describe('config/fontes.json', () => {
-  it('valida contra o schema Zod do catálogo (RN-19: exatamente 5 fontes)', () => {
+  it('valida contra o schema Zod do catálogo (RN-19: exatamente 7 fontes)', () => {
     const resultado = catalogoFontesSchema.safeParse(fontesJson);
     expect(resultado.success).toBe(true);
   });
 
-  it('tem exatamente 5 fontes', () => {
-    expect(fontesJson).toHaveLength(5);
+  it('tem exatamente 7 fontes', () => {
+    expect(fontesJson).toHaveLength(7);
   });
 
   it('cada fonte individualmente valida contra o schema de Fonte', () => {

@@ -58,7 +58,10 @@ export const fonteSchema = z.object({
 
 export type Fonte = z.infer<typeof fonteSchema>;
 
-// RN-19: o catálogo de notícias tem exatamente 5 fontes.
-export const catalogoFontesSchema = z.array(fonteSchema).length(5);
+// RN-19: o catálogo de notícias tem exatamente 7 fontes (decisão direta do
+// stakeholder, 2026-09-08 — ver `.md/BLOCKERS.md` Bloqueio 011 e nota de
+// atualização em `.md/adr/007-catalogo-de-fontes-como-configuracao-verificada.md`;
+// regra original previa 5, fixas desde o ADR-007).
+export const catalogoFontesSchema = z.array(fonteSchema).length(7);
 
 export type CatalogoFontes = z.infer<typeof catalogoFontesSchema>;

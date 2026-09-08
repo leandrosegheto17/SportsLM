@@ -207,5 +207,90 @@
       "em": null
     },
     "substitutos": ["folha-esporte", "placar"]
+  },
+  {
+    "id": "ogol",
+    "nome": "ogol.com.br",
+    "fixa": false,
+    "esportesCobertos": ["futebol"],
+    "termos": {
+      "url": null,
+      "verificadoEm": null,
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "ogol-noticias",
+        "url": "https://www.ogol.com.br/rss/noticias.php",
+        "formato": "rss",
+        "esporteFixado": "futebol"
+      }
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "superesportes",
+    "nome": "Superesportes",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "basquete",
+      "tenis",
+      "volei-quadra",
+      "formula1",
+      "mma"
+    ],
+    "termos": {
+      "url": null,
+      "verificadoEm": null,
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "superesportes-futebol-nacional",
+        "url": "https://www.mg.superesportes.com.br/rss/noticias/futebol/futebol-nacional/rss.xml",
+        "formato": "rss",
+        "esporteFixado": "futebol"
+      },
+      {
+        "id": "superesportes-basquete",
+        "url": "https://www.mg.superesportes.com.br/rss/noticias/basquete/rss.xml",
+        "formato": "rss",
+        "esporteFixado": "basquete"
+      },
+      {
+        "id": "superesportes-tenis",
+        "url": "https://www.mg.superesportes.com.br/rss/noticias/tenis/rss.xml",
+        "formato": "rss",
+        "esporteFixado": "tenis"
+      },
+      {
+        "id": "superesportes-volei",
+        "url": "https://www.mg.superesportes.com.br/rss/noticias/volei/rss.xml",
+        "formato": "rss",
+        "esporteFixado": "volei-quadra"
+      },
+      {
+        "id": "superesportes-automobilismo",
+        "url": "https://www.mg.superesportes.com.br/rss/noticias/automobilismo/rss.xml",
+        "formato": "rss",
+        "esporteFixado": "formula1"
+      },
+      {
+        "id": "superesportes-mma",
+        "url": "https://www.mg.superesportes.com.br/rss/noticias/mma/mma-noticias/rss.xml",
+        "formato": "rss",
+        "esporteFixado": "mma"
+      }
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
   }
 ]

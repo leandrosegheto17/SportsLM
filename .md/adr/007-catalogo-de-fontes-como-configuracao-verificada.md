@@ -6,6 +6,17 @@
 - **Requisitos afetados**: RF-01, RF-02, RF-15, RN-01, RN-08, RN-19, I-25, CA-01.4
 - **Riscos atacados**: R4 (fonte descontinuada — Lance/410 Gone), P1
 
+**Nota de atualização (2026-09-08)**: o número fixo de fontes (Seção "Contexto"
+abaixo, RN-19) mudou de 5 para **7** por decisão direta do stakeholder, fora
+deste fluxo de arquitetura — `ogol.com.br` e `Superesportes` foram adicionadas
+ao catálogo, ambas `verificacao.estado: pendente` (ver `.md/BLOCKERS.md`
+Bloqueio 011 e `.md/PRD-TECNICO.md` RN-19 atualizado). O mecanismo desenhado
+neste ADR (configuração verificada, estado de fonte em runtime, troca via
+`config/fontes.json` sem mudar código) continua válido e é exatamente o que
+permitiu essa ampliação sem redesenho — só o número fixo em
+`catalogoFontesSchema`/`catalogoFontesPublicoSchema` (`.length(N)`) precisou
+mudar de 5 para 7, nos dois arquivos que o declaram.
+
 ## Contexto
 
 O catálogo é fechado em 5 fontes (RN-19) e a troca da 5ª por um substituto ordenado

@@ -129,8 +129,9 @@ export const fontePublicaSchema = z.object({
   verificacao: verificacaoFonteSchema,
 });
 export type FontePublica = z.infer<typeof fontePublicaSchema>;
-/** RN-19: o catálogo tem sempre exatamente 5 fontes. */
-export const catalogoFontesPublicoSchema = z.array(fontePublicaSchema).length(5);
+/** RN-19: o catálogo tem sempre exatamente 7 fontes (ampliado de 5 por
+ * decisão direta do stakeholder, 2026-09-08 — `.md/BLOCKERS.md` Bloqueio 011). */
+export const catalogoFontesPublicoSchema = z.array(fontePublicaSchema).length(7);
 
 /** `/dados/noticias.json`: itens normalizados dentro da retenção, com
  * `grupoId`; nunca `fora-do-recorte` (CA-04.8). */

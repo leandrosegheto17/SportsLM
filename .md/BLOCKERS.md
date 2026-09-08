@@ -731,3 +731,59 @@
   Efeito esperado: a verificação de consistência (CA-16.6) deixa de descartar
   o lote do Brasileirão por `numero-de-clubes-incorreto` na próxima execução
   real da ingestão — a confirmar contra o `football-data.org` de verdade.
+
+## Bloqueio 011 — 2026-09-08
+- Reportado por: orquestrador (usuário), a partir de spike ad hoc sobre
+  ampliar a cobertura de GE e ESPN Brasil via scraping (título + link de
+  redirecionamento, sem reproduzir o corpo da notícia)
+- Escalado para: coordenador (dono do conteúdo de `.md/adr/013-comportamento-do-produto-sem-forma-legitima-de-consumir-o-ge.md`,
+  P-GE); gestor em paralelo (mesma relevância estratégica já reconhecida no
+  Bloqueio 003, decisão de negócio de risco legal/contratual, não técnica)
+- Artefato/trecho afetado: `.md/adr/013-...md` (P-GE); indiretamente
+  `config/fontes.json` (`ge` — `fixa: true`, `verificacao.estado: "pendente"`,
+  `feeds: []`; `espn-brasil` — já `verificada` via RSS oficial, não afetada
+  por este achado)
+- Descrição: a proposta avaliada era mostrar só título + link (não o corpo da
+  notícia) via scraping de página HTML do GE e da ESPN Brasil, no lugar de
+  RSS oficial, argumentando que isso não feriria direito autoral. A parte de
+  **direito autoral** procede — manchete/fato não é obra protegida e link não
+  reproduz conteúdo, mesma lógica de um agregador tipo Google News. O
+  problema encontrado é outro, e não é neutralizado por mostrar só
+  título+link: **Termos de Uso são cláusula contratual, separada de direito
+  autoral**, e ambos os sites proíbem explicitamente acesso automatizado,
+  independente do que é extraído depois:
+  - **ESPN Brasil**: confirmado por leitura direta (`WebFetch`) — (1)
+    `robots.txt` de `espn.com.br` bloqueia por nome uma lista de bots com
+    `Disallow: /` total, incluindo explicitamente **`anthropic-ai`**; (2)
+    ESPN Brasil é regida pelos Termos de Uso da Disney
+    (`disneytermsofuse.com/portuguese/`), que proíbem literalmente "aceder,
+    monitorizar ou copiar [...] usando um robô, spider, scraper ou outros
+    meios automatizados", sem exceção para uso de só título+link — proibição
+    absoluta, condicionada só a "autorização expressa por escrito" da Disney.
+  - **GE (ge.globo.com)**: domínio segue bloqueado a `WebFetch` neste
+    ambiente (mesma limitação já registrada no SPK-03/ADR-013 em rodada
+    anterior — não é achado novo, é reconfirmação). O achado já registrado no
+    Bloqueio 003/SPK-03 permanece válido: termos gerais da Globo proíbem
+    "reproduzir em todo ou em parte, publicar, retransmitir, distribuir"
+    conteúdo sem permissão expressa, sem carve-out para agregador/RSS.
+  - Mesma classe de achado que já reprovou o Placar como substituto da 5ª
+    fonte no Bloqueio 003 (proibição explícita de robôs nos termos) — este
+    bloqueio estende o mesmo padrão de decisão a GE e ESPN Brasil
+    especificamente para a via de **scraping** (a RSS oficial já em uso pela
+    ESPN Brasil em `config/fontes.json`, `feeds: [espn-top]`, não é afetada:
+    é distribuição que o próprio provedor disponibiliza para consumo
+    programático, categoria distinta de raspar a página HTML).
+- Impacto se não resolvido: nenhum imediato — nenhuma implementação de
+  scraping foi feita; `config/fontes.json` permanece como está (`ge` seguindo
+  `pendente`, `espn-brasil` seguindo `verificada` via RSS). O impacto é só
+  não ter, ainda, uma decisão formal registrada caso a ideia volte a surgir.
+- Sugestão (opcional): registrar este achado como argumento adicional em
+  `.md/adr/013-...md` (seção de alternativas/consequências de P-GE), ao lado
+  do achado do Placar (Bloqueio 003) — reforçando que scraping (mesmo
+  limitado a título+link) não é caminho viável para GE nem para ESPN Brasil
+  sem autorização expressa do provedor. Se o Coordenador/gestor um dia
+  quiser reabrir a via de scraping, a autorização expressa por escrito é o
+  único caminho que os próprios termos preveem — não é uma questão técnica
+  a ser resolvida com uma implementação mais cuidadosa.
+- Status: Aberto, não bloqueante (nenhum código de produção foi alterado;
+  não impede nenhum lote `Validado` nem nenhum deploy hoje).

@@ -25,21 +25,32 @@ referência cruzada. Mudanças da rodada 3 estão sinalizadas com **[R3]**.
 Formato: user story → casos de exceção → critérios de aceite EARS (`WHEN` gatilho /
 `GIVEN` pré-condição / `THE SYSTEM SHALL` comportamento).
 
-### RF-01 — Catálogo fixo de 5 fontes (RAN-01, Must) [R3]
+### RF-01 — Catálogo fixo de 7 fontes (RAN-01, Must) [R3]
 
-**Como** torcedor, **eu quero** ver as 5 fontes do produto, com nome, esportes que
+**Como** torcedor, **eu quero** ver as fontes do produto, com nome, esportes que
 cobre e estado, **para que** eu saiba de onde vem cada notícia e possa bloquear as
 que não confio.
+
+**Atualização (2026-09-08)**: catálogo ampliado de 5 para **7 fontes**, decisão
+direta do stakeholder fora do fluxo normal de `TASK.md` (mesmo padrão dos
+Bloqueios 006/010 em `.md/BLOCKERS.md`) — ver Bloqueio 011 para o achado que
+motivou a busca por mais fontes (scraping de GE/ESPN rejeitado por proibição
+de robô nos Termos de Uso) e a lista de candidatos avaliados.
 
 Catálogo (RN-19; verificação em 5.2): **GE — ge.globo (obrigatória, não
 bloqueável)**; ESPN Brasil; Gazeta Esportiva; Terra Esportes; UOL Esporte
 (candidata a confirmar pelo Coordenador — substitutos ordenados: Folha Esporte,
-Placar).
+Placar); **ogol.com.br** (nova, `verificacao.estado: pendente` — feed RSS
+oficial confirmado ativo, mas critério 1 de RN-19, "não agregador", não foi
+formalmente confirmado para este veículo e fica registrado aqui como pendência
+de avaliação do Coordenador); **Superesportes** (nova, `verificacao.estado:
+pendente` — feed RSS oficial confirmado ativo por categoria de esporte, termos
+de uso ainda não lidos diretamente).
 
 Casos de exceção:
 - E1: fonte instável (RN-08).
 - E2: GE indisponível (RN-03).
-- E3: 5ª fonte substituída antes do desenvolvimento (RN-19).
+- E3: fonte substituída antes do desenvolvimento (RN-19).
 
 Critérios de aceite:
 - CA-01.1 — WHEN o torcedor abre a lista de fontes, GIVEN o catálogo configurado,
@@ -686,22 +697,37 @@ Excluídos com motivo: handebol, boxe, ciclismo, e-sports (sem evidência acima 
 - EXCEPTION: deduplicação não é ranking.
 
 **RN-19 — Critério de confiabilidade e composição do catálogo [R3]** (RF-01)
-- RULE: O catálogo tem exatamente 5 fontes. Além do GE (fixo), uma fonte só é
-  elegível se atender **todos** os critérios: (1) redação profissional com
-  responsabilidade editorial identificável (empresa jornalística estabelecida,
-  não blog/agregador/conteúdo gerado por usuário); (2) cobertura multi-esporte
-  capaz de alimentar a maioria dos 15 esportes; (3) feed oficial gratuito
-  (RSS/Atom) publicado pelo próprio veículo, verificado ativo; (4) publicação
-  diária com volume suficiente para o feed de 30; (5) conteúdo editorial não
-  vinculado a casas de apostas ou conteúdo patrocinado como linha principal.
+- RULE: O catálogo tem exatamente **7 fontes** (ampliado de 5 em 2026-09-08,
+  decisão direta do stakeholder — `.md/BLOCKERS.md` Bloqueio 011). Além do GE
+  (fixo), uma fonte só é elegível se atender **todos** os critérios: (1)
+  redação profissional com responsabilidade editorial identificável (empresa
+  jornalística estabelecida, não blog/agregador/conteúdo gerado por usuário);
+  (2) cobertura multi-esporte capaz de alimentar a maioria dos 15 esportes; (3)
+  feed oficial gratuito (RSS/Atom) publicado pelo próprio veículo, verificado
+  ativo; (4) publicação diária com volume suficiente para o feed de 30; (5)
+  conteúdo editorial não vinculado a casas de apostas ou conteúdo patrocinado
+  como linha principal.
   Composição: GE (obrigatório); ESPN Brasil (verificada 2026-09-05); Gazeta
   Esportiva (verificada); Terra Esportes (verificada); UOL Esporte (candidata —
-  feed não verificável pela ferramenta do BA; confirmar no `SDD.md`). Substitutos
-  ordenados, aplicáveis se a candidata falhar: Folha Esporte, Placar. Substituir
-  é alteração de configuração registrada na Seção 7.
-- RATIONALE: decisão do stakeholder ("5 fontes, por confiabilidade"); critérios
-  explícitos tornam a escolha auditável e a substituição objetiva.
-- EXCEPTION: nenhuma.
+  feed não verificável pela ferramenta do BA; confirmar no `SDD.md`); ogol.com.br
+  (adicionada 2026-09-08, `verificacao.estado: pendente` — critério 3 confirmado
+  por leitura direta do feed real; **critério 1 não confirmado**, ogol.com.br
+  tem perfil também de agregador de dados de partida, avaliação formal do
+  Coordenador pendente); Superesportes (adicionada 2026-09-08,
+  `verificacao.estado: pendente` — critério 3 confirmado por leitura direta dos
+  feeds reais por categoria; critérios 1/5 não confirmados por leitura de
+  termos, só por inferência de ser vertical esportiva de grupo jornalístico
+  regional). Substitutos ordenados para a 5ª fonte histórica (UOL), aplicáveis
+  se a candidata falhar: Folha Esporte, Placar. Adicionar/substituir fonte é
+  alteração de configuração registrada na Seção 7.
+- RATIONALE: decisão original do stakeholder ("5 fontes, por confiabilidade");
+  critérios explícitos tornam a escolha auditável e a substituição objetiva.
+  Ampliação para 7 (2026-09-08) é decisão do mesmo stakeholder, buscando mais
+  cobertura de notícia sem abrir mão do feed oficial verificável (RN-01) — ver
+  Bloqueio 011 para o achado que descartou a alternativa de scraping.
+- EXCEPTION: nenhuma quanto ao número fixo; critério 1 de ogol.com.br e
+  critérios 1/5 de Superesportes ficam como pendência explícita de avaliação
+  do Coordenador, não como exceção silenciosa à regra.
 
 ## 4. Fluxos de Usuário/Processo
 
