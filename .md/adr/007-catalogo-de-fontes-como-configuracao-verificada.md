@@ -17,6 +17,16 @@ permitiu essa ampliação sem redesenho — só o número fixo em
 `catalogoFontesSchema`/`catalogoFontesPublicoSchema` (`.length(N)`) precisou
 mudar de 5 para 7, nos dois arquivos que o declaram.
 
+**Nota de atualização (2026-09-09)**: número fixo ampliado de 7 para **12**,
+mesma mecânica (`.length(N)` nos dois arquivos), a partir de um bug real
+reportado pelo usuário — ver `.md/BLOCKERS.md` Bloqueio 012 para a causa raiz
+(URLs de feed da Gazeta Esportiva desatualizadas, 404) e a busca de 5 fontes
+novas (F1Mania.net, Motorsport.com Brasil, Estadão Esportes, R7 Esporte,
+Torcedores.com) mais 2 feeds novos numa fonte já existente (ESPN Brasil —
+NBA e F1). De novo, nenhum redesenho de arquitetura foi necessário — o
+mecanismo de configuração verificada absorveu a mudança como já previsto por
+este ADR.
+
 ## Contexto
 
 O catálogo é fechado em 5 fontes (RN-19) e a troca da 5ª por um substituto ordenado

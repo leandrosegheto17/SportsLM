@@ -452,7 +452,7 @@ describe('coletarCatalogo', () => {
 describe('carregarCatalogoFontes', () => {
   it('carrega e valida o catálogo real (config/fontes.json), confirmando fast-xml-parser/Zod ponta a ponta', () => {
     const fontes = carregarCatalogoFontes();
-    expect(fontes).toHaveLength(7);
+    expect(fontes).toHaveLength(12);
     const ge = fontes.find((f) => f.id === 'ge');
     expect(ge?.feeds).toEqual([]); // GE pendente — sem feed ainda (SDD §3.1)
     const espn = fontes.find((f) => f.id === 'espn-brasil');

@@ -25,27 +25,53 @@ referência cruzada. Mudanças da rodada 3 estão sinalizadas com **[R3]**.
 Formato: user story → casos de exceção → critérios de aceite EARS (`WHEN` gatilho /
 `GIVEN` pré-condição / `THE SYSTEM SHALL` comportamento).
 
-### RF-01 — Catálogo fixo de 7 fontes (RAN-01, Must) [R3]
+### RF-01 — Catálogo fixo de 12 fontes (RAN-01, Must) [R3]
 
 **Como** torcedor, **eu quero** ver as fontes do produto, com nome, esportes que
 cobre e estado, **para que** eu saiba de onde vem cada notícia e possa bloquear as
 que não confio.
 
-**Atualização (2026-09-08)**: catálogo ampliado de 5 para **7 fontes**, decisão
+**Atualização (2026-09-08)**: catálogo ampliado de 5 para 7 fontes, decisão
 direta do stakeholder fora do fluxo normal de `TASK.md` (mesmo padrão dos
 Bloqueios 006/010 em `.md/BLOCKERS.md`) — ver Bloqueio 011 para o achado que
 motivou a busca por mais fontes (scraping de GE/ESPN rejeitado por proibição
 de robô nos Termos de Uso) e a lista de candidatos avaliados.
 
+**Atualização (2026-09-09)**: catálogo ampliado de 7 para **12 fontes** —
+busca dirigida por reforço de cobertura de Fórmula 1, basquete e futebol, a
+partir de um problema real reportado pelo usuário (notícias de basquete
+paravam de entrar). Investigação (debugging sistemático) encontrou a causa
+raiz: as 7 URLs de feed por categoria da Gazeta Esportiva (incluindo a de
+basquete) estavam todas retornando HTTP 404 — o site reestruturou os caminhos
+(`/editorias/<esporte>/feed/` → `/mais-esportes/<esporte>/feed/` e
+`/motor/formula-1/feed/`) e as URLs cadastradas nunca foram atualizadas.
+Corrigidas as 7 URLs; adicionados 2 feeds novos à ESPN Brasil (já fonte
+verificada) — NBA (`esporteFixado: basquete`) e F1 (`esporteFixado:
+formula1`), achados durante a mesma investigação; e adicionadas 5 fontes
+novas ao catálogo — ver Bloqueio 012 em `.md/BLOCKERS.md` para o detalhe
+completo da busca, inclusive candidatos investigados e descartados (CBB, LNB,
+GrandePremio.com.br, JumperBrasil — sem feed funcional ou com feed
+explicitamente proibido no próprio `robots.txt`).
+
 Catálogo (RN-19; verificação em 5.2): **GE — ge.globo (obrigatória, não
-bloqueável)**; ESPN Brasil; Gazeta Esportiva; Terra Esportes; UOL Esporte
-(candidata a confirmar pelo Coordenador — substitutos ordenados: Folha Esporte,
-Placar); **ogol.com.br** (nova, `verificacao.estado: pendente` — feed RSS
-oficial confirmado ativo, mas critério 1 de RN-19, "não agregador", não foi
-formalmente confirmado para este veículo e fica registrado aqui como pendência
-de avaliação do Coordenador); **Superesportes** (nova, `verificacao.estado:
-pendente` — feed RSS oficial confirmado ativo por categoria de esporte, termos
-de uso ainda não lidos diretamente).
+bloqueável)**; ESPN Brasil (agora com feeds dedicados de NBA e F1, além do
+geral); Gazeta Esportiva; Terra Esportes; UOL Esporte (candidata a confirmar
+pelo Coordenador — substitutos ordenados: Folha Esporte, Placar); ogol.com.br
+(`verificacao.estado: pendente` — feed RSS oficial confirmado ativo, mas
+critério 1 de RN-19, "não agregador", não confirmado); Superesportes
+(`verificacao.estado: pendente` — feeds RSS oficiais confirmados ativos por
+categoria); **F1Mania.net** (nova, formula1, `pendente` — feed dedicado
+confirmado ativo, explicitamente permitido no `robots.txt` do site);
+**Motorsport.com Brasil** (nova, formula1, `pendente` — feed dedicado
+confirmado ativo, opera sob o domínio `motorsport.uol.com.br`); **Estadão
+Esportes** (nova, geral, `pendente` — feed oficial confirmado ativo, veículo
+jornalístico estabelecido desde 1875, mas critério de "não vinculado a apostas"
+não lido diretamente nos termos); **R7 Esporte** (nova, geral, `pendente` —
+feed oficial confirmado ativo, mesma ressalva de termos não lidos); **Torcedores.com**
+(nova, futebol/basquete, `pendente` — feed confirmado ativo; critério 1
+("não agregador/blog") é o mais incerto deste candidato, é um portal de
+notícia esportiva com origem em rede de blogs, sinalizado para avaliação do
+Coordenador).
 
 Casos de exceção:
 - E1: fonte instável (RN-08).
@@ -697,37 +723,60 @@ Excluídos com motivo: handebol, boxe, ciclismo, e-sports (sem evidência acima 
 - EXCEPTION: deduplicação não é ranking.
 
 **RN-19 — Critério de confiabilidade e composição do catálogo [R3]** (RF-01)
-- RULE: O catálogo tem exatamente **7 fontes** (ampliado de 5 em 2026-09-08,
-  decisão direta do stakeholder — `.md/BLOCKERS.md` Bloqueio 011). Além do GE
-  (fixo), uma fonte só é elegível se atender **todos** os critérios: (1)
-  redação profissional com responsabilidade editorial identificável (empresa
-  jornalística estabelecida, não blog/agregador/conteúdo gerado por usuário);
-  (2) cobertura multi-esporte capaz de alimentar a maioria dos 15 esportes; (3)
-  feed oficial gratuito (RSS/Atom) publicado pelo próprio veículo, verificado
-  ativo; (4) publicação diária com volume suficiente para o feed de 30; (5)
-  conteúdo editorial não vinculado a casas de apostas ou conteúdo patrocinado
-  como linha principal.
-  Composição: GE (obrigatório); ESPN Brasil (verificada 2026-09-05); Gazeta
-  Esportiva (verificada); Terra Esportes (verificada); UOL Esporte (candidata —
-  feed não verificável pela ferramenta do BA; confirmar no `SDD.md`); ogol.com.br
-  (adicionada 2026-09-08, `verificacao.estado: pendente` — critério 3 confirmado
-  por leitura direta do feed real; **critério 1 não confirmado**, ogol.com.br
-  tem perfil também de agregador de dados de partida, avaliação formal do
-  Coordenador pendente); Superesportes (adicionada 2026-09-08,
-  `verificacao.estado: pendente` — critério 3 confirmado por leitura direta dos
-  feeds reais por categoria; critérios 1/5 não confirmados por leitura de
-  termos, só por inferência de ser vertical esportiva de grupo jornalístico
-  regional). Substitutos ordenados para a 5ª fonte histórica (UOL), aplicáveis
-  se a candidata falhar: Folha Esporte, Placar. Adicionar/substituir fonte é
-  alteração de configuração registrada na Seção 7.
+- RULE: O catálogo tem exatamente **12 fontes** (5 → 7 em 2026-09-08 → 12 em
+  2026-09-09, decisões diretas do stakeholder — `.md/BLOCKERS.md` Bloqueios
+  011/012). Além do GE (fixo), uma fonte só é elegível se atender **todos** os
+  critérios: (1) redação profissional com responsabilidade editorial
+  identificável (empresa jornalística estabelecida, não blog/agregador/
+  conteúdo gerado por usuário); (2) cobertura multi-esporte capaz de alimentar
+  a maioria dos 15 esportes; (3) feed oficial gratuito (RSS/Atom) publicado
+  pelo próprio veículo, verificado ativo; (4) publicação diária com volume
+  suficiente para o feed de 30; (5) conteúdo editorial não vinculado a casas
+  de apostas ou conteúdo patrocinado como linha principal.
+  Composição: GE (obrigatório); ESPN Brasil (verificada 2026-09-05; ganhou
+  feeds dedicados de NBA e F1 em 2026-09-09, mesma fonte já verificada, sem
+  reabrir verificação de termos); Gazeta Esportiva (verificada; 7 URLs de
+  feed por categoria corrigidas em 2026-09-09 após ficarem 404 — Bloqueio
+  012); Terra Esportes (verificada — feed único segue quebrado/descontinuado
+  pelo site, achado do SPK-05, não corrigido por falta de URL de substituição);
+  UOL Esporte (candidata — feed não verificável pela ferramenta do BA;
+  confirmar no `SDD.md`); ogol.com.br (adicionada 2026-09-08, `pendente` —
+  critério 3 confirmado, **critério 1 não confirmado**, perfil também de
+  agregador de dados de partida); Superesportes (adicionada 2026-09-08,
+  `pendente` — critério 3 confirmado, critérios 1/5 não confirmados por
+  leitura de termos); F1Mania.net (adicionada 2026-09-09, formula1, `pendente`
+  — critério 3 confirmado, feed explicitamente permitido no `robots.txt` do
+  site; critérios 1/2/5 não confirmados — é site especializado só em
+  motorsport, criterio 2 "multi-esporte" reconhecidamente não atendido, aceito
+  como exceção documentada de especialização, não erro); Motorsport.com
+  Brasil (adicionada 2026-09-09, formula1, `pendente` — mesma ressalva de
+  critério 2 do F1Mania; opera sob `motorsport.uol.com.br`, mesmo grupo do UOL
+  Esporte mas produto editorial distinto); Estadão Esportes (adicionada
+  2026-09-09, geral, `pendente` — critério 1 forte, veículo estabelecido desde
+  1875; critério 5 não lido diretamente nos termos); R7 Esporte (adicionada
+  2026-09-09, geral, `pendente` — mesma ressalva de critério 5 do Estadão);
+  Torcedores.com (adicionada 2026-09-09, futebol/basquete, `pendente` —
+  critério 1 é o mais incerto deste candidato, origem em rede de blogs
+  esportivos, sinalizado para avaliação do Coordenador). Substitutos ordenados
+  para a 5ª fonte histórica (UOL), aplicáveis se a candidata falhar: Folha
+  Esporte, Placar. Adicionar/substituir fonte é alteração de configuração
+  registrada na Seção 7.
 - RATIONALE: decisão original do stakeholder ("5 fontes, por confiabilidade");
   critérios explícitos tornam a escolha auditável e a substituição objetiva.
-  Ampliação para 7 (2026-09-08) é decisão do mesmo stakeholder, buscando mais
-  cobertura de notícia sem abrir mão do feed oficial verificável (RN-01) — ver
-  Bloqueio 011 para o achado que descartou a alternativa de scraping.
-- EXCEPTION: nenhuma quanto ao número fixo; critério 1 de ogol.com.br e
-  critérios 1/5 de Superesportes ficam como pendência explícita de avaliação
-  do Coordenador, não como exceção silenciosa à regra.
+  Ampliação para 7 (2026-09-08) e depois para 12 (2026-09-09) são decisões do
+  mesmo stakeholder, buscando mais cobertura de notícia (a segunda rodada
+  motivada por um problema real — cobertura de basquete parada — cuja
+  investigação revelou URLs de feed desatualizadas e uma oportunidade de
+  reforçar F1/basquete/futebol) sem abrir mão do feed oficial verificável
+  (RN-01) — ver Bloqueios 011 (scraping descartado) e 012 (busca de fontes,
+  URLs corrigidas, candidatos descartados) para o detalhe completo.
+- EXCEPTION: nenhuma quanto ao número fixo. Quanto ao critério 2
+  (multi-esporte), F1Mania.net e Motorsport.com Brasil são aceitos como
+  exceção documentada — são especializados em motorsport por desenho, não por
+  lacuna de pesquisa, e reforçam especificamente a cobertura de F1 que o
+  stakeholder pediu. Critério 1 de ogol.com.br/Torcedores.com e critérios 1/5
+  de Superesportes/Estadão/R7 ficam como pendência explícita de avaliação do
+  Coordenador, não como exceção silenciosa à regra.
 
 ## 4. Fluxos de Usuário/Processo
 

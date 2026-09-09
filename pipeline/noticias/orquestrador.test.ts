@@ -406,7 +406,7 @@ describe('executarIngestaoNoticiasEmDisco — camada de I/O (ING-N-07)', () => {
 
     // Confirma que os loaders batem com os arquivos reais publicados pelo Lote 2/4.
     const fontesReais = carregarFontesDominio();
-    expect(fontesReais.length).toBe(7);
+    expect(fontesReais.length).toBe(12);
     const lexicoReal = carregarLexicoEsportes();
     expect(lexicoReal.porEsporte.length).toBeGreaterThan(0);
     const categoriasReais = carregarCategoriasPorFonte();

@@ -787,3 +787,99 @@
   a ser resolvida com uma implementação mais cuidadosa.
 - Status: Aberto, não bloqueante (nenhum código de produção foi alterado;
   não impede nenhum lote `Validado` nem nenhum deploy hoje).
+
+## Bloqueio 012 — 2026-09-09
+- Reportado por: orquestrador (usuário) — "não estão entrando as notícias de
+  basquete"
+- Escalado para: coordenador (avaliação formal dos critérios 1/2/5 de RN-19
+  para os candidatos novos, ver lista abaixo); nenhuma escalada bloqueante —
+  correção de causa raiz e busca de fontes já aplicadas diretamente
+- Artefato/trecho afetado: `config/fontes.json` (URLs de feed da
+  `gazeta-esportiva`; feeds novos de `espn-brasil`; 5 fontes novas);
+  `config/fontes.schema.ts`/`pipeline/publicacao/gerador-snapshots.ts`
+  (`.length(7)` → `.length(12)`)
+- Descrição (debugging sistemático, causa raiz confirmada por requisição HTTP
+  real, não suposição): a Gazeta Esportiva é a única fonte do catálogo com
+  feed **dedicado e garantido** a basquete (`esporteFixado: "basquete"`); as
+  demais dependiam do classificador (léxico) pegar por acaso uma notícia de
+  basquete num feed geral. Confirmado por `curl` real que as 7 URLs de feed
+  por categoria da Gazeta Esportiva (`/editorias/<esporte>/feed/`) retornavam
+  HTTP 404 — o site reestruturou os caminhos para `/mais-esportes/<esporte>/
+  feed/` (a maioria) e `/motor/formula-1/feed/` (automobilismo), sem que as
+  URLs cadastradas fossem atualizadas. `app/public/dados/ingestao/status.json`
+  de produção confirmava: `gazeta-esportiva` com `resultado: "falha"` desde
+  então (a lógica de agregação em `orquestrador.ts` marca a fonte inteira como
+  `falha` quando nenhum dos seus feeds responde OK no ciclo). Esse achado já
+  tinha sido sinalizado como "achado à parte" no spike SPK-05 (2026-09-06),
+  mas nunca virou correção.
+- Resolução da causa raiz: as 7 URLs da Gazeta Esportiva corrigidas para os
+  caminhos reais confirmados por leitura direta (200, RSS válido, conteúdo
+  real). `terra-esportes` **não foi corrigida** (achado relacionado, mas
+  diferente): o site parece ter descontinuado RSS por completo — sem link de
+  feed na página, sem URL de substituição encontrada (mesma conclusão do
+  SPK-05); segue `falha`/quebrada, sem correção possível sem uma URL real.
+- Busca de fontes (pedido do usuário, no mesmo fluxo: "pelo menos 3 para F1, 3
+  para Basquete, 3 novas para futebol, mantendo todas que já existem"):
+  - **2 feeds novos numa fonte já verificada** (sem re-verificação de termos
+    necessária, mesmo domínio): ESPN Brasil ganhou `espn-nba`
+    (`https://www.espn.com.br/espn/rss/nba/news`, `esporteFixado: basquete`)
+    e `espn-f1` (`https://www.espn.com.br/espn/rss/f1/news`, `esporteFixado:
+    formula1`) — achados por tentativa direta do padrão de URL já usado por
+    `espn-top`; confirmados 200/RSS válido. (Também existe `espn/rss/mma/news`,
+    adicionado como `espn-mma` por ser praticamente gratuito dado o achado,
+    ainda que fora do pedido original.)
+  - **F1Mania.net** (`f1mania`, formula1) — feed dedicado
+    `https://www.f1mania.net/f1/feed/` confirmado ativo; `robots.txt` do site
+    **permite explicitamente** `/f1/feed/` (`Allow: /f1/feed/`, apesar de um
+    `Disallow: */feed/` mais genérico — a regra mais específica prevalece).
+  - **Motorsport.com Brasil** (`motorsport-brasil`, formula1) — feed dedicado
+    `https://motorsport.uol.com.br/rss/f1/news/` confirmado ativo (conteúdo
+    real em pt-BR); domínio `br.motorsport.com` redireciona para
+    `motorsport.uol.com.br` — é a edição brasileira operada pelo grupo UOL,
+    mas produto editorial distinto de `uol-esporte` (mantido como fonte
+    separada).
+  - **Estadão Esportes** (`estadao-esportes`, geral) — feed
+    `https://www.estadao.com.br/arc/outboundfeeds/rss/section/esportes/?outputType=xml`
+    confirmado ativo, conteúdo real; veículo jornalístico estabelecido (Grupo
+    Estado, criterio 1 forte); critério 5 (sem vínculo com apostas) não lido
+    diretamente nos termos.
+  - **R7 Esporte** (`r7-esporte`, geral) — feed
+    `https://esportes.r7.com/arc/outboundfeeds/rss/?outputType=xml` confirmado
+    ativo (mesma plataforma Arc XP do Estadão); `robots.txt` permissivo;
+    mesma ressalva de critério 5 não lido.
+  - **Torcedores.com** (`torcedores`, futebol/basquete) — feed
+    `https://www.torcedores.com/feed/` confirmado ativo, conteúdo real em
+    pt-BR; `robots.txt` explicitamente permite `/feed/`; **critério 1 é o mais
+    incerto deste candidato** — portal com origem em rede de blogs esportivos,
+    não uma redação jornalística tradicional; sinalizado para avaliação do
+    Coordenador, não assumido como conforme.
+  - **Candidatos investigados e descartados** (nenhum adicionado):
+    GrandePremio.com.br (feed migrou/redireciona para a home global, sem URL
+    de substituição encontrada); CBB — Confederação Brasileira de Basquete
+    (`robots.txt` excepcionalmente permissivo, inclusive nomeando `ClaudeBot`
+    como permitido, mas **sem feed RSS funcional** — todas as tentativas
+    redirecionam para 404, site não expõe feed); LNB — Liga Nacional de
+    Basquete (mesmo problema do CBB, feed WordPress desabilitado); JumperBrasil
+    (basquete/NBA) — **excluído por proibição explícita no próprio
+    `robots.txt`** (`Disallow: */feed/*`, sem exceção); Lance!
+    (`lance.com.br`) — feed confirmado morto (`/rss`, `/rss.xml` → HTTP 410
+    Gone, mesmo achado já registrado desde o ADR-007); br.bolavip.com — não
+    perseguido por ter categorias de apostas/cassino no próprio sitemap
+    (tensão direta com o critério 5 de RN-19).
+- Impacto se não resolvido (contrafactual, já resolvido): basquete
+  continuaria sem cobertura confiável indefinidamente — dependendo só de
+  acerto aleatório do classificador em feeds gerais. F1 tinha o mesmo risco
+  estrutural (só Gazeta e Superesportes garantiam cobertura; Gazeta estava
+  quebrada).
+- Pendência explícita para o Coordenador: confirmar formalmente os critérios
+  1/2/5 de RN-19 para os 7 candidatos novos (`ogol`, `superesportes`,
+  `f1mania`, `motorsport-brasil`, `estadao-esportes`, `r7-esporte`,
+  `torcedores`) — nenhum teve Termos de Uso lidos diretamente, só `robots.txt`
+  e conteúdo real confirmados. F1Mania.net e Motorsport.com Brasil violam
+  deliberadamente o critério 2 (multi-esporte) por serem especializados em
+  motorsport — aceito como exceção documentada (reforçam exatamente a
+  cobertura de F1 pedida), não como lacuna.
+- Status: Resolvido (causa raiz corrigida, fontes adicionadas, todos os
+  portões de qualidade confirmados limpos — ver `.md/TASK.md`, tarefa
+  correspondente). Pendência de avaliação formal do Coordenador (critérios
+  1/2/5 dos novos candidatos) permanece **aberta, não bloqueante**.

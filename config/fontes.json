@@ -49,6 +49,24 @@
         "url": "https://www.espn.com.br/espn/rss/news",
         "formato": "rss",
         "esporteFixado": null
+      },
+      {
+        "id": "espn-nba",
+        "url": "https://www.espn.com.br/espn/rss/nba/news",
+        "formato": "rss",
+        "esporteFixado": "basquete"
+      },
+      {
+        "id": "espn-f1",
+        "url": "https://www.espn.com.br/espn/rss/f1/news",
+        "formato": "rss",
+        "esporteFixado": "formula1"
+      },
+      {
+        "id": "espn-mma",
+        "url": "https://www.espn.com.br/espn/rss/mma/news",
+        "formato": "rss",
+        "esporteFixado": "mma"
       }
     ],
     "verificacao": {
@@ -79,43 +97,43 @@
     "feeds": [
       {
         "id": "gazeta-basquete",
-        "url": "https://www.gazetaesportiva.com/editorias/basquete/feed/",
+        "url": "https://www.gazetaesportiva.com/mais-esportes/basquete/feed/",
         "formato": "rss",
         "esporteFixado": "basquete"
       },
       {
         "id": "gazeta-tenis",
-        "url": "https://www.gazetaesportiva.com/editorias/tenis/feed/",
+        "url": "https://www.gazetaesportiva.com/mais-esportes/tenis/feed/",
         "formato": "rss",
         "esporteFixado": "tenis"
       },
       {
         "id": "gazeta-volei",
-        "url": "https://www.gazetaesportiva.com/editorias/volei/feed/",
+        "url": "https://www.gazetaesportiva.com/mais-esportes/volei/feed/",
         "formato": "rss",
         "esporteFixado": "volei-quadra"
       },
       {
         "id": "gazeta-automobilismo",
-        "url": "https://www.gazetaesportiva.com/editorias/automobilismo/feed/",
+        "url": "https://www.gazetaesportiva.com/motor/formula-1/feed/",
         "formato": "rss",
         "esporteFixado": "formula1"
       },
       {
         "id": "gazeta-futsal",
-        "url": "https://www.gazetaesportiva.com/editorias/futsal/feed/",
+        "url": "https://www.gazetaesportiva.com/mais-esportes/futsal/feed/",
         "formato": "rss",
         "esporteFixado": "futsal"
       },
       {
         "id": "gazeta-natacao",
-        "url": "https://www.gazetaesportiva.com/editorias/natacao/feed/",
+        "url": "https://www.gazetaesportiva.com/mais-esportes/natacao/feed/",
         "formato": "rss",
         "esporteFixado": "natacao"
       },
       {
         "id": "gazeta-atletismo",
-        "url": "https://www.gazetaesportiva.com/editorias/atletismo/feed/",
+        "url": "https://www.gazetaesportiva.com/mais-esportes/atletismo/feed/",
         "formato": "rss",
         "esporteFixado": "atletismo"
       }
@@ -286,6 +304,158 @@
         "url": "https://www.mg.superesportes.com.br/rss/noticias/mma/mma-noticias/rss.xml",
         "formato": "rss",
         "esporteFixado": "mma"
+      }
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "f1mania",
+    "nome": "F1Mania.net",
+    "fixa": false,
+    "esportesCobertos": ["formula1"],
+    "termos": {
+      "url": null,
+      "verificadoEm": null,
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "f1mania-f1",
+        "url": "https://www.f1mania.net/f1/feed/",
+        "formato": "rss",
+        "esporteFixado": "formula1"
+      }
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "motorsport-brasil",
+    "nome": "Motorsport.com Brasil",
+    "fixa": false,
+    "esportesCobertos": ["formula1"],
+    "termos": {
+      "url": null,
+      "verificadoEm": null,
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "motorsport-brasil-f1",
+        "url": "https://motorsport.uol.com.br/rss/f1/news/",
+        "formato": "rss",
+        "esporteFixado": "formula1"
+      }
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "estadao-esportes",
+    "nome": "Estadão Esportes",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "termos": {
+      "url": null,
+      "verificadoEm": null,
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "estadao-esportes",
+        "url": "https://www.estadao.com.br/arc/outboundfeeds/rss/section/esportes/?outputType=xml",
+        "formato": "rss",
+        "esporteFixado": null
+      }
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "r7-esporte",
+    "nome": "R7 Esporte",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "termos": {
+      "url": null,
+      "verificadoEm": null,
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "r7-esporte",
+        "url": "https://esportes.r7.com/arc/outboundfeeds/rss/?outputType=xml",
+        "formato": "rss",
+        "esporteFixado": null
+      }
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "torcedores",
+    "nome": "Torcedores.com",
+    "fixa": false,
+    "esportesCobertos": ["futebol", "basquete"],
+    "termos": {
+      "url": null,
+      "verificadoEm": null,
+      "uso": "nao-comercial"
+    },
+    "frequenciaMaximaMin": 30,
+    "feeds": [
+      {
+        "id": "torcedores-feed",
+        "url": "https://www.torcedores.com/feed/",
+        "formato": "rss",
+        "esporteFixado": null
       }
     ],
     "verificacao": {
