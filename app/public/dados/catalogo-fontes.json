@@ -139,5 +139,94 @@
       "estado": "pendente",
       "em": null
     }
+  },
+  {
+    "id": "f1mania",
+    "nome": "F1Mania.net",
+    "fixa": false,
+    "esportesCobertos": [
+      "formula1"
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "motorsport-brasil",
+    "nome": "Motorsport.com Brasil",
+    "fixa": false,
+    "esportesCobertos": [
+      "formula1"
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "estadao-esportes",
+    "nome": "Estadão Esportes",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "r7-esporte",
+    "nome": "R7 Esporte",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "volei-quadra",
+      "formula1",
+      "basquete",
+      "tenis",
+      "volei-praia",
+      "natacao",
+      "mma",
+      "ginastica-artistica",
+      "surfe",
+      "skate",
+      "judo",
+      "atletismo",
+      "futsal",
+      "futebol-americano"
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
+  },
+  {
+    "id": "torcedores",
+    "nome": "Torcedores.com",
+    "fixa": false,
+    "esportesCobertos": [
+      "futebol",
+      "basquete"
+    ],
+    "verificacao": {
+      "estado": "pendente",
+      "em": null
+    }
   }
 ]

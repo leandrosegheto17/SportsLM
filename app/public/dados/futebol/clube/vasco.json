@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-09T12:39:16.113Z"
+      "ultimaAtualizacao": "2026-09-09T16:59:20.936Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -444,71 +444,6 @@
           "mandante": 1,
           "visitante": 0
         }
-      },
-      {
-        "id": "555006",
-        "competicaoId": "brasileirao-serie-a",
-        "rodada": 27,
-        "fase": null,
-        "mandanteId": "gremio",
-        "visitanteId": "vasco",
-        "dataHora": "2026-09-12T19:00:00Z",
-        "horarioDefinido": true,
-        "estadio": null,
-        "status": "agendada",
-        "placar": null
-      },
-      {
-        "id": "555018",
-        "competicaoId": "brasileirao-serie-a",
-        "rodada": 28,
-        "fase": null,
-        "mandanteId": "vasco",
-        "visitanteId": "coritiba",
-        "dataHora": "2026-09-19T23:30:00Z",
-        "horarioDefinido": true,
-        "estadio": null,
-        "status": "agendada",
-        "placar": null
-      },
-      {
-        "id": "555021",
-        "competicaoId": "brasileirao-serie-a",
-        "rodada": 29,
-        "fase": null,
-        "mandanteId": "botafogo",
-        "visitanteId": "vasco",
-        "dataHora": "2026-10-07T23:30:00Z",
-        "horarioDefinido": true,
-        "estadio": null,
-        "status": "agendada",
-        "placar": null
-      },
-      {
-        "id": "555039",
-        "competicaoId": "brasileirao-serie-a",
-        "rodada": 30,
-        "fase": null,
-        "mandanteId": "vasco",
-        "visitanteId": "remo",
-        "dataHora": "2026-10-10T20:00:00Z",
-        "horarioDefinido": true,
-        "estadio": null,
-        "status": "agendada",
-        "placar": null
-      },
-      {
-        "id": "555049",
-        "competicaoId": "brasileirao-serie-a",
-        "rodada": 31,
-        "fase": null,
-        "mandanteId": "sao-paulo",
-        "visitanteId": "vasco",
-        "dataHora": "2026-10-17T00:00:00Z",
-        "horarioDefinido": false,
-        "estadio": null,
-        "status": "agendada",
-        "placar": null
       },
       {
         "id": "555058",
