@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-09T16:59:20.936Z"
+      "ultimaAtualizacao": "2026-09-09T19:38:25.717Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -431,6 +431,84 @@
           "mandante": 1,
           "visitante": 0
         }
+      },
+      {
+        "id": "555006",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 27,
+        "fase": null,
+        "mandanteId": "gremio",
+        "visitanteId": "vasco",
+        "dataHora": "2026-09-12T19:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "554941",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 21,
+        "fase": null,
+        "mandanteId": "botafogo",
+        "visitanteId": "gremio",
+        "dataHora": "2026-09-16T22:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555014",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 28,
+        "fase": null,
+        "mandanteId": "gremio",
+        "visitanteId": "palmeiras",
+        "dataHora": "2026-09-20T14:00:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555027",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 29,
+        "fase": null,
+        "mandanteId": "remo",
+        "visitanteId": "gremio",
+        "dataHora": "2026-10-07T22:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555036",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 30,
+        "fase": null,
+        "mandanteId": "gremio",
+        "visitanteId": "internacional",
+        "dataHora": "2026-10-11T20:30:00Z",
+        "horarioDefinido": true,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
+      },
+      {
+        "id": "555046",
+        "competicaoId": "brasileirao-serie-a",
+        "rodada": 31,
+        "fase": null,
+        "mandanteId": "gremio",
+        "visitanteId": "cruzeiro",
+        "dataHora": "2026-10-17T00:00:00Z",
+        "horarioDefinido": false,
+        "estadio": null,
+        "status": "agendada",
+        "placar": null
       },
       {
         "id": "555051",
