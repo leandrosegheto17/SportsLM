@@ -44,9 +44,10 @@ describe('Rotas (FUND-04 — shell da SPA)', () => {
 
   it('resolve / renderizando a Home real (UI-T02-04 — conteúdo real, ver Home.test.tsx)', () => {
     renderizarEm('/');
-    // A Home real (não mais placeholder desde UI-T02-04) sempre mostra a
-    // seção "Últimas notícias", independente de estado de rede/preferências.
-    expect(screen.getByRole('heading', { name: 'Últimas notícias' })).toBeTruthy();
+    // A Home real (não mais placeholder desde UI-T02-04) sempre mostra o
+    // feed "Notícias" (fusão de 2026-09-09), independente de estado de
+    // rede/preferências.
+    expect(screen.getByRole('heading', { name: 'Notícias' })).toBeTruthy();
   });
 
   it('resolve /time renderizando o Painel do time real (UI-T05-01 — conteúdo real, ver PainelTime.test.tsx)', () => {
@@ -105,7 +106,7 @@ describe('Rotas (FUND-04 — shell da SPA)', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole('heading', { name: 'Últimas notícias' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Notícias' })).toBeTruthy();
 
     fireEvent.click(screen.getByRole('link', { name: 'Ir para comparativo' }));
 

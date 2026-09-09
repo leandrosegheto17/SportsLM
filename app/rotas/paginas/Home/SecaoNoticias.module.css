@@ -1,5 +1,8 @@
 /*
- * SecaoSeusEsportes.module.css — UI-T02-02 (UX-SPEC §2/T-02)
+ * SecaoNoticias.module.css — otimização mobile da Home (2026-09-09)
+ *
+ * Substitui SecaoSeusEsportes.module.css + SecaoUltimasNoticias.module.css
+ * (idênticos entre si) — ver nota de topo de SecaoNoticias.tsx.
  *
  * Nenhum valor literal de cor/tamanho/espaçamento fora de
  * `app/design-system/tokens.css` (Diretriz de Implementação #4).
@@ -28,10 +31,15 @@
   text-transform: uppercase;
 }
 
+/* "Seus esportes em apenas uma linha enxuta" (pedido do usuário): 1 linha só,
+   com rolagem horizontal quando os chips não cabem — nunca quebra pra baixo
+   (diferente do `flex-wrap: wrap` que as duas seções antigas usavam). */
 .chips {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: var(--esp-2);
+  padding-bottom: var(--esp-1);
 }
 
 .lista {

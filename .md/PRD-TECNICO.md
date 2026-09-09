@@ -161,29 +161,44 @@ Critérios de aceite:
 - CA-04.6 — WHEN um item não tem data válida, GIVEN aceito na ingestão, THE SYSTEM
   SHALL usar o horário de ingestão e marcar "horário estimado".
 - CA-04.7 — WHEN um item não pôde ser classificado, GIVEN I-17, THE SYSTEM SHALL
-  exibi-lo no feed com o rótulo "geral" e nunca na seção de favoritos.
+  exibi-lo no feed com o rótulo "geral", só visível com o filtro "Todos" (RF-05)
+  — nunca ao filtrar por um esporte favorito específico.
 - CA-04.8 — WHEN um item é de esporte fora do recorte, GIVEN RN-06, THE SYSTEM
   SHALL não exibi-lo.
 
-### RF-05 — Seção de destaque dos favoritos (RAN-05, Must)
+### RF-05 — Filtro do feed pelos favoritos (RAN-05, Must)
 
-**Como** torcedor, **eu quero** uma seção que destaque as notícias mais recentes
-dos meus favoritos, **para que** o que mais me interessa apareça primeiro.
+**Como** torcedor, **eu quero** filtrar o feed de notícias pelos meus esportes
+favoritos, **para que** o que mais me interessa apareça em destaque sem esconder
+as demais notícias.
 
-Casos de exceção: E1 zero favoritos; E2 sem notícia recente dos favoritos; E3 item
-repetido entre seção e feed (permitido — I-02).
+**Revisado (2026-09-09, a pedido do usuário — otimização mobile da Home)**: até
+então esta seção era uma lista própria, separada do feed de RF-04, com pool e
+paginação próprios (10 itens). Passa a ser um filtro por chip sobre o MESMO feed
+único de RF-04/RF-19 (ver `.md/UX-SPEC.md` §2/T-02 e `app/rotas/paginas/Home/SecaoNoticias.tsx`)
+— "Complementa, acima do feed" (I-02) deixa de se aplicar; ver I-02 revisado.
+
+Casos de exceção: E1 zero favoritos (não bloqueia mais o feed — ver CA-05.4); E2
+sem notícia recente no filtro selecionado.
 
 Critérios de aceite:
-- CA-05.1 — WHEN a home abre, GIVEN 1 a 3 favoritos, THE SYSTEM SHALL exibir, acima
-  do feed, a seção "Seus esportes" com os 10 itens mais recentes (a confirmar) dos
-  favoritos, de fontes não bloqueadas.
-- CA-05.2 — WHEN a seção é exibida, GIVEN mais de um favorito, THE SYSTEM SHALL
-  identificar o esporte por item e permitir filtrar por um favorito.
-- CA-05.3 — WHEN não há itens dos favoritos, GIVEN E2, THE SYSTEM SHALL exibir "sem
-  notícias recentes de <favoritos> — atualizado há <tempo>".
+- CA-05.1 — WHEN o torcedor seleciona o chip de um esporte favorito, GIVEN 1 a 3
+  favoritos, THE SYSTEM SHALL filtrar o mesmo feed de RF-04 (fontes não
+  bloqueadas, grupo deduplicado = 1) para esse esporte, até os 30 mais recentes
+  (RN-07) — o filtro roda sobre o feed completo antes do corte de 30, nunca sobre
+  os 30 já exibidos em "Todos" (não perde item por causa do corte geral).
+- CA-05.2 — WHEN o feed é exibido, GIVEN 1 ou mais favoritos (ou time escolhido,
+  RF-06), THE SYSTEM SHALL exibir chips de filtro — "Todos", um por esporte
+  favorito e "Meu time" quando houver time escolhido — permitindo alternar sem
+  reload.
+- CA-05.3 — WHEN não há itens no filtro selecionado, GIVEN E2, THE SYSTEM SHALL
+  exibir "sem notícias recentes de <favorito ou time> — atualizado há <tempo>".
 - CA-05.4 — WHEN a home abre, GIVEN zero favoritos, THE SYSTEM SHALL exibir o
-  convite "escolha até 3 esportes favoritos" com atalho para RF-03.
-- CA-05.5 — WHEN a seção é exibida, GIVEN personalização somente de notícias, THE
+  feed geral normalmente (RF-04, nunca dependeu de favoritos) com um convite não
+  bloqueante "escolha até 3 esportes favoritos para filtrar as notícias aqui" e
+  atalho para RF-03 — **revisado**: antes bloqueava o feed inteiro; a decisão do
+  usuário foi que zero favoritos não deveria mais esconder notícia nenhuma.
+- CA-05.5 — WHEN o feed é exibido, GIVEN personalização somente de notícias, THE
   SYSTEM SHALL não exibir tabela, calendário ou resultado para esportes fora de
   futebol.
 
@@ -517,7 +532,7 @@ Critérios de aceite:
 | RAN-02 | RF-02 | Bloqueio |
 | RAN-03 | RF-03 | 15 esportes / 3 favoritos |
 | RAN-04 | RF-04 | 30 mais recentes |
-| RAN-05 | RF-05 | Seção de favoritos |
+| RAN-05 | RF-05 | Filtro de favoritos sobre o feed único (revisado 2026-09-09) |
 | RAN-06 | RF-06 | Série A do ano corrente |
 | RAN-07 | RF-07 | Todos os campeonatos |
 | RAN-08 | RF-08 | Detalhe |
@@ -1076,7 +1091,7 @@ Encerrados: P5, P6, P9 (decisões do stakeholder); R3 (sem LLM).
 | # | Ambiguidade original | Interpretação escolhida | Por quê |
 |---|---|---|---|
 | I-01 | "30 mais recentes" — por fonte/esporte ou total; limite temporal? | 30 no total entre as 5 fontes menos bloqueadas, todos os 15 esportes; grupo deduplicado = 1; retenção de 7 dias só para descarte | Literal da decisão; retenção evita crescimento |
-| I-02 | Seção de favoritos substitui ou complementa o feed? | Complementa, acima do feed; 10 itens (a confirmar); repetição permitida | "Prioriza/destaca" = destaque |
+| I-02 | Seção de favoritos substitui ou complementa o feed? | **Revisado 2026-09-09** (a pedido do usuário, otimização mobile da Home): funde-se ao feed único de RF-04 como filtro por chip, sem pool/paginação próprios (usa o corte de 30 de RN-07 por visão, aplicado depois do filtro). Histórico (até então): complementava, acima do feed; 10 itens (a confirmar); repetição permitida | "Prioriza/destaca" = destaque; revisão: 2 seções com a mesma origem de dado duplicavam busca/cabeçalho e ocupavam altura extra no mobile antes da primeira notícia |
 | I-03 | "Uma página Web" | Aplicação de página única com seções e configurações em sobreposição; técnica do Coordenador | Literal e mais simples |
 | I-04 | "Brasileirão" nas regras de rivais/simulação | Edição da Série A do ano corrente — agora decisão do stakeholder (Q4), não mais interpretação; mantida para rastreabilidade | — |
 | I-05 | "Times que disputam o Brasileirão junto com o time" | Os outros 19 clubes da Série A do ano | Literal |

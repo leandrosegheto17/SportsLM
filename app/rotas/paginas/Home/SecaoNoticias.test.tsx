@@ -1,16 +1,19 @@
 // @vitest-environment jsdom
-// app/rotas/paginas/Home/SecaoUltimasNoticias.test.tsx — UI-T02-03 (TASK.md Lote 8)
+// app/rotas/paginas/Home/SecaoNoticias.test.tsx — otimização mobile da Home (2026-09-09)
 //
-// Cobre CA-04.1 (30 mais recentes), CA-04.4 (vazio/erro), CA-04.5 (fonte
-// instável), CA-04.6 (horário estimado), CA-01.3/ADR-013 (GE indisponível) e
-// CA-19.1 a CA-19.4 (dedup/"TAMBÉM EM").
+// Sucessora de SecaoSeusEsportes.test.tsx (UI-T02-02) + SecaoUltimasNoticias.test.tsx
+// (UI-T02-03), removidos junto da fusão das duas seções (ver nota de topo de
+// SecaoNoticias.tsx). Cobre CA-04.1/04.4/04.5/04.6 (feed geral), CA-19.1/19.2/19.4
+// (dedup), CA-01.3/ADR-013 (GE indisponível), CA-02.4 (todas as fontes bloqueadas),
+// CA-05.2/05.3 (revistas: filtro por chip sobre o feed único) e o novo comportamento
+// não bloqueante de CA-05.4 (zero favoritos não esconde mais o feed geral).
 
-import { act, cleanup, render, screen, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { ClienteSnapshot } from '../../../dados/clienteSnapshot';
 import { URL_VERSAO } from '../../../dados/versao';
-import { SecaoUltimasNoticias } from './SecaoUltimasNoticias';
+import { SecaoNoticias } from './SecaoNoticias';
 import type { ItemNoticia } from '../../../../dominio/tipos/noticias';
 
 const URL_NOTICIAS = '/dados/noticias.json';
@@ -83,6 +86,7 @@ const AGORA = new Date('2026-09-05T10:00:00-03:00');
 const NOMES_ESPORTES = {
   futebol: 'Futebol',
   'volei-quadra': 'Vôlei',
+  basquete: 'Basquete',
   geral: 'Geral',
 } as const;
 const NOMES_FONTES = {
@@ -92,7 +96,7 @@ const NOMES_FONTES = {
   'uol-esporte': 'UOL Esporte',
 } as const;
 
-describe('SecaoUltimasNoticias (UI-T02-03)', () => {
+describe('SecaoNoticias', () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -107,9 +111,11 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -141,10 +147,12 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
           fontesBloqueadas={['uol-esporte']}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -164,7 +172,7 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
     expect(titulos).toHaveLength(2);
   });
 
-  it('CA-04.1/CA-19.4: mostra no máximo 30 itens, com grupo contando como 1', async () => {
+  it('CA-04.1/CA-19.4: mostra no máximo 30 itens em "Todos", com grupo contando como 1', async () => {
     const itens: ItemNoticia[] = [];
     for (let i = 0; i < 35; i += 1) {
       const grupoId = `grupo-${String(i)}`;
@@ -183,9 +191,11 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -224,9 +234,11 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -243,7 +255,7 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
     const itens = [
       item({
         id: 'mais-antigo'.padEnd(20, '0'),
-        fonteId: 'uol-esporte', // será bloqueada
+        fonteId: 'uol-esporte',
         grupoId: 'grupo-1',
         titulo: 'Versão bloqueada',
         publicadoEm: '2026-09-05T08:00:00-03:00',
@@ -260,10 +272,12 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
           fontesBloqueadas={['uol-esporte']}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -283,9 +297,11 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -297,14 +313,16 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
     expect(screen.getByText('horário estimado')).toBeTruthy();
   });
 
-  it('CA-04.4: zero itens exibe o texto canônico de vazio', async () => {
+  it('CA-04.4: zero itens no feed inteiro exibe o texto canônico de vazio', async () => {
     const cliente = criarCliente({ itens: [] });
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -321,9 +339,11 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -350,9 +370,11 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -364,44 +386,19 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
     expect(screen.getByText('1 fonte instável: UOL Esporte')).toBeTruthy();
   });
 
-  it('não mostra o banner de fonte instável para uma fonte bloqueada', async () => {
-    const cliente = criarCliente({
-      itens: [item({ id: 'a'.padEnd(20, '0'), fonteId: 'ge' })],
-      status: {
-        'uol-esporte': { instavel: true, instavelDesde: '2026-09-04T00:00:00-03:00' },
-      },
-    });
-
-    render(
-      <MemoryRouter>
-        <SecaoUltimasNoticias
-          nomesEsportes={NOMES_ESPORTES}
-          nomesFontes={NOMES_FONTES}
-          fontesBloqueadas={['uol-esporte']}
-          agora={AGORA}
-          cliente={cliente}
-        />
-      </MemoryRouter>,
-    );
-
-    await esvaziarMicrotarefas();
-
-    expect(screen.queryByText(/fonte instável/)).toBeNull();
-  });
-
   it('ADR-013/CA-01.3: GE instável mostra o banner canônico de GE indisponível', async () => {
     const cliente = criarCliente({
       itens: [item({ id: 'a'.padEnd(20, '0'), fonteId: 'espn-brasil' })],
-      status: {
-        ge: { instavel: true, instavelDesde: '2026-09-04T00:00:00-03:00' },
-      },
+      status: { ge: { instavel: true, instavelDesde: '2026-09-04T00:00:00-03:00' } },
     });
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -424,7 +421,8 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
           fontesBloqueadas={[
@@ -434,6 +432,7 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
             'uol-esporte',
           ]}
           totalFontesBloqueaveis={4}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -447,22 +446,19 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
     ).toBeTruthy();
   });
 
-  it('CA-02.4: não aciona sem `totalFontesBloqueaveis` (degradação segura)', async () => {
+  it('CA-05.4 (revista): zero favoritos NÃO bloqueia o feed geral, só convida a escolher', async () => {
+    const aoEscolherEsportes = vi.fn();
     const cliente = criarCliente({
-      itens: [item({ id: 'a'.padEnd(20, '0'), fonteId: 'ge' })],
+      itens: [item({ id: 'geral-1'.padEnd(20, '0'), titulo: 'Notícia geral qualquer' })],
     });
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={[]}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
-          fontesBloqueadas={[
-            'espn-brasil',
-            'gazeta-esportiva',
-            'terra-esportes',
-            'uol-esporte',
-          ]}
+          aoEscolherEsportes={aoEscolherEsportes}
           agora={AGORA}
           cliente={cliente}
         />
@@ -471,20 +467,28 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     await esvaziarMicrotarefas();
 
-    expect(screen.queryByText(/Você bloqueou/)).toBeNull();
+    expect(screen.getByText('Notícia geral qualquer')).toBeTruthy();
+    expect(
+      screen.getByText('Escolha até 3 esportes favoritos para filtrar as notícias aqui.'),
+    ).toBeTruthy();
+    expect(
+      screen.queryByRole('group', { name: 'Filtrar notícias por esporte favorito' }),
+    ).toBeNull();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Escolher esportes' }));
+    expect(aoEscolherEsportes).toHaveBeenCalledTimes(1);
   });
 
-  it('não mostra nenhum banner de instabilidade quando todas as fontes estão estáveis', async () => {
-    const cliente = criarCliente({
-      itens: [item({ id: 'a'.padEnd(20, '0') })],
-      status: { ge: { instavel: false, instavelDesde: null } },
-    });
+  it('mostra os chips de filtro mesmo com um único favorito (comportamento novo, ver nota de topo)', async () => {
+    const cliente = criarCliente({ itens: [item({ id: 'a'.padEnd(20, '0') })] });
 
     render(
       <MemoryRouter>
-        <SecaoUltimasNoticias
+        <SecaoNoticias
+          favoritos={['futebol']}
           nomesEsportes={NOMES_ESPORTES}
           nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
           agora={AGORA}
           cliente={cliente}
         />
@@ -493,7 +497,240 @@ describe('SecaoUltimasNoticias (UI-T02-03)', () => {
 
     await esvaziarMicrotarefas();
 
-    expect(screen.queryByText(/indisponível/)).toBeNull();
-    expect(screen.queryByText(/instável/)).toBeNull();
+    expect(
+      screen.getByRole('group', { name: 'Filtrar notícias por esporte favorito' }),
+    ).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Todos' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Futebol' })).toBeTruthy();
+  });
+
+  it('CA-05.2 (revista): filtro por chip funciona sem reload sobre o feed único, "geral" só em "Todos"', async () => {
+    const itens = [
+      item({
+        id: 'futebol-1'.padEnd(20, '0'),
+        esporte: 'futebol',
+        titulo: 'Notícia de futebol',
+      }),
+      item({
+        id: 'volei-1'.padEnd(20, '0'),
+        esporte: 'volei-quadra',
+        titulo: 'Notícia de vôlei',
+      }),
+      item({ id: 'geral-1'.padEnd(20, '0'), esporte: 'geral', titulo: 'Notícia geral' }),
+    ];
+    const cliente = criarCliente({ itens });
+
+    render(
+      <MemoryRouter>
+        <SecaoNoticias
+          favoritos={['futebol', 'volei-quadra']}
+          nomesEsportes={NOMES_ESPORTES}
+          nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
+          agora={AGORA}
+          cliente={cliente}
+        />
+      </MemoryRouter>,
+    );
+
+    await esvaziarMicrotarefas();
+
+    expect(screen.getByText('Notícia de futebol')).toBeTruthy();
+    expect(screen.getByText('Notícia de vôlei')).toBeTruthy();
+    expect(screen.getByText('Notícia geral')).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Vôlei' }));
+
+    expect(screen.queryByText('Notícia de futebol')).toBeNull();
+    expect(screen.queryByText('Notícia geral')).toBeNull();
+    expect(screen.getByText('Notícia de vôlei')).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Todos' }));
+
+    expect(screen.getByText('Notícia de futebol')).toBeTruthy();
+    expect(screen.getByText('Notícia de vôlei')).toBeTruthy();
+    expect(screen.getByText('Notícia geral')).toBeTruthy();
+  });
+
+  it('filtro por esporte não perde itens por causa do corte de 30 de "Todos" (filtra antes de cortar)', async () => {
+    const itens: ItemNoticia[] = [];
+    for (let i = 0; i < 32; i += 1) {
+      itens.push(
+        item({
+          id: `basquete-${String(i)}`.padEnd(20, '0'),
+          esporte: 'basquete',
+          titulo: `Notícia de basquete ${String(i)}`,
+          publicadoEm: new Date(AGORA.getTime() - i * 60_000).toISOString(),
+        }),
+      );
+    }
+    // O item de futebol favorito é o mais antigo de todos — cairia fora dos
+    // 30 mais recentes do feed geral, mas não deveria sumir ao filtrar por
+    // "Futebol" (o filtro corre sobre o feed completo, não sobre os 30 já
+    // cortados de "Todos").
+    itens.push(
+      item({
+        id: 'futebol-antigo'.padEnd(20, '0'),
+        esporte: 'futebol',
+        titulo: 'Notícia de futebol mais antiga',
+        publicadoEm: new Date(AGORA.getTime() - 60 * 60_000).toISOString(),
+      }),
+    );
+    const cliente = criarCliente({ itens });
+
+    render(
+      <MemoryRouter>
+        <SecaoNoticias
+          favoritos={['futebol']}
+          nomesEsportes={NOMES_ESPORTES}
+          nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
+          agora={AGORA}
+          cliente={cliente}
+        />
+      </MemoryRouter>,
+    );
+
+    await esvaziarMicrotarefas();
+
+    expect(screen.queryByText('Notícia de futebol mais antiga')).toBeNull();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Futebol' }));
+
+    expect(screen.getByText('Notícia de futebol mais antiga')).toBeTruthy();
+  });
+
+  it('CA-05.3 (revista): sem itens no escopo do chip selecionado exibe o texto canônico', async () => {
+    const cliente = criarCliente({
+      itens: [item({ id: 'a'.padEnd(20, '0'), esporte: 'basquete' })],
+    });
+
+    render(
+      <MemoryRouter>
+        <SecaoNoticias
+          favoritos={['futebol']}
+          nomesEsportes={NOMES_ESPORTES}
+          nomesFontes={NOMES_FONTES}
+          aoEscolherEsportes={vi.fn()}
+          agora={AGORA}
+          cliente={cliente}
+        />
+      </MemoryRouter>,
+    );
+
+    await esvaziarMicrotarefas();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Futebol' }));
+
+    expect(
+      screen.getByText(/Sem notícias recentes de Futebol — atualizado/),
+    ).toBeTruthy();
+  });
+
+  describe('chip "Meu time" (busca de texto)', () => {
+    it('aparece só quando `nomeTime` é definido', async () => {
+      const cliente = criarCliente({ itens: [item({ id: 'a'.padEnd(20, '0') })] });
+
+      const { rerender } = render(
+        <MemoryRouter>
+          <SecaoNoticias
+            favoritos={[]}
+            nomesEsportes={NOMES_ESPORTES}
+            nomesFontes={NOMES_FONTES}
+            aoEscolherEsportes={vi.fn()}
+            agora={AGORA}
+            cliente={cliente}
+          />
+        </MemoryRouter>,
+      );
+      await esvaziarMicrotarefas();
+      expect(screen.queryByRole('button', { name: 'Meu time' })).toBeNull();
+
+      rerender(
+        <MemoryRouter>
+          <SecaoNoticias
+            favoritos={[]}
+            nomesEsportes={NOMES_ESPORTES}
+            nomesFontes={NOMES_FONTES}
+            aoEscolherEsportes={vi.fn()}
+            agora={AGORA}
+            cliente={cliente}
+            nomeTime="Flamengo"
+          />
+        </MemoryRouter>,
+      );
+      expect(screen.getByRole('button', { name: 'Meu time' })).toBeTruthy();
+    });
+
+    it('filtra por título/resumo mencionando o time, tolerante a acento e caixa', async () => {
+      const itens = [
+        item({
+          id: 'flamengo-1'.padEnd(20, '0'),
+          titulo: 'FLAMENGO vence clássico no fim do jogo',
+        }),
+        item({
+          id: 'flamengo-2'.padEnd(20, '0'),
+          titulo: 'Técnico do rubro-negro projeta próxima rodada',
+          resumo: 'Comentário sobre o flamengo antes do jogo decisivo.',
+        }),
+        item({
+          id: 'outro-1'.padEnd(20, '0'),
+          titulo: 'Corinthians anuncia reforço para a próxima temporada',
+        }),
+      ];
+      const cliente = criarCliente({ itens });
+
+      render(
+        <MemoryRouter>
+          <SecaoNoticias
+            favoritos={[]}
+            nomesEsportes={NOMES_ESPORTES}
+            nomesFontes={NOMES_FONTES}
+            aoEscolherEsportes={vi.fn()}
+            agora={AGORA}
+            cliente={cliente}
+            nomeTime="Flamengo"
+          />
+        </MemoryRouter>,
+      );
+
+      await esvaziarMicrotarefas();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Meu time' }));
+
+      expect(screen.getByText('FLAMENGO vence clássico no fim do jogo')).toBeTruthy();
+      expect(
+        screen.getByText('Técnico do rubro-negro projeta próxima rodada'),
+      ).toBeTruthy();
+      expect(
+        screen.queryByText('Corinthians anuncia reforço para a próxima temporada'),
+      ).toBeNull();
+    });
+
+    it('estado vazio da aba "Meu time" cita o nome do time, não "seu time" genérico', async () => {
+      const cliente = criarCliente({
+        itens: [item({ id: 'a'.padEnd(20, '0'), titulo: 'Corinthians anuncia reforço' })],
+      });
+
+      render(
+        <MemoryRouter>
+          <SecaoNoticias
+            favoritos={[]}
+            nomesEsportes={NOMES_ESPORTES}
+            nomesFontes={NOMES_FONTES}
+            aoEscolherEsportes={vi.fn()}
+            agora={AGORA}
+            cliente={cliente}
+            nomeTime="Flamengo"
+          />
+        </MemoryRouter>,
+      );
+
+      await esvaziarMicrotarefas();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Meu time' }));
+
+      expect(screen.getByText(/Sem notícias recentes de Flamengo/)).toBeTruthy();
+    });
   });
 });

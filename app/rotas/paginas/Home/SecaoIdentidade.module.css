@@ -11,6 +11,35 @@
   gap: var(--esp-4);
 }
 
+/* Otimização mobile (2026-09-09): PRÓXIMO JOGO + A BRIGA lado a lado abaixo
+   de 1024px (ver nota em SecaoIdentidade.tsx); a partir de 1024px voltam a
+   empilhar na coluna estreita de REFAT-08-01/10-01. */
+.blocosTime {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--esp-3);
+}
+
+.blocosTime > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .blocosTime {
+    flex-direction: column;
+  }
+}
+
+/* Padding mais denso do corpo de PRÓXIMO JOGO/A BRIGA nesta tela (ver
+   `--bloco-preto-corpo-padding` em BlocoPreto.module.css) — a coluna de 2
+   está mais estreita que o uso padrão do componente (ex.: PainelTime, que
+   não passa esta classe e mantém o padding original). */
+.blocoCompacto {
+  --bloco-preto-corpo-padding: var(--esp-3);
+}
+
 /* CA-14.3: bloco único de convite, no lugar de PRÓXIMO JOGO + A BRIGA. */
 .convite {
   display: flex;

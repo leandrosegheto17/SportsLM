@@ -1,12 +1,12 @@
 // @vitest-environment jsdom
 // app/rotas/paginas/Home.test.tsx — UI-T02-04 (TASK.md Lote 8)
 //
-// Cobre a integração das 3 seções paralelas do Lote 8 (identidade/seus
-// esportes/últimas notícias) numa única rota `/`, os pontos de integração de
-// sobreposição (ESCOLHER MEU TIME → T-04, "Escolher esportes" → T-03) e o
-// encadeamento de CA-02.4 (totalFontesBloqueaveis, ver
-// `SecaoUltimasNoticias.test.tsx` para os casos daquele componente
-// isoladamente).
+// Cobre a integração das seções da Home (identidade + feed único de
+// notícias, ver otimização mobile de 2026-09-09 em `Home/SecaoNoticias.tsx`)
+// numa única rota `/`, os pontos de integração de sobreposição (ESCOLHER MEU
+// TIME → T-04, "Escolher esportes" → T-03) e o encadeamento de CA-02.4
+// (totalFontesBloqueaveis, ver `SecaoNoticias.test.tsx` para os casos
+// daquele componente isoladamente).
 
 import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
@@ -139,7 +139,7 @@ function renderizarHome(propriedades: Parameters<typeof Home>[0] = {}) {
   );
 }
 
-describe('Home (UI-T02-04 — integração das 3 seções do Lote 8)', () => {
+describe('Home (UI-T02-04 — integração de identidade + feed único de notícias)', () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -149,7 +149,7 @@ describe('Home (UI-T02-04 — integração das 3 seções do Lote 8)', () => {
     cleanup();
   });
 
-  it('compõe as 3 seções (identidade, seus esportes, últimas notícias) numa única tela', async () => {
+  it('compõe as seções (identidade, feed único de notícias) numa única tela', async () => {
     const cliente = criarClienteSnapshot([]);
     renderizarHome({ clienteSnapshot: cliente });
 
@@ -161,15 +161,11 @@ describe('Home (UI-T02-04 — integração das 3 seções do Lote 8)', () => {
         'Escolha seu time para ver o painel com todos os campeonatos do ano.',
       ),
     ).toBeTruthy();
-    // CA-05.4 — zero favoritos.
-    expect(screen.getByText('Seus esportes')).toBeTruthy();
+    // CA-05.4 (revista) — zero favoritos não bloqueia mais o feed, só convida.
+    expect(screen.getByRole('heading', { name: 'Notícias' })).toBeTruthy();
     expect(
-      screen.getByText(
-        'Escolha até 3 esportes favoritos para ver o que mais te interessa aqui.',
-      ),
+      screen.getByText('Escolha até 3 esportes favoritos para filtrar as notícias aqui.'),
     ).toBeTruthy();
-    // Feed "Últimas notícias" sempre presente, independente de favoritos.
-    expect(screen.getByRole('heading', { name: 'Últimas notícias' })).toBeTruthy();
   });
 
   it('"ESCOLHER MEU TIME" (dentro de SecaoIdentidade) abre a sobreposição T-04', async () => {
@@ -235,7 +231,7 @@ describe('Home (UI-T02-04 — integração das 3 seções do Lote 8)', () => {
     renderizarHome({ armazenamento, clienteSnapshot: cliente });
     await esvaziarMicrotarefas();
 
-    // Antes de bloquear: as duas notícias aparecem no feed "Últimas notícias".
+    // Antes de bloquear: as duas notícias aparecem no feed único de notícias.
     expect(screen.getByText('Notícia da Fonte A')).toBeTruthy();
     expect(screen.getByText('Notícia do GE')).toBeTruthy();
 

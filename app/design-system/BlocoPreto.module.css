@@ -38,7 +38,11 @@
 }
 
 .corpo {
-  padding: var(--esp-4);
+  /* `--bloco-preto-corpo-padding` (herdada do elemento raiz `.bloco` via
+     `className`, ex.: SecaoIdentidade.module.css `.blocoCompacto`) permite
+     que um consumidor específico peça um corpo mais denso sem mudar o
+     padrão de nenhum outro uso deste componente (fallback = --esp-4). */
+  padding: var(--bloco-preto-corpo-padding, var(--esp-4));
 }
 
 /* UX-SPEC §3.8.2: variante "projeção" é "fixo ao rolar" — permanece visível

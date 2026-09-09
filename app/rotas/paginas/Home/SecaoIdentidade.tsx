@@ -353,66 +353,86 @@ export function SecaoIdentidade({
         <FaixaClube variante="neutra" />
       )}
 
-      {proximoJogo ? (
-        <BlocoPreto variante="proximo-jogo" rotulo="Próximo jogo">
-          <p className={estilos['proximoJogoDataHora']}>
-            {formatarDataCurta(proximoJogo.partida.dataHora ?? '')} ·{' '}
-            {formatarHorario(proximoJogo.partida.dataHora ?? '')}
-          </p>
-          <p className={estilos['proximoJogoConfronto']}>
-            {clubes
-              ? nomeCurtoDoClube(clubes, proximoJogo.partida.mandanteId)
-              : proximoJogo.partida.mandanteId}
-            {' × '}
-            {clubes
-              ? nomeCurtoDoClube(clubes, proximoJogo.partida.visitanteId)
-              : proximoJogo.partida.visitanteId}
-          </p>
-          <p className={estilos['proximoJogoMeta']}>
-            {proximoJogo.partida.mandanteId === timeId ? 'casa' : 'fora'}
-            {` · ${proximoJogo.competicaoNome}`}
-            {proximoJogo.partida.rodada !== null
-              ? ` · ${proximoJogo.partida.rodada}ª rodada`
-              : ''}
-            {proximoJogo.partida.estadio ? ` · ${proximoJogo.partida.estadio}` : ''}
-          </p>
-        </BlocoPreto>
-      ) : futebolDoClube.carregando ? (
-        <Esqueleto variante="bloco" />
-      ) : null}
+      {/* Otimização mobile (2026-09-09): PRÓXIMO JOGO e A BRIGA lado a lado
+       * (2 colunas) abaixo de 1024px em vez de empilhados — reduz pela
+       * metade a altura que os dois blocos ocupam antes do feed de
+       * notícias, sem mexer na faixa do clube (prioridade visual maior,
+       * UX-SPEC §2/T-02 "hierarquia visual"). A partir de 1024px volta a
+       * empilhar (mesma coluna estreita de 336px de REFAT-08-01/10-01). */}
+      <div className={estilos['blocosTime']}>
+        {proximoJogo ? (
+          <BlocoPreto
+            variante="proximo-jogo"
+            rotulo="Próximo jogo"
+            {...(estilos['blocoCompacto'] ? { className: estilos['blocoCompacto'] } : {})}
+          >
+            <p className={estilos['proximoJogoDataHora']}>
+              {formatarDataCurta(proximoJogo.partida.dataHora ?? '')} ·{' '}
+              {formatarHorario(proximoJogo.partida.dataHora ?? '')}
+            </p>
+            <p className={estilos['proximoJogoConfronto']}>
+              {clubes
+                ? nomeCurtoDoClube(clubes, proximoJogo.partida.mandanteId)
+                : proximoJogo.partida.mandanteId}
+              {' × '}
+              {clubes
+                ? nomeCurtoDoClube(clubes, proximoJogo.partida.visitanteId)
+                : proximoJogo.partida.visitanteId}
+            </p>
+            <p className={estilos['proximoJogoMeta']}>
+              {proximoJogo.partida.mandanteId === timeId ? 'casa' : 'fora'}
+              {` · ${proximoJogo.competicaoNome}`}
+              {proximoJogo.partida.rodada !== null
+                ? ` · ${proximoJogo.partida.rodada}ª rodada`
+                : ''}
+              {proximoJogo.partida.estadio ? ` · ${proximoJogo.partida.estadio}` : ''}
+            </p>
+          </BlocoPreto>
+        ) : futebolDoClube.carregando ? (
+          <Esqueleto variante="bloco" />
+        ) : null}
 
-      {linhasABriga.length > 0 ? (
-        <BlocoPreto variante="a-briga" rotulo="A briga no Brasileirão">
-          <ul className={estilos['aBrigaLista']}>
-            {linhasABriga.map((linha) => {
-              const clubeDaLinha = clubes?.find((clube) => clube.id === linha.clubeId);
-              const ehOTorcedor = linha.clubeId === timeId;
-              return (
-                <li
-                  key={linha.clubeId}
-                  className={estilos['aBrigaLinha']}
-                  style={estiloLinhaABriga(clubeDaLinha?.paleta)}
-                  data-seu-time={ehOTorcedor ? 'true' : undefined}
-                >
-                  <span className={estilos['aBrigaPosicao']}>{`${linha.posicao}º`}</span>
-                  <BarraPontuacao
-                    nomeClube={clubeDaLinha?.nomeCurto ?? linha.clubeId}
-                    {...(clubeDaLinha ? { rotuloVisivel: clubeDaLinha.sigla } : {})}
-                    valor={linha.pontos}
-                    valorMaximo={valorMaximoABriga}
-                  />
-                  {ehOTorcedor ? <span className={estilos['aBrigaSeu']}>seu</span> : null}
-                </li>
-              );
-            })}
-          </ul>
-          <Botao variante="primario" onClick={() => navegar('/simulacao')}>
-            SIMULAR OS JOGOS QUE FALTAM
-          </Botao>
-        </BlocoPreto>
-      ) : brasileirao.carregando ? (
-        <Esqueleto variante="bloco" />
-      ) : null}
+        {linhasABriga.length > 0 ? (
+          <BlocoPreto
+            variante="a-briga"
+            rotulo="A briga no Brasileirão"
+            {...(estilos['blocoCompacto'] ? { className: estilos['blocoCompacto'] } : {})}
+          >
+            <ul className={estilos['aBrigaLista']}>
+              {linhasABriga.map((linha) => {
+                const clubeDaLinha = clubes?.find((clube) => clube.id === linha.clubeId);
+                const ehOTorcedor = linha.clubeId === timeId;
+                return (
+                  <li
+                    key={linha.clubeId}
+                    className={estilos['aBrigaLinha']}
+                    style={estiloLinhaABriga(clubeDaLinha?.paleta)}
+                    data-seu-time={ehOTorcedor ? 'true' : undefined}
+                  >
+                    <span
+                      className={estilos['aBrigaPosicao']}
+                    >{`${linha.posicao}º`}</span>
+                    <BarraPontuacao
+                      nomeClube={clubeDaLinha?.nomeCurto ?? linha.clubeId}
+                      {...(clubeDaLinha ? { rotuloVisivel: clubeDaLinha.sigla } : {})}
+                      valor={linha.pontos}
+                      valorMaximo={valorMaximoABriga}
+                    />
+                    {ehOTorcedor ? (
+                      <span className={estilos['aBrigaSeu']}>seu</span>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
+            <Botao variante="primario" onClick={() => navegar('/simulacao')}>
+              SIMULAR OS JOGOS QUE FALTAM
+            </Botao>
+          </BlocoPreto>
+        ) : brasileirao.carregando ? (
+          <Esqueleto variante="bloco" />
+        ) : null}
+      </div>
     </section>
   );
 }

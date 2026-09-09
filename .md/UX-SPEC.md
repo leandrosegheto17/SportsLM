@@ -142,42 +142,23 @@ Conteúdo é exemplo realista. Os clubes são da Série A; a lista real é confi
 │ ⚠ O GE está indisponível no momento — as     │ âmbar #FFF3D1 / texto #7A5300
 │   notícias abaixo vêm das outras fontes.     │
 ├──────────────────────────────────────────────┤
-│ ┌█ PRÓXIMO JOGO ███████████████████████████┐ │ tira preta, rótulo caixa alta 12/16
-│ │                                          │ │ borda tinta 2px em volta
-│ │  DOM, 13/09 · 16H00                      │ │ 12/16 peso 700 +1,2px
-│ │  Fluminense × São Paulo                  │ │ 24/30 peso 800
-│ │  fora · 24ª rodada · Maracanã            │ │ 14/20 secundário
-│ └──────────────────────────────────────────┘ │
-│ ┌█ A BRIGA NO BRASILEIRÃO ██████████████████┐ │
-│ │  1º PAL  47   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   │ │ barras: cor do clube de cada um
-│ │  5º COR  43   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓      │ │
-│ │  6º SPA  42   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  seu    │ │ linha do time: fundo --clube-suave
-│ │             [ SIMULAR OS JOGOS QUE FALTAM ]│ │ ação primária, cor do clube
-│ └──────────────────────────────────────────┘ │
+│ ┌█ PRÓXIMO JOGO ██████┐┌█ A BRIGA ██████████┐ │ 2 colunas lado a lado (2026-09-09,
+│ │ DOM 13/09 · 16H00   ││ 1º PAL 47 ▓▓▓▓▓▓▓▓ │ │ otimização mobile — reduz pela
+│ │ Flu × São Paulo     ││ 5º COR 43 ▓▓▓▓▓▓   │ │ metade a altura dos dois blocos
+│ │ fora · Maracanã     ││ 6º SPA 42 ▓▓▓▓ seu │ │ antes das notícias); corpo mais
+│ │                     ││ [ SIMULAR ]        │ │ denso (padding compacto), tira
+│ └─────────────────────┘└────────────────────┘ │ preta/borda tinta 2px mantidas
 ├──────────────────────────────────────────────┤
-│ SEUS ESPORTES              ATUALIZADO HÁ 12MIN│ 28/32 peso 800, -0,02em
-│ ( TODOS )( FUTEBOL )( VÔLEI )( FÓRMULA 1 )   │ chips caixa alta, 44px
-│ ┌▌─────────────────────────────────────────┐ │ ▌ barra 6px na cor do esporte
-│ │▌ [FUTEBOL]  ge · há 8 min                │ │ etiqueta tonal caixa alta
-│ │▌ São Paulo vence o Atlético-MG por       │ │ 24/30 peso 800 (manchete principal)
-│ │▌ 2 a 1 no Morumbis e encosta no G-6      │ │
-│ │▌ Tricolor chegou aos 42 pontos e ficou a │ │ 14/20 secundário, máx 3 linhas
-│ │▌ um do Botafogo, primeiro time dentro…   │ │
+│ NOTÍCIAS                   ATUALIZADO HÁ 12MIN│ 28/32 peso 800, -0,02em — título
+│ ⓘ Escolha até 3 esportes favoritos para      │ único (fusão de "Seus esportes" +
+│   filtrar as notícias aqui.  [Escolher]      │ "Últimas notícias", 2026-09-09);
+│ ⚠ 1 FONTE INSTÁVEL: UOL ESPORTE              │ banner só aparece com 0 favoritos,
+│ ( TODOS )( FUTEBOL )( VÔLEI )( MEU TIME )   →│ nunca esconde o feed abaixo
+│ ┌▌─────────────────────────────────────────┐ │ chips: 1 linha, rolagem horizontal
+│ │▌ [FÓRMULA 1]  ESPN Brasil · há 3 min     │ │ ▌ barra 6px na cor do esporte
+│ │▌ Verstappen crava a pole em Monza com    │ │ etiqueta tonal caixa alta
+│ │▌ 1min19s344 e supera Norris por 87 milé… │ │ 24/30 peso 800 (manchete principal)
 │ └──────────────────────────────────────────┘ │ cartão branco, raio 6px, borda fina
-│ ┌▌─────────────────────────────────────────┐ │
-│ │▌ [VÔLEI]  Terra Esportes · há 21 min     │ │
-│ │▌ Brasil bate a Itália por 3 sets a 1     │ │ 18/24 peso 700 (secundária)
-│ │▌ e vai à final do Mundial feminino       │ │
-│ └──────────────────────────────────────────┘ │
-│ ···  (10 itens)                              │
-├──────────────────────────────────────────────┤
-│ ÚLTIMAS NOTÍCIAS           ATUALIZADO HÁ 12MIN│
-│ ⚠ 1 FONTE INSTÁVEL: UOL ESPORTE              │
-│ ┌▌─────────────────────────────────────────┐ │
-│ │▌ [FÓRMULA 1]  ESPN Brasil · há 3 min     │ │
-│ │▌ Verstappen crava a pole em Monza com    │ │
-│ │▌ 1min19s344 e supera Norris por 87 milé… │ │
-│ └──────────────────────────────────────────┘ │
 │ ┌▌─────────────────────────────────────────┐ │
 │ │▌ [FUTEBOL]  ge +2 fontes · há 34 min     │ │ grupo deduplicado (CA-19.1)
 │ │▌ Palmeiras confirma lesão de zagueiro    │ │
@@ -185,22 +166,29 @@ Conteúdo é exemplo realista. Os clubes são da Série A; a lista real é confi
 │ │▌ TAMBÉM EM: ESPN BRASIL · GAZETA         │ │ 12/16 caixa alta, links
 │ └──────────────────────────────────────────┘ │
 │ ┌▌─────────────────────────────────────────┐ │
-│ │▌ [GERAL]  Gazeta · ⓘ 05/09 · 14h02       │ │ ⓘ = horário estimado (CA-04.6)
-│ │▌ COB divulga calendário de seletivas     │ │
+│ │▌ [GERAL]  Gazeta · ⓘ 05/09 · 14h02       │ │ ⓘ = horário estimado (CA-04.6);
+│ │▌ COB divulga calendário de seletivas     │ │ "geral" só aparece no chip "Todos"
 │ │▌ para os Jogos de 2028                   │ │
 │ └──────────────────────────────────────────┘ │
-│ ···  (30 itens)                              │
+│ ···  (30 itens no filtro atual — rolagem     │
+│      vertical; chips trocam o filtro, RN-07) │
 ├──────────────────────────────────────────────┤
 │█ NOTÍCIAS    MEU TIME    COMPARATIVO        █│ barra inferior preta fixa, 64px
 │█ ▔▔▔▔▔▔▔▔                                   █│ sublinhado na cor do clube
 └──────────────────────────────────────────────┘
 ```
 
-**Ordem no celular, e por quê**: faixa do clube → PRÓXIMO JOGO → A BRIGA → SEUS
-ESPORTES → ÚLTIMAS NOTÍCIAS. Os dois blocos do time ocupam ~230 px antes das notícias;
-é deliberado, porque é a direção escolhida (o clube toma a tela) e porque "A BRIGA"
-é o caminho de entrada do diferencial que M4 mede. **Sem time escolhido**, os dois
-blocos são substituídos por um único bloco de convite de 96 px e as notícias sobem.
+**Ordem no celular, e por quê**: faixa do clube → PRÓXIMO JOGO/A BRIGA (lado a
+lado) → NOTÍCIAS. **Revisado em 2026-09-09, a pedido do usuário**: antes PRÓXIMO
+JOGO e A BRIGA ficavam empilhados (~230 px) e SEUS ESPORTES/ÚLTIMAS NOTÍCIAS eram
+duas seções distintas — o torcedor precisava rolar bastante para ver a primeira
+notícia no mobile. Agora os dois blocos do time ficam lado a lado (metade da
+altura) e as duas seções de notícia se fundem num único feed "NOTÍCIAS", filtrável
+por chip (Todos/esporte favorito/Meu time), o que também elimina um cabeçalho e um
+carimbo de frescor duplicados. A faixa do clube não muda — continua a maior
+prioridade visual da tela (ver "Hierarquia visual" abaixo). **Sem time escolhido**,
+PRÓXIMO JOGO/A BRIGA são substituídos por um único bloco de convite de 96 px e o
+feed de notícias sobe.
 
 **Desktop (1280)**
 ```
@@ -242,6 +230,11 @@ blocos são substituídos por um único bloco de convite de 96 px e as notícias
 │ └─────────────────────────────────┘│                                                                 │
 └────────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
 ```
+
+**Revisado em 2026-09-09**: a coluna de feed (748px) também passa a ser um único
+"NOTÍCIAS" com chips de filtro no topo (mesma fusão do mobile) em vez de "SEUS
+ESPORTES" e "ÚLTIMAS NOTÍCIAS" como duas seções empilhadas — um só cabeçalho/
+carimbo de frescor, mesmo comportamento de filtro do mobile.
 
 **Hierarquia visual, do mais forte ao mais fraco**: (1) faixa do clube com o número de
 camisa — é a primeira coisa que o olho encontra e é o que dá a personalidade;

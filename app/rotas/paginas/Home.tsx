@@ -1,21 +1,27 @@
 // app/rotas/paginas/Home.tsx — UI-T02-04 (TASK.md Lote 8)
 //
-// T-02 · Home (UX-SPEC §2): compõe as 3 seções paralelas do Lote 8
-// (`SecaoIdentidade`/UI-T02-01, `SecaoSeusEsportes`/UI-T02-02,
-// `SecaoUltimasNoticias`/UI-T02-03) na ordem literal do wireframe mobile
-// ("faixa do clube → PRÓXIMO JOGO → A BRIGA → SEUS ESPORTES → ÚLTIMAS
-// NOTÍCIAS", UX-SPEC §2/T-02 — os 3 primeiros já vêm juntos de dentro de
-// `SecaoIdentidade`) e substitui o placeholder da rota `/` (FUND-04).
+// T-02 · Home (UX-SPEC §2): compõe as seções da Home (`SecaoIdentidade`/
+// UI-T02-01 e `SecaoNoticias`) na ordem do wireframe mobile ("faixa do
+// clube → PRÓXIMO JOGO/A BRIGA → NOTÍCIAS", UX-SPEC §2/T-02) e substitui o
+// placeholder da rota `/` (FUND-04).
 //
-// Os 4 estados da Seção 4/T-02 já são cobertos, de forma decomposta, por
-// cada seção individualmente (cada uma busca seu próprio dado e resolve seu
+// Otimização mobile (2026-09-09, a pedido do usuário): `SecaoSeusEsportes`
+// (UI-T02-02) e `SecaoUltimasNoticias` (UI-T02-03) — antes duas seções
+// paralelas do Lote 8, cada uma com seu próprio cabeçalho/carimbo/lista —
+// foram fundidas em `SecaoNoticias`, um único feed filtrável por chip, para
+// reduzir a altura que a Home ocupa antes da primeira notícia no mobile. Ver
+// nota de topo de `Home/SecaoNoticias.tsx` para o racional completo e
+// `.md/PRD-TECNICO.md` (RF-04/RF-05/RF-19) / `.md/UX-SPEC.md` §2/T-02 para
+// os requisitos reconciliados.
+//
+// Os estados da Seção 4/T-02 já são cobertos, de forma decomposta, por cada
+// seção individualmente (cada uma busca seu próprio dado e resolve seu
 // próprio carregando/erro/vazio/preenchido — arquitetura sem um estado
-// global único de tela, coerente com "cada seção é independente" já
-// registrado por UI-T02-01/02/03): esta tarefa integra, não duplica, esse
-// tratamento. Esta página só precisa fornecer os dados que dependem do
-// catálogo de configuração (`favoritos`/`fontesBloqueadas` de
-// `Preferencias`, nomes de exibição de esporte/fonte) e os pontos de
-// integração de navegação (sobreposições T-03/T-04, `Navegacao`/`Layout`).
+// global único de tela): esta tarefa integra, não duplica, esse tratamento.
+// Esta página só precisa fornecer os dados que dependem do catálogo de
+// configuração (`favoritos`/`fontesBloqueadas` de `Preferencias`, nomes de
+// exibição de esporte/fonte) e os pontos de integração de navegação
+// (sobreposições T-03/T-04, `Navegacao`/`Layout`).
 //
 // Decisão de implementação registrada (achado de UI-T02-01, TASK.md §6 —
 // resolvendo a divergência sinalizada entre instâncias paralelas do Lote 8):
@@ -79,8 +85,7 @@ import {
 } from './Onboarding/catalogoOnboarding';
 import { FaixaClubeDoTime } from './Home/FaixaClubeDoTime';
 import { SecaoIdentidade } from './Home/SecaoIdentidade';
-import { SecaoSeusEsportes } from './Home/SecaoSeusEsportes';
-import { SecaoUltimasNoticias } from './Home/SecaoUltimasNoticias';
+import { SecaoNoticias } from './Home/SecaoNoticias';
 import estilos from './Home.module.css';
 
 /** `config/fontes.json` (CFG-02) — só o subconjunto usado nesta tela (nome
@@ -258,21 +263,14 @@ export function Home({
       </div>
 
       <div className={estilos['feed']}>
-        <SecaoSeusEsportes
+        <SecaoNoticias
           favoritos={preferencias.favoritos}
           nomesEsportes={nomesEsportes}
           fontesBloqueadas={preferencias.fontesBloqueadas}
           nomesFontes={nomesFontes}
+          totalFontesBloqueaveis={totalFontesBloqueaveis}
           aoEscolherEsportes={abrirConfiguracoes}
           nomeTime={nomeTime}
-          {...(clienteSnapshot ? { cliente: clienteSnapshot } : {})}
-        />
-
-        <SecaoUltimasNoticias
-          nomesEsportes={nomesEsportes}
-          fontesBloqueadas={preferencias.fontesBloqueadas}
-          nomesFontes={nomesFontes}
-          totalFontesBloqueaveis={totalFontesBloqueaveis}
           {...(clienteSnapshot ? { cliente: clienteSnapshot } : {})}
         />
       </div>
