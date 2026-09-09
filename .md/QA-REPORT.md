@@ -2538,6 +2538,45 @@ Sinalizo ao Coordenador/Gestor para que fique registrada como pré-condição
 explícita do Gate de produção (junto ao chapéu DevOps), não perdida entre um
 lote aprovado e o próximo `/deploy`.
 
+### Refatoração Lote-12 — fechamento de REFAT-12-03
+
+**Achado fechado (2026-09-09)**: a pré-condição acima foi cumprida. Como
+registrado no achado original, esta verificação é estruturalmente humana —
+um leitor de tela real (NVDA/VoiceOver) não roda de forma genuína dentro de
+uma sessão de agente de código não-interativa (mesma limitação de ambiente
+já confirmada empiricamente pela tentativa de Chrome headless via Puppeteer
+em `REFAT-12-01`, que não produziu saída neste ambiente). Por isso a sessão
+foi conduzida diretamente pelo orquestrador/usuário, não por um agente —
+única forma de produzir a evidência real que o critério de aceite exige, em
+vez de repetir a verificação estrutural equivalente já feita e já
+considerada insuficiente por esta própria tarefa.
+
+Roteiro executado contra o build real (`npm run build` + `npm run
+preview`), NVDA (Windows) como leitor de tela:
+
+| Item de UX-SPEC §5.8 | Cobertura | Resultado |
+|---|---|---|
+| 1. Percurso só-teclado nos 7 fluxos (§1.2) | Onboarding→Home; Home→Configurações→bloquear fonte→fechar; Painel→campeonato→abas; Comparativo→escolher rival; Simulação→palpite→limpar cenário | Sem tab-trap, indicador de foco visível em todo o percurso |
+| 2. Leitor de tela real (NVDA) em T-02, T-06, T-08, T-09 | Leitura linear (`Insert+Down`) e por `Tab` da faixa do clube, tabela de classificação, comparativo e grade de simulação | Leitura coerente, sem trecho sem sentido |
+| 3. Nenhum estado da Seção 4 depende só de cor | Banners de fonte instável/GE indisponível/vazio | Todos com texto/ícone, não só cor |
+| 4. Foco não obscurecido (barra inferior / bloco PROJEÇÃO) em viewport móvel real | T-02/T-05/T-08 (barra inferior) e T-09 (PROJEÇÃO fixo) em ~375px | Contorno de foco visível no último item da lista/tabela em todos os casos |
+| 5. Zoom 200% a 320px | T-01, T-02, T-06, T-09 | Sem sobreposição, corte de texto ou ação inacessível |
+| 6. As 4 paletas de clube (Mirassol/clara, Palmeiras/escura, São Paulo/vermelha, Corinthians/acromática), nos 2 temas | Itens 2, 4 e 5 repetidos em Home (T-02) e Painel do time (T-05) — mesmas 2 telas com cobertura completa de paleta em `QA-01` | Sem achado em nenhuma combinação paleta×tema |
+
+**Resultado**: **todos os 6 itens passaram, sem nenhum achado**, conforme
+relato direto do usuário que executou a sessão (fonte da evidência: execução
+humana real, não uma leitura de código ou verificação automatizada — é
+exatamente o tipo de prova que este item exigia e que este Validador não tem
+como produzir sozinho). Nenhum arquivo de código alterado — é verificação,
+não implementação.
+
+**Veredito**: **REFAT-12-03 fechada, sem ressalva**. A pré-condição de
+acessibilidade manual do Gate de deploy em produção (`QA-01`, Lote 12) está
+satisfeita. `Refatoração Lote-12` fica com as 3 tarefas (`REFAT-12-01`,
+`REFAT-12-02`, `REFAT-12-03`) `Concluída` — fechamento estrutural completo
+(checagem QA+DevSecOps de lote, via `/validar`, continua sendo o próximo
+passo formal para o veredito de lote, não substituído por este registro).
+
 **Veredito**: **Aprovado (com ressalva de infraestrutura de verificação, não
 de produto)** — a ressalva não reabre a tarefa nem gera item em
 `Refatoração Lote-12` (não é código a corrigir); é uma pré-condição de
@@ -3565,3 +3604,4 @@ antes do `/deploy` real.
 | 2026-09-07 | Refatoração Lote-2 (débito operacional/dado) | Aprovado | 1/1 tarefa aprovada (REFAT-02-01); 99 arquivos/1135 testes (projeto inteiro), `tsc`/`eslint`/`format:check` limpos; `config/clubes-2026.json` confirmado sem nenhuma ocorrência de `"pendente-confirmacao"`, 20/20 `idsProvedor.football-data` numéricos, os 5 clubes novos (Athletico-PR/Coritiba/RB Bragantino/Remo/Chapecoense) com os ids exatos do Bloqueio 010; validação de contraste do ADR-017 confirmada estruturalmente coberta pelo teste genérico de `derivador-paleta.test.ts` sobre os 20 clubes reais (só Coritiba precisou de `paletaManual`, mesmo padrão de Palmeiras); `config/campeonatos-2026.json` confirmado com as referências aos 5 clubes removidos retiradas e documentadas; grep por slugs antigos em todo o repositório sem ocorrência residual real (só falsos positivos de "Sport Club"/"Esporte" em nomes de outros clubes); `tests/clubes-2026.test.ts` confirmado com os 2 casos novos, ambos passando; fechamento estrutural confirmado, sem nova tarefa |
 | 2026-09-06 | **Confirmação final pré-deploy** (Lotes 1-11+13, primeira publicação conjunta) | **Aprovado** | Regressão do zero: 97/1099 testes, `tsc`/`eslint`/`format:check`/`build` limpos, `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades, `git status` sem edição solta fora do processo; integração entre lotes confirmada manualmente — `gerarSnapshotsEmDisco` com config real (20 clubes/Brasileirão) gerando arquivos validados com sucesso contra os schemas reais da SPA (`app/dados/{versao,futebol,configPublico}.ts`), não só contra o schema do próprio pipeline; `react-router-dom@7.18.3` sem regressão nas telas dos Lotes 8-11; workflows aptos sem depender de tarefa `Pendente`; 1 observação não bloqueante (estender teste cruzado pipeline↔SPA aos 3 arquivos que só têm checagem tautológica hoje), sem tarefa aberta; nenhum achado alto/crítico |
 | 2026-09-08 | Lote 12 — Telemetria, acessibilidade e segurança transversal | Aprovado (com ressalvas) | 4/4 tarefas aprovadas (TEL-01, QA-02, SEC-01 sem ressalva; QA-01 com ressalva de infraestrutura de verificação); 99 arquivos/1135 testes, `tsc`/`eslint`/`format:check` limpos, `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; 5 eventos de telemetria e ausência de conteúdo/preferência na carga confirmados por tipo + teste; eliminação do módulo por build confirmada por prova real de 2 builds Vite (não simulação); CA-08.5/Bloqueio 001 confirmado resolvido com implementação real (`classificacaoFinalDoGrupo`); meta CSP do ADR-011 confirmada literal em `app/index.html` com teste de injeção XSS até o DOM real; 48 casos `axe-core` confirmados sem violação crítica/séria em nenhuma combinação tela×tema×paleta; nenhum achado vira `Refatoração Lote-12` (nenhum é débito de código); ressalva de QA-01 (sessão manual real de acessibilidade — teclado, leitor de tela, zoom 200%) registrada como pré-condição do Gate de deploy em produção, não como reprovação, sinalizada ao Coordenador/Gestor; primeiro veredito de fechamento formal deste lote — libera para auditoria do chapéu DevSecOps |
+| 2026-09-09 | Refatoração Lote-12 — REFAT-12-03 (fechamento da ressalva de QA-01) | Aprovado, sem ressalva | Sessão manual real de acessibilidade (UX-SPEC §5.8, os 6 itens) executada pelo orquestrador/usuário com NVDA contra o build real (`npm run build`+`preview`) — verificação estruturalmente humana, não automatizável por agente neste ambiente (mesma limitação já confirmada em REFAT-12-01/Puppeteer headless); todos os 6 itens passaram sem achado, incluindo as 4 paletas de clube × 2 temas em Home/Painel do time; pré-condição de acessibilidade manual do Gate de deploy em produção satisfeita; `Refatoração Lote-12` com as 3 tarefas (`REFAT-12-01/02/03`) `Concluída` |
