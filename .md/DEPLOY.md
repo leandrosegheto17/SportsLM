@@ -437,6 +437,39 @@ do comando (produção) porque a publicação já é um fato consumado — esta
 entrada é só o registro formal, com evidência real, de que ela aconteceu sem
 regressão cruzada entre Refatoração Lote-12 e a melhoria de Home mobile.
 
+### 2026-09-09 — Melhoria "Faixa do clube consistente" (`UX-15-01`/`UX-15-02`), publicação real desta sessão
+
+Diferente das confirmações anteriores desta seção (código já estava em
+produção antes da checagem), este é um deploy real disparado nesta sessão,
+pelo orquestrador/usuário ("Commit, push, deploy"), depois da dupla aprovação
+(QA + DevSecOps, ver `.md/QA-REPORT.md`/`.md/SECURITY-REVIEW.md`, seção
+"Melhoria — Faixa do clube consistente em Meu Time e Comparativo
+(2026-09-09)") registrada por `/validar`.
+
+- **Commit**: `baf0cab` ("feat(ux): faixa do clube consistente em Meu Time e
+  Comparativo"), rebaseado sobre `07503c6` (chore de dados concorrente) e
+  enviado a `origin/main` nesta sessão. Antes do commit, quatro arquivos
+  (`TASK.md`, `QA-REPORT.md`, `SECURITY-REVIEW.md`, `DEPLOY.md`) foram
+  normalizados de CRLF para LF (artefato de edição local, mesma família de
+  problema já registrada na confirmação anterior desta seção) para manter o
+  diff publicado limpo — `git diff --stat -w` conferido idêntico ao
+  `--stat` final antes do commit, garantindo que nenhuma linha de conteúdo
+  real foi perdida na normalização.
+- **Deployment Vercel confirmado por `vercel inspect`**:
+  `dpl_5HimAurDAp6Dg3BpePJWzFRt3HEa`, `target: production`, `● Ready`,
+  criado em poucos segundos após o `git push`, com os três aliases de
+  produção (inclusive `https://sports-lm.vercel.app`) já apontando para ele.
+  `curl -sI https://sports-lm.vercel.app` retornou `200 OK` logo em seguida.
+- **Escopo publicado**: `PainelTime.tsx` (sem mudança de código, só teste
+  novo confirmando composição já correta), `Comparativo.tsx` (nova
+  `FaixaClube` no topo), mais a rodada 3 do `UX-SPEC.md` e o fechamento de
+  `UX-15-01`/`UX-15-02` no `TASK.md`. Suíte completa validada limpa antes do
+  commit (98 arquivos/1135 testes, `tsc`/`eslint`/`prettier` limpos), sem
+  achado de segurança bloqueante.
+- **Sem staging intermediário** (mesma arquitetura de hosting único
+  documentada na Seção 1) — o push a `origin/main` é a própria publicação em
+  produção; não há uma etapa separada de deploy em staging a registrar aqui.
+
 ---
 
 ## 6. Achado bloqueante — primeira tentativa de deploy real (2026-09-06)

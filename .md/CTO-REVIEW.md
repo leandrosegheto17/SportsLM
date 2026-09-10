@@ -338,3 +338,78 @@ acessibilidade pendente desde o Gate 4 de 2026-09-08.
 
 **Registrado.** Gate 4 é só fechamento — não há veredito de aprovação/
 reprovação aqui, conforme PIPELINE-CONVENTIONS.md §1 e `.claude/agents/gestor.md`.
+
+---
+
+## Gate 4 — Registro de fechamento de deploy — 2026-09-09 (Faixa do clube consistente)
+
+**Skill**: não é deste chapéu (`deploy-report-drafting` é do Validador) — este é
+o registro de governança do Gate 4 (chapéu CTO), só documentação de fechamento;
+**sem poder de veto** (ver `.claude/agents/gestor.md` e
+PIPELINE-CONVENTIONS.md §1). Input: `.md/DEPLOY.md` (Seção 5, entrada "2026-09-09
+— Melhoria 'Faixa do clube consistente' (UX-15-01/UX-15-02), publicação real
+desta sessão"), `.md/QA-REPORT.md` e `.md/SECURITY-REVIEW.md` (entradas
+"Melhoria — Faixa do clube consistente em Meu Time e Comparativo (2026-09-09)"),
+todos já atualizados pelo Validador antes deste registro.
+
+Diferença deste Gate 4 em relação ao anterior (2026-09-09, Lote-12 +
+Home mobile): ali o Validador só confirmou publicações que já haviam ocorrido
+fora da sessão; aqui, o próprio orquestrador/usuário pediu explicitamente
+"Commit, push, deploy" nesta sessão, e o `git push`/deploy foi de fato
+executado agora, depois da dupla aprovação (QA + DevSecOps) deste lote.
+
+### Resultado
+
+**Sucesso.** Nenhum rollback, nenhum incidente. Confirmação feita por evidência
+direta (`vercel inspect`, `curl`), não por nota de terceiro.
+
+| Item | Valor |
+|---|---|
+| Ambiente | Vercel, produção real (`https://sports-lm.vercel.app`) — sem staging intermediário (arquitetura de hosting único, `.md/DEPLOY.md` §1) |
+| Commit publicado | `baf0cab` ("feat(ux): faixa do clube consistente em Meu Time e Comparativo"), rebaseado sobre `07503c6` e enviado a `origin/main` nesta sessão |
+| Lote incluído | Melhoria — Faixa do clube consistente em Meu Time e Comparativo (`UX-15-01`, `UX-15-02`) |
+| Deployment de produção correspondente | `dpl_5HimAurDAp6Dg3BpePJWzFRt3HEa`, `● Ready`, `target: production`, criado em poucos segundos após o `git push`, três aliases de produção (inclusive `https://sports-lm.vercel.app`) apontando para ele |
+| Confirmação adicional | `curl -sI https://sports-lm.vercel.app` → `200 OK` |
+| Data | 2026-09-09 |
+
+### O que foi publicado
+
+- `PainelTime.tsx`: sem mudança de código de produção, só teste novo
+  confirmando que a composição já existente (`FaixaClube`, UI-DS-01, Lote 7)
+  está correta.
+- `Comparativo.tsx`: nova `FaixaClube` no topo, mesmo shape de dado
+  (`ClubeParaFaixa`) e mesma fonte já validada por Zod usados por
+  `Home`/`PainelTime`, sem `href` (sem navegação nova).
+- Rodada 3 do `UX-SPEC.md` e fechamento de `UX-15-01`/`UX-15-02` em `TASK.md`.
+- Suíte completa validada limpa antes do commit (98 arquivos/1135 testes,
+  `tsc`/`eslint`/`prettier` limpos), sem achado de segurança bloqueante
+  (`.md/QA-REPORT.md`/`.md/SECURITY-REVIEW.md`, seção correspondente).
+
+### Débitos residuais conhecidos — sem veto, apenas registro
+
+- Os 2 achados do chapéu QA (`QA-15-01`, nome de componente incorreto no
+  critério de aceite de `UX-15-02`; `QA-15-02`, contagem de teste incorreta na
+  nota do Executor) são de documentação/narração, sem débito de código e sem
+  implicação de segurança (confirmado pelo chapéu DevSecOps) — não abrem
+  `Refatoração Lote-15`, não geram ressalva estratégica nova.
+- Débitos de baixa severidade já conhecidos e inalterados por este lote
+  (`SEC-12-01`, `SEC-12-02`, ressalva de verificação visual real de UX-14 em
+  dispositivo móvel) seguem como registrado no Gate 4 anterior (2026-09-09,
+  Lote-12 + Home mobile) — nenhum novo achado deste lote se soma a eles.
+- Nenhum achado dos relatórios revisados é genuinamente novo ou preocupante o
+  suficiente para reabrir o Gate 1 ou qualquer ressalva estratégica ativa.
+
+### Checklist do Gate 4
+
+- [x] `DEPLOY.md` recebido do Validador, com resultado sucesso/rollback/incidente
+      declarado (sucesso, publicação real disparada nesta sessão)
+- [x] Commit e ambiente publicado identificados
+- [x] Lote/tarefas incluídos nesta confirmação nomeados (`UX-15-01`, `UX-15-02`)
+- [x] Débitos residuais conhecidos revisados: nenhum novo, nenhuma mudança nos
+      já existentes (`SEC-12-01`/`SEC-12-02`, ressalva de verificação visual de
+      UX-14), sem veto
+
+### Veredito
+
+**Registrado.** Gate 4 é só fechamento — não há veredito de aprovação/
+reprovação aqui, conforme PIPELINE-CONVENTIONS.md §1 e `.claude/agents/gestor.md`.
