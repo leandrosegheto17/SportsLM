@@ -1,10 +1,35 @@
 # UX-SPEC.md — SportsLM
 
-**Status**: entregue para revisão do usuário — Loop B, **rodada 2** (2026-09-05)
+**Status**: entregue para revisão do usuário — Loop B, **rodada 3** (2026-09-09)
 **Autor**: Coordenador (chapéu UX/UI)
 **Base**: `.md/PRD-TECNICO.md` (rodada 3), `.md/PRD.md` (rodada 3), `.md/SDD.md` e os
 17 ADRs em `.md/adr/`.
 **Consumidores**: executor, validador, gestor.
+
+**O que mudou da rodada 2 para a rodada 3**: o usuário revisou, fora deste repositório,
+um exercício de brainstorm visual (canvas de exploração com 5 direções) para as 3 telas
+mobile principais e confirmou a direção já em produção (a "Direção B — Camisa" desta
+Seção 3, inalterada), com **um único ajuste pontual**: a faixa do clube precisa ter a
+**mesma aparência compacta nas três telas principais** — Notícias (T-02), Meu Time
+(T-05) e Comparativo (T-08) —, sempre a variante **completa** de `FaixaClube` (Seção
+3.8): mesmo avatar, nome, campeonato e pontos, sem variantes divergentes de altura ou
+conteúdo entre telas. Concretamente:
+- **T-05** usava uma faixa mais alta, com o botão "[ TROCAR TIME ]" embutido dentro
+  dela — uma variante que só existia ali. Passa a usar a faixa completa idêntica à da
+  Home; "Trocar time" continua existindo na tela, mas como botão fantasma separado,
+  logo abaixo da faixa, não mais dentro dela.
+- **T-08** não tinha faixa do clube nenhuma — a tela começava direto no cabeçalho
+  "COMPARATIVO · BRASILEIRÃO 2026". Passa a abrir com a mesma faixa completa das
+  outras duas telas, antes desse cabeçalho.
+- **T-02** já era a referência e não muda.
+
+Isso é reuso de composição do mesmo componente `FaixaClube` (já especificado como
+reutilizável na Seção 3.8 da rodada 2) em mais lugares — não altera a Seção 3 (Design
+System), nem introduz componente novo, nem contradiz o ADR-017 (a cor e a lógica de
+contraste da faixa são as mesmas já validadas). Por isso não há novo ADR: é ajuste de
+Seção 2 (Wireframes), com reflexos pontuais nas Seções 3.8, 4 e 6 só onde elas citavam
+a forma antiga da faixa em T-05/T-08. Fluxos, requisitos, textos de estado e critérios
+de aceite **não mudaram**.
 
 **O que mudou da rodada 1 para a rodada 2**: o stakeholder viu três direções visuais
 desenhadas a partir da rodada 1 e escolheu a **Direção B — "Camisa"**, com o pedido
@@ -412,11 +437,14 @@ favoritos e fontes bloqueadas foram mantidos."**
 ┌──────────────────────────────────────────────┐
 │█ SportsLM                            ◐   ⚙  █│
 ├──────────────────────────────────────────────┤
-│▚▚▚ FAIXA DO CLUBE ▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚│
-│▚  ⬤    SÃO PAULO                     6      ▚│
-│▚  SPA   BRASILEIRÃO SÉRIE A · 2026  42 PTS  ▚│
-│▚                          [ TROCAR TIME ]   ▚│ botão fantasma s/ contorno claro
+│▚▚▚ FAIXA DO CLUBE — listras diagonais ▚▚▚▚▚▚│ 116px — `FaixaClube` completa,
+│▚                                            ▚│ idêntica à da Home (T-02);
+│▚  ⬤    SÃO PAULO                     6      ▚│ "TROCAR TIME" não mora mais
+│▚  SPA   BRASILEIRÃO SÉRIE A · 2026  42 PTS  ▚│ dentro dela (ver abaixo)
+│▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚│
 ├──────────────────────────────────────────────┤
+│                        [ TROCAR TIME ]       │ botão fantasma, 44px, fora da
+├──────────────────────────────────────────────┤ faixa, alinhado à direita
 │ ┌█ PRÓXIMO JOGO ███████████████████████████┐ │
 │ │  DOM, 13/09 · 16H00                      │ │
 │ │  Fluminense × São Paulo                  │ │
@@ -461,9 +489,12 @@ favoritos e fontes bloqueadas foram mantidos."**
 │█                               ▔▔▔▔▔▔▔▔                                                             █│
 ├──────────────────────────────────────────────────────────────────────────────────────────────────────┤
 │▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚│
-│▚   ⬤       SÃO PAULO                                                    6            [ TROCAR TIME ]▚│
-│▚  SPA      BRASILEIRÃO SÉRIE A · 2026                                  42 PTS                       ▚│
+│▚                                                                                                    ▚│ `FaixaClube` completa, idêntica
+│▚   ⬤       SÃO PAULO                                                                     6         ▚│ à da Home (T-02) — sem
+│▚  SPA      BRASILEIRÃO SÉRIE A · 2026                                                   42 PTS     ▚│ "TROCAR TIME" dentro dela
+│▚                                                                                                    ▚│
 │▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚│
+│                                                                      [ TROCAR TIME ]                  │ botão fantasma, fora da faixa
 ├────────────────────────────────────┬─────────────────────────────────────────────────────────────────┤
 │ ┌█ PRÓXIMO JOGO ██████████████████┐│ CAMPEONATOS DE 2026                     ATUALIZADO HÁ 42 MIN    │
 │ │  DOM, 13/09 · 16H00             ││ 6 campeonatos · 1 sem cobertura                                 │
@@ -489,6 +520,13 @@ favoritos e fontes bloqueadas foram mantidos."**
 
 **Ordenação dos cartões** (CA-07.4), igual nas duas larguras: em andamento (pela data
 do próximo jogo) → não iniciados → eliminados → concluídos → sem dados.
+
+**Revisado em 2026-09-09, a pedido do usuário**: a faixa aqui era uma variante própria
+desta tela — mais alta, com "[ TROCAR TIME ]" embutido dentro dela. Isso divergia da
+faixa da Home (T-02) e criava uma segunda variante de `FaixaClube` sem necessidade.
+Agora T-05 usa a mesma `FaixaClube` completa da Home, com o mesmo conteúdo (avatar,
+nome, campeonato, pontos); "Trocar time" continua acessível, só que como botão
+fantasma separado, logo abaixo da faixa.
 
 ---
 
@@ -615,6 +653,12 @@ palpites dele na simulação serão apagados."** com `[ REMOVER ]` e `Cancelar`.
 **Mobile (360)** — cartões empilhados, o time do coração sempre primeiro
 ```
 ┌──────────────────────────────────────────────┐
+│▚▚▚ FAIXA DO CLUBE — listras diagonais ▚▚▚▚▚▚│ 116px — `FaixaClube` completa,
+│▚                                            ▚│ idêntica à da Home (T-02) e do
+│▚  ⬤    SÃO PAULO                     6      ▚│ Painel (T-05) — novo nesta
+│▚  SPA   BRASILEIRÃO SÉRIE A · 2026  42 PTS  ▚│ tela (rodada 3)
+│▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚│
+├──────────────────────────────────────────────┤
 │█ COMPARATIVO · BRASILEIRÃO 2026             █│
 ├──────────────────────────────────────────────┤
 │ ATUALIZADO HÁ 42 MIN                         │
@@ -660,6 +704,11 @@ palpites dele na simulação serão apagados."** com `[ REMOVER ]` e `Cancelar`.
 **Desktop (1280)**
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚│
+│▚   ⬤       SÃO PAULO                                                                     6         ▚│ `FaixaClube` completa, idêntica
+│▚  SPA      BRASILEIRÃO SÉRIE A · 2026                                                   42 PTS     ▚│ à da Home (T-02) e do Painel
+│▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚│ (T-05) — novo nesta tela
+├──────────────────────────────────────────────────────────────────────────────────────────────────────┤
 │█ COMPARATIVO · BRASILEIRÃO 2026            ATUALIZADO HÁ 42 MIN          [ ABRIR SIMULAÇÃO ]        █│
 ├────────────────────────────────┬────────────────────────────────┬────────────────────────────────────┤
 │▌⬤SPA SÃO PAULO      SEU TIME   │▌⬤PAL PALMEIRAS                 │▌⬤COR CORINTHIANS                   │
@@ -681,6 +730,14 @@ palpites dele na simulação serão apagados."** com `[ REMOVER ]` e `Cancelar`.
 
 Cada coluna usa a barra de 6 px na cor **daquele** clube — é o que faz a comparação
 ser lida de relance, que é o que o stakeholder pediu ("ver a briga").
+
+**Revisado em 2026-09-09, a pedido do usuário**: a tela não tinha faixa do clube — o
+comparativo começava direto no cabeçalho "COMPARATIVO · BRASILEIRÃO 2026". Isso quebrava
+a consistência de identidade que a Home (T-02) e o Painel (T-05) já tinham. Agora as três
+telas principais abrem com a mesma `FaixaClube` completa (Seção 3.8), sem variantes
+divergentes de altura ou conteúdo entre elas — o cartão "SEU TIME" logo abaixo continua
+existindo e não muda: ele é `CartaoIngresso`, não `FaixaClube`, e cumpre outro papel
+(comparar, não identificar a tela).
 
 ---
 
@@ -946,9 +1003,11 @@ Os seis primeiros são específicos desta direção e concentram o risco de impl
   `--txt-rotulo`, e o **número da posição** em `--txt-camisa` alinhado à direita, com
   os pontos abaixo em `--txt-rotulo`.
 - Todo o texto usa `--clube-identidade-texto`.
-- Variantes: **completa** (home, painel — 116 px no celular, 140 px no desktop);
-  **compacta** (cabeçalhos internos — 72 px, sem número); **neutra** (sem time
-  escolhido: tinta e cinza, sem número, com o texto "SPORTSLM").
+- Variantes: **completa** (home T-02, painel T-05, comparativo T-08 — 116 px no
+  celular, 140 px no desktop; **rodada 3**: passou a ser a única variante usada nas 3
+  telas principais, sem divergência de altura/conteúdo entre elas); **compacta**
+  (cabeçalhos internos — 72 px, sem número); **neutra** (sem time escolhido: tinta e
+  cinza, sem número, com o texto "SPORTSLM").
 - A faixa inteira é clicável na home (leva ao painel) e tem `aria-label` completo:
   "São Paulo, 6º lugar no Brasileirão Série A de 2026, 42 pontos. Abrir painel do
   time."
@@ -1002,7 +1061,7 @@ Componentes de base, também novos, na mesma linguagem:
 
 | Componente | Anatomia | Variantes |
 |---|---|---|
-| `Botao` | 44 px, raio md, rótulo em `--txt-rotulo` | primário (fundo `--clube-identidade`, texto `--clube-identidade-texto`) · secundário (contorno tinta) · terciário (link) · destrutivo · fantasma sobre a faixa |
+| `Botao` | 44 px, raio md, rótulo em `--txt-rotulo` | primário (fundo `--clube-identidade`, texto `--clube-identidade-texto`) · secundário (contorno tinta) · terciário (link) · destrutivo · fantasma (contorno claro; ex.: "Trocar time" em T-05, sempre fora da `FaixaClube` desde a rodada 3) |
 | `Chip` | 44 px, raio sm, caixa alta | selecionável · removível · informativo ("FONTE FIXA") |
 | `EtiquetaEsporte` | caixa alta 12/16 sobre fundo tonal do esporte, raio sm | 15 esportes + "GERAL" |
 | `SeloFonte` | nome + ponto de estado + texto | ativa · bloqueada · instável · fixa |
@@ -1078,6 +1137,7 @@ justificativa.
 | Campeonato sem cobertura | "SUPERCOPA REI — SEM DADOS. Cobertura indisponível nesta versão." (CA-07.2) |
 | Frescor em alerta | "ATUALIZADO HÁ 7 H — PODE ESTAR DESATUALIZADO" (CA-17.2) |
 | Pausa por cota | "Atualização pausada por limite do provedor. Última atualização há 3 h." (CA-16.4 / CA-17.4) |
+| Visual | **Revisado na rodada 3**: a faixa é a mesma variante completa da Home (T-02) e do Comparativo (T-08), sem variante própria desta tela. "Trocar time" é um botão fantasma separado, logo abaixo da faixa — não mora mais dentro dela |
 
 ### T-06 · Detalhe do campeonato
 | Estado | Texto na tela |
@@ -1111,6 +1171,7 @@ justificativa.
 | Erro | "Não conseguimos carregar o comparativo." + `[ TENTAR DE NOVO ]` |
 | Preenchido | Wireframe da Seção 2 |
 | Confronto direto | "⚔ CONFRONTO DIRETO" nas duas listas (CA-10.3) |
+| Visual | **Novo na rodada 3**: `FaixaClube` completa do time do coração no topo, em todos os estados acima (inclusive vazio e carregando) — o mesmo componente e conteúdo da Home (T-02) e do Painel (T-05); não depende de rival escolhido nem de dado do Brasileirão |
 
 ### T-09 · Simulação
 | Estado | Texto na tela |
@@ -1234,7 +1295,7 @@ Mobile-first. Pontos de quebra: **360** (base), **600** (tablet retrato), **900*
 | T-04 / T-07 | Folha de baixo; lista em 1 coluna | Modal 520 px; 2 colunas | Modal 560 px; 2 colunas |
 | T-05 Painel | Faixa completa; bloco de próximo jogo; cartões de campeonato empilhados | Campeonatos em 2 colunas | Coluna fixa de 336 px (próximo jogo + a briga) + campeonatos em grade de 2 colunas à direita |
 | T-06 Campeonato | Cabeçalho preto; bloco de resumo; abas Tabela/Disputadas/Próximas; tabela com 6 colunas e rolagem interna | Tabela com 8 colunas | **Sem abas**: resumo em largura total, tabela completa de 10 colunas, e Disputadas/Próximas lado a lado em 540 px |
-| T-08 Comparativo | Cartões empilhados (time primeiro); calendário com abas por clube | 2 colunas; calendário empilhado | 3 colunas comparáveis lado a lado, cada uma com seu calendário embaixo |
+| T-08 Comparativo | Faixa completa; cartões empilhados (time primeiro); calendário com abas por clube | 2 colunas; calendário empilhado | 3 colunas comparáveis lado a lado, cada uma com seu calendário embaixo |
 | T-09 Simulação | Lista por rodada; bloco PROJEÇÃO fixo no topo | Lista por rodada, 2 rodadas por linha | Matriz rodada × clube; PROJEÇÃO fixo; barras de acumulado no rodapé |
 
 **Regras transversais**

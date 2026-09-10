@@ -3578,6 +3578,206 @@ antes do `/deploy` real.
 
 ---
 
+## Melhoria — Otimização mobile da Home (2026-09-09)
+
+Pedido direto do usuário, conduzido fora do pipeline formal Gestor/Coordenador
+(ver `.md/TASK.md`, seção "Melhoria — Otimização mobile da Home"). Este lote
+ainda não tinha veredito em `QA-REPORT.md`/`SECURITY-REVIEW.md` antes desta
+validação. Base: `.md/TASK.md` (UX-14-01, UX-14-02), `.md/PRD-TECNICO.md`
+(RF-04/RF-05/RF-19), `.md/UX-SPEC.md` (§2/T-02).
+
+### UX-14-01 — PRÓXIMO JOGO + A BRIGA lado a lado no mobile
+
+**Critério de aceite**: abaixo de 1024px, os dois `BlocoPreto` ficam lado a
+lado (2 colunas) em vez de empilhados; a partir de 1024px continuam
+empilhados na coluna estreita de 336px; faixa do clube sem mudança de
+altura/conteúdo.
+
+| Verificação | Evidência | Resultado |
+|---|---|---|
+| Layout lado a lado abaixo de 1024px | `app/rotas/paginas/Home/SecaoIdentidade.module.css` lido: `.blocosTime { display:flex; flex-direction:row; ... }`, `.blocosTime > * { flex:1 1 0 }` | Conforme |
+| Empilhado a partir de 1024px | `@media (min-width:1024px) { .blocosTime { flex-direction:column } }` no mesmo arquivo | Conforme — mesma coluna estreita de REFAT-08-01/10-01, breakpoint inalterado |
+| Faixa do clube sem mudança | `SecaoIdentidade.tsx` lido: bloco `<FaixaClube>` fora do novo wrapper `blocosTime`, sem prop nova, sem alteração de `FaixaClube.tsx`/`FaixaClube.module.css` neste lote | Conforme |
+| Padding mais denso (`blocoCompacto`) aditivo/retrocompatível | `BlocoPreto.module.css`/`grep -rn "blocoCompacto" app/` — só `SecaoIdentidade.module.css`/`.tsx` referenciam a classe; `PainelTime.tsx` (outro consumidor de `BlocoPreto`) não a usa | Conforme — sem efeito colateral em outro consumidor |
+| Regressão de teste | `SecaoIdentidade.test.tsx` (baseado em busca por texto, não estrutura DOM) | Passa sem alteração, dentro de `npx vitest run` |
+| `tsc --noEmit` / `eslint .` | Rodados por mim sobre o projeto inteiro | Limpos |
+
+**Veredito**: **Aprovado**, sem ressalva.
+
+### UX-14-02 — Fundir "Seus esportes" + "Últimas notícias" num feed único filtrável
+
+**Critério de aceite**: um único componente (`SecaoNoticias`) substitui os
+dois; chips filtram o MESMO feed deduplicado; zero favoritos não bloqueia o
+feed geral; filtro por esporte roda sobre o feed completo antes do corte de
+30 (RN-07); RF-04/RF-05/RF-19 e UX-SPEC §2/T-02 atualizados para refletir a
+fusão.
+
+| Verificação | Evidência | Resultado |
+|---|---|---|
+| Substituição estrutural | `SecaoSeusEsportes.tsx`/`SecaoUltimasNoticias.tsx` (+ `.module.css`/`.test.tsx`) ausentes de `app/rotas/paginas/Home/`; `grep` por esses nomes no repositório só encontra comentário/histórico em `SecaoNoticias.*`, `Home.tsx`, `Home.module.css`, `PainelTime.tsx`, `Configuracoes*`, `tokens.css` — nenhum import real remanescente | Conforme |
+| `Home.tsx` integra só `SecaoNoticias` | `Home.tsx` lido linha a linha | Conforme — `<SecaoNoticias>` no lugar das duas antigas |
+| Feed único, corte de 30 após o filtro | `SecaoNoticias.tsx` lido: `feedCompleto` via `montarFeedNoticias(..., Number.POSITIVE_INFINITY)`; `itensFiltrados` aplica o filtro por chip sobre `feedCompleto` e só then `.slice(0, LIMITE_ITENS_EXIBIDOS)` | Conforme — filtro nunca perde item por causa do corte geral |
+| Zero favoritos não bloqueia o feed | `SecaoNoticias.tsx`: `favoritos.length === 0` só renderiza `BannerAlerta` não bloqueante acima dos chips; nenhum `return` antecipado nem condicional envolvendo a lista | Conforme — CA-05.4 revista confirmada |
+| Chips aparecem com 1 favorito (mudança deliberada) | `mostrarChips = favoritos.length > 0 \|\| nomeTime !== null` | Conforme, bate com a nota da tarefa |
+| `RF-05` reescrito em `PRD-TECNICO.md` | `.md/PRD-TECNICO.md` linhas 169-203 lidas: "Revisado (2026-09-09...)" explícito, CA-05.1/05.2/05.4 revisados, CA-05.3 mantido coerente com o filtro sobre feed único | Conforme |
+| `UX-SPEC.md` §2/T-02 — wireframe/narrativa | `.md/UX-SPEC.md` linhas 154-217 lidas: wireframe mobile mostra "NOTÍCIAS" único com chips (Todos/Futebol/Vôlei/Meu time) e nota "Ordem no celular" reescrita explicando a fusão | Conforme |
+| **Achado (QA-14-01)** — `UX-SPEC.md` §4/§6 não reconciliadas | `.md/UX-SPEC.md` linha 1101 (tabela de Estados de T-02): "Seção 'SEUS ESPORTES' substituída por..." — ainda fala de uma seção separada, incompatível com o feed único; linha 1292 (tabela de Comportamento Responsivo, coluna `< 600` de "T-02 Home"): "PRÓXIMO JOGO → A BRIGA → SEUS ESPORTES → ÚLTIMAS NOTÍCIAS", empilhados — nem reflete a fusão em "NOTÍCIAS" nem o layout lado a lado de UX-14-01 (que já vale abaixo de 1024px, cobrindo toda a faixa `< 600`) | **Inconsistência real dentro do próprio `UX-SPEC.md`** — o wireframe/narrativa do §2 foram atualizados, mas essas duas tabelas de apoio (Estados, Responsivo) ficaram para trás |
+| Testes por tabela do arquivo novo | `SecaoNoticias.test.tsx` (21 casos) lido: cobre CA-05.1 (filtro não perde item pelo corte de 30), CA-05.4 (zero favoritos não bloqueia), chip com 1 favorito, "Meu time" | Conforme |
+| Suíte completa | `npx vitest run` executado por mim | **98 arquivos, 1135 testes, todos passando** — bate com o relatado (1131 na conclusão de UX-14-02 + 4 de UX-15-01/02, feitas depois no mesmo dia) |
+| `tsc --noEmit` | Rodado por mim | Limpo |
+| `eslint .` | Rodado por mim | Limpo |
+| Verificação visual real (chips/densidade, 320-360px) | Nenhum teste automatizado cobre rolagem horizontal de chips nem densidade visual real (`grep` por "320"/"360"/"scroll"/"rolagem" nos arquivos de teste do lote sem resultado) — mesma limitação estrutural de ambiente headless já registrada em REFAT-12-01/REFAT-12-03 (sem navegador real/DevTools disponível para este agente) | Não verificável neste ambiente — tratado como ressalva não bloqueante, não como reprovação (mesmo padrão de REFAT-12-03) |
+
+**Classificação do achado QA-14-01**: **Simples** — ajuste pontual de
+documentação (reescrever 2 células de tabela em `UX-SPEC.md`), não compromete
+o critério de aceite central da tarefa (a fusão do feed e a redução de altura
+já estão implementadas e corretas, confirmado por código e por teste), e não
+bloqueia nenhuma outra tarefa do lote ou de lotes futuros. A tarefa **UX-14-02
+continua `Concluída`** — o achado vira `REFAT-14-01` em `Refatoração Lote-14`
+(`.md/TASK.md`), criada por mim nesta mesma checagem, sem reabrir o
+Coordenador.
+
+**Veredito**: **Aprovado (com ressalvas)** — ressalva 1 (QA-14-01, achado
+simples de documentação) não bloqueante, tarefa aberta em `Refatoração
+Lote-14`; ressalva 2 (verificação visual real em 320-360px) é pré-condição de
+processo para o próximo `/deploy`, não débito de código — mesmo tratamento já
+dado a REFAT-12-03/verificação manual de acessibilidade, recomendo ao usuário
+conferir em dispositivo real antes do próximo `/deploy`.
+
+### Fechamento estrutural — Melhoria "Otimização mobile da Home"
+
+- Ambas as tarefas (`UX-14-01`, `UX-14-02`) estão `Concluída` em
+  `.md/TASK.md`.
+- Nenhuma dependência da Seção 4 do `TASK.md` órfã/inconsistente relativa a
+  este lote — UX-14-02 depende só de UX-14-01 (mesmo arquivo `Home.tsx`, sem
+  dependência funcional real), ambas concluídas.
+- Nenhuma tarefa `Bloqueada` neste lote.
+- Achado desta validação (QA-14-01, simples) virou `REFAT-14-01` em
+  `Refatoração Lote-14`, criada por mim nesta checagem — não exige redesenho
+  de dependência/decomposição, portanto não escala ao Coordenador.
+- Sem padrão recorrente de bug que sugira problema de decomposição/diretriz
+  de implementação — os dois achados desta validação são um gap pontual de
+  documentação e uma limitação de ambiente, não um padrão.
+
+### Veredito — Melhoria "Otimização mobile da Home"
+
+**Aprovado (com ressalvas)**. 2/2 tarefas aprovadas; 98 arquivos/1135 testes,
+`tsc`/`eslint` limpos, sem regressão; 1 achado simples (QA-14-01) virou
+`REFAT-14-01`; 1 ressalva de verificação visual real (não bloqueante,
+pré-condição de `/deploy`). Libera para auditoria do chapéu DevSecOps.
+
+## Melhoria — Faixa do clube consistente em Meu Time e Comparativo (2026-09-09)
+
+Pedido direto do usuário, a partir de brainstorm visual fora do pipeline (ver
+`.md/TASK.md`, seção "Melhoria — Faixa do clube consistente em Meu Time e
+Comparativo"). Lote ainda não tinha veredito em `QA-REPORT.md`/
+`SECURITY-REVIEW.md`. Base: `.md/TASK.md` (UX-15-01, UX-15-02),
+`.md/PRD-TECNICO.md`, `.md/UX-SPEC.md` (rodada 3, §2/T-05 e T-08, §4/T-05 e
+T-08). Validação sobre o **working tree não commitado** desta sessão
+(`.md/UX-SPEC.md`, `.md/TASK.md`, `app/rotas/paginas/Comparativo.tsx`,
+`Comparativo.test.tsx`, `PainelTime.test.tsx`) — commit não é responsabilidade
+deste agente.
+
+### UX-15-01 — `PainelTime.tsx`: `FaixaClube` completa, "Trocar time" fora da faixa
+
+**Critério de aceite**: `PainelTime.tsx` usa a mesma variante de `FaixaClube`
+que `Home.tsx`/T-02 (mesma altura/conteúdo); botão "Trocar time" continua
+abrindo T-04, agora fora do componente da faixa; nenhum teste de comportamento
+existente muda de resultado, só a composição visual.
+
+| Verificação | Evidência | Resultado |
+|---|---|---|
+| `FaixaClube` variante `completa`, mesmo conteúdo da Home | `app/rotas/paginas/PainelTime.tsx` lido linha a linha (não a nota do Executor): `<FaixaClube variante="completa" clube={clubeParaFaixa} competicaoNome={...} posicao={...} pontos={...}>` — mesmo shape de `ClubeParaFaixa` (nome/sigla/paleta) e mesmas props de `FaixaClubeDoTime.tsx`/Home, só sem `href` (a faixa não navega para lugar nenhum a partir da própria tela do time) | Conforme — confirmado por leitura direta, não pela nota do Executor |
+| "Trocar time" fora da faixa (irmão, não filho) | `PainelTime.tsx`: `{faixa}` e `{trocarTime}` são dois elementos irmãos no retorno do componente, em todos os 4 estados que os renderizam (carregando, erro, vazio-com-time, preenchido); `Botao variante="fantasma"` nunca é filho/prop de `<FaixaClube>` | Conforme |
+| Nenhuma linha de `PainelTime.tsx`/`.module.css` alterada nesta tarefa | `git diff` sobre esses dois arquivos: sem alteração (só `.test.tsx` mudou) | Conforme com o que a nota do Executor afirma — verificado, não presumido |
+| Teste novo prova a separação estrutural | `PainelTime.test.tsx`, caso "UX-15-01: 'TROCAR TIME' fica fora da FaixaClube (...) e abre T-04" lido: usa `faixa.contains(botaoTrocarTime)` (`false`) + `fireEvent.click` confirmando abertura de T-04 | Conforme — prova real de DOM, não suposição |
+| Nenhum teste de comportamento pré-existente mudou de resultado | `npx vitest run app/rotas/paginas/PainelTime.test.tsx` — 11 testes (10 pré-existentes + 1 novo, confirmado por `git show HEAD` vs. working tree), todos passando | Conforme |
+| `tsc --noEmit` / `eslint .` | Rodados por mim sobre o projeto inteiro | Limpos |
+
+**Veredito**: **Aprovado**, sem ressalva. A premissa da tarefa (Painel usava
+faixa alta com botão embutido) já não correspondia ao código antes de
+qualquer mudança — confirmado, e a nota do Executor documenta isso
+corretamente em vez de reescrever histórico.
+
+### UX-15-02 — `Comparativo.tsx`: `FaixaClube` completa do time do coração no topo
+
+**Critério de aceite completo** (UX-SPEC §2/T-08 rodada 3 + tabela §4/T-08):
+`FaixaClube` aparece no topo nos estados "com time" — preenchido, carregando,
+erro, zero rival, Brasileirão sem dados (CA-09.5) e não iniciado (CA-09.6);
+no estado "sem time" (CA-14.3) a faixa não aparece; cartão "SEU TIME" dentro
+da lista de comparados não muda.
+
+| Verificação | Evidência | Resultado |
+|---|---|---|
+| Sem time (CA-14.3): faixa ausente | `Comparativo.tsx` linhas 300-310 (`if (timeId === null)`) — retorna só `EstadoVazio`, `{faixa}` nunca calculado neste ramo (guard antecede o cálculo de `faixa`) | Conforme |
+| Preenchido: faixa presente | Linha 442-443, `{faixa}` primeiro filho do `<article>` do retorno final | Conforme |
+| Carregando: faixa presente | Linhas 349-356 (`carregandoInicial`) — `{faixa}` antes dos esqueletos | Conforme |
+| Erro: faixa presente | Linhas 359-369 (`erroSemDados`) — `{faixa}` antes do `EstadoVazio` de erro | Conforme |
+| Zero rival (CA-10.5): faixa presente | Linhas 389-399 — `{faixa}` antes do convite "Escolher rivais" | Conforme |
+| Brasileirão sem dados (CA-09.5): faixa presente | Linhas 375-386 (`dados.classificacao.length === 0`) — `{faixa}` antes do `EstadoVazio` correspondente | Conforme |
+| Não iniciado (CA-09.6): faixa presente | Não é um `return` isolado — cai no render final (linha 441+), que sempre inclui `{faixa}`; o aviso "ainda não começou" é um parágrafo adicional dentro do mesmo retorno | Conforme |
+| Faixa sem `href`, mesmo padrão de `PainelTime` | `<FaixaClube variante="completa" ...>` sem prop `href` em nenhuma das 7 ocorrências de `{faixa}` | Conforme |
+| Faixa usa dado já buscado, sem 2ª requisição | `clubes` (via `useClubesPublicos`) e `dados?.classificacao`/`dados?.competicao` (via `useSnapshot` do Brasileirão) já existiam antes desta tarefa; `clubeParaFaixa`/`linhaDoTimeParaFaixa` só derivam desses dois, sem novo `useSnapshot`/`fetch` | Conforme |
+| Cartão "SEU TIME" inalterado | `estilos['seloSeuTime']` (span "SEU TIME" dentro do cartão de cada clube comparado) sem mudança de lógica/posição no `git diff`; **divergência de nomenclatura**: o critério de aceite do TASK.md chama esse elemento de "`CartaoIngresso`, já existente", mas `grep -rn CartaoIngresso app/` mostra que esse componente existe (`app/design-system/CartaoIngresso.tsx`) e é usado só em `SecaoNoticias.tsx` (cards de notícia) — nunca em `Comparativo.tsx`, em nenhum commit do histórico (`git log -p --follow` sobre o arquivo, sem ocorrência). O elemento real é um `<div className={estilos['cartao']}>` inline, não o componente `CartaoIngresso`. O *comportamento* pedido (não muda, não duplica informação) está correto; é só o *nome* no texto do critério de aceite que está errado | **Achado QA-15-01** (documentação — nome de componente incorreto na tabela de tarefas do TASK.md, não afeta código) |
+| Testes cobrindo os 7 pontos acima | `Comparativo.test.tsx` lido: casos "sem time salvo" (faixa ausente), "zero rival" (faixa completa), assert adicional em CA-10.1 (preenchido), "estado carregando" (faixa nunca ausente com time salvo), assert em "Erro sem dado anterior", assert em CA-09.5, assert em CA-09.6 — todos usando `getByRole('group', ...)` (papel real de `FaixaClube`, não suposição de classe CSS) | Conforme, cobre os 7 estados |
+| **Achado QA-15-02** — contagem de testes divergente da nota do Executor | Nota de UX-15-02 no TASK.md afirma "Comparativo.test.tsx — 15 testes ... (9 pré-existentes + 6 novos)"; `git show HEAD:app/rotas/paginas/Comparativo.test.tsx \| grep -c 'it('` = **12** pré-existentes (não 9), e o diff real desta sessão adiciona só **3** blocos `it(` novos (mais 4 asserts dentro de testes já existentes) — total bate em 15 (12+3), mas a decomposição "9+6" no texto da nota está incorreta. Não afeta o resultado real: 15/15 passam, e o total do projeto (1135) bate exatamente com "1131 (UX-14-02) + 4 (UX-15-01/02)" já registrado na entrada anterior deste relatório | **Achado informativo** — miscontagem na narração da nota do Executor, sem efeito em código/comportamento; não gera tarefa de refatoração (mesmo padrão de Lote 3/Lote 13, achado informativo sem tarefa) |
+| `npx vitest run app/rotas/paginas/Comparativo.test.tsx` | Rodado por mim | 15 testes, todos passando |
+| Suíte completa | `npx vitest run` | **98 arquivos, 1135 testes, todos passando** — bate com o relatado em ambas as entradas do TASK.md |
+| `tsc --noEmit` / `eslint .` | Rodados por mim sobre o projeto inteiro | Limpos |
+
+**Classificação de QA-15-01/QA-15-02**: **Simples** — ambos são desvios de
+documentação/narração (nome de componente incorreto no critério de aceite;
+contagem de teste incorreta na nota do Executor), não comprometem o critério
+de aceite central (a `FaixaClube` aparece/some exatamente onde deveria, em
+todos os 7 estados, confirmado por leitura direta e por teste real) e não
+bloqueiam nenhuma outra tarefa. **UX-15-02 continua `Concluída`.**
+
+**Veredito**: **Aprovado**, com 2 achados simples registrados (sem tarefa de
+`Refatoração Lote-15` — ambos são apenas correção de texto/nota, não código
+ou teste a mudar; anoto para quem revisar `TASK.md` no futuro, mas não abro
+tarefa de execução para reescrever uma nota histórica já fechada).
+
+### Consistência visual/comportamental entre as 3 telas (Home/T-02, Painel/T-05, Comparativo/T-08)
+
+| Verificação | Evidência | Resultado |
+|---|---|---|
+| Mesma variante em todas as 3 | `Home/FaixaClubeDoTime.tsx`, `PainelTime.tsx`, `Comparativo.tsx` — os 3 usam `variante="completa"` (nenhum usa `compacta`/`neutra` no caminho "com dado") | Conforme |
+| Mesmo shape de dado (`ClubeParaFaixa`) | Os 3 montam `{ nome: nomeCurto, sigla, paleta }` a partir de `clubes?.find(...)` — idêntico nos 3 arquivos | Conforme |
+| Mesma altura/CSS | Nenhum dos 3 `.module.css` de página (`Home.module.css`, `PainelTime.module.css`, `Comparativo.module.css`) sobrescreve altura/padding/fonte de `FaixaClube` — só posicionamento de layout (`grid-area`/wrapper); a altura vem inteiramente de `FaixaClube.module.css`, único e compartilhado | Conforme |
+| Única diferença esperada: `href` | Só a Home passa `href="/time"` (a faixa é o link de entrada); Painel e Comparativo não passam `href` (já estão na tela de contexto do próprio time) — diferença documentada e intencional, não uma inconsistência | Conforme, sem achado |
+| `UX-SPEC.md` reflete a decisão | Linhas 14, 527, 736, 1006-1007, 1140, 1174 (lidas) — "rodada 3" descreve a convergência para variante única `completa` nas 3 telas de forma consistente entre narrativa (topo), Seção 2 (wireframes) e Seção 4 (tabela de estados) | Conforme — sem a inconsistência do tipo QA-14-01 (§4/§6 desatualizadas) desta vez |
+
+**Nenhuma inconsistência visual/comportamental encontrada entre as 3 telas.**
+
+### Fechamento estrutural — Melhoria "Faixa do clube consistente em Meu Time e Comparativo"
+
+- Ambas as tarefas (`UX-15-01`, `UX-15-02`) estão `Concluída` em `.md/TASK.md`.
+- Nenhuma dependência da Seção 4 do `TASK.md` órfã/inconsistente relativa a
+  este lote — as duas tarefas dependem só de `UI-T05-01`/`UI-DS-01` e
+  `UI-T08-01`/`UI-DS-01` respectivamente, todas já `Concluída` em lotes
+  anteriores; nota de paralelização (arquivos disjuntos) confirmada pelo
+  `git diff` real (sem conflito, sem edição cruzada de arquivo).
+- Nenhuma tarefa `Bloqueada` neste lote.
+- Os 2 achados desta validação (QA-15-01, QA-15-02) são inconsistências de
+  texto/nota, não débito de código — não abrem `Refatoração Lote-15` (mesmo
+  tratamento de achados informativos de Lote 3/Lote 13, quando o achado não é
+  débito de implementação).
+- Sem padrão recorrente de bug que sugira problema de decomposição/diretriz —
+  os dois achados são pontuais de narração, não um padrão.
+
+### Veredito — Melhoria "Faixa do clube consistente em Meu Time e Comparativo"
+
+**Aprovado**. 2/2 tarefas aprovadas (UX-15-01, UX-15-02); 98 arquivos/1135
+testes, `tsc`/`eslint` limpos, sem regressão; consistência visual/comportamental
+confirmada entre Home/Painel/Comparativo (mesma variante `completa`, mesmo
+shape de dado, mesma altura via CSS único); 2 achados simples de
+documentação/narração (nome de componente incorreto no critério de aceite de
+UX-15-02; contagem de teste incorreta na nota do Executor), nenhum vira tarefa
+de refatoração (apenas nota informativa). Libera para auditoria do chapéu
+DevSecOps.
+
+---
+
 ## Log de Validações
 
 | Data | Lote | Veredito | Observação |
@@ -3605,3 +3805,5 @@ antes do `/deploy` real.
 | 2026-09-06 | **Confirmação final pré-deploy** (Lotes 1-11+13, primeira publicação conjunta) | **Aprovado** | Regressão do zero: 97/1099 testes, `tsc`/`eslint`/`format:check`/`build` limpos, `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades, `git status` sem edição solta fora do processo; integração entre lotes confirmada manualmente — `gerarSnapshotsEmDisco` com config real (20 clubes/Brasileirão) gerando arquivos validados com sucesso contra os schemas reais da SPA (`app/dados/{versao,futebol,configPublico}.ts`), não só contra o schema do próprio pipeline; `react-router-dom@7.18.3` sem regressão nas telas dos Lotes 8-11; workflows aptos sem depender de tarefa `Pendente`; 1 observação não bloqueante (estender teste cruzado pipeline↔SPA aos 3 arquivos que só têm checagem tautológica hoje), sem tarefa aberta; nenhum achado alto/crítico |
 | 2026-09-08 | Lote 12 — Telemetria, acessibilidade e segurança transversal | Aprovado (com ressalvas) | 4/4 tarefas aprovadas (TEL-01, QA-02, SEC-01 sem ressalva; QA-01 com ressalva de infraestrutura de verificação); 99 arquivos/1135 testes, `tsc`/`eslint`/`format:check` limpos, `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; 5 eventos de telemetria e ausência de conteúdo/preferência na carga confirmados por tipo + teste; eliminação do módulo por build confirmada por prova real de 2 builds Vite (não simulação); CA-08.5/Bloqueio 001 confirmado resolvido com implementação real (`classificacaoFinalDoGrupo`); meta CSP do ADR-011 confirmada literal em `app/index.html` com teste de injeção XSS até o DOM real; 48 casos `axe-core` confirmados sem violação crítica/séria em nenhuma combinação tela×tema×paleta; nenhum achado vira `Refatoração Lote-12` (nenhum é débito de código); ressalva de QA-01 (sessão manual real de acessibilidade — teclado, leitor de tela, zoom 200%) registrada como pré-condição do Gate de deploy em produção, não como reprovação, sinalizada ao Coordenador/Gestor; primeiro veredito de fechamento formal deste lote — libera para auditoria do chapéu DevSecOps |
 | 2026-09-09 | Refatoração Lote-12 — REFAT-12-03 (fechamento da ressalva de QA-01) | Aprovado, sem ressalva | Sessão manual real de acessibilidade (UX-SPEC §5.8, os 6 itens) executada pelo orquestrador/usuário com NVDA contra o build real (`npm run build`+`preview`) — verificação estruturalmente humana, não automatizável por agente neste ambiente (mesma limitação já confirmada em REFAT-12-01/Puppeteer headless); todos os 6 itens passaram sem achado, incluindo as 4 paletas de clube × 2 temas em Home/Painel do time; pré-condição de acessibilidade manual do Gate de deploy em produção satisfeita; `Refatoração Lote-12` com as 3 tarefas (`REFAT-12-01/02/03`) `Concluída` |
+| 2026-09-09 | Melhoria — Otimização mobile da Home (UX-14-01, UX-14-02) | Aprovado (com ressalvas) | 2/2 tarefas aprovadas; layout lado a lado (<1024px) e feed único filtrável confirmados por leitura de código e de `RF-05`/`UX-SPEC §2/T-02` atualizados; 98 arquivos/1135 testes, `tsc`/`eslint` limpos, sem regressão; 1 achado simples (QA-14-01, tabelas de Estados/Responsivo de `UX-SPEC.md` §4/§6 não reconciliadas com a fusão do feed) virou `REFAT-14-01` em `Refatoração Lote-14`, sem reabrir tarefa nem Coordenador; 1 ressalva não bloqueante (verificação visual real de chips/densidade em 320-360px, não executável neste ambiente headless — mesmo padrão de REFAT-12-03), registrada como pré-condição do próximo `/deploy`; libera para auditoria do chapéu DevSecOps |
+| 2026-09-09 | Melhoria — Faixa do clube consistente em Meu Time e Comparativo (UX-15-01, UX-15-02) | Aprovado | 2/2 tarefas aprovadas, validadas sobre o working tree não commitado desta sessão; `FaixaClube` variante `completa` confirmada idêntica (mesmo shape de dado, mesma altura via CSS único) nas 3 telas (Home/T-02, Painel/T-05, Comparativo/T-08), diferindo só por `href` (só a Home linka); em `Comparativo.tsx`, faixa confirmada presente nos 7 estados "com time" (preenchido, carregando, erro, zero rival, CA-09.5, CA-09.6) e ausente em CA-14.3, por leitura direta de código, não da nota do Executor; 98 arquivos/1135 testes, `tsc`/`eslint` limpos, sem regressão; sem inconsistência visual/comportamental entre as 3 telas; 2 achados simples de documentação/narração (QA-15-01, nome de componente `CartaoIngresso` incorreto no critério de aceite de UX-15-02 — o elemento real é uma `div` inline; QA-15-02, contagem "9 pré-existentes + 6 novos" de `Comparativo.test.tsx` incorreta, real é 12+3=15), nenhum vira tarefa de refatoração (achado informativo, sem débito de código); libera para auditoria do chapéu DevSecOps |

@@ -1972,3 +1972,204 @@ aprovação deste lote.
 | 2026-09-06 | **Confirmação final pré-deploy** (Lotes 1-11+13, primeira publicação conjunta) | **Aprovado (com débito já registrado, nenhum novo)** | `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; segredo/isolamento `dominio/pipeline/app` reconfirmados sem novo artefato de produção; achado de hardening não bloqueante sobre sincronia manual de schema pipeline↔SPA (mesmo achado do chapéu QA, sem vulnerabilidade real hoje); requisitos operacionais para o chapéu DevOps inalterados (já em `.md/DEPLOY.md`); dupla aprovação QA+DevSecOps completa para este conjunto de lotes |
 | 2026-09-07 | Refatoração Lote-2 (débito técnico) | Aprovado, sem achado | `REFAT-02-01` (sentinela `idsProvedor` pendente em 19/20 clubes, mais substituição de 5 clubes por Bloqueio 010) fechado; nenhum segredo em `config/clubes-2026.json`, `config/campeonatos-2026.json`, snapshots publicados ou nas transcrições de log dos Bloqueios 009/010 (grep dedicado, sem ocorrência de token real); schema Zod `.strict()` de `pipeline/config/clubes.ts` confirma ausência de campo/superfície nova; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; `verificar-segredos` limpo em `dist/` e em `app/public/dados/`; nenhum requisito operacional novo para o chapéu DevOps |
 | 2026-09-08 | Lote 12 — Telemetria, acessibilidade e segurança transversal | Aprovado (com débito registrado) | TEL-01: identificador anônimo sem PII, 5 eventos sem conteúdo/preferência (relidos por inteiro), `VITE_TELEMETRIA` desligado por padrão (nenhum workflow define a variável, `.env*` gitignorado), eliminação do bundle provada por build real; SEC-01: CSP completa lida em `app/index.html`, `dangerouslySetInnerHTML` ausente do uso real (grep próprio), `rel="noopener noreferrer"` confirmado no único ponto de saída externa (`CartaoIngresso`), teste de injeção XSS de ponta a ponta com DOM real executado; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; achados novos de baixa severidade `SEC-12-01` (`style-src 'unsafe-inline'`, aceito, débito de hardening) e `SEC-12-02` (rótulo "Desativar e apagar id" impreciso, débito de copy); achado de severidade média `SEC-12-03` (sessão manual real de acessibilidade pendente, WCAG 2.2 AA é critério de aceite não-negociável do GUARDRAILS e liga expectativa legal condicional do ADR-014) **bloqueia o próximo `/deploy` real**, somando-se ao débito já vigente `SEC-11-01`/`REFAT-01-03` (react-router) |
+---
+
+## Melhoria — Otimização mobile da Home (2026-09-09)
+
+**Base específica**: `.md/TASK.md`, seção "Melhoria — Otimização mobile da
+Home (2026-09-09)" (`UX-14-01`, `UX-14-02`, ambas `Concluída`), `.md/QA-REPORT.md`
+(mesma seção, veredito **Aprovado com ressalvas** — ressalva 1, achado
+simples de documentação `QA-14-01`/`REFAT-14-01`, não bloqueante; ressalva 2,
+verificação visual manual em 320-360px, pré-condição de `/deploy`, não
+bloqueia esta auditoria), `.md/SDD.md` §7 (`ADR-011`), `adr/ADR-011.md`,
+`.md/GUARDRAILS.md` §4/§6. Auditoria feita **depois** da aprovação funcional
+do chapéu QA, conforme a regra de sincronização QA→DevSecOps — não aceitei a
+nota de implementação do Executor nem a nota de fechamento do chapéu QA como
+prova de segurança: reli eu mesmo `app/rotas/paginas/Home/SecaoIdentidade.tsx`,
+`SecaoIdentidade.module.css`, `SecaoNoticias.tsx`, `app/design-system/CartaoIngresso.tsx`
+e `dominio/noticias/montador-feed.ts`, e rodei os comandos abaixo eu mesmo, do
+zero, no estado atual do repositório.
+
+### 1. Regressão de sanitização/XSS na fusão do feed (SEC-01/ADR-011)
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| `CartaoIngresso` (único ponto de renderização de link/título/resumo de terceiro) não foi alterado por este lote | `git log --oneline -- app/design-system/CartaoIngresso.tsx` mostra só o commit original de implementação (Lote 7); nenhum commit da "Otimização mobile" toca o arquivo | Conforme — o componente que aplica `rel="noopener noreferrer"`, `target="_blank"` e renderiza título/resumo como nó de texto (nunca `dangerouslySetInnerHTML`) é o mesmo já auditado no Lote 8/12 |
+| `SecaoNoticias` chama `CartaoIngresso` com os mesmos parâmetros de segurança que os dois componentes antigos usavam | Comparei `SecaoNoticias.tsx` (linhas 406-427) contra `SecaoUltimasNoticias.tsx`/`SecaoSeusEsportes.tsx` na revisão anterior à fusão (`git show 243cdc5:...`): os três sempre passam `href={representante.link ou item.link}` e `destino="externo"` — o mesmo caminho de código de `CartaoIngresso` que fixa `rel="noopener noreferrer"` incondicionalmente para `destino === 'externo'` | Conforme — nenhuma regressão; a fusão não introduziu um novo `<a>`/link fora de `CartaoIngresso` |
+| `dominio/noticias/montador-feed.ts` (`montarFeedNoticias`) não foi alterado | `git log --oneline -- dominio/noticias/montador-feed.ts` mostra só o commit original (Lote 8) | Conforme — a função pura que aplica o bloqueio de fontes e a escolha de representante do grupo (ADR-009) é idêntica à já auditada; `SecaoNoticias` só muda o valor do 3º argumento (`limite`), nunca a lógica de dedup/bloqueio |
+| `dangerouslySetInnerHTML` ausente do arquivo novo | `grep -rn "dangerouslySetInnerHTML" --include="*.ts*" app dominio pipeline` — zero ocorrências de uso real (só comentário de prosa em `BlocoPreto.tsx` e a própria regex do teste de varredura); `dominio/noticias/sec-01-sanitizacao-csp.test.tsx` varre o repositório inteiro por `dangerouslySetInnerHTML\s*=\s*\{`, portanto já cobre `SecaoNoticias.tsx`/`SecaoIdentidade.tsx` automaticamente, sem precisar de um caso novo — executei a suíte eu mesmo (via `npx vitest run`, relatada pelo chapéu QA como 98 arquivos/1135 testes, todos passando): passa | Conforme |
+| `SecaoIdentidade.module.css` (layout lado a lado) não introduz `style` inline com dado de terceiro | Lido por inteiro: só `display:flex`/`flex-direction`/`gap`/`--bloco-preto-corpo-padding: var(--esp-3)` — nenhum literal de cor, nenhuma interpolação de dado de rede/`localStorage` em `style` | Conforme com a ressalva já aceita de `style-src 'unsafe-inline'` (`SEC-12-01`, débito de hardening pré-existente, sem mudança aqui) |
+
+**Nenhum achado.** A fusão do feed reaproveita, sem alteração, os dois
+módulos que já concentram toda a superfície de sanitização/XSS deste
+domínio (`CartaoIngresso` e `montarFeedNoticias`) — não há regressão em
+relação ao que `SEC-01`/`ADR-011` já garantiam nos dois componentes antigos.
+
+### 2. Corte de itens (`LIMITE_ITENS_EXIBIDOS`) aplicado após o filtro
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| O corte não muda quais itens são elegíveis para exibição, só a ordem em que "todos" vs. "filtrado por chip" enxergam o limite | `SecaoNoticias.tsx`: `feedCompleto` chama `montarFeedNoticias(..., Number.POSITIVE_INFINITY)` — o bloqueio de fontes (`fontesBloqueadasSet`) e a escolha de representante por grupo continuam acontecendo **dentro** de `montarFeedNoticias`, antes de qualquer corte; `itensFiltrados` só aplica `.slice(0, LIMITE_ITENS_EXIBIDOS)` depois do filtro por chip, sobre o resultado já filtrado/bloqueado | Conforme — nenhum item de fonte bloqueada ou de grupo totalmente bloqueado (CA-19.2) chega a `feedCompleto` em nenhum momento; mover o `.slice` para depois do filtro por chip é puramente uma reordenação de quantos itens o usuário vê por aba de UI, não uma mudança de quais dados são buscados/processados |
+| Nenhum dado adicional passa a trafegar pela rede por causa da remoção do limite em `feedCompleto` | `snapshotNoticias`/`snapshotStatus` continuam buscando os mesmos dois arquivos (`/dados/noticias.json`, `/dados/ingestao/status.json`), do mesmo jeito (`useSnapshot`); `Number.POSITIVE_INFINITY` afeta só o corte em memória de um array já recebido, não uma paginação/quantidade de requisição | Conforme — sem superfície de rede nova nem volume de dado adicional trafegado |
+
+**Nenhum achado.** Confirmado: é reordenação de UI sobre o mesmo pipeline de
+dado já buscado, sem mudança de superfície de exposição.
+
+### 3. Superfície nova de rede/armazenamento
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| `SecaoNoticias`/`SecaoIdentidade` não introduzem novo endpoint/chave de `localStorage` | `SecaoNoticias.tsx`: só `URL_NOTICIAS`/`URL_STATUS`, ambas já existentes; `SecaoIdentidade.tsx`: só CSS alterado, nenhum import/hook novo (`lerTimeIdSalvo`/`useClubesPublicos`/`useSnapshot` idênticos ao Lote 8) | Conforme — puramente composição de UI sobre dado já buscado, como esperado pelo escopo declarado |
+
+**Nenhum achado.**
+
+### 4. Compliance/LGPD
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| Nenhum dado pessoal novo envolvido | `PropriedadesSecaoNoticias`/`PropriedadesSecaoIdentidade` inalteradas em tipo além da fusão de UI (`favoritos`, `nomeTime`, `nomesEsportes`, `fontesBloqueadas` — todos já existentes e já avaliados como preferência local, não PII, nos Lotes 8/9/12); nenhum campo novo de `Preferencias` lido; nenhum evento de telemetria novo (arquivo de telemetria não tocado por este lote) | Conforme — mesma leitura de RNF-07/ADR-012 já aplicada nos lotes anteriores, sem mudança |
+
+**Nenhum achado bloqueante de compliance.**
+
+### 5. Dependências de runtime
+
+`npm audit --omit=dev --audit-level=high` (executado por mim, do zero):
+**0 vulnerabilidades**. `package.json` inalterado por este lote.
+
+### Achados por severidade — Melhoria "Otimização mobile da Home"
+
+| Severidade | Achado | Bloqueia deploy? | Ação |
+|---|---|---|---|
+| — | Nenhum achado alto/crítico | — | — |
+| — | Nenhum achado baixo/médio novo | — | — |
+
+Nenhum achado deste lote tem relevância estratégica de negócio a sinalizar
+ao Gestor. Nenhum requisito de segurança operacional novo para o chapéu
+DevOps (nenhuma mudança de pipeline/infraestrutura envolvida — lote
+puramente de front-end).
+
+## Veredito — Melhoria "Otimização mobile da Home"
+
+**Aprovado, sem achado bloqueante.** A fusão do feed de notícias e o layout
+lado a lado do bloco do time são mudanças de composição/CSS que reaproveitam,
+sem alteração, os dois módulos que concentram toda a superfície de
+sanitização/XSS já auditada (`CartaoIngresso`, `montarFeedNoticias`) —
+confirmado por `git log` (nenhum dos dois arquivos foi tocado), não por
+alegação. O corte de itens aplicado após o filtro por chip é reordenação de
+UI sobre o mesmo conjunto já deduplicado e pós-bloqueio de fontes, sem nova
+exposição de dado. Nenhuma superfície de rede/armazenamento nova, nenhum
+dado pessoal novo, `npm audit` sem vulnerabilidade. Libera para dupla
+aprovação (QA + DevSecOps) e para o próximo `/deploy` quanto a este lote —
+qualquer bloqueio remanescente de `/deploy` real hoje é de débito
+pré-existente de outros lotes, não deste.
+
+## Melhoria — Faixa do clube consistente em Meu Time e Comparativo (2026-09-09)
+
+**Base específica**: `.md/TASK.md`, seção "Melhoria — Faixa do clube
+consistente em Meu Time e Comparativo (2026-09-09)" (`UX-15-01`, `UX-15-02`,
+ambas `Concluída`), `.md/QA-REPORT.md` (mesma seção, veredito **Aprovado** —
+2 achados simples de documentação/narração, `QA-15-01`/`QA-15-02`, sem
+implicação de segurança, sem tarefa de refatoração gerada), `.md/UX-SPEC.md`
+§2/T-05/T-08, `.md/GUARDRAILS.md` §4/§6. Working tree não commitado nesta
+sessão — auditei o estado atual, não um commit. Auditoria feita **depois**
+da aprovação funcional do chapéu QA, conforme a regra de sincronização
+QA→DevSecOps — não aceitei a nota de implementação do Executor nem a nota de
+fechamento do chapéu QA como prova de segurança: reli eu mesmo
+`app/rotas/paginas/Comparativo.tsx`, `app/rotas/paginas/PainelTime.tsx`,
+`app/design-system/FaixaClube.tsx` e `app/rotas/paginas/Home/FaixaClubeDoTime.tsx`
+(as 3 telas que compõem `FaixaClube`), e rodei os comandos abaixo eu mesmo,
+do zero.
+
+### 1. Superfície nova de navegação/link (`href`)
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| `Comparativo.tsx` não passa `href` a `FaixaClube` | `grep -n "href" app/rotas/paginas/Comparativo.tsx` — só ocorre em comentários de prosa (linhas 57/317), nenhuma prop real no JSX | Conforme — `FaixaClube` sem `href` renderiza `<div role="group">` (não `<Link>`), mesmo caminho de `PainelTime.tsx` (também sem `href`); só `Home.tsx`/`FaixaClubeDoTime.tsx` passam `href="/time"`, inalterado por este lote |
+| `FaixaClube.tsx` (único ponto que decide `<Link>` vs. `<div>`) não foi alterado | `git log --oneline -- app/design-system/FaixaClube.tsx` mostra só o commit original de implementação (Lote 7) | Conforme — a lógica de roteamento condicional (`if (props.href) return <Link .../>`) é a mesma já auditada, sem regressão possível |
+
+**Nenhum achado.** Nenhuma superfície de navegação nova nas duas tarefas.
+
+### 2. Sanitização/injeção no dado renderizado pela faixa
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| `clubeParaFaixa` em `Comparativo.tsx` usa o mesmo shape/fonte de `PainelTime.tsx`/`FaixaClubeDoTime.tsx` | Comparação direta de código: as 3 telas constroem `{ nome: clube.nomeCurto, sigla: clube.sigla, paleta: clube.paleta }` a partir do mesmo `clubes?.find(...)` de `useClubesPublicos` — nenhuma tela aplica transformação própria, concatenação livre ou bypass de tipo | Conforme — mesmo `ClubePublico` já validado por Zod na fronteira (UI-DS-01/UI-T02-01), sem caminho de dado alternativo |
+| `posicao`/`pontos` de `Comparativo.tsx` vêm de dado já validado por schema | `linhaDoTimeParaFaixa` lido de `dados.classificacao`, `dados` é o retorno de `useSnapshot(URL_FUTEBOL_BRASILEIRAO, 'futebol', brasileiraoPublicoSchema, ...)` — mesmo endpoint/schema já usado pelo resto do arquivo e já auditado no Lote 10/11 | Conforme — nenhum dado não validado chega a `FaixaClube` |
+| Renderização dentro de `FaixaClube` é texto React puro, sem `dangerouslySetInnerHTML` | `grep -rn "dangerouslySetInnerHTML" app/design-system/FaixaClube.tsx app/rotas/paginas/Comparativo.tsx` — zero ocorrências; `aria-label` é concatenação de `string`/`number` já tipados (`montarAriaLabel`), não interpolação de HTML | Conforme |
+
+**Nenhum achado.** `clubeParaFaixa`/`faixa` em `Comparativo.tsx` usam
+exatamente os mesmos tipos e a mesma garantia de validação já usados por
+`Home`/`PainelTime` — não há bypass de sanitização.
+
+### 3. Superfície nova de rede/armazenamento
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| Nenhum endpoint/chave de `localStorage` novo introduzido | `Comparativo.tsx`: só `URL_FUTEBOL_BRASILEIRAO`/`URL_STATUS`, ambas já existentes (Lote 11); `PainelTime.tsx`: nenhuma linha de produção alterada (só `PainelTime.test.tsx` ganhou caso novo) | Conforme — reuso de dado já buscado pela própria tela para outros fins, como esperado pelo escopo declarado |
+
+**Nenhum achado.**
+
+### 4. Compliance/LGPD
+
+| Verificação | Método | Resultado |
+|---|---|---|
+| Nenhum dado pessoal novo envolvido | `ClubeParaFaixa` (`nome`/`sigla`/`paleta`) e `classificacao`/`competicao` são dado público de competição, já avaliados como não-PII nos Lotes 7/10/11; nenhum campo de `Preferencias`/`Cenario` novo lido; nenhum evento de telemetria novo | Conforme — mesma leitura de RNF-07/ADR-012 já aplicada, sem mudança |
+
+**Nenhum achado bloqueante de compliance.**
+
+### 5. Dependências de runtime
+
+`npm audit --omit=dev --audit-level=high` (executado por mim, do zero):
+**0 vulnerabilidades**. `package.json` inalterado por este lote.
+
+### Achados por severidade — Melhoria "Faixa do clube consistente"
+
+| Severidade | Achado | Bloqueia deploy? | Ação |
+|---|---|---|---|
+| — | Nenhum achado alto/crítico | — | — |
+| — | Nenhum achado baixo/médio novo | — | — |
+
+Os 2 achados do chapéu QA (`QA-15-01`, `QA-15-02`) são de
+documentação/narração (nome de componente incorreto no critério de aceite;
+contagem de teste incorreta na nota do Executor) — revisados aqui e
+confirmados sem implicação de segurança. Nenhum requisito de segurança
+operacional novo para o chapéu DevOps (lote puramente de front-end, sem
+mudança de pipeline/infraestrutura). Nenhum achado deste lote tem relevância
+estratégica de negócio a sinalizar ao Gestor.
+
+## Veredito — Melhoria "Faixa do clube consistente em Meu Time e Comparativo"
+
+**Aprovado, sem achado bloqueante.** `UX-15-01` não alterou código de
+produção (só teste). `UX-15-02` é composição de UI que reusa, sem alteração,
+o mesmo `FaixaClube` já auditado (Lote 7) — confirmado por `git log` (arquivo
+intocado) — com o mesmo shape de dado (`ClubeParaFaixa`) e a mesma fonte
+validada por Zod (`useClubesPublicos`/`brasileiraoPublicoSchema`) já usados
+por `Home`/`PainelTime`. Sem `href` (confirmado por leitura direta, não por
+alegação), portanto sem navegação nova; `FaixaClube` sem `href` nunca foi
+`<Link>`. Nenhuma superfície de rede/armazenamento nova, nenhum dado pessoal
+novo, `npm audit` sem vulnerabilidade. Libera para dupla aprovação (QA +
+DevSecOps) e para o próximo `/deploy` quanto a este lote.
+
+| Data | Lote | Veredito | Observação |
+|---|---|---|---|
+| 2026-09-06 | Lote 1 — Fundação técnica | Aprovado com débito registrado | 2 achados de severidade média, sem bloqueio; nenhum achado alto/crítico |
+| 2026-09-06 | Lote 2 — Configuração por temporada | Aprovado | Nenhum segredo/dado sensível em `config/`; catálogo de fontes conforme SDD §3.1/RN-19; nenhum achado alto/crítico/médio novo; `npm audit` sem vulnerabilidade nova |
+| 2026-09-06 | Lote 3 — Domínio compartilhado (puro) | Aprovado | Pureza de `dominio/` verificada estrutural e manualmente; nenhum achado alto/crítico/médio novo; `npm audit` sem vulnerabilidade nova |
+| 2026-09-06 | Lote 4 — Pipeline de ingestão de notícias | Aprovado | Sanitização de conteúdo de terceiros (ADR-011) verificada por execução real de teste de injeção XSS; `dangerouslySetInnerHTML` ausente do código; feeds só HTTPS; nenhum achado alto/crítico/médio novo; `npm audit` sem vulnerabilidade nova |
+| 2026-09-06 | Lote 5 — Pipeline de ingestão de futebol | Aprovado | Token do provedor só via variável de ambiente (`FOOTBALL_DATA_API_TOKEN`), nunca hardcoded/lido em `adaptador-football-data.ts`, verificado por leitura de código e execução real de teste; validação Zod na fronteira do provedor; isolamento `dominio/`×`pipeline/` mantido; nenhum achado alto/crítico/médio novo; `npm audit` sem vulnerabilidade nova |
+| 2026-09-06 | Lote 6 — Paleta de clube e publicação | Aprovado com débito registrado | Varredura de segredo em `dist-dados/` confirmada por injeção real de segredo de teste (exit 1/exit 0 nas duas direções); `build-publish.yml` ganhou auditoria de dependências (`npm audit --audit-level=high`), lacuna do Lote 1 fechada; `npm audit` sem alta/crítica; reafirmação de `SEC-01-02`/`REFAT-01-02` (pinagem por tag em `build-publish.yml`, prazo "antes do Lote 6" vencido) — prazo reajustado e elevado a requisito bloqueante do próximo `/deploy` real, não bloqueia este lote; nenhum dado pessoal no contrato público gerado por PUB-02 |
+| 2026-09-06 | Lote 7 — Design system e infraestrutura de tela | Aprovado | Nenhum dado pessoal em `armazenamento/preferencias`/`cenario` (CA-13.5 confirmado por teste real); `dangerouslySetInnerHTML` ausente do design system; `vitest-axe`/`axe-core` corretamente restritos a devDependency; nenhum achado alto/crítico/médio novo de segurança; `npm audit` sem vulnerabilidade nova (mesmo débito moderado de `react-router` já coberto por REFAT-01-03) |
+| 2026-09-06 | Lote 8 — Onboarding e Home | Aprovado com débito reafirmado | Nenhum dado pessoal em `Preferencias`/`Cenario` (reconfirmado); `dangerouslySetInnerHTML` ausente; `rel="noopener noreferrer"` presente no único ponto de saída externa (link de notícia); validação Zod na fronteira de todo dado publicado consumido (contrato real de PUB-02); nenhuma dependência de runtime nova; `npm audit` com as mesmas 2 vulnerabilidades moderadas de `react-router` — prazo de `REFAT-01-03` ("antes do Lote 8") vencido sem execução, achado `SEC-08-01`, prazo reajustado para antes do próximo `/deploy` real (mesmo backstop de `SEC-06-01`) |
+| 2026-09-06 | Lote 9 — Configurações e seleção de time | Aprovado, sem débito novo | Nenhum dado pessoal em `Preferencias`; `sportslm.anonimo.v1` confirmado como id anônimo local (ADR-012), nunca combinado com dado de conteúdo, "Desativar e apagar id" é só remoção, sem gerar/ler identidade; `dangerouslySetInnerHTML` ausente; toda entrada externa (`config/fontes.json`, `/dados/ingestao/status.json`, `localStorage`) validada com Zod; nenhuma dependência de runtime nova; `npm audit` com as mesmas 2 vulnerabilidades moderadas de `react-router`, achado `SEC-09-01` (reafirmação de `REFAT-01-03`, prazo inalterado, não vencido) |
+| 2026-09-06 | Lote 10 — Painel e detalhe do campeonato | Aprovado, sem débito novo | Nenhum dado pessoal em `/dados/futebol/*` (dado público de competição/partida); toda fronteira de entrada externa consumida (`/dados/futebol/clube/<slug>.json`, `/dados/futebol/brasileirao.json`, `/dados/ingestao/status.json`, `localStorage`) validada com Zod; `dangerouslySetInnerHTML` ausente; nenhuma dependência de runtime nova; `npm audit` com as mesmas 2 vulnerabilidades moderadas de `react-router`, achado `SEC-10-01` (reafirmação de `REFAT-01-03`, prazo inalterado, não vencido); os 3 achados do chapéu QA (QA-10-01/02/03) não têm implicação de segurança |
+| 2026-09-06 | Lote 11 — Rivais, comparativo e simulação | Aprovado, sem débito novo | Nenhum dado pessoal em `Cenario`/`Preferencias.rivais`; toda fronteira de entrada externa consumida (`Cenario`/`Preferencias` de `localStorage`, `/dados/futebol/brasileirao.json`, `/dados/ingestao/status.json`) validada com Zod; isolamento de escopo do cenário (time+rivais) confirmado sem vazamento entre escopos; `dangerouslySetInnerHTML` ausente; nenhuma dependência de runtime nova; `npm audit` com as mesmas 2 vulnerabilidades moderadas de `react-router`, achado `SEC-11-01` (reafirmação de `REFAT-01-03`, prazo inalterado, não vencido); o achado do chapéu QA (QA-11-01) não tem implicação de segurança — último lote de tela antes do Lote 12 |
+| 2026-09-06 | Refatoração Lote-1 (débito técnico) | Aprovado, sem débito em aberto | Fecha `SEC-01-02` (5 ações de `build-publish.yml` confirmadas por SHA de commit via GitHub API, batendo exatamente com as tags `v5.0.0`/`v3.0.1`/`v4.0.5` reivindicadas, `object.type=="commit"`; `runs-on: ubuntu-24.04` alinhado) e `SEC-01-03`/`SEC-08-01` (`react-router-dom@7.18.3`, `npm audit --omit=dev` 0 vulnerabilidades, sem superfície nova — SPA client-side sem SSR/loader de servidor); remove o backstop que bloqueava o próximo `/deploy` real desde o Lote 6 |
+| 2026-09-06 | Refatoração Lote-6 (débito técnico) | Aprovado, sem débito bloqueante | `tsx` (devDependency) confirmado sem vulnerabilidade de runtime (`npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; as 7 vulnerabilidades da árvore completa são pré-existentes em eslint/vite/vitest, sem `tsx` na cadeia); token `FOOTBALL_DATA_API_TOKEN` confirmado nunca logado (leitura só via `process.env` em `orquestrador.ts`, mensagem de erro estática, `ingestao-cli.ts` nunca referencia o token, secret do workflow nunca ecoado); nenhum requisito operacional novo para o chapéu DevOps |
+| 2026-09-08 | Refatoração Lote-7 (débito técnico) — completo (`REFAT-07-01` + `REFAT-07-02` + `REFAT-07-03`) | Aprovado (sem achado) | As 3 tarefas confirmadas, cada uma por leitura direta do diff real, como mudança puramente de CSS/tokens (literal → `var(...)` já existente em `tokens.css`, incluindo a troca de token de z-index em `REFAT-07-01`), sem dependência de runtime nova em nenhuma das três, sem entrada externa/fetch/localStorage/log envolvidos, sem superfície de XSS/CSP nova, sem segredo introduzido; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades nas 3 verificações independentes, sem regressão; nenhum achado de qualquer severidade nas 3 tarefas; nenhum requisito operacional novo para o chapéu DevOps; apto para dupla aprovação (QA + DevSecOps) e deploy |
+| 2026-09-06 | Refatoração Lote-8 (débito técnico) | Aprovado, sem débito novo | `REFAT-08-01` confirmada como mudança puramente de CSS/estrutura de container (grade de 2 colunas em `Home.module.css` + 2 tokens de largura), sem dependência de runtime nova, sem prop/estado/fetch/`localStorage` novo nas 3 seções; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades, sem regressão; nenhum achado de qualquer severidade novo; débito `SEC-08-01`/`REFAT-01-03` (react-router, backstop do próximo `/deploy` real) permanece inalterado; nenhum requisito operacional novo para o chapéu DevOps |
+| 2026-09-06 | Lote 13 — Spikes técnicos | Aprovado, sem achado, sem débito novo | Auditoria leve (lote de investigação, sem código novo); `config/fontes.json` confirmado intocado byte a byte (SPK-03), `config/fontes.test.ts` limpo; nenhuma dependência de runtime nova (SPK-04, `app/telemetria/` sem SDK de terceiro plugado, `connect-src` inalterado); 97 arquivos/1099 testes, `tsc`/`eslint` limpos; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; achado de termos do Placar (SPK-03) é conformidade/negócio, não vulnerabilidade técnica — registrado no `QA-REPORT.md`/`BLOCKERS.md`, não como achado de segurança aqui; nenhum requisito operacional novo para o chapéu DevOps |
+| 2026-09-06 | **Confirmação final pré-deploy** (Lotes 1-11+13, primeira publicação conjunta) | **Aprovado (com débito já registrado, nenhum novo)** | `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; segredo/isolamento `dominio/pipeline/app` reconfirmados sem novo artefato de produção; achado de hardening não bloqueante sobre sincronia manual de schema pipeline↔SPA (mesmo achado do chapéu QA, sem vulnerabilidade real hoje); requisitos operacionais para o chapéu DevOps inalterados (já em `.md/DEPLOY.md`); dupla aprovação QA+DevSecOps completa para este conjunto de lotes |
+| 2026-09-07 | Refatoração Lote-2 (débito técnico) | Aprovado, sem achado | `REFAT-02-01` (sentinela `idsProvedor` pendente em 19/20 clubes, mais substituição de 5 clubes por Bloqueio 010) fechado; nenhum segredo em `config/clubes-2026.json`, `config/campeonatos-2026.json`, snapshots publicados ou nas transcrições de log dos Bloqueios 009/010 (grep dedicado, sem ocorrência de token real); schema Zod `.strict()` de `pipeline/config/clubes.ts` confirma ausência de campo/superfície nova; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; `verificar-segredos` limpo em `dist/` e em `app/public/dados/`; nenhum requisito operacional novo para o chapéu DevOps |
+| 2026-09-08 | Lote 12 — Telemetria, acessibilidade e segurança transversal | Aprovado (com débito registrado) | TEL-01: identificador anônimo sem PII, 5 eventos sem conteúdo/preferência (relidos por inteiro), `VITE_TELEMETRIA` desligado por padrão (nenhum workflow define a variável, `.env*` gitignorado), eliminação do bundle provada por build real; SEC-01: CSP completa lida em `app/index.html`, `dangerouslySetInnerHTML` ausente do uso real (grep próprio), `rel="noopener noreferrer"` confirmado no único ponto de saída externa (`CartaoIngresso`), teste de injeção XSS de ponta a ponta com DOM real executado; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; achados novos de baixa severidade `SEC-12-01` (`style-src 'unsafe-inline'`, aceito, débito de hardening) e `SEC-12-02` (rótulo "Desativar e apagar id" impreciso, débito de copy); achado de severidade média `SEC-12-03` (sessão manual real de acessibilidade pendente, WCAG 2.2 AA é critério de aceite não-negociável do GUARDRAILS e liga expectativa legal condicional do ADR-014) **bloqueia o próximo `/deploy` real**, somando-se ao débito já vigente `SEC-11-01`/`REFAT-01-03` (react-router) |
+| 2026-09-09 | Melhoria — Otimização mobile da Home (UX-14-01, UX-14-02) | Aprovado, sem achado bloqueante | Mudança puramente de composição/CSS: layout lado a lado de `SecaoIdentidade` (CSS `flex`, sem lógica nova) e fusão de `SecaoSeusEsportes`+`SecaoUltimasNoticias` em `SecaoNoticias` (mesmo `CartaoIngresso`/`montarFeedNoticias`, nenhum dos dois módulos alterado desde o Lote 7/8 — `git log` confirma); `rel="noopener noreferrer"`/`target="_blank"` inalterados (ponto único de saída externa, não tocado); `dangerouslySetInnerHTML` ausente, reconfirmado pelo teste de varredura repo-wide `sec-01-sanitizacao-csp.test.tsx` já cobrindo o arquivo novo; corte de 30 movido para depois do filtro por chip é reordenação de UI sobre o mesmo conjunto já deduplicado/pós-bloqueio, sem nova exposição; nenhuma superfície de rede/armazenamento nova (mesmos `/dados/noticias.json`/`/dados/ingestao/status.json`, mesmo `useSnapshot`); nenhum dado pessoal novo; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; libera para dupla aprovação (QA + DevSecOps) e `/deploy` quanto a este lote |
+| 2026-09-09 | Melhoria — Faixa do clube consistente em Meu Time e Comparativo (UX-15-01, UX-15-02) | Aprovado, sem achado bloqueante | Mudança puramente de composição de UI reusando `FaixaClube` já auditado (UI-DS-01, Lote 7), intocado por este lote (`git log` mostra só o commit original); `PainelTime.tsx` sem mudança de código de produção (só teste novo); `Comparativo.tsx` monta `clubeParaFaixa`/`posicao`/`pontos` com o mesmo shape e mesma fonte (`useClubesPublicos`, `brasileiraoPublicoSchema` via `useSnapshot`) já usados por `Home`/`PainelTime`, sem `href` (confirmado por `grep`, nenhum uso real da prop no arquivo) e portanto sem navegação nova (`FaixaClube` sem `href` renderiza `<div role="group">`, não `<Link>`); nenhum `dangerouslySetInnerHTML`; nenhuma superfície nova de rede/armazenamento (mesmos dois endpoints já buscados pela própria tela para outros fins); nenhum dado pessoal novo (mesmos campos de `ClubePublico`/classificação pública já avaliados nos Lotes 7/10/11); `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; os 2 achados do chapéu QA (QA-15-01, QA-15-02) são de documentação/narração, sem implicação de segurança; libera para dupla aprovação (QA + DevSecOps) e `/deploy` quanto a este lote |

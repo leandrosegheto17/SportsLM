@@ -239,3 +239,102 @@ continua sendo o Coordenador/usuário via `TASK.md`.
 
 **Registrado.** Gate 4 é só fechamento — não há veredito de aprovação/reprovação
 aqui, conforme PIPELINE-CONVENTIONS.md §1 e `.claude/agents/gestor.md`.
+
+---
+
+## Gate 4 — Registro de fechamento de deploy — 2026-09-09
+
+**Skill**: não é deste chapéu (`deploy-report-drafting` é do Validador) — este é
+o registro de governança do Gate 4 (chapéu CTO), só documentação de fechamento;
+**sem poder de veto** (ver `.claude/agents/gestor.md` e
+PIPELINE-CONVENTIONS.md §1). Input: `.md/DEPLOY.md` (Seção 5, entrada de
+2026-09-09), `.md/QA-REPORT.md` e `.md/SECURITY-REVIEW.md` (entradas de
+"Refatoração Lote-12"/fechamento de `REFAT-12-03` e "Melhoria — Otimização
+mobile da Home"), todos já atualizados pelo Validador antes deste registro.
+
+Diferença deste Gate 4 em relação ao anterior (2026-09-08): não houve
+publicação nova disparada nesta sessão — o Validador confirmou que dois lotes,
+cujos commits já estavam em `origin/main` fora desta sessão, de fato chegaram
+a produção sem regressão cruzada entre si. O registro abaixo fecha o ciclo
+Gestor→Coordenador→Executor→Validador→Gestor para esses dois lotes.
+
+### Resultado
+
+**Sucesso.** Nenhum rollback, nenhum incidente. Confirmação feita por
+evidência direta (`git merge-base --is-ancestor`, `vercel inspect`/`vercel ls`,
+`curl`), não por nota de terceiro.
+
+| Item | Valor |
+|---|---|
+| Ambiente | Vercel, produção real (`https://sports-lm.vercel.app`) |
+| Commits confirmados como publicados | `df420b4`, `7813ed9` (Refatoração Lote-12) e `23ec6bf` (UX-14-01/UX-14-02) — todos ancestrais de `origin/main` |
+| Deployments de produção correspondentes | `Ready`/`target: production`, timestamps batendo em segundos com cada commit (`vercel inspect`/`vercel ls`); deployment mais recente no momento da checagem (`dpl_D2npeNHYXK4xe6aBjMTWiBnZRBGE`, commit `07503c6`, descendente de `23ec6bf`) já com o alias público apontando para ele |
+| Confirmação adicional | `curl -sI https://sports-lm.vercel.app` → `200 OK` |
+| Data | 2026-09-09 |
+
+### O que foi publicado
+
+- **Fechamento estrutural de Refatoração Lote-12** (`REFAT-12-01`,
+  `REFAT-12-02`, `REFAT-12-03`, todas `Concluída`): `df420b4` fecha
+  `REFAT-12-01` (remove `'unsafe-inline'` de `style-src`) e `REFAT-12-02`
+  (rótulo do botão de telemetria); `7813ed9` fecha `REFAT-12-03` com a sessão
+  manual real de acessibilidade (percurso só-teclado, NVDA, zoom 200%,
+  roteiro `UX-SPEC.md` §5.8), conduzida diretamente pelo usuário — os 6 itens
+  do roteiro passaram sem nenhum achado (`.md/QA-REPORT.md`, "Refatoração
+  Lote-12 — fechamento de REFAT-12-03").
+- **Melhoria — Otimização mobile da Home** (`UX-14-01`/`UX-14-02`, `23ec6bf`):
+  bloco do time lado a lado e feed único de notícias no mobile, mudança
+  isolada a `Home.tsx`/`SecaoIdentidade`/`SecaoNoticias`, sem sobreposição de
+  arquivo com o fechamento do Lote-12.
+- Regressão cruzada checada com suíte completa isolada num `git worktree`
+  dedicado ao `HEAD` real: `tsc --noEmit`/`eslint .` limpos, `vitest run` — 98
+  arquivos, 1131 testes, todos passando, sem regressão entre os dois lotes.
+
+### Débitos residuais conhecidos — sem veto, apenas registro
+
+- **`SEC-12-01`** (severidade baixa, `style-src 'unsafe-inline'` remanescente
+  em parte do CSS, desvio documentado e aceito do ADR-011) e **`SEC-12-02`**
+  (severidade baixa, rótulo "Desativar e apagar id" impreciso) seguem como
+  débito de hardening/copy, sem prazo fixado — não bloqueiam esta publicação
+  nem geram nova ressalva estratégica além da já registrada no Gate 4 anterior
+  para `SEC-12-03` (agora encerrado).
+- **`SEC-12-03`/`REFAT-12-03` está encerrado** com esta publicação — a
+  ressalva estratégica de acessibilidade registrada no Gate 4 de 2026-09-08
+  (compromisso do ADR-014, WCAG 2.2 AA como critério não-negociável) fica
+  **resolvida**: a sessão manual real confirmou, sem achado, os pontos mais
+  frágeis identificados naquele ADR (2.4.11 Foco não obscurecido, 2.5.8
+  Tamanho do alvo, 4.1.3 Mensagens de status via `aria-live`). Não há mais
+  débito de acessibilidade manual pendente para este ciclo.
+- **Ressalva de verificação visual real em dispositivo móvel físico** (UX-14,
+  registrada pelo Validador como pré-condição de processo, não de produto):
+  segue não-automatizável, já conhecida, não bloqueante — mesma natureza da
+  ressalva de acessibilidade anterior, sem relevância estratégica nova a
+  acrescentar além do que já está documentado em `.md/QA-REPORT.md`.
+- **Nota cosmética, não estratégica**: a prosa introdutória do Lote 12 em
+  `.md/TASK.md` ainda descreve `REFAT-12-03` como bloqueio do próximo
+  `/deploy` — texto desatualizado desde `7813ed9` (a coluna `Status`, fonte de
+  verdade, já mostra `Concluída` nas três tarefas). Já sinalizado pelo
+  Validador para uma próxima passagem de documentação; não justifica reabrir
+  nada aqui.
+
+Nenhum achado dos relatórios revisados é genuinamente novo ou preocupante o
+suficiente para reabrir o Gate 1 ou qualquer ressalva estratégica ativa —
+pelo contrário, este fechamento **resolve** a única ressalva estratégica de
+acessibilidade pendente desde o Gate 4 de 2026-09-08.
+
+### Checklist do Gate 4
+
+- [x] `DEPLOY.md` recebido do Validador, com resultado sucesso/rollback/incidente
+      declarado (sucesso, confirmação de publicação já ocorrida)
+- [x] Commits e ambiente publicado identificados
+- [x] Lotes/tarefas incluídos nesta confirmação nomeados (Refatoração Lote-12
+      completo; Melhoria — Otimização mobile da Home)
+- [x] Débitos residuais conhecidos revisados: nenhum novo, um encerrado
+      (`SEC-12-03`/`REFAT-12-03`), demais (`SEC-12-01`/`SEC-12-02`, ressalva de
+      verificação visual real) permanecem como débito de baixa severidade/
+      processo, sem veto
+
+### Veredito
+
+**Registrado.** Gate 4 é só fechamento — não há veredito de aprovação/
+reprovação aqui, conforme PIPELINE-CONVENTIONS.md §1 e `.claude/agents/gestor.md`.

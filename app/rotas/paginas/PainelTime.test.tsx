@@ -278,6 +278,26 @@ describe('PainelTime (UI-T05-01 — UX-SPEC T-05)', () => {
     expect(screen.getByRole('heading', { name: /escolher|trocar/i })).toBeTruthy();
   });
 
+  it('UX-15-01: "TROCAR TIME" fica fora da FaixaClube (mesma variante completa da Home) e abre T-04', async () => {
+    renderizar({ armazenamento: armazenamentoComTime('sao-paulo') });
+
+    await waitFor(() => {
+      expect(screen.getByText('Brasileirão Série A')).not.toBeNull();
+    });
+
+    // A faixa é o `role="group"` com o `aria-label` do clube (sem `href`,
+    // já que T-05 não navega ao clicar na própria faixa) — "TROCAR TIME"
+    // não pode estar dentro dela (UX-SPEC §2/T-05, rodada 3).
+    const faixa = screen.getByRole('group', { name: /São Paulo/ });
+    const botaoTrocarTime = screen.getByRole('button', { name: 'TROCAR TIME' });
+    expect(faixa.contains(botaoTrocarTime)).toBe(false);
+
+    fireEvent.click(botaoTrocarTime);
+    // T-04 (`EscolherTime`) monta ao lado, controlada por `ProvedorSobreposicoes`
+    // (mesmo mecanismo de "ESCOLHER MEU TIME", ver caso CA-14.3 acima).
+    expect(screen.getByRole('heading', { name: /escolher|trocar/i })).toBeTruthy();
+  });
+
   it('CA-07.2: cartão "sem dados" nunca é omitido, mesmo com outros 3 status presentes', async () => {
     renderizar({ armazenamento: armazenamentoComTime('sao-paulo') });
 

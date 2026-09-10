@@ -257,6 +257,17 @@ describe('Comparativo (UI-T08-01 — UX-SPEC T-08)', () => {
     expect(screen.getByRole('heading', { name: /escolher|trocar/i })).toBeTruthy();
   });
 
+  it('UX-15-02: sem time salvo (CA-14.3), a `FaixaClube` não aparece', () => {
+    renderizar({ armazenamento: armazenamentoComPreferencias(null, []) });
+
+    expect(
+      screen.getByText(/Escolha seu time para ver o comparativo com seus rivais/),
+    ).not.toBeNull();
+    // Nem a variante `completa` nem a `neutra` de `FaixaClube` aparecem no
+    // estado "sem time" — o convite atual (EstadoVazio) continua sozinho.
+    expect(screen.queryByRole('group')).toBeNull();
+  });
+
   it('CA-10.5: sem rival escolhido, mostra o convite canônico com atalho para T-07', async () => {
     renderizar({ armazenamento: armazenamentoComPreferencias('sao-paulo', []) });
 
@@ -268,6 +279,16 @@ describe('Comparativo (UI-T08-01 — UX-SPEC T-08)', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'ESCOLHER RIVAIS' }));
     expect(screen.getByRole('heading', { name: /escolher rivais/i })).toBeTruthy();
+  });
+
+  it('UX-15-02 (CA-10.5): com time salvo mas zero rival, a `FaixaClube` completa do time do coração aparece', async () => {
+    renderizar({ armazenamento: armazenamentoComPreferencias('sao-paulo', []) });
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole('group', { name: /São Paulo.*Brasileirão Série A.*2026/s }),
+      ).not.toBeNull();
+    });
   });
 
   it('CA-10.1: mostra posição, pontos, aproveitamento e diferença dos clubes comparados, time sempre primeiro', async () => {
@@ -289,6 +310,14 @@ describe('Comparativo (UI-T08-01 — UX-SPEC T-08)', () => {
 
     expect(screen.getByText('+5 PTS')).not.toBeNull();
     expect(screen.getByText('+1 PT')).not.toBeNull();
+
+    // UX-15-02: `FaixaClube` completa do time do coração (São Paulo), no topo
+    // da tela preenchida — não confundir com o `role="group"` da própria
+    // seção "São Paulo" (aria-label exato distinto, ver `getByLabelText`
+    // acima, que casa string exata).
+    expect(
+      screen.getByRole('group', { name: /São Paulo.*Brasileirão Série A.*2026/s }),
+    ).not.toBeNull();
   });
 
   it('CA-10.3: confronto direto aparece nas duas listas simultaneamente', async () => {
@@ -311,6 +340,20 @@ describe('Comparativo (UI-T08-01 — UX-SPEC T-08)', () => {
     });
   });
 
+  it('UX-15-02: estado carregando (antes do Brasileirão/clubes chegarem) já mostra alguma `FaixaClube` (com time salvo, nunca ausente)', () => {
+    // Sem `await`/`waitFor`: captura a tela no instante inicial, antes das
+    // promises de clubes/Brasileirão resolverem — mesmo padrão de asserção
+    // síncrona já usado no teste "sem time salvo" acima. Não afirma a
+    // variante exata (pode ser `neutra` até `clubes` carregar e virar
+    // `completa`, ver `Comparativo.tsx`) — só que a faixa nunca fica
+    // ausente enquanto há time salvo, diferente do estado CA-14.3.
+    renderizar({
+      armazenamento: armazenamentoComPreferencias('sao-paulo', ['palmeiras']),
+    });
+
+    expect(screen.getByRole('group')).not.toBeNull();
+  });
+
   it('Erro sem dado anterior: mostra "Não conseguimos carregar o comparativo." com Tentar de novo', async () => {
     renderizar({
       armazenamento: armazenamentoComPreferencias('sao-paulo', ['palmeiras']),
@@ -321,6 +364,13 @@ describe('Comparativo (UI-T08-01 — UX-SPEC T-08)', () => {
       expect(screen.getByText('Não conseguimos carregar o comparativo.')).not.toBeNull();
     });
     expect(screen.getByRole('button', { name: 'TENTAR DE NOVO' })).not.toBeNull();
+
+    // UX-15-02: mesmo no estado de erro (com time salvo), a `FaixaClube`
+    // aparece — sem dados de posição/pontos ainda (Brasileirão não chegou a
+    // carregar), então cai na variante `completa` sem o bloco de número.
+    await waitFor(() => {
+      expect(screen.getByRole('group', { name: 'São Paulo.' })).not.toBeNull();
+    });
   });
 
   it('CA-09.5: classificação vazia mostra o estado "sem dados" com atalho para rivais', async () => {
@@ -335,6 +385,12 @@ describe('Comparativo (UI-T08-01 — UX-SPEC T-08)', () => {
       expect(
         screen.getByText(/Sem dados disponíveis no momento\. Você já pode escolher/),
       ).not.toBeNull();
+    });
+
+    // UX-15-02: Brasileirão sem dados publicados (CA-09.5) ainda mostra a
+    // `FaixaClube` — sem posição/pontos, porque `classificacao` está vazia.
+    await waitFor(() => {
+      expect(screen.getByRole('group', { name: 'São Paulo.' })).not.toBeNull();
     });
   });
 
@@ -450,6 +506,13 @@ describe('Comparativo (UI-T08-01 — UX-SPEC T-08)', () => {
         screen.getByText(/ainda não começou\. Todas as 38 rodadas contam como restantes/),
       ).not.toBeNull();
     });
+
+    // UX-15-02: Brasileirão não iniciado também mostra a `FaixaClube`, com o
+    // número (posição/pontos da fixture, que não são zerados por esta
+    // variação de teste — só `jogos` é zerado).
+    expect(
+      screen.getByRole('group', { name: /São Paulo.*Brasileirão Série A.*2026/s }),
+    ).not.toBeNull();
   });
 
   it('CA-09.7: Brasileirão encerrado — mantém rivais e comparativo (situação final), sem aviso de "não começou"', async () => {

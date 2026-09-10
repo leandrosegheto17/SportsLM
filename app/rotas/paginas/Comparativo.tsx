@@ -42,6 +42,22 @@
 // lado" — só diverge da affordance de abas do wireframe mobile. Sinalizo ao
 // Coordenador se a UX de abas compartilhadas for considerada essencial.
 //
+// UX-15-02 (TASK.md, "Melhoria — Faixa do clube consistente em Meu Time e
+// Comparativo", 2026-09-09): UX-SPEC §2/T-08 (rodada 3) pede a mesma
+// `FaixaClube` variante `completa` já usada na Home (T-02, `FaixaClubeDoTime`)
+// e no Painel do time (T-05, `PainelTime`), do time do coração, antes do
+// cabeçalho "Comparativo · Brasileirão {ano}" — sem variante própria, sem
+// número quando a posição/pontos ainda não chegaram (mesmo padrão de
+// `PainelTime`: a faixa não tem "versão esqueleto" própria, só omite o bloco
+// de número quando `posicao`/`pontos` são `null`, o que já é o comportamento
+// coberto pela prop opcional de `FaixaClube`). Aparece em todo estado "com
+// time" (preenchido, carregando, erro, zero rival, Brasileirão sem
+// dados/não iniciado) — só o estado "sem time" (CA-14.3, `timeId === null`,
+// já tratado acima) continua sem faixa, mantendo o convite atual como está.
+// Sem `href`: mesmo tratamento de `PainelTime` (a faixa não navega para lugar
+// nenhum quando já está na própria tela do contexto do time), diferente da
+// Home, onde a faixa é o link de entrada para `/time`.
+
 // "Confronto direto" (CA-10.3): não reaproveita `LinhaPartida` (UI-DS-07B)
 // porque aquele componente não tem uma prop para o marcador "⚔ CONFRONTO
 // DIRETO" — sua API cobre a anatomia de T-06 (disputada/próxima/etc., com
@@ -62,6 +78,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { BarraPontuacao } from '../../design-system/BarraPontuacao';
+import { FaixaClube, type ClubeParaFaixa } from '../../design-system/FaixaClube';
 import { Botao } from '../../design-system/componentes/Botao';
 import { CarimboFrescor, Esqueleto, EstadoVazio } from '../../design-system/componentes';
 import { useSnapshot } from '../../dados/useSnapshot';
@@ -296,9 +313,43 @@ export function Comparativo({
   const carregandoInicial = brasileirao.carregando && dados === null;
   const erroSemDados = brasileirao.erro !== null && dados === null;
 
+  // UX-15-02 — `FaixaClube` completa do time do coração, mesma composição de
+  // `Home.tsx`/`PainelTime.tsx` (variante `completa`, sem `href`). Usa os
+  // dados que já estiverem disponíveis no momento (posição/pontos ficam
+  // `null` quando `dados` ainda não chegou, o que a variante `completa` já
+  // trata sem exibir o bloco de número).
+  const clubeSelecionado = clubes?.find((clube) => clube.id === timeId);
+  const clubeParaFaixa: ClubeParaFaixa | undefined = clubeSelecionado
+    ? {
+        nome: clubeSelecionado.nomeCurto,
+        sigla: clubeSelecionado.sigla,
+        paleta: clubeSelecionado.paleta,
+      }
+    : undefined;
+  const linhaDoTimeParaFaixa = dados?.classificacao.find(
+    (linha) => linha.clubeId === timeId,
+  );
+  const propsTemporadaFaixa =
+    dados?.competicao.temporada !== undefined
+      ? { temporada: dados.competicao.temporada }
+      : {};
+  const faixa = clubeParaFaixa ? (
+    <FaixaClube
+      variante="completa"
+      clube={clubeParaFaixa}
+      competicaoNome={dados?.competicao.nome ?? 'Brasileirão Série A'}
+      {...propsTemporadaFaixa}
+      posicao={linhaDoTimeParaFaixa?.posicao ?? null}
+      pontos={linhaDoTimeParaFaixa?.pontos ?? null}
+    />
+  ) : (
+    <FaixaClube variante="neutra" />
+  );
+
   if (carregandoInicial) {
     return (
       <article className={estilos['pagina']} aria-label="Comparativo">
+        {faixa}
         <Esqueleto variante="cartao" quantidade={3} />
         <Esqueleto variante="linha-tabela" quantidade={5} />
       </article>
@@ -308,6 +359,7 @@ export function Comparativo({
   if (erroSemDados) {
     return (
       <article className={estilos['pagina']} aria-label="Comparativo">
+        {faixa}
         <EstadoVazio
           titulo="Comparativo"
           texto="Não conseguimos carregar o comparativo."
@@ -323,6 +375,7 @@ export function Comparativo({
   if (dados !== null && dados.classificacao.length === 0) {
     return (
       <article className={estilos['pagina']} aria-label="Comparativo">
+        {faixa}
         <EstadoVazio
           titulo="Comparativo"
           texto="Sem dados disponíveis no momento. Você já pode escolher seus rivais; o comparativo aparece assim que os dados do Brasileirão chegarem."
@@ -336,6 +389,7 @@ export function Comparativo({
   if (rivais.length === 0) {
     return (
       <article className={estilos['pagina']} aria-label="Comparativo">
+        {faixa}
         <EstadoVazio
           titulo="Comparativo"
           texto="Escolha até 2 rivais para ver a briga lado a lado."
@@ -386,6 +440,7 @@ export function Comparativo({
 
   return (
     <article className={estilos['pagina']} aria-label="Comparativo">
+      {faixa}
       <div className={estilos['cabecalho']}>
         <h1 className={estilos['titulo']}>
           Comparativo · Brasileirão

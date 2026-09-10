@@ -7,7 +7,7 @@ FUND-02/03, REFAT-01-02, REFAT-06-01), não provisionamento novo. Nenhum
 `git push` nem alteração de configuração real do GitHub foi feito por este
 agente — só leitura e documentação.
 
-Autor: Validador (chapéu DevOps) · Data: 2026-09-06 (última atualização: 2026-09-08 — correção de Seção 1/histórico, ver Log de Alterações)
+Autor: Validador (chapéu DevOps) · Data: 2026-09-06 (última atualização: 2026-09-09 — confirmação de publicação de Refatoração Lote-12 e UX-14, ver Log de Alterações)
 
 ---
 
@@ -341,6 +341,101 @@ na Seção 1) e a ausência de qualquer novo bloqueio registrado em
 `.md/BLOCKERS.md` depois do Bloqueio 010 até esta confirmação.
 
 | 2026-09-08 | Vercel (produção, auto-deploy via integração Git) | `cd747b6` | **Sucesso** — confirmado diretamente via `vercel inspect` (não por nota de terceiro): deployment `dpl_HLy1ATndKaDwaUxSD9MCrYDW9C78`, criado ~26s após o `git push`, `status: ● Ready`, `target: production`, com o alias `https://sports-lm.vercel.app` já apontando para ele; `curl` a `https://sports-lm.vercel.app` retornou `200`. | Commit publica o fechamento de Refatoração Lote-2 (REFAT-02-01, sem achado novo), Refatoração Lote-7 completo (REFAT-07-01/02/03, consolidação de tokens de borda) e a validação do Lote 12 com a criação de Refatoração Lote-12 (REFAT-12-01/02/03). **Débito aceito explicitamente pelo orquestrador/usuário em 2026-09-08**: `REFAT-12-03` (sessão manual real de acessibilidade, WCAG 2.2 AA, achado `SEC-12-03`) segue pendente — publicação liberada porque as mudanças deste commit são só CSS de tokens (sem alteração de valor visual) e documentação, não tocam superfície de acessibilidade. `REFAT-12-01`/`REFAT-12-02` também seguem pendentes, sem prazo vencido nesta rodada. Nenhum incidente na confirmação imediata pós-deploy; janela de observação de 24h ainda não fechada no momento deste registro. |
+| 2026-09-08/09 | Vercel (produção, auto-deploy via integração Git) | `df420b4` → `7813ed9` → `23ec6bf` | **Confirmação de publicação já ocorrida** (não é um novo `/deploy` disparado por este agente — os commits já estavam em `origin/main` antes desta sessão) | Ver detalhe completo abaixo. |
+
+**Confirmação (2026-09-09, Validador — chapéu DevOps, Seção 3 de `/deploy`,
+"Validação final de confirmação")**: este projeto não tem staging — todo push
+em `origin/main` já é produção (Seção 1). Nada foi publicado por este agente
+nesta sessão (nenhum `git push`/`vercel deploy` executado, conforme
+restrição da tarefa); o trabalho aqui foi só confirmar que dois fechamentos
+já enviados ao remoto em sessões anteriores de fato chegaram a produção, sem
+regressão cruzada entre eles.
+
+- **Ancestralidade confirmada por `git merge-base --is-ancestor`** (depois de
+  `git fetch origin main`, sem push): `df420b4`, `7813ed9` e `23ec6bf` são
+  todos ancestrais de `origin/main` (que hoje aponta para `07503c6`, um chore
+  de dados posterior a `23ec6bf`, sem relação com nenhum dos dois lotes).
+- **Fechamento de Refatoração Lote-12** — o achado de `cd747b6`
+  ("`REFAT-12-01`/`REFAT-12-02`/`REFAT-12-03` seguem pendentes") foi resolvido
+  em dois commits distintos, nenhum deles ainda registrado nesta seção:
+  - `df420b4` (2026-09-08 11:00:13 -03:00, "fecha REFAT-12-01/REFAT-12-02
+    (CSP e rotulo de telemetria)") — fecha `REFAT-12-01` (remove
+    `'unsafe-inline'` de `style-src`) e `REFAT-12-02` (rótulo do botão de
+    telemetria). Confirmado por leitura direta do diff (`git show df420b4`) e
+    por `TASK.md` (HEAD): as duas linhas mudaram de `Pendente` para
+    `Concluída` neste commit, não em `cd747b6` (que só as havia criado como
+    tarefas de débito).
+  - `7813ed9` (2026-09-09 16:38:34 -03:00, "fecha REFAT-12-03 apos sessao
+    manual real de acessibilidade") — fecha o último item (`REFAT-12-03`,
+    sessão manual real com NVDA, achado `SEC-12-03`), só documentação
+    (`QA-REPORT.md`/`TASK.md`), nenhum código de produção alterado.
+  - Com os três itens `Concluída`, `Refatoração Lote-12` está estruturalmente
+    fechada — nenhuma tarefa `Pendente`/`Bloqueada` remanescente, nenhuma
+    dependência da Seção 4 do `TASK.md` órfã referente a este lote. Nenhum
+    novo achado surgiu na checagem, então não há nova tarefa a criar em
+    `Refatoração Lote-12`.
+  - Nota (não bloqueante): a prosa introdutória da seção `Refatoração
+    Lote-12` e do "Status do lote" do Lote 12 em `TASK.md` (linhas
+    ~578-579/629) ainda diz que `REFAT-12-03` "bloqueia o próximo `/deploy`
+    real" — texto descritivo desatualizado desde o fechamento por `7813ed9`;
+    a coluna `Status` de cada tarefa (fonte de verdade) já mostra `Concluída`
+    nas três. Sinalizado aqui para uma próxima passagem de documentação
+    corrigir a prosa, sem bloquear esta confirmação.
+  - Confirmação de deployment via `vercel inspect`: os timestamps de criação
+    de deployment de produção (`● Ready`, `target: production`) batem, dentro
+    de segundos, com os `git commit`s correspondentes — `0f1bc14` (chore de
+    dados concorrente) às 16:38:26 -03:00 e `7813ed9` às 16:38:34 -03:00
+    corresponderam a dois deployments de produção separados criados às
+    16:38:31 e 16:38:52 (`vercel ls sports-lm`); `23ec6bf` (17:25:36 -03:00)
+    correspondeu ao deployment criado às 17:25:49 -03:00
+    (`sports-4lc2r1jmf...`). O deployment de produção mais recente no momento
+    desta confirmação (`dpl_D2npeNHYXK4xe6aBjMTWiBnZRBGE`, criado às
+    19:10:56 -03:00, alias `https://sports-lm.vercel.app` já apontando para
+    ele) corresponde ao commit `07503c6` (chore de dados às 19:10:51 -03:00),
+    que é descendente de `23ec6bf` — ou seja, a Home mobile e o fechamento do
+    Lote-12 já estão na versão live confirmada. Não foi confirmado
+    individualmente o deployment específico de `df420b4` (2026-09-08, mais de
+    24h antes desta checagem e fora da janela padrão de `vercel ls`) — não é
+    necessário: seu conteúdo já está incluído em todo deployment posterior
+    confirmado, inclusive o atual. `curl -sI https://sports-lm.vercel.app`
+    retornou `200 OK` no momento desta confirmação.
+- **Melhoria — Otimização mobile da Home (`UX-14-01`/`UX-14-02`,
+  `23ec6bf`)**: ambas `Concluída` em `TASK.md`. Confirmado por leitura do
+  diff que a mudança é isolada a `Home.tsx`/`SecaoIdentidade`/`SecaoNoticias`
+  (mais `PRD-TECNICO.md`/`UX-SPEC.md`) — nenhum arquivo do fechamento do
+  Lote-12 (`app/index.html`, `SecaoPrivacidade.tsx`,
+  `armazenamento/telemetriaId.ts`, `telemetria/`) é tocado por este commit, e
+  vice-versa. Sem sobreposição de arquivo entre os dois lotes.
+- **Regressão cruzada**: suíte completa rodada sobre o `HEAD` real
+  (`23ec6bf`), isolando as mudanças não commitadas de `UX-15-01`/`UX-15-02`
+  (ainda não validadas, fora do escopo desta confirmação) via `git worktree`
+  dedicado a partir do mesmo `HEAD` — não um `git stash`/checkout no working
+  tree principal, para não arriscar as mudanças de UX-15 em andamento.
+  Resultado, todos limpos: `npx tsc --noEmit` (0 erros), `eslint .` (0
+  problemas), `npx vitest run` — **98 arquivos, 1131 testes, todos
+  passando** (mesmo número reportado pelo Executor ao fechar `UX-14-02`, sem
+  regressão introduzida por nenhuma interação entre os dois lotes). Nota de
+  ambiente: a primeira tentativa de rodar a suíte no worktree falhou com
+  `SyntaxError` em `tests/verificar-segredos.test.ts` por um artefato local de
+  `core.autocrlf=true` do Git (conversão para CRLF de um arquivo que no
+  repositório real está em LF, expondo um bug de parsing do esbuild 0.21.5
+  para CRLF+comentário acentuado) — não é uma regressão de código; corrigido
+  fixando `core.autocrlf=false` no worktree e re-checkando os arquivos antes
+  de rodar a suíte de verdade. `npm audit` não foi re-executado nesta
+  confirmação (já coberto pelo chapéu DevSecOps no fechamento do Lote-12 e
+  pelo Executor em cada tarefa; nenhuma dependência nova entra em nenhum dos
+  dois commits confirmados aqui).
+- **Ações operacionais pendentes da Seção 2**: sem mudança — seguem
+  pendentes do stakeholder, sem relação com esta confirmação.
+
+**Veredito**: confirmação limpa, sem achado bloqueante. Não há nenhuma ação
+de "publicar" pendente da parte deste Validador — `df420b4`, `7813ed9` e
+`23ec6bf` já são ancestrais de `origin/main` (chegaram lá fora desta sessão)
+e o deployment de produção atual, mais recente que os três, já está `● Ready`
+com o alias público apontando para ele. Não há pausa a fazer antes da Seção 5
+do comando (produção) porque a publicação já é um fato consumado — esta
+entrada é só o registro formal, com evidência real, de que ela aconteceu sem
+regressão cruzada entre Refatoração Lote-12 e a melhoria de Home mobile.
 
 ---
 
@@ -452,3 +547,4 @@ testes) limpos. Detalhe completo em `.md/BLOCKERS.md`, Bloqueio 005
 | 2026-09-07 | Executor | Resolução do Bloqueio 004 (Seção 6): `TZ=America/Sao_Paulo` fixado em `vitest.config.ts` (`test.env`), tornando a suíte determinística em CI sem alterar nenhum componente de produção — decisão do stakeholder confirmou que RNF-02/RN-07 cobrem só cálculo interno, não apresentação na tela. Ver `.md/BLOCKERS.md`, Bloqueio 004 (Resolvido). |
 | 2026-09-07 | Executor | Resolução do Bloqueio 005 (Seção 6): padrão `token` de `pipeline/ci/verificar-segredos.mjs` deixou de casar a palavra isolada e passou a exigir formato real de segredo vazado (valor entre aspas, 16+ caracteres, com dígito), eliminando o falso positivo contra `zona.token` sem enfraquecer os outros 3 padrões. Prova de ponta a ponta contra o `dist/` real (`npm run build` + `npm run verificar-segredos`) limpa. Ver `.md/BLOCKERS.md`, Bloqueio 005 (Resolvido). |
 | 2026-09-08 | Validador (confirmação final pré-`/deploy`, chapéus QA + DevSecOps + DevOps) | Correção de Seção 1 (infraestrutura): documento estava desatualizado, ainda descrevia GitHub Pages como hosting único. Corrigido para refletir a realidade real confirmada por leitura de `vercel.json` e dos dois workflows: hosting real é **Vercel** (`https://sports-lm.vercel.app`, auto-deploy a cada push em `main`), com o pipeline de ingestão publicando snapshots públicos direto em `app/public/dados/` na própria `main` (ADR-018, Bloqueio 006) em vez da branch órfã `dados` de ADR-002. `build-publish.yml` (GitHub Pages) segue existindo mas não é mais o hosting real. Seções 3/4 (observabilidade/rollback) receberam nota apontando a mesma correção sem reescrita completa. Seção 5 (histórico de deploys) ganhou entrada resumindo, com evidência de `git log` e `.md/BLOCKERS.md` (Bloqueios 004-010), os múltiplos pushes reais que chegaram a produção desde a primeira tentativa falha (`43d26e9`), incluindo a primeira publicação real de dados (`982124d`) e a correção do elenco do Brasileirão (`5cd50e8`/Bloqueio 010). Rodada completa de portões sobre o working tree (incluindo mudanças não commitadas de `REFAT-07-02`/`REFAT-07-03`): `npm run test` 99 arquivos/1135 testes, `typecheck`/`lint`/`format:check` limpos, `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades — confirmando que `SEC-11-01`/`REFAT-01-03` (`react-router`) segue fechado (Refatoração Lote-1, 2026-09-06), sem regressão. Único achado ainda bloqueante para o próximo `/deploy` real: `REFAT-12-03`/`SEC-12-03` (sessão manual de acessibilidade), inalterado por esta rodada — ver veredito no relatório de confirmação correspondente. Nenhum `git commit`/`git push`/alteração de configuração real feita por este agente. |
+| 2026-09-09 | Validador (chapéu DevOps, Seção 3 de `/deploy` — validação final de confirmação) | Seção 5 ganhou entrada confirmando a chegada a produção de `df420b4`+`7813ed9` (fecham `Refatoração Lote-12` por completo: `REFAT-12-01/02/03`, todas `Concluída`) e `23ec6bf` (`UX-14-01`/`UX-14-02`, otimização mobile da Home) — commits já estavam em `origin/main` fora desta sessão, nenhum `git push`/`vercel deploy`/commit feito por este agente. Ancestralidade confirmada via `git merge-base --is-ancestor` após `git fetch origin main`; deployments de produção correspondentes confirmados via `vercel inspect`/`vercel ls` (timestamps batendo em segundos com os commits) e `curl` (200 OK). Regressão cruzada entre os dois lotes checada com suíte completa num `git worktree` dedicado ao `HEAD` real (isolando as mudanças não commitadas de `UX-15`, fora de escopo): `tsc --noEmit`/`eslint .` limpos, `vitest run` 98 arquivos/1131 testes passando. Achado de ambiente não bloqueante documentado (CRLF de `core.autocrlf=true` quebrando o parsing do esbuild num arquivo de teste só no worktree, corrigido com `core.autocrlf=false`). Nota não bloqueante: prosa descritiva do Lote 12/`Refatoração Lote-12` em `TASK.md` ainda cita `REFAT-12-03` como bloqueio do próximo deploy, desatualizada desde `7813ed9` — não corrigida por este agente (fora do escopo desta confirmação), sinalizada para próxima passagem de documentação. Veredito: confirmação limpa, sem achado bloqueante; nenhuma ação de publicação pendente. |

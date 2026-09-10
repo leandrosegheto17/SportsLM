@@ -651,6 +651,27 @@ formal Gestor/Coordenador — decisão do usuário, por ser essencialmente um
 ajuste de UX sobre tela já existente. RF-04/RF-05/RF-19 e UX-SPEC §2/T-02 foram
 atualizados como parte da mudança (ver `.md/PRD-TECNICO.md` e `.md/UX-SPEC.md`).
 
+**Status do lote**: **Validado (com ressalvas)** — Validador, 2026-09-09
+(chapéus QA e DevSecOps aprovaram; ver `.md/QA-REPORT.md` e
+`.md/SECURITY-REVIEW.md`, seção "Melhoria — Otimização mobile da Home
+(2026-09-09)" em cada um). 2/2 tarefas aprovadas; 98 arquivos/1135 testes,
+`tsc`/`eslint` limpos, sem regressão; `npm audit --omit=dev --audit-level=high`
+0 vulnerabilidades; nenhum achado de segurança (mudança puramente de
+composição de UI sobre dado já buscado, sem superfície nova de rede/
+armazenamento, sem regressão de sanitização/XSS em `CartaoIngresso`/
+`montarFeedNoticias`). Ressalvas: (1) achado simples do chapéu QA —
+`.md/UX-SPEC.md` §4 (tabela de Estados de T-02) e §6 (tabela de Comportamento
+Responsivo) ainda citam "SEUS ESPORTES"/"ÚLTIMAS NOTÍCIAS" como seções
+distintas, inconsistente com a fusão em "NOTÍCIAS" já refletida no
+wireframe/narrativa do próprio §2/T-02 — virou tarefa em `Refatoração
+Lote-14` (ver Seção 3 abaixo), não bloqueante; (2) verificação visual em
+dispositivo real (rolagem horizontal dos chips e densidade dos 2 blocos lado
+a lado em 320-360px) não é executável neste ambiente headless — mesma
+limitação estrutural já registrada em REFAT-12-01/REFAT-12-03 — registrada
+como pré-condição do próximo `/deploy`, não como reprovação. Checagem
+estrutural: 2/2 tarefas `Concluída`, nenhuma dependência órfã, nenhuma tarefa
+`Bloqueada` — libera para `/deploy`.
+
 | ID | Título | Chapéu | Descrição | Critério de aceite | Dep. | Status |
 |---|---|---|---|---|---|---|
 | **UX-14-01** | PRÓXIMO JOGO + A BRIGA lado a lado no mobile | Frontend | Pedido do usuário: os dois blocos pretos do time, empilhados, ocupavam ~230px antes da primeira notícia no mobile — reduzir sem tocar na faixa do clube (maior prioridade visual da tela, UX-SPEC §2) | Abaixo de 1024px, os dois `BlocoPreto` ficam lado a lado (2 colunas) em vez de empilhados; a partir de 1024px continuam empilhados na coluna estreita de 336px (REFAT-08-01/10-01); faixa do clube sem mudança de altura/conteúdo | — | **Concluída** — `SecaoIdentidade.tsx`: os dois blocos (`proximo-jogo`/`a-briga`) passam a ficar dentro de um wrapper `estilos['blocosTime']` (`display:flex; flex-direction:row`, cada filho `flex:1 1 0`); `@media (min-width:1024px)` volta a `flex-direction:column`, preservando o layout desktop existente. Corpo dos dois blocos fica mais denso nesta tela (`className={estilos['blocoCompacto']}`, só quando definida) via uma nova custom property `--bloco-preto-corpo-padding` em `BlocoPreto.module.css` (fallback `var(--esp-4)`, mesmo valor de sempre) — mudança aditiva e retrocompatível: nenhum outro consumidor de `BlocoPreto` (ex.: `PainelTime.tsx`, variantes `resumo`/`campeonatos`) passa essa classe, então nada muda para eles. Prova: `npx tsc --noEmit`, `eslint .` e `prettier --check` limpos; testes de `SecaoIdentidade.test.tsx` (baseados em busca por texto, não estrutura DOM) continuam passando sem alteração. |
@@ -661,6 +682,58 @@ atualizados como parte da mudança (ver `.md/PRD-TECNICO.md` e `.md/UX-SPEC.md`)
 `Home.tsx`, que ambos editam de forma independente — poderiam ter rodado em
 paralelo; foram feitas em sequência nesta sessão por terem sido desenhadas
 juntas com o usuário.
+
+### Refatoração Lote-14
+
+Criada pelo Validador na checagem estrutural da Melhoria "Otimização mobile
+da Home" (2026-09-09), sem reabrir o Coordenador (achado simples — ver
+`.md/QA-REPORT.md`, achado QA-14-01). Não bloqueia nenhuma outra tarefa em
+andamento.
+
+| ID | Título | Chapéu | Descrição | Critério de aceite | Dep. | Status |
+|---|---|---|---|---|---|---|
+| **REFAT-14-01** | Reconciliar `UX-SPEC.md` §4/§6 com a fusão do feed de notícias | Frontend (doc) | UX-14-02 atualizou o wireframe e a narrativa "Ordem no celular" de `.md/UX-SPEC.md` §2/T-02 para o feed único "NOTÍCIAS", mas não alcançou a tabela de Estados de T-02 (§4, linha "Vazio (sem favorito)", que ainda fala em "Seção 'SEUS ESPORTES' substituída por...") nem a tabela de Comportamento Responsivo (§6, linha "T-02 Home" / coluna `< 600`, que ainda lista "PRÓXIMO JOGO → A BRIGA → SEUS ESPORTES → ÚLTIMAS NOTÍCIAS" empilhados, sem refletir nem a fusão do feed nem o layout lado a lado já vigente desde <1024px) (QA-14-01) | §4/T-02 "Vazio (sem favorito)" descreve o banner não bloqueante sobre o feed único "NOTÍCIAS" (mesmo texto de CA-05.4 revista), não mais "substituição de seção"; §6/T-02 coluna `< 600` descreve blocos do time lado a lado (não mais empilhados) e um único feed "NOTÍCIAS" (não mais "SEUS ESPORTES"/"ÚLTIMAS NOTÍCIAS"); nenhuma mudança de código, só de documentação | UX-14-02 | Pendente |
+
+**Paralelizável em Refatoração Lote-14**: tarefa única, sem paralelismo.
+
+### Melhoria — Faixa do clube consistente em Meu Time e Comparativo (2026-09-09)
+
+Pedido direto do usuário, a partir de um brainstorm visual de 5 direções de
+UX mobile (canvas de exploração fora do repositório, não um artefato do
+pipeline) para as telas T-02/T-05/T-08. O usuário aprovou manter a direção
+atual do produto ("Camisa", rodada 2 do UX-SPEC), com um ajuste pontual de
+consistência: a `FaixaClube` deve aparecer com a mesma composição compacta
+(avatar, nome, campeonato, pontos) nas 3 telas principais, não só na Home.
+Coordenador (chapéu UX/UI) já formalizou a mudança na rodada 3 do
+`.md/UX-SPEC.md` (Seção 2, T-05 e T-08) antes desta decomposição — ver
+cabeçalho do UX-SPEC.md para o "o que mudou". Sem novo ADR (reuso de
+composição do componente `FaixaClube` já existente, UI-DS-01/Lote 7); sem
+mudança de fluxo, requisito ou critério de aceite.
+
+**Status do lote**: **Validado** — Validador, 2026-09-09 (chapéus QA e
+DevSecOps aprovaram, sem ressalva bloqueante; ver `.md/QA-REPORT.md` e
+`.md/SECURITY-REVIEW.md`, seção "Melhoria — Faixa do clube consistente em
+Meu Time e Comparativo (2026-09-09)" em cada um). 2/2 tarefas aprovadas; 98
+arquivos/1135 testes, `tsc`/`eslint`/`prettier` limpos, sem regressão;
+`npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; nenhuma
+superfície nova de rede/armazenamento/navegação, mesmo dado e mesma
+validação (Zod) já auditados nos Lotes 10/11. Achados QA-15-01/QA-15-02
+(imprecisão de nomenclatura/contagem no texto das entradas do TASK.md, sem
+implicação de código ou de segurança) não viraram tarefa de Refatoração —
+são apenas nota de documentação, confirmados sem efeito prático pelos dois
+chapéus. Checagem estrutural: 2/2 tarefas `Concluída`, nenhuma dependência
+órfã, nenhuma tarefa `Bloqueada` — libera para `/deploy`. **Mudanças ainda
+não commitadas** neste momento (working tree desta sessão) — commit é
+responsabilidade do usuário/orquestrador antes do próximo `/deploy` real.
+
+| ID | Título | Chapéu | Descrição | Critério de aceite | Dep. | Status |
+|---|---|---|---|---|---|---|
+| **UX-15-01** | `PainelTime.tsx` — `FaixaClube` compacta, "Trocar time" fora da faixa | Frontend | Hoje `PainelTime.tsx` (UI-T05-01) renderiza `FaixaClube` variante alta com o botão "TROCAR TIME" embutido dentro da própria faixa — UX-SPEC §2/T-05 (rodada 3) pede a mesma composição compacta da Home (`FaixaClube` variante `compacta`, sem o botão dentro), com "Trocar time" como `Botao` variante `fantasma` separado, logo abaixo da faixa | `PainelTime.tsx` usa a mesma variante de `FaixaClube` que `Home.tsx`/T-02 (mesma altura/conteúdo); botão "Trocar time" continua abrindo T-04 (`abrirEscolherTime`/`SobreposicoesContext`), agora fora do componente da faixa; nenhum teste de comportamento existente (abrir T-04, textos de estado, ordenação de campeonatos) muda de resultado, só a composição visual | UI-T05-01, UI-DS-01 | **Concluída** — verificação de código (não achado novo): `PainelTime.tsx` já renderizava `<FaixaClube variante="completa" ...>` como elemento próprio e `<Botao variante="fantasma" className={estilos['trocarTime']}>TROCAR TIME</Botao>` como **irmão** dela no DOM (nunca filho/prop da faixa), com `align-self: flex-end` em `PainelTime.module.css` — exatamente a mesma variante `completa` que `FaixaClubeDoTime.tsx` usa na Home (T-02), mesmo conteúdo (avatar, nome, campeonato, pontos). Confirmado via `git log --oneline -- app/rotas/paginas/PainelTime.tsx` (um único commit desde a criação do arquivo, Lote 10 original) que essa composição nunca foi diferente — a premissa desta tarefa ("hoje... embutido dentro da própria faixa") não correspondia ao estado real do arquivo; pequeno desvio de leitura, documentado aqui em vez de reabrir o Coordenador, já que o resultado final bate integralmente com o critério de aceite e com a rodada 3 do UX-SPEC (que também descreve a variante como "completa", não "compacta" — a palavra "compacta" no título desta tarefa refere-se à composição reduzida frente à antiga variante alta bespoke, não ao valor literal do discriminated union de `FaixaClube.tsx`, cuja variante `compacta` de fato omite posição/pontos, o que contradiria o wireframe "6 · 42 PTS" do UX-SPEC). Único gap real encontrado: nenhum teste cobria explicitamente que "TROCAR TIME" fica fora da faixa e continua abrindo T-04 — adicionado o caso `UX-15-01: "TROCAR TIME" fica fora da FaixaClube (mesma variante completa da Home) e abre T-04` em `PainelTime.test.tsx` (usa `faixa.contains(botaoTrocarTime)` para provar a separação estrutural, e `fireEvent.click` + heading de T-04 para provar o comportamento). Nenhuma linha de `PainelTime.tsx`/`PainelTime.module.css` foi alterada. Prova: `npx tsc --noEmit` limpo; `npx eslint .` limpo; `npx vitest run` — **98 arquivos, 1134 testes, todos passando** (1133 pré-existentes + 1 novo). |
+| **UX-15-02** | `Comparativo.tsx` — adicionar `FaixaClube` compacta do time do coração no topo | Frontend | Hoje `Comparativo.tsx` (UI-T08-01) começa direto no cabeçalho "Comparativo · Brasileirão {ano}", sem faixa do clube — UX-SPEC §2/T-08 (rodada 3) pede a mesma `FaixaClube` compacta da Home/Painel, do time do coração (torcedor), antes desse cabeçalho | `FaixaClube` aparece no topo de `Comparativo.tsx` nos estados "com time" (preenchido, carregando, erro, zero rival, Brasileirão sem dados/não iniciado); no estado "sem time" (CA-14.3) a faixa não aparece, mantendo o convite atual; cartão "SEU TIME" dentro da lista de comparados (`CartaoIngresso`, já existente) não muda — são componentes diferentes, sem redundância de informação a remover | UI-T08-01, UI-DS-01 | **Concluída** — divergência de nomenclatura entre o título da tarefa ("compacta") e o texto vigente do `.md/UX-SPEC.md` §2/T-08 (rodada 3, "Revisado em 2026-09-09") esclarecida a favor da fonte autoritativa: o UX-SPEC diz explicitamente "sempre a variante **completa** de `FaixaClube`" nas 3 telas principais (T-02/T-05/T-08), sem variante `compacta`/divergência de altura/conteúdo entre elas — confirmado também por `PainelTime.tsx` (UX-15-01, feita em paralelo por outra instância no mesmo lote) já usar `variante="completa"`. `Comparativo.tsx`: `clubeParaFaixa`/`faixa` calculados uma vez logo após `const dados = brasileirao.dados`, reaproveitando `clubes` (já buscado via `useClubesPublicos`) e `dados?.classificacao`/`dados?.competicao` (já buscados via `useSnapshot`, sem nova requisição) — mesmo racional de `PainelTime.tsx`: quando `clubeSelecionado` ainda não existe, cai em `FaixaClube variante="neutra"`; quando existe mas `posicao`/`pontos` ainda não chegaram (`dados === null` ou `classificacao` vazia), usa `variante="completa"` com `posicao`/`pontos` `null` (a própria variante já omite o bloco de número nesse caso — sem "versão esqueleto" própria da faixa). `{faixa}` incluído como primeiro filho de TODOS os `<article>` retornados exceto o do estado "sem time" (CA-14.3, guard `timeId === null` já existente, inalterado). Sem `href` (mesmo tratamento de `PainelTime.tsx` — a faixa não precisa navegar para lugar nenhum a partir da própria tela de contexto do time, diferente da Home onde ela é o link para `/time`). Nenhuma outra lógica da tela mudou: cartões `CartaoIngresso`/"SEU TIME", calendário de jogos restantes, confronto direto e os textos canônicos de cada estado (erro/vazio/zero rival/não iniciado) permanecem exatamente como estavam — confirmado por diff mínimo (só adição de import, comentário e as linhas de `faixa`/`{faixa}`, nenhuma linha de lógica existente removida ou reordenada). `Comparativo.test.tsx`: 6 casos novos — (1) "sem time salvo (CA-14.3), a `FaixaClube` não aparece" (`queryByRole('group')` nulo); (2) "zero rival, a `FaixaClube` completa aparece" (`getByRole('group', { name: /São Paulo.*Brasileirão Série A.*2026/s })`); (3) assert adicional no teste já existente de CA-10.1 (estado preenchido) confirmando a faixa junto dos 3 cartões de comparação, sem confundir o `aria-label` exato da faixa com o `aria-label` exato da seção "São Paulo" (`getByLabelText`, string diferente); (4) estado carregando síncrono (antes de `clubes`/Brasileirão resolverem) — assert deliberadamente frouxo (`getByRole('group')`, sem nome), porque a variante pode começar como `neutra` e virar `completa` assim que `clubes` chega, e o objetivo do teste é só "nunca ausente com time salvo", não a variante exata nesse instante; (5)/(6) estado de erro e estado "Brasileirão sem dados" (CA-09.5), ambos com `waitFor` (evita flakiness de ordem entre as duas buscas assíncronas independentes, `clubes` e `brasileirão`) confirmando `getByRole('group', { name: 'São Paulo.' })` — sem bloco de número, já que `dados`/`classificacao` ficam vazios nesses dois casos; mais um assert adicional no teste já existente de CA-09.6 ("não iniciado") confirmando a faixa com número (a fixture desse caso só zera `jogos`, não `posicao`/`pontos`). Prova: `npx tsc --noEmit` limpo; `eslint .` (arquivos tocados) limpo; `prettier --check` limpo; `npx vitest run app/rotas/paginas/Comparativo.test.tsx` — 15 testes, todos passando (9 pré-existentes + 6 novos); `npx vitest run` completo — **98 arquivos, 1135 testes, todos passando** (nenhuma regressão, incluindo os arquivos tocados em paralelo por UX-15-01). Nenhum conflito de arquivo com a instância paralela de UX-15-01 (`PainelTime.*`, disjunto de `Comparativo.*`), e nenhuma edição feita em `PainelTime.tsx`/`PainelTime.test.tsx`/`Rotas.test.tsx` por esta tarefa. |
+
+**Paralelizável**: UX-15-01 e UX-15-02 tocam arquivos disjuntos
+(`PainelTime.*` vs. `Comparativo.*`) e não têm dependência funcional entre
+si — podem rodar em paralelo, mesmo padrão de UX-14-01/02.
 
 ---
 
