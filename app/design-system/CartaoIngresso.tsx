@@ -23,15 +23,19 @@ import estilos from './CartaoIngresso.module.css';
  *   componentes de base, sem os 15 tons listados). Quando UI-DS-07B publicar
  *   o componente real, trocar aqui é mudança mecânica de composição, não de
  *   comportamento.
- * - Pelo mesmo motivo (paleta de esporte inexistente em `tokens.css`), a cor
- *   da barra não é resolvida dentro deste componente: `corBarra` é uma
+ * - A cor da barra não é resolvida dentro deste componente: `corBarra` é uma
  *   custom property CSS já resolvida, injetada por quem monta a tela (mesmo
  *   padrão que `app/design-system/README.md`/`tokens.css` já documentam para
  *   `--clube-*`: "o valor real é injetado inline pelo componente que
  *   conhece a configuração do clube"). Isso mantém `CartaoIngresso` livre de
  *   qualquer valor literal de cor fora de `tokens.css` (Diretriz de
  *   Implementação #4) — só usa tokens estruturais (raio, borda, espessura da
- *   barra, alvo de toque) mais a cor que o chamador resolveu.
+ *   barra, alvo de toque) mais a cor que o chamador resolveu. Desde
+ *   2026-09-09, a paleta de 15 tons de esporte existe em `tokens.css`
+ *   (`--esporte-*`); `SecaoNoticias.tsx` passa
+ *   `var(--esporte-<id>, var(--cor-esmaecido))` como `corBarra`, e a
+ *   etiqueta (`.etiqueta` em CartaoIngresso.module.css) deriva seu fundo
+ *   tonal da mesma custom property via `color-mix()`.
  * - WCAG 1.4.1 (Diretriz de Implementação #7): a cor da barra nunca é a
  *   única pista. Toda variante tem etiqueta textual (`rotuloEtiqueta`,
  *   sempre presente) e as variantes "encerrado"/"sem dados" ainda somam um

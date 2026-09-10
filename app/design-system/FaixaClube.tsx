@@ -10,8 +10,9 @@ import estilos from './FaixaClube.module.css';
  * nome e (na variante completa) a posição/pontos do clube no Brasileirão.
  *
  * Três variantes (UX-SPEC §3.8.1):
- * - `completa`: home/painel — 116 px no celular, 140 px no desktop
- *   (`--faixaclube-altura-completa`), com avatar, nome e número da posição.
+ * - `completa`: home/painel — altura definida por
+ *   `--faixaclube-altura-completa` (tokens.css), com avatar, nome e número
+ *   da posição.
  * - `compacta`: cabeçalhos internos — 72 px (`--faixaclube-altura-compacta`),
  *   sem número (a anatomia da variante nunca mostra `posicao`/`pontos`, ainda
  *   que informados via prop — eles continuam entrando no `aria-label`).

@@ -11,7 +11,11 @@
 .contêiner {
   display: flex;
   align-items: center;
-  gap: var(--esp-3);
+  /* `--barrapontuacao-gap` (mesmo padrão de `--barrapontuacao-rotulo-largura`
+     abaixo): permite que um contexto estreito (ex.: coluna de 2 da Home
+     mobile, ver SecaoIdentidade.module.css) aperte o espaçamento interno sem
+     mudar o padrão de nenhum outro uso do componente. */
+  gap: var(--barrapontuacao-gap, var(--esp-3));
 }
 
 .rotulo {
@@ -27,6 +31,14 @@
 .trilho {
   position: relative;
   flex: 1 1 auto;
+  /* `--barrapontuacao-trilho-largura-minima` (mesmo padrão de
+     `--barrapontuacao-gap`/`--barrapontuacao-rotulo-largura` acima): sem
+     mínimo, `flex: 1 1 auto` permite que o trilho encolha até ~0px quando o
+     contêiner pai é extremamente estreito (coluna de 2 da Home mobile) — a
+     barra vira uma linha quase invisível em vez de uma barra reconhecível.
+     O padrão (0) preserva o comportamento de sempre para todo outro uso do
+     componente. */
+  min-width: var(--barrapontuacao-trilho-largura-minima, 0);
   height: var(--esp-4);
   background: var(--cor-superficie-2);
   border: var(--borda-fina) solid var(--cor-borda);

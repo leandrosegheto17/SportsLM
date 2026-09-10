@@ -421,6 +421,7 @@ export function SecaoNoticias({
                             : 'normal'
                       }
                       origemCorBarra="esporte"
+                      corBarra={`var(--esporte-${representante.esporte}, var(--cor-esmaecido))`}
                       {...(agrupado
                         ? { quantidadeFontesAgrupadas: outrasFontesIds.length }
                         : {})}

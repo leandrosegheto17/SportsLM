@@ -81,6 +81,57 @@
   margin: 0;
 }
 
+/* Ajuste (2026-09-09, feedback direto de produto sobre a Home mobile):
+   PRÓXIMO JOGO/A BRIGA lado a lado (`.blocosTime`, abaixo de 1024px) têm
+   metade da largura do card empilhado original — vários textos/anatomias
+   pensados para a coluna cheia de 336px (REFAT-08-01/10-01) não cabiam
+   nessa metade sem quebrar de forma apertada ou cortar conteúdo. Acima de
+   1024px os blocos voltam a empilhar em coluna cheia e recuperam os valores
+   padrão dos componentes. */
+@media (max-width: 1023px) {
+  /* Confronto em --txt-manchete (24px/800) e meta em --txt-corpo-sm (14px)
+     quebravam texto de forma apertada nessa coluna estreita — reduzidos
+     para os tokens imediatamente menores da escala. */
+  .proximoJogoConfronto {
+    font: var(--txt-manchete-sec) var(--fonte-sistema);
+    letter-spacing: var(--txt-manchete-sec-tracking);
+  }
+
+  .proximoJogoMeta {
+    font: var(--txt-meta) var(--fonte-sistema);
+    letter-spacing: var(--txt-meta-tracking);
+  }
+
+  /* O rótulo fixo de 96px de BarraPontuacao (`--barrapontuacao-rotulo-largura`,
+     pensado para a lista de largura cheia de "A BRIGA") somado ao espaçamento
+     padrão de --esp-3/--esp-2 entre posição/rótulo/trilho/valor/"seu" não
+     sobrava espaço nenhum para o trilho nesta coluna estreita — a barra de
+     pontuação ficava visualmente cortada/invisível, só os números
+     apareciam (e o rótulo "seu" chegava a ser cortado no meio). Custom
+     properties atravessam CSS Modules normalmente (não são escopadas/
+     hasheadas como nomes de classe), então redefinir aqui, num ancestral,
+     basta para apertar só esta lista sem tocar no componente genérico.
+     `--barrapontuacao-trilho-largura-minima` garante que a barra continue
+     reconhecível como barra (não uma linha de 1-2px) mesmo espremida — nesta
+     largura ela deixa de ser proporcional de fato (a diferença de poucos
+     pontos entre 1º/2º/3º não caberia em poucos px de qualquer forma), mas
+     continua a mesma cor/papel semântico do UX-SPEC §3.8.6, só compacta. */
+  .aBrigaLista {
+    --barrapontuacao-rotulo-largura: 28px;
+    --barrapontuacao-gap: var(--esp-1);
+    --barrapontuacao-trilho-largura-minima: 14px;
+  }
+
+  .aBrigaLinha {
+    gap: var(--esp-1);
+    padding: var(--esp-1);
+  }
+
+  .blocoCompacto {
+    --bloco-preto-corpo-padding: var(--esp-2);
+  }
+}
+
 .aBrigaLista {
   display: flex;
   flex-direction: column;

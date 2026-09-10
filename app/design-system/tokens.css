@@ -22,6 +22,21 @@
  * sistema e não variam por tema (UX-SPEC §3.2 é a única tabela que as define).
  */
 
+/* 'Plus Jakarta Sans' (SIL Open Font License), auto-hospedada em
+ * `app/public/fontes/` — arquivo variável único (peso 400-800, subconjunto
+ * latino, cobre acentuação de pt-BR) para não multiplicar requisições. Nunca
+ * via `<link>`/`@import` de `fonts.googleapis.com`: o CSP de `app/index.html`
+ * (`default-src`/`style-src 'self'`, ADR-011) bloquearia o host externo — e
+ * um arquivo auto-hospedado, sendo mesma origem, não exige nenhuma mudança
+ * de CSP. */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fontes/plus-jakarta-sans/plus-jakarta-sans-latin.woff2') format('woff2');
+}
+
 :root {
   /* === 3.2 Cores do sistema — tema claro (padrão) === */
   --cor-fundo: #faf7f2;
@@ -58,6 +73,31 @@
   --zona-sul-americana: #5c6570;
   --zona-rebaixamento: #b3261e;
 
+  /* === 3.4b Cores de esporte (etiqueta/barra de `CartaoIngresso` e
+     `EtiquetaEsporte`) — paleta categórica fixa, não muda por tema (mesmo
+     critério de `--zona-*` acima): 15 tons distintos, um por `EsporteId`
+     (`dominio/tipos/esportes.ts`), escolhidos em `oklch()` com matiz
+     espaçado ao redor da roda de cor para que esportes vizinhos no feed
+     nunca fiquem parecidos. `--esporte-geral` cobre o item de triagem
+     "geral"; qualquer outro valor cai no fallback `--cor-esmaecido` já
+     usado por quem consome estes tokens (nunca falta contorno). */
+  --esporte-futebol: oklch(56% 0.15 152);
+  --esporte-volei-quadra: oklch(60% 0.17 300);
+  --esporte-formula1: oklch(54% 0.22 25);
+  --esporte-basquete: oklch(63% 0.18 55);
+  --esporte-tenis: oklch(74% 0.16 122);
+  --esporte-volei-praia: oklch(75% 0.11 230);
+  --esporte-natacao: oklch(58% 0.15 250);
+  --esporte-mma: oklch(38% 0.03 30);
+  --esporte-ginastica-artistica: oklch(66% 0.19 350);
+  --esporte-surfe: oklch(65% 0.12 205);
+  --esporte-skate: oklch(60% 0.2 40);
+  --esporte-judo: oklch(45% 0.14 270);
+  --esporte-atletismo: oklch(64% 0.18 75);
+  --esporte-futsal: oklch(55% 0.13 170);
+  --esporte-futebol-americano: oklch(42% 0.1 50);
+  --esporte-geral: var(--cor-esmaecido);
+
   /* === 3.4 Cores de clube — fallback "sem time escolhido" ===
      UX-SPEC §3.4: "identidade neutra, idêntica ao tratamento acromático —
      tinta com listras em #3A3F45". O componente que conhece o clube do
@@ -75,8 +115,14 @@
      Cada token combina peso + tamanho/entrelinha no formato aceito pelo
      shorthand `font` (`font: var(--txt-x) var(--fonte-sistema)`); tracking
      fica em custom property irmã porque não faz parte do shorthand `font`. */
-  --fonte-sistema: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
+  /* 'Plus Jakarta Sans' (auto-hospedada em `/fontes/`, `@font-face` no topo
+     deste arquivo — nunca via `<link>` externo, que o CSP `style-src 'self'`
+     de `app/index.html` bloquearia) substitui a pilha 100% de fontes de
+     sistema anterior por um traço mais geométrico/clean; a pilha de sistema
+     permanece como fallback caso o arquivo auto-hospedado falhe em
+     carregar. */
+  --fonte-sistema: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --numero-tabular: tabular-nums;
 
   --txt-camisa: 800 72px/64px;
@@ -201,14 +247,20 @@
   --bloco-preto-projecao-altura: 0px;
 
   /* UI-DS-01 (`FaixaClube`, UX-SPEC §3.8.1): alturas de anatomia específicas
-     do componente ("116 px no celular, 140 px no desktop" para a variante
-     completa; "72 px" para a compacta) sem tabela própria em §3.6 — mesma
-     regra de "nenhum literal fora do arquivo de tokens" já aplicada acima a
+     do componente sem tabela própria em §3.6 — mesma regra de "nenhum
+     literal fora do arquivo de tokens" já aplicada acima a
      --bloco-preto-tira-altura/--txt-camisa-compacta. A variante compacta
      reaproveita o mesmo valor de --z-bloco-fixo/--alvo-toque-minimo sempre
      que a anatomia coincide (avatar de 44 px = --alvo-toque-minimo, sem novo
-     token). */
-  --faixaclube-altura-completa: 116px;
+     token).
+     Ajuste (2026-09-09, feedback direto de produto sobre a Home mobile):
+     116px/140px (valor original do UX-SPEC) sobravam de espaço vazio acima/
+     abaixo do conteúdo real — o número de posição usava --txt-camisa (72px,
+     pensado para o número de camisa inteiro de `NumeroCamisa`), maior do que
+     esta anatomia precisa. `.numero` em FaixaClube.module.css passou a usar
+     --txt-camisa-sm (48px/44px); a altura da faixa acompanha essa redução
+     para eliminar o espaço morto sem cortar avatar/número/pontos. */
+  --faixaclube-altura-completa: 84px;
   --faixaclube-altura-compacta: 72px;
 
   /* UI-T02-04 (`Navegacao`, UX-SPEC §2/T-02: "nav preta #16181A, 56px, fixa" /
@@ -263,9 +315,10 @@
     --txt-camisa: 800 96px/88px;
     --txt-display: 800 40px/40px;
 
-    /* UI-DS-01 (`FaixaClube`, UX-SPEC §3.8.1): variante completa cresce para
-       140 px no desktop. */
-    --faixaclube-altura-completa: 140px;
+    /* UI-DS-01 (`FaixaClube`, UX-SPEC §3.8.1): variante completa cresce um
+       pouco no desktop (nome/data cresce para --txt-display 40px). Reduzido
+       junto com o valor mobile em 2026-09-09 (ver comentário acima). */
+    --faixaclube-altura-completa: 100px;
   }
 }
 

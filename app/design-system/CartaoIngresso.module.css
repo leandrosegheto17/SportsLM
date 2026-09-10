@@ -58,12 +58,25 @@
   gap: var(--esp-2);
 }
 
+/* Fundo tonal deriva de `--cartao-cor-barra` (mesma custom property que
+ * colore a borda esquerda do cartão, ver `.barraEsporte`/`.barraClube`
+ * acima) via `color-mix()` — nunca um literal novo, e nunca a única pista de
+ * significado (WCAG 1.4.1, Diretriz de Implementação #7): o nome do esporte
+ * continua sempre como texto. Texto permanece em `--cor-tinta` (não na cor
+ * do esporte) para garantir contraste em qualquer tom da paleta e em ambos
+ * os temas, já que `--cor-superficie`/`--cor-tinta` já se invertem sozinhos
+ * no tema escuro. Sem `corBarra` (variantes "encerrado"/"sem-dados"), o
+ * fallback `--cor-esmaecido` mantém o tratamento neutro anterior. */
 .etiqueta {
   font: var(--txt-rotulo) var(--fonte-sistema);
   letter-spacing: var(--txt-rotulo-tracking);
   text-transform: uppercase;
   color: var(--cor-tinta);
-  background: var(--cor-superficie-2);
+  background: color-mix(
+    in oklch,
+    var(--cartao-cor-barra, var(--cor-esmaecido)) 22%,
+    var(--cor-superficie)
+  );
   border-radius: var(--raio-sm);
   padding: 0 var(--esp-2);
 }

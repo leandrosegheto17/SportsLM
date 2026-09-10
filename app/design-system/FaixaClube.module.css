@@ -135,23 +135,18 @@
   gap: var(--esp-1);
 }
 
+/* Ajuste (2026-09-09): --txt-camisa (72/96px) era pensado para o número de
+ * camisa inteiro de `NumeroCamisa`, não para este número de posição — usar o
+ * token cheio inflava a altura da faixa sem necessidade (ver comentário em
+ * tokens.css sobre --faixaclube-altura-completa). --txt-camisa-sm já tem
+ * peso/tamanho suficiente para permanecer o elemento de maior destaque da
+ * faixa, sem o excesso de espaço vazio. */
 .numero {
   margin: 0;
-  font: var(--txt-camisa) var(--fonte-sistema);
-  letter-spacing: var(--txt-camisa-tracking);
+  font: var(--txt-camisa-sm) var(--fonte-sistema);
+  letter-spacing: var(--txt-camisa-sm-tracking);
   font-variant-numeric: var(--numero-tabular);
   color: inherit;
-}
-
-/* UI-DS-04 (`NumeroCamisa`) já registrou este mesmo breakpoint/token em
- * `tokens.css` prevendo o reaproveitamento por `FaixaClube` — mesmo critério
- * de acessibilidade de UX-SPEC §5.5 ("o número de camisa em 72 px reduz para
- * 56 px abaixo de 340 px"), aplicado aqui ao número de posição da faixa. */
-@media (max-width: 339px) {
-  .numero {
-    font: var(--txt-camisa-compacta) var(--fonte-sistema);
-    letter-spacing: var(--txt-camisa-compacta-tracking);
-  }
 }
 
 .pontos {
