@@ -470,6 +470,52 @@ pelo orquestrador/usuário ("Commit, push, deploy"), depois da dupla aprovação
   documentada na Seção 1) — o push a `origin/main` é a própria publicação em
   produção; não há uma etapa separada de deploy em staging a registrar aqui.
 
+### 2026-09-10 — Ajustes diretos de feedback de produto na Home mobile, publicação real desta sessão
+
+Deploy real disparado nesta sessão, pelo orquestrador/usuário ("Commit, push
+e deploy"), a partir de feedback visual direto (captura de tela da Home
+mobile) — não passou pelo fluxo formal `Gestor→Coordenador→Executor→
+Validador` (sem item novo em `TASK.md`, sem dupla aprovação QA/DevSecOps
+formal registrada em `QA-REPORT.md`/`SECURITY-REVIEW.md`): mudança só de
+CSS/tokens de design system + um asset de fonte estático auto-hospedado, sem
+superfície de segurança nova (sem I/O, sem dado do usuário, sem dependência
+nova) e sem alteração de comportamento/lógica de domínio — verificada
+diretamente nesta sessão (`tsc --noEmit`, `eslint .`, `vitest run` 98
+arquivos/1135 testes, `vite build`) em vez de pelo `/validar` formal.
+Registrado aqui para manter o histórico de deploys completo mesmo fora do
+fluxo padrão.
+
+- **Commit**: `1afd1ff` ("feat(home): melhora legibilidade e acabamento
+  visual da Home mobile"), enviado a `origin/main` nesta sessão sem rebase
+  (sem commit concorrente em `origin/main` no momento do push — `git fetch`
+  + `git log HEAD..origin/main` vazio antes do `git push`). Um arquivo
+  (`BarraPontuacao.module.css`) tinha sido salvo em CRLF por um artefato
+  local de edição (mesma família de problema já registrada nas confirmações
+  anteriores desta seção); normalizado para LF antes do commit —
+  `git diff --stat -w` conferido idêntico ao `--stat` final.
+- **Deployment Vercel confirmado por `curl`** (sem `vercel inspect` nesta
+  sessão — CLI não autenticado/disponível no ambiente): `curl -sI
+  https://sports-lm.vercel.app` retornou `200 OK` com `Last-Modified`
+  batendo com o horário real do push; `curl -sI` no asset novo
+  (`/fontes/plus-jakarta-sans/plus-jakarta-sans-latin.woff2`) também
+  retornou `200 OK` com `Content-Length: 27348`, idêntico ao arquivo local
+  publicado — confirma que o build novo (não uma versão em cache) está no
+  ar.
+- **Escopo publicado**: `tokens.css` (paleta de 15 cores de esporte, altura
+  da faixa do clube reduzida, fonte `Plus Jakarta Sans` auto-hospedada),
+  `FaixaClube.tsx`/`.module.css` (número de posição em `--txt-camisa-sm` em
+  vez de `--txt-camisa`), `SecaoIdentidade.module.css`
+  (`PRÓXIMO JOGO`/`A BRIGA` reorganizados para não cortar texto/barra de
+  pontuação na coluna de 2 da Home mobile), `BarraPontuacao.module.css`
+  (novos `--barrapontuacao-gap`/`--barrapontuacao-trilho-largura-minima`,
+  mesmo padrão de override já usado por `--barrapontuacao-rotulo-largura`),
+  `CartaoIngresso.tsx`/`.module.css` e `SecaoNoticias.tsx` (etiqueta do card
+  de notícia usa a cor do esporte via `color-mix()`), mais o asset
+  `app/public/fontes/plus-jakarta-sans/plus-jakarta-sans-latin.woff2`.
+- **Sem staging intermediário** (mesma arquitetura de hosting único
+  documentada na Seção 1) — o push a `origin/main` é a própria publicação em
+  produção.
+
 ---
 
 ## 6. Achado bloqueante — primeira tentativa de deploy real (2026-09-06)
