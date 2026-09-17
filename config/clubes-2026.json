@@ -5,7 +5,10 @@
     "nomeCurto": "Flamengo",
     "sigla": "FLA",
     "corBase": "#E2231A",
-    "idsProvedor": { "football-data": 1783 }
+    "idsProvedor": {
+      "football-data": 1783,
+      "thesportsdb": "134287"
+    }
   },
   {
     "id": "palmeiras",
@@ -13,8 +16,13 @@
     "nomeCurto": "Palmeiras",
     "sigla": "PAL",
     "corBase": "#006437",
-    "idsProvedor": { "football-data": 1769 },
-    "paletaManual": { "faixaB": "#004526" }
+    "idsProvedor": {
+      "football-data": 1769,
+      "thesportsdb": "134465"
+    },
+    "paletaManual": {
+      "faixaB": "#004526"
+    }
   },
   {
     "id": "sao-paulo",
@@ -22,7 +30,10 @@
     "nomeCurto": "São Paulo",
     "sigla": "SPA",
     "corBase": "#E30613",
-    "idsProvedor": { "football-data": 1776 }
+    "idsProvedor": {
+      "football-data": 1776,
+      "thesportsdb": "134291"
+    }
   },
   {
     "id": "mirassol",
@@ -30,7 +41,10 @@
     "nomeCurto": "Mirassol",
     "sigla": "MIR",
     "corBase": "#FFDD00",
-    "idsProvedor": { "football-data": 4364 }
+    "idsProvedor": {
+      "football-data": 4364,
+      "thesportsdb": "141181"
+    }
   },
   {
     "id": "corinthians",
@@ -38,7 +52,10 @@
     "nomeCurto": "Corinthians",
     "sigla": "COR",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": 1779 }
+    "idsProvedor": {
+      "football-data": 1779,
+      "thesportsdb": "134284"
+    }
   },
   {
     "id": "botafogo",
@@ -46,7 +63,10 @@
     "nomeCurto": "Botafogo",
     "sigla": "BOT",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": 1770 }
+    "idsProvedor": {
+      "football-data": 1770,
+      "thesportsdb": "134285"
+    }
   },
   {
     "id": "santos",
@@ -54,7 +74,10 @@
     "nomeCurto": "Santos",
     "sigla": "SAN",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": 6685 }
+    "idsProvedor": {
+      "football-data": 6685,
+      "thesportsdb": "134286"
+    }
   },
   {
     "id": "vasco",
@@ -62,7 +85,10 @@
     "nomeCurto": "Vasco",
     "sigla": "VAS",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": 1780 }
+    "idsProvedor": {
+      "football-data": 1780,
+      "thesportsdb": "134282"
+    }
   },
   {
     "id": "atletico-mg",
@@ -70,7 +96,9 @@
     "nomeCurto": "Atlético-MG",
     "sigla": "CAM",
     "corBase": "#000000",
-    "idsProvedor": { "football-data": 1766 }
+    "idsProvedor": {
+      "football-data": 1766
+    }
   },
   {
     "id": "cruzeiro",
@@ -78,7 +106,9 @@
     "nomeCurto": "Cruzeiro",
     "sigla": "CRU",
     "corBase": "#0033A0",
-    "idsProvedor": { "football-data": 1771 }
+    "idsProvedor": {
+      "football-data": 1771
+    }
   },
   {
     "id": "fluminense",
@@ -86,7 +116,10 @@
     "nomeCurto": "Fluminense",
     "sigla": "FLU",
     "corBase": "#7A0026",
-    "idsProvedor": { "football-data": 1765 }
+    "idsProvedor": {
+      "football-data": 1765,
+      "thesportsdb": "134296"
+    }
   },
   {
     "id": "bahia",
@@ -94,7 +127,9 @@
     "nomeCurto": "Bahia",
     "sigla": "BAH",
     "corBase": "#1C3F94",
-    "idsProvedor": { "football-data": 1777 }
+    "idsProvedor": {
+      "football-data": 1777
+    }
   },
   {
     "id": "internacional",
@@ -102,7 +137,9 @@
     "nomeCurto": "Internacional",
     "sigla": "INT",
     "corBase": "#C8102E",
-    "idsProvedor": { "football-data": 6684 }
+    "idsProvedor": {
+      "football-data": 6684
+    }
   },
   {
     "id": "gremio",
@@ -110,7 +147,9 @@
     "nomeCurto": "Grêmio",
     "sigla": "GRE",
     "corBase": "#004B87",
-    "idsProvedor": { "football-data": 1767 }
+    "idsProvedor": {
+      "football-data": 1767
+    }
   },
   {
     "id": "vitoria",
@@ -118,7 +157,9 @@
     "nomeCurto": "Vitória",
     "sigla": "VIT",
     "corBase": "#A6192E",
-    "idsProvedor": { "football-data": 1782 }
+    "idsProvedor": {
+      "football-data": 1782
+    }
   },
   {
     "id": "athletico-pr",
@@ -126,7 +167,9 @@
     "nomeCurto": "Athletico-PR",
     "sigla": "CAP",
     "corBase": "#E4062A",
-    "idsProvedor": { "football-data": 1768 }
+    "idsProvedor": {
+      "football-data": 1768
+    }
   },
   {
     "id": "coritiba",
@@ -134,8 +177,12 @@
     "nomeCurto": "Coritiba",
     "sigla": "CFC",
     "corBase": "#0F6B3A",
-    "idsProvedor": { "football-data": 4241 },
-    "paletaManual": { "faixaB": "#004526" }
+    "idsProvedor": {
+      "football-data": 4241
+    },
+    "paletaManual": {
+      "faixaB": "#004526"
+    }
   },
   {
     "id": "rb-bragantino",
@@ -143,7 +190,9 @@
     "nomeCurto": "Bragantino",
     "sigla": "RBB",
     "corBase": "#E30613",
-    "idsProvedor": { "football-data": 4286 }
+    "idsProvedor": {
+      "football-data": 4286
+    }
   },
   {
     "id": "remo",
@@ -151,7 +200,9 @@
     "nomeCurto": "Remo",
     "sigla": "REM",
     "corBase": "#0B3D91",
-    "idsProvedor": { "football-data": 4287 }
+    "idsProvedor": {
+      "football-data": 4287
+    }
   },
   {
     "id": "chapecoense",
@@ -159,7 +210,11 @@
     "nomeCurto": "Chapecoense",
     "sigla": "CHA",
     "corBase": "#0C6B3D",
-    "idsProvedor": { "football-data": 1772 },
-    "paletaManual": { "faixaB": "#004526" }
+    "idsProvedor": {
+      "football-data": 1772
+    },
+    "paletaManual": {
+      "faixaB": "#004526"
+    }
   }
 ]

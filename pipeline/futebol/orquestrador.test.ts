@@ -3,9 +3,11 @@
 // Teste de integração de ponta a ponta do Fluxo 2 (SDD §2.4): liga
 // ING-F-02 (coleta por prioridade/cota) → ING-F-04 (consistência) → ING-F-03
 // (derivação de status/fase), com um provedor mockado (nenhuma chamada de
-// rede real) registrado só para o Brasileirão — igual à configuração real de
-// `config/campeonatos-2026.json` (`provedor: "football-data-org"` só na
-// Série A, o resto `null`). Cobre especificamente:
+// rede real) registrado só para o Brasileirão (`provedor: "football-data-org"`
+// em `config/campeonatos-2026.json`). Desde SPK-01 (2026-09-17), Paulista e
+// Carioca também têm provedor real (`"thesportsdb"`) — coberto à parte pelo
+// describe "montarProvedoresPadrao" no fim deste arquivo, sem rede real
+// (só a construção da referência por competição). Cobre especificamente:
 //   (a) Brasileirão com os 20 clubes reais, gravando linhas/partidas/
 //       participações coerentes para todos eles (CA-16.2);
 //   (b) descarte de um lote inconsistente, mantendo o snapshot anterior
@@ -23,6 +25,7 @@ import {
   executarIngestaoFutebolEmDisco,
   estadoFutebolVazio,
   carregarCampeonatosDominio,
+  montarProvedoresPadrao,
   type EstadoFutebol,
 } from './orquestrador';
 import { registrarProvedor, type ProvedorFutebolPort } from './coletor-futebol';
@@ -421,5 +424,54 @@ describe('executarIngestaoFutebolEmDisco — camada de I/O', () => {
         process.env['FOOTBALL_DATA_API_TOKEN'] = tokenAnterior;
       }
     }
+  });
+});
+
+describe('montarProvedoresPadrao (SPK-01 — TheSportsDB para Paulista/Carioca)', () => {
+  const clubes = carregarClubesSerieA2026();
+  const registro = montarProvedoresPadrao(clubes, 'token-fake');
+
+  it('registra football-data-org e thesportsdb', () => {
+    expect(Object.keys(registro).sort()).toEqual(['football-data-org', 'thesportsdb']);
+  });
+
+  it('constrói referência TheSportsDB para paulista e carioca', () => {
+    const paulista = CAMPEONATOS.find((c) => c.id === 'paulista');
+    const carioca = CAMPEONATOS.find((c) => c.id === 'carioca');
+    if (paulista === undefined || carioca === undefined) {
+      throw new Error(
+        'fixture: paulista/carioca ausentes de config/campeonatos-2026.json',
+      );
+    }
+
+    expect(registro['thesportsdb']?.construirReferencia(paulista)).toEqual({
+      competicaoId: 'paulista',
+      idLigaProvedor: '5767',
+      temTabela: true,
+      temporadaProvedor: '2026',
+    });
+    expect(registro['thesportsdb']?.construirReferencia(carioca)).toEqual({
+      competicaoId: 'carioca',
+      idLigaProvedor: '5688',
+      temTabela: true,
+      temporadaProvedor: '2026',
+    });
+  });
+
+  it('lança erro claro para uma competição sem referência TheSportsDB mapeada (ex.: Copa do Brasil, fora do escopo desta rodada)', () => {
+    const copaDoBrasil = CAMPEONATOS.find((c) => c.id === 'copa-do-brasil');
+    if (copaDoBrasil === undefined) {
+      throw new Error('fixture: copa-do-brasil ausente de config/campeonatos-2026.json');
+    }
+    expect(() => registro['thesportsdb']?.construirReferencia(copaDoBrasil)).toThrow(
+      /sem referência de liga TheSportsDB mapeada/,
+    );
+  });
+
+  it('constrói referência football-data.org só para o Brasileirão', () => {
+    expect(registro['football-data-org']?.construirReferencia(BRASILEIRAO)).toEqual({
+      competicaoId: 'brasileirao-serie-a',
+      codigoCompeticao: 'BSA',
+    });
   });
 });

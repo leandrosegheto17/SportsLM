@@ -32,15 +32,28 @@
 //
 // Nota de lacuna sinalizada (TASK.md §6-style, desvio pequeno — não bloqueia
 // esta tarefa): `CampeonatoConfigSchema` (CFG-03) não tem um campo para o
-// "código de competição" específico de cada provedor (ex.: `'BSA'` no
-// football-data.org, ADR-006 item 4) — só guarda o id genérico do provedor
-// (`provedor: "football-data-org"`). Enquanto só existe uma competição com
-// provedor real (o Brasileirão), este módulo usa um mapa interno
-// (`CODIGOS_COMPETICAO_FOOTBALL_DATA`) só para o wrapper de disco; a camada
-// pura (`executarFluxoFutebol`) não depende disso — quem chama já injeta o
-// registro de provedores pronto. Sinalizado ao Coordenador para, se um
-// segundo campeonato ganhar cobertura real (SPK-01), CFG-03 ganhar um campo
-// explícito em vez deste mapa local.
+// "código/id de competição" específico de cada provedor (ex.: `'BSA'` no
+// football-data.org, ADR-006 item 4, ou o `idLigaProvedor` do TheSportsDB) —
+// só guarda o id genérico do provedor (`provedor: "football-data-org"` /
+// `"thesportsdb"`). Este módulo usa mapas internos por provedor
+// (`CODIGOS_COMPETICAO_FOOTBALL_DATA`/`REFS_COMPETICAO_THESPORTSDB`) só para
+// o wrapper de disco; a camada pura (`executarFluxoFutebol`) não depende
+// disso — quem chama já injeta o registro de provedores pronto. Sinalizado ao
+// Coordenador para, se mais competições ganharem cobertura real, CFG-03
+// ganhar um campo explícito em vez destes mapas locais.
+//
+// SPK-01 (Paulista/Carioca via TheSportsDB, decisão do usuário 2026-09-17):
+// as duas competições já têm `provedor: "thesportsdb"` em CFG-03 e
+// `idsProvedor.thesportsdb` mapeado nos clubes que as disputam — mas ambas
+// estão fora da janela de calendário 2026 (`2026-01-14`–`2026-03-22`, já
+// encerrada) no momento desta implementação. `foraDaJanela`
+// (`coletor-futebol.ts`) pula a consulta ao provedor até `2027-01-14`; até
+// lá, as duas aparecem como "sem dados" (mesmo comportamento de hoje) — o
+// wiring fica pronto e passa a valer sozinho quando a janela de 2027 abrir,
+// sem trabalho adicional. Copa do Brasil ficou fora desta rodada (mata-mata
+// sem conceito de classificação; `numeroClubesEsperado`/
+// `verificarConsistenciaCompeticao` não tem um caminho definido para esse
+// formato ainda — próxima rodada, por decisão do usuário).
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -58,6 +71,10 @@ import {
   type RefCompeticaoFootballData,
   type InconsistenciaClube,
 } from './adaptador-football-data';
+import {
+  criarAdaptadorTheSportsDB,
+  type RefCompeticaoTheSportsDB,
+} from './adaptador-thesportsdb';
 import { carregarClubesSerieA2026, type ClubeBase } from '../config/clubes';
 import {
   ConfigCampeonatosSchema,
@@ -427,6 +444,19 @@ const CODIGOS_COMPETICAO_FOOTBALL_DATA: Record<string, string> = {
   'brasileirao-serie-a': 'BSA',
 };
 
+/** Referência de liga do TheSportsDB (SPK-01) por id interno de competição —
+ * ids confirmados via `lookuptable.php`/`searchteams.php` em 2026-09-17 (ver
+ * nota no topo do arquivo). Só competições em formato "grupos" com tabela
+ * (`temTabela: true`) por enquanto — Copa do Brasil (mata-mata) fica para
+ * uma rodada futura. */
+const REFS_COMPETICAO_THESPORTSDB: Record<
+  string,
+  Omit<RefCompeticaoTheSportsDB, 'competicaoId'>
+> = {
+  paulista: { idLigaProvedor: '5767', temTabela: true, temporadaProvedor: '2026' },
+  carioca: { idLigaProvedor: '5688', temTabela: true, temporadaProvedor: '2026' },
+};
+
 const competicaoEstadoSchema = z.object({
   competicao: competicaoSchema,
   linhas: z.array(linhaClassificacaoSchema),
@@ -517,19 +547,21 @@ export function carregarCampeonatosDominio(
 }
 
 /**
- * Monta o registro de provedores disponíveis para a execução real: hoje só
- * `football-data.org`, restrito ao Brasileirão (ADR-006 item 4). Token
- * injetado via variável de ambiente `FOOTBALL_DATA_API_TOKEN` (segredo do
- * job de CI, TASK.md §1 diretriz 12 — nunca hardcoded, nunca lido por
- * `adaptador-football-data.ts` diretamente).
+ * Monta o registro de provedores disponíveis para a execução real:
+ * `football-data.org` (Brasileirão, ADR-006 item 4) e `TheSportsDB`
+ * (Paulista/Carioca, SPK-01 — ver nota no topo do arquivo). Token do
+ * football-data.org injetado via variável de ambiente
+ * `FOOTBALL_DATA_API_TOKEN` (segredo do job de CI, TASK.md §1 diretriz 12 —
+ * nunca hardcoded, nunca lido por `adaptador-football-data.ts` diretamente).
+ * TheSportsDB usa a chave demo pública (`BASE_URL_THESPORTSDB`, sem segredo).
  */
 export function montarProvedoresPadrao(
   clubes: ClubeBase[],
   token: string,
 ): Record<string, ProvedorRegistrado> {
-  const adaptador = criarAdaptadorFootballData({ token, clubes });
-  const registro = registrarProvedor<RefCompeticaoFootballData>(
-    adaptador,
+  const adaptadorFootballData = criarAdaptadorFootballData({ token, clubes });
+  const registroFootballData = registrarProvedor<RefCompeticaoFootballData>(
+    adaptadorFootballData,
     (campeonato) => {
       const codigoCompeticao = CODIGOS_COMPETICAO_FOOTBALL_DATA[campeonato.id];
       if (codigoCompeticao === undefined) {
@@ -540,11 +572,29 @@ export function montarProvedoresPadrao(
       return { competicaoId: campeonato.id, codigoCompeticao };
     },
   );
-  // Chave = mesma string usada em `CampeonatoConfig.provedor` (CFG-03,
-  // "football-data-org") — deliberadamente distinta de `adaptador.id`
-  // (`"football-data"`, usado só para `Clube.idsProvedor`, ver nota em
+
+  const adaptadorTheSportsDB = criarAdaptadorTheSportsDB({ clubes });
+  const registroTheSportsDB = registrarProvedor<RefCompeticaoTheSportsDB>(
+    adaptadorTheSportsDB,
+    (campeonato) => {
+      const ref = REFS_COMPETICAO_THESPORTSDB[campeonato.id];
+      if (ref === undefined) {
+        throw new Error(
+          `sem referência de liga TheSportsDB mapeada para "${campeonato.id}"`,
+        );
+      }
+      return { competicaoId: campeonato.id, ...ref };
+    },
+  );
+
+  // Chave = mesma string usada em `CampeonatoConfig.provedor` (CFG-03) —
+  // deliberadamente distinta de `adaptador.id` (`"football-data"`/
+  // `"thesportsdb"`, usado só para `Clube.idsProvedor`, ver nota em
   // `coletor-futebol.ts`).
-  return { 'football-data-org': registro };
+  return {
+    'football-data-org': registroFootballData,
+    thesportsdb: registroTheSportsDB,
+  };
 }
 
 export interface OpcoesIngestaoFutebolEmDisco {

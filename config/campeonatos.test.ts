@@ -89,18 +89,33 @@ describe('config/campeonatos-2026.json (CFG-03, RN-05)', () => {
 
   it('todo campeonato sem cobertura confirmada tem provedor: null (CA-07.2)', () => {
     const config = ConfigCampeonatosSchema.parse(configCampeonatos);
-    const semCobertura = config.campeonatos.filter((c) => c.categoria !== 'brasileirao');
+    // Paulista/Carioca ganharam cobertura confirmada via TheSportsDB — ver
+    // teste seguinte, que nomeia exatamente os 3 campeonatos com provedor.
+    const comIdConfirmado = new Set(['brasileirao-serie-a', 'paulista', 'carioca']);
+    const semCobertura = config.campeonatos.filter((c) => !comIdConfirmado.has(c.id));
     expect(semCobertura.length).toBeGreaterThan(0);
     for (const campeonato of semCobertura) {
       expect(campeonato.provedor).toBeNull();
     }
   });
 
-  it('o Brasileirão é o único campeonato com provedor confirmado (football-data-org)', () => {
+  it('Brasileirão, Paulista e Carioca são os únicos campeonatos com provedor confirmado', () => {
     const config = ConfigCampeonatosSchema.parse(configCampeonatos);
     const comProvedor = config.campeonatos.filter((c) => c.provedor !== null);
-    expect(comProvedor).toHaveLength(1);
-    expect(comProvedor[0]?.categoria).toBe('brasileirao');
+    expect(comProvedor.map((c) => c.id).sort()).toEqual([
+      'brasileirao-serie-a',
+      'carioca',
+      'paulista',
+    ]);
+    expect(config.campeonatos.find((c) => c.id === 'brasileirao-serie-a')?.provedor).toBe(
+      'football-data-org',
+    );
+    expect(config.campeonatos.find((c) => c.id === 'paulista')?.provedor).toBe(
+      'thesportsdb',
+    );
+    expect(config.campeonatos.find((c) => c.id === 'carioca')?.provedor).toBe(
+      'thesportsdb',
+    );
   });
 
   it('todo campeonato com clubes vazio documenta a pendência em "observacao"', () => {

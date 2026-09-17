@@ -103,7 +103,7 @@
       "categoria": "estadual",
       "formato": "grupos",
       "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
-      "provedor": null,
+      "provedor": "thesportsdb",
       "clubes": ["corinthians", "mirassol", "palmeiras", "santos", "sao-paulo"]
     },
     {
@@ -113,7 +113,7 @@
       "categoria": "estadual",
       "formato": "grupos",
       "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
-      "provedor": null,
+      "provedor": "thesportsdb",
       "clubes": ["botafogo", "flamengo", "fluminense", "vasco"]
     },
     {
