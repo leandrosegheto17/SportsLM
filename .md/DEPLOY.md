@@ -516,6 +516,131 @@ fluxo padrão.
   documentada na Seção 1) — o push a `origin/main` é a própria publicação em
   produção.
 
+### 2026-09-17 — Correção do bloqueio de ingestão de 8 dias + fechamento de Refatoração Lote-14, publicação real desta sessão
+
+Deploy real disparado nesta sessão, pelo orquestrador/usuário ("Sim", em
+resposta à pergunta "quer que eu faça o commit + push agora?"), depois de
+investigação (`superpowers:systematic-debugging`) do relato do usuário
+("as notícias de basquete continuam não entrando... tabelas desatualizadas...
+algumas páginas parecem quebradas").
+
+- **Causa raiz confirmada**: `npm run format:check` (Prettier) do workflow
+  `.github/workflows/ingestao.yml` vinha falhando em **toda** execução
+  agendada desde `2026-09-10T14:00:03Z` (confirmado via
+  `gh run list --workflow=ingestao.yml`, dezenas de execuções consecutivas
+  `failure`, todas ~30s — abortadas antes de chegar perto da lógica de
+  ingestão), por causa de uma quebra de linha do Prettier em
+  `app/design-system/tokens.css` (`--fonte-sistema`) introduzida no commit
+  `1afd1ff` (2026-09-10, publicado fora do fluxo formal, sem
+  `format:check` real rodado antes do push). Resultado: nenhuma fonte de
+  notícia (nem futebol, nem basquete, nem nenhum outro esporte) foi
+  atualizada por 8 dias — `app/public/dados/versao.json` congelado em
+  `2026-09-09T22:10:51Z`. Não é um bug do classificador de basquete (a
+  correção de `1f12b32`/Bloqueio 012 já estava correta no código, só nunca
+  teve chance de rodar). As "páginas quebradas" relatadas pelo usuário
+  foram investigadas com Playwright real contra produção (Home, Painel do
+  Time, Detalhe do Campeonato, Comparativo, Simulação, desktop + mobile,
+  com time salvo em `localStorage`) — **zero erro de console, zero
+  requisição falhando, zero erro de página**; a aparência de "quebrado" é
+  só o dado congelado (próximo jogo já disputado há dias, tabela travada
+  na 26ª rodada, banner "atualizado há 8 dias" em toda tela).
+- **Correção**: `npx prettier --write app/design-system/tokens.css` — só
+  a quebra de linha, nenhuma mudança de valor. Verificado localmente:
+  `tsc --noEmit`, `eslint .`, `prettier --check` e `vitest run` (98
+  arquivos/1135 testes) limpos antes do commit.
+- **Commit**: `0c4d363` ("fix(design-system): corrige quebra de linha do
+  Prettier em tokens.css"), enviado a `origin/main` nesta sessão sem
+  rebase (`git fetch` + `git log HEAD..origin/main` vazio antes do push).
+  Inclui também o fechamento de `Refatoração Lote-14` (`REFAT-14-01`, já
+  validado nesta sessão — QA Aprovado, DevSecOps Aprovado, checagem
+  estrutural limpa).
+- **CI confirmado**: `build-publish` (GitHub Actions, dispara em todo push
+  em `main`) rodou `success` neste commit (`run 35254100225`, ambos os
+  jobs — "Build + verificação de segredo" e "Publicação (GitHub Pages)" —
+  verdes), confirmando que o mesmo build que o Vercel dispara
+  automaticamente passa limpo.
+- **Deployment Vercel confirmado por `curl`**: `curl -sI
+  https://sports-lm.vercel.app` retornou `200 OK`, `Server: Vercel`,
+  `Last-Modified` batendo com o horário do push. `vercel inspect` não
+  disponível nesta sessão (nome de projeto não resolvido pela CLI local
+  sem contexto de conta configurado) — evidência fica no `curl` + build
+  verde do Actions, mesmo padrão de confirmação indireta já usado acima.
+- **Pendência não bloqueante**: a confirmação empírica de que
+  `ingestao.yml` volta a publicar dado real só vem do **próximo run
+  agendado** (ciclo de ~5-6h pelo padrão observado) — nenhuma execução
+  agendada rodou ainda sobre o commit `0c4d363` no momento deste registro.
+  Recomendo checar `gh run list --workflow=ingestao.yml --limit 3` daqui a
+  algumas horas para confirmar que o bloqueio de 8 dias está
+  definitivamente encerrado (não só corrigido em teoria).
+- **Sem staging intermediário** (mesma arquitetura de hosting único
+  documentada na Seção 1) — o push a `origin/main` é a própria publicação
+  em produção.
+
+### 2026-09-17 (continuação, mesma sessão) — causa raiz real era outra: secret ausente, não só o gate de formatação
+
+A pendência acima ("aguardar o próximo run agendado") escondia um segundo
+problema, mais grave: o cron de `ingestao.yml` (`*/30 * * * *`) ficou **mais
+de 90 minutos sem disparar** depois do push de `0c4d363` — atraso maior que o
+normal do GitHub Actions em repositório de baixo uso. Para não depender só do
+agendamento, disparei `gh workflow run ingestao.yml` manualmente
+(`35262516579`) e o job terminou `success`, mas **sem publicar nada**
+(`app/public/dados/versao.json` seguiu em `2026-09-09T22:10:51Z`) — o log
+revelou a causa raiz verdadeira:
+
+> "Aviso: FOOTBALL_DATA_API_TOKEN ainda não cadastrado no cofre de segredo
+> deste repositório." (`gh secret list` só mostrava `CLOUDFLARE_ACCOUNT_ID`/
+> `CLOUDFLARE_API_TOKEN`)
+
+O workflow checa esse secret **antes** de chamar `npm run ingestao`
+(`.github/workflows/ingestao.yml`) e, sem ele, sempre roda em dry-run
+(`publica=false`) — notícias e futebol são pulados juntos (o CLI
+`pipeline/ingestao-cli.ts` roda os dois fluxos no mesmo processo). Ou seja: a
+correção de `0c4d363` resolveu o gate `format:check`, mas o pipeline de
+ingestão real **nunca tinha chegado a publicar nada**, desde sempre — os "8
+dias" eram só a última publicação manual, não um efeito colateral isolado do
+bug do CSS.
+
+Usuário cadastrou o secret (`gh secret set FOOTBALL_DATA_API_TOKEN`,
+confirmado em `gh secret list`). Disparei `ingestao.yml` de novo
+(`35263115679`) — desta vez `publica=true`, commit real
+`0f19365` ("chore(dados): atualiza snapshots de ingestão") enviado a `main`,
+`versao.json` em produção atualizado para `2026-09-17T19:10:06Z` (hashes de
+notícias/futebol mudaram). Confirmado por `curl` direto em
+`sports-lm.vercel.app/dados/versao.json` (cache-busted) e pelo commit em
+`origin/main`.
+
+### 2026-09-17 (continuação) — bug real de CSS achado durante a verificação visual pós-deploy
+
+Usuário reportou "a tela principal ainda parece quebrada" mesmo com o dado já
+atualizado. Investigação com Playwright real (`sports-lm.vercel.app`,
+`localStorage` com um time salvo) achou um bug de layout genuíno, não
+relacionado a dado: em telas ≥1024px (desktop), os blocos "PRÓXIMO JOGO" e "A
+BRIGA NO BRASILEIRÃO" da Home colapsavam para ~4px de altura, cortando todo o
+conteúdo — visível como duas barras pretas finas logo abaixo da faixa do
+clube.
+
+**Causa raiz**: `SecaoIdentidade.module.css` (`.blocosTime`) usa
+`flex-direction: row` no mobile (<1024px, blocos lado a lado) e
+`flex-direction: column` a partir de 1024px (blocos empilhados,
+REFAT-08-01/10-01). A regra `.blocosTime > * { flex: 1 1 0 }` — pensada para
+dividir a LARGURA igualmente entre os dois blocos no layout mobile — continua
+valendo no desktop, onde o mesmo `flex-basis: 0` passa a controlar a ALTURA
+(eixo principal muda com `flex-direction`). Combinado com `overflow: hidden`
+em `.bloco` (`BlocoPreto.module.css`, que zera a altura mínima automática do
+item flex por spec), o resultado é o colapso. Confirmado via Playwright:
+altura do bloco = 4px em viewport 1280px vs. 240px em viewport 390px, mesmo
+HTML/conteúdo.
+
+**Correção**: adicionado `.blocosTime > * { flex: 0 0 auto; }` dentro do
+próprio `@media (min-width: 1024px)` que já existia, restaurando
+dimensionamento por conteúdo no desktop sem tocar no comportamento mobile
+(intocado, confirmado por Playwright em 390px antes/depois). Validado:
+`tsc --noEmit`, `eslint`, `prettier --check`, `vitest run` (98 arquivos/1135
+testes) limpos; verificação visual com Playwright contra o **bundle de
+produção real** (`vite build` + `vite preview`, não o dev server) em
+1280px (blocos com 158px/228px de altura, conteúdo visível) e 390px (240px,
+inalterado).
+
 ---
 
 ## 6. Achado bloqueante — primeira tentativa de deploy real (2026-09-06)

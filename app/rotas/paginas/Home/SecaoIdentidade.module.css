@@ -30,6 +30,19 @@
   .blocosTime {
     flex-direction: column;
   }
+
+  /* `.blocosTime > * { flex: 1 1 0 }` divide a largura igualmente entre os
+     dois blocos no layout lado a lado do mobile (linha 24). Em
+     `flex-direction: column` (aqui, desktop), o mesmo `flex-basis: 0` passa
+     a valer para a ALTURA em vez da largura — combinado com `overflow:
+     hidden` de `.bloco` (BlocoPreto.module.css, que zera a altura mínima
+     automática do item), os blocos colapsavam para poucos pixels de altura,
+     cortando todo o conteúdo (achado de bug real, 2026-09-17). Volta ao
+     dimensionamento natural por conteúdo — cada bloco empilhado com a
+     própria altura, sem crescer/encolher. */
+  .blocosTime > * {
+    flex: 0 0 auto;
+  }
 }
 
 /* Padding mais denso do corpo de PRÓXIMO JOGO/A BRIGA nesta tela (ver

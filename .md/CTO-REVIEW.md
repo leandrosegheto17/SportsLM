@@ -413,3 +413,140 @@ direta (`vercel inspect`, `curl`), não por nota de terceiro.
 
 **Registrado.** Gate 4 é só fechamento — não há veredito de aprovação/
 reprovação aqui, conforme PIPELINE-CONVENTIONS.md §1 e `.claude/agents/gestor.md`.
+
+---
+
+## Gate 4 — Registro de fechamento de deploy — 2026-09-17 (Correção do bloqueio de ingestão de 8 dias + fechamento de Refatoração Lote-14)
+
+**Skill**: não é deste chapéu (`deploy-report-drafting` é do Validador) — este é
+o registro de governança do Gate 4 (chapéu CTO), só documentação de fechamento;
+**sem poder de veto** (ver `.claude/agents/gestor.md` e
+PIPELINE-CONVENTIONS.md §1). Input: `.md/DEPLOY.md` (Seção 5, entrada
+"2026-09-17 — Correção do bloqueio de ingestão de 8 dias + fechamento de
+Refatoração Lote-14, publicação real desta sessão"), já atualizado pelo
+Validador/orquestrador antes deste registro.
+
+Diferença deste Gate 4 em relação aos anteriores: a publicação nasceu de um
+relato direto do usuário sobre sintoma em produção ("notícias de basquete não
+entram", "tabelas desatualizadas", "páginas parecem quebradas"), investigado
+com `systematic-debugging` até causa raiz confirmada em CI real (`gh run
+list`/`gh run view`), não suposição — e incluiu, na mesma publicação, o
+fechamento formal de uma tarefa de débito documental já validada
+(`REFAT-14-01`).
+
+### Resultado
+
+**Sucesso.** Nenhum rollback, nenhum incidente na confirmação imediata
+pós-deploy.
+
+| Item | Valor |
+|---|---|
+| Ambiente | Vercel, produção real (`https://sports-lm.vercel.app`), sem staging intermediário |
+| Commit publicado | `0c4d363` ("fix(design-system): corrige quebra de linha do Prettier em tokens.css"), enviado a `origin/main` nesta sessão |
+| Confirmação | CI `build-publish` (GitHub Actions) verde neste commit (`run 35254100225`, ambos os jobs); `curl -sI https://sports-lm.vercel.app` → `200 OK`, `Server: Vercel`, `Last-Modified` batendo com o horário do push (`vercel inspect` indisponível nesta sessão — CLI sem contexto de conta configurado) |
+| Data | 2026-09-17 |
+
+### O que foi publicado
+
+1. **Correção de bug de infraestrutura**: `app/design-system/tokens.css` — uma
+   quebra de linha do Prettier fora de conformidade, introduzida no commit
+   `1afd1ff` (2026-09-10, publicado fora do fluxo formal, sem `format:check`
+   real rodado antes do push), vinha fazendo o gate `format:check` do
+   workflow `.github/workflows/ingestao.yml` falhar em **toda** execução
+   agendada desde 2026-09-10T14:00:03Z — 8 dias consecutivos sem nenhuma
+   atualização de dado (notícias de qualquer esporte, tabelas de futebol),
+   confirmado por dezenas de execuções `failure` em `gh run list` e por
+   `app/public/dados/versao.json` congelado. As "páginas quebradas"
+   relatadas pelo usuário foram investigadas com Playwright real contra
+   produção (5 telas, desktop + mobile) sem nenhum erro técnico — o sintoma
+   era só dado congelado, não regressão de código. Correção foi
+   estritamente formatação (`npx prettier --write`), sem mudança de valor.
+2. **Fechamento formal de Refatoração Lote-14** (`REFAT-14-01`) — reconciliação
+   de `.md/UX-SPEC.md` §4/§6 com a fusão do feed de notícias já publicada em
+   `UX-14-02`, já com dupla aprovação (QA Aprovado, DevSecOps Aprovado,
+   checagem estrutural limpa) antes desta publicação.
+
+### Nota de relevância estratégica — causa raiz do incidente é de processo, não de arquitetura
+
+O bloqueio de 8 dias não veio de uma falha de design do pipeline de ingestão
+nem de dado externo indisponível — veio de um push fora do fluxo formal
+(`1afd1ff`, mudança "só CSS", liberada sem rodar `format:check` real antes do
+`git push`) que quebrou silenciosamente um gate de CI que só é exercitado pela
+execução agendada de `ingestao.yml`, não pelo fluxo de deploy da SPA em si
+(`build-publish.yml` também roda `format:check`, mas isso não impede a
+publicação da SPA porque o Vercel não depende desse workflow — só o dado
+parou). Como o produto não tem alerta automático de falha de workflow (Seção
+3 de `DEPLOY.md`, já registrado como limite conhecido do "perfil de
+protótipo", ADR-015), o bloqueio só foi percebido 8 dias depois, por relato
+do usuário, não por observabilidade do sistema. Isso não é um achado novo de
+arquitetura a reabrir aqui — é reforço de um risco já conhecido e aceito
+(ADR-015): sem alerta automático de falha de CI/ingestão, qualquer push fora
+do fluxo formal que quebre silenciosamente um gate de qualidade só será
+percebido por sintoma observado pelo usuário final, com atraso proporcional à
+cadência de uso. Não gera reabertura do Gate 1 nem de nenhuma ressalva
+estratégica ativa; fica registrado para orientar prioridade futura, cuja
+decisão de sequenciamento continua sendo do Coordenador/usuário via
+`TASK.md`.
+
+### Débitos residuais conhecidos — sem veto, apenas registro
+
+- **Pendência não bloqueante já registrada pelo Validador**: a confirmação
+  empírica de que `ingestao.yml` volta a publicar dado real só vem do
+  próximo run agendado (ciclo de ~5-6h) — nenhuma execução agendada havia
+  rodado sobre `0c4d363` no momento do registro em `DEPLOY.md`. Recomendação
+  de acompanhamento (não bloqueio): checar `gh run list
+  --workflow=ingestao.yml --limit 3` para confirmar o encerramento definitivo
+  do bloqueio.
+- Débitos de baixa severidade já conhecidos e inalterados por esta
+  publicação (`SEC-12-01`, `SEC-12-02`, ressalva de verificação visual real
+  de UX-14 em dispositivo móvel) seguem como registrado em Gates 4
+  anteriores — nenhum novo achado desta publicação se soma a eles.
+- Nenhum achado desta publicação é genuinamente novo ou preocupante o
+  suficiente para reabrir o Gate 1 ou qualquer ressalva estratégica ativa.
+
+### Checklist do Gate 4
+
+- [x] `DEPLOY.md` recebido do Validador/orquestrador, com resultado sucesso/
+      rollback/incidente declarado (sucesso, publicação real disparada nesta
+      sessão)
+- [x] Commit e ambiente publicado identificados (`0c4d363`, Vercel produção)
+- [x] Lotes/mudanças incluídos nesta confirmação nomeados (correção de
+      infraestrutura de ingestão; fechamento de `REFAT-14-01`)
+- [x] Pendência não bloqueante (confirmação do próximo run agendado de
+      `ingestao.yml`) registrada como acompanhamento, sem veto
+
+### Veredito
+
+**Registrado.** Gate 4 é só fechamento — não há veredito de aprovação/
+reprovação aqui, conforme PIPELINE-CONVENTIONS.md §1 e `.claude/agents/gestor.md`.
+
+---
+
+## Adendo ao Gate 4 acima — 2026-09-17 (mesma sessão): a pendência não era só o run agendado
+
+Registrado como só "acompanhamento, sem veto" acima — mas a investigação da
+pendência achou uma causa raiz mais grave, então fica documentado aqui em vez
+de reabrir o Gate 4 inteiro (não muda o veredito "Registrado", só corrige o
+que se sabia no momento):
+
+1. **`FOOTBALL_DATA_API_TOKEN` nunca esteve cadastrado no repositório** — o
+   pipeline de ingestão sempre rodou em dry-run (`publica=false`), mesmo
+   antes do bug do Prettier. A correção de `0c4d363` só resolveu o gate de
+   formatação; nunca teria, sozinha, voltado a publicar dado real. Usuário
+   cadastrou o secret nesta sessão; disparo manual confirmou publicação real
+   (`0f19365`, `versao.json` em `2026-09-17T19:10:06Z`) — ver
+   `.md/DEPLOY.md` §5, entrada "causa raiz real era outra".
+2. **Bug de CSS real e pré-existente** (não introduzido nesta sessão) fazia
+   os blocos "PRÓXIMO JOGO"/"A BRIGA" da Home colapsarem no desktop
+   (≥1024px) — achado só depois que o usuário confirmou visualmente a
+   publicação e reportou "a tela ainda parece quebrada". Corrigido em
+   `app/rotas/paginas/Home/SecaoIdentidade.module.css`, validado (testes +
+   verificação visual contra bundle de produção real) e publicado — ver
+   `.md/DEPLOY.md` §5, entrada "bug real de CSS achado durante a
+   verificação visual pós-deploy".
+
+Nenhum dos dois achados é motivo para reabrir o Gate 1 ou qualquer ressalva
+estratégica — reforça, de novo, o risco já aceito em ADR-015 (sem alerta
+automático de falha de CI/dado ausente, o produto só descobre esse tipo de
+problema por sintoma relatado pelo usuário, com atraso). Fica como reforço de
+prioridade futura, não como bloqueio.
