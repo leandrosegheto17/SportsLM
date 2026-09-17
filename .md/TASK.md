@@ -690,9 +690,19 @@ da Home" (2026-09-09), sem reabrir o Coordenador (achado simples — ver
 `.md/QA-REPORT.md`, achado QA-14-01). Não bloqueia nenhuma outra tarefa em
 andamento.
 
+**Status do lote**: **Validado** — Validador, 2026-09-15 (chapéus QA e
+DevSecOps, `.md/QA-REPORT.md`/`.md/SECURITY-REVIEW.md`, seção "Refatoração
+Lote-14"). Tarefa única de documentação pura (só `.md/UX-SPEC.md` alterado,
+nenhum código tocado): §4/T-02 "Vazio (sem favorito)" e §6/T-02 coluna
+`< 600` reconciliadas com a narrativa "Ordem no celular" de §2/T-02, sem
+inconsistência interna remanescente no `UX-SPEC.md`. Nenhum achado em
+nenhum dos dois chapéus. Checagem estrutural: 1/1 tarefa `Concluída`,
+nenhuma dependência órfã, nenhuma tarefa `Bloqueada` — libera para
+`/deploy`.
+
 | ID | Título | Chapéu | Descrição | Critério de aceite | Dep. | Status |
 |---|---|---|---|---|---|---|
-| **REFAT-14-01** | Reconciliar `UX-SPEC.md` §4/§6 com a fusão do feed de notícias | Frontend (doc) | UX-14-02 atualizou o wireframe e a narrativa "Ordem no celular" de `.md/UX-SPEC.md` §2/T-02 para o feed único "NOTÍCIAS", mas não alcançou a tabela de Estados de T-02 (§4, linha "Vazio (sem favorito)", que ainda fala em "Seção 'SEUS ESPORTES' substituída por...") nem a tabela de Comportamento Responsivo (§6, linha "T-02 Home" / coluna `< 600`, que ainda lista "PRÓXIMO JOGO → A BRIGA → SEUS ESPORTES → ÚLTIMAS NOTÍCIAS" empilhados, sem refletir nem a fusão do feed nem o layout lado a lado já vigente desde <1024px) (QA-14-01) | §4/T-02 "Vazio (sem favorito)" descreve o banner não bloqueante sobre o feed único "NOTÍCIAS" (mesmo texto de CA-05.4 revista), não mais "substituição de seção"; §6/T-02 coluna `< 600` descreve blocos do time lado a lado (não mais empilhados) e um único feed "NOTÍCIAS" (não mais "SEUS ESPORTES"/"ÚLTIMAS NOTÍCIAS"); nenhuma mudança de código, só de documentação | UX-14-02 | Pendente |
+| **REFAT-14-01** | Reconciliar `UX-SPEC.md` §4/§6 com a fusão do feed de notícias | Frontend (doc) | UX-14-02 atualizou o wireframe e a narrativa "Ordem no celular" de `.md/UX-SPEC.md` §2/T-02 para o feed único "NOTÍCIAS", mas não alcançou a tabela de Estados de T-02 (§4, linha "Vazio (sem favorito)", que ainda fala em "Seção 'SEUS ESPORTES' substituída por...") nem a tabela de Comportamento Responsivo (§6, linha "T-02 Home" / coluna `< 600`, que ainda lista "PRÓXIMO JOGO → A BRIGA → SEUS ESPORTES → ÚLTIMAS NOTÍCIAS" empilhados, sem refletir nem a fusão do feed nem o layout lado a lado já vigente desde <1024px) (QA-14-01) | §4/T-02 "Vazio (sem favorito)" descreve o banner não bloqueante sobre o feed único "NOTÍCIAS" (mesmo texto de CA-05.4 revista), não mais "substituição de seção"; §6/T-02 coluna `< 600` descreve blocos do time lado a lado (não mais empilhados) e um único feed "NOTÍCIAS" (não mais "SEUS ESPORTES"/"ÚLTIMAS NOTÍCIAS"); nenhuma mudança de código, só de documentação | UX-14-02 | Concluída — §4/T-02 "Vazio (sem favorito)" agora descreve o banner não bloqueante sobre o feed "NOTÍCIAS" (CA-05.4 revista); §6/T-02 coluna `< 600` agora descreve PRÓXIMO JOGO/A BRIGA lado a lado e feed único "NOTÍCIAS". Só `.md/UX-SPEC.md` alterado, nenhum código tocado |
 
 **Paralelizável em Refatoração Lote-14**: tarefa única, sem paralelismo.
 

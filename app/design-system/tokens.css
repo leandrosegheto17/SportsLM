@@ -121,8 +121,8 @@
      sistema anterior por um traço mais geométrico/clean; a pilha de sistema
      permanece como fallback caso o arquivo auto-hospedado falhe em
      carregar. */
-  --fonte-sistema: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --fonte-sistema: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
   --numero-tabular: tabular-nums;
 
   --txt-camisa: 800 72px/64px;

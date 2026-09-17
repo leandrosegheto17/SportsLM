@@ -1098,7 +1098,7 @@ justificativa.
 | Estado | Texto na tela |
 |---|---|
 | Vazio (sem notícia) | "Ainda não há notícias — atualizado há 3 min." (CA-04.4) |
-| Vazio (sem favorito) | Seção "SEUS ESPORTES" substituída por: "Escolha até 3 esportes favoritos para ver o que mais te interessa aqui." + `[ ESCOLHER ESPORTES ]` (CA-05.4) |
+| Vazio (sem favorito) | Banner **não bloqueante** sobre o feed único "NOTÍCIAS" (nunca esconde o feed abaixo): "Escolha até 3 esportes favoritos para filtrar as notícias aqui." + `[ Escolher ]` (CA-05.4, revista em 2026-09-09) |
 | Vazio (favoritos sem notícia) | "Sem notícias recentes de Futebol e Vôlei — atualizado há 12 min." (CA-05.3) |
 | Vazio (sem time) | Faixa **neutra** com "SPORTSLM"; os blocos PRÓXIMO JOGO e A BRIGA são substituídos por um único bloco: "Escolha seu time para ver o painel com todos os campeonatos do ano." + `[ ESCOLHER MEU TIME ]`. As notícias sobem na tela |
 | Vazio (todas as bloqueáveis bloqueadas) | Feed segue com o GE; abaixo: "Você bloqueou 4 fontes. Estas notícias vêm do ge." (CA-02.4) |
@@ -1289,7 +1289,7 @@ Mobile-first. Pontos de quebra: **360** (base), **600** (tablet retrato), **900*
 
 | Tela | < 600 | 600-899 | ≥ 900 |
 |---|---|---|---|
-| **T-02 Home** | Coluna única: faixa (116 px) → PRÓXIMO JOGO → A BRIGA → SEUS ESPORTES → ÚLTIMAS NOTÍCIAS. Navegação em barra inferior preta fixa | Faixa 128 px; blocos do time lado a lado em 2 colunas; feed em 1 coluna; navegação no topo | Faixa 140 px em largura total; **duas colunas: fixa de 336 px** (PRÓXIMO JOGO, A BRIGA, CAMPEONATOS) **+ feed de 748 px em 2 colunas de cartão** |
+| **T-02 Home** | Coluna única: faixa (116 px) → PRÓXIMO JOGO/A BRIGA lado a lado (2 colunas, metade da altura) → feed único "NOTÍCIAS". Navegação em barra inferior preta fixa | Faixa 128 px; blocos do time lado a lado em 2 colunas; feed em 1 coluna; navegação no topo | Faixa 140 px em largura total; **duas colunas: fixa de 336 px** (PRÓXIMO JOGO, A BRIGA, CAMPEONATOS) **+ feed de 748 px em 2 colunas de cartão** |
 | T-01 Onboarding | Faixa neutra 72 px; coluna única; ação fixa no rodapé | Coluna central 560 px | Coluna central 640 px; clubes em 3 colunas |
 | T-03 Configurações | Folha de baixo, 92% da altura, cabeçalho preto fixo | Modal 560 px | Modal 640 px; esportes em 3 colunas |
 | T-04 / T-07 | Folha de baixo; lista em 1 coluna | Modal 520 px; 2 colunas | Modal 560 px; 2 colunas |

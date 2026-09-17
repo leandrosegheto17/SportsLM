@@ -3778,6 +3778,80 @@ DevSecOps.
 
 ---
 
+## Refatoração Lote-14 — validação de fechamento de débito de documentação
+
+**Base específica**: `REFAT-14-01` (`.md/TASK.md`, lote `Refatoração Lote-14`),
+`Concluída`. Origem: achado `QA-14-01` (registrado na seção "Melhoria —
+Otimização mobile da Home" acima), que apontou que UX-14-02 atualizou o
+wireframe e a narrativa "Ordem no celular" de `.md/UX-SPEC.md` §2/T-02 para o
+feed único "NOTÍCIAS", mas não alcançou a tabela de Estados de T-02 (§4, linha
+"Vazio (sem favorito)") nem a tabela de Comportamento Responsivo (§6, linha
+"T-02 Home", coluna `< 600`) — ambas ainda descreviam o layout antigo
+(seção "SEUS ESPORTES" e blocos empilhados). Tarefa de documentação pura, sem
+mudança de código.
+
+Não usei a nota de implementação do orquestrador como base de aprovação —
+conferi cada afirmação por leitura direta do arquivo e por `git diff`:
+
+- **`git diff --stat`** confirma que só dois arquivos foram tocados:
+  `.md/TASK.md` (1 linha, célula de Status de `REFAT-14-01`) e
+  `.md/UX-SPEC.md` (2 linhas, uma em §4 e uma em §6) — nenhum arquivo de
+  código-fonte, config ou teste alterado. Coerente com a natureza da tarefa
+  (documentação pura).
+- **§4/T-02 "Vazio (sem favorito)"** (linha 1101 de `UX-SPEC.md`): o texto
+  novo — "Banner **não bloqueante** sobre o feed único 'NOTÍCIAS' (nunca
+  esconde o feed abaixo): 'Escolha até 3 esportes favoritos para filtrar as
+  notícias aqui.' + `[ Escolher ]` (CA-05.4, revista em 2026-09-09)" — bate
+  literalmente com o texto de CA-05.4 revista já registrado por UX-14-02 na
+  linha 214 do próprio `.md/TASK.md` ("banner não bloqueante ... zero
+  favoritos não esconde mais nada ... `BannerAlerta` não bloqueante") e com a
+  implementação real (`BannerAlerta` em `SecaoNoticias.tsx`, confirmada na
+  nota de UX-14-02). Não há mais menção a "substituição de seção", que era o
+  comportamento antigo (pré-fusão).
+- **§6/T-02, coluna `< 600`** (linha 1292 de `UX-SPEC.md`): o texto novo —
+  "Coluna única: faixa (116 px) → PRÓXIMO JOGO/A BRIGA lado a lado (2
+  colunas, metade da altura) → feed único 'NOTÍCIAS'. Navegação em barra
+  inferior preta fixa" — bate com a narrativa "Ordem no celular" de §2/T-02
+  (linhas 206-216, já revisada por UX-14-02): "faixa do clube →
+  PRÓXIMO JOGO/A BRIGA (lado a lado) → NOTÍCIAS ... os dois blocos do time
+  ficam lado a lado (metade da altura) e as duas seções de notícia se fundem
+  num único feed 'NOTÍCIAS'". Terminologia idêntica entre §2 e §6 agora —
+  nenhuma inconsistência interna no `UX-SPEC.md`.
+- **Sem reinterpretação do critério de aceite**: o critério de aceite de
+  `REFAT-14-01` já especificava o texto-alvo quase literal para as duas
+  células; a edição aplicada corresponde a esse texto, sem adicionar,
+  remover ou reinterpretar conteúdo além do pedido.
+- **Sem necessidade de suíte automatizada**: mudança de documentação pura,
+  sem superfície testável por `vitest`/`tsc`/`eslint` — não rodei essas
+  ferramentas para esta tarefa especificamente (já confirmadas limpas no
+  ciclo anterior, "Melhoria — Otimização mobile da Home", sem regressão
+  desde então, já que nenhum código foi tocado).
+
+**Nenhum achado, nenhuma reprovação (crítica ou simples).**
+
+### Fechamento estrutural de `Refatoração Lote-14`
+
+- [x] A única tarefa (`REFAT-14-01`) está `Concluída` no `TASK.md`.
+- [x] Nenhuma dependência órfã/inconsistente: `REFAT-14-01` dependia de
+  `UX-14-02` (lote "Melhoria — Otimização mobile da Home"), já `Concluída` e
+  aprovada — satisfeita. Seção 4 do `TASK.md` ("Dependências e Ordem de
+  Execução") não referencia lotes de Refatoração individualmente (mesmo
+  padrão já observado em outros lotes de refatoração), então não há entrada
+  a atualizar ali.
+- [x] Nenhuma tarefa `Bloqueada`.
+- [x] Nenhum achado novo encontrado durante esta verificação que justifique
+  nova tarefa de refatoração.
+
+Nenhuma inconsistência que exija redesenho de dependência/decomposição — sem
+escalonamento ao Coordenador nesta rodada.
+
+**Veredito**: **Aprovado**. `Refatoração Lote-14` fechada — libera para
+auditoria do chapéu DevSecOps (mudança sem superfície de segurança, dado que
+é documentação pura, mas a auditoria segue registrada por completude do
+processo).
+
+---
+
 ## Log de Validações
 
 | Data | Lote | Veredito | Observação |
@@ -3807,3 +3881,4 @@ DevSecOps.
 | 2026-09-09 | Refatoração Lote-12 — REFAT-12-03 (fechamento da ressalva de QA-01) | Aprovado, sem ressalva | Sessão manual real de acessibilidade (UX-SPEC §5.8, os 6 itens) executada pelo orquestrador/usuário com NVDA contra o build real (`npm run build`+`preview`) — verificação estruturalmente humana, não automatizável por agente neste ambiente (mesma limitação já confirmada em REFAT-12-01/Puppeteer headless); todos os 6 itens passaram sem achado, incluindo as 4 paletas de clube × 2 temas em Home/Painel do time; pré-condição de acessibilidade manual do Gate de deploy em produção satisfeita; `Refatoração Lote-12` com as 3 tarefas (`REFAT-12-01/02/03`) `Concluída` |
 | 2026-09-09 | Melhoria — Otimização mobile da Home (UX-14-01, UX-14-02) | Aprovado (com ressalvas) | 2/2 tarefas aprovadas; layout lado a lado (<1024px) e feed único filtrável confirmados por leitura de código e de `RF-05`/`UX-SPEC §2/T-02` atualizados; 98 arquivos/1135 testes, `tsc`/`eslint` limpos, sem regressão; 1 achado simples (QA-14-01, tabelas de Estados/Responsivo de `UX-SPEC.md` §4/§6 não reconciliadas com a fusão do feed) virou `REFAT-14-01` em `Refatoração Lote-14`, sem reabrir tarefa nem Coordenador; 1 ressalva não bloqueante (verificação visual real de chips/densidade em 320-360px, não executável neste ambiente headless — mesmo padrão de REFAT-12-03), registrada como pré-condição do próximo `/deploy`; libera para auditoria do chapéu DevSecOps |
 | 2026-09-09 | Melhoria — Faixa do clube consistente em Meu Time e Comparativo (UX-15-01, UX-15-02) | Aprovado | 2/2 tarefas aprovadas, validadas sobre o working tree não commitado desta sessão; `FaixaClube` variante `completa` confirmada idêntica (mesmo shape de dado, mesma altura via CSS único) nas 3 telas (Home/T-02, Painel/T-05, Comparativo/T-08), diferindo só por `href` (só a Home linka); em `Comparativo.tsx`, faixa confirmada presente nos 7 estados "com time" (preenchido, carregando, erro, zero rival, CA-09.5, CA-09.6) e ausente em CA-14.3, por leitura direta de código, não da nota do Executor; 98 arquivos/1135 testes, `tsc`/`eslint` limpos, sem regressão; sem inconsistência visual/comportamental entre as 3 telas; 2 achados simples de documentação/narração (QA-15-01, nome de componente `CartaoIngresso` incorreto no critério de aceite de UX-15-02 — o elemento real é uma `div` inline; QA-15-02, contagem "9 pré-existentes + 6 novos" de `Comparativo.test.tsx` incorreta, real é 12+3=15), nenhum vira tarefa de refatoração (achado informativo, sem débito de código); libera para auditoria do chapéu DevSecOps |
+| 2026-09-15 | Refatoração Lote-14 (débito de documentação) | Aprovado | 1/1 tarefa aprovada (REFAT-14-01); `git diff --stat` confirma só `.md/UX-SPEC.md`/`.md/TASK.md` tocados, nenhum código; §4/T-02 "Vazio (sem favorito)" e §6/T-02 coluna `< 600` confirmadas reconciliadas com a narrativa "Ordem no celular" de §2/T-02 (mesma terminologia, sem inconsistência interna no `UX-SPEC.md`); sem necessidade de suíte automatizada (doc pura); fechamento estrutural confirmado, sem nova tarefa; libera para auditoria do chapéu DevSecOps |

@@ -2150,6 +2150,46 @@ alegação), portanto sem navegação nova; `FaixaClube` sem `href` nunca foi
 novo, `npm audit` sem vulnerabilidade. Libera para dupla aprovação (QA +
 DevSecOps) e para o próximo `/deploy` quanto a este lote.
 
+## Refatoração Lote-14 — validação de fechamento de débito de documentação (chapéu DevSecOps)
+
+**Base específica**: `REFAT-14-01` (reconciliação de `.md/UX-SPEC.md` §4/§6
+com a fusão do feed de notícias de UX-14-02), aprovado funcionalmente pelo
+chapéu QA em `.md/QA-REPORT.md`, seção "Refatoração Lote-14 — validação de
+fechamento de débito de documentação" (veredito **Aprovado**). Auditoria
+feita depois dessa aprovação funcional, conforme a regra de sincronização
+QA→DevSecOps.
+
+Confirmação rápida de que não há superfície de auditoria nesta tarefa —
+verificada por mim, não assumida pela descrição da tarefa:
+
+- `git diff --stat -- .md/UX-SPEC.md .md/TASK.md` confirma 2 arquivos, 3
+  linhas alteradas no total (1 em `TASK.md`, 2 em `UX-SPEC.md`) — nenhum
+  arquivo de código-fonte (`app/`, `pipeline/`, `dominio/`, `config/`),
+  workflow (`.github/workflows/`) ou dependência (`package.json`/
+  `package-lock.json`) tocado.
+- Conteúdo das duas células alteradas é só texto descritivo de UI (nome de
+  componente visual, ordem de blocos, texto de banner) — nenhum valor que se
+  pareça com segredo, token, URL de endpoint novo, ou dado pessoal.
+- `npm audit --omit=dev --audit-level=high` (executado por mim, do zero):
+  **0 vulnerabilidades**. Sem regressão em relação ao ciclo anterior
+  ("Melhoria — Otimização mobile da Home"), já que `package.json` está
+  inalterado.
+- Nenhum requisito de segurança operacional novo para o chapéu DevOps —
+  lote sem qualquer mudança de infraestrutura/pipeline.
+- Nenhum achado de relevância estratégica a sinalizar ao Gestor.
+
+### Achados por severidade — Refatoração Lote-14
+
+| Severidade | Achado | Bloqueia deploy? | Ação |
+|---|---|---|---|
+| — | Nenhum achado | — | — |
+
+## Veredito — Refatoração Lote-14
+
+**Aprovado, sem achado.** Mudança de documentação pura, sem superfície de
+segredo, rede, armazenamento, dependência ou compliance. Libera para dupla
+aprovação (QA + DevSecOps) e para o próximo `/deploy` quanto a este lote.
+
 | Data | Lote | Veredito | Observação |
 |---|---|---|---|
 | 2026-09-06 | Lote 1 — Fundação técnica | Aprovado com débito registrado | 2 achados de severidade média, sem bloqueio; nenhum achado alto/crítico |
@@ -2173,3 +2213,4 @@ DevSecOps) e para o próximo `/deploy` quanto a este lote.
 | 2026-09-08 | Lote 12 — Telemetria, acessibilidade e segurança transversal | Aprovado (com débito registrado) | TEL-01: identificador anônimo sem PII, 5 eventos sem conteúdo/preferência (relidos por inteiro), `VITE_TELEMETRIA` desligado por padrão (nenhum workflow define a variável, `.env*` gitignorado), eliminação do bundle provada por build real; SEC-01: CSP completa lida em `app/index.html`, `dangerouslySetInnerHTML` ausente do uso real (grep próprio), `rel="noopener noreferrer"` confirmado no único ponto de saída externa (`CartaoIngresso`), teste de injeção XSS de ponta a ponta com DOM real executado; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; achados novos de baixa severidade `SEC-12-01` (`style-src 'unsafe-inline'`, aceito, débito de hardening) e `SEC-12-02` (rótulo "Desativar e apagar id" impreciso, débito de copy); achado de severidade média `SEC-12-03` (sessão manual real de acessibilidade pendente, WCAG 2.2 AA é critério de aceite não-negociável do GUARDRAILS e liga expectativa legal condicional do ADR-014) **bloqueia o próximo `/deploy` real**, somando-se ao débito já vigente `SEC-11-01`/`REFAT-01-03` (react-router) |
 | 2026-09-09 | Melhoria — Otimização mobile da Home (UX-14-01, UX-14-02) | Aprovado, sem achado bloqueante | Mudança puramente de composição/CSS: layout lado a lado de `SecaoIdentidade` (CSS `flex`, sem lógica nova) e fusão de `SecaoSeusEsportes`+`SecaoUltimasNoticias` em `SecaoNoticias` (mesmo `CartaoIngresso`/`montarFeedNoticias`, nenhum dos dois módulos alterado desde o Lote 7/8 — `git log` confirma); `rel="noopener noreferrer"`/`target="_blank"` inalterados (ponto único de saída externa, não tocado); `dangerouslySetInnerHTML` ausente, reconfirmado pelo teste de varredura repo-wide `sec-01-sanitizacao-csp.test.tsx` já cobrindo o arquivo novo; corte de 30 movido para depois do filtro por chip é reordenação de UI sobre o mesmo conjunto já deduplicado/pós-bloqueio, sem nova exposição; nenhuma superfície de rede/armazenamento nova (mesmos `/dados/noticias.json`/`/dados/ingestao/status.json`, mesmo `useSnapshot`); nenhum dado pessoal novo; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; libera para dupla aprovação (QA + DevSecOps) e `/deploy` quanto a este lote |
 | 2026-09-09 | Melhoria — Faixa do clube consistente em Meu Time e Comparativo (UX-15-01, UX-15-02) | Aprovado, sem achado bloqueante | Mudança puramente de composição de UI reusando `FaixaClube` já auditado (UI-DS-01, Lote 7), intocado por este lote (`git log` mostra só o commit original); `PainelTime.tsx` sem mudança de código de produção (só teste novo); `Comparativo.tsx` monta `clubeParaFaixa`/`posicao`/`pontos` com o mesmo shape e mesma fonte (`useClubesPublicos`, `brasileiraoPublicoSchema` via `useSnapshot`) já usados por `Home`/`PainelTime`, sem `href` (confirmado por `grep`, nenhum uso real da prop no arquivo) e portanto sem navegação nova (`FaixaClube` sem `href` renderiza `<div role="group">`, não `<Link>`); nenhum `dangerouslySetInnerHTML`; nenhuma superfície nova de rede/armazenamento (mesmos dois endpoints já buscados pela própria tela para outros fins); nenhum dado pessoal novo (mesmos campos de `ClubePublico`/classificação pública já avaliados nos Lotes 7/10/11); `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; os 2 achados do chapéu QA (QA-15-01, QA-15-02) são de documentação/narração, sem implicação de segurança; libera para dupla aprovação (QA + DevSecOps) e `/deploy` quanto a este lote |
+| 2026-09-15 | Refatoração Lote-14 (débito de documentação) | Aprovado, sem achado | `REFAT-14-01` confirmada como mudança puramente de texto em `.md/UX-SPEC.md` (2 células, §4 e §6), sem código-fonte/workflow/dependência tocados (`git diff --stat` confirmado); nenhum segredo/dado pessoal nas células alteradas; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; nenhum requisito operacional novo para o chapéu DevOps; libera para dupla aprovação (QA + DevSecOps) e `/deploy` quanto a este lote |
