@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-17T20:28:45.747Z"
+      "ultimaAtualizacao": "2026-09-17T22:59:53.081Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -642,7 +642,7 @@
         "inicio": "2026-01-14",
         "fim": "2026-03-22"
       },
-      "provedor": null,
+      "provedor": "thesportsdb",
       "ultimaAtualizacao": null
     },
     "participacao": {
