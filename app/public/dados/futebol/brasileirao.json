@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-18T15:39:24.420Z"
+    "ultimaAtualizacao": "2026-09-18T18:49:10.622Z"
   },
   "classificacao": [
     {
@@ -3519,38 +3519,12 @@
       }
     },
     {
-      "id": "554940",
-      "competicaoId": "brasileirao-serie-a",
-      "rodada": 21,
-      "fase": null,
-      "mandanteId": "atletico-mg",
-      "visitanteId": "rb-bragantino",
-      "dataHora": "2026-07-29T00:00:00Z",
-      "horarioDefinido": false,
-      "estadio": null,
-      "status": "adiada",
-      "placar": null
-    },
-    {
       "id": "554942",
       "competicaoId": "brasileirao-serie-a",
       "rodada": 21,
       "fase": null,
       "mandanteId": "chapecoense",
       "visitanteId": "vasco",
-      "dataHora": "2026-07-29T00:00:00Z",
-      "horarioDefinido": false,
-      "estadio": null,
-      "status": "adiada",
-      "placar": null
-    },
-    {
-      "id": "554948",
-      "competicaoId": "brasileirao-serie-a",
-      "rodada": 21,
-      "fase": null,
-      "mandanteId": "sao-paulo",
-      "visitanteId": "santos",
       "dataHora": "2026-07-29T00:00:00Z",
       "horarioDefinido": false,
       "estadio": null,
@@ -4770,6 +4744,32 @@
       "mandanteId": "athletico-pr",
       "visitanteId": "bahia",
       "dataHora": "2026-09-20T22:30:00Z",
+      "horarioDefinido": true,
+      "estadio": null,
+      "status": "agendada",
+      "placar": null
+    },
+    {
+      "id": "554948",
+      "competicaoId": "brasileirao-serie-a",
+      "rodada": 21,
+      "fase": null,
+      "mandanteId": "sao-paulo",
+      "visitanteId": "santos",
+      "dataHora": "2026-10-02T23:00:00Z",
+      "horarioDefinido": true,
+      "estadio": null,
+      "status": "agendada",
+      "placar": null
+    },
+    {
+      "id": "554940",
+      "competicaoId": "brasileirao-serie-a",
+      "rodada": 21,
+      "fase": null,
+      "mandanteId": "atletico-mg",
+      "visitanteId": "rb-bragantino",
+      "dataHora": "2026-10-03T21:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
       "status": "agendada",
