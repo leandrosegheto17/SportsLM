@@ -882,8 +882,10 @@ reabrir o Lote 16 nem o Coordenador (achados simples/débito baixo — ver
 `.md/QA-REPORT.md`, seção "Lote 16", QA-16-01 a QA-16-03, e
 `.md/SECURITY-REVIEW.md`, seção "Lote 16", SEC-16-01 e SEC-16-02).
 
-**Status do lote**: **Fechado** — REFAT-16-01 a -05 concluídas (2026-09-18). REFAT-16-01 é
-pré-requisito do `/deploy` do Lote 16.
+**Status do lote**: **Validado com ressalvas** — REFAT-16-01 a -05 concluídas (2026-09-18) e
+aprovadas por QA e DevSecOps (`.md/QA-REPORT.md` e `.md/SECURITY-REVIEW.md`, seções
+"Refatoração Lote-16"). REFAT-16-01 é pré-requisito do `/deploy` do Lote 16 (atendido).
+Débito não bloqueante agendado em REFAT-16-06 (`npm audit` completo, só devDependencies).
 
 | ID | Título | Chapéu | Descrição | Critério de aceite | Dep. | Prazo | Status |
 |---|---|---|---|---|---|---|---|
@@ -892,6 +894,7 @@ pré-requisito do `/deploy` do Lote 16.
 | **REFAT-16-03** | Rodar `prettier --write` nos arquivos do Lote 16 (QA-16-03) | Backend/Frontend (formatação) | `format:check` acusa 58 arquivos, 42 tocados pelo Lote 16. Só formatação, sem mudança de comportamento | `npm run format:check` limpo; testes e `tsc` inalterados | — | 1 dia | Concluída |
 | **REFAT-16-04** | Corrigir a regex de `normalizarPorTimestamp` (SEC-16-01) | Backend | `pipeline/futebol/adaptador-thesportsdb.ts`: a regex `/^(d{4}-d{2}-d{2})T(d{2}:d{2}:d{2})/` está sem a barra invertida (`\d`), então nunca casa e `strTimestamp` (UTC) nunca é usado, contra o comentário de SPK-08. Severidade baixa (integridade de dado, não exposição) | Regex com `\d`; teste com `strTimestamp` UTC diferente de `dateEvent`/`strTime` locais comprova a preferência pelo UTC; testes existentes verdes | — | 5 dias (junto de REFAT-16-02, mesmo arquivo) | Concluída |
 | **REFAT-16-05** | Não propagar trecho do corpo do provedor em `mensagemErro` (SEC-16-02) | Backend | `JSON.parse(texto)`/`.json()` lançam `SyntaxError` com trecho do corpo, e `ZodError` de `.parse()` vai a `mensagemDeErro` (`coletor-futebol.ts`) sem filtro. O comentário do `erroHttp` promete "nunca inclui o corpo". Severidade baixa | Falha de parse/validação do provedor vira mensagem estática (ex.: "TheSportsDB respondeu corpo inválido, liga X"); teste com corpo HTML garante que o trecho não aparece na mensagem/status | — | 5 dias | Concluída |
+| **REFAT-16-06** | Atualizar vite/vitest e cadeia esbuild (DEBT-DEV-DEPS, `SECURITY-REVIEW.md` seção "Refatoração Lote-16") | Backend/Frontend (dependências) | `npm audit` completo aponta 7 vulnerabilidades (2 baixas, 3 moderadas, 1 alta, 1 crítica), todas na cadeia vite/vitest/esbuild de devDependencies; `npm audit --omit=dev` está em 0. Não entram no build de produção. Requer atualização de versão major | `npm audit` sem alta/crítica; `typecheck`, `lint`, `format:check`, `test` e `build` limpos com as versões novas; nenhuma mudança de comportamento | — | 30 dias a partir de 2026-09-18 (não bloqueia o deploy) | Pendente |
 
 **Paralelizável em Refatoração Lote-16**: REFAT-16-01 e REFAT-16-03 são independentes; REFAT-16-02, -04 e -05 tocam `adaptador-thesportsdb.ts`/`coletor-futebol.ts` — sequenciar para evitar conflito de merge; REFAT-16-03 por último (formatação depois das demais).
 

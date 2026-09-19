@@ -2262,3 +2262,42 @@ Nenhum achado alto/crítico. Nenhum compliance obrigatório em aberto. Sem relev
 | Data | Lote | Veredito | Observação |
 |---|---|---|---|
 | 2026-09-18 | Lote 16 — Cobertura completa de ligas | Aprovado com débito registrado | Chave só a pública `123`, nada logado; resposta externa validada por Zod (corpo vazio, `externo-`, nome sem `<>`); espaçador 28/min, 2,2 s; 0 dependências novas, `npm audit` 0; 2 achados baixos (SEC-16-01, SEC-16-02) em `Refatoração Lote-16` |
+
+
+## Refatoração Lote-16 (REFAT-16-01 a -05) — auditoria DevSecOps, 2026-09-18
+
+Pré-condição: QA aprovou o lote (QA-REPORT.md, seção 'Refatoração Lote-16').
+
+### 1. Fechamento dos achados anteriores
+- **SEC-16-01 (fechado):** `adaptador-thesportsdb.ts:166` usa `/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})/`. A regex é ancorada, com quantificadores fixos, sem backtracking (sem ReDoS).
+- **SEC-16-02 (fechado):** `semVazarCorpo` (l. 528-537) envolve os dois `.json()`/`parse` (l. 570 e 597). `SyntaxError` e `ZodError` viram a mensagem estática "TheSportsDB respondeu corpo inválido (contexto)". `erroHttp` não inclui corpo; `Retry-After` só entra se for `^\d+$`. `mensagemDeErro` do coletor agora só recebe mensagens estáticas ou de HTTP. O contexto contém apenas `idLigaProvedor`, que é configuração interna.
+
+### 2. REFAT-16-02 (`tabelaSemDados`)
+- O orquestrador só liga o flag quando `provedor === PROVEDOR_ACUMULA`, `classificacao.linhas.length === 0` e `partidasLote.length > 0`.
+- Em `verificacao-consistencia.ts:122` o flag só afrouxa o ramo `numero-de-clubes-incorreto`, e só com `linhas` vazio. As demais verificações (partidas, clube fora da configuração, duplicidade etc.) continuam valendo. Não há como usá-lo para passar linhas inválidas.
+- Sem exposição de dado: nenhum dado novo é publicado, apenas a tabela "sem dados". Risco residual (aceito, decisão de negócio do Bloqueio 013 opção a): uma tabela vazia do provedor não descarta o lote. É integridade/disponibilidade, não segurança.
+
+### 3. Segredos e logs
+- Só a chave pública `123` (constante `BASE_URL_THESPORTSDB`); nenhum secret novo. Não há `console.*` novo no lote. O único `console.warn` (orquestrador l. 664) é o de estado local inválido, anterior ao lote e sem dado do provedor. Nada sensível em `status.json`.
+
+### 4. Dependências
+- `package.json` e `package-lock.json` sem mudança no lote. `npm audit --omit=dev`: 0 vulnerabilidades.
+- `npm audit` completo: 7 (2 baixas, 3 moderadas, 1 alta, 1 crítica), todas em cadeia de dev/teste (vite/vitest/esbuild), fora do build de produção e sem exposição em runtime. Não é regressão deste lote. Recomenda-se o débito **DEBT-DEV-DEPS**: atualizar vite/vitest (major) em janela própria, prazo 30 dias. Não bloqueia (ferramenta de dev não é publicada).
+
+### 5. Compliance/LGPD
+- Dados públicos de competição; nenhum dado pessoal; nenhuma mudança.
+
+### Achados
+
+| ID | Sev. | Descrição | Destino |
+|---|---|---|---|
+| SEC-16-01 | - | Fechado | - |
+| SEC-16-02 | - | Fechado | - |
+| DEBT-DEV-DEPS | Baixa (dev-only; nominalmente alta/crítica no audit completo, sem alcance em produção) | Vulnerabilidades em vite/esbuild de devDependencies | Tarefa em Refatoração (30 dias), sugerida ao Gestor/Validador; TASK.md não editado |
+| Informativo | - | `tabelaSemDados` mascara tabela vazia por decisão de negócio | - |
+
+Nenhum achado alto/crítico em código de produção. Nenhum compliance obrigatório em aberto. Sem relevância estratégica. Sem requisito operacional novo para DevOps.
+
+### Veredito — Refatoração Lote-16
+
+**Aprovado** (com o débito dev-only acima). Dupla aprovação (QA + DevSecOps) presente para o lote.

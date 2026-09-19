@@ -3942,3 +3942,47 @@ Nenhuma reprovação Crítica. Nenhuma tarefa volta para `Em andamento`.
 | Data | Lote | Veredito | Resumo |
 |---|---|---|---|
 | 2026-09-18 | Lote 16 — Cobertura completa de ligas | Aprovado (com ressalvas) | 43/43 tarefas aprovadas; 112 arquivos/1388 testes, `tsc` e `eslint` limpos; `format:check` com 58 arquivos fora do padrão; 3 achados simples (QA-16-01 a 03) para `Refatoração Lote-16`; 0 críticos |
+
+## Refatoração Lote-16 (validação QA, 2026-09-18)
+
+Escopo: REFAT-16-01 a REFAT-16-05, commits `cffefea` (-01, -02, -04, -05) e `0ec3238` (-03). Origem: QA-16-01..03 e SEC-16-01/02. Nenhum código alterado nesta validação; `TASK.md` não editado.
+
+### Resultados de execução
+
+| Comando | Resultado |
+|---|---|
+| `npm run typecheck` | limpo, 0 erros |
+| `npm run lint` | limpo, 0 avisos |
+| `npm run format:check` | limpo ("All matched files use Prettier code style") |
+| `npm run test` | 112 arquivos / 1396 testes, todos passando (40 s); antes eram 1388 |
+
+### Validação por tarefa
+
+- REFAT-16-01 (QA-16-01): aprovada. `rb-bragantino` está em `paulista.clubes` (`config/campeonatos-2026.json:71`, com corinthians/mirassol/palmeiras/santos/sao-paulo); `config/campeonatos.test.ts` cobre e passa; a integração COB-31 não descarta mais o lote do Paulista.
+- REFAT-16-02 (QA-16-02): aprovada. Segue o Bloqueio 013, opção (a). `orquestrador.ts:502-507` passa `tabelaSemDados: true` só quando a liga é do provedor que acumula, `linhas.length === 0` e há partidas; `verificacao-consistencia.ts:122` aceita só linhas vazias (não relaxa tabela não vazia). Integração (Carioca): `atualizada`, `linhas` vazias, partidas publicadas, `tabelaParcial` indefinido, `ultimaAtualizacao` não nulo. Sem descarte e sem `tabelaParcial` com zero linhas (I-32). Testes unitários cobrem os dois lados.
+- REFAT-16-03 (QA-16-03): aprovada. `format:check` limpo; testes e `tsc` sem regressão.
+- REFAT-16-04 (SEC-16-01): aprovada. `adaptador-thesportsdb.ts:166` usa `/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})/`. Teste com `strTimestamp` UTC (2026-09-04T00:00) diferente de `dateEvent`/`strTime` locais (2026-09-03 21:00) comprova o uso do UTC.
+- REFAT-16-05 (SEC-16-02): aprovada. `adaptador-thesportsdb.ts:526-533` converte `SyntaxError`/`ZodError` em `TheSportsDB respondeu corpo inválido (<contexto>)`. Testes com corpo HTML (classificação e partidas) e JSON fora do schema garantem que "SEGREDO-DO-CORPO" não aparece. `mensagemDeErro` do coletor repassa só `erro.message`, que agora é estático.
+
+### Integração cruzada e não funcionais
+
+- `cobertura-ligas.integracao.test.ts` (COB-31) passa com o caso Carioca atualizado; Paulista sem descarte.
+- Brasileirão inalterado (o caminho de `tabelaSemDados` exige o provedor que acumula).
+- Sem vazamento de corpo do provedor em mensagem/status; limite de taxa e tamanho de snapshot cobertos pelos testes existentes, verdes.
+- Ressalva de observação (não é achado): `mensagemDeErro` do coletor não filtra mensagens de outros adaptadores; hoje só o TheSportsDB passa por esse caminho e ele já sanitiza.
+
+### Achados
+
+Nenhum. Zero reprovações Críticas, zero Simples. Nenhuma tarefa volta para `Em andamento`.
+
+### Fechamento estrutural
+
+As 5 tarefas estão `Concluída`, sem dependência órfã, sem tarefa `Bloqueada`. Nenhuma escalação ao Coordenador.
+
+### Veredito
+
+**Aprovado.** REFAT-16-01 a -05 aprovadas. O pré-requisito QA do `/deploy` do Lote 16 (REFAT-16-01) está atendido. Falta apenas a dupla aprovação do chapéu DevSecOps, conforme o fluxo.
+
+| Data | Lote | Veredito | Resumo |
+|---|---|---|---|
+| 2026-09-18 | Refatoração Lote-16 | Aprovado | 5/5 aprovadas; 112 arquivos/1396 testes, `tsc`, `eslint` e `format:check` limpos; 0 achados |
