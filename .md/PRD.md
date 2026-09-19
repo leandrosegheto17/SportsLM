@@ -330,7 +330,7 @@ futuras).
 havia sido apenas "Sim").
 Interpretação conservadora **I-32** adotada: se o TheSportsDB gratuito não cobrir bem
 Libertadores/Sul-Americana, **assume-se a lacuna** (estado honesto), sem fonte paga,
-sem cadastro e sem API alternativa neste recorte. Confirmar com o usuário.
+sem cadastro e sem API alternativa neste recorte.
 
 ---
 
