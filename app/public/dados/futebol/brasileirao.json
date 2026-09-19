@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-19T17:41:49.453Z"
+    "ultimaAtualizacao": "2026-09-19T19:54:55.990Z"
   },
   "classificacao": [
     {
@@ -114,14 +114,14 @@
       "posicao": 7,
       "clubeId": "atletico-mg",
       "pontos": 39,
-      "jogos": 26,
+      "jogos": 27,
       "v": 11,
       "e": 6,
-      "d": 9,
+      "d": 10,
       "gp": 35,
-      "gc": 31,
-      "sg": 4,
-      "aproveitamento": 50,
+      "gc": 32,
+      "sg": 3,
+      "aproveitamento": 48.148148148148145,
       "ultimosCinco": []
     },
     {
@@ -321,15 +321,15 @@
       "grupo": "Matchday",
       "posicao": 20,
       "clubeId": "chapecoense",
-      "pontos": 17,
-      "jogos": 26,
-      "v": 3,
+      "pontos": 20,
+      "jogos": 27,
+      "v": 4,
       "e": 8,
       "d": 15,
-      "gp": 28,
+      "gp": 29,
       "gc": 52,
-      "sg": -24,
-      "aproveitamento": 21.794871794871796,
+      "sg": -23,
+      "aproveitamento": 24.691358024691358,
       "ultimosCinco": []
     }
   ],
@@ -4629,7 +4629,7 @@
       "dataHora": "2026-09-19T19:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
