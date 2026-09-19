@@ -95,13 +95,11 @@ const FONTES_FIXTURE: Fonte[] = [
   fonteFixture('gazeta-esportiva', 'Gazeta Esportiva'),
   fonteFixture('terra-esportes', 'Terra Esportes'),
   fonteFixture('uol-esporte', 'UOL Esporte'),
-  fonteFixture('ogol', 'ogol.com.br'),
   fonteFixture('superesportes', 'Superesportes'),
   fonteFixture('f1mania', 'F1Mania.net'),
   fonteFixture('motorsport-brasil', 'Motorsport.com Brasil'),
   fonteFixture('estadao-esportes', 'Estadão Esportes'),
   fonteFixture('r7-esporte', 'R7 Esporte'),
-  fonteFixture('torcedores', 'Torcedores.com'),
 ];
 
 function itemFixture(
@@ -607,8 +605,8 @@ describe('gerarSnapshotsEmDisco — contrato completo em disco (config real)', (
       expect(existsSync(join(dirSaida, ...caminho.split('/')))).toBe(true);
     }
 
-    // RN-19 (12 fontes) e RN-04 (20 clubes) confirmados a partir da config real.
-    expect(snapshots.catalogoFontes).toHaveLength(12);
+    // RN-19 (10 fontes) e RN-04 (20 clubes) confirmados a partir da config real.
+    expect(snapshots.catalogoFontes).toHaveLength(10);
     expect(snapshots.configClubes).toHaveLength(20);
 
     // CA-18.2: sem `config/zonas-2026.json` real publicado, nada é gerado.

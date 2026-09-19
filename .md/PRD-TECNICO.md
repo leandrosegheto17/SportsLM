@@ -738,8 +738,9 @@ Excluídos com motivo: handebol, boxe, ciclismo, e-sports (sem evidência acima 
 - EXCEPTION: deduplicação não é ranking.
 
 **RN-19 — Critério de confiabilidade e composição do catálogo [R3]** (RF-01)
-- RULE: O catálogo tem exatamente **12 fontes** (5 → 7 em 2026-09-08 → 12 em
-  2026-09-09, decisões diretas do stakeholder — `.md/BLOCKERS.md` Bloqueios
+- RULE: O catálogo tem exatamente **10 fontes** (5 → 7 em 2026-09-08 → 12 em
+  2026-09-09 → 10 em 2026-09-19, após a avaliação formal REFAT-17-01
+  (`.md/AVALIACAO-FONTES-RN19.md`) remover `ogol` e `torcedores`; decisões diretas do stakeholder — `.md/BLOCKERS.md` Bloqueios
   011/012). Além do GE (fixo), uma fonte só é elegível se atender **todos** os
   critérios: (1) redação profissional com responsabilidade editorial
   identificável (empresa jornalística estabelecida, não blog/agregador/

@@ -879,7 +879,17 @@
 - Status: Resolvido (causa raiz corrigida, fontes adicionadas, todos os
   portões de qualidade confirmados limpos — ver `.md/TASK.md`, tarefa
   correspondente). Pendência de avaliação formal do Coordenador (critérios
-  1/2/5 dos novos candidatos) permanece **aberta, não bloqueante**.
+  1/2/5 dos novos candidatos): **Resolvida (2026-09-19, REFAT-17-01)** — registro
+  em `.md/AVALIACAO-FONTES-RN19.md`. Fontes `não conforme` (fora a exceção aceita
+  do critério 2 de `f1mania`/`motorsport-brasil`): **`torcedores`** (critério 2:
+  só 2 esportes; critério 5: seção "Dicas de apostas", operada pela Better
+  Collective) e **`ogol`** (critério 2: só futebol; decisão do stakeholder pode
+  aceitá-la como exceção, análoga à de F1). Ressalvas: `superesportes` (seção
+  "Apostas" de afiliados; 6 esportes) e `ogol` (banners/odds de apostas).
+  Critério 5 `não verificável` (domínio inacessível à ferramenta) para
+  `motorsport-brasil`, `estadao-esportes` e `r7-esporte`: verificação manual
+  pendente, não bloqueante. Ativa REFAT-17-02 para `torcedores` e `ogol`
+  (aguarda decisão do stakeholder sobre remover ou aceitar).
 
 ## Bloqueio 013 — 2026-09-18
 - Reportado por: validador (checagem estrutural do Lote 16, QA-16-02)

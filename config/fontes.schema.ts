@@ -58,11 +58,13 @@ export const fonteSchema = z.object({
 
 export type Fonte = z.infer<typeof fonteSchema>;
 
-// RN-19: o catálogo de notícias tem exatamente 12 fontes (decisão direta do
+// RN-19: o catálogo de notícias tem exatamente 10 fontes (decisão direta do
 // stakeholder, 2026-09-08/09 — ver `.md/BLOCKERS.md` Bloqueios 011/012 e nota
 // de atualização em `.md/adr/007-catalogo-de-fontes-como-configuracao-verificada.md`;
 // regra original previa 5, fixas desde o ADR-007; ampliada para 7 e depois
-// para 12 em buscas sucessivas por mais cobertura de F1/basquete/futebol).
-export const catalogoFontesSchema = z.array(fonteSchema).length(12);
+// para 12 em buscas sucessivas por mais cobertura de F1/basquete/futebol; reduzida
+// a 10 em 2026-09-19 pela REFAT-17-02, removidas `ogol` e `torcedores` na avaliação
+// formal da RN-19, `.md/AVALIACAO-FONTES-RN19.md`).
+export const catalogoFontesSchema = z.array(fonteSchema).length(10);
 
 export type CatalogoFontes = z.infer<typeof catalogoFontesSchema>;
