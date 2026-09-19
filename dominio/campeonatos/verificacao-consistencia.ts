@@ -56,6 +56,10 @@ export interface EntradaVerificacaoConsistencia {
    * `pontos-corridos`/`grupos` aceita menos linhas que clubes, mantendo as
    * demais verificações. Ausente/false → comportamento anterior. */
   readonly tabelaParcial?: boolean;
+  /** Provedor sem nenhuma linha de tabela mas com partidas (REFAT-16-02, I-28,
+   * Bloqueio 013 opção a): a tabela vazia não descarta o lote — as partidas são
+   * publicadas e a tabela fica "sem dados" (I-32). Só vale com `linhas` vazio. */
+  readonly tabelaSemDados?: boolean;
 }
 
 export interface ResultadoVerificacaoConsistencia {
@@ -115,6 +119,8 @@ export function verificarConsistenciaCompeticao(
           motivos.push('clube-fora-da-configuracao');
         }
       }
+    } else if (entrada.tabelaSemDados === true && entrada.linhas.length === 0) {
+      // Tabela vazia com partidas: nada a checar na tabela (REFAT-16-02).
     } else if (entrada.linhas.length !== entrada.numeroClubesEsperado) {
       motivos.push('numero-de-clubes-incorreto');
     }

@@ -883,3 +883,31 @@
   portões de qualidade confirmados limpos — ver `.md/TASK.md`, tarefa
   correspondente). Pendência de avaliação formal do Coordenador (critérios
   1/2/5 dos novos candidatos) permanece **aberta, não bloqueante**.
+
+## Bloqueio 013 — 2026-09-18
+- Reportado por: validador (checagem estrutural do Lote 16, QA-16-02)
+- Escalado para: gestor (com ciência do coordenador)
+- Artefato/trecho afetado: `.md/PRD-TECNICO.md` I-28 ("Cobertura completa");
+  `pipeline/futebol` (COB-13/COB-20); tarefa `REFAT-16-02` em `.md/TASK.md`
+- Descrição: liga de formato `grupos` com `lookuptable` vazio e partidas
+  disponíveis é descartada inteira (`numero-de-clubes-incorreto`, lacuna G2 do
+  COB-31), perdendo as partidas. I-28 hoje mede 83,6% dos pares com lote aceito
+  e 37,0% com partida ou linha real. Falta definir a política de negócio para
+  esse caso.
+- Decisão necessária: qual é o comportamento correto quando a tabela vem vazia?
+  (a) publicar só as partidas e marcar a tabela como "sem dados" honesto (I-32);
+  (b) tratar como `tabelaParcial: true` (ADR-024) com zero linhas;
+  (c) outra política definida pelo Gestor. Confirmar também se a meta de I-28
+  (≥ 80% dos pares com dado real) continua sendo o critério de aceite.
+- Impacto se não resolvido: `REFAT-16-02` não pode ser implementada. Não bloqueia
+  o `/deploy` do Lote 16 (só REFAT-16-01 bloqueia); as partidas dessas ligas
+  seguem não publicadas.
+- Sugestão: opção (a), pois evita publicar tabela vazia como se fosse parcial e
+  é a mais simples de testar.
+- Decisão (2026-09-18, usuário): opção (a). Liga de `grupos` com `lookuptable`
+  vazio e partidas disponíveis publica só as partidas e marca a tabela como
+  "sem dados" honesto (I-32); nunca descarta o lote nem usa `tabelaParcial` com
+  zero linhas. A meta de I-28 (≥ 80% dos pares com dado real) é mantida como
+  critério de aceite, sem alteração no PRD-TECNICO.
+- Status: Resolvido (decisão tomada; implementação em `REFAT-16-02`, agora
+  desbloqueada).

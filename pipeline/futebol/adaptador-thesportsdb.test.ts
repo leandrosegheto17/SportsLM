@@ -731,7 +731,12 @@ describe('criarAdaptadorTheSportsDB - espaçador e custo (COB-11)', () => {
     await ad.obterPartidas(refPaulista('sempre'));
     await ad.obterClassificacao(refPaulista('sempre'));
     expect(log).toEqual([
-      'esp', 'eventspastleague', 'esp', 'eventsnextleague', 'esp', 'lookuptable',
+      'esp',
+      'eventspastleague',
+      'esp',
+      'eventsnextleague',
+      'esp',
+      'lookuptable',
     ]);
   });
 
@@ -789,7 +794,9 @@ describe('criarAdaptadorTheSportsDB - espaçador e custo (COB-11)', () => {
         buscar: async () => ({
           ok: false,
           status,
-          headers: { get: (n: string) => (n.toLowerCase() === 'retry-after' ? '60' : null) },
+          headers: {
+            get: (n: string) => (n.toLowerCase() === 'retry-after' ? '60' : null),
+          },
           json: async () => ({ segredo: 'CORPO' }),
           text: async () => 'CORPO-SECRETO',
         }),
@@ -808,7 +815,8 @@ describe('criarAdaptadorTheSportsDB - espaçador e custo (COB-11)', () => {
 });
 
 describe('COB-33: eventsday (fixtures spk08)', () => {
-  const lerFx = (n: string) => readFileSync(join(__dirname, 'fixtures', 'thesportsdb', n), 'utf8');
+  const lerFx = (n: string) =>
+    readFileSync(join(__dirname, 'fixtures', 'thesportsdb', n), 'utf8');
   const rapido = () =>
     criarEspacador({
       maxPorJanela: 1000,
@@ -852,7 +860,74 @@ describe('COB-33: eventsday (fixtures spk08)', () => {
     expect(urls.length).toBeLessThanOrEqual(7);
     const total = (JSON.parse(dia3) as { events: unknown[] }).events.length;
     // 3 eventos vindos da âncora e do dia: dedupe => contagem única
-    expect(r.partidas.length + r.foraDoRecorte + r.inconsistencias.length).toBe(total * 2);
+    expect(r.partidas.length + r.foraDoRecorte + r.inconsistencias.length).toBe(
+      total * 2,
+    );
     expect(new Set(r.partidas.map((p) => p.id)).size).toBe(r.partidas.length);
+  });
+});
+
+describe('REFAT-16-04: preferência por strTimestamp (UTC)', () => {
+  it('usa data/hora do strTimestamp quando difere de dateEvent/strTime locais', () => {
+    const clubes = [clube('gremio', '134288'), clube('internacional', '134281')];
+    const base = EVENTO_PASSADO_COPA_DO_BRASIL_REAL.events[0];
+    const { partidas } = traduzirPartidasTheSportsDB(
+      {
+        events: [
+          {
+            ...base,
+            dateEvent: '2026-09-03',
+            strTime: '21:00:00',
+            strTimestamp: '2026-09-04T00:00:00',
+          },
+        ],
+      },
+      'copa-do-brasil',
+      clubes,
+      new Date('2026-09-18T12:00:00Z'),
+    );
+    expect(partidas[0]?.dataHora).toContain('2026-09-04');
+  });
+});
+
+describe('REFAT-16-05: corpo inválido não vaza na mensagem (SEC-16-02)', () => {
+  const html = '<html><body>SEGREDO-DO-CORPO</body></html>';
+  const ref = {
+    competicaoId: 'x',
+    idLigaProvedor: '4725',
+    politicaTabela: 'sempre' as const,
+  };
+
+  it('classificação com corpo HTML vira mensagem estática', async () => {
+    const ad = criarAdaptadorTheSportsDB({
+      clubes: [],
+      buscar: buscadorTexto(html).buscador,
+    });
+    const erro = await ad.obterClassificacao(ref).catch((e: Error) => e);
+    expect(erro).toBeInstanceOf(Error);
+    expect((erro as Error).message).toBe(
+      'TheSportsDB respondeu corpo inválido (classificação, liga 4725)',
+    );
+  });
+
+  it('partidas com corpo HTML (json() lança SyntaxError) vira mensagem estática', async () => {
+    const ad = criarAdaptadorTheSportsDB({
+      clubes: [],
+      buscar: buscadorTexto(html).buscador,
+    });
+    const erro = await ad.obterPartidas(ref).catch((e: Error) => e);
+    expect((erro as Error).message).not.toContain('SEGREDO');
+    expect((erro as Error).message).toBe(
+      'TheSportsDB respondeu corpo inválido (partidas, liga 4725)',
+    );
+  });
+
+  it('partidas com JSON fora do schema (ZodError) vira mensagem estática', async () => {
+    const ad = criarAdaptadorTheSportsDB({
+      clubes: [],
+      buscar: buscadorTexto('{"events":"SEGREDO-DO-CORPO"}').buscador,
+    });
+    const erro = await ad.obterPartidas(ref).catch((e: Error) => e);
+    expect((erro as Error).message).not.toContain('SEGREDO');
   });
 });

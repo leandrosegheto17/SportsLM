@@ -2214,3 +2214,51 @@ aprovação (QA + DevSecOps) e para o próximo `/deploy` quanto a este lote.
 | 2026-09-09 | Melhoria — Otimização mobile da Home (UX-14-01, UX-14-02) | Aprovado, sem achado bloqueante | Mudança puramente de composição/CSS: layout lado a lado de `SecaoIdentidade` (CSS `flex`, sem lógica nova) e fusão de `SecaoSeusEsportes`+`SecaoUltimasNoticias` em `SecaoNoticias` (mesmo `CartaoIngresso`/`montarFeedNoticias`, nenhum dos dois módulos alterado desde o Lote 7/8 — `git log` confirma); `rel="noopener noreferrer"`/`target="_blank"` inalterados (ponto único de saída externa, não tocado); `dangerouslySetInnerHTML` ausente, reconfirmado pelo teste de varredura repo-wide `sec-01-sanitizacao-csp.test.tsx` já cobrindo o arquivo novo; corte de 30 movido para depois do filtro por chip é reordenação de UI sobre o mesmo conjunto já deduplicado/pós-bloqueio, sem nova exposição; nenhuma superfície de rede/armazenamento nova (mesmos `/dados/noticias.json`/`/dados/ingestao/status.json`, mesmo `useSnapshot`); nenhum dado pessoal novo; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; libera para dupla aprovação (QA + DevSecOps) e `/deploy` quanto a este lote |
 | 2026-09-09 | Melhoria — Faixa do clube consistente em Meu Time e Comparativo (UX-15-01, UX-15-02) | Aprovado, sem achado bloqueante | Mudança puramente de composição de UI reusando `FaixaClube` já auditado (UI-DS-01, Lote 7), intocado por este lote (`git log` mostra só o commit original); `PainelTime.tsx` sem mudança de código de produção (só teste novo); `Comparativo.tsx` monta `clubeParaFaixa`/`posicao`/`pontos` com o mesmo shape e mesma fonte (`useClubesPublicos`, `brasileiraoPublicoSchema` via `useSnapshot`) já usados por `Home`/`PainelTime`, sem `href` (confirmado por `grep`, nenhum uso real da prop no arquivo) e portanto sem navegação nova (`FaixaClube` sem `href` renderiza `<div role="group">`, não `<Link>`); nenhum `dangerouslySetInnerHTML`; nenhuma superfície nova de rede/armazenamento (mesmos dois endpoints já buscados pela própria tela para outros fins); nenhum dado pessoal novo (mesmos campos de `ClubePublico`/classificação pública já avaliados nos Lotes 7/10/11); `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; os 2 achados do chapéu QA (QA-15-01, QA-15-02) são de documentação/narração, sem implicação de segurança; libera para dupla aprovação (QA + DevSecOps) e `/deploy` quanto a este lote |
 | 2026-09-15 | Refatoração Lote-14 (débito de documentação) | Aprovado, sem achado | `REFAT-14-01` confirmada como mudança puramente de texto em `.md/UX-SPEC.md` (2 células, §4 e §6), sem código-fonte/workflow/dependência tocados (`git diff --stat` confirmado); nenhum segredo/dado pessoal nas células alteradas; `npm audit --omit=dev --audit-level=high` 0 vulnerabilidades; nenhum requisito operacional novo para o chapéu DevOps; libera para dupla aprovação (QA + DevSecOps) e `/deploy` quanto a este lote |
+
+---
+
+## Lote 16 — Cobertura completa de ligas via TheSportsDB (chapéu DevSecOps, 2026-09-18)
+
+**Base**: commits `31df31e` (docs) e `bb98040` (código), depois da aprovação com ressalvas do chapéu QA (`QA-REPORT.md`, seção Lote 16). Leitura direta de `adaptador-thesportsdb.ts`, `espacador-requisicoes.ts`, `dominio/tipos/futebol.ts`, `coletor-futebol.ts` e `app/index.html`.
+
+### 1. Segredo/chave do provedor
+- A única credencial é a chave pública de demonstração `123`, na constante `BASE_URL_THESPORTSDB`. Não é segredo e é intencional (ADR-006).
+- Nenhum `.env` versionado (`git ls-files`). Não há token novo, nem `secrets.*` novo em workflow (nenhum arquivo em `.github/` mudou no lote).
+- O adaptador não usa `console`/logger. A mensagem de `erroHttp` traz só status, contexto e `Retry-After` numérico (regex `^\d+$`), sem URL nem corpo.
+- Resultado: conforme.
+
+### 2. Resposta externa não confiável
+- Corpo vazio (HTTP 200, 0 bytes) tratado em `obterClassificacao`. `events: null` e `table: null` tratados por schema Zod.
+- Toda resposta passa por Zod (`.parse`) antes de entrar no domínio; falha vira `falha` por competição no coletor (fail closed, mantém dado anterior).
+- `partidaSchema` valida o par `externo-<id>`: prefixo exige o campo `externo`, no máximo um lado, coerência de lado. `nomeExternoSchema` rejeita `<`, `>` e caracteres de controle. `normalizarFase` remove tags e limita a 60 caracteres.
+- URLs de requisição só usam `idLigaProvedor`/`idLiga`/dia derivado de `planejarDias` (config e relógio), nunca campo da resposta. Sem SSRF nem injeção de query.
+- UI: nomes externos renderizados como texto pelo React. `dangerouslySetInnerHTML` ausente do código de produção (grep). CSP `connect-src 'self'` mantida, sem chamada do navegador ao provedor.
+- Ressalvas: SEC-16-01 e SEC-16-02 (baixas).
+
+### 3. Rate limit e DoS ao provedor
+- `criarEspacador` serializa as chamadas em fila, com intervalo mínimo de 2200 ms e teto de 28 por 60 s (abaixo dos 30/min). O `.catch` na fila impede que uma falha trave as chamadas seguintes. Orçamento declarado: 60 por execução; `custoEstimado` teto de 8 por liga.
+- Negação de cota (429) vira erro/`Retry-After` sem retry em laço. Sem risco de DoS ao provedor nem de laço infinito. O laço `for(;;)` do espaçador só espera e termina.
+
+### 4. Dependências
+- `package.json` e `package-lock.json` sem mudança no lote (nenhuma dependência nova). `npm audit --omit=dev`: 0 vulnerabilidades.
+
+### 5. Compliance/LGPD
+- Dados de competição públicos (times, placares, estádios). Nenhum dado pessoal. A telemetria segue desligada por padrão. Fixtures `spk*` contêm só a resposta pública da API com a chave 123 (URLs de imagem/badge do provedor, sem segredo).
+
+### Achados por severidade
+
+| ID | Sev. | Descrição | Destino |
+|---|---|---|---|
+| SEC-16-01 | Baixa | Regex de `normalizarPorTimestamp` escrita como `/^(d{4}-d{2}-d{2})T.../` (sem `\d`): nunca casa, então o `strTimestamp` UTC (SPK-08) nunca é usado. Integridade de dado (hora/data podem ser locais), sem exposição. | `REFAT-16-04`, 5 dias |
+| SEC-16-02 | Baixa | `JSON.parse`/`.json()` (SyntaxError com trecho do corpo) e `ZodError` chegam a `mensagemDeErro` do coletor sem filtro, contra a promessa de `erroHttp` ("nunca inclui o corpo"). O corpo de um provedor comprometido/erro HTML poderia parar na mensagem de falha. Sem segredo envolvido. | `REFAT-16-05`, 5 dias |
+| Informativo | - | Os achados QA-16-01/02/03 não têm implicação de segurança (`REFAT-16-01` a `-03`). | - |
+
+Nenhum achado alto/crítico. Nenhum compliance obrigatório em aberto. Sem relevância estratégica para o Gestor. Sem requisito operacional novo para o chapéu DevOps (nenhum secret novo).
+
+### Veredito — Lote 16
+
+**Aprovado com débito registrado (baixa severidade).** Com o QA aprovado com ressalvas, a dupla aprovação existe. O deploy só depende de `REFAT-16-01` (condição do QA), não de segurança.
+
+| Data | Lote | Veredito | Observação |
+|---|---|---|---|
+| 2026-09-18 | Lote 16 — Cobertura completa de ligas | Aprovado com débito registrado | Chave só a pública `123`, nada logado; resposta externa validada por Zod (corpo vazio, `externo-`, nome sem `<>`); espaçador 28/min, 2,2 s; 0 dependências novas, `npm audit` 0; 2 achados baixos (SEC-16-01, SEC-16-02) em `Refatoração Lote-16` |

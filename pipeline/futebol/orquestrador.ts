@@ -249,7 +249,10 @@ function construirCompeticao(
 
 /** Mapeia a partida para o derivador, com adversário e lado do clube (ADR-020
  * item 7). `faseJogoUnico` fica indefinido: sem prova, não se afirma jogo único. */
-export function paraDerivacao(partida: Partida, clubeId: string): PartidaParaDerivacaoStatus {
+export function paraDerivacao(
+  partida: Partida,
+  clubeId: string,
+): PartidaParaDerivacaoStatus {
   const clubeEhMandante = partida.mandanteId === clubeId;
   return {
     adversarioId: clubeEhMandante ? partida.visitanteId : partida.mandanteId,
@@ -495,6 +498,13 @@ export async function executarFluxoFutebol(
         numeroClubesEsperado: config.clubes.length,
         inicioCompeticao: config.janela.inicio,
         ...(tabelaParcial ? { tabelaParcial: true } : {}),
+        // REFAT-16-02 (I-28, Bloqueio 013 opção a): tabela vazia + partidas do
+        // provedor que acumula não descarta o lote; a tabela fica "sem dados".
+        ...(config.provedor === PROVEDOR_ACUMULA &&
+        resultado.classificacao.linhas.length === 0 &&
+        partidasLote.length > 0
+          ? { tabelaSemDados: true }
+          : {}),
       });
 
       if (!consistencia.consistente) {
@@ -524,9 +534,7 @@ export async function executarFluxoFutebol(
         resultado.classificacao.linhas,
         anterior?.linhas ?? [],
       ).map((l) => linhaClassificacaoSchema.parse(l));
-      const partidasValidadas = partidasLote.map((p) =>
-        partidaSchema.parse(p),
-      );
+      const partidasValidadas = partidasLote.map((p) => partidaSchema.parse(p));
       const competicao = competicaoSchema.parse(
         construirCompeticao(config, ultimaAtualizacao, tabelaParcial),
       );

@@ -163,7 +163,7 @@ const eventosProvedorSchema = z.object({
 
 /** Prefere `strTimestamp` (UTC) a dateEvent/strTime quando bem formado. */
 function normalizarPorTimestamp(evento: EventoProvedor): EventoProvedor {
-  const m = /^(d{4}-d{2}-d{2})T(d{2}:d{2}:d{2})/.exec(evento.strTimestamp ?? '');
+  const m = /^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})/.exec(evento.strTimestamp ?? '');
   if (m === null) return evento;
   return { ...evento, dateEvent: m[1]!, strTime: m[2]! };
 }
@@ -180,7 +180,6 @@ function indiceClubesPorIdProvedor(clubes: ClubeBase[]): Map<string, ClubeBase> 
   }
   return indice;
 }
-
 
 export type InconsistenciaPartidaTheSportsDB = InconsistenciaPartida;
 export type InconsistenciaClassificacaoTheSportsDB =
@@ -519,7 +518,22 @@ function erroHttp(resposta: Awaited<ReturnType<BuscadorHttp>>, contexto: string)
   const retry = resposta.headers?.get('Retry-After') ?? null;
   const sufixo = retry !== null && /^\d+$/.test(retry) ? `, Retry-After ${retry}s` : '';
   // Nunca inclui o corpo da resposta na mensagem.
-  return new Error(`TheSportsDB respondeu HTTP ${resposta.status} (${contexto}${sufixo})`);
+  return new Error(
+    `TheSportsDB respondeu HTTP ${resposta.status} (${contexto}${sufixo})`,
+  );
+}
+
+/** Falha de parse/validação do corpo vira mensagem estática: `SyntaxError` e
+ * `ZodError` citam trecho do corpo do provedor (SEC-16-02). */
+async function semVazarCorpo<T>(contexto: string, fn: () => Promise<T>): Promise<T> {
+  try {
+    return await fn();
+  } catch (erro) {
+    if (erro instanceof SyntaxError || erro instanceof z.ZodError) {
+      throw new Error(`TheSportsDB respondeu corpo inválido (${contexto})`);
+    }
+    throw erro;
+  }
 }
 
 /**
@@ -552,86 +566,92 @@ export function criarAdaptadorTheSportsDB(opcoes: OpcoesAdaptadorTheSportsDB) {
       return ref.politicaTabela === 'nunca' ? 7 : 8;
     },
 
-    async obterClassificacao(ref: RefCompeticaoTheSportsDB) {
-      const vazio = {
-        linhas: [] as LinhaClassificacao[],
-        inconsistencias: [] as InconsistenciaClassificacaoTheSportsDB[],
-        parcial: false,
-      };
-      // Mata-mata: não existe "classificação" no domínio — sem requisição.
-      if (ref.politicaTabela === 'nunca') return vazio;
-      const resposta = await buscarEspacado(
-        `${baseUrl}/lookuptable.php?l=${ref.idLigaProvedor}&s=${ref.temporadaProvedor ?? ''}`,
-      );
-      if (!resposta.ok) {
-        if (ref.politicaTabela === 'tentar' && resposta.status === 404) return vazio;
-        throw erroHttp(resposta, `classificação, liga ${ref.idLigaProvedor}`);
-      }
-      const texto = await resposta.text();
-      if (texto.trim() === '') return vazio; // HTTP 200 com corpo vazio (SPK-06)
-      return traduzirClassificacaoTheSportsDB(
-        JSON.parse(texto) as unknown,
-        ref.competicaoId,
-        opcoes.clubes,
-        ref.clubesEsperados,
-      );
+    obterClassificacao(ref: RefCompeticaoTheSportsDB) {
+      return semVazarCorpo(`classificação, liga ${ref.idLigaProvedor}`, async () => {
+        const vazio = {
+          linhas: [] as LinhaClassificacao[],
+          inconsistencias: [] as InconsistenciaClassificacaoTheSportsDB[],
+          parcial: false,
+        };
+        // Mata-mata: não existe "classificação" no domínio — sem requisição.
+        if (ref.politicaTabela === 'nunca') return vazio;
+        const resposta = await buscarEspacado(
+          `${baseUrl}/lookuptable.php?l=${ref.idLigaProvedor}&s=${ref.temporadaProvedor ?? ''}`,
+        );
+        if (!resposta.ok) {
+          if (ref.politicaTabela === 'tentar' && resposta.status === 404) return vazio;
+          throw erroHttp(resposta, `classificação, liga ${ref.idLigaProvedor}`);
+        }
+        const texto = await resposta.text();
+        if (texto.trim() === '') return vazio; // HTTP 200 com corpo vazio (SPK-06)
+        return traduzirClassificacaoTheSportsDB(
+          JSON.parse(texto) as unknown,
+          ref.competicaoId,
+          opcoes.clubes,
+          ref.clubesEsperados,
+        );
+      });
     },
 
-    async obterPartidas(ref: RefCompeticaoTheSportsDB) {
-      // Serial (ADR-021): past -> next, cada uma pelo espaçador.
-      const respostaPassadas = await buscarEspacado(
-        `${baseUrl}/eventspastleague.php?id=${ref.idLigaProvedor}`,
-      );
-      if (!respostaPassadas.ok) {
-        throw erroHttp(respostaPassadas, `partidas, liga ${ref.idLigaProvedor}`);
-      }
-      const corpoPassadas = await respostaPassadas.json();
-      const respostaFuturas = await buscarEspacado(
-        `${baseUrl}/eventsnextleague.php?id=${ref.idLigaProvedor}`,
-      );
-      if (!respostaFuturas.ok) {
-        throw erroHttp(respostaFuturas, `partidas, liga ${ref.idLigaProvedor}`);
-      }
-      const corpoFuturas = await respostaFuturas.json();
-      const lotes = [corpoPassadas, corpoFuturas];
-      if (ref.idLiga !== undefined) {
-        const dataDe = (corpo: unknown, ultimo: boolean): string | null => {
-          const evs = eventosProvedorSchema.parse(corpo).events ?? [];
-          const dias = evs
-            .map((e) => normalizarPorTimestamp(e).dateEvent)
-            .filter((d): d is string => d !== null)
-            .sort();
-          return (ultimo ? dias[dias.length - 1] : dias[0]) ?? null;
+    obterPartidas(ref: RefCompeticaoTheSportsDB) {
+      return semVazarCorpo(`partidas, liga ${ref.idLigaProvedor}`, async () => {
+        // Serial (ADR-021): past -> next, cada uma pelo espaçador.
+        const respostaPassadas = await buscarEspacado(
+          `${baseUrl}/eventspastleague.php?id=${ref.idLigaProvedor}`,
+        );
+        if (!respostaPassadas.ok) {
+          throw erroHttp(respostaPassadas, `partidas, liga ${ref.idLigaProvedor}`);
+        }
+        const corpoPassadas = await respostaPassadas.json();
+        const respostaFuturas = await buscarEspacado(
+          `${baseUrl}/eventsnextleague.php?id=${ref.idLigaProvedor}`,
+        );
+        if (!respostaFuturas.ok) {
+          throw erroHttp(respostaFuturas, `partidas, liga ${ref.idLigaProvedor}`);
+        }
+        const corpoFuturas = await respostaFuturas.json();
+        const lotes = [corpoPassadas, corpoFuturas];
+        if (ref.idLiga !== undefined) {
+          const dataDe = (corpo: unknown, ultimo: boolean): string | null => {
+            const evs = eventosProvedorSchema.parse(corpo).events ?? [];
+            const dias = evs
+              .map((e) => normalizarPorTimestamp(e).dateEvent)
+              .filter((d): d is string => d !== null)
+              .sort();
+            return (ultimo ? dias[dias.length - 1] : dias[0]) ?? null;
+          };
+          const dias = planejarDias({
+            hoje: (opcoes.agora ?? (() => new Date()))(),
+            ultimoEvento: dataDe(corpoPassadas, true),
+            proximoEvento: dataDe(corpoFuturas, false),
+            faixa: 1,
+          });
+          for (const dia of dias) {
+            const r = await buscarEspacado(
+              `${baseUrl}/eventsday.php?d=${dia}&l=${ref.idLiga}`,
+            );
+            if (!r.ok) throw erroHttp(r, `partidas do dia ${dia}, liga ${ref.idLiga}`);
+            lotes.push(await r.json());
+          }
+        }
+        const traduzidos = lotes.map((corpo) =>
+          traduzirPartidasTheSportsDB(corpo, ref.competicaoId, opcoes.clubes),
+        );
+        const vistos = new Set<string>();
+        const partidas: Partida[] = [];
+        for (const t of traduzidos) {
+          for (const p of t.partidas) {
+            if (vistos.has(p.id)) continue;
+            vistos.add(p.id);
+            partidas.push(p);
+          }
+        }
+        return {
+          partidas,
+          inconsistencias: traduzidos.flatMap((t) => t.inconsistencias),
+          foraDoRecorte: traduzidos.reduce((a, t) => a + t.foraDoRecorte, 0),
         };
-        const dias = planejarDias({
-          hoje: (opcoes.agora ?? (() => new Date()))(),
-          ultimoEvento: dataDe(corpoPassadas, true),
-          proximoEvento: dataDe(corpoFuturas, false),
-          faixa: 1,
-        });
-        for (const dia of dias) {
-          const r = await buscarEspacado(`${baseUrl}/eventsday.php?d=${dia}&l=${ref.idLiga}`);
-          if (!r.ok) throw erroHttp(r, `partidas do dia ${dia}, liga ${ref.idLiga}`);
-          lotes.push(await r.json());
-        }
-      }
-      const traduzidos = lotes.map((corpo) =>
-        traduzirPartidasTheSportsDB(corpo, ref.competicaoId, opcoes.clubes),
-      );
-      const vistos = new Set<string>();
-      const partidas: Partida[] = [];
-      for (const t of traduzidos) {
-        for (const p of t.partidas) {
-          if (vistos.has(p.id)) continue;
-          vistos.add(p.id);
-          partidas.push(p);
-        }
-      }
-      return {
-        partidas,
-        inconsistencias: traduzidos.flatMap((t) => t.inconsistencias),
-        foraDoRecorte: traduzidos.reduce((a, t) => a + t.foraDoRecorte, 0),
-      };
+      });
     },
   };
 }

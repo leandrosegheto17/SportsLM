@@ -158,7 +158,14 @@
         "id": "5767",
         "temporada": "2026"
       },
-      "clubes": ["corinthians", "mirassol", "palmeiras", "santos", "sao-paulo"]
+      "clubes": [
+        "corinthians",
+        "mirassol",
+        "palmeiras",
+        "rb-bragantino",
+        "santos",
+        "sao-paulo"
+      ]
     },
     {
       "id": "carioca",

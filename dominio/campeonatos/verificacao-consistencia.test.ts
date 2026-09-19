@@ -222,13 +222,17 @@ describe('verificarConsistenciaCompeticao por formato (ADR-020 item 5)', () => {
       expect(motivosDe({ formato, linhas: cheia })).toEqual([]);
     });
     it('parcial → numero-de-clubes-incorreto', () => {
-      expect(motivosDe({ formato, linhas: cheia.slice(0, 2) })).toContain('numero-de-clubes-incorreto');
+      expect(motivosDe({ formato, linhas: cheia.slice(0, 2) })).toContain(
+        'numero-de-clubes-incorreto',
+      );
     });
     it('vazia → numero-de-clubes-incorreto', () => {
       expect(motivosDe({ formato, linhas: [] })).toContain('numero-de-clubes-incorreto');
     });
     it('duplicada → clube-duplicado', () => {
-      expect(motivosDe({ formato, linhas: [cheia[0]!, cheia[0]!, cheia[1]!] })).toContain('clube-duplicado');
+      expect(motivosDe({ formato, linhas: [cheia[0]!, cheia[0]!, cheia[1]!] })).toContain(
+        'clube-duplicado',
+      );
     });
   });
 
@@ -240,18 +244,30 @@ describe('verificarConsistenciaCompeticao por formato (ADR-020 item 5)', () => {
       expect(motivosDe({ formato, linhas: [] })).toEqual([]);
     });
     it('duplicada → clube-duplicado', () => {
-      expect(motivosDe({ formato, linhas: [cheia[0]!, cheia[0]!] })).toContain('clube-duplicado');
+      expect(motivosDe({ formato, linhas: [cheia[0]!, cheia[0]!] })).toContain(
+        'clube-duplicado',
+      );
     });
     it('clube fora da config → clube-fora-da-configuracao', () => {
-      expect(motivosDe({ formato, linhas: [linha({ clubeId: 'vasco' })] })).toContain('clube-fora-da-configuracao');
+      expect(motivosDe({ formato, linhas: [linha({ clubeId: 'vasco' })] })).toContain(
+        'clube-fora-da-configuracao',
+      );
     });
     it('mais linhas que clubes → numero-de-clubes-incorreto', () => {
-      expect(motivosDe({ formato, numeroClubesEsperado: 1, linhas: cheia.slice(0, 2) })).toContain('numero-de-clubes-incorreto');
+      expect(
+        motivosDe({ formato, numeroClubesEsperado: 1, linhas: cheia.slice(0, 2) }),
+      ).toContain('numero-de-clubes-incorreto');
     });
     it('não afrouxa saldo nem finalizada sem placar', () => {
       expect(
-        motivosDe({ formato, linhas: [linha({ sg: 99 })], partidas: [partida({ placar: null })] }),
-      ).toEqual(expect.arrayContaining(['saldo-invalido', 'partida-finalizada-sem-placar']));
+        motivosDe({
+          formato,
+          linhas: [linha({ sg: 99 })],
+          partidas: [partida({ placar: null })],
+        }),
+      ).toEqual(
+        expect.arrayContaining(['saldo-invalido', 'partida-finalizada-sem-placar']),
+      );
     });
   });
 
@@ -266,7 +282,11 @@ describe('verificarConsistenciaCompeticao por formato (ADR-020 item 5)', () => {
     });
     it('finalizada sem placar continua inconsistente', () => {
       expect(
-        motivosDe({ formato: 'mata-mata', linhas: [], partidas: [partida({ placar: null })] }),
+        motivosDe({
+          formato: 'mata-mata',
+          linhas: [],
+          partidas: [partida({ placar: null })],
+        }),
       ).toContain('partida-finalizada-sem-placar');
     });
   });
@@ -285,8 +305,19 @@ describe('verificarConsistenciaCompeticao com tabelaParcial (COB-40, ADR-024)', 
       expect(motivosDe({ formato, linhas: parcial, tabelaParcial: true })).toEqual([]);
     });
     it('parcial sem marca continua reprovada', () => {
-      expect(motivosDe({ formato, linhas: parcial })).toContain('numero-de-clubes-incorreto');
+      expect(motivosDe({ formato, linhas: parcial })).toContain(
+        'numero-de-clubes-incorreto',
+      );
       expect(motivosDe({ formato, linhas: parcial, tabelaParcial: false })).toContain(
+        'numero-de-clubes-incorreto',
+      );
+    });
+    it('tabelaSemDados (REFAT-16-02): tabela vazia passa; sem a marca segue reprovada', () => {
+      expect(motivosDe({ formato, linhas: [], tabelaSemDados: true })).toEqual([]);
+      expect(motivosDe({ formato, linhas: [] })).toContain('numero-de-clubes-incorreto');
+    });
+    it('tabelaSemDados nao relaxa tabela nao vazia', () => {
+      expect(motivosDe({ formato, linhas: parcial, tabelaSemDados: true })).toContain(
         'numero-de-clubes-incorreto',
       );
     });
@@ -308,7 +339,11 @@ describe('verificarConsistenciaCompeticao com tabelaParcial (COB-40, ADR-024)', 
     });
     it('marcada: pontos incoerentes reprovam', () => {
       expect(
-        motivosDe({ formato, linhas: [linha({ clubeId: 'a', pontos: 99 })], tabelaParcial: true }),
+        motivosDe({
+          formato,
+          linhas: [linha({ clubeId: 'a', pontos: 99 })],
+          tabelaParcial: true,
+        }),
       ).toContain('linha-aritmetica-invalida');
     });
   });

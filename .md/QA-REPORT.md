@@ -3882,3 +3882,63 @@ processo).
 | 2026-09-09 | Melhoria — Otimização mobile da Home (UX-14-01, UX-14-02) | Aprovado (com ressalvas) | 2/2 tarefas aprovadas; layout lado a lado (<1024px) e feed único filtrável confirmados por leitura de código e de `RF-05`/`UX-SPEC §2/T-02` atualizados; 98 arquivos/1135 testes, `tsc`/`eslint` limpos, sem regressão; 1 achado simples (QA-14-01, tabelas de Estados/Responsivo de `UX-SPEC.md` §4/§6 não reconciliadas com a fusão do feed) virou `REFAT-14-01` em `Refatoração Lote-14`, sem reabrir tarefa nem Coordenador; 1 ressalva não bloqueante (verificação visual real de chips/densidade em 320-360px, não executável neste ambiente headless — mesmo padrão de REFAT-12-03), registrada como pré-condição do próximo `/deploy`; libera para auditoria do chapéu DevSecOps |
 | 2026-09-09 | Melhoria — Faixa do clube consistente em Meu Time e Comparativo (UX-15-01, UX-15-02) | Aprovado | 2/2 tarefas aprovadas, validadas sobre o working tree não commitado desta sessão; `FaixaClube` variante `completa` confirmada idêntica (mesmo shape de dado, mesma altura via CSS único) nas 3 telas (Home/T-02, Painel/T-05, Comparativo/T-08), diferindo só por `href` (só a Home linka); em `Comparativo.tsx`, faixa confirmada presente nos 7 estados "com time" (preenchido, carregando, erro, zero rival, CA-09.5, CA-09.6) e ausente em CA-14.3, por leitura direta de código, não da nota do Executor; 98 arquivos/1135 testes, `tsc`/`eslint` limpos, sem regressão; sem inconsistência visual/comportamental entre as 3 telas; 2 achados simples de documentação/narração (QA-15-01, nome de componente `CartaoIngresso` incorreto no critério de aceite de UX-15-02 — o elemento real é uma `div` inline; QA-15-02, contagem "9 pré-existentes + 6 novos" de `Comparativo.test.tsx` incorreta, real é 12+3=15), nenhum vira tarefa de refatoração (achado informativo, sem débito de código); libera para auditoria do chapéu DevSecOps |
 | 2026-09-15 | Refatoração Lote-14 (débito de documentação) | Aprovado | 1/1 tarefa aprovada (REFAT-14-01); `git diff --stat` confirma só `.md/UX-SPEC.md`/`.md/TASK.md` tocados, nenhum código; §4/T-02 "Vazio (sem favorito)" e §6/T-02 coluna `< 600` confirmadas reconciliadas com a narrativa "Ordem no celular" de §2/T-02 (mesma terminologia, sem inconsistência interna no `UX-SPEC.md`); sem necessidade de suíte automatizada (doc pura); fechamento estrutural confirmado, sem nova tarefa; libera para auditoria do chapéu DevSecOps |
+
+---
+
+## Lote 16 — Cobertura completa de ligas (validação QA, 2026-09-18)
+
+Escopo: SPK-06/07/08 e COB-01 a COB-40 (43 tarefas), commits `31df31e` e `bb98040`. Nenhum código de produção alterado nesta validação.
+
+### Resultados de execução
+
+| Comando | Resultado |
+|---|---|
+| `npm run typecheck` (`tsc --noEmit`) | limpo, 0 erros |
+| `npm run lint` (`eslint .`) | limpo, 0 avisos |
+| `npm test` (`vitest run`) | 112 arquivos / 1388 testes, todos passando (29,5 s) |
+| `npm run format:check` | 58 arquivos fora do padrão Prettier (42 tocados pelo Lote 16). Ver QA-16-03 |
+
+### Validação por tarefa
+
+- Aprovadas (critério de aceite coberto por teste que passa e conferido no código): SPK-06, SPK-07, SPK-08, COB-01 a COB-10, COB-12 a COB-30, COB-32 a COB-40.
+- COB-11: aprovada. Espaçador serial, `porExecucao: 60` declarado (`adaptador-thesportsdb.ts:548`), 429/5xx com Retry-After. A nota "não foi TDD estrito" não reprova.
+- COB-31 (portão de integração): aprovada com ressalvas (QA-16-01, QA-16-02).
+- COB-36: a lacuna anotada ("falta declarar `porExecucao: 60`") foi fechada pelo COB-11. Confirmado no código.
+- COB-20: a ressalva `fora-do-recorte` sempre 0 foi tratada; `orquestrador.ts:449` repassa o valor do provedor.
+- Isolamento de `externo-`: só `app/dados/lado-partida.ts` o resolve na UI. O restante são `dominio/tipos`, adaptador, orquestrador e resumo (pipeline), como previsto.
+- Integração cruzada: `cobertura-ligas.integracao.test.ts` (8 casos, sem rede real) e `acessibilidade-consolidada.test.tsx` (24 casos axe) passam.
+
+### Requisitos não funcionais
+
+- Limite de taxa: espaçador em 28 req/min e testes com relógio falso passam.
+- Tamanho do snapshot: orçamento de 25 KB gzip coberto por teste (COB-21).
+- `brasileirao.json` idêntico ao base (hash) e comportamento do Brasileirão inalterado.
+- Acessibilidade: 0 violações críticas/sérias.
+- Log: sem vazamento de token ou corpo, coberto por teste.
+- Não executado: sessão manual com leitor de tela, pré-condição opcional do `/deploy`.
+
+### Achados (bug-documentation)
+
+Nenhuma reprovação Crítica. Nenhuma tarefa volta para `Em andamento`.
+
+| ID | Sev. | Descrição / reprodução | Esperado x obtido | Destino |
+|---|---|---|---|---|
+| QA-16-01 | Simples | `config/campeonatos-2026.json`: `paulista.clubes` = corinthians, mirassol, palmeiras, santos, sao-paulo, sem `rb-bragantino`. O teste de integração descarta o lote do Paulista como `clube-fora-da-configuracao` (lacuna G1 do COB-31). | Esperado: todo clube do Paulista com id conhecido está na config. Obtido: lote descartado na fixture. É ajuste de dado, uma linha, e não muda o critério central. | Tarefa em `Refatoração Lote-16`, prioridade alta, prazo antes do `/deploy`. Confirmar a lista de clubes do Paulista com o dado SPK-07 |
+| QA-16-02 | Simples, com decisão de negócio pendente | Liga de `grupos` com `lookuptable` vazio e partidas é descartada inteira (`numero-de-clubes-incorreto`). COB-31 registra a lacuna G2 e a I-28 (83,6% de pares com lote aceito, 37,0% com partida ou linha real). | A tabela vazia deveria ser tratada como parcial ou publicar só as partidas (I-32, "sem dados honesto"). Hoje perde as partidas. | Tarefa em `Refatoração Lote-16` (COB-13/COB-20). A definição de I-28 e a política vão ao Gestor/Coordenador via `BLOCKERS.md`. Não escala como padrão recorrente |
+| QA-16-03 | Simples | `format:check` acusa 58 arquivos, 42 deles tocados pelo Lote 16 (por exemplo `retencao-tabela.ts`, `status-sem-dados.test.ts`). Os relatórios anteriores registravam `format:check` limpo. | Esperado: limpo. Obtido: 58 avisos. | Tarefa em `Refatoração Lote-16` (`prettier --write`, só formatação), prazo 1 dia |
+
+### Fechamento estrutural
+
+- Todas as 43 tarefas estão `Concluída`, nenhuma `Bloqueada`.
+- Nenhuma dependência órfã. O Lote 16 não reabriu lote anterior.
+- Nenhuma inconsistência exige redesenho, então não há escalonamento ao Coordenador por decomposição.
+- Nota ao Gestor: a I-28 (cobertura de ligas) precisa de decisão de definição (QA-16-02).
+- Pendência: as 3 tarefas simples devem ser criadas em `Refatoração Lote-16` na Seção 3 do `TASK.md`. Esta validação não editou `TASK.md`, por instrução de não alterar nada além do relatório.
+
+### Veredito
+
+**Aprovado com ressalvas.** Libera o chapéu DevSecOps para auditar o lote. O deploy depende da dupla aprovação e da resolução prévia do QA-16-01.
+
+| Data | Lote | Veredito | Resumo |
+|---|---|---|---|
+| 2026-09-18 | Lote 16 — Cobertura completa de ligas | Aprovado (com ressalvas) | 43/43 tarefas aprovadas; 112 arquivos/1388 testes, `tsc` e `eslint` limpos; `format:check` com 58 arquivos fora do padrão; 3 achados simples (QA-16-01 a 03) para `Refatoração Lote-16`; 0 críticos |

@@ -875,6 +875,26 @@ Origem: SPK-06 concluiu P12 = TRUNCA (1 evento por chamada). ADR-022 escolheu **
 
 **Contagem do Lote 16 (rev. 2 — 2026-09-18)**: 43 tarefas (33 originais + 10 do bloco 16.G, que passa de 8 para 10 tarefas — acima do limite de ~8 por bloco, justificado por serem duas linhas de dependência independentes: calendário [SPK-08, COB-32..36, 38] e tabela parcial [COB-39, 40, 37]): 3 spikes sem estimativa + 40 estimadas (≈ 31 dias-pessoa; 16.G ≈ 7 d) — 33 Backend (3 spikes) e 10 Frontend.
 
+### Refatoração Lote-16
+
+Criada pelo Validador na checagem estrutural do Lote 16 (2026-09-18), sem
+reabrir o Lote 16 nem o Coordenador (achados simples/débito baixo — ver
+`.md/QA-REPORT.md`, seção "Lote 16", QA-16-01 a QA-16-03, e
+`.md/SECURITY-REVIEW.md`, seção "Lote 16", SEC-16-01 e SEC-16-02).
+
+**Status do lote**: **Fechado** — REFAT-16-01 a -05 concluídas (2026-09-18). REFAT-16-01 é
+pré-requisito do `/deploy` do Lote 16.
+
+| ID | Título | Chapéu | Descrição | Critério de aceite | Dep. | Prazo | Status |
+|---|---|---|---|---|---|---|---|
+| **REFAT-16-01** | Incluir `rb-bragantino` em `paulista.clubes` (QA-16-01) | Backend (dado) | `config/campeonatos-2026.json`: `paulista.clubes` não tem `rb-bragantino`; o teste de integração descarta o lote do Paulista como `clube-fora-da-configuracao` (lacuna G1 do COB-31). Confirmar a lista com o dado do SPK-07 | Todo clube do Paulista com id conhecido está na config; integração COB-31 sem descarte do lote do Paulista; `config/campeonatos.test.ts` verde | COB-31 | **Antes do `/deploy`** (prioridade alta) | Concluída |
+| **REFAT-16-02** | Tabela vazia em liga de `grupos` não pode descartar as partidas (QA-16-02) | Backend | Liga de `grupos` com `lookuptable` vazio e partidas é descartada inteira (`numero-de-clubes-incorreto`; lacuna G2, I-28). Tratar como tabela parcial ou publicar só as partidas ("sem dados honesto", I-32). A definição de I-28 é decisão de negócio: vai ao Gestor/Coordenador via `BLOCKERS.md`; a tarefa só implementa a política decidida | Partidas da liga são publicadas; tabela vazia vira `tabelaParcial`/sem dados, nunca descarte; teste de integração cobre o caso | COB-13, COB-20; I-28 decidido em 2026-09-18 (Bloqueio 013): opção (a), só partidas + tabela "sem dados" (I-32) | 5 dias a partir de 2026-09-18 (não bloqueia o deploy) | Concluída |
+| **REFAT-16-03** | Rodar `prettier --write` nos arquivos do Lote 16 (QA-16-03) | Backend/Frontend (formatação) | `format:check` acusa 58 arquivos, 42 tocados pelo Lote 16. Só formatação, sem mudança de comportamento | `npm run format:check` limpo; testes e `tsc` inalterados | — | 1 dia | Concluída |
+| **REFAT-16-04** | Corrigir a regex de `normalizarPorTimestamp` (SEC-16-01) | Backend | `pipeline/futebol/adaptador-thesportsdb.ts`: a regex `/^(d{4}-d{2}-d{2})T(d{2}:d{2}:d{2})/` está sem a barra invertida (`\d`), então nunca casa e `strTimestamp` (UTC) nunca é usado, contra o comentário de SPK-08. Severidade baixa (integridade de dado, não exposição) | Regex com `\d`; teste com `strTimestamp` UTC diferente de `dateEvent`/`strTime` locais comprova a preferência pelo UTC; testes existentes verdes | — | 5 dias (junto de REFAT-16-02, mesmo arquivo) | Concluída |
+| **REFAT-16-05** | Não propagar trecho do corpo do provedor em `mensagemErro` (SEC-16-02) | Backend | `JSON.parse(texto)`/`.json()` lançam `SyntaxError` com trecho do corpo, e `ZodError` de `.parse()` vai a `mensagemDeErro` (`coletor-futebol.ts`) sem filtro. O comentário do `erroHttp` promete "nunca inclui o corpo". Severidade baixa | Falha de parse/validação do provedor vira mensagem estática (ex.: "TheSportsDB respondeu corpo inválido, liga X"); teste com corpo HTML garante que o trecho não aparece na mensagem/status | — | 5 dias | Concluída |
+
+**Paralelizável em Refatoração Lote-16**: REFAT-16-01 e REFAT-16-03 são independentes; REFAT-16-02, -04 e -05 tocam `adaptador-thesportsdb.ts`/`coletor-futebol.ts` — sequenciar para evitar conflito de merge; REFAT-16-03 por último (formatação depois das demais).
+
 ---
 
 ## 4. Dependências e Ordem de Execução
