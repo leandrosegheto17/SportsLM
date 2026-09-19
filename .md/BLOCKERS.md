@@ -84,8 +84,7 @@
 - Sugestão (opcional): atualizar ADR-012 regra 4 substituindo Cloudflare Web
   Analytics por Umami Cloud como alternativa a GoatCounter, com nota
   referenciando a evidência de SPK-04 (`.md/TASK.md`, tabela do Lote 13).
-- Status: Aberto, não bloqueante (não impede a validação do Lote 13 nem
-  nenhum deploy hoje).
+- Status: Resolvido (2026-09-19). Achado registrado como nota de atualização no ADR-012; a escolha entre GoatCounter e Umami Cloud fica para quando alguma ferramenta for plugada.
 
 ## Bloqueio 003 — 2026-09-06
 - Reportado por: validador (checagem estrutural do Lote 13, a partir do
@@ -114,8 +113,7 @@
   ADR-013 (seção de alternativas/consequências de P-GE) ou em qualquer
   registro de avaliação de fonte substituta que o Coordenador mantenha,
   referenciando `.md/TASK.md`, tabela do Lote 13, nota de SPK-03.
-- Status: Aberto, não bloqueante (catálogo já reflete a decisão correta;
-  achado é insumo para decisão futura, não correção de erro atual).
+- Status: Resolvido (2026-09-19). Achado registrado como nota de atualização no ADR-013; catálogo já refletia a decisão correta.
 
 ## Bloqueio 004 — 2026-09-06
 - Reportado por: orquestrador (usuário), durante `/deploy` — confirmação final
@@ -150,9 +148,9 @@
   `America/Sao_Paulo` (`timeZone` fixo) se a intenção de produto for sempre
   mostrar horário de Brasília a qualquer visitante — esta segunda opção é
   uma decisão de produto, não escolha livre do Executor.
-- Status: Aberto, bloqueante para publicação (não afeta nenhum lote já
-  `Validado` retroativamente — é achado da confirmação final de `/deploy`,
-  não de nenhuma validação de lote anterior).
+- Status inicial: Aberto, bloqueante para publicação. **Resolvido em 2026-09-07**
+  (ver "Status: Resolvido" e a decisão do stakeholder abaixo); a linha de status
+  inicial ficou desatualizada e foi ajustada em 2026-09-19.
 - Atualização (2026-09-07, executor): antes de aplicar a correção (a) sugerida
   (fixar `TZ=America/Sao_Paulo` só no ambiente de teste, mantendo o componente
   formatando no fuso local do processo/visitante), confirmei rapidamente
@@ -785,8 +783,7 @@
   quiser reabrir a via de scraping, a autorização expressa por escrito é o
   único caminho que os próprios termos preveem — não é uma questão técnica
   a ser resolvida com uma implementação mais cuidadosa.
-- Status: Aberto, não bloqueante (nenhum código de produção foi alterado;
-  não impede nenhum lote `Validado` nem nenhum deploy hoje).
+- Status: Resolvido (2026-09-19). Achado registrado como nota de atualização no ADR-013; nenhum código de produção foi alterado.
 
 ## Bloqueio 012 — 2026-09-09
 - Reportado por: orquestrador (usuário) — "não estão entrando as notícias de
