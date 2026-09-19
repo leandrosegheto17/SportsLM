@@ -8,9 +8,19 @@ export interface JanelaCompeticao {
   readonly fim: string;
 }
 
-export type FrescorCompeticao = 'normal' | 'alerta' | 'encerrada' | 'pausado' | 'falha' | 'nunca';
+export type FrescorCompeticao =
+  | 'normal'
+  | 'alerta'
+  | 'encerrada'
+  | 'pausado'
+  | 'falha'
+  | 'nunca';
 
-const SEM_COBERTURA = new Set(['sem-cobertura', 'sem-dados-provedor', 'provedor-nao-registrado']);
+const SEM_COBERTURA = new Set([
+  'sem-cobertura',
+  'sem-dados-provedor',
+  'provedor-nao-registrado',
+]);
 
 /** Intervalos (min): 1 h com jogo próximo (alerta em 2 h), 6 h nos demais (12 h). */
 const INTERVALO_COM_JOGO_MIN = 60;
@@ -33,7 +43,8 @@ export function motivoSemDados(args: {
 }): string | null {
   const { resultado, janela, agora, temDado } = args;
   if (temDado) return null;
-  if (resultado === null || resultado === undefined) return 'Sem dados disponíveis no momento';
+  if (resultado === null || resultado === undefined)
+    return 'Sem dados disponíveis no momento';
   if (SEM_COBERTURA.has(resultado) || resultado === 'atualizada')
     return 'Cobertura indisponível nesta versão.';
   if (resultado === 'fora-da-janela') {
@@ -42,7 +53,8 @@ export function motivoSemDados(args: {
       ? `${base} Começa em ${ddmm(janela.inicio)}.`
       : base;
   }
-  if (resultado === 'pausado-por-cota') return 'Atualização pausada por limite do provedor.';
+  if (resultado === 'pausado-por-cota')
+    return 'Atualização pausada por limite do provedor.';
   return 'Falha na última atualização.';
 }
 
@@ -66,5 +78,7 @@ export function frescorDaCompeticao(args: {
   )
     return 'falha';
   const intervalo = temJogoProximo ? INTERVALO_COM_JOGO_MIN : INTERVALO_SEM_JOGO_MIN;
-  return estaEmAlerta(agora, new Date(ultimaAtualizacao), intervalo) ? 'alerta' : 'normal';
+  return estaEmAlerta(agora, new Date(ultimaAtualizacao), intervalo)
+    ? 'alerta'
+    : 'normal';
 }

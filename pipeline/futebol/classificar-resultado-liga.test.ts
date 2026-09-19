@@ -11,14 +11,14 @@ describe('classificarResultadoLiga', () => {
     );
   });
   it('só partidas => atualizada', () => {
-    expect(classificarResultadoLiga({ linhas: [], partidas: [partida], descartes: [] })).toBe(
-      'atualizada',
-    );
+    expect(
+      classificarResultadoLiga({ linhas: [], partidas: [partida], descartes: [] }),
+    ).toBe('atualizada');
   });
   it('só tabela => atualizada', () => {
-    expect(classificarResultadoLiga({ linhas: [linha], partidas: [], descartes: [] })).toBe(
-      'atualizada',
-    );
+    expect(
+      classificarResultadoLiga({ linhas: [linha], partidas: [], descartes: [] }),
+    ).toBe('atualizada');
   });
   it('só descartes fora-do-recorte => atualizada (provedor cobre a liga)', () => {
     expect(

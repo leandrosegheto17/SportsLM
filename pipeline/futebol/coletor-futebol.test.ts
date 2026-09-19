@@ -384,7 +384,9 @@ describe('coletarFutebol — RN-22 faixas e custo declarado (COB-12, ADR-021)', 
       return registrarProvedor(adaptador, (c) => ({ codigo: c.id }));
     }
     const ligas = () => [
-      ...Array.from({ length: 7 }, (_, n) => campeonato({ id: `e${n}`, categoria: 'estadual' })),
+      ...Array.from({ length: 7 }, (_, n) =>
+        campeonato({ id: `e${n}`, categoria: 'estadual' }),
+      ),
       campeonato({ id: 'supercopa', categoria: 'supercopa' }),
     ];
 
@@ -395,7 +397,10 @@ describe('coletarFutebol — RN-22 faixas e custo declarado (COB-12, ADR-021)', 
         provedores: { 'provedor-teste': reg({ porMinuto: 30, porExecucao: 60 }) },
       });
       expect(r.resultados.filter((x) => x.tipo === 'atualizada')).toHaveLength(7);
-      expect(r.resultados[7]).toMatchObject({ competicaoId: 'supercopa', tipo: 'pausado-por-cota' });
+      expect(r.resultados[7]).toMatchObject({
+        competicaoId: 'supercopa',
+        tipo: 'pausado-por-cota',
+      });
     });
 
     it('sem porExecucao mantem porMinuto como teto', async () => {

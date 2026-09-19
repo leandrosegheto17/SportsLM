@@ -373,8 +373,10 @@ describe('DetalheCampeonato (UI-T06-01)', () => {
   });
 
   describe('COB-37: avisos de calendario e tabela parciais', () => {
-    const AVISO_CAL = 'Calendário parcial — a fonte gratuita informa poucos jogos por consulta.';
-    const AVISO_TAB = 'Tabela parcial — a fonte gratuita informa só parte da classificação.';
+    const AVISO_CAL =
+      'Calendário parcial — a fonte gratuita informa poucos jogos por consulta.';
+    const AVISO_TAB =
+      'Tabela parcial — a fonte gratuita informa só parte da classificação.';
 
     async function montar(extra: Record<string, unknown>) {
       const armazenamento = new ArmazenamentoFalso();

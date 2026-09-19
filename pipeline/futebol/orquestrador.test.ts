@@ -721,7 +721,9 @@ describe('executarFluxoFutebol — integração COB-20 (retenção, sem-dados, p
       agora: AGORA_ATIVA,
     });
     const linha = r.linhasLogPorLiga?.[0] ?? '';
-    expect(linha).toContain('liga=brasileirao-serie-a resultado=atualizada partidas=20 requisicoes=2');
+    expect(linha).toContain(
+      'liga=brasileirao-serie-a resultado=atualizada partidas=20 requisicoes=2',
+    );
     expect(linha).not.toMatch(/token|Bearer/i);
   });
 });
@@ -768,7 +770,9 @@ describe('executarFluxoFutebol — COB-35 (acúmulo, tabela parcial, foraDoRecor
       obterPartidas: async () => ({
         partidas: lote().partidas,
         inconsistencias: [],
-        ...(lote().foraDoRecorte !== undefined ? { foraDoRecorte: lote().foraDoRecorte! } : {}),
+        ...(lote().foraDoRecorte !== undefined
+          ? { foraDoRecorte: lote().foraDoRecorte! }
+          : {}),
       }),
     };
     return registrarProvedor<RefTeste>(adaptador, (c) => ({ competicaoId: c.id }));
@@ -812,10 +816,9 @@ describe('executarFluxoFutebol — COB-35 (acúmulo, tabela parcial, foraDoRecor
       estadoAnterior: c1r.novoEstado,
       agora: AGORA_ATIVA,
     });
-    expect(c2r.novoEstado.competicoes[COPA.id]!.partidas.map((p) => p.id).sort()).toEqual([
-      'A',
-      'B',
-    ]);
+    expect(c2r.novoEstado.competicoes[COPA.id]!.partidas.map((p) => p.id).sort()).toEqual(
+      ['A', 'B'],
+    );
   });
 
   it('Brasileirão (football-data) fica fora da mescla: partida ausente some', async () => {
@@ -869,17 +872,25 @@ describe('executarFluxoFutebol — COB-35 (acúmulo, tabela parcial, foraDoRecor
     const parcial = await executarFluxoFutebol({
       campeonatos: [PAULISTA],
       provedores: {
-        thesportsdb: reg(() => ({ linhas: [linha(p1, 1), linha(p2, 2)], partidas: [], parcial: true })),
+        thesportsdb: reg(() => ({
+          linhas: [linha(p1, 1), linha(p2, 2)],
+          partidas: [],
+          parcial: true,
+        })),
       },
       estadoAnterior: estadoFutebolVazio(),
       agora: AGORA_ATIVA,
     });
     expect(parcial.status.futebol[PAULISTA.id]?.resultado).toBe('atualizada');
-    expect(parcial.novoEstado.competicoes[PAULISTA.id]!.competicao.tabelaParcial).toBe(true);
+    expect(parcial.novoEstado.competicoes[PAULISTA.id]!.competicao.tabelaParcial).toBe(
+      true,
+    );
 
     const semMarca = await executarFluxoFutebol({
       campeonatos: [PAULISTA],
-      provedores: { thesportsdb: reg(() => ({ linhas: [linha(p1, 1), linha(p2, 2)], partidas: [] })) },
+      provedores: {
+        thesportsdb: reg(() => ({ linhas: [linha(p1, 1), linha(p2, 2)], partidas: [] })),
+      },
       estadoAnterior: estadoFutebolVazio(),
       agora: AGORA_ATIVA,
     });

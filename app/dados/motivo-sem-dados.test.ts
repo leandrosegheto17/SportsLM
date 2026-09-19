@@ -39,13 +39,18 @@ describe('frescorDaCompeticao', () => {
   it('nunca', () => expect(f({ ultimaAtualizacao: null })).toBe('nunca'));
   it('normal e alerta 2h/12h', () => {
     expect(f({})).toBe('normal');
-    expect(f({ ultimaAtualizacao: '2026-06-01T09:00:00Z', temJogoProximo: true })).toBe('alerta');
+    expect(f({ ultimaAtualizacao: '2026-06-01T09:00:00Z', temJogoProximo: true })).toBe(
+      'alerta',
+    );
     expect(f({ ultimaAtualizacao: '2026-06-01T09:00:00Z' })).toBe('normal');
     expect(f({ ultimaAtualizacao: '2026-05-31T23:00:00Z' })).toBe('alerta');
   });
   it('encerrada nunca em alerta', () => {
     expect(
-      f({ agora: new Date('2026-12-15T00:00:00Z'), ultimaAtualizacao: '2026-11-30T00:00:00Z' }),
+      f({
+        agora: new Date('2026-12-15T00:00:00Z'),
+        ultimaAtualizacao: '2026-11-30T00:00:00Z',
+      }),
     ).toBe('encerrada');
   });
   it('pausado e falha', () => {

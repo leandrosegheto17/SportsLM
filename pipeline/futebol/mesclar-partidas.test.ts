@@ -40,12 +40,15 @@ describe('mesclarPartidas', () => {
     expect(r[0]?.estadio).toBe('X');
   });
   it('ordena por data, null por último, depois id', () => {
-    const r = mesclarPartidas([], [
-      p('c', { dataHora: null }),
-      p('b', { dataHora: '2026-03-02T00:00:00Z' }),
-      p('a'),
-      p('0'),
-    ]);
+    const r = mesclarPartidas(
+      [],
+      [
+        p('c', { dataHora: null }),
+        p('b', { dataHora: '2026-03-02T00:00:00Z' }),
+        p('a'),
+        p('0'),
+      ],
+    );
     expect(r.map((x) => x.id)).toEqual(['0', 'a', 'b', 'c']);
   });
   it('idempotente', () => {

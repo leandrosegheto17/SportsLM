@@ -13,11 +13,7 @@ export function resolverTabelaPublicada(
   linhasAnteriores: readonly LinhaClassificacao[],
 ): LinhaClassificacao[] {
   if (formato === 'mata-mata') return [];
-  if (
-    formato === 'misto' &&
-    linhasNovas.length === 0 &&
-    linhasAnteriores.length > 0
-  ) {
+  if (formato === 'misto' && linhasNovas.length === 0 && linhasAnteriores.length > 0) {
     return [...linhasAnteriores];
   }
   return [...linhasNovas];

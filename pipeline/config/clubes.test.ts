@@ -24,13 +24,22 @@ describe('COB-03: idsProvedor.thesportsdb dos 20 clubes', () => {
 
   it('ids do SPK-07 para os 11 clubes novos', () => {
     const esperado: Record<string, string> = {
-      'atletico-mg': '134299', cruzeiro: '134294', bahia: '134293',
-      internacional: '134281', gremio: '134288', vitoria: '134280',
-      'athletico-pr': '134297', coritiba: '134298', 'rb-bragantino': '134736',
-      remo: '137818', chapecoense: '134464',
+      'atletico-mg': '134299',
+      cruzeiro: '134294',
+      bahia: '134293',
+      internacional: '134281',
+      gremio: '134288',
+      vitoria: '134280',
+      'athletico-pr': '134297',
+      coritiba: '134298',
+      'rb-bragantino': '134736',
+      remo: '137818',
+      chapecoense: '134464',
     };
     for (const [id, tsdb] of Object.entries(esperado)) {
-      expect(clubes.find((c) => c.id === id)?.idsProvedor[ID_PROVEDOR_THESPORTSDB]).toBe(tsdb);
+      expect(clubes.find((c) => c.id === id)?.idsProvedor[ID_PROVEDOR_THESPORTSDB]).toBe(
+        tsdb,
+      );
     }
   });
 });

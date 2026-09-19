@@ -485,7 +485,11 @@ function montarConfrontoMataMata(
     fase: faseAtual,
     proprioNome: nomeCurtoOuSigla(clubes, timeId).nomeCurto,
     adversarioNome: nomeDoLado(
-      resolverLado(primeira, primeira.mandanteId === timeId ? 'visitante' : 'mandante', clubes),
+      resolverLado(
+        primeira,
+        primeira.mandanteId === timeId ? 'visitante' : 'mandante',
+        clubes,
+      ),
     ),
     agregado,
     proximo,
@@ -798,7 +802,11 @@ export function DetalheCampeonato({
   });
   const frescor =
     ultimaAtualizacaoCompeticao !== null
-      ? calcularFrescor(agora, new Date(ultimaAtualizacaoCompeticao), temJogoHoje ? 60 : 360)
+      ? calcularFrescor(
+          agora,
+          new Date(ultimaAtualizacaoCompeticao),
+          temJogoHoje ? 60 : 360,
+        )
       : null;
   const textoAtualizadoHa = (frescor?.atualizadoHa ?? '').replace(/^atualizado\s*/i, '');
 
@@ -861,7 +869,9 @@ export function DetalheCampeonato({
       {competicao.tabelaParcial === true && !ehMataMata ? (
         <p className={estilos['resumoLinha']}>
           <span aria-hidden="true">⚠</span>{' '}
-          <span>Tabela parcial — a fonte gratuita informa só parte da classificação.</span>
+          <span>
+            Tabela parcial — a fonte gratuita informa só parte da classificação.
+          </span>
         </p>
       ) : null}
 

@@ -13,7 +13,9 @@ const base = (resultado: string) => ({
 
 describe('status.json resultado (COB-16)', () => {
   it('aceita sem-dados-provedor e os valores antigos', () => {
-    expect(statusIngestaoPublicoSchema.safeParse(base('sem-dados-provedor')).success).toBe(true);
+    expect(
+      statusIngestaoPublicoSchema.safeParse(base('sem-dados-provedor')).success,
+    ).toBe(true);
     expect(statusIngestaoPublicoSchema.safeParse(base('atualizada')).success).toBe(true);
   });
   it('rejeita valor desconhecido', () => {

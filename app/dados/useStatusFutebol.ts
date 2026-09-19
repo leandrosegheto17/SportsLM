@@ -17,7 +17,9 @@ const CONHECIDOS = [
 ];
 
 /** Valor desconhecido de `resultado` vira `falha` (nunca quebra a validação). */
-const resultadoTolerante = z.string().transform((v) => (CONHECIDOS.includes(v) ? v : 'falha'));
+const resultadoTolerante = z
+  .string()
+  .transform((v) => (CONHECIDOS.includes(v) ? v : 'falha'));
 
 export const statusFutebolSchema = z
   .object({
@@ -35,7 +37,9 @@ export const statusFutebolSchema = z
 
 export type StatusFutebol = z.infer<typeof statusFutebolSchema>;
 
-export function useStatusFutebol(cliente?: ClienteSnapshot): EstadoSnapshot<StatusFutebol> {
+export function useStatusFutebol(
+  cliente?: ClienteSnapshot,
+): EstadoSnapshot<StatusFutebol> {
   return useSnapshot<StatusFutebol>(
     URL_STATUS_INGESTAO,
     'status',

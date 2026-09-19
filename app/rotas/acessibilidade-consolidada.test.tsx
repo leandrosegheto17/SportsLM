@@ -1007,9 +1007,17 @@ describe('QA-01 — Simulação (T-09)', () => {
 // ---------------------------------------------------------------------------
 describe('COB-30 — Painel do time (T-05), estados da rodada 4', () => {
   const SEM_DADOS: { nome: string; resultado: string | null; texto: string }[] = [
-    { nome: 'pausado-por-cota', resultado: 'pausado-por-cota', texto: 'Atualização pausada por limite do provedor.' },
+    {
+      nome: 'pausado-por-cota',
+      resultado: 'pausado-por-cota',
+      texto: 'Atualização pausada por limite do provedor.',
+    },
     { nome: 'falha', resultado: 'falha', texto: 'Falha na última atualização.' },
-    { nome: 'sem-cobertura', resultado: 'sem-cobertura', texto: 'Cobertura indisponível nesta versão.' },
+    {
+      nome: 'sem-cobertura',
+      resultado: 'sem-cobertura',
+      texto: 'Cobertura indisponível nesta versão.',
+    },
     { nome: 'sem resultado', resultado: null, texto: '' },
   ];
   const FRESCOR: {
@@ -1019,9 +1027,25 @@ describe('COB-30 — Painel do time (T-05), estados da rodada 4', () => {
     res?: string;
     texto: string;
   }[] = [
-    { nome: 'alerta', ultima: '2026-09-04T23:00:00-03:00', fim: '2026-12-01', texto: 'ATUALIZADO HÁ 13 H — PODE ESTAR DESATUALIZADO' },
-    { nome: 'encerrada', ultima: '2026-03-22T20:00:00-03:00', fim: '2026-04-01', texto: 'ENCERRADA — DADOS DE 22/03' },
-    { nome: 'pausada', ultima: '2026-09-05T09:00:00-03:00', fim: '2026-12-01', res: 'pausado-por-cota', texto: 'ATUALIZAÇÃO PAUSADA POR LIMITE DO PROVEDOR — DADOS DE HÁ 3 H' },
+    {
+      nome: 'alerta',
+      ultima: '2026-09-04T23:00:00-03:00',
+      fim: '2026-12-01',
+      texto: 'ATUALIZADO HÁ 13 H — PODE ESTAR DESATUALIZADO',
+    },
+    {
+      nome: 'encerrada',
+      ultima: '2026-03-22T20:00:00-03:00',
+      fim: '2026-04-01',
+      texto: 'ENCERRADA — DADOS DE 22/03',
+    },
+    {
+      nome: 'pausada',
+      ultima: '2026-09-05T09:00:00-03:00',
+      fim: '2026-12-01',
+      res: 'pausado-por-cota',
+      texto: 'ATUALIZAÇÃO PAUSADA POR LIMITE DO PROVEDOR — DADOS DE HÁ 3 H',
+    },
   ];
 
   function entradas(ultima: string, fim: string) {
@@ -1092,7 +1116,10 @@ describe('COB-30 — Painel do time (T-05), estados da rodada 4', () => {
     return new ClienteSnapshot({ buscar });
   }
 
-  async function montar(clubeTeste: ClubeDeTeste, cli: ClienteSnapshot): Promise<Element> {
+  async function montar(
+    clubeTeste: ClubeDeTeste,
+    cli: ClienteSnapshot,
+  ): Promise<Element> {
     const armazenamento = armazenamentoComPreferencias({ timeId: 'sao-paulo' });
     const { container } = render(
       <MemoryRouter initialEntries={['/time']}>
@@ -1103,7 +1130,9 @@ describe('COB-30 — Painel do time (T-05), estados da rodada 4', () => {
               element={
                 <PainelTime
                   armazenamento={armazenamento}
-                  opcoesClubesPublicos={{ buscar: buscarClubesFake([meuClube(clubeTeste)]) }}
+                  opcoesClubesPublicos={{
+                    buscar: buscarClubesFake([meuClube(clubeTeste)]),
+                  }}
                   clienteSnapshot={cli}
                   agora={AGORA}
                 />
@@ -1146,7 +1175,9 @@ describe('COB-30 — Painel do time (T-05), estados da rodada 4', () => {
           const cli = cliente(
             f.ultima,
             f.fim,
-            f.res ? { 'copa-do-brasil': { resultado: f.res, ultimaAtualizacao: f.ultima } } : {},
+            f.res
+              ? { 'copa-do-brasil': { resultado: f.res, ultimaAtualizacao: f.ultima } }
+              : {},
           );
           const container = await montar(clubeTeste, cli);
           const carimbo = (await screen.findByText(f.texto)).closest('[data-estado]');
@@ -1170,8 +1201,10 @@ describe('COB-30 — Detalhe do campeonato (T-06), estados da rodada 4', () => {
     vi.useRealTimers();
   });
 
-  const AVISO_CAL = 'Calendário parcial — a fonte gratuita informa poucos jogos por consulta.';
-  const AVISO_TAB = 'Tabela parcial — a fonte gratuita informa só parte da classificação.';
+  const AVISO_CAL =
+    'Calendário parcial — a fonte gratuita informa poucos jogos por consulta.';
+  const AVISO_TAB =
+    'Tabela parcial — a fonte gratuita informa só parte da classificação.';
 
   type Variante = 'externo' | 'parcial' | 'grupos';
 
@@ -1198,7 +1231,10 @@ describe('COB-30 — Detalhe do campeonato (T-06), estados da rodada 4', () => {
             { ...linhaClassificacao('sao-paulo', 1, 12), grupo: 'A' },
             { ...linhaClassificacao('palmeiras', 2, 10), grupo: 'A' },
           ]
-        : [linhaClassificacao('palmeiras', 1, 55), linhaClassificacao('sao-paulo', 6, 42)];
+        : [
+            linhaClassificacao('palmeiras', 1, 55),
+            linhaClassificacao('sao-paulo', 6, 42),
+          ];
     const buscar = vi.fn(async (url: RequestInfo | URL) => {
       const chave = String(url);
       if (chave === URL_VERSAO) return buscarOk(versaoJson());
@@ -1255,7 +1291,10 @@ describe('COB-30 — Detalhe do campeonato (T-06), estados da rodada 4', () => {
                         armazenamento={armazenamento}
                         clienteSnapshot={cliente(variante)}
                         opcoesClubesPublicos={{
-                          buscar: buscarClubesFake([meuClube(clubeTeste), CLUBE_PALMEIRAS_FIXO]),
+                          buscar: buscarClubesFake([
+                            meuClube(clubeTeste),
+                            CLUBE_PALMEIRAS_FIXO,
+                          ]),
                         }}
                         agora={AGORA}
                       />
@@ -1270,13 +1309,18 @@ describe('COB-30 — Detalhe do campeonato (T-06), estados da rodada 4', () => {
           expect(screen.getByRole('table')).not.toBeNull();
           if (variante === 'parcial') {
             expect(screen.getByText(AVISO_CAL)).not.toBeNull();
-            expect(screen.getByText(AVISO_TAB).parentElement?.textContent).toContain('⚠');
+            expect(screen.getByText(AVISO_TAB).parentElement?.textContent).toContain(
+              '⚠',
+            );
           }
           if (variante === 'externo') {
             expect(document.body.textContent).toContain('Ituano FC');
             expect(document.body.textContent).not.toContain('externo-');
           }
-          await semViolacoesGraves(container, `Detalhe/${variante}/${tema}/${clubeTeste.nome}`);
+          await semViolacoesGraves(
+            container,
+            `Detalhe/${variante}/${tema}/${clubeTeste.nome}`,
+          );
         });
       }
     }

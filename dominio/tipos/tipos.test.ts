@@ -269,13 +269,21 @@ describe('dominio/tipos — validadores Zod de SDD §5 (DOM-01)', () => {
     });
 
     it('tabelaParcial é opcional: true/false válidos, ausente válido (ADR-024)', () => {
-      expect(competicaoSchema.safeParse({ ...competicaoValida, tabelaParcial: true }).success).toBe(true);
-      expect(competicaoSchema.safeParse({ ...competicaoValida, tabelaParcial: false }).success).toBe(true);
-      expect(competicaoSchema.parse(competicaoValida)).not.toHaveProperty('tabelaParcial');
+      expect(
+        competicaoSchema.safeParse({ ...competicaoValida, tabelaParcial: true }).success,
+      ).toBe(true);
+      expect(
+        competicaoSchema.safeParse({ ...competicaoValida, tabelaParcial: false }).success,
+      ).toBe(true);
+      expect(competicaoSchema.parse(competicaoValida)).not.toHaveProperty(
+        'tabelaParcial',
+      );
     });
 
     it('rejeita tabelaParcial não booleano', () => {
-      expect(competicaoSchema.safeParse({ ...competicaoValida, tabelaParcial: 'sim' }).success).toBe(false);
+      expect(
+        competicaoSchema.safeParse({ ...competicaoValida, tabelaParcial: 'sim' }).success,
+      ).toBe(false);
     });
 
     it('rejeita formato fora da união de 4 valores', () => {

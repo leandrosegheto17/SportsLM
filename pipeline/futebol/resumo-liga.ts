@@ -40,7 +40,10 @@ const MOTIVO_POR_TIPO: Record<InconsistenciaPartida['tipo'], MotivoDescarte> = {
 };
 
 export function montarResumoLiga(e: EntradaResumoLiga): ResumoLiga {
-  const descartes = Object.fromEntries(MOTIVOS.map((m) => [m, 0])) as Record<MotivoDescarte, number>;
+  const descartes = Object.fromEntries(MOTIVOS.map((m) => [m, 0])) as Record<
+    MotivoDescarte,
+    number
+  >;
   descartes['fora-do-recorte'] = e.foraDoRecorte;
   for (const i of e.inconsistencias) descartes[MOTIVO_POR_TIPO[i.tipo]] += 1;
   return { partidas: e.partidas, requisicoes: e.requisicoes, descartes };
