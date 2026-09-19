@@ -618,3 +618,54 @@ Checklist do Gate 1:
 - [x] Objetivo de negócio declarado e verificável (Q3 / RAN-07)
 - [x] Alinhamento com roadmap/orçamento (RN-13 preservada; sem prazo)
 - [x] Sem gap óbvio de capacidade
+
+---
+
+## Gate 4 — Registro de fechamento de deploy — 2026-09-18 (Lote 16 + Refatoração Lote-16)
+
+**Skill**: não é deste chapéu (`deploy-report-drafting` é do Validador) — registro
+de governança do Gate 4, só documentação de fechamento; **sem poder de veto**
+(ver `.claude/agents/gestor.md` e PIPELINE-CONVENTIONS.md §1). Input:
+`.md/DEPLOY.md`, entrada "2026-09-18 — Confirmação final: Lote 16 (cobertura de
+ligas, TheSportsDB) + Refatoração Lote-16 em produção via push a `main`".
+
+### Resultado
+
+**Sucesso.** Sem rollback, sem incidente.
+
+| Item | Valor |
+|---|---|
+| Ambiente | Vercel, produção (`https://sports-lm.vercel.app`), auto-deploy a cada push em `main`; sem staging |
+| Commits publicados | `e1e0b7c` (Lote 16), `cffefea` (REFAT-16-01/02/04/05), `0ec3238` (REFAT-16-03, prettier), docs `272f4fe` e `04baeb9`; fechamento de docs `a6715f3` (2026-09-18, enviado a `origin/main` nesta sessão) |
+| Confirmação | `tsc`/`eslint`/`prettier` limpos; `vitest` 112 arquivos / 1396 testes; `npm audit --omit=dev` 0; build + `verificar-segredos` limpos; site 200; `versao.json` 200; `ingestao.yml` 6 últimas execuções success; `build-publish.yml` success |
+| Data | 2026-09-18 |
+
+### O que foi publicado
+
+1. **Lote 16** — cobertura completa de ligas via TheSportsDB (recorte aprovado no
+   Gate 1 pontual de 2026-09-18, com ressalvas RS-1 a RS-4).
+2. **Refatoração Lote-16** — REFAT-16-01 a -05 Concluídas.
+
+### Ressalvas e pendências não bloqueantes — sem veto, apenas registro
+
+- **REFAT-16-06** (vite/vitest/esbuild em devDependencies): Pendente, prazo de 30
+  dias a partir de 2026-09-18.
+- **Sem evidência de dado real do TheSportsDB em produção ainda**: Libertadores,
+  Sul-Americana e Copa do Brasil aparecem `sem-cobertura`; demais estaduais, Copa
+  do Nordeste e Supercopa aparecem `fora-da-janela` — estados previstos no SDD.
+  Estaduais só se provam em 2027 (PR-09). Coerente com RS-1 do Gate 1 (estado
+  honesto, sem cobertura garantida).
+- **Ligação commit -> deployment Vercel não confirmada** por `vercel inspect`
+  (CLI indisponível); inferida por 200 + `versao.json` atualizado.
+
+### Checklist do Gate 4
+
+- [x] `DEPLOY.md` recebido com resultado declarado (sucesso)
+- [x] Commits e ambiente publicado identificados
+- [x] Lotes incluídos nomeados (Lote 16; Refatoração Lote-16)
+- [x] Pendências não bloqueantes registradas, sem veto
+
+### Veredito
+
+**Registrado.** Gate 4 é só fechamento — não há veredito de aprovação/
+reprovação aqui, conforme PIPELINE-CONVENTIONS.md §1 e `.claude/agents/gestor.md`.
