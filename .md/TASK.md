@@ -901,6 +901,27 @@ REFAT-16-06 (vite/vitest, `npm audit` alta/crítica) concluída e revalidada em 
 
 **Paralelizável em Refatoração Lote-16**: REFAT-16-01 e REFAT-16-03 são independentes; REFAT-16-02, -04 e -05 tocam `adaptador-thesportsdb.ts`/`coletor-futebol.ts` — sequenciar para evitar conflito de merge; REFAT-16-03 por último (formatação depois das demais).
 
+### Refatoração Lote-17
+
+Criada pelo Coordenador (2026-09-19) a partir da "pendência explícita para o Coordenador" do
+`.md/BLOCKERS.md`, Bloqueio 012: confirmar formalmente os critérios 1 (veículo jornalístico),
+2 (foco esportivo/não multi-esporte) e 5 (sem vínculo com apostas) da RN-19
+(`.md/PRD-TECNICO.md`) para os 7 candidatos adicionados a `config/fontes.json`: `ogol`,
+`superesportes`, `f1mania`, `motorsport-brasil`, `estadao-esportes`, `r7-esporte`, `torcedores`.
+Hoje só `robots.txt` e conteúdo real foram checados; Termos de Uso não foram lidos. Não reabre
+nenhum lote Validado; não redecompõe nada existente. Contexto de produção (2026-09-19):
+`superesportes` com 1 falha consecutiva; `terra-esportes` segue quebrada (sem RSS, Bloqueio 012).
+
+**Status do lote**: em aberto (nenhuma tarefa iniciada).
+
+| ID | Título | Chapéu | Descrição | Critério de aceite | Dep. | Prazo / Estimativa | Status |
+|---|---|---|---|---|---|---|---|
+| **REFAT-17-01** | Avaliação formal dos critérios 1/2/5 da RN-19 para os 7 candidatos (Bloqueio 012) | Coordenador (leitura/pesquisa e registro; sem código de produção) | Ler os Termos de Uso/política editorial de cada uma das 7 fontes, além de `robots.txt` e conteúdo real já checados, e emitir veredito por critério. `torcedores` é o mais incerto no critério 1 (rede de blogs, não redação jornalística). `f1mania` e `motorsport-brasil` violam deliberadamente o critério 2 (multi-esporte): registrar como exceção documentada, não como falha | Registro criado em `.md/AVALIACAO-FONTES-RN19.md` (novo; ADR-007 é imutável, então não é editado) com, para **cada uma das 7 fontes** e **cada critério 1, 2 e 5**, um veredito `conforme` / `conforme com ressalva` / `não conforme` **com evidência citada** (URL + trecho/data da consulta dos Termos, ou `robots.txt`/conteúdo); exceções do critério 2 (`f1mania`, `motorsport-brasil`) marcadas como aceitas com justificativa; Bloqueio 012 em `.md/BLOCKERS.md` atualizado (pendência marcada resolvida, apontando para o registro, e lista das fontes `não conforme`, se houver); toda fonte `não conforme` em qualquer critério (exceto a exceção aceita do critério 2) gera a tarefa REFAT-17-02 ativada, com a fonte nomeada | — | 1 dia | Pendente |
+| **REFAT-17-02** | (Condicional) Remover/ajustar no catálogo a fonte reprovada em REFAT-17-01 | Backend (dado/config) | **Só existe se REFAT-17-01 emitir `não conforme`.** Remover a fonte de `config/fontes.json` ou ajustá-la (ex.: restringir a feeds conformes), e atualizar `.length(N)` em `config/fontes.schema.ts`/`pipeline/publicacao/gerador-snapshots.ts` e testes de catálogo, como feito no Bloqueio 012. Uma tarefa por fonte reprovada (sufixo a, b, ...). Decisão de reduzir o catálogo abaixo do mínimo da RN-19 vai ao Gestor via `BLOCKERS.md` | Fonte reprovada ausente (ou ajustada) em `config/fontes.json`; `.length(N)` coerente; `typecheck`, `lint`, `test` e `build` limpos; ADR-007/Bloqueio 012 referenciam a decisão | REFAT-17-01 (veredito `não conforme`) | 0,5 dia por fonte | Pendente (condicional; cancelar se nenhuma fonte reprovada) |
+| **REFAT-17-03** | (Opcional) Acompanhar falha do `superesportes` | Validador/Executor (investigação) | `superesportes` está com 1 falha consecutiva em produção (2026-09-19). Só investigar se a falha **persistir por 3 ciclos consecutivos** em `app/public/dados/ingestao/status.json`; antes disso, sem ação. Verificar URL do feed, mudança de formato e bloqueio por User-Agent (não tratar como o caso `terra-esportes` sem evidência) | Se 3 ciclos consecutivos com `resultado: "falha"`: causa raiz registrada em `.md/BLOCKERS.md` com evidência de requisição real, e correção de URL em `config/fontes.json` ou tarefa de remoção (via REFAT-17-02). Se a fonte se recuperar antes: tarefa cancelada com nota | — (independente de REFAT-17-01/02) | 0,5 dia, só se acionada | Pendente (opcional) |
+
+**Paralelizável em Refatoração Lote-17**: REFAT-17-01 e REFAT-17-03 são independentes; REFAT-17-02 depende do veredito de REFAT-17-01 (se `superesportes` for reprovada ou remoção decidida em -03, reaproveitar a mesma tarefa condicional). Nenhuma toca código de produção, exceto -02/-03 quando acionadas.
+
 ---
 
 ## 4. Dependências e Ordem de Execução
