@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-19T01:24:07.934Z"
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -619,11 +619,64 @@
         "inicio": "2026-02-18",
         "fim": "2026-11-04"
       },
-      "provedor": null,
-      "ultimaAtualizacao": null
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
+      "clubeId": "gremio",
+      "status": "em-andamento",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": [
+      {
+        "id": "2570522",
+        "competicaoId": "copa-do-brasil",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "gremio",
+        "visitanteId": "internacional",
+        "dataHora": "2026-09-03",
+        "horarioDefinido": true,
+        "estadio": "Arena do Grêmio",
+        "status": "finalizada",
+        "placar": {
+          "mandante": 3,
+          "visitante": 1
+        }
+      },
+      {
+        "id": "2599711",
+        "competicaoId": "copa-do-brasil",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "gremio",
+        "visitanteId": "atletico-mg",
+        "dataHora": "2026-11-01",
+        "horarioDefinido": true,
+        "estadio": "Arena do Grêmio",
+        "status": "agendada",
+        "placar": null
+      }
+    ]
+  },
+  {
+    "competicao": {
+      "id": "sul-americana",
+      "nome": "Copa Sul-Americana",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-03-03",
+        "fim": "2026-11-21"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
+    },
+    "participacao": {
+      "competicaoId": "sul-americana",
       "clubeId": "gremio",
       "status": "sem-dados",
       "faseAtual": null,
@@ -642,7 +695,7 @@
         "inicio": "2026-01-14",
         "fim": "2026-03-22"
       },
-      "provedor": null,
+      "provedor": "thesportsdb",
       "ultimaAtualizacao": null
     },
     "participacao": {

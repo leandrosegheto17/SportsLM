@@ -112,18 +112,6 @@
     }
   },
   {
-    "id": "ogol",
-    "nome": "ogol.com.br",
-    "fixa": false,
-    "esportesCobertos": [
-      "futebol"
-    ],
-    "verificacao": {
-      "estado": "pendente",
-      "em": null
-    }
-  },
-  {
     "id": "superesportes",
     "nome": "Superesportes",
     "fixa": false,
@@ -210,19 +198,6 @@
       "atletismo",
       "futsal",
       "futebol-americano"
-    ],
-    "verificacao": {
-      "estado": "pendente",
-      "em": null
-    }
-  },
-  {
-    "id": "torcedores",
-    "nome": "Torcedores.com",
-    "fixa": false,
-    "esportesCobertos": [
-      "futebol",
-      "basquete"
     ],
     "verificacao": {
       "estado": "pendente",

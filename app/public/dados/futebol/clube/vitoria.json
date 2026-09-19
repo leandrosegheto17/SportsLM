@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-19T01:24:07.934Z"
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -619,8 +619,8 @@
         "inicio": "2026-02-18",
         "fim": "2026-11-04"
       },
-      "provedor": null,
-      "ultimaAtualizacao": null
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
@@ -630,7 +630,24 @@
       "resultadoFinal": null,
       "resumo": null
     },
-    "partidas": []
+    "partidas": [
+      {
+        "id": "2570523",
+        "competicaoId": "copa-do-brasil",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "vitoria",
+        "visitanteId": "vasco",
+        "dataHora": "2026-09-03",
+        "horarioDefinido": true,
+        "estadio": "Estádio Manoel Barradas",
+        "status": "finalizada",
+        "placar": {
+          "mandante": 0,
+          "visitante": 2
+        }
+      }
+    ]
   },
   {
     "competicao": {

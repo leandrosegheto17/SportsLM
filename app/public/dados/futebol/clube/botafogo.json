@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-19T01:24:07.934Z"
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -619,11 +619,57 @@
         "inicio": "2026-02-18",
         "fim": "2026-11-04"
       },
-      "provedor": null,
-      "ultimaAtualizacao": null
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
+      "clubeId": "botafogo",
+      "status": "sem-dados",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": []
+  },
+  {
+    "competicao": {
+      "id": "libertadores",
+      "nome": "Copa Libertadores da América",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-02-03",
+        "fim": "2026-11-28"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
+    },
+    "participacao": {
+      "competicaoId": "libertadores",
+      "clubeId": "botafogo",
+      "status": "sem-dados",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": []
+  },
+  {
+    "competicao": {
+      "id": "sul-americana",
+      "nome": "Copa Sul-Americana",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-03-03",
+        "fim": "2026-11-21"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
+    },
+    "participacao": {
+      "competicaoId": "sul-americana",
       "clubeId": "botafogo",
       "status": "sem-dados",
       "faseAtual": null,

@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-19T01:24:07.934Z"
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -611,6 +611,43 @@
   },
   {
     "competicao": {
+      "id": "libertadores",
+      "nome": "Copa Libertadores da América",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-02-03",
+        "fim": "2026-11-28"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
+    },
+    "participacao": {
+      "competicaoId": "libertadores",
+      "clubeId": "palmeiras",
+      "status": "em-andamento",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": [
+      {
+        "id": "2606267",
+        "competicaoId": "libertadores",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "fluminense",
+        "visitanteId": "palmeiras",
+        "dataHora": "2026-10-13",
+        "horarioDefinido": true,
+        "estadio": "Estádio do Maracanã",
+        "status": "agendada",
+        "placar": null
+      }
+    ]
+  },
+  {
+    "competicao": {
       "id": "copa-do-brasil",
       "nome": "Copa do Brasil",
       "temporada": 2026,
@@ -619,18 +656,48 @@
         "inicio": "2026-02-18",
         "fim": "2026-11-04"
       },
-      "provedor": null,
-      "ultimaAtualizacao": null
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-09-19T06:12:56.005Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
       "clubeId": "palmeiras",
-      "status": "sem-dados",
+      "status": "em-andamento",
       "faseAtual": null,
       "resultadoFinal": null,
       "resumo": null
     },
-    "partidas": []
+    "partidas": [
+      {
+        "id": "2570521",
+        "competicaoId": "copa-do-brasil",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "santos",
+        "visitanteId": "palmeiras",
+        "dataHora": "2026-09-03",
+        "horarioDefinido": true,
+        "estadio": "Estádio Urbano Caldeira",
+        "status": "finalizada",
+        "placar": {
+          "mandante": 0,
+          "visitante": 0
+        }
+      },
+      {
+        "id": "2599514",
+        "competicaoId": "copa-do-brasil",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "vasco",
+        "visitanteId": "palmeiras",
+        "dataHora": "2026-11-01",
+        "horarioDefinido": true,
+        "estadio": "Estádio São Januário",
+        "status": "agendada",
+        "placar": null
+      }
+    ]
   },
   {
     "competicao": {
