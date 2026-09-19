@@ -1,6 +1,9 @@
 # SDD.md — SportsLM
 
-**Status**: entregue para revisão do usuário — Loop B, rodada 1 (2026-09-05)
+**Status**: entregue para revisão do usuário — Loop B, rodada 1 (2026-09-05); **adição
+pontual "Cobertura completa de ligas" (2026-09-18)**, que altera só os pontos marcados
+"[2026-09-18]" nas Seções 2.2, 2.4, 2.6, 4, 5.2, 5.4, 6.1 e 7 e cria os ADR-019, 020 e
+021 — o restante do documento não foi revisado nesta rodada.
 **Autor**: Coordenador (chapéu Software Architect)
 **Base**: `.md/PRD-TECNICO.md` (rodada 3, liberado), `.md/PRD.md` (rodada 3),
 `.md/CTO-REVIEW.md` (Gate 1 + adendos das rodadas 2 e 3).
@@ -158,6 +161,18 @@ existir 30 itens da fonte restante. Regra: reter 7 dias com teto de **60 itens p
 fonte** → ≤ 300 itens × ~350 bytes ≈ 105 KB brutos, ~30 KB comprimidos. Dentro do
 orçamento de ADR-016.
 
+**[2026-09-18] Extensões de contrato da cobertura de ligas** (concordância exigida por
+GUARDRAILS §5; todas **aditivas**, nenhum arquivo ou caminho novo):
+- `Partida.externo?` em `clube/<slug>.json` — adversário fora da Série A como dado de
+  exibição ([ADR-019](adr/019-adversario-fora-da-serie-a-como-dado-de-exibicao-na-partida.md)).
+- `ingestao/status.json`, entrada `futebol[<competicaoId>]`: novo `resultado`
+  `sem-dados-provedor`, contagens por liga e diagnósticos (§5.4). O motivo "sem dados"
+  exibido na tela é **derivado** de `resultado` + janela — não há campo de texto no dado.
+- `config/campeonatos-2026.json` ganha `refProvedor` por competição
+  ([ADR-020](adr/020-cobertura-de-ligas-por-configuracao-participantes-tabela-e-fase.md));
+  o orçamento de tamanho (< 4 KB) deve ser reverificado (COB-02).
+- `brasileirao.json` **não muda**.
+
 **Revalidação**: a SPA busca `versao.json` na abertura e a cada 5 minutos enquanto a
 aba está visível; se algum hash mudou, rebusca só o arquivo correspondente. Sem
 sondagem cega, sem WebSocket.
@@ -202,6 +217,32 @@ saldo = GP − GC; número de clubes na tabela igual ao configurado; nenhuma par
 data anterior ao início da competição; nenhuma partida `finalizada` sem placar. Falha
 em qualquer uma → descarta o lote da competição e mantém o anterior.
 
+**[2026-09-18] Fluxo 2 estendido por liga (FL-08, ADR-019/020/021).** O laço "para cada
+competição" passa a ser, em ordem:
+
+```
+ciclo (a cada 30 min, cadência global acima inalterada)
+  ├─ ordena ligas por RN-22: [janela ativa + jogo ≤48h] → [janela ativa] → [fora: não consulta]
+  │    (dentro da faixa: categoria do ADR-002)
+  └─ para cada liga — TUDO dentro de um try/catch por liga (ADR-021 item 5)
+       ├─ provedor 429/limite ──> suspende o provedor no ciclo; liga e restantes = pausado-por-cota
+       ├─ espaçador (≤28 req/min, ≥2,2 s entre chamadas, serial) ──> partidas [+ tabela conforme política]
+       │    política de tabela pelo `formato`: mata-mata nunca · grupos/pontos-corridos sempre · misto tenta (ADR-020 item 3)
+       ├─ partida: um lado Série A por id + lado desconhecido ──> mantém com `externo` (ADR-019)
+       │           nenhum lado Série A ──> descarta (fora-do-recorte, contado)
+       │           clube Série A sem id (diagnóstico por nome) ──> descarta + `clube-serie-a-sem-id`
+       │           status fora de NS/FT/adiada ──> agendada (futura) ou aguardando-resultado (passada); nunca "ao vivo"
+       ├─ eventos e tabela vazios ──> resultado `sem-dados-provedor` (não carimba frescor)
+       ├─ consistência por formato (ADR-020 item 5); inconsistente ──> descarta, mantém anterior
+       ├─ misto com tabela nova vazia ──> retém tabela anterior (tabela final de grupos)
+       ├─ derivador: eliminação só com evidência (ADR-020 item 7)
+       ├─ cruza participantes Série A por id × `clubes` da config ──> diagnóstico `participante-nao-configurado`
+       └─ grava resultado, contagens e `ultimaAtualizacao` DA LIGA
+```
+
+Exceção em qualquer passo de uma liga → `falha` só dela, dado anterior mantido, próxima
+liga segue.
+
 ### 2.5 Fluxo 3 — Leitura na tela (FL-02, FL-03, FL-04)
 
 ```
@@ -227,7 +268,10 @@ alerta com "pode estar desatualizado" (CA-17.2/CA-08.11). Nunca houve atualizaç
 
 Tudo que muda de ano é arquivo, não código: lista de clubes da Série A, lista de
 campeonatos com janelas e formato, zonas da tabela, lista dos 15 esportes, catálogo de
-fontes, léxico de classificação, limiar de deduplicação. A virada de temporada
+fontes, léxico de classificação, limiar de deduplicação. **[2026-09-18]** Isso inclui
+agora, por competição, o `refProvedor` (id da liga no provedor + temporada do provedor) e
+a lista verificada de participantes das continentais — nenhuma competição nova exige
+código (ADR-020). A virada de temporada
 (RN-12/CA-06.5) é detectada comparando a `temporada` corrente da configuração com a
 que está gravada nas preferências locais.
 
@@ -317,6 +361,10 @@ ADRs são imutáveis. Mudança de decisão gera novo ADR com `Superseded by` no 
 | [015](adr/015-perfil-de-prototipo-e-gatilhos-de-promocao-a-produto.md) | Perfil de protótipo e gatilhos de promoção a produto | Aceito | RNF-07 a RNF-15, RAN-20 |
 | [016](adr/016-matriz-de-navegadores-e-orcamento-de-desempenho.md) | Matriz de navegadores e orçamento de desempenho | Aceito | RNF-01, RNF-04, M3 |
 | [017](adr/017-cor-de-identidade-derivada-do-clube-com-contraste-pre-computado.md) | Cor de identidade derivada do clube, com paleta acessível pré-computada no pipeline | Aceito | RNF-03, CA-06.1 |
+| [018](adr/018-publicacao-de-snapshots-publicos-direto-em-main-para-vercel.md) | Publicação de snapshots públicos direto em `main` para a Vercel | Aceito | RNF-05, RNF-13 (entrada adicionada ao índice em 2026-09-18; ADR já existia) |
+| [019](adr/019-adversario-fora-da-serie-a-como-dado-de-exibicao-na-partida.md) | Adversário fora da Série A como dado de exibição da `Partida` | Aceito | RF-21, RN-23 |
+| [020](adr/020-cobertura-de-ligas-por-configuracao-participantes-tabela-e-fase.md) | Cobertura de ligas por configuração: ref. do provedor, participantes, tabela e fase | Aceito | RF-20, RF-22, RF-25, RN-05 |
+| [021](adr/021-cota-do-provedor-espacamento-prioridade-e-isolamento-por-liga.md) | Cota do provedor: espaçamento, prioridade por liga e isolamento de falha | Aceito | RF-24, RNF-17, RNF-18, RN-22 |
 
 **Nota da rodada 2 do Loop B (2026-09-05)**: o stakeholder escolheu a direção visual
 "Camisa", em que a identidade do clube governa a tela. Isso tornou a cor do clube uma
@@ -413,6 +461,7 @@ interface Competicao {
   janela: { inicio: string; fim: string };          // controla consumo de cota
   provedor: string | null;                          // null = sem cobertura (CA-07.2)
   ultimaAtualizacao: string | null;
+  tabelaParcial?: boolean;                          // ADR-024: fonte gratuita informa só parte da tabela
 }
 
 interface ParticipacaoClube {
@@ -432,7 +481,14 @@ interface Partida {
   estadio: string | null;
   status: 'agendada' | 'aguardando-resultado' | 'finalizada' | 'adiada' | 'cancelada';
   placar: { mandante: number; visitante: number } | null;
+  // [2026-09-18] ADR-019: presente só quando um lado NÃO é da Série A. O id desse lado é
+  // sintético `externo-<idTeam do provedor>`; o nome é o do provedor (texto puro, ≤ 60).
+  externo?: { lado: 'mandante' | 'visitante'; nome: string };
 }
+
+// [2026-09-18] ADR-020: entrada de configuração (CFG-03), não o runtime `Competicao`.
+// `refProvedor` obrigatório se `provedor !== null`; `id` = código da competição NO provedor.
+interface CampeonatoConfig { /* ... */ refProvedor?: { id: string; temporada?: string } }
 
 interface LinhaClassificacao {
   competicaoId: string; grupo: string | null; posicao: number; clubeId: string;
@@ -448,6 +504,13 @@ Invariantes: partida encerrada sem resultado ingerido fica em "próximas" com
 omite o campeonato (CA-07.2); a ordenação de campeonatos de CA-07.4 é
 `em-andamento` (pela data do próximo jogo) → `nao-iniciado` → `eliminado` →
 `concluido` → `sem-dados`.
+
+**[2026-09-18] Invariantes novos**: `externo` ⇔ exatamente um id `externo-*` (ADR-019);
+`LinhaClassificacao` só existe para clube da Série A (tabela publicada é parcial em
+ligas com adversários externos); em `formato: 'misto'` a tabela de grupos é **retida**
+quando o provedor deixa de devolvê-la (ADR-020 item 4); `eliminado` só com derrota
+comprovada (ADR-020 item 7); nunca zeros no lugar de ausência (RN-21) — sem dado é
+`sem-dados` com motivo derivado do status da liga.
 
 ### 5.3 Estado local (nunca sai do dispositivo)
 
@@ -481,6 +544,19 @@ Por fonte e por provedor: `ultimaTentativa`, `resultado` (`ok` | `falha` | `pula
 `distribuicaoClassificacao`, `gruposFormados`. É o único mecanismo de diagnóstico do
 protótipo, e alimenta diretamente os estados visíveis de RF-17.
 
+**[2026-09-18] Por liga de futebol** (`futebol[<competicaoId>]`, ADR-021 item 8):
+`resultado` ∈ `atualizada` | `inconsistente` | `fora-da-janela` | `sem-cobertura` |
+`sem-dados-provedor` (novo: provedor respondeu, sem eventos nem tabela) |
+`provedor-nao-registrado` | `pausado-por-cota` | `falha`; `ultimaAtualizacao` (só
+avança em `atualizada`); `partidas` e `requisicoes` (inteiros); `descartes` (contagens por
+motivo: `fora-do-recorte`, `clube-serie-a-sem-id`, `status-desconhecido`, …);
+`participantesNaoConfigurados` (ids de clube). **Mapeamento resultado → motivo exibido**
+(UX-SPEC T-05): `sem-cobertura`/`sem-dados-provedor`/`provedor-nao-registrado` →
+"cobertura indisponível nesta versão"; `fora-da-janela` → "fora da janela da competição";
+`pausado-por-cota` → "atualização pausada por limite do provedor"; `falha`/`inconsistente`
+→ "falha na última atualização". Sem segredo, sem conteúdo de terceiro além de ids e
+contagens.
+
 ---
 
 ## 6. Riscos Técnicos, Gargalos e Dívida Aceita
@@ -496,13 +572,15 @@ protótipo, e alimenta diretamente os estados visíveis de RF-17.
 | **RT-05** | **Classificação por regras erra o esporte** (sem IA por decisão) | Média | Item errado na seção de favoritos degrada a confiança na personalização (M2) | Cascata com feeds mono-esporte fixados antes de qualquer inferência; queda para `geral`, que nunca entra na seção de favoritos; taxa de `geral` medida por execução (ADR-008) | Taxa de `geral` > 35% → revisar léxico/feeds |
 | **RT-06** | **Fase e eliminação em mata-mata** (P8): provedor pode não expor | Média | Status errado no painel é pior que status ausente | Derivação a partir das partidas; ambiguidade → "sem dados" (ADR-006) | Parte do SP-01 |
 | **RT-07** | **Agendador de CI é melhor esforço**: execução pode atrasar ou ser pulada | Média | Frescor pior que o alvo em horário de pico | Carimbo sempre a partir do dado real; alerta de 2× absorve uma execução perdida; publicação só quando há mudança | Atraso recorrente > 2× → migrar para cron de borda (ADR-002) |
-| **RT-08** | **Cota do provedor** (R2) | Baixa hoje, Média depois | Com football-data.org o custo é de 2 requisições por execução — folga enorme. O risco só aparece com um segundo provedor: no plano gratuito de 100 req/dia da API-Football, 8 competições × 2 chamadas × 6 execuções ≈ 96/dia, no limite | Prioridade fixa + janela de calendário + suspensão com aviso na tela (CA-16.4) | O SP-01 precisa medir **cota**, não só cobertura |
+| **RT-08** | **Cota do provedor** (R2) — **[2026-09-18] atualizado**: o segundo provedor entrou (TheSportsDB, 30 req/min, ~20 chamadas/ciclo com 7 ligas); mitigado por ADR-021, residual em RT-15/RT-16 | Baixa hoje, Média depois | Com football-data.org o custo é de 2 requisições por execução — folga enorme. O risco só aparece com um segundo provedor: no plano gratuito de 100 req/dia da API-Football, 8 competições × 2 chamadas × 6 execuções ≈ 96/dia, no limite | Prioridade fixa + janela de calendário + suspensão com aviso na tela (CA-16.4) | O SP-01 precisa medir **cota**, não só cobertura |
 | **RT-09** | **`localStorage` indisponível** (modo privado, política de armazenamento) | Média | Preferências e cenário não persistem | Modo memória com aviso explícito (CA-11.9/CA-13.3) | — |
 | **RT-10** | **Mudança de formato de campeonato no meio da temporada** (CA-08.5) | Baixa | Tabela de grupo precisa continuar acessível após virar mata-mata | `formato: 'misto'` e retenção da tabela final do grupo | — |
 | **RT-11** | **Injeção via conteúdo de terceiro** (XSS pelo feed) | Média (probabilidade baixa, impacto alto) | Execução de script na origem do produto | Sanitização na ingestão + renderização como texto + CSP + proibição de `dangerouslySetInnerHTML` (ADR-011) | Qualquer achado do Validador é bloqueante |
 | **RT-12** | **Licenciamento** (R1/R4): termos das fontes não foram lidos por ninguém com competência jurídica | Média no protótipo / **Alta se virar produto** | Exposição jurídica | Uso não comercial, só título+resumo+link, sem imagem, sem texto integral, atribuição sempre visível (RN-02/RN-17) | **Revisão jurídica obrigatória antes de qualquer lançamento** — dono é o stakeholder, fora do roster |
 | **RT-13** | **Sem `frame-ancestors`** no hosting estático | Baixa | Produto pode ser embutido em iframe de terceiro | Não há sessão nem ação de estado a sequestrar; débito registrado | Migrar de hosting ou promover a produto |
 | **RT-14** | **Telemetria depende de terceiro e de plano gratuito não confirmado** | Baixa | Sem telemetria, M1-M4 ficam inverificáveis | Interruptor de build; duas opções gratuitas mapeadas | **Spike SP-04** |
+| **RT-15** | **[2026-09-18] Limite de eventos por chamada do TheSportsDB gratuito (P12)**: SPK-01 registrou "10 resultados por endpoint"; o adaptador usa `eventspastleague`/`eventsnextleague`, cujo teto real por liga é **não confirmado** | **Alta** (para Copa do Brasil/continentais) | Calendário truncado: próximo jogo do clube ausente; partidas de meses atrás invisíveis; derivador poderia rotular "eliminado" por ausência | Derivador conservador (ADR-020 item 7); **SPK-06** mede o teto real; contingência escalonada em ADR-021 item 7 (`eventsseason` → por clube → lacuna assumida) | SPK-06 mostrar teto < ~15 por chamada ⇒ novo ADR antes de codificar contingência |
+| **RT-16** | **[2026-09-18] Chave demo pública compartilhada**: 429 pode ocorrer fora do nosso orçamento; e o provedor pode remover/limitar a chave | Média | Ligas ficam `pausado-por-cota` ou `falha` por períodos; cobertura cai para "sem dados" | Espaçador (≤28/min), suspensão por ciclo, dado anterior mantido, motivo honesto na tela (ADR-021); nenhuma fonte paga (RN-13) | Meta ≥ 80% de pares clube-competição com dado real (I-28) não atingida em 2 semanas ⇒ reportar ao Gestor (decisão de negócio, não do Coordenador) |
 
 ### 6.2 Gargalos de desempenho e escalabilidade
 
@@ -600,6 +678,13 @@ publicação. Segredo encontrado = falha da construção, sem exceção.
    desligada).
 6. **Sem imagem de terceiro** (I-14) e **sem texto integral** (RN-02) — implementado
    no pipeline, não confiado à disciplina da interface.
+7. **[2026-09-18] Nome de adversário externo é entrada de terceiro** (ADR-019): na
+   ingestão, aparado, 1-60 caracteres, sem caracteres de controle nem marcação, validado
+   por Zod (`externo.nome`); descarte com registro se inválido; renderizado só como nó
+   de texto. A chave do TheSportsDB (`123`) é **pública, sem segredo** — não entra no
+   cofre nem é tratada como credencial, mas nenhuma chave paga/pessoal pode ser
+   adicionada sem aprovação (RN-13). Mensagens de erro do provedor gravadas em
+   `status.json` nunca incluem corpo de resposta integral.
 
 ### 7.5 Isolamento
 
@@ -640,6 +725,9 @@ publicação. Segredo encontrado = falha da construção, sem exceção.
 6. Nenhum dado de preferência trafegando para fora do dispositivo.
 7. Nenhuma chamada a terceiro a partir do navegador além do beacon de telemetria.
 8. Auditoria de dependências limpa nas dependências de runtime.
+9. **[2026-09-18]** `externo.nome` validado/limitado e renderizado só como texto; nenhuma
+   mensagem de `status.json` com corpo de resposta do provedor; nenhuma dependência
+   nova para espaçamento de chamadas (implementação própria, sem biblioteca).
 9. Nenhum acesso a fonte fora do catálogo configurado, e nenhum acesso por scraping.
 
 ---

@@ -550,3 +550,71 @@ estratégica — reforça, de novo, o risco já aceito em ADR-015 (sem alerta
 automático de falha de CI/dado ausente, o produto só descobre esse tipo de
 problema por sintoma relatado pelo usuário, com atraso). Fica como reforço de
 prioridade futura, não como bloqueio.
+
+---
+
+## Gate 1 (recorte pontual) — Cobertura completa de ligas via TheSportsDB — 2026-09-18
+
+**Skill**: `tech-strategy-review` (escopo: uma demanda, não o projeto).
+**Input**: demanda "estender a integração TheSportsDB a todos os estaduais, Copa do
+Brasil e continentais" (Loop A, reabertura pontual — caso (b) de PLANNING-FLOW.md);
+`PRD.md` (Q3, RAN-07, P2b, P8, R2, R5), `PRD-TECNICO.md` (RF-07/08/16/17, RN-05, RN-13),
+`GUARDRAILS.md` §3/§5, código de `pipeline/futebol/adaptador-thesportsdb.ts` e
+`orquestrador.ts`, `config/campeonatos-2026.json`.
+
+**Atualização (rodada 2, mesmo dia)**: o stakeholder reduziu o recorte a Copa do
+Brasil, Libertadores, Sul-Americana, Paulista, Carioca, Gaúcho e Mineiro (demais
+estaduais, Copa do Nordeste e Supercopa ficam fora), aceitou a meta de 80% com lacuna
+honesta e, sobre continentais, respondeu apenas "Sim" (lido de forma conservadora: assumir
+lacuna, sem fonte paga/cadastro/API alternativa — a confirmar). Redução de escopo:
+**veredito inalterado** (as ressalvas abaixo seguem valendo; RS-1 passa a valer para
+essa lista fechada).
+
+### Objetivo de negócio
+
+Cumprir a promessa já aceita do PRD (Q3: "todos os campeonatos do ano, incluindo
+estaduais e regionais") que o painel do time mostre a temporada inteira do clube
+sem sair para outro site — o que sustenta a hipótese de valor (PRD §1) e M3. Hoje o
+painel tem dado real só para Brasileirão (football-data.org) + Paulista/Carioca
+(SPK-01); Copa do Brasil, Libertadores, Sul-Americana e demais estaduais aparecem
+como "sem dados" (RN-05).
+
+### Alinhamento e plausibilidade
+
+- **Alinhado**: reduz o principal vazio de cobertura do diferencial do painel, sem
+  novo custo (RN-13), sem IA, sem ao vivo, sem conta.
+- **Custo/prazo**: reaproveita o adaptador e a porta `ProvedorFutebol` (ADR-006); o
+  trabalho é configuração + mapeamento de ids + tratamento de mata-mata/adversário
+  fora da Série A. Compatível com um protótipo sem prazo.
+- **Fatos técnicos que limitam a promessa (evidência no código)**: (a) o adaptador
+  descarta toda partida em que um dos clubes não esteja na Série A 2026
+  (`clube-nao-mapeado`) — Copa do Brasil (fases iniciais) e continentais têm
+  adversários fora da Série A, então sem mudança o painel mostraria buracos; (b) as
+  listas `clubes` de Libertadores/Sul-Americana estão vazias e Mineiro não tem id de
+  liga localizado; (c) os estaduais 2026 já encerraram
+  (janela até 2026-03-22; `foraDaJanela` só reabre em 2027-01-14), então hoje só
+  Copa do Brasil e continentais estão vivas; (d) a extensão de cobertura amplia a
+  superfície de falha silenciosa já aceita em ADR-015 (sem alerta de CI).
+- **Termos**: chave demo pública "123", 30 req/min; uso não-comercial aceitável no
+  protótipo (RNF-08, I-22); reabre R1 se virar produto.
+
+### Gap de roster
+
+Nenhum novo. Verificação jurídica dos termos do TheSportsDB segue com o stakeholder (R4).
+
+### Veredito
+
+**Aprovado com ressalvas.** Libera os chapéus PM e BA para o recorte.
+
+| # | Ressalva | Antes de |
+|---|---|---|
+| RS-1 | "Completa" = toda competição do recorte exibida, com estado honesto "sem dados" onde o provedor não cobrir — nunca cobertura garantida (P2b/R5 seguem abertas) | Aprovação do recorte pelo usuário |
+| RS-2 | Adversário fora da Série A é decisão de contrato de dados (GUARDRAILS §5) — só o Coordenador pode aprovar a mudança | `/definir_organizar` |
+| RS-3 | Orçamento de 30 req/min e limite de eventos por chamada do endpoint gratuito são premissas a provar com teste real, não a assumir | SDD/TASK do recorte |
+| RS-4 | Nenhuma fonte paga, mesmo que a cobertura fique parcial — exceção só via consulta ao stakeholder (RN-13) | Sempre |
+
+Checklist do Gate 1:
+
+- [x] Objetivo de negócio declarado e verificável (Q3 / RAN-07)
+- [x] Alinhamento com roadmap/orçamento (RN-13 preservada; sem prazo)
+- [x] Sem gap óbvio de capacidade

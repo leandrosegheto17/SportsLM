@@ -6,6 +6,17 @@
 17 ADRs em `.md/adr/`.
 **Consumidores**: executor, validador, gestor.
 
+**Adição pontual "Cobertura completa de ligas" (rodada 4, 2026-09-18)** — altera só o
+que a demanda exige: T-05 (motivo de "sem dados" e frescor por cartão de competição),
+T-06 (adversário fora da Série A, tabela parcial, tabela final de grupos, frescor da
+competição), as tabelas de estados da Seção 4 (T-05/T-06), uma linha em 5.4, uma regra
+em 6 e os trade-offs TR-20 a TR-23 da Seção 7. **Nenhum componente novo**: tudo reusa
+`AvatarClube` (fallback neutro), `CarimboFrescor`, `EstadoVazio`, `LinhaPartida` e o
+cartão tracejado de "sem dados" já existentes; **nenhuma cor nova, nenhum token novo,
+nenhuma tela nova**. T-02 muda só na origem do nome do adversário do PRÓXIMO JOGO
+(nome de adversário externo); layout inalterado. Telas T-01, T-03, T-04, T-07, T-08 e T-09
+não mudam (o Comparativo e a Simulação são do Brasileirão, sem adversário externo).
+
 **O que mudou da rodada 2 para a rodada 3**: o usuário revisou, fora deste repositório,
 um exercício de brainstorm visual (canvas de exploração com 5 direções) para as 3 telas
 mobile principais e confirmou a direção já em produção (a "Direção B — Camisa" desta
@@ -528,6 +539,57 @@ Agora T-05 usa a mesma `FaixaClube` completa da Home, com o mesmo conteúdo (ava
 nome, campeonato, pontos); "Trocar time" continua acessível, só que como botão
 fantasma separado, logo abaixo da faixa.
 
+**Rodada 4 (2026-09-18) — cartão de campeonato com dado real de ligas novas, sem dado
+com motivo e frescor por cartão.** Layout, larguras, ordenação (CA-07.4) e cores
+**inalterados**; muda o conteúdo textual:
+
+```
+│ ┌▌─────────────────────────────────────────┐ │ frescor DA COMPETIÇÃO (linha nova, 12/16,
+│ │▌ COPA DO BRASIL                        ▸ │ │ tabular): "ATUALIZADO HÁ 42 MIN"
+│ │▌ ● EM ANDAMENTO — OITAVAS DE FINAL       │ │ (CA-23.1) — no lugar do carimbo global
+│ │▌ Próximo: qua, 23/09 · 21h30             │ │
+│ │▌ ATUALIZADO HÁ 42 MIN                    │ │
+│ └──────────────────────────────────────────┘ │
+│ ┌▌─────────────────────────────────────────┐ │ alerta (CA-23.2): ⚠ + texto, âmbar do
+│ │▌ COPA LIBERTADORES                     ▸ │ │ sistema (nunca cor de clube)
+│ │▌ ● EM ANDAMENTO — FASE DE GRUPOS         │ │
+│ │▌ ⚠ ATUALIZADO HÁ 7 H — PODE ESTAR        │ │
+│ │▌   DESATUALIZADO                         │ │
+│ └──────────────────────────────────────────┘ │
+│ ┌▌─────────────────────────────────────────┐ │ dado antigo legítimo (CA-23.3): sem
+│ │▌ CAMPEONATO CARIOCA                    ▸ │ │ alerta, cinza de "encerrado"
+│ │▌ ✓ CONCLUÍDO                             │ │
+│ │▌ ENCERRADA — DADOS DE 22/03              │ │
+│ └──────────────────────────────────────────┘ │
+│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │ SEM DADOS: mesmo cartão tracejado de
+│   CAMPEONATO MINEIRO                         │ hoje; a 2ª linha passa a ser o MOTIVO
+│   — SEM DADOS                                │ (um dos 4 textos canônicos abaixo)
+│   Atualização pausada por limite do          │
+│   provedor.                                  │
+│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │
+```
+
+**Motivos de "sem dados" (texto canônico, GUARDRAILS §6; derivados do `resultado` da liga
+em `status.json` — SDD §5.4, e da janela):**
+
+| Situação (dado da liga) | Texto do motivo |
+|---|---|
+| `sem-cobertura`, `sem-dados-provedor`, `provedor-nao-registrado` | "Cobertura indisponível nesta versão." |
+| `fora-da-janela` **e nunca houve dado** | "Fora da janela da competição." (não iniciada: "Começa em 03/03." como 2ª frase) |
+| `pausado-por-cota` **e nunca houve dado** | "Atualização pausada por limite do provedor." |
+| `falha` ou `inconsistente` **e nunca houve dado** | "Falha na última atualização." |
+
+Com **dado anterior** e a última tentativa em `pausado-por-cota`/`falha`/`inconsistente`,
+o cartão **não** vira "sem dados": mantém o dado e o carimbo passa a "⚠ FALHA NA ÚLTIMA
+ATUALIZAÇÃO — DADOS DE HÁ 3 H" ou "⚠ ATUALIZAÇÃO PAUSADA POR LIMITE DO PROVEDOR — DADOS
+DE HÁ 3 H" (variante `alerta`/`pausado` de `CarimboFrescor`, sem estado novo). Nunca
+zeros, nunca cartão omitido (RN-21). Frescor da competição em janela: alerta se
+`ultimaAtualizacao` excede 2 h quando a competição tem jogo do time hoje/nas próximas 48 h,
+12 h nos demais (mesma regra de RF-17 aplicada por competição, CA-23.2); fora da janela
+com dado: "ENCERRADA — DADOS DE dd/mm" sem alerta (CA-23.3); nunca ingerida: "Sem dados
+disponíveis no momento" (CA-23.4). O carimbo global do cabeçalho "CAMPEONATOS DE 2026"
+permanece como resumo (o mais recente entre as competições exibidas).
+
 ---
 
 ### T-06 · Detalhe do campeonato
@@ -613,6 +675,42 @@ Aba **PRÓXIMAS** (CA-08.7 a CA-08.10):
 **Desktop (1280)** — resumo em bloco preto de largura total; **sem abas**: tabela
 completa de 10 colunas (`# · CLUBE · P · J · V · E · D · GP · GC · SG · %`) em cima,
 sem rolagem, e "DISPUTADAS" e "PRÓXIMAS" lado a lado em duas colunas de 540 px abaixo.
+
+**Rodada 4 (2026-09-18) — o que muda em T-06 (Copa do Brasil, Libertadores,
+Sul-Americana, estaduais):**
+
+1. **Adversário fora da Série A (CA-21.1, ADR-019)** — mesma linha de partida, mesmo
+   alinhamento; o nome vem do provedor, **sem** avatar colorido e sem link:
+   ```
+   │ SÁB, 05/09 · OITAVAS DE FINAL                │
+   │ ┌▌─────────────────────────────────────────┐ │ ▌ cor V/E/D do sistema (nunca clube)
+   │ │▌ (V) São Paulo 2 × 1 Lanús · casa        │ │ "Lanús" = nome do provedor, texto puro
+   │ └──────────────────────────────────────────┘ │
+   ```
+   Onde a lista já mostra avatar de clube (ex.: bloco do confronto), o adversário externo
+   usa `AvatarClube` **sem** `corIdentidade` (fallback neutro) com até 3 iniciais do nome —
+   variante já existente do componente; não é componente novo. `aria-label` da linha usa o
+   nome completo. Nunca cor de clube, escudo ou seta de navegação para o adversário.
+2. **Tabela parcial (ADR-019 item 4)**: em competição cuja tabela tem clubes fora da Série
+   A (estaduais e fase de grupos das continentais), a aba/bloco TABELA mostra só os clubes
+   da Série A **com a posição do provedor** e, logo abaixo do cabeçalho da tabela, a linha
+   de apoio (14/20, secundário): "Mostrando só os clubes da Série A. A posição é a da
+   classificação completa." Lacunas de posição (ex.: 1º, 4º, 9º) são esperadas.
+3. **Tabela final de grupos (CA-20.3/CA-08.5)** em competição `misto` que já entrou no
+   mata-mata: a aba TABELA continua existindo, com o rótulo "FASE DE GRUPOS — TABELA
+   FINAL" acima da tabela; o resumo e o bloco de confronto passam a mostrar a fase de
+   mata-mata (como no wireframe "Mata-mata" acima). Enquanto o provedor devolve tabela
+   corrente (fase de grupos), o rótulo é só "TABELA".
+4. **Frescor da competição (CA-23.1)**: o carimbo do cabeçalho de T-06 usa o
+   `ultimaAtualizacao` **desta competição** (não o carimbo global), com as mesmas
+   variantes de T-05 (normal, alerta, "ENCERRADA — DADOS DE dd/mm", pausado).
+5. **Mata-mata sem "quem avançou"** (CA-22.4): jogo(s) mostram placar do provedor; o
+   agregado só é somado quando ida **e** volta estão finalizadas contra o mesmo adversário;
+   com pênaltis/prorrogação não detalhados, a linha mostra o placar e nada mais — o resumo
+   nunca afirma "classificado"/"eliminado" sem evidência (ADR-020 item 7); na dúvida, o
+   status do cartão em T-05 é "sem dados"/"em andamento" conforme o derivador.
+6. **Partida em andamento entre ingestões (CA-22.3)**: nunca "ao vivo"; data já passada e
+   sem resultado → "⏳ AGUARDANDO RESULTADO" (existente); futura → normal.
 
 ---
 
@@ -1135,6 +1233,8 @@ justificativa.
 | Erro | "Não conseguimos carregar o painel agora." + `[ TENTAR DE NOVO ]` |
 | Preenchido | Wireframe da Seção 2 |
 | Campeonato sem cobertura | "SUPERCOPA REI — SEM DADOS. Cobertura indisponível nesta versão." (CA-07.2) |
+| Campeonato sem dados — motivos (rodada 4, CA-22.1) | "<COMPETIÇÃO> — SEM DADOS." + um de: "Cobertura indisponível nesta versão." · "Fora da janela da competição." · "Atualização pausada por limite do provedor." · "Falha na última atualização." (tabela de motivos na Seção 2/T-05; nunca omite o cartão, nunca zeros — RN-21) |
+| Frescor por competição (rodada 4, CA-23.1-23.4) | "ATUALIZADO HÁ 42 MIN" no cartão da própria competição · alerta "⚠ ATUALIZADO HÁ 7 H — PODE ESTAR DESATUALIZADO" · fora da janela com dado "ENCERRADA — DADOS DE 22/03" (sem alerta) · nunca ingerida "Sem dados disponíveis no momento" |
 | Frescor em alerta | "ATUALIZADO HÁ 7 H — PODE ESTAR DESATUALIZADO" (CA-17.2) |
 | Pausa por cota | "Atualização pausada por limite do provedor. Última atualização há 3 h." (CA-16.4 / CA-17.4) |
 | Visual | **Revisado na rodada 3**: a faixa é a mesma variante completa da Home (T-02) e do Comparativo (T-08), sem variante própria desta tela. "Trocar time" é um botão fantasma separado, logo abaixo da faixa — não mora mais dentro dela |
@@ -1150,6 +1250,14 @@ justificativa.
 | Preenchido | Wireframe da Seção 2 |
 | Estados de partida | "horário a definir" (CA-08.8) · "data a definir" (CA-10.4) · "Adiada — nova data: 21/10" e "Cancelada" (CA-08.9) · "Aguardando resultado" (CA-08.10) |
 | Sem zonas configuradas | Tabela sem faixas e sem legenda, sem mensagem de erro (CA-18.2) |
+| Adversário fora da Série A (rodada 4, CA-21.1) | Nome do provedor em texto, sem avatar colorido/escudo/link; onde há avatar, neutro com iniciais |
+| Tabela parcial (rodada 4) | Linha de apoio: "Mostrando só os clubes da Série A. A posição é a da classificação completa." |
+| Tabela parcial do provedor (rodada 4b, ADR-024/P-D; distinta da linha acima) | Quando `competicao.tabelaParcial`: aviso "Tabela parcial — a fonte gratuita informa só parte da classificação." com símbolo (não só cor); posição = a do provedor |
+| Calendário parcial (rodada 4b, ADR-024/P-B) | Em T-06 (e no cartão T-05) de competição TheSportsDB: "Calendário parcial — a fonte gratuita informa poucos jogos por consulta." Texto puro, sem alarme |
+| Cartão continental sem jogos (rodada 4b, ADR-023/024/P-C) | Candidato sem partida vista mostra "<COMPETIÇÃO> — SEM JOGOS." + motivo canônico; ex.: Botafogo tem os dois cartões (Libertadores e Sul-Americana) |
+| Tabela final de grupos (rodada 4, CA-20.3) | Rótulo "FASE DE GRUPOS — TABELA FINAL" quando a competição já está no mata-mata |
+| Frescor da competição (rodada 4, CA-23.1-23.3) | Mesmos textos de T-05 por competição: normal · "PODE ESTAR DESATUALIZADO" · "ENCERRADA — DADOS DE dd/mm" · "Atualização pausada por limite do provedor. Última atualização há 3 h." |
+| Competição sem dados (rodada 4) | **Não se aplica a T-06**: o cartão "sem dados" de T-05 não navega (sem seta, sem link); só chega a T-06 competição com ao menos um dado. Acesso direto por URL a competição sem dado usa o estado "Erro" acima com o motivo canônico de T-05 no lugar da 2ª frase, se disponível |
 
 ### T-07 · Escolher rivais
 | Estado | Texto na tela |
@@ -1245,6 +1353,12 @@ acromática tipo Corinthians).
 bloqueada. 4 notícias removidas do feed") · recálculo da simulação ("São Paulo 55
 pontos projetados, 2º entre os comparados") · travamento de palpites · limite de
 favoritos · limite de rivais · atualização de snapshot. Nunca `assertive`.
+**Rodada 4**: motivo de "sem dados" e carimbo de frescor/alerta/pausa **por cartão de
+competição** são texto visível (não `aria-live`: não mudam sem ação do usuário); cada um
+traz símbolo redundante (ⓘ, ⚠, ✓, ○) além do texto — nunca só cor (WCAG 1.4.1). O cartão
+"sem dados" é lido como um bloco: "<competição>, sem dados. <motivo>." (`aria-label` ou
+texto associado por `aria-describedby`). Adversário externo: `aria-label` com o nome
+completo; iniciais do avatar neutro são decorativas (`aria-hidden`).
 
 ### 5.5 Movimento, alvo e reflow
 - `prefers-reduced-motion`: transições zeradas, inclusive a de "acender" a faixa do
@@ -1313,6 +1427,10 @@ Mobile-first. Pontos de quebra: **360** (base), **600** (tablet retrato), **900*
 - Nenhuma imagem em nenhuma largura; ilustração de estado vazio é ícone SVG
   monocromático.
 - Orientação paisagem no celular usa o layout de 600-899 px.
+- **Rodada 4**: sem mudança de layout. Os textos de motivo/frescor por cartão podem
+  quebrar em até 2 linhas em 360 px (14/20, sem truncar com reticências); nome de
+  adversário externo longo quebra linha na linha de partida (`overflow-wrap:anywhere`),
+  nunca corta nem some.
 
 ---
 
@@ -1348,6 +1466,18 @@ encontrou um limite técnico ou de regra, e a decisão que tomei.
 | **TR-18** | Navegação preta + faixa colorida + blocos pretos criam alta densidade de contraste | Cor fica nas superfícies grandes; texto e ícones são tinta ou branco; nada de texto colorido sobre fundo colorido fora do par validado | Detalhe |
 | **TR-19** | Zonas da tabela e estados V/E/D poderiam usar a cor do clube | **Não usam**: são cores fixas do sistema. Informação não muda de cor conforme o time do usuário | Detalhe, e é uma regra dura |
 | **TR-8** | CA-06.1 pede "identidade visual" do clube; escudo é marca registrada e I-14 veta imagem de terceiro | Mantido da rodada 1: sigla + cor, sem escudo. A nova direção **aumenta o peso dessa decisão**, porque agora a cor é o principal veículo de identidade | **Decisão do stakeholder** (SDD §6.4, D5). Com a direção "Camisa", vale reperguntar: escudos licenciados dariam bem mais força visual à faixa |
+
+### 7.2b Trade-offs da rodada 4 — Cobertura completa de ligas (2026-09-18)
+
+| # | Tensão (experiência × restrição do SDD/ADR) | Decisão | Impacto |
+|---|---|---|---|
+| **TR-20** | Mostrar o adversário "de verdade" (escudo, cor) × RN-23/I-14/ADR-019 (sem entidade cadastrada, sem imagem de terceiro) | Nome do provedor em texto; avatar neutro com iniciais só onde já havia avatar; nunca cor de clube | **Piora** leve: linhas de Copa/continentais menos "coloridas" que as do Brasileirão. Coerente com TR-8; reversível trocando o componente |
+| **TR-21** | Tabela completa do estadual/grupo × contrato só com clubes da Série A (ADR-019 item 4) | Tabela parcial com a posição do provedor e frase de apoio explícita | **Piora**: o usuário não vê a tabela inteira. Decisão de detalhe dentro do já aprovado (RN-23); alternativa (cadastrar todos) é decisão de negócio |
+| **TR-22** | Dizer "eliminado"/"classificado" em mata-mata × provedor sem "quem avançou" e calendário possivelmente truncado (ADR-020 item 7, RT-15) | Só afirma com evidência; senão "sem dados"/"em andamento" | **Piora**: mais cartões de mata-mata com "sem dados". Aceito (RN-21) — sinalizado ao Gestor com RT-15 |
+| **TR-23** | Frescor "de verdade" por competição × cota que espaça ligas (ADR-021) | Carimbo por competição com o próprio `ultimaAtualizacao`; alerta em 2 h (jogo próximo) / 12 h; pausa por cota explicada em texto | Detalhe, dentro do aprovado (CA-23.x) |
+
+Nenhum destes trade-offs muda custo ou prazo além do já previsto — não exigem decisão do
+Gestor além da ciência de RT-15/TR-22.
 
 ### 7.3 Impacto em ADRs e no SDD
 

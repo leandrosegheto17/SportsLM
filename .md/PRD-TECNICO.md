@@ -1119,6 +1119,235 @@ Encerrados: P5, P6, P9 (decisões do stakeholder); R3 (sem LLM).
 
 ---
 
+## 8. Adição pontual — Cobertura completa de ligas (rascunho, 2026-09-18)
+
+**Autor**: Gestor (chapéu BA). **Base**: `PRD.md` §8 (RAN-21 a RAN-26) e Gate 1 de
+2026-09-18. Adiciona requisitos às Seções 1-7 sem alterá-las. Não decide
+arquitetura: escolhas inevitáveis estão marcadas "decisão em aberto para o
+Coordenador". Estado atual verificado no código: `adaptador-thesportsdb.ts` cobre
+tabela + partidas passadas/próximas por liga, casa clube só por
+`idsProvedor.thesportsdb`, **descarta** partida com clube não mapeado e com status
+diferente de `NS`/`FT`/adiada; `orquestrador.ts` mapeia só Paulista e Carioca.
+
+### 8.1 Requisitos funcionais
+
+**RF-20 — Ligas ativas do provedor gratuito (RAN-21, RAN-25, RAN-26, Must/Should)**
+
+Como torcedor, quero ver Copa do Brasil, Libertadores, Sul-Americana e os estaduais
+do meu clube com dado real, para acompanhar o ano inteiro num só lugar.
+
+- CA-20.1 — WHEN a ingestão de futebol roda, GIVEN uma competição da Seção 8.3 com
+  `provedor: "thesportsdb"` e dentro da janela, THE SYSTEM SHALL obter e publicar
+  partidas passadas e próximas e, quando o formato tiver tabela, a classificação,
+  usando apenas plano e chave gratuitos.
+- CA-20.2 — WHEN uma competição está fora da janela, GIVEN qualquer estado, THE
+  SYSTEM SHALL não consumir requisição ao provedor (ADR-002) e manter o último dado
+  publicado, exibindo o status "concluído" ou "não iniciado" conforme a janela.
+- CA-20.3b (nota 2026-09-18, ADR-024) — WHEN o provedor devolver classificação incompleta, THE SYSTEM SHALL publicá-la com a marca `tabelaParcial` e exibir aviso textual; WHEN uma competição de mata-mata/misto vier do provedor gratuito, THE SYSTEM SHALL exibir "Calendário parcial"; candidatos continentais (ADR-023) sem partida vista SHALL ter cartão "SEM JOGOS".
+- CA-20.3 — WHEN uma competição de formato misto (Libertadores/Sul-Americana) muda de
+  fase de grupos para mata-mata, GIVEN o provedor, THE SYSTEM SHALL passar a exibir
+  fase/confronto (CA-08.4) e manter acessível a tabela final de grupos (CA-08.5);
+  decisão em aberto para o Coordenador: `temTabela` hoje é fixo por liga.
+- CA-20.4 — WHEN o provedor devolve `events`/`table` nulos para uma liga, GIVEN
+  cobertura ausente, THE SYSTEM SHALL tratar como "sem dados" (RF-20 / CA-22.1), nunca
+  como erro.
+- CA-20.5 — WHEN a ingestão de uma liga falha (HTTP, schema inválido, timeout), GIVEN
+  outras ligas saudáveis, THE SYSTEM SHALL manter o dado anterior daquela liga,
+  registrar a falha (RNF-11) e concluir as demais (RNF-09).
+
+**RF-21 — Adversário fora da Série A (RAN-24, Must)**
+
+- CA-21.1 — WHEN uma partida tem um clube da Série A 2026 e um adversário sem
+  cadastro, GIVEN Copa do Brasil ou continental, THE SYSTEM SHALL manter a partida e
+  exibir o adversário pelo nome do provedor, com identidade visual neutra (sem
+  escudo, I-14), em vez de descartá-la como `clube-nao-mapeado`.
+- CA-21.2 — WHEN uma partida tem **nenhum** clube da Série A 2026 (jogos que não
+  envolvem o time), GIVEN a competição, THE SYSTEM SHALL não exibi-la no painel de
+  nenhum time (fora do recorte de RF-07/08).
+- CA-21.3 — WHEN um clube da Série A aparece no provedor sem `idsProvedor.thesportsdb`
+  mapeado, GIVEN CA-16.6, THE SYSTEM SHALL registrar a inconsistência e não casar por
+  nome. Nota: relaxar o casamento do adversário (CA-21.1) **não** relaxa o
+  casamento do clube da Série A.
+- Decisão em aberto para o Coordenador: como o adversário externo entra no contrato
+  de `/dados/*.json` (GUARDRAILS §5 — mudança de contrato exige concordância dele
+  antes de implementar).
+
+**RF-22 — Estado honesto por competição (RAN-22, Must)**
+
+- CA-22.1 — WHEN o painel lista uma competição prevista em RN-05 para o time, GIVEN
+  ausência de dado, THE SYSTEM SHALL exibir "sem dados disponíveis no momento" com um
+  dos motivos: "cobertura indisponível nesta versão", "fora da janela da competição",
+  "atualização pausada por limite do provedor", "falha na última atualização";
+  nunca omitir a competição nem exibir zeros no lugar de ausência.
+- CA-22.2 — WHEN o time foi eliminado ou a competição encerrou, GIVEN dado, THE
+  SYSTEM SHALL exibir "eliminado na <fase>" / "concluído — <resultado>" (CA-07.1/07.3),
+  ou "sem dados" com motivo se o provedor não permitir concluir a fase (P13).
+- CA-22.3 — WHEN uma partida tem status fora de `NS`/`FT`/adiada (ex.: em andamento
+  entre duas ingestões), GIVEN nenhuma exibição "ao vivo" (RN-09), THE SYSTEM SHALL
+  não fazê-la desaparecer: mantê-la como "aguardando resultado" se a data já passou
+  (CA-08.10), ou como agendada se futura; nunca inventar placar parcial.
+- CA-22.4 — WHEN a partida é jogo único de mata-mata com prorrogação/pênaltis,
+  GIVEN o provedor sinaliza só o placar, THE SYSTEM SHALL exibir o placar do provedor
+  sem inferir quem avançou; se a fase seguinte não confirmar, "sem dados".
+
+**RF-23 — Frescor por competição (RAN-23, Must)**
+
+- CA-23.1 — WHEN uma competição é exibida no painel ou no detalhe, GIVEN ao menos
+  uma ingestão bem-sucedida dela, THE SYSTEM SHALL exibir "atualizado há <tempo>"
+  específico daquela competição (CA-17.5), não o carimbo global.
+- CA-23.2 — WHEN o dado de uma competição em janela excede o alerta de RN-09, GIVEN
+  o intervalo da liga, THE SYSTEM SHALL exibir o carimbo em alerta "pode estar
+  desatualizado" (CA-17.2).
+- CA-23.3 — WHEN uma competição está fora da janela, GIVEN dado antigo legítimo, THE
+  SYSTEM SHALL exibir "encerrada — dados de <data>", sem alerta de desatualização.
+- CA-23.4 — WHEN uma competição nunca foi ingerida, GIVEN CA-17.3, THE SYSTEM SHALL
+  exibir "sem dados disponíveis no momento".
+
+**RF-24 — Cota e priorização (RAN-26, Must)**
+
+- CA-24.1 — WHEN o ciclo de ingestão inclui N ligas, GIVEN o orçamento de 30
+  requisições por minuto (adaptador), THE SYSTEM SHALL espaçar as chamadas sem
+  exceder o limite e priorizar ligas em janela ativa e com jogo próximo (regra
+  exata: Coordenador).
+- CA-24.2 — WHEN o provedor responde limite excedido (HTTP 429 ou equivalente),
+  GIVEN qualquer liga, THE SYSTEM SHALL suspender o restante do ciclo, manter os
+  dados anteriores e sinalizar "atualização pausada por limite do provedor" (CA-16.4).
+- CA-24.3 — WHEN a cobertura é ampliada, GIVEN RN-13, THE SYSTEM SHALL não
+  introduzir chave paga, conta, cadastro ou segredo novo.
+
+**RF-25 — Configuração de cobertura (RAN-21/25, Must)**
+
+- CA-25.1 — WHEN uma competição é adicionada, GIVEN os módulos existentes, THE SYSTEM
+  SHALL exigir apenas configuração (competição, provedor, id de liga da temporada,
+  participantes da Série A) e nenhuma lógica nova por competição; lacuna sinalizada em
+  `orquestrador.ts` (mapa local `REFS_COMPETICAO_THESPORTSDB`) para o Coordenador
+  decidir se vira campo de CFG-03.
+- CA-25.2 — WHEN Gaúcho ou Mineiro ainda não têm id de liga verificado no provedor
+  (Mineiro não foi localizado em SPK-01), GIVEN RN-05, THE SYSTEM SHALL continuar
+  listando a competição para os clubes correspondentes com "sem dados — cobertura
+  indisponível nesta versão".
+- CA-25.4 — WHEN a config de competições é carregada, GIVEN a decisão do stakeholder,
+  THE SYSTEM SHALL ter como estaduais com dado do provedor somente Paulista, Carioca,
+  Gaúcho e Mineiro; nenhum outro estadual, Copa do Nordeste ou Supercopa ganha
+  `provedor: "thesportsdb"` neste recorte.
+- CA-25.3 — WHEN a lista de participantes de Libertadores/Sul-Americana está vazia
+  (estado atual), GIVEN RN-05, THE SYSTEM SHALL preenchê-la por configuração
+  verificada contra o provedor e por temporada; **decisão em aberto para o
+  Coordenador**: preenchimento manual versus descoberta automática por ingestão.
+
+### 8.2 Requisitos não funcionais
+
+| # | Categoria | Requisito | Valor |
+|---|---|---|---|
+| RNF-16 | Custo | Zero custo, conta, cadastro ou segredo novo (RN-13) | Zero |
+| RNF-17 | Resiliência | Falha ou cota em uma liga degrada só aquela liga (RNF-09) | Isolamento por liga |
+| RNF-18 | Frescor | Intervalo por liga dentro de RNF-06 (≤ 1 h em dia de jogo, ≤ 6 h nos demais, a confirmar); alerta em 2× | Sujeito à cota (R2) |
+| RNF-19 | Observabilidade | Log por tentativa **e por liga** (horário, liga, resultado, contagem de partidas, descartes por motivo) | Log simples (RNF-11) |
+| RNF-20 | Integridade | Casamento de clube da Série A só por id (CA-16.6); status desconhecido nunca "adivinhado" | Sem heurística por nome |
+| RNF-21 | Acessibilidade | Estados "sem dados"/alerta com texto, não só cor (GUARDRAILS §6); 4 estados por tela | WCAG 2.2 AA |
+
+### 8.3 Regras de negócio
+
+**RN-20 — Escopo de "todas as competições"** (RF-20, RF-25)
+- RULE: Entram exatamente: Copa do Brasil, Libertadores, Sul-Americana, Paulista,
+  Carioca, Gaúcho e Mineiro (PRD §8.2). Qualquer outra competição (outros estaduais,
+  Copa do Nordeste, Supercopa) está fora; Copa do Nordeste e Supercopa são candidatas
+  futuras.
+- RATIONALE: decisão do stakeholder (rodada 2); menos ligas = menos cota gasta (R2).
+- EXCEPTION: nenhuma sem nova decisão do stakeholder.
+
+**RN-21 — Nunca omitir, nunca inventar** (RF-22)
+- RULE: Competição prevista sem dado aparece como "sem dados" com motivo; nenhum
+  valor é estimado, interpolado ou preenchido por outra liga/fonte não elegível (RN-01).
+- RATIONALE: RN-05, I-12; confiança é o ativo do produto.
+- EXCEPTION: nenhuma.
+
+**RN-22 — Prioridade de cota** (RF-24)
+- RULE: Em ciclo com cota insuficiente, ordem: (1) liga em janela ativa com jogo nas
+  próximas 48 h; (2) liga em janela ativa; (3) liga fora da janela (não consulta).
+- RATIONALE: R2; maximiza frescor onde o usuário olha.
+- EXCEPTION: nenhuma.
+
+**RN-23 — Adversário fora da Série A é dado de exibição, não entidade cadastrada** (RF-21)
+- RULE: O adversário externo só carrega nome (do provedor) e mando; sem escudo, sem
+  cor de clube, sem página própria.
+- RATIONALE: I-14, GUARDRAILS §6; evita cadastro manual de centenas de clubes.
+- EXCEPTION: nenhuma.
+
+### 8.4 Fluxo de processo — FL-08 (ingestão por liga, estende FL-07)
+
+```mermaid
+flowchart TD
+    A[Ciclo de ingestao] --> B[Ordenar ligas RN-22]
+    B --> C{Liga em janela?}
+    C -- Nao --> C1[Nao consultar; estado concluida/nao iniciada CA-20.2/23.3] --> Z[Proxima liga]
+    C -- Sim --> D{Cota disponivel?}
+    D -- Nao --> D1[Pausar restante; sinalizar CA-24.2] --> Y[Fim]
+    D -- Sim --> E[Buscar partidas e, se aplicavel, tabela]
+    E --> F{HTTP e schema ok?}
+    F -- Nao --> F1[Manter anterior; registrar; motivo falha CA-20.5/22.1] --> Z
+    F -- Sim --> G{Eventos ou tabela vazios?}
+    G -- Sim --> G1[Sem dados: cobertura indisponivel CA-20.4] --> Z
+    G -- Nao --> H[Para cada partida]
+    H --> I{Status NS/FT/adiada?}
+    I -- Nao --> I1[Manter como aguardando/agendada CA-22.3; registrar] --> J
+    I -- Sim --> J{Clube da Serie A mapeado por id?}
+    J -- Nenhum --> J1[Descartar: fora do recorte CA-21.2] --> H
+    J -- Sim e adversario externo --> J2[Manter com nome do provedor CA-21.1] --> K
+    J -- Sim e Serie A --> K[Traduzir e validar Zod]
+    J -- Clube Serie A sem id --> J3[Registrar inconsistencia CA-21.3] --> H
+    K --> L[Publicar; carimbar frescor da liga CA-23.1] --> Z
+```
+
+### 8.5 Dependências e integrações
+
+| Requisito | Depende de | Motivo |
+|---|---|---|
+| RF-21 | Aprovação de contrato pelo Coordenador (GUARDRAILS §5) | Adversário externo muda o formato de partida |
+| RF-20 (Libertadores/Sul-Americana) | RF-25 (CA-25.3, participantes) | Lista de clubes vazia hoje |
+| RF-20 (Gaúcho, Mineiro) | RF-25 (CA-25.2, ids de liga) | Mineiro sem id; Gaúcho a verificar |
+| RF-23 | RF-16/RF-17 (`última atualização por campeonato`, CA-16.1) | Insumo do carimbo |
+| RF-24 | Adaptador `orcamento.porMinuto = 30` | Limite do provedor |
+
+Integração externa: **TheSportsDB v1** (chave demo "123", `lookuptable.php`,
+`eventspastleague.php`, `eventsnextleague.php`), já em uso; termos: uso
+não-comercial aceito no protótipo (RNF-08/I-22). Nenhum provedor novo. Alternativas
+já avaliadas em 5.2 (API-Football, football-data.org) **não entram neste recorte**
+(I-32): se P12/P13 falharem, a lacuna é assumida.
+
+### 8.6 Premissas e riscos — status (BA)
+
+| Item | Evidência buscada | Veredito | Consequência |
+|---|---|---|---|
+| P12 (eventos suficientes por liga) | Cabeçalho do adaptador: Copa do Brasil (id 4725) e Libertadores (id 4501) devolvem jogo passado recente e futuro agendado; **quantidade máxima por chamada não confirmada** | **Não validada** | Teste real por liga antes do `SDD.md`; se truncar, avaliar consulta por temporada/clube (decisão do Coordenador) |
+| P13 (fase/eliminação) | Adaptador guarda `strGroup` como `fase`; mata-mata sem rodada | **Parcial** | CA-22.2 cai em "sem dados" quando não conclui |
+| P14 (ids de liga) | Paulista 5767, Carioca 5688, Copa do Brasil 4725, Libertadores 4501 confirmados; Mineiro não localizado; Gaúcho não pesquisado | **Parcial** | Ligas sem id = "sem dados" até verificação |
+| R2 | 30 req/min; ~3 chamadas por liga com tabela, 2 sem | Confirmado como limite; suficiente para dezenas de ligas se espaçado | RN-22, CA-24.1 |
+| Estaduais encerrados (janela 2026-01-14 a 03-22) | `foraDaJanela` em `coletor-futebol.ts` | Confirmado | Critério de aceite dos estaduais restantes só por fixture/histórico até 2027 (ver 8.7) |
+
+### 8.7 Interpretações registradas
+
+| # | Ambiguidade | Interpretação | Por quê |
+|---|---|---|---|
+| I-27 | "Todos os estaduais" (revisada na rodada 2) | Somente Paulista, Carioca, Gaúcho e Mineiro; Baiano, Paranaense, Paraense, Catarinense e qualquer outro ficam fora; Cearense/Pernambucano seguem na config sem clubes (RN-05) | Decisão explícita do stakeholder |
+| I-28 | "Cobertura completa" | Toda competição do recorte **exibida**; dado real onde o provedor cobre; "sem dados" honesto no resto; meta ≥ 80% dos pares clube-competição com dado real (aceita) | P2b/R5 não permitem garantir cobertura e RN-13 veta pago |
+| I-32 | Resposta "Sim" sobre continentais/lacuna (**a confirmar com o usuário**) | Conservadora: se o TheSportsDB gratuito não cobrir bem Libertadores/Sul-Americana, assume-se a lacuna (estado honesto); sem fonte paga, sem cadastro, sem API alternativa neste recorte | Resposta ambígua; a leitura de menor risco preserva RN-13 e "sem conta" |
+| I-33 | Copa do Nordeste e Supercopa | Fora do recorte, candidatas futuras | Decisão do stakeholder |
+| I-29 | "Continentais" | Libertadores e Sul-Americana (as duas do modelo de RN-05); Recopa e outras fora | Modelo de temporada do repositório |
+| I-30 | Verificação dos estaduais em 2026-09 | Como estão encerrados, o aceite usa respostas gravadas do provedor (fixtures) e o estado "concluído"; o teste ao vivo só ocorre em 2027 | Janela de calendário (`foraDaJanela`) |
+| I-31 | Partida em andamento | Não exibir "ao vivo"; nunca sumir | Q12 e CA-08.10 |
+
+### 8.8 Checklist do chapéu BA — este recorte
+
+- [x] Todo RF novo (RF-20 a RF-25) com critério EARS
+- [x] Regras de negócio novas com racional (RN-20 a RN-23)
+- [x] Fluxo com decisões e alternativas (FL-08)
+- [x] Dependências e integração nomeadas (8.5)
+- [x] Premissas herdadas avaliadas com evidência ou marcadas "não validada" (8.6)
+- [x] Ambiguidades na Seção 7 (I-27 a I-33; rodada 2 do Loop A aplicada)
+
+---
+
 **Checklist do chapéu BA (Critérios de Pronto, gestor.md)** — ver resumo da
 rodada. Documento pronto para o Coordenador **após** aprovação do usuário sobre
 `PRD.md` + `PRD-TECNICO.md` juntos (Loop A).

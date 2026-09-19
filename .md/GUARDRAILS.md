@@ -126,6 +126,34 @@ decisão arquitetural já tomada, um novo ADR.
   `BLOCKERS.md`; lacuna de **detalhe** é decidida e documentada no próprio
   artefato (TASK.md Seção 6, ou equivalente).
 
+## 8. Cobertura completa de ligas — regras vigentes (aprovadas 2026-09-18)
+
+Aprovadas pelo Gestor (chapéu CTO) em 2026-09-18, conforme PIPELINE-CONVENTIONS.md §5.
+Proposto pelo Coordenador; base: ADR-019, ADR-020, ADR-021.
+
+- **G-1 (§3/§5) — Cota de provedor só por espaçador.** Toda chamada de rede a um
+  provedor de futebol com limite de cota passa pelo espaçador de requisições
+  (`espacador-requisicoes.ts`); é proibido disparar chamadas ao **mesmo provedor** em
+  paralelo (`Promise.all`) ou em rajada. Teto operativo do TheSportsDB gratuito: 28
+  req/min (limite real 30). Chave demo pública `123` não é segredo, mas nenhuma chave
+  paga/pessoal entra sem aprovação (RN-13). Resposta 429 (chave compartilhada) é
+  falha isolada da liga (G-4): sem repetição em rajada; a nova tentativa passa pelo
+  espaçador ou fica para o próximo ciclo.
+- **G-2 (§5) — Adversário fora da Série A é só dado de exibição.** Vive apenas em
+  `Partida.externo` (nome do provedor, texto puro); nunca ganha entrada em
+  `clubes-2026.json`, cor, escudo, link ou página; clube da Série A continua casando
+  **só por id** — comparação por nome só como diagnóstico, nunca como casamento. Nenhuma
+  tela exibe o id sintético `externo-*`.
+- **G-3 (§5/§6) — Ausência de dado é "sem dados" com motivo.** Competição prevista sem
+  dado aparece com um dos motivos canônicos do UX-SPEC (T-05); nunca omitida, nunca
+  zeros; frescor sempre da **própria** competição; `ultimaAtualizacao` só avança em
+  ingestão que trouxe dado (`atualizada`).
+- **G-4 (§5) — Falha isolada por liga.** Nenhuma exceção no processamento de uma
+  competição pode abortar o ciclo das demais nem apagar o dado anterior dela.
+- **G-5 (§5) — Eliminação/classificação só com evidência.** "Eliminado", "classificado"
+  ou "campeão" só são exibidos com derrota/resultado comprovado pelos dados; ausência de
+  partida futura nunca basta.
+
 ---
 
 **Nota de rascunho**: este é o rascunho inicial (skill `guardrails-drafting`),
@@ -139,3 +167,5 @@ segue aprovando `SDD.md`, `UX-SPEC.md` e `TASK.md` diretamente.
 | Data | Proposto por | Aprovado por | Mudança | Motivo |
 |---|---|---|---|---|
 | 2026-09-05 | coordenador | gestor | Criação da versão inicial (7 seções) | Base: CTO-REVIEW.md + SDD.md + 17 ADRs |
+| 2026-09-18 | coordenador | gestor | Proposta da Seção 8 (G-1 a G-5) aprovada e vigente; G-1 com ajuste (429 = falha isolada, sem retry em rajada); G-2 a G-5 aprovadas como propostas. Seção "pendentes" removida | Cobertura completa de ligas (Lote 16): ADR-019/020/021 |
+| 2026-09-18 | gestor | gestor | Registro informativo, sem ação: risco P12 (teto de eventos por chamada da TheSportsDB; SPK-01 registrou 10) pode custar +2 a 4 dias se o SPK-06 confirmar. Gestor ciente | Transparência de prazo do Lote 16 (33 tarefas, COB-14 incluída, aprovado pelo usuário) |

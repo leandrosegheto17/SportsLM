@@ -253,6 +253,86 @@ agentes, já com dono:
 
 ---
 
+## 8. Adição pontual — Cobertura completa de ligas (rascunho, 2026-09-18)
+
+**Autor**: Gestor (chapéu PM). **Base**: Gate 1 (recorte pontual) de 2026-09-18 em
+`CTO-REVIEW.md` — Aprovado com ressalvas. Adição sobre as Seções 1-7, que **não são
+reescritas**; concretiza Q3/RAN-07/RAN-08 e trata P2b, P8, R2 e R5. Marcação:
+**[DECISÃO PM]** contestável.
+
+### 8.1 Problema e objetivo
+
+Q3 prometeu "todos os campeonatos do ano". Hoje, com dado real: Brasileirão,
+Paulista e Carioca. Copa do Brasil, Libertadores, Sul-Americana e os demais
+estaduais aparecem como "sem dados". O torcedor de Grêmio, Cruzeiro, Bahia,
+Athletico, etc. vê o ano do time incompleto exatamente onde ele mais joga.
+
+**Objetivo mensurável [STAKEHOLDER, rodada 2: meta ≥ 80% e lacuna honesta aceitas]**: cobertura de dados =
+(pares clube-competição com dado real) ÷ (pares clube-competição previstos em RN-05
+para o clube na temporada). Baseline: medir na primeira execução do recorte (a
+composição atual sugere baixa). Meta: **≥ 80%** dos pares, e **100% dos pares
+previstos exibidos** (nenhum omitido: ou dado real, ou "sem dados" honesto com
+motivo). Complementar: **0** competição exibida com dado mais velho que o alerta de
+RN-09 sem o aviso "pode estar desatualizado".
+
+### 8.2 Quais competições entram [DECISÃO PM]
+
+**[STAKEHOLDER, rodada 2]** O recorte fecha em: Copa do Brasil, Libertadores,
+Sul-Americana e quatro estaduais (Paulista, Carioca, Gaúcho, Mineiro). Qualquer outro
+estadual está fora. Isso substitui a leitura anterior de "todos" (toda competição com
+clube da Série A).
+
+| Bloco | Competição | Prioridade | Observação |
+|---|---|---|---|
+| Nacional | Copa do Brasil (mata-mata, jogo único; Série A entra na 5ª fase) | **Must** | Janela ativa (até 04/11); P8 (fase/eliminação) precisa de prova |
+| Continental | Libertadores (grupos + mata-mata) | **Must** | Janela ativa (final 28/nov); formato misto |
+| Continental | Sul-Americana (grupos + mata-mata) | **Must** | Janela ativa (final 21/nov) |
+| Estadual (já ligados) | Paulista, Carioca | Must (manter) | Feito em SPK-01; fora de janela até 2027 |
+| Estadual | Mineiro, Gaúcho | **Should** | [STAKEHOLDER, rodada 2] Já em `campeonatos-2026.json`; ids de liga a localizar |
+| Fora, candidatas futuras | Copa do Nordeste, Supercopa do Brasil | Won't (agora) | [STAKEHOLDER, rodada 2] "ficam para depois" |
+| Fora | Baiano, Paranaense, Paraense, Catarinense, Cearense, Pernambucano e qualquer outro estadual; Copa Verde, Série B/C/D; Mundial de Clubes | Won't | [STAKEHOLDER, rodada 2]: estaduais somente Gaúcho, Mineiro, Paulista e Carioca |
+
+Sequenciamento **[DECISÃO PM]**: primeiro o que está em janela e move a métrica hoje
+(Copa do Brasil, Libertadores, Sul-Americana), depois os estaduais (encerrados em
+2026: valor imediato é "concluído — resultado" e prontidão para 2027).
+
+### 8.3 Requisitos de alto nível
+
+| # | Requisito | MoSCoW | Origem |
+|---|---|---|---|
+| RAN-21 | Painel do time mostra dado real (tabela quando houver, partidas disputadas/próximas, fase) para Copa do Brasil, Libertadores e Sul-Americana, via provedor gratuito | Must | Q3; RAN-07/08 |
+| RAN-22 | Cada competição prevista exibe **estado honesto**: dado real, "sem dados — cobertura indisponível" (com motivo: provedor não cobre, fora da janela, cota pausada, falha) — nunca omitida, nunca número inventado | Must | RN-05, I-12 |
+| RAN-23 | **Indicador de frescor por competição** ("atualizado há X", alerta em RN-09), independente entre competições | Must | RAN-15 |
+| RAN-24 | Partidas contra adversário fora da Série A (comum em Copa do Brasil e continentais) aparecem, com o nome do adversário informado pelo provedor | Must | Sem isso RAN-21 fica com buracos |
+| RAN-25 | Gaúcho e Mineiro cobertos com o mesmo mecanismo (estaduais fora desses quatro não entram) | Should | Q3; [STAKEHOLDER, rodada 2] |
+| RAN-26 | Nenhum custo, conta ou segredo novo; sem IA; sem ao vivo/push; degradação de uma liga não afeta as demais | Must (restrição) | RN-13, Q8, Q12 |
+
+### 8.4 Premissas e riscos (dono e prazo)
+
+| # | Premissa / Risco | Impacto | Sev. | Dono | Prazo |
+|---|---|---|---|---|---|
+| P11 | Meta de cobertura (≥ 80%) é realista com o TheSportsDB (meta aceita pelo stakeholder) | Se falsa, **lacuna assumida** (interpretação I-32, a confirmar); sem fonte paga nem API alternativa neste recorte | Média | Coordenador mede na 1ª execução | `SDD.md` |
+| P12 | TheSportsDB gratuito devolve Copa do Brasil e continentais com jogos passados e futuros **suficientes** (o endpoint por liga pode limitar a quantidade de eventos por chamada) | Histórico/calendário truncado → painel parcial | Alta | Coordenador — teste real por liga | `SDD.md` do recorte |
+| P13 | Provedor identifica fase e eliminação em mata-mata (**P8**, reaberta) | Status errado; cair em "sem dados" | Média | Coordenador | `SDD.md` |
+| P14 | Ids de liga existem para Mineiro e Gaúcho (Mineiro não localizado em SPK-01) | Liga fica "sem dados" | Média | Coordenador | `SDD.md` |
+| R2 (reaberta) | Cota de 30 req/min: mais ligas × (tabela + passadas + próximas) por ciclo | Frescor cai; priorizar por janela ativa | Alta | Coordenador | `SDD.md` |
+| R5 (reaberta) | Cobertura regional fraca no free tier | Painel parcial; **lacuna assumida, não fonte paga**, salvo consulta ao stakeholder | Alta | Stakeholder | Fechamento do recorte |
+| R6 | Chave demo "123" compartilhada pode ser limitada/alterada pelo provedor | Perda de cobertura de todas as ligas do provedor | Média | Coordenador (detecção, RN-08) | `TASK.md` |
+| R7 | Ingestão falha sem alerta (ADR-015) e o painel envelhece sem ninguém saber | Frescor sinalizado só ao usuário | Média | PM/Coordenador (RAN-23 mitiga no produto) | `TASK.md` |
+
+### 8.5 Perguntas em aberto (produto)
+
+Respondidas na rodada 2: estaduais = só Gaúcho, Mineiro, Paulista e Carioca; meta ≥ 80%
+e lacuna honesta aceitas; Copa do Nordeste e Supercopa ficam para depois (candidatas
+futuras).
+
+Pendente de confirmação: a resposta do usuário sobre continentais foi apenas "Sim".
+Interpretação conservadora **I-32** adotada: se o TheSportsDB gratuito não cobrir bem
+Libertadores/Sul-Americana, **assume-se a lacuna** (estado honesto), sem fonte paga,
+sem cadastro e sem API alternativa neste recorte. Confirmar com o usuário.
+
+---
+
 **Stakeholder alignment check (rodada 3, 2026-09-05)**: (1) objetivo de negócio:
 inalterado; (2) público/escopo: restringido (Série A; 5 fontes; sem IA) — dentro
 do aprovado; (3) orçamento/prazo: "protótipo sem prazo e sem lançamento
