@@ -60,7 +60,12 @@ function competicao(
     temporada: 2026,
     formato,
     janela: { inicio: '2026-01-01', fim: '2026-12-01' },
-    provedor: id === 'supercopa-do-brasil' ? null : 'football-data-org',
+    provedor:
+      id === 'supercopa-do-brasil'
+        ? null
+        : id === 'copa-do-brasil'
+          ? 'thesportsdb'
+          : 'football-data-org',
     ultimaAtualizacao: '2026-09-05T10:00:00-03:00',
   };
 }
@@ -187,6 +192,10 @@ function criarClienteSnapshotFake(
     erroFutebol?: boolean;
     futebolClubeFixture?: unknown;
     pausadoPorCota?: boolean;
+    futebolStatus?: Record<
+      string,
+      { resultado: string; ultimaAtualizacao: string | null }
+    >;
   } = {},
 ): ClienteSnapshot {
   const versaoJson = {
@@ -203,7 +212,10 @@ function criarClienteSnapshotFake(
       return {
         ok: true,
         status: 200,
-        json: async () => ({ pausadoPorCota: opcoes.pausadoPorCota ?? false }),
+        json: async () => ({
+          pausadoPorCota: opcoes.pausadoPorCota ?? false,
+          ...(opcoes.futebolStatus ? { futebol: opcoes.futebolStatus } : {}),
+        }),
       } as Response;
     }
     if (chave === urlFutebolClube('sao-paulo')) {
@@ -298,6 +310,18 @@ describe('PainelTime (UI-T05-01 — UX-SPEC T-05)', () => {
     expect(screen.getByRole('heading', { name: /escolher|trocar/i })).toBeTruthy();
   });
 
+  it('COB-37: cartão T-05 de competição TheSportsDB traz só o aviso de calendário parcial', async () => {
+    renderizar({ armazenamento: armazenamentoComTime('sao-paulo') });
+    await waitFor(() => {
+      expect(
+        screen.getAllByText(
+          'Calendário parcial — a fonte gratuita informa poucos jogos por consulta.',
+        ),
+      ).toHaveLength(1);
+    });
+    expect(screen.queryByText(/Tabela parcial/)).toBeNull();
+  });
+
   it('CA-07.2: cartão "sem dados" nunca é omitido, mesmo com outros 3 status presentes', async () => {
     renderizar({ armazenamento: armazenamentoComTime('sao-paulo') });
 
@@ -305,6 +329,138 @@ describe('PainelTime (UI-T05-01 — UX-SPEC T-05)', () => {
       expect(screen.getByText('Supercopa do Brasil — SEM DADOS')).not.toBeNull();
     });
     expect(screen.getByText('Cobertura indisponível nesta versão.')).not.toBeNull();
+  });
+
+  it('COB-27: motivo canônico por resultado e aria-label do cartão sem dados', async () => {
+    const casos: [string, string][] = [
+      ['pausado-por-cota', 'Atualização pausada por limite do provedor.'],
+      ['falha', 'Falha na última atualização.'],
+      ['sem-cobertura', 'Cobertura indisponível nesta versão.'],
+    ];
+    for (const [resultado, texto] of casos) {
+      cleanup();
+      resetarCacheClubesPublicosParaTeste();
+      renderizar({
+        armazenamento: armazenamentoComTime('sao-paulo'),
+        clienteSnapshot: criarClienteSnapshotFake({
+          futebolStatus: {
+            'supercopa-do-brasil': { resultado, ultimaAtualizacao: null },
+          },
+        }),
+      });
+      await waitFor(() => {
+        expect(screen.getByText(texto)).not.toBeNull();
+      });
+      expect(screen.getByText('Supercopa do Brasil — SEM DADOS')).not.toBeNull();
+      expect(
+        screen.getByLabelText(`Supercopa do Brasil, sem dados. ${texto}`),
+      ).not.toBeNull();
+    }
+  });
+
+  it('COB-28: frescor por cartão (normal/alerta/encerrada/pausada/falha/nunca)', async () => {
+    const fix = (ultima: string | null, fim = '2026-12-01'): unknown =>
+      FUTEBOL_CLUBE_FIXTURE.map((e) =>
+        e.competicao.id === 'copa-do-brasil'
+          ? {
+              ...e,
+              competicao: {
+                ...e.competicao,
+                ultimaAtualizacao: ultima,
+                janela: { inicio: '2026-01-01', fim },
+              },
+            }
+          : e,
+      );
+    const casos: {
+      nome: string;
+      ultima: string | null;
+      fim?: string;
+      res?: string;
+      texto: string;
+      estado: string;
+    }[] = [
+      {
+        nome: 'normal',
+        ultima: '2026-09-05T11:18:00-03:00',
+        texto: 'ATUALIZADO HÁ 42 MIN',
+        estado: 'normal',
+      },
+      {
+        nome: 'alerta',
+        ultima: '2026-09-04T23:00:00-03:00',
+        texto: 'ATUALIZADO HÁ 13 H — PODE ESTAR DESATUALIZADO',
+        estado: 'alerta',
+      },
+      {
+        nome: 'encerrada',
+        ultima: '2026-03-22T20:00:00-03:00',
+        fim: '2026-04-01',
+        texto: 'ENCERRADA — DADOS DE 22/03',
+        estado: 'normal',
+      },
+      {
+        nome: 'pausada',
+        ultima: '2026-09-05T09:00:00-03:00',
+        res: 'pausado-por-cota',
+        texto: 'ATUALIZAÇÃO PAUSADA POR LIMITE DO PROVEDOR — DADOS DE HÁ 3 H',
+        estado: 'pausado',
+      },
+      {
+        nome: 'falha',
+        ultima: '2026-09-05T09:00:00-03:00',
+        res: 'falha',
+        texto: 'FALHA NA ÚLTIMA ATUALIZAÇÃO — DADOS DE HÁ 3 H',
+        estado: 'alerta',
+      },
+      {
+        nome: 'nunca',
+        ultima: null,
+        texto: 'Sem dados disponíveis no momento',
+        estado: 'sem-dados',
+      },
+    ];
+    for (const c of casos) {
+      cleanup();
+      resetarCacheClubesPublicosParaTeste();
+      renderizar({
+        armazenamento: armazenamentoComTime('sao-paulo'),
+        clienteSnapshot: criarClienteSnapshotFake({
+          futebolClubeFixture: fix(c.ultima, c.fim),
+          ...(c.res
+            ? {
+                futebolStatus: {
+                  'copa-do-brasil': { resultado: c.res, ultimaAtualizacao: c.ultima },
+                },
+              }
+            : {}),
+        }),
+      });
+      const alvo = await screen.findByText(c.texto);
+      const carimbo = alvo.closest('[data-estado]');
+      expect(carimbo?.getAttribute('data-estado'), c.nome).toBe(c.estado);
+      expect(carimbo?.closest('li')?.textContent).toContain('Copa do Brasil');
+      if (c.nome === 'alerta') expect(carimbo?.textContent).toContain('⚠');
+      if (c.nome === 'encerrada') expect(carimbo?.textContent).not.toContain('⚠');
+    }
+  });
+
+  it('COB-27/ADR-024: candidato sem partida vista mostra "— SEM JOGOS." e nunca é omitido', async () => {
+    renderizar({
+      armazenamento: armazenamentoComTime('sao-paulo'),
+      clienteSnapshot: criarClienteSnapshotFake({
+        futebolStatus: {
+          'supercopa-do-brasil': {
+            resultado: 'atualizada',
+            ultimaAtualizacao: '2026-09-05T10:00:00-03:00',
+          },
+        },
+      }),
+    });
+    await waitFor(() => {
+      expect(screen.getByText('Supercopa do Brasil — SEM JOGOS.')).not.toBeNull();
+    });
+    expect(screen.queryByText(/SEM DADOS/)).toBeNull();
   });
 
   it('CA-07.4: ordena em-andamento → eliminado → concluído → sem-dados (mesma ordem sempre)', async () => {
@@ -346,6 +502,42 @@ describe('PainelTime (UI-T05-01 — UX-SPEC T-05)', () => {
     });
     expect(screen.getByText(/Fluminense/)).not.toBeNull();
     expect(screen.getByText(/24ª rodada/)).not.toBeNull();
+  });
+
+  it('COB-24: próximo jogo contra adversário externo mostra o nome do provedor, nunca o id', async () => {
+    const fixture = [
+      {
+        competicao: competicao('libertadores', 'Libertadores', 'misto'),
+        participacao: {
+          competicaoId: 'libertadores',
+          clubeId: 'sao-paulo',
+          status: 'em-andamento' as const,
+          faseAtual: null,
+          resultadoFinal: null,
+          resumo: null,
+        },
+        partidas: [
+          {
+            ...PARTIDA_PROXIMA,
+            id: 'pl',
+            competicaoId: 'libertadores',
+            rodada: 3,
+            mandanteId: 'sao-paulo',
+            visitanteId: 'externo-boca-juniors',
+            externo: { lado: 'visitante', nome: 'Boca Juniors' },
+          },
+        ],
+      },
+    ];
+    const { container } = renderizar({
+      armazenamento: armazenamentoComTime('sao-paulo'),
+      clienteSnapshot: criarClienteSnapshotFake({ futebolClubeFixture: fixture }),
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(/Boca Juniors/)).not.toBeNull();
+    });
+    expect(container.textContent).not.toContain('externo-');
   });
 
   it('navega para /time/:campeonatoId ao clicar num cartão (T-06)', async () => {

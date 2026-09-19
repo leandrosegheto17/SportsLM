@@ -268,6 +268,16 @@ describe('dominio/tipos — validadores Zod de SDD §5 (DOM-01)', () => {
       expect(competicaoSchema.safeParse(competicao).success).toBe(true);
     });
 
+    it('tabelaParcial é opcional: true/false válidos, ausente válido (ADR-024)', () => {
+      expect(competicaoSchema.safeParse({ ...competicaoValida, tabelaParcial: true }).success).toBe(true);
+      expect(competicaoSchema.safeParse({ ...competicaoValida, tabelaParcial: false }).success).toBe(true);
+      expect(competicaoSchema.parse(competicaoValida)).not.toHaveProperty('tabelaParcial');
+    });
+
+    it('rejeita tabelaParcial não booleano', () => {
+      expect(competicaoSchema.safeParse({ ...competicaoValida, tabelaParcial: 'sim' }).success).toBe(false);
+    });
+
     it('rejeita formato fora da união de 4 valores', () => {
       const invalida = { ...competicaoValida, formato: 'liga' };
       expect(competicaoSchema.safeParse(invalida).success).toBe(false);
@@ -312,6 +322,57 @@ describe('dominio/tipos — validadores Zod de SDD §5 (DOM-01)', () => {
     it('rejeita placar com valor negativo', () => {
       const invalida = { ...partidaValida, placar: { mandante: -1, visitante: 0 } };
       expect(partidaSchema.safeParse(invalida).success).toBe(false);
+    });
+
+    describe('externo (ADR-019)', () => {
+      const ext = (o: object) => ({ ...partidaValida, ...o });
+      const okMandante = {
+        mandanteId: 'externo-134567',
+        externo: { lado: 'mandante', nome: 'Clube Externo' },
+      };
+      const okVisitante = {
+        visitanteId: 'externo-9',
+        externo: { lado: 'visitante', nome: 'Clube Externo' },
+      };
+
+      it('aceita partida sem externo (contrato anterior)', () => {
+        expect(partidaSchema.safeParse(partidaValida).success).toBe(true);
+      });
+
+      it.each([
+        ['mandante externo', okMandante],
+        ['visitante externo', okVisitante],
+      ])('aceita %s válido', (_n, o) => {
+        expect(partidaSchema.safeParse(ext(o)).success).toBe(true);
+      });
+
+      it.each([
+        ['campo sem id externo-*', { externo: { lado: 'mandante', nome: 'X' } }],
+        ['id externo-* sem campo', { mandanteId: 'externo-1' }],
+        ['lado incoerente', { ...okMandante, externo: { lado: 'visitante', nome: 'X' } }],
+        ['ambos externos', { ...okMandante, visitanteId: 'externo-2' }],
+        ['nome vazio', { ...okMandante, externo: { lado: 'mandante', nome: '' } }],
+        [
+          'nome só espaços',
+          { ...okMandante, externo: { lado: 'mandante', nome: '   ' } },
+        ],
+        [
+          'nome com 61 caracteres',
+          { ...okMandante, externo: { lado: 'mandante', nome: 'a'.repeat(61) } },
+        ],
+        [
+          'nome com quebra de linha',
+          { ...okMandante, externo: { lado: 'mandante', nome: 'a\nb' } },
+        ],
+        ['nome com <', { ...okMandante, externo: { lado: 'mandante', nome: 'a<b' } }],
+      ])('rejeita %s', (_n, o) => {
+        expect(partidaSchema.safeParse(ext(o)).success).toBe(false);
+      });
+
+      it('aceita nome com 60 caracteres', () => {
+        const o = { ...okMandante, externo: { lado: 'mandante', nome: 'a'.repeat(60) } };
+        expect(partidaSchema.safeParse(ext(o)).success).toBe(true);
+      });
     });
   });
 

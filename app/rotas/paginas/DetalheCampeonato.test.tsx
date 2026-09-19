@@ -109,6 +109,7 @@ function criarCliente(opcoes: {
   clube?: unknown;
   brasileirao?: unknown;
   falharClube?: boolean;
+  status?: unknown;
 }): ClienteSnapshot {
   const buscar = vi.fn(async (url: RequestInfo | URL) => {
     const chave = String(url);
@@ -139,6 +140,13 @@ function criarCliente(opcoes: {
             partidas: [],
             zonas: [],
           },
+      } as Response;
+    }
+    if (chave === '/dados/ingestao/status.json') {
+      return {
+        ok: true,
+        status: 200,
+        json: async () => opcoes.status ?? { futebol: {} },
       } as Response;
     }
     throw new Error(`URL não modelada neste teste: ${chave}`);
@@ -362,6 +370,65 @@ describe('DetalheCampeonato (UI-T06-01)', () => {
     expect(within(tabela).queryByText(/Palmeiras|palmeiras/)).not.toBeNull();
     expect(within(tabela).queryByText(/Corinthians|corinthians/)).toBeNull();
     expect(within(tabela).queryByText(/Santos|santos/)).toBeNull();
+  });
+
+  describe('COB-37: avisos de calendario e tabela parciais', () => {
+    const AVISO_CAL = 'Calendário parcial — a fonte gratuita informa poucos jogos por consulta.';
+    const AVISO_TAB = 'Tabela parcial — a fonte gratuita informa só parte da classificação.';
+
+    async function montar(extra: Record<string, unknown>) {
+      const armazenamento = new ArmazenamentoFalso();
+      armazenamento.setItem(
+        'sportslm.preferencias.v1',
+        JSON.stringify(preferenciasComTime('sao-paulo')),
+      );
+      const comp = { ...competicao(), ...extra };
+      const clube = [
+        {
+          competicao: comp,
+          participacao: {
+            competicaoId: 'brasileirao-serie-a',
+            clubeId: 'sao-paulo',
+            status: 'em-andamento',
+            faseAtual: null,
+            resultadoFinal: null,
+            resumo: resumo(),
+          },
+          partidas: [],
+        },
+      ];
+      const brasileirao = {
+        competicao: comp,
+        classificacao: [linhaClassificacao('sao-paulo', 6)],
+        partidas: [],
+        zonas: [],
+      };
+      renderizar({
+        armazenamento,
+        clienteSnapshot: criarCliente({ clube, brasileirao }),
+      });
+      await esvaziarMicrotarefas();
+    }
+
+    it('TheSportsDB + tabelaParcial: mostra os dois avisos, tabela com posicao do provedor', async () => {
+      await montar({ provedor: 'thesportsdb', tabelaParcial: true });
+      expect(screen.getByText(AVISO_CAL)).not.toBeNull();
+      const tab = screen.getByText(AVISO_TAB);
+      expect(tab.parentElement?.textContent).toContain('⚠');
+      expect(screen.getByRole('table')).not.toBeNull();
+    });
+
+    it('Brasileirao sem os campos: nenhum aviso', async () => {
+      await montar({});
+      expect(screen.queryByText(AVISO_CAL)).toBeNull();
+      expect(screen.queryByText(AVISO_TAB)).toBeNull();
+    });
+
+    it('TheSportsDB sem tabelaParcial: so o aviso de calendario', async () => {
+      await montar({ provedor: 'thesportsdb' });
+      expect(screen.getByText(AVISO_CAL)).not.toBeNull();
+      expect(screen.queryByText(AVISO_TAB)).toBeNull();
+    });
   });
 
   it('CA-18.2: zonas ausentes — tabela sem faixas e sem legenda, sem erro', async () => {
@@ -642,6 +709,135 @@ describe('DetalheCampeonato (UI-T06-01)', () => {
     expect(carimboTexto.closest('[data-estado]')?.getAttribute('data-estado')).toBe(
       'alerta',
     );
+  });
+
+  describe('COB-29: frescor da própria competição (UX-SPEC T-06)', () => {
+    function clubeCom(sobrescritas: Record<string, unknown>) {
+      return [
+        {
+          competicao: { ...competicao(), ...sobrescritas },
+          participacao: {
+            competicaoId: 'brasileirao-serie-a',
+            clubeId: 'sao-paulo',
+            status: 'em-andamento',
+            faseAtual: null,
+            resultadoFinal: null,
+            resumo: resumo(),
+          },
+          partidas: [],
+        },
+      ];
+    }
+
+    async function abrir(
+      sobrescritas: Record<string, unknown>,
+      statusResultado?: string,
+    ): Promise<void> {
+      const armazenamento = new ArmazenamentoFalso();
+      armazenamento.setItem(
+        'sportslm.preferencias.v1',
+        JSON.stringify(preferenciasComTime('sao-paulo')),
+      );
+      const cliente = criarCliente({
+        clube: clubeCom(sobrescritas),
+        ...(statusResultado !== undefined
+          ? {
+              status: {
+                futebol: {
+                  'brasileirao-serie-a': {
+                    resultado: statusResultado,
+                    ultimaAtualizacao: '2026-09-05T09:00:00-03:00',
+                  },
+                },
+              },
+            }
+          : {}),
+      });
+      renderizar({ armazenamento, clienteSnapshot: cliente });
+      await esvaziarMicrotarefas();
+    }
+
+    it('normal: usa o ultimaAtualizacao da competição, não o global', async () => {
+      await abrir({ ultimaAtualizacao: '2026-09-05T11:30:00-03:00' });
+      const esperado = calcularFrescor(AGORA, new Date('2026-09-05T11:30:00-03:00'), 360);
+      const global = calcularFrescor(AGORA, new Date(GERADO_EM_FIXTURE), 360);
+      expect(esperado.atualizadoHa).not.toBe(global.atualizadoHa);
+      const el = screen.getByText(esperado.atualizadoHa);
+      expect(el.closest('[data-estado]')?.getAttribute('data-estado')).toBe('normal');
+      expect(screen.queryByText(global.atualizadoHa)).toBeNull();
+    });
+
+    it('alerta: competição antiga fica em alerta mesmo com global recente', async () => {
+      await abrir({ ultimaAtualizacao: '2026-09-04T09:00:00-03:00' });
+      const esperado = calcularFrescor(AGORA, new Date('2026-09-04T09:00:00-03:00'), 360);
+      const el = screen.getByText(esperado.atualizadoHa);
+      expect(el.closest('[data-estado]')?.getAttribute('data-estado')).toBe('alerta');
+    });
+
+    it('encerrada: "ENCERRADA — DADOS DE dd/mm" sem alerta', async () => {
+      await abrir({
+        ultimaAtualizacao: '2026-03-22T18:00:00-03:00',
+        janela: { inicio: '2026-01-10', fim: '2026-03-23' },
+      });
+      const el = screen.getByText('ENCERRADA — DADOS DE 22/03');
+      expect(el.closest('[data-estado]')?.getAttribute('data-estado')).toBe('normal');
+    });
+
+    it('pausado: texto de pausa por cota com a última atualização', async () => {
+      await abrir({ ultimaAtualizacao: '2026-09-05T09:00:00-03:00' }, 'pausado-por-cota');
+      const el = screen.getByText(/Atualização pausada por limite do provedor\./);
+      expect(el.closest('[data-estado]')?.getAttribute('data-estado')).toBe('pausado');
+      expect(el.textContent).toContain('Última atualização há 3 h');
+    });
+
+    it('nunca ingerida: "Sem dados disponíveis no momento"', async () => {
+      await abrir({ ultimaAtualizacao: null });
+      const el = screen.getByText('Sem dados disponíveis no momento');
+      expect(el.closest('[data-estado]')?.getAttribute('data-estado')).toBe('sem-dados');
+    });
+  });
+
+  it('COB-23: adversário fora da Série A usa o nome do lado externo, nunca externo-… cru', async () => {
+    const armazenamento = new ArmazenamentoFalso();
+    armazenamento.setItem(
+      'sportslm.preferencias.v1',
+      JSON.stringify(preferenciasComTime('sao-paulo')),
+    );
+    const partidas = [
+      {
+        id: 'p-ext',
+        competicaoId: 'brasileirao-serie-a',
+        rodada: 23,
+        fase: null,
+        mandanteId: 'sao-paulo',
+        visitanteId: 'externo-ituano-fc',
+        externo: { lado: 'visitante', nome: 'Ituano FC' },
+        dataHora: '2026-09-05T23:00:00-03:00',
+        horarioDefinido: true,
+        estadio: null,
+        status: 'finalizada',
+        placar: { mandante: 2, visitante: 1 },
+      },
+    ];
+    const clube = [
+      {
+        competicao: competicao(),
+        participacao: {
+          competicaoId: 'brasileirao-serie-a',
+          clubeId: 'sao-paulo',
+          status: 'em-andamento',
+          faseAtual: null,
+          resultadoFinal: null,
+          resumo: resumo(),
+        },
+        partidas,
+      },
+    ];
+    renderizar({ armazenamento, clienteSnapshot: criarCliente({ clube }) });
+    await esvaziarMicrotarefas();
+
+    expect(screen.getByText(/sao-paulo 2 × 1 Ituano FC · casa/)).not.toBeNull();
+    expect(document.body.textContent).not.toContain('externo-');
   });
 
   it('abas Disputadas/Próximas cobrem os 7 estados de LinhaPartida com texto canônico (CA-08.6 a CA-08.10)', async () => {

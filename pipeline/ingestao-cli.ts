@@ -86,6 +86,8 @@ export interface ResumoIngestao {
      * `.md/BLOCKERS.md`) — nunca inclui o token do provedor, só id/nome de
      * time (dado público). */
     readonly clubesNaoMapeados: readonly { idProvedor: string | number; nome: string }[];
+    /** Uma linha por liga (RNF-19), sem segredo/corpo. */
+    readonly linhasLogPorLiga: readonly string[];
   };
   readonly publicacao: { readonly arquivosGerados: number };
 }
@@ -133,6 +135,7 @@ export async function executarIngestaoCompleta(
       competicoesTotal: competicoes.length,
       pausadoPorCota: resultadoFutebol.status.pausadoPorCota,
       clubesNaoMapeados,
+      linhasLogPorLiga: resultadoFutebol.linhasLogPorLiga ?? [],
     },
     publicacao: {
       arquivosGerados: Object.keys(mapaDeArquivosPublicos(snapshots)).length,
@@ -182,6 +185,7 @@ async function main(): Promise<void> {
   try {
     const resumo = await executarIngestaoCompleta();
     console.log(formatarResumo(resumo));
+    for (const linha of resumo.futebol.linhasLogPorLiga) console.log(linha);
     const alerta = formatarAlertaClubesNaoMapeados(resumo.futebol.clubesNaoMapeados);
     if (alerta !== null) console.warn(alerta);
   } catch (erro) {

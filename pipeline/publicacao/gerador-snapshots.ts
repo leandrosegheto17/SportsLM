@@ -220,6 +220,7 @@ const statusCompeticaoPublicaSchema = z.object({
     'sem-cobertura',
     'provedor-nao-registrado',
     'pausado-por-cota',
+    'sem-dados-provedor',
     'falha',
   ]),
   ultimaAtualizacao: z.string().nullable(),

@@ -391,6 +391,35 @@ describe('construirSnapshots — SDD §2.2 (estado mockado)', () => {
     expect(paulista?.competicao.ultimaAtualizacao).toBeNull();
   });
 
+  it('preserva Competicao.tabelaParcial no clube/<slug>.json e no brasileirao.json (ADR-024)', () => {
+    const entrada = entradaFixture();
+    const estado = entrada.competicoesFutebol['brasileirao-serie-a'] as CompeticaoEstado;
+    const marcada: EntradaSnapshots = {
+      ...entrada,
+      competicoesFutebol: {
+        ...entrada.competicoesFutebol,
+        'brasileirao-serie-a': {
+          ...estado,
+          competicao: { ...estado.competicao, tabelaParcial: true },
+        },
+      },
+    };
+    const snapshots = construirSnapshots(marcada);
+    const doClube = snapshots.futebolPorClube['flamengo']?.find(
+      (c) => c.competicao.id === 'brasileirao-serie-a',
+    );
+    expect(doClube?.competicao.tabelaParcial).toBe(true);
+    expect(snapshots.futebolBrasileirao.competicao.tabelaParcial).toBe(true);
+    expect(
+      clubeFutebolPublicoSchema.parse(snapshots.futebolPorClube['flamengo']),
+    ).toBeDefined();
+  });
+
+  it('sem o campo, o snapshot não ganha tabelaParcial', () => {
+    const snapshots = construirSnapshots(entradaFixture());
+    expect(snapshots.futebolBrasileirao.competicao).not.toHaveProperty('tabelaParcial');
+  });
+
   it('CA-07.4: campeonato em-andamento vem antes do sem-dados na lista do clube', () => {
     const snapshots = construirSnapshots(entradaFixture());
     const idsOrdenados = snapshots.futebolPorClube['sao-paulo']?.map(

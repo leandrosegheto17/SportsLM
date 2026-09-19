@@ -65,6 +65,7 @@ import {
   type OpcoesUseClubesPublicos,
 } from '../../../dados/useClubesPublicos';
 import type { ClubePublico } from '../../../dados/configPublico';
+import { resolverLado } from '../../../dados/lado-partida';
 import {
   brasileiraoPublicoSchema,
   clubeFutebolPublicoSchema,
@@ -202,8 +203,14 @@ function selecionarLinhasABriga(
   return semDuplicata.sort((a, b) => a.posicao - b.posicao);
 }
 
-function nomeCurtoDoClube(clubes: readonly ClubePublico[], clubeId: string): string {
-  return clubes.find((clube) => clube.id === clubeId)?.nomeCurto ?? clubeId;
+/** COB-25: nome via `resolverLado` (ADR-019) — externo usa o nome do provedor. */
+function nomeDoLado(
+  partida: Partida,
+  lado: 'mandante' | 'visitante',
+  clubes: readonly ClubePublico[] | null,
+): string {
+  const resolvido = resolverLado(partida, lado, clubes);
+  return resolvido.tipo === 'clube' ? resolvido.clube.nomeCurto : resolvido.nome;
 }
 
 /**
@@ -371,13 +378,9 @@ export function SecaoIdentidade({
               {formatarHorario(proximoJogo.partida.dataHora ?? '')}
             </p>
             <p className={estilos['proximoJogoConfronto']}>
-              {clubes
-                ? nomeCurtoDoClube(clubes, proximoJogo.partida.mandanteId)
-                : proximoJogo.partida.mandanteId}
+              {nomeDoLado(proximoJogo.partida, 'mandante', clubes)}
               {' × '}
-              {clubes
-                ? nomeCurtoDoClube(clubes, proximoJogo.partida.visitanteId)
-                : proximoJogo.partida.visitanteId}
+              {nomeDoLado(proximoJogo.partida, 'visitante', clubes)}
             </p>
             <p className={estilos['proximoJogoMeta']}>
               {proximoJogo.partida.mandanteId === timeId ? 'casa' : 'fora'}

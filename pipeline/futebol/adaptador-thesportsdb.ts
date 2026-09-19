@@ -35,16 +35,23 @@
 // `pipeline/` faz I/O de rede — mora fora de `dominio/` (GUARDRAILS.md §5).
 
 import { z } from 'zod';
+import { partidaSchema } from '../../dominio/tipos/futebol';
 import type { LinhaClassificacao, Partida } from '../../dominio/tipos/futebol';
 import {
   ID_PROVEDOR_THESPORTSDB,
   SENTINELA_ID_PENDENTE,
   type ClubeBase,
 } from '../config/clubes';
+import { criarEspacador, type Espacador } from './espacador-requisicoes';
+import { planejarDias } from './planejar-dias';
 import type {
   InconsistenciaClube,
   InconsistenciaPartida,
   InconsistenciaStatusPartidaDesconhecido,
+} from './adaptador-football-data';
+export type {
+  InconsistenciaClubeSerieASemId,
+  InconsistenciaPartidaInvalida,
 } from './adaptador-football-data';
 
 /** URL base da API v1 pública, chave de demonstração gratuita "123" (ADR-006
@@ -64,10 +71,30 @@ export interface RefCompeticaoTheSportsDB {
   /** Id de liga do provedor, ex. `'5767'` (Paulista) — string porque é assim
    * que a API devolve e espera (`l=`/`id=` na query). */
   idLigaProvedor: string;
-  temTabela: boolean;
-  /** Temporada no formato do provedor (`s=`), ex. `'2026'` — obrigatória só
-   * quando `temTabela` é `true` (`lookuptable.php` exige `s`). */
+  /** Id de liga numérico (ADR-022), exposto para o `eventsday` (COB-33). */
+  idLiga?: number;
+  /** Política de tabela (ADR-020 item 3): `nunca` = sem requisição, vazio;
+   * `sempre` = consulta e falha em erro; `tentar` = consulta e trata "sem
+   * tabela" (`table: null`, corpo vazio, 404) como classificação vazia. */
+  politicaTabela: PoliticaTabelaTheSportsDB;
+  /** Temporada no formato do provedor (`s=`), ex. `'2026'` — obrigatória
+   * quando a política consulta a tabela (`lookuptable.php` exige `s`). */
   temporadaProvedor?: string;
+  /** Nº de clubes configurados em `pontos-corridos`/`grupos`; base da
+   * detecção de tabela parcial (ADR-024). Ausente = não avalia parcialidade. */
+  clubesEsperados?: number;
+}
+
+export type PoliticaTabelaTheSportsDB = 'nunca' | 'sempre' | 'tentar';
+
+/** Tabela do provedor com menos linhas mapeadas que clubes configurados —
+ * publicada com `Competicao.tabelaParcial = true` (ADR-024), nunca `falha`. */
+export interface InconsistenciaTabelaParcialProvedor {
+  tipo: 'tabela-parcial-provedor';
+  competicaoId: string;
+  linhasMapeadas: number;
+  clubesConfigurados: number;
+  contexto: string;
 }
 
 // --- Schemas da resposta bruta do provedor -----------------------------
@@ -100,9 +127,19 @@ const tabelaProvedorSchema = z.object({
   table: z.array(linhaTabelaProvedorSchema).nullable(),
 });
 
+/** Fase = `strGroup` como texto puro, aparado, ≤ 60; ilegível/vazio => null.
+ * Nunca deriva de `intRound` (SPK-06, ADR-022). */
+function normalizarFase(bruto: string | null | undefined): string | null {
+  if (bruto === null || bruto === undefined) return null;
+  const texto = bruto.replace(/<[^>]*>/g, '').trim();
+  return texto === '' || texto.length > 60 ? null : texto;
+}
+
 const eventoProvedorSchema = z.object({
   idEvent: z.string(),
   dateEvent: z.string().nullable(),
+  /** UTC `AAAA-MM-DDTHH:MM:SS`; preferido a `dateEventLocal` (SPK-08). */
+  strTimestamp: z.string().nullable().optional(),
   strTime: z.string().nullable().optional(),
   strStatus: z.string().nullable().optional(),
   strPostponed: z.string().nullable().optional(),
@@ -124,6 +161,13 @@ const eventosProvedorSchema = z.object({
   events: z.array(eventoProvedorSchema).nullable(),
 });
 
+/** Prefere `strTimestamp` (UTC) a dateEvent/strTime quando bem formado. */
+function normalizarPorTimestamp(evento: EventoProvedor): EventoProvedor {
+  const m = /^(d{4}-d{2}-d{2})T(d{2}:d{2}:d{2})/.exec(evento.strTimestamp ?? '');
+  if (m === null) return evento;
+  return { ...evento, dateEvent: m[1]!, strTime: m[2]! };
+}
+
 // --- Casamento por id (CA-16.6, mesma regra do adaptador football-data) ---
 
 function indiceClubesPorIdProvedor(clubes: ClubeBase[]): Map<string, ClubeBase> {
@@ -137,26 +181,22 @@ function indiceClubesPorIdProvedor(clubes: ClubeBase[]): Map<string, ClubeBase> 
   return indice;
 }
 
-function resolverClube(
-  indice: Map<string, ClubeBase>,
-  idProvedor: string,
-  nomeProvedorDiagnostico: string,
-  competicaoId: string,
-  contexto: string,
-  inconsistencias: InconsistenciaPartida[],
-): ClubeBase | null {
-  const clube = indice.get(idProvedor);
-  if (clube === undefined) {
-    inconsistencias.push({
-      tipo: 'clube-nao-mapeado',
-      competicaoId,
-      idProvedor,
-      nomeProvedorDiagnostico,
-      contexto,
-    });
-    return null;
-  }
-  return clube;
+
+export type InconsistenciaPartidaTheSportsDB = InconsistenciaPartida;
+export type InconsistenciaClassificacaoTheSportsDB =
+  | InconsistenciaClube
+  | InconsistenciaTabelaParcialProvedor;
+
+function normalizarNome(nome: string): string {
+  return nome.normalize('NFD').replace(/[̀-ͯ]/g, '').trim().toLowerCase();
+}
+
+/** Só diagnóstico: o nome do provedor parece um clube da Série A sem id? */
+function pareceClubeSerieA(nomeProvedor: string, clubes: ClubeBase[]): boolean {
+  const alvo = normalizarNome(nomeProvedor);
+  return clubes.some(
+    (c) => normalizarNome(c.nome) === alvo || normalizarNome(c.nomeCurto) === alvo,
+  );
 }
 
 // --- Tradução de classificação ------------------------------------------
@@ -196,22 +236,33 @@ export function traduzirClassificacaoTheSportsDB(
   respostaBruta: unknown,
   competicaoId: string,
   clubes: ClubeBase[],
-): { linhas: LinhaClassificacao[]; inconsistencias: InconsistenciaClube[] } {
+  clubesEsperados?: number,
+): {
+  linhas: LinhaClassificacao[];
+  inconsistencias: InconsistenciaClassificacaoTheSportsDB[];
+  parcial: boolean;
+} {
   const resposta = tabelaProvedorSchema.parse(respostaBruta);
   const indice = indiceClubesPorIdProvedor(clubes);
-  const inconsistencias: InconsistenciaClube[] = [];
+  const inconsistencias: InconsistenciaClassificacaoTheSportsDB[] = [];
   const linhas: LinhaClassificacao[] = [];
 
   for (const linha of resposta.table ?? []) {
-    const clube = resolverClube(
-      indice,
-      linha.idTeam,
-      linha.strTeam,
-      competicaoId,
-      `classificacao:posicao ${linha.intRank}`,
-      inconsistencias,
-    );
-    if (clube === null) continue;
+    const clube = indice.get(linha.idTeam);
+    if (clube === undefined) {
+      // Externo à Série A: ignorado sem inconsistência (ADR-019 item 4).
+      // Parece clube da Série A sem id: segue inconsistência.
+      if (pareceClubeSerieA(linha.strTeam, clubes)) {
+        inconsistencias.push({
+          tipo: 'clube-nao-mapeado',
+          competicaoId,
+          idProvedor: linha.idTeam,
+          nomeProvedorDiagnostico: linha.strTeam,
+          contexto: `classificacao:posicao ${linha.intRank}`,
+        });
+      }
+      continue;
+    }
 
     linhas.push({
       competicaoId,
@@ -232,7 +283,19 @@ export function traduzirClassificacaoTheSportsDB(
     });
   }
 
-  return { linhas, inconsistencias };
+  const parcial =
+    clubesEsperados !== undefined && linhas.length > 0 && linhas.length < clubesEsperados;
+  if (parcial) {
+    inconsistencias.push({
+      tipo: 'tabela-parcial-provedor',
+      competicaoId,
+      linhasMapeadas: linhas.length,
+      clubesConfigurados: clubesEsperados,
+      contexto: 'classificacao:tabela-parcial',
+    });
+  }
+
+  return { linhas, inconsistencias, parcial };
 }
 
 // --- Tradução de partidas -------------------------------------------------
@@ -246,7 +309,32 @@ export function traduzirClassificacaoTheSportsDB(
  * a partida é descartada e registrada individualmente (mesma disciplina do
  * Bloqueio 008 em `adaptador-football-data.ts`), nunca invalidando as demais.
  */
-function traduzirStatusEHorario(evento: EventoProvedor):
+const STATUS_ENCERRADO = new Set(['FT', 'AET', 'PEN']);
+const STATUS_EM_ANDAMENTO = new Set(['1H', 'HT', '2H', 'ET', 'BT', 'P', 'LIVE', 'INT']);
+const STATUS_ADIADO = new Set(['PST', 'SUSP']);
+const STATUS_CANCELADO = new Set(['CANC', 'ABD', 'AWD', 'WO']);
+
+function dataJaPassou(evento: EventoProvedor, agora: Date): boolean {
+  if (evento.dateEvent === null) return false;
+  const hora =
+    evento.strTime !== null && evento.strTime !== undefined && evento.strTime !== ''
+      ? evento.strTime
+      : '23:59:59';
+  const instante = Date.parse(`${evento.dateEvent}T${hora}Z`);
+  return !Number.isNaN(instante) && instante < agora.getTime();
+}
+
+/**
+ * Status tolerantes (RF-22, CA-22.3/22.4): encerrado (FT/AET/PEN) com placar →
+ * `finalizada` (nunca inferimos quem avançou); em andamento ou código
+ * desconhecido com data passada → `aguardando-resultado` (sem placar parcial);
+ * desconhecido com data futura → `agendada`. Só status ausente/vazio
+ * (realmente ilegível) é descartado e registrado.
+ */
+function traduzirStatusEHorario(
+  evento: EventoProvedor,
+  agora: Date,
+):
   | {
       ok: true;
       status: Partida['status'];
@@ -263,22 +351,32 @@ function traduzirStatusEHorario(evento: EventoProvedor):
     ? { mandante: Number(evento.intHomeScore), visitante: Number(evento.intAwayScore) }
     : null;
   const horarioDefinido = evento.strTime !== null && evento.strTime !== undefined;
+  const codigo = (evento.strStatus ?? '').trim().toUpperCase();
+  const aguardando = {
+    ok: true as const,
+    status: 'aguardando-resultado' as const,
+    horarioDefinido: true,
+    placar: null,
+  };
 
-  switch (evento.strStatus) {
-    case 'NS':
-      return { ok: true, status: 'agendada', horarioDefinido, placar: null };
-    case 'FT':
-      return temPlacarCompleto
-        ? { ok: true, status: 'finalizada', horarioDefinido: true, placar }
-        : {
-            ok: true,
-            status: 'aguardando-resultado',
-            horarioDefinido: true,
-            placar: null,
-          };
-    default:
-      return { ok: false };
+  if (codigo === '') return { ok: false };
+  if (codigo === 'NS')
+    return { ok: true, status: 'agendada', horarioDefinido, placar: null };
+  if (STATUS_ENCERRADO.has(codigo)) {
+    return temPlacarCompleto
+      ? { ok: true, status: 'finalizada', horarioDefinido: true, placar }
+      : aguardando;
   }
+  if (STATUS_ADIADO.has(codigo)) {
+    return { ok: true, status: 'adiada', horarioDefinido: false, placar: null };
+  }
+  if (STATUS_CANCELADO.has(codigo)) {
+    return { ok: true, status: 'cancelada', horarioDefinido, placar: null };
+  }
+  if (STATUS_EM_ANDAMENTO.has(codigo)) return aguardando;
+  return dataJaPassou(evento, agora)
+    ? aguardando
+    : { ok: true, status: 'agendada', horarioDefinido, placar: null };
 }
 
 /**
@@ -291,14 +389,22 @@ export function traduzirPartidasTheSportsDB(
   respostaBruta: unknown,
   competicaoId: string,
   clubes: ClubeBase[],
-): { partidas: Partida[]; inconsistencias: InconsistenciaPartida[] } {
+  agora: Date = new Date(),
+): {
+  partidas: Partida[];
+  inconsistencias: InconsistenciaPartidaTheSportsDB[];
+  /** Partidas sem nenhum lado Série A — comportamento esperado (CA-21.2). */
+  foraDoRecorte: number;
+} {
   const resposta = eventosProvedorSchema.parse(respostaBruta);
   const indice = indiceClubesPorIdProvedor(clubes);
-  const inconsistencias: InconsistenciaPartida[] = [];
+  const inconsistencias: InconsistenciaPartidaTheSportsDB[] = [];
+  let foraDoRecorte = 0;
   const partidas: Partida[] = [];
 
-  for (const evento of resposta.events ?? []) {
-    const traduzido = traduzirStatusEHorario(evento);
+  for (const bruto of resposta.events ?? []) {
+    const evento = normalizarPorTimestamp(bruto);
+    const traduzido = traduzirStatusEHorario(evento, agora);
     if (!traduzido.ok) {
       const inconsistencia: InconsistenciaStatusPartidaDesconhecido = {
         tipo: 'partida-status-desconhecido',
@@ -311,41 +417,77 @@ export function traduzirPartidasTheSportsDB(
       continue;
     }
 
-    const mandante = resolverClube(
-      indice,
-      evento.idHomeTeam,
-      evento.strHomeTeam,
-      competicaoId,
-      `partida:${evento.idEvent}:mandante`,
-      inconsistencias,
-    );
-    const visitante = resolverClube(
-      indice,
-      evento.idAwayTeam,
-      evento.strAwayTeam,
-      competicaoId,
-      `partida:${evento.idEvent}:visitante`,
-      inconsistencias,
-    );
-    if (mandante === null || visitante === null) continue;
+    const mandante = indice.get(evento.idHomeTeam) ?? null;
+    const visitante = indice.get(evento.idAwayTeam) ?? null;
 
-    partidas.push({
+    if (mandante === null && visitante === null) {
+      const suspeito = [
+        [evento.idHomeTeam, evento.strHomeTeam, 'mandante'],
+        [evento.idAwayTeam, evento.strAwayTeam, 'visitante'],
+      ].find(([, nome]) => pareceClubeSerieA(nome as string, clubes));
+      if (suspeito !== undefined) {
+        inconsistencias.push({
+          tipo: 'clube-serie-a-sem-id',
+          competicaoId,
+          idProvedor: suspeito[0] as string,
+          nomeProvedorDiagnostico: suspeito[1] as string,
+          contexto: `partida:${evento.idEvent}:${suspeito[2]}`,
+        });
+      } else {
+        foraDoRecorte += 1;
+      }
+      continue;
+    }
+
+    let externo: Partida['externo'];
+    if (mandante === null || visitante === null) {
+      const lado = mandante === null ? 'mandante' : 'visitante';
+      const idExt = lado === 'mandante' ? evento.idHomeTeam : evento.idAwayTeam;
+      const nomeExt = lado === 'mandante' ? evento.strHomeTeam : evento.strAwayTeam;
+      if (pareceClubeSerieA(nomeExt, clubes)) {
+        inconsistencias.push({
+          tipo: 'clube-serie-a-sem-id',
+          competicaoId,
+          idProvedor: idExt,
+          nomeProvedorDiagnostico: nomeExt,
+          contexto: `partida:${evento.idEvent}:${lado}`,
+        });
+        continue;
+      }
+      externo = { lado, nome: nomeExt };
+    }
+    const mandanteId = mandante?.id ?? `externo-${evento.idHomeTeam}`;
+    const visitanteId = visitante?.id ?? `externo-${evento.idAwayTeam}`;
+
+    const candidata = {
       id: evento.idEvent,
       competicaoId,
       rodada: null, // TheSportsDB não separa rodada de forma confiável para mata-mata/grupos mistos
-      fase:
-        evento.strGroup !== undefined && evento.strGroup !== '' ? evento.strGroup : null,
-      mandanteId: mandante.id,
-      visitanteId: visitante.id,
+      fase: normalizarFase(evento.strGroup),
+      mandanteId,
+      visitanteId,
       dataHora: evento.dateEvent,
       horarioDefinido: traduzido.horarioDefinido,
       estadio: evento.strVenue ?? null,
       status: traduzido.status,
       placar: traduzido.placar,
-    });
+      ...(externo === undefined ? {} : { externo }),
+    };
+    const validada = partidaSchema.safeParse(candidata);
+    if (!validada.success) {
+      inconsistencias.push({
+        tipo: 'partida-invalida',
+        competicaoId,
+        idPartidaProvedor: evento.idEvent,
+        motivo: validada.error.issues.map((x) => x.message).join('; '),
+        contexto: `partida:${evento.idEvent}:externo`,
+      });
+      continue;
+    }
+    partidas.push(validada.data);
   }
 
-  return { partidas, inconsistencias };
+  return { partidas, inconsistencias, foraDoRecorte };
 }
 
 // --- Porta ProvedorFutebol (ADR-006 item 1) — I/O de rede -----------------
@@ -356,12 +498,28 @@ export type BuscadorHttp = (url: string) => Promise<{
   ok: boolean;
   status: number;
   json: () => Promise<unknown>;
+  /** Corpo cru — o provedor responde HTTP 200 com corpo vazio (0 bytes) em
+   * `lookuptable` de algumas ligas (SPK-06); `.json()` cru lançaria. */
+  text: () => Promise<string>;
+  /** Opcional: usado só para citar `Retry-After` na mensagem de negação. */
+  headers?: { get: (nome: string) => string | null };
 }>;
 
 export interface OpcoesAdaptadorTheSportsDB {
   clubes: ClubeBase[];
   buscar?: BuscadorHttp;
   baseUrl?: string;
+  /** Espaçador de requisições (ADR-021); padrão: instância única por adaptador. */
+  espacador?: Espacador;
+  /** Relógio injetável (dias-alvo do eventsday); padrão: `new Date()`. */
+  agora?: () => Date;
+}
+
+function erroHttp(resposta: Awaited<ReturnType<BuscadorHttp>>, contexto: string): Error {
+  const retry = resposta.headers?.get('Retry-After') ?? null;
+  const sufixo = retry !== null && /^\d+$/.test(retry) ? `, Retry-After ${retry}s` : '';
+  // Nunca inclui o corpo da resposta na mensagem.
+  return new Error(`TheSportsDB respondeu HTTP ${resposta.status} (${contexto}${sufixo})`);
 }
 
 /**
@@ -373,61 +531,106 @@ export interface OpcoesAdaptadorTheSportsDB {
 export function criarAdaptadorTheSportsDB(opcoes: OpcoesAdaptadorTheSportsDB) {
   const buscar: BuscadorHttp = opcoes.buscar ?? ((url) => fetch(url));
   const baseUrl = opcoes.baseUrl ?? BASE_URL_THESPORTSDB;
+  const espacador: Espacador =
+    opcoes.espacador ??
+    criarEspacador({
+      maxPorJanela: 28,
+      janelaMs: 60000,
+      intervaloMinMs: 2200,
+      agora: () => Date.now(),
+      dormir: (ms) => new Promise((r) => setTimeout(r, ms)),
+    });
+  const buscarEspacado = (url: string) => espacador.executar(() => buscar(url));
 
   return {
     id: ID_PROVEDOR_THESPORTSDB,
     // Plano gratuito (chave "123"): 30 requisições/minuto.
-    orcamento: { porMinuto: 30 },
+    orcamento: { porMinuto: 30, porExecucao: 60 },
+
+    /** Teto do ADR-022: 2 âncoras + até 5 dias + tabela (1) conforme política. */
+    custoEstimado(ref: RefCompeticaoTheSportsDB): number {
+      return ref.politicaTabela === 'nunca' ? 7 : 8;
+    },
 
     async obterClassificacao(ref: RefCompeticaoTheSportsDB) {
-      if (!ref.temTabela) {
-        // Mata-mata (Copa do Brasil, fases iniciais da Libertadores): não
-        // existe "classificação" no domínio — devolve vazio sem gastar
-        // requisição em vez de forçar uma tradução sem sentido.
-        return { linhas: [], inconsistencias: [] };
-      }
-      const resposta = await buscar(
+      const vazio = {
+        linhas: [] as LinhaClassificacao[],
+        inconsistencias: [] as InconsistenciaClassificacaoTheSportsDB[],
+        parcial: false,
+      };
+      // Mata-mata: não existe "classificação" no domínio — sem requisição.
+      if (ref.politicaTabela === 'nunca') return vazio;
+      const resposta = await buscarEspacado(
         `${baseUrl}/lookuptable.php?l=${ref.idLigaProvedor}&s=${ref.temporadaProvedor ?? ''}`,
       );
       if (!resposta.ok) {
-        throw new Error(
-          `TheSportsDB respondeu HTTP ${resposta.status} (classificação, liga ${ref.idLigaProvedor})`,
-        );
+        if (ref.politicaTabela === 'tentar' && resposta.status === 404) return vazio;
+        throw erroHttp(resposta, `classificação, liga ${ref.idLigaProvedor}`);
       }
-      const corpo = await resposta.json();
-      return traduzirClassificacaoTheSportsDB(corpo, ref.competicaoId, opcoes.clubes);
+      const texto = await resposta.text();
+      if (texto.trim() === '') return vazio; // HTTP 200 com corpo vazio (SPK-06)
+      return traduzirClassificacaoTheSportsDB(
+        JSON.parse(texto) as unknown,
+        ref.competicaoId,
+        opcoes.clubes,
+        ref.clubesEsperados,
+      );
     },
 
     async obterPartidas(ref: RefCompeticaoTheSportsDB) {
-      const [respostaPassadas, respostaFuturas] = await Promise.all([
-        buscar(`${baseUrl}/eventspastleague.php?id=${ref.idLigaProvedor}`),
-        buscar(`${baseUrl}/eventsnextleague.php?id=${ref.idLigaProvedor}`),
-      ]);
-      if (!respostaPassadas.ok || !respostaFuturas.ok) {
-        const status = !respostaPassadas.ok
-          ? respostaPassadas.status
-          : respostaFuturas.status;
-        throw new Error(
-          `TheSportsDB respondeu HTTP ${status} (partidas, liga ${ref.idLigaProvedor})`,
-        );
+      // Serial (ADR-021): past -> next, cada uma pelo espaçador.
+      const respostaPassadas = await buscarEspacado(
+        `${baseUrl}/eventspastleague.php?id=${ref.idLigaProvedor}`,
+      );
+      if (!respostaPassadas.ok) {
+        throw erroHttp(respostaPassadas, `partidas, liga ${ref.idLigaProvedor}`);
       }
-      const [corpoPassadas, corpoFuturas] = await Promise.all([
-        respostaPassadas.json(),
-        respostaFuturas.json(),
-      ]);
-      const passadas = traduzirPartidasTheSportsDB(
-        corpoPassadas,
-        ref.competicaoId,
-        opcoes.clubes,
+      const corpoPassadas = await respostaPassadas.json();
+      const respostaFuturas = await buscarEspacado(
+        `${baseUrl}/eventsnextleague.php?id=${ref.idLigaProvedor}`,
       );
-      const futuras = traduzirPartidasTheSportsDB(
-        corpoFuturas,
-        ref.competicaoId,
-        opcoes.clubes,
+      if (!respostaFuturas.ok) {
+        throw erroHttp(respostaFuturas, `partidas, liga ${ref.idLigaProvedor}`);
+      }
+      const corpoFuturas = await respostaFuturas.json();
+      const lotes = [corpoPassadas, corpoFuturas];
+      if (ref.idLiga !== undefined) {
+        const dataDe = (corpo: unknown, ultimo: boolean): string | null => {
+          const evs = eventosProvedorSchema.parse(corpo).events ?? [];
+          const dias = evs
+            .map((e) => normalizarPorTimestamp(e).dateEvent)
+            .filter((d): d is string => d !== null)
+            .sort();
+          return (ultimo ? dias[dias.length - 1] : dias[0]) ?? null;
+        };
+        const dias = planejarDias({
+          hoje: (opcoes.agora ?? (() => new Date()))(),
+          ultimoEvento: dataDe(corpoPassadas, true),
+          proximoEvento: dataDe(corpoFuturas, false),
+          faixa: 1,
+        });
+        for (const dia of dias) {
+          const r = await buscarEspacado(`${baseUrl}/eventsday.php?d=${dia}&l=${ref.idLiga}`);
+          if (!r.ok) throw erroHttp(r, `partidas do dia ${dia}, liga ${ref.idLiga}`);
+          lotes.push(await r.json());
+        }
+      }
+      const traduzidos = lotes.map((corpo) =>
+        traduzirPartidasTheSportsDB(corpo, ref.competicaoId, opcoes.clubes),
       );
+      const vistos = new Set<string>();
+      const partidas: Partida[] = [];
+      for (const t of traduzidos) {
+        for (const p of t.partidas) {
+          if (vistos.has(p.id)) continue;
+          vistos.add(p.id);
+          partidas.push(p);
+        }
+      }
       return {
-        partidas: [...passadas.partidas, ...futuras.partidas],
-        inconsistencias: [...passadas.inconsistencias, ...futuras.inconsistencias],
+        partidas,
+        inconsistencias: traduzidos.flatMap((t) => t.inconsistencias),
+        foraDoRecorte: traduzidos.reduce((a, t) => a + t.foraDoRecorte, 0),
       };
     },
   };

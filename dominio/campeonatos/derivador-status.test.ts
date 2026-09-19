@@ -86,24 +86,142 @@ describe('derivarStatusCampeonato (CA-07.1)', () => {
     expect(resultado).toEqual({ status: 'em-andamento', faseAtual: 'Oitavas' });
   });
 
-  it('mata-mata sem partida futura, competição ainda ativa → eliminado na fase (CA-07.3)', () => {
+  const jogo = (p: Partial<PartidaParaDerivacaoStatus>): PartidaParaDerivacaoStatus =>
+    partida({ adversarioId: 'x', clubeEhMandante: true, ...p });
+  const placar = (mandante: number, visitante: number) => ({ mandante, visitante });
+
+  it('mata-mata: agregado ida+volta perdido → eliminado na fase (CA-07.3)', () => {
     const resultado = derivarStatusCampeonato(
       entrada({
         formato: 'mata-mata',
-        agora: AGORA_MEIO_DA_JANELA,
         partidas: [
-          partida({ fase: 'Oitavas', dataHora: '2026-06-01T20:00:00-03:00' }),
-          partida({ fase: 'Quartas', dataHora: '2026-08-01T20:00:00-03:00' }),
+          jogo({
+            fase: 'Quartas',
+            dataHora: '2026-07-01T20:00:00-03:00',
+            placar: placar(1, 1),
+          }),
+          jogo({
+            fase: 'Quartas',
+            dataHora: '2026-08-01T20:00:00-03:00',
+            clubeEhMandante: false,
+            placar: placar(2, 0),
+          }),
         ],
       }),
     );
     expect(resultado).toEqual({ status: 'eliminado', faseAtual: 'Quartas' });
   });
 
-  it('misto/grupos sem partida futura, competição ativa, também elimina', () => {
+  it('mata-mata: venceu o agregado, sem próxima fase conhecida → em-andamento sem fase', () => {
+    const resultado = derivarStatusCampeonato(
+      entrada({
+        formato: 'mata-mata',
+        partidas: [
+          jogo({
+            fase: 'Oitavas',
+            dataHora: '2026-06-01T20:00:00-03:00',
+            placar: placar(2, 0),
+          }),
+          jogo({
+            fase: 'Oitavas',
+            dataHora: '2026-06-08T20:00:00-03:00',
+            clubeEhMandante: false,
+            placar: placar(0, 1),
+          }),
+        ],
+      }),
+    );
+    expect(resultado).toEqual({ status: 'em-andamento', faseAtual: null });
+  });
+
+  it('mata-mata: agregado empatado → sem-dados (CA-22.4)', () => {
+    const resultado = derivarStatusCampeonato(
+      entrada({
+        formato: 'mata-mata',
+        partidas: [
+          jogo({
+            fase: 'Oitavas',
+            dataHora: '2026-06-01T20:00:00-03:00',
+            placar: placar(1, 0),
+          }),
+          jogo({
+            fase: 'Oitavas',
+            dataHora: '2026-06-08T20:00:00-03:00',
+            clubeEhMandante: false,
+            placar: placar(1, 0),
+          }),
+        ],
+      }),
+    );
+    expect(resultado).toEqual({ status: 'sem-dados', faseAtual: null });
+  });
+
+  it('mata-mata: ida perdida sem volta → em-andamento na fase', () => {
+    const resultado = derivarStatusCampeonato(
+      entrada({
+        formato: 'mata-mata',
+        partidas: [
+          jogo({
+            fase: 'Quartas',
+            dataHora: '2026-07-01T20:00:00-03:00',
+            placar: placar(0, 2),
+          }),
+        ],
+      }),
+    );
+    expect(resultado).toEqual({ status: 'em-andamento', faseAtual: 'Quartas' });
+  });
+
+  it('mata-mata: jogo único perdido em fase comprovadamente única → eliminado; empatado → sem-dados', () => {
+    const base = {
+      fase: 'Final',
+      dataHora: '2026-08-01T20:00:00-03:00',
+      faseJogoUnico: true,
+    };
+    expect(
+      derivarStatusCampeonato(
+        entrada({
+          formato: 'mata-mata',
+          partidas: [jogo({ ...base, placar: placar(0, 1) })],
+        }),
+      ),
+    ).toEqual({ status: 'eliminado', faseAtual: 'Final' });
+    expect(
+      derivarStatusCampeonato(
+        entrada({
+          formato: 'mata-mata',
+          partidas: [jogo({ ...base, placar: placar(1, 1) })],
+        }),
+      ),
+    ).toEqual({ status: 'sem-dados', faseAtual: null });
+  });
+
+  it('mata-mata: sem adversário/lado informado → sem prova, sem-dados (ausência de jogo futuro não basta)', () => {
+    const resultado = derivarStatusCampeonato(
+      entrada({
+        formato: 'mata-mata',
+        partidas: [partida({ fase: 'Quartas', dataHora: '2026-08-01T20:00:00-03:00' })],
+      }),
+    );
+    expect(resultado).toEqual({ status: 'sem-dados', faseAtual: null });
+  });
+
+  it('misto: jogo de fase de grupos sem partida futura não prova eliminação → sem-dados', () => {
     const resultado = derivarStatusCampeonato(
       entrada({
         formato: 'misto',
+        partidas: [
+          partida({ fase: 'Fase de grupos', dataHora: '2026-05-01T20:00:00-03:00' }),
+        ],
+      }),
+    );
+    expect(resultado).toEqual({ status: 'sem-dados', faseAtual: null });
+  });
+
+  it('grupos sem partida futura, competição ativa, segue eliminando (inalterado)', () => {
+    const resultado = derivarStatusCampeonato(
+      entrada({
+        formato: 'grupos',
         partidas: [
           partida({ fase: 'Fase de grupos', dataHora: '2026-05-01T20:00:00-03:00' }),
         ],
@@ -177,10 +295,10 @@ describe('derivarStatusCampeonato — quedas para sem-dados em ambiguidade (P8/A
     expect(resultado).toEqual({ status: 'sem-dados', faseAtual: null });
   });
 
-  it('duas finalizadas sem data conhecida mas com a MESMA fase não é ambíguo → eliminado', () => {
+  it('duas finalizadas sem data conhecida mas com a MESMA fase não é ambíguo → eliminado (grupos)', () => {
     const resultado = derivarStatusCampeonato(
       entrada({
-        formato: 'mata-mata',
+        formato: 'grupos',
         partidas: [
           partida({ fase: 'Quartas', dataHora: null }),
           partida({ fase: 'Quartas', dataHora: null }),

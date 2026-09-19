@@ -308,3 +308,123 @@ describe('coletarFutebol — suspensão por cota esgotada (CA-16.4)', () => {
     expect(resultado.requisicoesUsadas['provedor-teste']).toBe(6);
   });
 });
+
+describe('coletarFutebol — RN-22 faixas e custo declarado (COB-12, ADR-021)', () => {
+  const agora = new Date('2026-06-01T12:00:00Z');
+
+  it('faixa 1 (jogo em <=48h) antes da faixa 2; faixa 3 (fora da janela) por ultimo e sem requisicao', async () => {
+    const { registro, obterClassificacao } = criarProvedorMock();
+    const campeonatos = [
+      campeonato({
+        id: 'fora',
+        categoria: 'brasileirao',
+        janela: { inicio: '2027-01-01', fim: '2027-02-01' },
+      }),
+      campeonato({ id: 'supercopa-com-jogo', categoria: 'supercopa' }),
+      campeonato({ id: 'brasileirao-sem-jogo', categoria: 'brasileirao' }),
+      campeonato({ id: 'estadual-com-jogo', categoria: 'estadual' }),
+      campeonato({ id: 'estadual-jogo-longe', categoria: 'estadual' }),
+    ];
+    const r = await coletarFutebol({
+      campeonatos,
+      agora,
+      provedores: { 'provedor-teste': registro },
+      proximoJogoPorCompeticao: {
+        'supercopa-com-jogo': '2026-06-03T12:00:00Z',
+        'estadual-com-jogo': '2026-06-02T00:00:00Z',
+        'estadual-jogo-longe': '2026-06-03T12:00:01Z',
+        'brasileirao-sem-jogo': null,
+      },
+    });
+    expect(r.resultados.map((x) => x.competicaoId)).toEqual([
+      'estadual-com-jogo',
+      'supercopa-com-jogo',
+      'brasileirao-sem-jogo',
+      'estadual-jogo-longe',
+      'fora',
+    ]);
+    expect(obterClassificacao).toHaveBeenCalledTimes(4);
+  });
+
+  it('usa custoEstimado no teto proativo e pausa a liga de menor prioridade', async () => {
+    const adaptador: ProvedorFutebolPort<RefTeste> = {
+      id: 'x',
+      orcamento: { porMinuto: 6 },
+      custoEstimado: () => 3,
+      obterClassificacao: vi.fn(async () => ({ linhas: [], inconsistencias: [] })),
+      obterPartidas: vi.fn(async () => ({ partidas: [], inconsistencias: [] })),
+    };
+    const registro = registrarProvedor(adaptador, (c) => ({ codigo: c.id }));
+    const r = await coletarFutebol({
+      campeonatos: [
+        campeonato({ id: 'supercopa', categoria: 'supercopa' }),
+        campeonato({ id: 'br', categoria: 'brasileirao' }),
+        campeonato({ id: 'estadual', categoria: 'estadual' }),
+      ],
+      agora,
+      provedores: { 'provedor-teste': registro },
+    });
+    expect(r.resultados.map((x) => [x.competicaoId, x.tipo])).toEqual([
+      ['br', 'atualizada'],
+      ['estadual', 'atualizada'],
+      ['supercopa', 'pausado-por-cota'],
+    ]);
+    expect(r.provedoresPausadosPorCota).toEqual(['provedor-teste']);
+  });
+
+  describe('teto por execucao porExecucao (COB-36, ADR-022)', () => {
+    function reg(orcamento: { porMinuto?: number; porExecucao?: number }) {
+      const adaptador: ProvedorFutebolPort<RefTeste> = {
+        id: 'x',
+        orcamento,
+        custoEstimado: () => 8,
+        obterClassificacao: vi.fn(async () => ({ linhas: [], inconsistencias: [] })),
+        obterPartidas: vi.fn(async () => ({ partidas: [], inconsistencias: [] })),
+      };
+      return registrarProvedor(adaptador, (c) => ({ codigo: c.id }));
+    }
+    const ligas = () => [
+      ...Array.from({ length: 7 }, (_, n) => campeonato({ id: `e${n}`, categoria: 'estadual' })),
+      campeonato({ id: 'supercopa', categoria: 'supercopa' }),
+    ];
+
+    it('usa porExecucao (60), nao porMinuto (30): 7 ligas custo 8 cabem, a de menor prioridade pausa', async () => {
+      const r = await coletarFutebol({
+        campeonatos: ligas(),
+        agora,
+        provedores: { 'provedor-teste': reg({ porMinuto: 30, porExecucao: 60 }) },
+      });
+      expect(r.resultados.filter((x) => x.tipo === 'atualizada')).toHaveLength(7);
+      expect(r.resultados[7]).toMatchObject({ competicaoId: 'supercopa', tipo: 'pausado-por-cota' });
+    });
+
+    it('sem porExecucao mantem porMinuto como teto', async () => {
+      const r = await coletarFutebol({
+        campeonatos: ligas(),
+        agora,
+        provedores: { 'provedor-teste': reg({ porMinuto: 30 }) },
+      });
+      expect(r.resultados.filter((x) => x.tipo === 'atualizada')).toHaveLength(3);
+    });
+  });
+
+  it('429 suspende o provedor e as ligas seguintes', async () => {
+    const { registro } = criarProvedorMock({
+      obterClassificacao: vi.fn(async () => {
+        throw new Error('HTTP 429');
+      }),
+    });
+    const r = await coletarFutebol({
+      campeonatos: [
+        campeonato({ id: 'a', categoria: 'brasileirao' }),
+        campeonato({ id: 'b', categoria: 'estadual' }),
+      ],
+      agora,
+      provedores: { 'provedor-teste': registro },
+    });
+    expect(r.resultados.map((x) => x.tipo)).toEqual([
+      'pausado-por-cota',
+      'pausado-por-cota',
+    ]);
+  });
+});

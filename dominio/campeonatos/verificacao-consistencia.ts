@@ -22,18 +22,25 @@
 // nem omitir regra. Se o Coordenador quiser as duas separadas, é ajuste
 // mecânico deste único arquivo (duas constantes de motivo em vez de uma).
 
-import type { LinhaClassificacao, Partida } from '../tipos/futebol';
+import type { Competicao, LinhaClassificacao, Partida } from '../tipos/futebol';
 
 /** Motivo de inconsistência — um por verificação (exatamente 5, ver nota
  * acima), na ordem em que o SDD §2.4 as enuncia. */
 export type MotivoInconsistencia =
   | 'linha-aritmetica-invalida' // pontos = 3V+E e jogos = V+E+D (verificações 1+2 do SDD)
   | 'saldo-invalido' // saldo = GP − GC (verificação 3 do SDD)
+  | 'clube-duplicado' // mesmo clube duas vezes na mesma tabela/grupo (ADR-020 item 5)
+  | 'clube-fora-da-configuracao' // linha de clube não configurado (misto, ADR-020 item 5)
   | 'numero-de-clubes-incorreto' // nº de linhas == nº de clubes configurado (verificação 4 do SDD)
   | 'partida-anterior-ao-inicio' // nenhuma partida com data < início da competição (verificação 5 do SDD)
   | 'partida-finalizada-sem-placar'; // nenhuma partida `finalizada` sem placar (verificação 6 do SDD)
 
 export interface EntradaVerificacaoConsistencia {
+  /** Formato de disputa (ADR-020 item 5): define a exigência sobre a tabela. */
+  readonly formato: Competicao['formato'];
+  /** Ids dos clubes configurados; `misto` checa que toda linha é de clube
+   * configurado. Ausente → essa checagem não roda. */
+  readonly clubesConfigurados?: readonly string[];
   /** Classificação coletada nesta execução (pode ser de mais de um grupo —
    * `LinhaClassificacao.grupo`, SDD §5.2). */
   readonly linhas: readonly LinhaClassificacao[];
@@ -45,6 +52,10 @@ export interface EntradaVerificacaoConsistencia {
   /** Início da janela da competição (`Competicao.janela.inicio`, SDD §5.2),
    * ISO 8601. */
   readonly inicioCompeticao: string;
+  /** Marca de tabela parcial do provedor (ADR-024, COB-40): em
+   * `pontos-corridos`/`grupos` aceita menos linhas que clubes, mantendo as
+   * demais verificações. Ausente/false → comportamento anterior. */
+  readonly tabelaParcial?: boolean;
 }
 
 export interface ResultadoVerificacaoConsistencia {
@@ -90,8 +101,23 @@ export function verificarConsistenciaCompeticao(
     motivos.push('saldo-invalido');
   }
 
-  if (entrada.linhas.length !== entrada.numeroClubesEsperado) {
-    motivos.push('numero-de-clubes-incorreto');
+  if (entrada.formato !== 'mata-mata') {
+    const chaves = entrada.linhas.map((l) => `${l.grupo ?? ''}|${l.clubeId}`);
+    if (new Set(chaves).size !== chaves.length) motivos.push('clube-duplicado');
+
+    if (entrada.formato === 'misto' || entrada.tabelaParcial === true) {
+      if (entrada.linhas.length > entrada.numeroClubesEsperado) {
+        motivos.push('numero-de-clubes-incorreto');
+      }
+      if (entrada.clubesConfigurados !== undefined) {
+        const configurados = new Set(entrada.clubesConfigurados);
+        if (entrada.linhas.some((l) => !configurados.has(l.clubeId))) {
+          motivos.push('clube-fora-da-configuracao');
+        }
+      }
+    } else if (entrada.linhas.length !== entrada.numeroClubesEsperado) {
+      motivos.push('numero-de-clubes-incorreto');
+    }
   }
 
   const inicioMs = paraTimestamp(entrada.inicioCompeticao);

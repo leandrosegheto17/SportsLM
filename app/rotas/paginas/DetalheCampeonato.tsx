@@ -98,6 +98,9 @@ import {
 import { CHAVE_ARMAZENAMENTO_PREFERENCIAS } from '../../armazenamento/preferencias';
 import { lerBrutoSemLancar } from '../../armazenamento/nucleo';
 import { preferenciasSchema } from '../../../dominio/tipos';
+import { frescorDaCompeticao } from '../../dados/motivo-sem-dados';
+import { useStatusFutebol } from '../../dados/useStatusFutebol';
+import { resolverLado, type LadoResolvido } from '../../dados/lado-partida';
 import type { LinhaClassificacao, Partida, Zona } from '../../../dominio/tipos/futebol';
 import { calcularFrescor } from '../../../dominio/frescor';
 import { BlocoPreto } from '../../design-system/BlocoPreto';
@@ -229,9 +232,13 @@ function nomesDaPartida(
   clubes: readonly ClubePublico[] | null,
 ): { readonly mandante: string; readonly visitante: string } {
   return {
-    mandante: nomeCurtoOuSigla(clubes, partida.mandanteId).nomeCurto,
-    visitante: nomeCurtoOuSigla(clubes, partida.visitanteId).nomeCurto,
+    mandante: nomeDoLado(resolverLado(partida, 'mandante', clubes)),
+    visitante: nomeDoLado(resolverLado(partida, 'visitante', clubes)),
   };
+}
+
+function nomeDoLado(lado: LadoResolvido): string {
+  return lado.tipo === 'clube' ? lado.clube.nomeCurto : lado.nome;
 }
 
 /** CA-08.6 — linha "disputada" (data, adversário, mando, placar, V/E/D), a
@@ -428,8 +435,6 @@ function montarConfrontoMataMata(
     return null;
   }
 
-  const adversarioId =
-    primeira.mandanteId === timeId ? primeira.visitanteId : primeira.mandanteId;
   const ehJogoUnico = daFase.length === 1;
 
   const finalizada =
@@ -479,7 +484,9 @@ function montarConfrontoMataMata(
   return {
     fase: faseAtual,
     proprioNome: nomeCurtoOuSigla(clubes, timeId).nomeCurto,
-    adversarioNome: nomeCurtoOuSigla(clubes, adversarioId).nomeCurto,
+    adversarioNome: nomeDoLado(
+      resolverLado(primeira, primeira.mandanteId === timeId ? 'visitante' : 'mandante', clubes),
+    ),
     agregado,
     proximo,
   };
@@ -654,6 +661,7 @@ export function DetalheCampeonato({
     clubeFutebolPublicoSchema,
     opcoesSnapshot,
   );
+  const statusFutebol = useStatusFutebol(clienteSnapshot);
   const brasileirao = useSnapshot(
     URL_FUTEBOL_BRASILEIRAO,
     'futebol',
@@ -775,20 +783,24 @@ export function DetalheCampeonato({
   const linhasProximas = montarLinhasProximas(partidasDoCampeonato, timeId, clubes);
   const nomeTorcedor = nomeCurtoOuSigla(clubes, timeId).nomeCurto;
 
-  const geradoEmIso = clubeFutebol.geradoEm;
+  // COB-29 (UX-SPEC T-06, CA-23.1-23.4): carimbo da PRÓPRIA competição.
+  const ultimaAtualizacaoCompeticao = competicao.ultimaAtualizacao;
+  const temJogoHoje = temPartidaHoje(
+    agora,
+    clubeFutebol.dados?.flatMap((entrada) => entrada.partidas) ?? [],
+  );
+  const estadoFrescor = frescorDaCompeticao({
+    ultimaAtualizacao: ultimaAtualizacaoCompeticao,
+    janela: competicao.janela,
+    agora,
+    temJogoProximo: temJogoHoje,
+    resultado: statusFutebol.dados?.[competicao.id]?.resultado ?? null,
+  });
   const frescor =
-    geradoEmIso !== null
-      ? calcularFrescor(
-          agora,
-          new Date(geradoEmIso),
-          temPartidaHoje(
-            agora,
-            clubeFutebol.dados?.flatMap((entrada) => entrada.partidas) ?? [],
-          )
-            ? 60
-            : 360,
-        )
+    ultimaAtualizacaoCompeticao !== null
+      ? calcularFrescor(agora, new Date(ultimaAtualizacaoCompeticao), temJogoHoje ? 60 : 360)
       : null;
+  const textoAtualizadoHa = (frescor?.atualizadoHa ?? '').replace(/^atualizado\s*/i, '');
 
   return (
     <article className={estilos['pagina']}>
@@ -797,11 +809,25 @@ export function DetalheCampeonato({
       </p>
       <h1 className={estilos['titulo']}>{competicao.nome}</h1>
 
-      {frescor ? (
+      {frescor && ultimaAtualizacaoCompeticao !== null ? (
         <CarimboFrescor
-          estado={frescor.emAlerta ? 'alerta' : 'normal'}
-          texto={frescor.atualizadoHa}
-          {...(geradoEmIso !== null ? { dataHoraIso: geradoEmIso } : {})}
+          estado={
+            estadoFrescor === 'pausado'
+              ? 'pausado'
+              : estadoFrescor === 'alerta' || estadoFrescor === 'falha'
+                ? 'alerta'
+                : 'normal'
+          }
+          texto={
+            estadoFrescor === 'encerrada'
+              ? `ENCERRADA — DADOS DE ${formatarDiaMes(ultimaAtualizacaoCompeticao)}`
+              : estadoFrescor === 'pausado'
+                ? `Atualização pausada por limite do provedor. Última atualização ${textoAtualizadoHa}.`
+                : estadoFrescor === 'falha'
+                  ? `FALHA NA ÚLTIMA ATUALIZAÇÃO — DADOS DE ${textoAtualizadoHa.toUpperCase()}`
+                  : frescor.atualizadoHa
+          }
+          dataHoraIso={ultimaAtualizacaoCompeticao}
         />
       ) : (
         <CarimboFrescor estado="sem-dados" texto="Sem dados disponíveis no momento" />
@@ -831,6 +857,13 @@ export function DetalheCampeonato({
           <p className={estilos['resumoLinha']}>Sem dados disponíveis no momento.</p>
         )}
       </BlocoPreto>
+
+      {competicao.tabelaParcial === true && !ehMataMata ? (
+        <p className={estilos['resumoLinha']}>
+          <span aria-hidden="true">⚠</span>{' '}
+          <span>Tabela parcial — a fonte gratuita informa só parte da classificação.</span>
+        </p>
+      ) : null}
 
       {ehMataMata ? (
         <>
@@ -899,6 +932,12 @@ export function DetalheCampeonato({
             </p>
           ) : null}
         </BlocoPreto>
+      ) : null}
+
+      {competicao.provedor === 'thesportsdb' ? (
+        <p className={estilos['resumoLinha']}>
+          Calendário parcial — a fonte gratuita informa poucos jogos por consulta.
+        </p>
       ) : null}
 
       <div className={estilos['abasContainer']}>

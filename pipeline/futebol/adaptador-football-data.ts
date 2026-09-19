@@ -109,9 +109,32 @@ export interface InconsistenciaStatusPartidaDesconhecido {
  * casamento de clube (ADR-006 item 3) ou status de partida fora do enum
  * conhecido (Bloqueio 008). `traduzirClassificacao` continua devolvendo só
  * `InconsistenciaClube[]` (não lida com `status` de partida). */
+/** Partida descartada porque o nome do provedor de um lado sem id bate com um
+ * clube da Série A (ADR-019 item 5, CA-21.3). Comparação SÓ diagnóstica: nunca
+ * casa nem exibe como externo — o pré-requisito real é preencher os ids. */
+export interface InconsistenciaClubeSerieASemId {
+  tipo: 'clube-serie-a-sem-id';
+  competicaoId: string;
+  idProvedor: string;
+  nomeProvedorDiagnostico: string;
+  contexto: string;
+}
+
+/** Partida descartada porque o resultado (ex.: nome externo inválido) não passa
+ * em `partidaSchema` (ADR-019 item 3). */
+export interface InconsistenciaPartidaInvalida {
+  tipo: 'partida-invalida';
+  competicaoId: string;
+  idPartidaProvedor: string;
+  motivo: string;
+  contexto: string;
+}
+
 export type InconsistenciaPartida =
   | InconsistenciaClube
-  | InconsistenciaStatusPartidaDesconhecido;
+  | InconsistenciaStatusPartidaDesconhecido
+  | InconsistenciaClubeSerieASemId
+  | InconsistenciaPartidaInvalida;
 
 // --- Schemas da resposta bruta do provedor -----------------------------
 // Toda entrada externa passa por Zod antes de entrar no domínio (TASK.md §1,

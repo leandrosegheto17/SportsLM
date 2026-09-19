@@ -77,6 +77,9 @@ import { BlocoPreto } from '../../design-system/BlocoPreto';
 import { Botao } from '../../design-system/componentes/Botao';
 import { CarimboFrescor, Esqueleto, EstadoVazio } from '../../design-system/componentes';
 import { useSnapshot } from '../../dados/useSnapshot';
+import { frescorDaCompeticao, motivoSemDados } from '../../dados/motivo-sem-dados';
+import { statusFutebolSchema, type StatusFutebol } from '../../dados/useStatusFutebol';
+import { resolverLado, type LadoResolvido } from '../../dados/lado-partida';
 import { clienteSnapshotPadrao, type ClienteSnapshot } from '../../dados/clienteSnapshot';
 import {
   useClubesPublicos,
@@ -99,6 +102,9 @@ import {
 import { calcularFrescor } from '../../../dominio/frescor';
 import type { Partida } from '../../../dominio/tipos/futebol';
 import { useSobreposicoes } from '../SobreposicoesContext';
+
+const nomeDoLado = (l: LadoResolvido): string =>
+  l.tipo === 'clube' ? l.clube.nomeCurto : l.nome;
 import { useTituloDocumento } from '../useTituloDocumento';
 import estilos from './PainelTime.module.css';
 
@@ -115,7 +121,13 @@ const INTERVALO_FUTEBOL_MINUTOS = 6 * 60;
 /** `/dados/ingestao/status.json` (SDD §5.4) — só o campo usado por esta tela
  * (CA-16.4/CA-17.4); mesmo padrão de leitura "parcial, com passthrough" de
  * `SecaoUltimasNoticias`/UI-T02-03. */
-const esquemaStatusPublico = z.object({ pausadoPorCota: z.boolean() }).passthrough();
+const esquemaStatusPublico = z
+  .object({ pausadoPorCota: z.boolean(), futebol: z.unknown().optional() })
+  .passthrough()
+  .transform((s) => ({
+    pausadoPorCota: s.pausadoPorCota,
+    futebol: statusFutebolSchema.parse({ futebol: s.futebol }),
+  }));
 const URL_STATUS = '/dados/ingestao/status.json';
 
 const FORMATADOR_DIA_SEMANA = new Intl.DateTimeFormat('pt-BR', {
@@ -301,6 +313,73 @@ export interface PropriedadesPainelTime {
 }
 
 /** T-05 — Painel do time (campeonatos do ano). Rota: `/time`. */
+function ddmmSp(iso: string): string {
+  return new Intl.DateTimeFormat('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    timeZone: 'America/Sao_Paulo',
+  }).format(new Date(iso));
+}
+
+const JANELA_JOGO_PROXIMO_MS = 48 * 60 * 60 * 1000;
+
+/** COB-28 (CA-23.1-23.4): carimbo de frescor da PRÓPRIA competição. */
+function frescorDoCartao(
+  entrada: CampeonatoOrdenavelComEntrada['entrada'],
+  resultado: string | null,
+  agora: Date,
+): {
+  estado: 'normal' | 'alerta' | 'sem-dados' | 'pausado';
+  texto: string;
+  iso?: string;
+} {
+  const ultima = entrada.competicao.ultimaAtualizacao ?? null;
+  const temJogoProximo = entrada.partidas.some((p) => {
+    if (p.dataHora === null || p.status === 'finalizada') return false;
+    const dif = Date.parse(p.dataHora) - agora.getTime();
+    return dif >= 0 && dif <= JANELA_JOGO_PROXIMO_MS;
+  });
+  const estado = frescorDaCompeticao({
+    ultimaAtualizacao: ultima,
+    janela: entrada.competicao.janela,
+    agora,
+    temJogoProximo,
+    resultado,
+  });
+  if (ultima === null || estado === 'nunca')
+    return { estado: 'sem-dados', texto: 'Sem dados disponíveis no momento' };
+  const ha = calcularFrescor(agora, new Date(ultima), temJogoProximo ? 60 : 360)
+    .atualizadoHa.replace(/^atualizado\s*/i, '')
+    .toUpperCase()
+    .replace(/(\d+) MINUTOS?/, '$1 MIN')
+    .replace(/(\d+) HORAS?/, '$1 H');
+  if (estado === 'encerrada')
+    return {
+      estado: 'normal',
+      texto: `ENCERRADA — DADOS DE ${ddmmSp(ultima)}`,
+      iso: ultima,
+    };
+  if (estado === 'pausado')
+    return {
+      estado: 'pausado',
+      texto: `ATUALIZAÇÃO PAUSADA POR LIMITE DO PROVEDOR — DADOS DE ${ha}`,
+      iso: ultima,
+    };
+  if (estado === 'falha')
+    return {
+      estado: 'alerta',
+      texto: `FALHA NA ÚLTIMA ATUALIZAÇÃO — DADOS DE ${ha}`,
+      iso: ultima,
+    };
+  if (estado === 'alerta')
+    return {
+      estado: 'alerta',
+      texto: `ATUALIZADO ${ha} — PODE ESTAR DESATUALIZADO`,
+      iso: ultima,
+    };
+  return { estado: 'normal', texto: `ATUALIZADO ${ha}`, iso: ultima };
+}
+
 export function PainelTime({
   armazenamento,
   opcoesClubesPublicos,
@@ -478,11 +557,9 @@ export function PainelTime({
             {formatarHorario(proximoJogo.partida.dataHora ?? '')}
           </p>
           <p className={estilos['proximoJogoConfronto']}>
-            {clubes?.find((c) => c.id === proximoJogo.partida.mandanteId)?.nomeCurto ??
-              proximoJogo.partida.mandanteId}
+            {nomeDoLado(resolverLado(proximoJogo.partida, 'mandante', clubes))}
             {' × '}
-            {clubes?.find((c) => c.id === proximoJogo.partida.visitanteId)?.nomeCurto ??
-              proximoJogo.partida.visitanteId}
+            {nomeDoLado(resolverLado(proximoJogo.partida, 'visitante', clubes))}
           </p>
           <p className={estilos['proximoJogoMeta']}>
             {proximoJogo.partida.mandanteId === timeId ? 'casa' : 'fora'}
@@ -532,18 +609,39 @@ export function PainelTime({
           const { status } = entrada.participacao;
 
           if (status === 'sem-dados') {
+            const resultado =
+              (statusIngestao.dados?.futebol as StatusFutebol | undefined)?.[
+                entrada.competicao.id
+              ]?.resultado ??
+              (entrada.competicao.provedor === null ? 'sem-cobertura' : null);
+            // ADR-024/P-C: candidato configurado, provedor ok, nenhuma partida vista.
+            const semJogos = resultado === 'atualizada' && entrada.partidas.length === 0;
+            const motivo =
+              motivoSemDados({
+                resultado,
+                janela: entrada.competicao.janela,
+                agora,
+                temDado: false,
+              }) ?? 'Sem dados disponíveis no momento';
             return (
-              <li key={entrada.competicao.id} className={estilos['cartaoSemDados']}>
+              <li
+                key={entrada.competicao.id}
+                className={estilos['cartaoSemDados']}
+                aria-label={`${entrada.competicao.nome}, sem dados. ${motivo}`}
+              >
                 <p className={estilos['cartaoSemDadosTitulo']}>
-                  {entrada.competicao.nome} — SEM DADOS
+                  {entrada.competicao.nome} — {semJogos ? 'SEM JOGOS.' : 'SEM DADOS'}
                 </p>
-                <p className={estilos['cartaoSemDadosTexto']}>
-                  Cobertura indisponível nesta versão.
-                </p>
+                <p className={estilos['cartaoSemDadosTexto']}>{motivo}</p>
               </li>
             );
           }
 
+          const resultadoCartao =
+            (statusIngestao.dados?.futebol as StatusFutebol | undefined)?.[
+              entrada.competicao.id
+            ]?.resultado ?? null;
+          const carimboCartao = frescorDoCartao(entrada, resultadoCartao, agora);
           const linhaResumo = montarLinhaResumo(entrada.participacao.resumo);
           const proximaPartidaDoCartao =
             linhaResumo === null ? proximaPartidaAgendada(entrada.partidas) : null;
@@ -569,6 +667,20 @@ export function PainelTime({
                   </span>
                 ) : null}
               </Link>
+              {entrada.competicao.provedor === 'thesportsdb' ? (
+                <p className={estilos['cartaoMeta']}>
+                  Calendário parcial — a fonte gratuita informa poucos jogos por consulta.
+                </p>
+              ) : null}
+              <p className={estilos['cartaoMeta']}>
+                <CarimboFrescor
+                  estado={carimboCartao.estado}
+                  texto={carimboCartao.texto}
+                  {...(carimboCartao.iso !== undefined
+                    ? { dataHoraIso: carimboCartao.iso }
+                    : {})}
+                />
+              </p>
             </li>
           );
         })}

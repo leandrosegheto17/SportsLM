@@ -49,6 +49,13 @@ export interface PartidaParaDerivacaoStatus {
   readonly dataHora: string | null;
   readonly status: StatusPartidaParaDerivacao;
   readonly placar: { readonly mandante: number; readonly visitante: number } | null;
+  /** Adversário do clube nesta partida (ADR-020 item 7). Ausente => sem prova. */
+  readonly adversarioId?: string;
+  /** `true` se o clube é o mandante desta partida. Ausente => sem prova. */
+  readonly clubeEhMandante?: boolean;
+  /** `true` só quando a fase é comprovadamente de jogo único (dado do SPK-06).
+   * Ausente/`false` => não se afirma eliminação por um único jogo. */
+  readonly faseJogoUnico?: boolean;
 }
 
 export type StatusCampeonato =
@@ -200,5 +207,48 @@ export function derivarStatusCampeonato(entrada: EntradaDerivadorStatus): Status
   const ultimaFase = obterUltimaFase(finalizadas);
   if (ultimaFase === undefined) return SEM_DADOS; // fase da eliminação ambígua (ADR-006 ponto 6)
 
-  return { status: 'eliminado', faseAtual: ultimaFase };
+  if (entrada.formato === 'grupos') {
+    return { status: 'eliminado', faseAtual: ultimaFase };
+  }
+  return derivarMataMata(finalizadas, ultimaFase);
+}
+
+/** Saldo do clube na partida (gols pró - contra); `null` sem prova de lado/placar. */
+function saldoDoClube(p: PartidaParaDerivacaoStatus): number | null {
+  if (p.placar === null || p.clubeEhMandante === undefined) return null;
+  return p.clubeEhMandante
+    ? p.placar.mandante - p.placar.visitante
+    : p.placar.visitante - p.placar.mandante;
+}
+
+/**
+ * Ramo mata-mata/misto (ADR-020 item 7): "eliminado" só com derrota
+ * comprovada. Ausência de partida futura nunca basta.
+ */
+function derivarMataMata(
+  finalizadas: readonly PartidaParaDerivacaoStatus[],
+  ultimaFase: string | null,
+): StatusDerivado {
+  if (ultimaFase === null) return SEM_DADOS;
+  const daFase = finalizadas.filter((p) => p.fase === ultimaFase);
+  const adversario = daFase[0]?.adversarioId;
+  if (adversario === undefined || daFase.some((p) => p.adversarioId !== adversario)) {
+    return SEM_DADOS;
+  }
+  if (daFase.length > 2) return SEM_DADOS;
+  let agregado = 0;
+  for (const p of daFase) {
+    const saldo = saldoDoClube(p);
+    if (saldo === null) return SEM_DADOS;
+    agregado += saldo;
+  }
+
+  if (daFase.length === 2 || daFase[0]?.faseJogoUnico === true) {
+    if (agregado === 0) return SEM_DADOS; // penaltis/gols fora desconhecidos (CA-22.4)
+    return agregado < 0
+      ? { status: 'eliminado', faseAtual: ultimaFase }
+      : { status: 'em-andamento', faseAtual: null };
+  }
+  // Um único jogo em fase não comprovada como jogo único: a volta pode faltar.
+  return { status: 'em-andamento', faseAtual: ultimaFase };
 }

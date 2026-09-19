@@ -66,6 +66,11 @@ import type {
   InconsistenciaClube,
   InconsistenciaPartida,
 } from './adaptador-football-data';
+import type { InconsistenciaTabelaParcialProvedor } from './adaptador-thesportsdb';
+
+type InconsistenciaClassificacao =
+  | InconsistenciaClube
+  | InconsistenciaTabelaParcialProvedor;
 
 /** Custo fixo, em requisições, de coletar uma competição — chamar
  * `obterClassificacao` e `obterPartidas` uma vez cada (ADR-006 item 1). */
@@ -80,26 +85,38 @@ export const CUSTO_REQUISICOES_POR_COMPETICAO = 2;
  */
 export interface ProvedorFutebolPort<TRef = unknown> {
   readonly id: string;
-  readonly orcamento: { porMinuto?: number; porDia?: number };
-  obterClassificacao(
-    ref: TRef,
-  ): Promise<{ linhas: LinhaClassificacao[]; inconsistencias: InconsistenciaClube[] }>;
-  obterPartidas(
-    ref: TRef,
-  ): Promise<{ partidas: Partida[]; inconsistencias: InconsistenciaPartida[] }>;
+  readonly orcamento: { porMinuto?: number; porDia?: number; porExecucao?: number };
+  /** Custo estimado, em requisicoes, de coletar uma competicao (ADR-021 item 2).
+   * Ausente = `CUSTO_REQUISICOES_POR_COMPETICAO`. */
+  custoEstimado?(ref: TRef): number;
+  obterClassificacao(ref: TRef): Promise<{
+    linhas: LinhaClassificacao[];
+    inconsistencias: InconsistenciaClassificacao[];
+    parcial?: boolean;
+  }>;
+  obterPartidas(ref: TRef): Promise<{
+    partidas: Partida[];
+    inconsistencias: InconsistenciaPartida[];
+    /** Eventos descartados por fora do recorte (ADR-022); ausente = 0. */
+    foraDoRecorte?: number;
+  }>;
 }
 
 /** Entrada opaca do registro de provedores — ver `registrarProvedor`. */
 export interface ProvedorRegistrado {
   readonly adaptador: {
-    readonly orcamento: { porMinuto?: number; porDia?: number };
+    readonly orcamento: { porMinuto?: number; porDia?: number; porExecucao?: number };
+    custoEstimado?: (ref: unknown) => number;
     obterClassificacao: (ref: unknown) => Promise<{
       linhas: LinhaClassificacao[];
-      inconsistencias: InconsistenciaClube[];
+      inconsistencias: InconsistenciaClassificacao[];
+      parcial?: boolean;
     }>;
-    obterPartidas: (
-      ref: unknown,
-    ) => Promise<{ partidas: Partida[]; inconsistencias: InconsistenciaPartida[] }>;
+    obterPartidas: (ref: unknown) => Promise<{
+      partidas: Partida[];
+      inconsistencias: InconsistenciaPartida[];
+      foraDoRecorte?: number;
+    }>;
   };
   readonly construirReferencia: (campeonato: CampeonatoConfig) => unknown;
 }
@@ -119,6 +136,9 @@ export function registrarProvedor<TRef>(
   return {
     adaptador: {
       orcamento: adaptador.orcamento,
+      ...(adaptador.custoEstimado !== undefined && {
+        custoEstimado: (ref: unknown) => adaptador.custoEstimado!(ref as TRef),
+      }),
       obterClassificacao: (ref) => adaptador.obterClassificacao(ref as TRef),
       obterPartidas: (ref) => adaptador.obterPartidas(ref as TRef),
     },
@@ -132,8 +152,16 @@ export interface ResultadoCompeticaoAtualizada {
   competicaoId: string;
   categoria: CategoriaCampeonato;
   tipo: 'atualizada';
-  classificacao: { linhas: LinhaClassificacao[]; inconsistencias: InconsistenciaClube[] };
-  partidas: { partidas: Partida[]; inconsistencias: InconsistenciaPartida[] };
+  classificacao: {
+    linhas: LinhaClassificacao[];
+    inconsistencias: InconsistenciaClassificacao[];
+    parcial?: boolean;
+  };
+  partidas: {
+    partidas: Partida[];
+    inconsistencias: InconsistenciaPartida[];
+    foraDoRecorte?: number;
+  };
 }
 
 /** Fora da janela de calendário da competição (não consome requisição, ADR-002)
@@ -206,6 +234,9 @@ export interface OpcoesColeta {
    * próprio provedor).
    */
   limitesPorExecucao?: Record<string, number>;
+  /** Proximo jogo (ISO 8601) por competicao, calculado do estado anterior
+   * (RN-22/ADR-021 item 3). Ausente/`null` => faixa 2. */
+  proximoJogoPorCompeticao?: Record<string, string | null>;
 }
 
 // --- Prioridade (ADR-002) ---------------------------------------------------
@@ -219,9 +250,29 @@ const ORDEM_PRIORIDADE_CATEGORIA: Record<CategoriaCampeonato, number> = {
   supercopa: 4,
 };
 
-function ordenarPorPrioridade(campeonatos: CampeonatoConfig[]): CampeonatoConfig[] {
+const JANELA_JOGO_PROXIMO_MS = 48 * 60 * 60 * 1000;
+
+/** Faixa RN-22: 1 = janela ativa e jogo em <= 48 h; 2 = janela ativa; 3 = fora. */
+function faixaRn22(
+  c: CampeonatoConfig,
+  agora: Date,
+  proximo: Record<string, string | null> | undefined,
+): 1 | 2 | 3 {
+  if (foraDaJanela(c.janela, agora)) return 3;
+  const iso = proximo?.[c.id];
+  if (iso === undefined || iso === null) return 2;
+  const delta = new Date(iso).getTime() - agora.getTime();
+  return Number.isFinite(delta) && delta >= 0 && delta <= JANELA_JOGO_PROXIMO_MS ? 1 : 2;
+}
+
+function ordenarPorPrioridade(
+  campeonatos: CampeonatoConfig[],
+  agora: Date,
+  proximo: Record<string, string | null> | undefined,
+): CampeonatoConfig[] {
   return [...campeonatos].sort(
     (a, b) =>
+      faixaRn22(a, agora, proximo) - faixaRn22(b, agora, proximo) ||
       ORDEM_PRIORIDADE_CATEGORIA[a.categoria] - ORDEM_PRIORIDADE_CATEGORIA[b.categoria],
   );
 }
@@ -263,10 +314,16 @@ function mensagemDeErro(erro: unknown): string {
  * papel de cada adaptador (ING-F-01) e de quem liga o fluxo (ING-F-05).
  */
 export async function coletarFutebol(opcoes: OpcoesColeta): Promise<ResultadoColeta> {
-  const ordenados = ordenarPorPrioridade(opcoes.campeonatos);
+  const ordenados = ordenarPorPrioridade(
+    opcoes.campeonatos,
+    opcoes.agora,
+    opcoes.proximoJogoPorCompeticao,
+  );
   const resultados: ResultadoCompeticao[] = [];
   const requisicoesUsadas: Record<string, number> = {};
   const provedoresPausados = new Set<string>();
+  // Custo declarado (ADR-022) ja comprometido por provedor; base do teto proativo.
+  const custoReservado: Record<string, number> = {};
 
   for (const campeonato of ordenados) {
     const base = { competicaoId: campeonato.id, categoria: campeonato.categoria };
@@ -293,19 +350,22 @@ export async function coletarFutebol(opcoes: OpcoesColeta): Promise<ResultadoCol
       continue;
     }
 
+    const referencia = registro.construirReferencia(campeonato);
     const usadasAtuais = requisicoesUsadas[provedorId] ?? 0;
+    const reservado = custoReservado[provedorId] ?? 0;
+    const custo =
+      registro.adaptador.custoEstimado?.(referencia) ?? CUSTO_REQUISICOES_POR_COMPETICAO;
     const limite =
-      opcoes.limitesPorExecucao?.[provedorId] ?? registro.adaptador.orcamento.porMinuto;
-    if (
-      limite !== undefined &&
-      usadasAtuais + CUSTO_REQUISICOES_POR_COMPETICAO > limite
-    ) {
+      opcoes.limitesPorExecucao?.[provedorId] ??
+      registro.adaptador.orcamento.porExecucao ??
+      registro.adaptador.orcamento.porMinuto;
+    if (limite !== undefined && reservado + custo > limite) {
       provedoresPausados.add(provedorId);
       resultados.push({ ...base, tipo: 'pausado-por-cota' });
       continue;
     }
 
-    const referencia = registro.construirReferencia(campeonato);
+    custoReservado[provedorId] = reservado + custo;
     try {
       requisicoesUsadas[provedorId] = usadasAtuais + 1;
       const classificacao = await registro.adaptador.obterClassificacao(referencia);

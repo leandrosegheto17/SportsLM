@@ -54,6 +54,7 @@ function entrada(
   p: Partial<EntradaVerificacaoConsistencia> = {},
 ): EntradaVerificacaoConsistencia {
   return {
+    formato: 'pontos-corridos',
     linhas: [linha()],
     partidas: [partida()],
     numeroClubesEsperado: 1,
@@ -205,5 +206,110 @@ describe('verificarConsistenciaCompeticao (CA-16.6)', () => {
       ]),
     );
     expect(resultado.motivos).toHaveLength(5);
+  });
+});
+
+describe('verificarConsistenciaCompeticao por formato (ADR-020 item 5)', () => {
+  const clubes = ['palmeiras', 'flamengo', 'santos'];
+  const cheia = clubes.map((clubeId) => linha({ clubeId }));
+  const base = (p: Partial<EntradaVerificacaoConsistencia>) =>
+    entrada({ numeroClubesEsperado: 3, clubesConfigurados: clubes, ...p });
+  const motivosDe = (p: Partial<EntradaVerificacaoConsistencia>) =>
+    verificarConsistenciaCompeticao(base(p)).motivos;
+
+  describe.each(['pontos-corridos', 'grupos'] as const)('%s', (formato) => {
+    it('tabela cheia → consistente', () => {
+      expect(motivosDe({ formato, linhas: cheia })).toEqual([]);
+    });
+    it('parcial → numero-de-clubes-incorreto', () => {
+      expect(motivosDe({ formato, linhas: cheia.slice(0, 2) })).toContain('numero-de-clubes-incorreto');
+    });
+    it('vazia → numero-de-clubes-incorreto', () => {
+      expect(motivosDe({ formato, linhas: [] })).toContain('numero-de-clubes-incorreto');
+    });
+    it('duplicada → clube-duplicado', () => {
+      expect(motivosDe({ formato, linhas: [cheia[0]!, cheia[0]!, cheia[1]!] })).toContain('clube-duplicado');
+    });
+  });
+
+  describe('misto', () => {
+    const formato = 'misto' as const;
+    it('cheia, parcial e vazia → consistente', () => {
+      expect(motivosDe({ formato, linhas: cheia })).toEqual([]);
+      expect(motivosDe({ formato, linhas: cheia.slice(0, 2) })).toEqual([]);
+      expect(motivosDe({ formato, linhas: [] })).toEqual([]);
+    });
+    it('duplicada → clube-duplicado', () => {
+      expect(motivosDe({ formato, linhas: [cheia[0]!, cheia[0]!] })).toContain('clube-duplicado');
+    });
+    it('clube fora da config → clube-fora-da-configuracao', () => {
+      expect(motivosDe({ formato, linhas: [linha({ clubeId: 'vasco' })] })).toContain('clube-fora-da-configuracao');
+    });
+    it('mais linhas que clubes → numero-de-clubes-incorreto', () => {
+      expect(motivosDe({ formato, numeroClubesEsperado: 1, linhas: cheia.slice(0, 2) })).toContain('numero-de-clubes-incorreto');
+    });
+    it('não afrouxa saldo nem finalizada sem placar', () => {
+      expect(
+        motivosDe({ formato, linhas: [linha({ sg: 99 })], partidas: [partida({ placar: null })] }),
+      ).toEqual(expect.arrayContaining(['saldo-invalido', 'partida-finalizada-sem-placar']));
+    });
+  });
+
+  describe('mata-mata', () => {
+    it.each([
+      ['vazia', [] as LinhaClassificacao[]],
+      ['parcial', cheia.slice(0, 1)],
+      ['duplicada', [cheia[0]!, cheia[0]!]],
+      ['clube fora da config', [linha({ clubeId: 'vasco' })]],
+    ])('tabela %s não é exigida', (_n, linhas) => {
+      expect(motivosDe({ formato: 'mata-mata', linhas })).toEqual([]);
+    });
+    it('finalizada sem placar continua inconsistente', () => {
+      expect(
+        motivosDe({ formato: 'mata-mata', linhas: [], partidas: [partida({ placar: null })] }),
+      ).toContain('partida-finalizada-sem-placar');
+    });
+  });
+});
+
+describe('verificarConsistenciaCompeticao com tabelaParcial (COB-40, ADR-024)', () => {
+  const clubes = ['a', 'b', 'c', 'd'];
+  const parcial = ['a', 'b'].map((clubeId) => linha({ clubeId }));
+  const motivosDe = (p: Partial<EntradaVerificacaoConsistencia>) =>
+    verificarConsistenciaCompeticao(
+      entrada({ numeroClubesEsperado: 4, clubesConfigurados: clubes, ...p }),
+    ).motivos;
+
+  describe.each(['pontos-corridos', 'grupos'] as const)('%s', (formato) => {
+    it('parcial marcada passa', () => {
+      expect(motivosDe({ formato, linhas: parcial, tabelaParcial: true })).toEqual([]);
+    });
+    it('parcial sem marca continua reprovada', () => {
+      expect(motivosDe({ formato, linhas: parcial })).toContain('numero-de-clubes-incorreto');
+      expect(motivosDe({ formato, linhas: parcial, tabelaParcial: false })).toContain(
+        'numero-de-clubes-incorreto',
+      );
+    });
+    it('marcada: duplicata reprova', () => {
+      expect(
+        motivosDe({ formato, linhas: [parcial[0]!, parcial[0]!], tabelaParcial: true }),
+      ).toContain('clube-duplicado');
+    });
+    it('marcada: clube fora da config reprova', () => {
+      expect(
+        motivosDe({ formato, linhas: [linha({ clubeId: 'x' })], tabelaParcial: true }),
+      ).toContain('clube-fora-da-configuracao');
+    });
+    it('marcada: mais linhas que clubes reprova', () => {
+      const muitas = ['a', 'b', 'c', 'd', 'e'].map((clubeId) => linha({ clubeId }));
+      expect(motivosDe({ formato, linhas: muitas, tabelaParcial: true })).toContain(
+        'numero-de-clubes-incorreto',
+      );
+    });
+    it('marcada: pontos incoerentes reprovam', () => {
+      expect(
+        motivosDe({ formato, linhas: [linha({ clubeId: 'a', pontos: 99 })], tabelaParcial: true }),
+      ).toContain('linha-aritmetica-invalida');
+    });
   });
 });

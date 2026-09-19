@@ -7,8 +7,14 @@
       "temporada": 2026,
       "categoria": "brasileirao",
       "formato": "pontos-corridos",
-      "janela": { "inicio": "2026-01-28", "fim": "2026-12-02" },
+      "janela": {
+        "inicio": "2026-01-28",
+        "fim": "2026-12-02"
+      },
       "provedor": "football-data-org",
+      "refProvedor": {
+        "id": "BSA"
+      },
       "clubes": [
         "atletico-mg",
         "athletico-pr",
@@ -38,8 +44,15 @@
       "temporada": 2026,
       "categoria": "copa-do-brasil",
       "formato": "mata-mata",
-      "janela": { "inicio": "2026-02-18", "fim": "2026-11-04" },
-      "provedor": null,
+      "janela": {
+        "inicio": "2026-02-18",
+        "fim": "2026-11-04"
+      },
+      "provedor": "thesportsdb",
+      "refProvedor": {
+        "id": "4725",
+        "temporada": "2026"
+      },
       "clubes": [
         "atletico-mg",
         "athletico-pr",
@@ -69,7 +82,10 @@
       "temporada": 2026,
       "categoria": "supercopa",
       "formato": "mata-mata",
-      "janela": { "inicio": "2026-01-18", "fim": "2026-01-18" },
+      "janela": {
+        "inicio": "2026-01-18",
+        "fim": "2026-01-18"
+      },
       "provedor": null,
       "clubes": [],
       "observacao": "Disputada entre o campeão do Brasileirão 2025 e o campeão da Copa do Brasil 2025; participantes só entram nesta lista quando o provedor confirmar (RN-05)."
@@ -80,10 +96,26 @@
       "temporada": 2026,
       "categoria": "continental",
       "formato": "misto",
-      "janela": { "inicio": "2026-02-03", "fim": "2026-11-28" },
-      "provedor": null,
-      "clubes": [],
-      "observacao": "Vagas definidas pela classificação final do Brasileirão 2025 e pelo campeão da Copa do Brasil 2025; participantes só entram nesta lista quando o provedor confirmar (RN-05)."
+      "janela": {
+        "inicio": "2026-02-03",
+        "fim": "2026-11-28"
+      },
+      "provedor": "thesportsdb",
+      "refProvedor": {
+        "id": "4501",
+        "temporada": "2026"
+      },
+      "clubes": [
+        "flamengo",
+        "palmeiras",
+        "mirassol",
+        "corinthians",
+        "botafogo",
+        "fluminense",
+        "cruzeiro",
+        "bahia"
+      ],
+      "observacao": "Candidatos verificados no provedor em 2026-09-18 (SPK-07, ADR-023); lista a revisar a cada fase; migração (ex.: Libertadores para Sul-Americana) é ajuste manual. Botafogo consta também na Sul-Americana."
     },
     {
       "id": "sul-americana",
@@ -91,10 +123,25 @@
       "temporada": 2026,
       "categoria": "continental",
       "formato": "misto",
-      "janela": { "inicio": "2026-03-03", "fim": "2026-11-21" },
-      "provedor": null,
-      "clubes": [],
-      "observacao": "Vagas definidas pela classificação final do Brasileirão 2025 e pelas fases finais da Copa do Brasil 2025; participantes só entram nesta lista quando o provedor confirmar (RN-05)."
+      "janela": {
+        "inicio": "2026-03-03",
+        "fim": "2026-11-21"
+      },
+      "provedor": "thesportsdb",
+      "refProvedor": {
+        "id": "4724",
+        "temporada": "2026"
+      },
+      "clubes": [
+        "sao-paulo",
+        "botafogo",
+        "santos",
+        "vasco",
+        "atletico-mg",
+        "gremio",
+        "rb-bragantino"
+      ],
+      "observacao": "Candidatos verificados no provedor em 2026-09-18 (SPK-07, ADR-023); lista a revisar a cada fase; migração é ajuste manual. Botafogo consta também na Libertadores."
     },
     {
       "id": "paulista",
@@ -102,8 +149,15 @@
       "temporada": 2026,
       "categoria": "estadual",
       "formato": "grupos",
-      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "janela": {
+        "inicio": "2026-01-14",
+        "fim": "2026-03-22"
+      },
       "provedor": "thesportsdb",
+      "refProvedor": {
+        "id": "5767",
+        "temporada": "2026"
+      },
       "clubes": ["corinthians", "mirassol", "palmeiras", "santos", "sao-paulo"]
     },
     {
@@ -112,8 +166,15 @@
       "temporada": 2026,
       "categoria": "estadual",
       "formato": "grupos",
-      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "janela": {
+        "inicio": "2026-01-14",
+        "fim": "2026-03-22"
+      },
       "provedor": "thesportsdb",
+      "refProvedor": {
+        "id": "5688",
+        "temporada": "2026"
+      },
       "clubes": ["botafogo", "flamengo", "fluminense", "vasco"]
     },
     {
@@ -122,8 +183,15 @@
       "temporada": 2026,
       "categoria": "estadual",
       "formato": "grupos",
-      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
-      "provedor": null,
+      "janela": {
+        "inicio": "2026-01-14",
+        "fim": "2026-03-22"
+      },
+      "provedor": "thesportsdb",
+      "refProvedor": {
+        "id": "5763",
+        "temporada": "2026"
+      },
       "clubes": ["atletico-mg", "cruzeiro"]
     },
     {
@@ -132,8 +200,15 @@
       "temporada": 2026,
       "categoria": "estadual",
       "formato": "grupos",
-      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
-      "provedor": null,
+      "janela": {
+        "inicio": "2026-01-14",
+        "fim": "2026-03-22"
+      },
+      "provedor": "thesportsdb",
+      "refProvedor": {
+        "id": "5691",
+        "temporada": "2026"
+      },
       "clubes": ["gremio", "internacional"],
       "observacao": "Juventude disputa este estadual, mas não está na Série A 2026 confirmada pelo provedor (Bloqueio 010, .md/BLOCKERS.md) — RN-05 só rastreia clube que está no Brasileirão."
     },
@@ -143,7 +218,10 @@
       "temporada": 2026,
       "categoria": "estadual",
       "formato": "grupos",
-      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "janela": {
+        "inicio": "2026-01-14",
+        "fim": "2026-03-22"
+      },
       "provedor": null,
       "clubes": ["bahia", "vitoria"]
     },
@@ -153,7 +231,10 @@
       "temporada": 2026,
       "categoria": "estadual",
       "formato": "grupos",
-      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "janela": {
+        "inicio": "2026-01-14",
+        "fim": "2026-03-22"
+      },
       "provedor": null,
       "clubes": [],
       "observacao": "Ceará e Fortaleza disputam este estadual, mas não estão na Série A 2026 confirmada pelo provedor (Bloqueio 010, .md/BLOCKERS.md) — RN-05 só rastreia clube que está no Brasileirão."
@@ -164,7 +245,10 @@
       "temporada": 2026,
       "categoria": "estadual",
       "formato": "grupos",
-      "janela": { "inicio": "2026-01-14", "fim": "2026-03-22" },
+      "janela": {
+        "inicio": "2026-01-14",
+        "fim": "2026-03-22"
+      },
       "provedor": null,
       "clubes": [],
       "observacao": "Sport disputa este estadual, mas não está na Série A 2026 confirmada pelo provedor (Bloqueio 010, .md/BLOCKERS.md) — RN-05 só rastreia clube que está no Brasileirão."
@@ -175,7 +259,10 @@
       "temporada": 2026,
       "categoria": "regional",
       "formato": "grupos",
-      "janela": { "inicio": "2026-01-14", "fim": "2026-04-05" },
+      "janela": {
+        "inicio": "2026-01-14",
+        "fim": "2026-04-05"
+      },
       "provedor": null,
       "clubes": ["bahia", "vitoria"],
       "observacao": "Ceará, Fortaleza e Sport disputam esta copa, mas não estão na Série A 2026 confirmada pelo provedor (Bloqueio 010, .md/BLOCKERS.md) — RN-05 só rastreia clube que está no Brasileirão."

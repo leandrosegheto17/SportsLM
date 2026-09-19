@@ -139,7 +139,9 @@ function armazenamentoComTime(timeId: string | null): Pick<Storage, 'getItem'> {
   };
 }
 
-function criarClienteSnapshotFake(): ClienteSnapshot {
+function criarClienteSnapshotFake(
+  futebolClube: unknown = FUTEBOL_CLUBE_FIXTURE,
+): ClienteSnapshot {
   const versaoJson = {
     geradoEm: '2026-09-05T10:00:00-03:00',
     hashes: { noticias: 'h1', futebol: 'f1', catalogo: 'c1', status: 's1' },
@@ -157,7 +159,7 @@ function criarClienteSnapshotFake(): ClienteSnapshot {
       return {
         ok: true,
         status: 200,
-        json: async () => FUTEBOL_CLUBE_FIXTURE,
+        json: async () => futebolClube,
       } as Response;
     }
     throw new Error(`URL inesperada: ${chave}`);
@@ -232,6 +234,26 @@ describe('SecaoIdentidade (UI-T02-01 — UX-SPEC T-02)', () => {
         'Escolha seu time para ver o painel com todos os campeonatos do ano.',
       ),
     ).toBeNull();
+  });
+
+  it('COB-25: próximo jogo contra externo exibe o nome do provedor, sem `externo-` no DOM', async () => {
+    const partida = {
+      ...PARTIDA_FIXTURE,
+      competicaoId: 'copa-do-brasil',
+      mandanteId: 'sao-paulo',
+      visitanteId: 'externo-cuiaba-ec',
+      externo: { lado: 'visitante' as const, nome: 'Cuiabá EC' },
+    };
+    const dados = [{ ...FUTEBOL_CLUBE_FIXTURE[0]!, partidas: [partida] }];
+    renderizar({
+      armazenamento: armazenamentoComTime('sao-paulo'),
+      clienteSnapshot: criarClienteSnapshotFake(dados),
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(/Cuiabá EC/)).not.toBeNull();
+    });
+    expect(document.body.textContent).not.toContain('externo-');
   });
 
   it('exibe nome do clube, PRÓXIMO JOGO e A BRIGA quando os três dados chegam', async () => {

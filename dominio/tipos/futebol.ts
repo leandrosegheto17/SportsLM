@@ -85,6 +85,8 @@ export const competicaoSchema = z.object({
   janela: z.object({ inicio: z.string(), fim: z.string() }),
   provedor: z.string().min(1).nullable(), // null = sem cobertura (CA-07.2)
   ultimaAtualizacao: z.string().nullable(),
+  /** ADR-024: true quando a fonte gratuita entrega só parte da classificação. */
+  tabelaParcial: z.boolean().optional(),
 });
 
 export type Competicao = z.infer<typeof competicaoSchema>;
@@ -114,28 +116,59 @@ export const participacaoClubeSchema = z.object({
 
 export type ParticipacaoClube = z.infer<typeof participacaoClubeSchema>;
 
-/** `Partida` (SDD §5.2). */
-export const partidaSchema = z.object({
-  id: z.string().min(1),
-  competicaoId: slugSchema,
-  rodada: z.number().int().min(1).nullable(),
-  fase: z.string().nullable(),
-  mandanteId: slugSchema,
-  visitanteId: slugSchema,
-  dataHora: z.string().nullable(), // null → "data a definir" (CA-10.4)
-  horarioDefinido: z.boolean(), // false → "horário a definir" (CA-08.8)
-  estadio: z.string().nullable(),
-  status: z.enum([
-    'agendada',
-    'aguardando-resultado',
-    'finalizada',
-    'adiada',
-    'cancelada',
-  ]),
-  placar: z
-    .object({ mandante: z.number().int().min(0), visitante: z.number().int().min(0) })
-    .nullable(),
-});
+const PREFIXO_EXTERNO = 'externo-';
+
+/** Nome de adversário fora da Série A (ADR-019): entrada de terceiro, texto
+ * puro (ADR-011) — aparado, 1 a 60 caracteres, sem controle nem `<`/`>`. */
+const nomeExternoSchema = z
+  .string()
+  .trim()
+  .min(1)
+  .max(60)
+  // eslint-disable-next-line no-control-regex
+  .regex(/^[^\x00-\x1F\x7F-\x9F<>]+$/, 'nome deve ser texto puro');
+
+/** `Partida` (SDD §5.2) + `externo` opcional (ADR-019): adversário fora da
+ * Série A, com id sintético `externo-<idProvedor>` no lado correspondente. */
+export const partidaSchema = z
+  .object({
+    id: z.string().min(1),
+    competicaoId: slugSchema,
+    rodada: z.number().int().min(1).nullable(),
+    fase: z.string().nullable(),
+    mandanteId: slugSchema,
+    visitanteId: slugSchema,
+    dataHora: z.string().nullable(), // null → "data a definir" (CA-10.4)
+    horarioDefinido: z.boolean(), // false → "horário a definir" (CA-08.8)
+    estadio: z.string().nullable(),
+    status: z.enum([
+      'agendada',
+      'aguardando-resultado',
+      'finalizada',
+      'adiada',
+      'cancelada',
+    ]),
+    placar: z
+      .object({ mandante: z.number().int().min(0), visitante: z.number().int().min(0) })
+      .nullable(),
+    externo: z
+      .object({ lado: z.enum(['mandante', 'visitante']), nome: nomeExternoSchema })
+      .optional(),
+  })
+  .superRefine((p, ctx) => {
+    const m = p.mandanteId.startsWith(PREFIXO_EXTERNO);
+    const v = p.visitanteId.startsWith(PREFIXO_EXTERNO);
+    const erro = (message: string) =>
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['externo'], message });
+    if (m && v) return erro('no máximo um lado pode ser externo');
+    if (p.externo === undefined) {
+      if (m || v) erro(`id ${PREFIXO_EXTERNO}* exige o campo externo`);
+      return;
+    }
+    if (!m && !v) return erro(`externo exige um id ${PREFIXO_EXTERNO}*`);
+    if (p.externo.lado !== (m ? 'mandante' : 'visitante'))
+      erro('externo.lado incoerente com o id externo');
+  });
 
 export type Partida = z.infer<typeof partidaSchema>;
 

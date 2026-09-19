@@ -998,3 +998,287 @@ describe('QA-01 — Simulação (T-09)', () => {
     }
   }
 });
+
+// ---------------------------------------------------------------------------
+// COB-30 · Rodada 4 — estados novos de T-05/T-06 (motivo de "sem dados",
+// frescor por cartão, adversário externo, avisos de parcialidade, tabela de
+// grupos). 2 temas × 2 paletas amostradas (Corinthians, Mirassol). Texto +
+// símbolo (WCAG 1.4.1) é asserido junto do axe.
+// ---------------------------------------------------------------------------
+describe('COB-30 — Painel do time (T-05), estados da rodada 4', () => {
+  const SEM_DADOS: { nome: string; resultado: string | null; texto: string }[] = [
+    { nome: 'pausado-por-cota', resultado: 'pausado-por-cota', texto: 'Atualização pausada por limite do provedor.' },
+    { nome: 'falha', resultado: 'falha', texto: 'Falha na última atualização.' },
+    { nome: 'sem-cobertura', resultado: 'sem-cobertura', texto: 'Cobertura indisponível nesta versão.' },
+    { nome: 'sem resultado', resultado: null, texto: '' },
+  ];
+  const FRESCOR: {
+    nome: string;
+    ultima: string;
+    fim: string;
+    res?: string;
+    texto: string;
+  }[] = [
+    { nome: 'alerta', ultima: '2026-09-04T23:00:00-03:00', fim: '2026-12-01', texto: 'ATUALIZADO HÁ 13 H — PODE ESTAR DESATUALIZADO' },
+    { nome: 'encerrada', ultima: '2026-03-22T20:00:00-03:00', fim: '2026-04-01', texto: 'ENCERRADA — DADOS DE 22/03' },
+    { nome: 'pausada', ultima: '2026-09-05T09:00:00-03:00', fim: '2026-12-01', res: 'pausado-por-cota', texto: 'ATUALIZAÇÃO PAUSADA POR LIMITE DO PROVEDOR — DADOS DE HÁ 3 H' },
+  ];
+
+  function entradas(ultima: string, fim: string) {
+    return [
+      {
+        competicao: competicaoBrasileirao(),
+        participacao: {
+          competicaoId: 'brasileirao-serie-a',
+          clubeId: 'sao-paulo',
+          status: 'em-andamento',
+          faseAtual: null,
+          resultadoFinal: null,
+          resumo: null,
+        },
+        partidas: [partida('p1', 'fluminense', 'sao-paulo')],
+      },
+      {
+        competicao: {
+          ...competicaoBrasileirao(),
+          id: 'copa-do-brasil',
+          nome: 'Copa do Brasil',
+          formato: 'mata-mata' as const,
+          ultimaAtualizacao: ultima,
+          janela: { inicio: '2026-01-01', fim },
+        },
+        participacao: {
+          competicaoId: 'copa-do-brasil',
+          clubeId: 'sao-paulo',
+          status: 'em-andamento',
+          faseAtual: 'Oitavas',
+          resultadoFinal: null,
+          resumo: null,
+        },
+        partidas: [],
+      },
+      {
+        competicao: {
+          ...competicaoBrasileirao(),
+          id: 'supercopa',
+          nome: 'Supercopa do Brasil',
+          formato: 'mata-mata' as const,
+        },
+        participacao: {
+          competicaoId: 'supercopa',
+          clubeId: 'sao-paulo',
+          status: 'sem-dados',
+          faseAtual: null,
+          resultadoFinal: null,
+          resumo: null,
+        },
+        partidas: [],
+      },
+    ];
+  }
+
+  function cliente(
+    ultima: string,
+    fim: string,
+    futebol: Record<string, { resultado: string; ultimaAtualizacao: string | null }>,
+  ): ClienteSnapshot {
+    const buscar = vi.fn(async (url: RequestInfo | URL) => {
+      const chave = String(url);
+      if (chave === URL_VERSAO) return buscarOk(versaoJson());
+      if (chave === URL_STATUS) return buscarOk({ pausadoPorCota: false, futebol });
+      if (chave === urlFutebolClube('sao-paulo')) return buscarOk(entradas(ultima, fim));
+      throw new Error(`URL não modelada (PainelTime COB-30): ${chave}`);
+    }) as unknown as typeof fetch;
+    return new ClienteSnapshot({ buscar });
+  }
+
+  async function montar(clubeTeste: ClubeDeTeste, cli: ClienteSnapshot): Promise<Element> {
+    const armazenamento = armazenamentoComPreferencias({ timeId: 'sao-paulo' });
+    const { container } = render(
+      <MemoryRouter initialEntries={['/time']}>
+        <ProvedorSobreposicoes armazenamento={armazenamento}>
+          <Routes>
+            <Route
+              path="/time"
+              element={
+                <PainelTime
+                  armazenamento={armazenamento}
+                  opcoesClubesPublicos={{ buscar: buscarClubesFake([meuClube(clubeTeste)]) }}
+                  clienteSnapshot={cli}
+                  agora={AGORA}
+                />
+              }
+            />
+          </Routes>
+        </ProvedorSobreposicoes>
+      </MemoryRouter>,
+    );
+    await waitFor(() => {
+      expect(screen.getByText('Brasileirão Série A')).not.toBeNull();
+    });
+    return container;
+  }
+
+  for (const tema of TEMAS) {
+    for (const clubeTeste of PALETAS_REDUZIDAS) {
+      for (const motivo of SEM_DADOS) {
+        it(`sem dados (${motivo.nome}) — tema ${tema}, paleta ${clubeTeste.nome}`, async () => {
+          definirTema(tema);
+          const cli = cliente(
+            '2026-09-05T11:18:00-03:00',
+            '2026-12-01',
+            motivo.resultado
+              ? { supercopa: { resultado: motivo.resultado, ultimaAtualizacao: null } }
+              : {},
+          );
+          const container = await montar(clubeTeste, cli);
+          expect(screen.getByText('Supercopa do Brasil — SEM DADOS')).not.toBeNull();
+          if (motivo.texto) expect(screen.getByText(motivo.texto)).not.toBeNull();
+          await semViolacoesGraves(
+            container,
+            `PainelTime/sem-dados-${motivo.nome}/${tema}/${clubeTeste.nome}`,
+          );
+        });
+      }
+      for (const f of FRESCOR) {
+        it(`frescor ${f.nome} — tema ${tema}, paleta ${clubeTeste.nome}`, async () => {
+          definirTema(tema);
+          const cli = cliente(
+            f.ultima,
+            f.fim,
+            f.res ? { 'copa-do-brasil': { resultado: f.res, ultimaAtualizacao: f.ultima } } : {},
+          );
+          const container = await montar(clubeTeste, cli);
+          const carimbo = (await screen.findByText(f.texto)).closest('[data-estado]');
+          expect(carimbo?.textContent ?? '').toContain(f.texto);
+          if (f.nome === 'alerta') expect(carimbo?.textContent).toContain('⚠');
+          await semViolacoesGraves(
+            container,
+            `PainelTime/frescor-${f.nome}/${tema}/${clubeTeste.nome}`,
+          );
+        });
+      }
+    }
+  }
+});
+
+describe('COB-30 — Detalhe do campeonato (T-06), estados da rodada 4', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  const AVISO_CAL = 'Calendário parcial — a fonte gratuita informa poucos jogos por consulta.';
+  const AVISO_TAB = 'Tabela parcial — a fonte gratuita informa só parte da classificação.';
+
+  type Variante = 'externo' | 'parcial' | 'grupos';
+
+  function cliente(variante: Variante): ClienteSnapshot {
+    const comp: Record<string, unknown> = {
+      ...competicaoBrasileirao(),
+      ...(variante === 'parcial' ? { provedor: 'thesportsdb', tabelaParcial: true } : {}),
+      ...(variante === 'grupos' ? { formato: 'grupos' } : {}),
+    };
+    const partidas =
+      variante === 'externo'
+        ? [
+            partida('p-ext', 'sao-paulo', 'externo-ituano-fc', {
+              rodada: 23,
+              status: 'finalizada',
+              placar: { mandante: 2, visitante: 1 },
+              externo: { lado: 'visitante', nome: 'Ituano FC' },
+            }),
+          ]
+        : [];
+    const classificacao =
+      variante === 'grupos'
+        ? [
+            { ...linhaClassificacao('sao-paulo', 1, 12), grupo: 'A' },
+            { ...linhaClassificacao('palmeiras', 2, 10), grupo: 'A' },
+          ]
+        : [linhaClassificacao('palmeiras', 1, 55), linhaClassificacao('sao-paulo', 6, 42)];
+    const buscar = vi.fn(async (url: RequestInfo | URL) => {
+      const chave = String(url);
+      if (chave === URL_VERSAO) return buscarOk(versaoJson());
+      if (chave === URL_STATUS) return buscarOk({ pausadoPorCota: false });
+      if (chave === urlFutebolClube('sao-paulo')) {
+        return buscarOk([
+          {
+            competicao: comp,
+            participacao: {
+              competicaoId: 'brasileirao-serie-a',
+              clubeId: 'sao-paulo',
+              status: 'em-andamento',
+              faseAtual: null,
+              resultadoFinal: null,
+              resumo: {
+                jogos: 23,
+                v: 11,
+                e: 9,
+                d: 3,
+                gp: 36,
+                gc: 22,
+                sg: 14,
+                pontos: 42,
+                aproveitamento: 61.4,
+                posicao: 6,
+              },
+            },
+            partidas,
+          },
+        ]);
+      }
+      if (chave === URL_FUTEBOL_BRASILEIRAO) {
+        return buscarOk({ competicao: comp, classificacao, partidas, zonas: [] });
+      }
+      throw new Error(`URL não modelada (Detalhe COB-30): ${chave}`);
+    });
+    return new ClienteSnapshot({ buscar });
+  }
+
+  for (const tema of TEMAS) {
+    for (const clubeTeste of PALETAS_REDUZIDAS) {
+      for (const variante of ['externo', 'parcial', 'grupos'] as const) {
+        it(`${variante} — tema ${tema}, paleta ${clubeTeste.nome}`, async () => {
+          definirTema(tema);
+          const armazenamento = armazenamentoComPreferencias({ timeId: 'sao-paulo' });
+          const { container } = render(
+            <MemoryRouter initialEntries={['/time/brasileirao-serie-a']}>
+              <ProvedorSobreposicoes armazenamento={armazenamento}>
+                <Routes>
+                  <Route
+                    path="/time/:campeonatoId"
+                    element={
+                      <DetalheCampeonato
+                        armazenamento={armazenamento}
+                        clienteSnapshot={cliente(variante)}
+                        opcoesClubesPublicos={{
+                          buscar: buscarClubesFake([meuClube(clubeTeste), CLUBE_PALMEIRAS_FIXO]),
+                        }}
+                        agora={AGORA}
+                      />
+                    }
+                  />
+                </Routes>
+              </ProvedorSobreposicoes>
+            </MemoryRouter>,
+          );
+          await esvaziarMicrotarefas();
+          await esvaziarMicrotarefas();
+          expect(screen.getByRole('table')).not.toBeNull();
+          if (variante === 'parcial') {
+            expect(screen.getByText(AVISO_CAL)).not.toBeNull();
+            expect(screen.getByText(AVISO_TAB).parentElement?.textContent).toContain('⚠');
+          }
+          if (variante === 'externo') {
+            expect(document.body.textContent).toContain('Ituano FC');
+            expect(document.body.textContent).not.toContain('externo-');
+          }
+          await semViolacoesGraves(container, `Detalhe/${variante}/${tema}/${clubeTeste.nome}`);
+        });
+      }
+    }
+  }
+});

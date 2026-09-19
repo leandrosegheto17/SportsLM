@@ -76,6 +76,15 @@ export const CampeonatoConfigSchema = z
     janela: JanelaSchema,
     /** `null` = sem cobertura confirmada por provedor gratuito (RN-05, CA-07.2). */
     provedor: z.string().min(1).nullable(),
+    /**
+     * ADR-020: identificador da competição NO provedor ("BSA" no
+     * football-data.org, "5767" no TheSportsDB) e temporada no formato do
+     * provedor. Obrigatório se `provedor !== null`, proibido se `null`.
+     */
+    refProvedor: z
+      .object({ id: z.string().min(1), temporada: z.string().min(1).optional() })
+      .strict()
+      .optional(),
     /** Ids de clube (RN-04) que disputam este campeonato na temporada. */
     clubes: z.array(SlugSchema),
     /**
@@ -87,6 +96,22 @@ export const CampeonatoConfigSchema = z
     observacao: z.string().min(1).optional(),
   })
   .strict()
+  .superRefine((campeonato, ctx) => {
+    if (campeonato.provedor !== null && campeonato.refProvedor === undefined) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'campeonato com "provedor" exige "refProvedor" (ADR-020)',
+        path: ['refProvedor'],
+      });
+    }
+    if (campeonato.provedor === null && campeonato.refProvedor !== undefined) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '"refProvedor" é proibido quando "provedor" é null (ADR-020)',
+        path: ['refProvedor'],
+      });
+    }
+  })
   .refine(
     (campeonato) => campeonato.clubes.length > 0 || campeonato.observacao !== undefined,
     {

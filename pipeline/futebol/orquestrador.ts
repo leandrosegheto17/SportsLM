@@ -36,7 +36,7 @@
 // football-data.org, ADR-006 item 4, ou o `idLigaProvedor` do TheSportsDB) —
 // só guarda o id genérico do provedor (`provedor: "football-data-org"` /
 // `"thesportsdb"`). Este módulo usa mapas internos por provedor
-// (`CODIGOS_COMPETICAO_FOOTBALL_DATA`/`REFS_COMPETICAO_THESPORTSDB`) só para
+// (removidos no COB-05: `refProvedor` da config, ADR-020) só para
 // o wrapper de disco; a camada pura (`executarFluxoFutebol`) não depende
 // disso — quem chama já injeta o registro de provedores pronto. Sinalizado ao
 // Coordenador para, se mais competições ganharem cobertura real, CFG-03
@@ -62,6 +62,7 @@ import { z } from 'zod';
 
 import {
   coletarFutebol,
+  CUSTO_REQUISICOES_POR_COMPETICAO,
   registrarProvedor,
   type OpcoesColeta,
   type ProvedorRegistrado,
@@ -75,6 +76,11 @@ import {
   criarAdaptadorTheSportsDB,
   type RefCompeticaoTheSportsDB,
 } from './adaptador-thesportsdb';
+import { resolverTabelaPublicada } from './retencao-tabela';
+import { mesclarPartidas } from './mesclar-partidas';
+import { classificarResultadoLiga } from './classificar-resultado-liga';
+import { diagnosticarParticipantes } from './participantes';
+import { linhaLogLiga, montarResumoLiga, type MotivoDescarte } from './resumo-liga';
 import { carregarClubesSerieA2026, type ClubeBase } from '../config/clubes';
 import {
   ConfigCampeonatosSchema,
@@ -126,6 +132,7 @@ export type ResultadoCompeticaoStatus =
   | 'sem-cobertura'
   | 'provedor-nao-registrado'
   | 'pausado-por-cota'
+  | 'sem-dados-provedor'
   | 'falha';
 
 export interface StatusCompeticaoFutebol {
@@ -135,6 +142,13 @@ export interface StatusCompeticaoFutebol {
   readonly ultimaAtualizacao: string | null;
   readonly motivosInconsistencia?: readonly MotivoInconsistencia[];
   readonly mensagemErro?: string;
+  /** Partidas publicadas da liga (COB-20). */
+  readonly partidas?: number;
+  /** Requisições estimadas gastas nesta liga (custo declarado do provedor). */
+  readonly requisicoes?: number;
+  readonly descartes?: Record<MotivoDescarte, number>;
+  /** Clubes vistos no provedor e ausentes da config (ADR-020 item 2). */
+  readonly participantesNaoConfigurados?: readonly string[];
 }
 
 /**
@@ -174,6 +188,8 @@ export interface ResultadoFluxoFutebol {
    * nunca circula por aqui).
    */
   readonly inconsistenciasClube: readonly InconsistenciaClube[];
+  /** Uma linha de log por liga processada (RNF-19), sem segredo/corpo. */
+  readonly linhasLogPorLiga?: readonly string[];
 }
 
 export interface OpcoesFluxoFutebol {
@@ -187,11 +203,37 @@ export interface OpcoesFluxoFutebol {
   readonly limitesPorExecucao?: Record<string, number>;
 }
 
+const JANELA_PROXIMO_JOGO_MS = 48 * 60 * 60 * 1000;
+const PREFIXO_ID_EXTERNO = 'externo-';
+const PROVEDOR_ACUMULA = 'thesportsdb';
+
+/** Próximo jogo (<= 48 h) por competição, do estado anterior (RN-22/ADR-021). */
+function proximoJogoDoEstado(
+  estado: EstadoFutebol,
+  agora: Date,
+): Record<string, string | null> {
+  const mapa: Record<string, string | null> = {};
+  for (const [id, ce] of Object.entries(estado.competicoes)) {
+    let melhor: number | null = null;
+    for (const p of ce.partidas) {
+      if (p.status !== 'agendada' || p.dataHora === null) continue;
+      const t = new Date(p.dataHora).getTime();
+      const delta = t - agora.getTime();
+      if (Number.isFinite(delta) && delta >= 0 && delta <= JANELA_PROXIMO_JOGO_MS) {
+        if (melhor === null || t < melhor) melhor = t;
+      }
+    }
+    mapa[id] = melhor === null ? null : new Date(melhor).toISOString();
+  }
+  return mapa;
+}
+
 // --- Construção de `Competicao`/`ParticipacaoClube` a partir de um lote -------
 
 function construirCompeticao(
   config: CampeonatoConfig,
   ultimaAtualizacao: string | null,
+  tabelaParcial = false,
 ): Competicao {
   return {
     id: config.id,
@@ -201,11 +243,17 @@ function construirCompeticao(
     janela: config.janela,
     provedor: config.provedor,
     ultimaAtualizacao,
+    ...(tabelaParcial ? { tabelaParcial: true } : {}),
   };
 }
 
-function paraDerivacao(partida: Partida): PartidaParaDerivacaoStatus {
+/** Mapeia a partida para o derivador, com adversário e lado do clube (ADR-020
+ * item 7). `faseJogoUnico` fica indefinido: sem prova, não se afirma jogo único. */
+export function paraDerivacao(partida: Partida, clubeId: string): PartidaParaDerivacaoStatus {
+  const clubeEhMandante = partida.mandanteId === clubeId;
   return {
+    adversarioId: clubeEhMandante ? partida.visitanteId : partida.mandanteId,
+    clubeEhMandante,
     fase: partida.fase,
     dataHora: partida.dataHora,
     status: partida.status,
@@ -239,7 +287,7 @@ function construirParticipacoes(
     const { status, faseAtual } = derivarStatusCampeonato({
       formato: config.formato,
       janela: config.janela,
-      partidas: partidasDoClube.map(paraDerivacao),
+      partidas: partidasDoClube.map((p) => paraDerivacao(p, clubeId)),
       agora,
     });
     const linha = linhas.find((l) => l.clubeId === clubeId) ?? null;
@@ -284,6 +332,12 @@ function competicaoInicialSemDados(
   };
 }
 
+/** Mensagem curta, sem corpo de resposta/stack (RNF-17). */
+function mensagemCurta(erro: unknown): string {
+  const m = erro instanceof Error ? `${erro.name}: ${erro.message}` : String(erro);
+  return m.replace(/s+/g, ' ').slice(0, 200);
+}
+
 /**
  * Executa o Fluxo 2 (SDD §2.4) de ponta a ponta: coleta por prioridade e cota
  * (ING-F-02, que já embute a tradução do provedor via adaptador registrado,
@@ -301,6 +355,7 @@ export async function executarFluxoFutebol(
     campeonatos: [...opcoes.campeonatos],
     agora: opcoes.agora,
     provedores: opcoes.provedores,
+    proximoJogoPorCompeticao: proximoJogoDoEstado(opcoes.estadoAnterior, opcoes.agora),
     ...(opcoes.limitesPorExecucao !== undefined
       ? { limitesPorExecucao: opcoes.limitesPorExecucao }
       : {}),
@@ -313,103 +368,209 @@ export async function executarFluxoFutebol(
   };
   const statusFutebol: Record<string, StatusCompeticaoFutebol> = {};
   const inconsistenciasClube: InconsistenciaClube[] = [];
+  const linhasLogPorLiga: string[] = [];
 
   for (const resultado of coleta.resultados) {
     const config = configPorId.get(resultado.competicaoId);
     if (config === undefined) continue; // defensivo: nunca deveria faltar
 
-    const anterior = competicoes[resultado.competicaoId];
+    // RNF-17/CA-20.5: excecao no processamento de UMA liga (ex.: ZodError)
+    // vira `falha` so dela; estado anterior mantido, ciclo continua.
+    try {
+      const anterior = competicoes[resultado.competicaoId];
 
-    if (resultado.tipo !== 'atualizada') {
-      // Nenhum destes tipos produz dado novo (CA-16.1/16.3/16.4/16.5): mantém
-      // o estado anterior intocado; só garante que o campeonato exista
-      // (CA-07.2) quando esta é a primeira vez que o vemos.
-      if (anterior === undefined) {
-        competicoes[resultado.competicaoId] = competicaoInicialSemDados(
-          config,
-          opcoes.agora,
+      if (resultado.tipo !== 'atualizada') {
+        // Nenhum destes tipos produz dado novo (CA-16.1/16.3/16.4/16.5): mantém
+        // o estado anterior intocado; só garante que o campeonato exista
+        // (CA-07.2) quando esta é a primeira vez que o vemos.
+        if (anterior === undefined) {
+          competicoes[resultado.competicaoId] = competicaoInicialSemDados(
+            config,
+            opcoes.agora,
+          );
+        }
+        const statusEntry: StatusCompeticaoFutebol = {
+          resultado: resultado.tipo,
+          ultimaAtualizacao:
+            competicoes[resultado.competicaoId]?.competicao.ultimaAtualizacao ?? null,
+        };
+        statusFutebol[resultado.competicaoId] =
+          resultado.tipo === 'falha'
+            ? { ...statusEntry, mensagemErro: resultado.mensagemErro }
+            : statusEntry;
+        linhasLogPorLiga.push(
+          linhaLogLiga({
+            horario: opcoes.agora,
+            liga: resultado.competicaoId,
+            resultado: resultado.tipo,
+            resumo: montarResumoLiga({
+              partidas: 0,
+              requisicoes: 0,
+              foraDoRecorte: 0,
+              inconsistencias: [],
+            }),
+          }),
         );
+        continue;
       }
-      const statusEntry: StatusCompeticaoFutebol = {
-        resultado: resultado.tipo,
-        ultimaAtualizacao:
-          competicoes[resultado.competicaoId]?.competicao.ultimaAtualizacao ?? null,
+
+      // Coleta as inconsistências de clube não mapeado deste lote (Bloqueio
+      // 009) independentemente de o lote acabar sendo aceito ou descartado por
+      // `verificarConsistenciaCompeticao` a seguir — o diagnóstico de "qual
+      // clube o provedor manda com que id" vale mesmo quando o lote como um
+      // todo é inconsistente por outro motivo.
+      inconsistenciasClube.push(
+        ...resultado.classificacao.inconsistencias.filter(
+          (i): i is InconsistenciaClube => i.tipo === 'clube-nao-mapeado',
+        ),
+      );
+      inconsistenciasClube.push(
+        ...resultado.partidas.inconsistencias.filter(
+          (i): i is InconsistenciaClube => i.tipo === 'clube-nao-mapeado',
+        ),
+      );
+
+      const inconsistenciasPartida = resultado.partidas.inconsistencias;
+      const registroProvedor =
+        config.provedor === null ? undefined : opcoes.provedores[config.provedor];
+      // ADR-022: só ligas TheSportsDB acumulam partidas entre ciclos; o
+      // Brasileirão (football-data) publica o lote como veio.
+      const partidasLote =
+        config.provedor === PROVEDOR_ACUMULA
+          ? mesclarPartidas(anterior?.partidas ?? [], resultado.partidas.partidas)
+          : resultado.partidas.partidas;
+      const tabelaParcial = resultado.classificacao.parcial === true;
+      const resumo = montarResumoLiga({
+        partidas: partidasLote.length,
+        requisicoes:
+          registroProvedor?.adaptador.custoEstimado?.(
+            registroProvedor.construirReferencia(config),
+          ) ?? CUSTO_REQUISICOES_POR_COMPETICAO,
+        foraDoRecorte: resultado.partidas.foraDoRecorte ?? 0,
+        inconsistencias: inconsistenciasPartida,
+      });
+      const registrarLog = (r: string): void => {
+        linhasLogPorLiga.push(
+          linhaLogLiga({
+            horario: opcoes.agora,
+            liga: resultado.competicaoId,
+            resultado: r,
+            resumo,
+          }),
+        );
       };
-      statusFutebol[resultado.competicaoId] =
-        resultado.tipo === 'falha'
-          ? { ...statusEntry, mensagemErro: resultado.mensagemErro }
-          : statusEntry;
-      continue;
-    }
 
-    // Coleta as inconsistências de clube não mapeado deste lote (Bloqueio
-    // 009) independentemente de o lote acabar sendo aceito ou descartado por
-    // `verificarConsistenciaCompeticao` a seguir — o diagnóstico de "qual
-    // clube o provedor manda com que id" vale mesmo quando o lote como um
-    // todo é inconsistente por outro motivo.
-    inconsistenciasClube.push(...resultado.classificacao.inconsistencias);
-    inconsistenciasClube.push(
-      ...resultado.partidas.inconsistencias.filter(
-        (i): i is InconsistenciaClube => i.tipo === 'clube-nao-mapeado',
-      ),
-    );
+      // Sem eventos nem tabela do provedor: não carimba ultimaAtualizacao.
+      const classificado = classificarResultadoLiga({
+        linhas: resultado.classificacao.linhas,
+        partidas: resultado.partidas.partidas,
+        descartes: [
+          ...resultado.classificacao.inconsistencias,
+          ...inconsistenciasPartida,
+        ].map((i) => ({ motivo: i.tipo })),
+      });
+      if (classificado === 'sem-dados-provedor') {
+        if (anterior === undefined) {
+          competicoes[resultado.competicaoId] = competicaoInicialSemDados(
+            config,
+            opcoes.agora,
+          );
+        }
+        statusFutebol[resultado.competicaoId] = {
+          resultado: 'sem-dados-provedor',
+          ultimaAtualizacao:
+            competicoes[resultado.competicaoId]?.competicao.ultimaAtualizacao ?? null,
+        };
+        registrarLog('sem-dados-provedor');
+        continue;
+      }
 
-    // tipo === 'atualizada': verifica consistência (ING-F-04) antes de
-    // aceitar o lote (CA-16.6).
-    const consistencia = verificarConsistenciaCompeticao({
-      linhas: resultado.classificacao.linhas,
-      partidas: resultado.partidas.partidas,
-      numeroClubesEsperado: config.clubes.length,
-      inicioCompeticao: config.janela.inicio,
-    });
+      // tipo === 'atualizada': verifica consistência (ING-F-04) antes de
+      // aceitar o lote (CA-16.6).
+      const consistencia = verificarConsistenciaCompeticao({
+        linhas: resultado.classificacao.linhas,
+        partidas: partidasLote,
+        formato: config.formato,
+        clubesConfigurados: config.clubes,
+        numeroClubesEsperado: config.clubes.length,
+        inicioCompeticao: config.janela.inicio,
+        ...(tabelaParcial ? { tabelaParcial: true } : {}),
+      });
 
-    if (!consistencia.consistente) {
-      // Descarta o lote da competição e mantém o anterior (SDD §2.4/CA-16.6) —
-      // nunca escreve por cima com dado inconsistente.
-      if (anterior === undefined) {
+      if (!consistencia.consistente) {
+        // Descarta o lote da competição e mantém o anterior (SDD §2.4/CA-16.6) —
+        // nunca escreve por cima com dado inconsistente.
+        if (anterior === undefined) {
+          competicoes[resultado.competicaoId] = competicaoInicialSemDados(
+            config,
+            opcoes.agora,
+          );
+        }
+        registrarLog('inconsistente');
+        statusFutebol[resultado.competicaoId] = {
+          resultado: 'inconsistente',
+          ultimaAtualizacao:
+            competicoes[resultado.competicaoId]?.competicao.ultimaAtualizacao ?? null,
+          motivosInconsistencia: consistencia.motivos,
+        };
+        continue;
+      }
+
+      // Lote consistente: aceita, deriva status/fase por clube (ING-F-03) e
+      // grava `ultimaAtualizacao` (CA-16.1).
+      const ultimaAtualizacao = opcoes.agora.toISOString();
+      const linhasValidadas = resolverTabelaPublicada(
+        config.formato,
+        resultado.classificacao.linhas,
+        anterior?.linhas ?? [],
+      ).map((l) => linhaClassificacaoSchema.parse(l));
+      const partidasValidadas = partidasLote.map((p) =>
+        partidaSchema.parse(p),
+      );
+      const competicao = competicaoSchema.parse(
+        construirCompeticao(config, ultimaAtualizacao, tabelaParcial),
+      );
+      const participacoes = construirParticipacoes(
+        config,
+        linhasValidadas,
+        partidasValidadas,
+        opcoes.agora,
+      );
+
+      competicoes[resultado.competicaoId] = {
+        competicao,
+        linhas: linhasValidadas,
+        partidas: partidasValidadas,
+        participacoes,
+      };
+      const idsVistos = [
+        ...linhasValidadas.map((l) => l.clubeId),
+        ...partidasValidadas.flatMap((p) => [p.mandanteId, p.visitanteId]),
+      ].filter((id) => !id.startsWith(PREFIXO_ID_EXTERNO));
+      const diagnostico = diagnosticarParticipantes(idsVistos, config.clubes);
+      statusFutebol[resultado.competicaoId] = {
+        resultado: 'atualizada',
+        ultimaAtualizacao,
+        partidas: resumo.partidas,
+        requisicoes: resumo.requisicoes,
+        descartes: resumo.descartes,
+        participantesNaoConfigurados: [...diagnostico.naoConfigurados],
+      };
+      registrarLog('atualizada');
+    } catch (erro) {
+      if (competicoes[resultado.competicaoId] === undefined) {
         competicoes[resultado.competicaoId] = competicaoInicialSemDados(
           config,
           opcoes.agora,
         );
       }
       statusFutebol[resultado.competicaoId] = {
-        resultado: 'inconsistente',
+        resultado: 'falha',
         ultimaAtualizacao:
           competicoes[resultado.competicaoId]?.competicao.ultimaAtualizacao ?? null,
-        motivosInconsistencia: consistencia.motivos,
+        mensagemErro: mensagemCurta(erro),
       };
-      continue;
     }
-
-    // Lote consistente: aceita, deriva status/fase por clube (ING-F-03) e
-    // grava `ultimaAtualizacao` (CA-16.1).
-    const ultimaAtualizacao = opcoes.agora.toISOString();
-    const linhasValidadas = resultado.classificacao.linhas.map((l) =>
-      linhaClassificacaoSchema.parse(l),
-    );
-    const partidasValidadas = resultado.partidas.partidas.map((p) =>
-      partidaSchema.parse(p),
-    );
-    const competicao = competicaoSchema.parse(
-      construirCompeticao(config, ultimaAtualizacao),
-    );
-    const participacoes = construirParticipacoes(
-      config,
-      linhasValidadas,
-      partidasValidadas,
-      opcoes.agora,
-    );
-
-    competicoes[resultado.competicaoId] = {
-      competicao,
-      linhas: linhasValidadas,
-      partidas: partidasValidadas,
-      participacoes,
-    };
-    statusFutebol[resultado.competicaoId] = {
-      resultado: 'atualizada',
-      ultimaAtualizacao,
-    };
   }
 
   const status: StatusIngestaoFutebol = {
@@ -419,7 +580,12 @@ export async function executarFluxoFutebol(
     pausadoPorCota: coleta.provedoresPausadosPorCota.length > 0,
   };
 
-  return { novoEstado: { competicoes }, status, inconsistenciasClube };
+  return {
+    novoEstado: { competicoes },
+    status,
+    inconsistenciasClube,
+    linhasLogPorLiga,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -438,24 +604,27 @@ function dirEstado(): string {
   return process.env['SPORTSLM_DIR_ESTADO'] ?? join(RAIZ_PROJETO, 'estado');
 }
 
-/** Código de competição do football-data.org (ADR-006 item 4) por id interno
- * de competição — ver "Nota de lacuna sinalizada" no topo do arquivo. */
-const CODIGOS_COMPETICAO_FOOTBALL_DATA: Record<string, string> = {
-  'brasileirao-serie-a': 'BSA',
-};
+/** Política de tabela do TheSportsDB derivada do formato (ADR-020 item 3). */
+function politicaTabelaPorFormato(
+  formato: CampeonatoConfig['formato'],
+): RefCompeticaoTheSportsDB['politicaTabela'] {
+  if (formato === 'mata-mata') return 'nunca';
+  if (formato === 'misto') return 'tentar';
+  return 'sempre';
+}
 
-/** Referência de liga do TheSportsDB (SPK-01) por id interno de competição —
- * ids confirmados via `lookuptable.php`/`searchteams.php` em 2026-09-17 (ver
- * nota no topo do arquivo). Só competições em formato "grupos" com tabela
- * (`temTabela: true`) por enquanto — Copa do Brasil (mata-mata) fica para
- * uma rodada futura. */
-const REFS_COMPETICAO_THESPORTSDB: Record<
-  string,
-  Omit<RefCompeticaoTheSportsDB, 'competicaoId'>
-> = {
-  paulista: { idLigaProvedor: '5767', temTabela: true, temporadaProvedor: '2026' },
-  carioca: { idLigaProvedor: '5688', temTabela: true, temporadaProvedor: '2026' },
-};
+/** `refProvedor` da config (ADR-020); erro claro nomeando a competição. */
+function refProvedorObrigatorio(campeonato: CampeonatoConfig): {
+  id: string;
+  temporada?: string | undefined;
+} {
+  if (campeonato.refProvedor === undefined) {
+    throw new Error(
+      `competição "${campeonato.id}" sem "refProvedor" em config/campeonatos-2026.json (ADR-020)`,
+    );
+  }
+  return campeonato.refProvedor;
+}
 
 const competicaoEstadoSchema = z.object({
   competicao: competicaoSchema,
@@ -563,12 +732,7 @@ export function montarProvedoresPadrao(
   const registroFootballData = registrarProvedor<RefCompeticaoFootballData>(
     adaptadorFootballData,
     (campeonato) => {
-      const codigoCompeticao = CODIGOS_COMPETICAO_FOOTBALL_DATA[campeonato.id];
-      if (codigoCompeticao === undefined) {
-        throw new Error(
-          `sem código de competição football-data.org mapeado para "${campeonato.id}"`,
-        );
-      }
+      const { id: codigoCompeticao } = refProvedorObrigatorio(campeonato);
       return { competicaoId: campeonato.id, codigoCompeticao };
     },
   );
@@ -577,13 +741,18 @@ export function montarProvedoresPadrao(
   const registroTheSportsDB = registrarProvedor<RefCompeticaoTheSportsDB>(
     adaptadorTheSportsDB,
     (campeonato) => {
-      const ref = REFS_COMPETICAO_THESPORTSDB[campeonato.id];
-      if (ref === undefined) {
-        throw new Error(
-          `sem referência de liga TheSportsDB mapeada para "${campeonato.id}"`,
-        );
-      }
-      return { competicaoId: campeonato.id, ...ref };
+      const { id, temporada } = refProvedorObrigatorio(campeonato);
+      const comTabelaCompleta =
+        (campeonato.formato === 'grupos' || campeonato.formato === 'pontos-corridos') &&
+        campeonato.clubes.length > 0;
+      return {
+        competicaoId: campeonato.id,
+        idLigaProvedor: id,
+        idLiga: Number(id), // ADR-022: exposto para o eventsday (COB-33)
+        politicaTabela: politicaTabelaPorFormato(campeonato.formato),
+        ...(temporada !== undefined ? { temporadaProvedor: temporada } : {}),
+        ...(comTabelaCompleta ? { clubesEsperados: campeonato.clubes.length } : {}),
+      };
     },
   );
 
