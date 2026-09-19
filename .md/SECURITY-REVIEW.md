@@ -2301,3 +2301,24 @@ Nenhum achado alto/crítico em código de produção. Nenhum compliance obrigat�
 ### Veredito — Refatoração Lote-16
 
 **Aprovado** (com o débito dev-only acima). Dupla aprovação (QA + DevSecOps) presente para o lote.
+
+---
+
+## Revalidação Lote 16 pós-REFAT-16-06 (2026-09-18)
+
+Escopo: commit 21b07d4 (vite 7.3.6, vitest 4.1.11, plugin-react 5.2.0, @types/node 22.20.4; só package.json/package-lock.json).
+
+**Veredito DevSecOps: Aprovado com ressalvas** (ressalvas = 1 débito baixo dev-only + 1 risco operacional; nada bloqueante).
+
+Evidência:
+- `npm audit --omit=dev --audit-level=high`: 0 vulnerabilidades. `npm audit` completo: 2 baixas (eslint 9.10–9.26 e @eslint/plugin-kit <0.3.4, ReDoS GHSA-xffm-g5w8-qvg7), ambas devDependencies.
+- Lockfile: 54 `resolved` adicionados, todos em registry.npmjs.org, todos com `integrity`; sem fonte git/http/tarball. Único `hasInstallScript` é esbuild (já existia; só deduplicado). Sem pacote suspeito/typosquatting.
+- .github/workflows e app/index.html (CSP) sem alteração no commit; pins por SHA (GUARDRAILS §2) intactos.
+- SEC-16-01 (regex ancorada `^\d{4}-...` em normalizarPorTimestamp) e SEC-16-02 (mensagem estática "corpo inválido", sem corpo do provedor; `erroHttp` sem corpo) confirmadas no código; testes REFAT-16-05 passando (55/55 no adaptador).
+- `npm run build` + `verificar-segredos dist`: nenhum padrão encontrado. Nenhum dado pessoal novo (LGPD inalterada); SDD §7 / GUARDRAILS §4 inalterados.
+
+Achados:
+- SEC-16-03 (baixo, não bloqueante): eslint/@eslint/plugin-kit ReDoS. Fora do bundle; roda só em dev/CI sobre código do próprio repo (entrada não confiável inexistente). Exploitabilidade praticamente nula. Correção: eslint >=9.27 (fixo 9.17.0 hoje; `--force` sugere 9.39.5, salto de minor a validar). Prazo sugerido: junto da próxima atualização de tooling. Escala para: nenhum.
+- SEC-16-04 (informativo/risco operacional): vite 7/vitest 4 exigem Node ^20.19 || >=22.12. Workflows usam node-version '22' (ok); o Node do projeto Vercel não é verificável pelo repo, confirmar no painel. Escala para: gestor/DevOps (confirmação).
+
+Escala para gestor: não há.
