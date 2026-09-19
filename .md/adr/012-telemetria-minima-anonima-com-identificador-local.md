@@ -85,3 +85,14 @@ indicativos, não estatísticos — já registrado pelo Gestor em I-24.
 Instância própria de análise (auto-hospedada), base legal LGPD declarada, política de
 privacidade publicada, consentimento formal e retenção definida — RNF-07 muda de
 "mínima" para "completa" (ADR-015).
+
+## Nota de atualização (2026-09-19) — resultado de SPK-04 (Bloqueio 002)
+
+O ADR original permanece como decidido; esta nota só registra evidência posterior.
+SPK-04 concluiu que o **Cloudflare Web Analytics não suporta eventos customizados**
+(só pageviews agregados) e por isso não cobre nenhum dos 5 eventos de RNF-07. Na regra 4,
+a alternativa a GoatCounter passa a ser o **Umami Cloud** (tier gratuito hospedado,
+100 mil eventos/mês, cookieless, eventos customizados nativos). GoatCounter segue válido.
+Ao plugar uma ferramenta de fato, decidir entre as duas e atualizar o host em
+`connect-src` (`app/index.html`). Hoje nada está plugado (`assinarColetor` sem adaptador).
+Ver `.md/BLOCKERS.md`, Bloqueio 002, e `.md/TASK.md` (tabela do Lote 13).

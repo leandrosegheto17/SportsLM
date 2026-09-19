@@ -83,3 +83,17 @@ Isso é **risco RT-01 (severidade alta)** na Seção 6 do SDD.
 
 Acordo formal de licenciamento com o publicador antes de qualquer lançamento
 comercial (R1/R4), independentemente de existir feed técnico.
+
+## Nota de atualização (2026-09-19) — evidência de SPK-03 e do Bloqueio 011
+
+O ADR original permanece como decidido; esta nota só acrescenta argumentos contra as
+alternativas de substituição, sem mudar a decisão:
+
+- **Placar** (Bloqueio 003, SPK-03): os Termos e Condições da Editora Score proíbem
+  explicitamente "robôs ou qualquer dispositivo para monitorar ou copiar conteúdo".
+  Não serve como substituto da 5ª fonte (`uol-esporte`); segue fora de `config/fontes.json`.
+- **Scraping de título + link no GE e na ESPN Brasil** (Bloqueio 011): mostrar só título e
+  link não afasta o problema, porque os Termos de Uso são cláusula contratual separada de
+  direito autoral e ambos os sites proíbem acesso automatizado. A ESPN Brasil ainda bloqueia
+  bots por nome no `robots.txt`. Só a autorização expressa por escrito do publicador reabre
+  essa via. A ESPN Brasil segue via RSS oficial (`verificada`).
