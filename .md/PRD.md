@@ -326,10 +326,11 @@ Respondidas na rodada 2: estaduais = só Gaúcho, Mineiro, Paulista e Carioca; m
 e lacuna honesta aceitas; Copa do Nordeste e Supercopa ficam para depois (candidatas
 futuras).
 
-Pendente de confirmação: a resposta do usuário sobre continentais foi apenas "Sim".
+**Confirmado pelo usuário em 2026-09-19** (antes pendente: a resposta sobre continentais
+havia sido apenas "Sim").
 Interpretação conservadora **I-32** adotada: se o TheSportsDB gratuito não cobrir bem
 Libertadores/Sul-Americana, **assume-se a lacuna** (estado honesto), sem fonte paga,
-sem cadastro e sem API alternativa neste recorte. Confirmar com o usuário.
+sem cadastro e sem API alternativa neste recorte.
 
 ---
 
