@@ -122,3 +122,12 @@ dependendo da execução manual do `verificar-catalogo`.
 
 Verificação automática do catálogo em cadência semanal no CI, com alerta em falha; e
 revisão jurídica dos termos de cada fonte (R1/R4), hoje fora do roster.
+
+## Nota de atualização (2026-09-19) — avaliação formal da RN-19 (REFAT-17-01/02)
+
+O ADR original permanece como decidido. A avaliação formal dos critérios 1/2/5 das 7 fontes
+adicionadas em 2026-09-08/09 (`.md/AVALIACAO-FONTES-RN19.md`) reprovou `torcedores` (critérios
+2 e 5, operado por afiliada de apostas) e `ogol` (critério 2, só futebol). Por decisão do
+stakeholder ambas foram removidas do catálogo, que passa a ter 10 fontes. Critério 5 de
+`motorsport-brasil`, `estadao-esportes` e `r7-esporte` segue "não verificável" (verificação
+manual pendente, não bloqueante).

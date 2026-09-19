@@ -357,7 +357,7 @@ function publicar(res: ResultadoFluxoFutebol, agora: Date): SnapshotsPublicados 
   return construirSnapshots({
     agora,
     itensNoticiasEstado: [],
-    fontes: Array.from({ length: 12 }, (_, i) => fonte(`f${String(i)}`)),
+    fontes: Array.from({ length: 10 }, (_, i) => fonte(`f${String(i)}`)),
     statusIngestaoBruto: res.status,
     competicoesFutebol: res.novoEstado.competicoes,
     campeonatosConfig: CAMPEONATOS,

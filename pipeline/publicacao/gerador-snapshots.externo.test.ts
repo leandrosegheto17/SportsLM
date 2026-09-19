@@ -40,7 +40,7 @@ const fonte = (id: string): Fonte => ({
   feeds: [],
   verificacao: { estado: 'verificada', em: '2026-09-05' },
 });
-const FONTES = Array.from({ length: 12 }, (_, i) => fonte(`f${String(i)}`));
+const FONTES = Array.from({ length: 10 }, (_, i) => fonte(`f${String(i)}`));
 
 const cfg = (
   id: string,

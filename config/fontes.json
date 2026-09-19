@@ -227,30 +227,6 @@
     "substitutos": ["folha-esporte", "placar"]
   },
   {
-    "id": "ogol",
-    "nome": "ogol.com.br",
-    "fixa": false,
-    "esportesCobertos": ["futebol"],
-    "termos": {
-      "url": null,
-      "verificadoEm": null,
-      "uso": "nao-comercial"
-    },
-    "frequenciaMaximaMin": 30,
-    "feeds": [
-      {
-        "id": "ogol-noticias",
-        "url": "https://www.ogol.com.br/rss/noticias.php",
-        "formato": "rss",
-        "esporteFixado": "futebol"
-      }
-    ],
-    "verificacao": {
-      "estado": "pendente",
-      "em": null
-    }
-  },
-  {
     "id": "superesportes",
     "nome": "Superesportes",
     "fixa": false,
@@ -430,30 +406,6 @@
       {
         "id": "r7-esporte",
         "url": "https://esportes.r7.com/arc/outboundfeeds/rss/?outputType=xml",
-        "formato": "rss",
-        "esporteFixado": null
-      }
-    ],
-    "verificacao": {
-      "estado": "pendente",
-      "em": null
-    }
-  },
-  {
-    "id": "torcedores",
-    "nome": "Torcedores.com",
-    "fixa": false,
-    "esportesCobertos": ["futebol", "basquete"],
-    "termos": {
-      "url": null,
-      "verificadoEm": null,
-      "uso": "nao-comercial"
-    },
-    "frequenciaMaximaMin": 30,
-    "feeds": [
-      {
-        "id": "torcedores-feed",
-        "url": "https://www.torcedores.com/feed/",
         "formato": "rss",
         "esporteFixado": null
       }
