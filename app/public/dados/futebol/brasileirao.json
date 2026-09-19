@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-19T19:54:55.990Z"
+    "ultimaAtualizacao": "2026-09-19T22:03:30.270Z"
   },
   "classificacao": [
     {
@@ -113,15 +113,15 @@
       "grupo": "Matchday",
       "posicao": 7,
       "clubeId": "atletico-mg",
-      "pontos": 39,
+      "pontos": 40,
       "jogos": 27,
       "v": 11,
-      "e": 6,
-      "d": 10,
-      "gp": 35,
+      "e": 7,
+      "d": 9,
+      "gp": 36,
       "gc": 32,
-      "sg": 3,
-      "aproveitamento": 48.148148148148145,
+      "sg": 4,
+      "aproveitamento": 49.382716049382715,
       "ultimosCinco": []
     },
     {
@@ -161,15 +161,15 @@
       "grupo": "Matchday",
       "posicao": 10,
       "clubeId": "santos",
-      "pontos": 35,
-      "jogos": 26,
+      "pontos": 36,
+      "jogos": 27,
       "v": 9,
-      "e": 8,
+      "e": 9,
       "d": 9,
       "gp": 39,
       "gc": 39,
       "sg": 0,
-      "aproveitamento": 44.871794871794876,
+      "aproveitamento": 44.44444444444444,
       "ultimosCinco": []
     },
     {
@@ -178,14 +178,14 @@
       "posicao": 11,
       "clubeId": "botafogo",
       "pontos": 35,
-      "jogos": 27,
+      "jogos": 28,
       "v": 9,
       "e": 8,
-      "d": 10,
+      "d": 11,
       "gp": 41,
-      "gc": 43,
-      "sg": -2,
-      "aproveitamento": 43.20987654320987,
+      "gc": 45,
+      "sg": -4,
+      "aproveitamento": 41.66666666666667,
       "ultimosCinco": []
     },
     {
@@ -241,15 +241,15 @@
       "grupo": "Matchday",
       "posicao": 15,
       "clubeId": "mirassol",
-      "pontos": 29,
-      "jogos": 27,
-      "v": 7,
+      "pontos": 32,
+      "jogos": 28,
+      "v": 8,
       "e": 8,
       "d": 12,
-      "gp": 31,
+      "gp": 33,
       "gc": 42,
-      "sg": -11,
-      "aproveitamento": 35.80246913580247,
+      "sg": -9,
+      "aproveitamento": 38.095238095238095,
       "ultimosCinco": []
     },
     {
@@ -305,15 +305,15 @@
       "grupo": "Matchday",
       "posicao": 19,
       "clubeId": "remo",
-      "pontos": 23,
-      "jogos": 27,
+      "pontos": 24,
+      "jogos": 28,
       "v": 5,
-      "e": 8,
+      "e": 9,
       "d": 14,
       "gp": 31,
       "gc": 45,
       "sg": -14,
-      "aproveitamento": 28.39506172839506,
+      "aproveitamento": 28.57142857142857,
       "ultimosCinco": []
     },
     {
@@ -321,15 +321,15 @@
       "grupo": "Matchday",
       "posicao": 20,
       "clubeId": "chapecoense",
-      "pontos": 20,
+      "pontos": 18,
       "jogos": 27,
-      "v": 4,
-      "e": 8,
+      "v": 3,
+      "e": 9,
       "d": 15,
       "gp": 29,
-      "gc": 52,
-      "sg": -23,
-      "aproveitamento": 24.691358024691358,
+      "gc": 53,
+      "sg": -24,
+      "aproveitamento": 22.22222222222222,
       "ultimosCinco": []
     }
   ],
@@ -4629,8 +4629,11 @@
       "dataHora": "2026-09-19T19:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 1
+      }
     },
     {
       "id": "555015",
@@ -4642,8 +4645,11 @@
       "dataHora": "2026-09-19T20:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 2,
+        "visitante": 0
+      }
     },
     {
       "id": "555016",
@@ -4655,7 +4661,7 @@
       "dataHora": "2026-09-19T21:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {

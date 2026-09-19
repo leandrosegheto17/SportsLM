@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-19T19:54:55.990Z"
+      "ultimaAtualizacao": "2026-09-19T22:03:30.270Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -19,15 +19,15 @@
       "faseAtual": null,
       "resultadoFinal": null,
       "resumo": {
-        "jogos": 27,
+        "jogos": 28,
         "v": 5,
-        "e": 8,
+        "e": 9,
         "d": 14,
         "gp": 31,
         "gc": 45,
         "sg": -14,
-        "pontos": 23,
-        "aproveitamento": 28.39506172839506,
+        "pontos": 24,
+        "aproveitamento": 28.57142857142857,
         "posicao": 19
       }
     },
@@ -474,7 +474,7 @@
         "dataHora": "2026-09-19T21:30:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "agendada",
+        "status": "aguardando-resultado",
         "placar": null
       },
       {
@@ -620,7 +620,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-09-19T19:54:55.990Z"
+      "ultimaAtualizacao": "2026-09-19T22:03:30.270Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
