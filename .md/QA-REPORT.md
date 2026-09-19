@@ -3986,3 +3986,52 @@ As 5 tarefas estão `Concluída`, sem dependência órfã, sem tarefa `Bloqueada
 | Data | Lote | Veredito | Resumo |
 |---|---|---|---|
 | 2026-09-18 | Refatoração Lote-16 | Aprovado | 5/5 aprovadas; 112 arquivos/1396 testes, `tsc`, `eslint` e `format:check` limpos; 0 achados |
+
+## Revalidação Lote 16 pós-REFAT-16-06 (QA, 2026-09-18/19)
+
+Escopo: Lote 16 inteiro + Refatoração Lote-16 (REFAT-16-01 a -06), branch `refat-16-06-vite-vitest` (commit `21b07d4`, só `package.json`/`package-lock.json`). Nenhum código de produção alterado; Status do `TASK.md` não editado.
+
+### Resultados de execução (saída real na branch)
+
+| Comando | Resultado |
+|---|---|
+| `npm run typecheck` | limpo |
+| `npm run lint` | limpo |
+| `npm run format:check` | limpo |
+| `npm run test` | 112 arquivos / 1396 testes passando (vitest 4.1.11; stderr do axe-core é ruído, não falha) |
+| `npm run build` | ok (vite 7.3.6), JS 384,29 kB / gzip 115,71 kB |
+| `npm audit` | 2 baixas restantes, 0 moderada/alta/crítica |
+
+### Critérios de aceite REFAT-16-01 a -06
+
+- -01: `rb-bragantino` em `paulista.clubes` (`config/campeonatos-2026.json:71`); teste de config e integração COB-31 verdes. Aprovada.
+- -02: `tabelaSemDados` só com provedor acumulador, linhas vazias e partidas; Carioca publica partidas sem descarte (teste de integração verde). Aprovada.
+- -04: `adaptador-thesportsdb.ts:166` com `\d`; teste com `strTimestamp` UTC distinto do local verde. Aprovada.
+- -05: `adaptador-thesportsdb.ts:533` mensagem estática; testes com corpo HTML ("SEGREDO-DO-CORPO") verdes. Aprovada.
+- -03: `format:check` limpo. Aprovada.
+- -06: audit sem alta/crítica, 5 portões limpos, sem mudança de comportamento (build paritário). Aprovada.
+
+### Ressalvas e achados anteriores
+
+- QA-16-01: fechado (REFAT-16-01).
+- QA-16-02: fechado (REFAT-16-02; I-28 decidido no Bloqueio 013).
+- QA-16-03: fechado (REFAT-16-03; `format:check` limpo).
+- SEC-16-01 e SEC-16-02: fechados (REFAT-16-04/-05).
+- DEBT-DEV-DEPS: fechado no que era alta/crítica (REFAT-16-06); restam 2 baixas de devDependencies, sem exigência de aceite, sem prazo bloqueante.
+- Observação (não é achado, segue aberta): `mensagemDeErro` do coletor não filtra mensagens de outros adaptadores; hoje só o TheSportsDB passa por lá e já sanitiza.
+
+### Regressão
+
+Suíte completa (inclui integração do pipeline de futebol, COB-31 e snapshots públicos) verde, sem alteração de resultado frente a `main`.
+
+### Achados novos
+
+Nenhum. Zero críticos, zero simples.
+
+### Veredito
+
+**Aprovado.** Sem ressalva bloqueante em aberto; a branch pode seguir para merge (decisão do fluxo/DevSecOps).
+
+| Data | Lote | Veredito | Resumo |
+|---|---|---|---|
+| 2026-09-18/19 | Lote 16 + Refatoração Lote-16 (pós-REFAT-16-06) | Aprovado | 6/6 REFAT aprovadas; 112 arquivos/1396 testes, 5 portões limpos; 0 achados |
