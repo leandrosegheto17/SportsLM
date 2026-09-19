@@ -7,8 +7,9 @@ tabela — em `dominio/` (DOM-02 a DOM-06) ou em qualquer teste de tela/pipeline
 que o exercite — e fecha as lacunas encontradas com casos novos.
 
 Total: 62 critérios de aceite auditados. 61 cobertos após esta tarefa (7 casos
-novos). 1 sinalizado como lacuna de implementação (não de teste), fora do
-escopo desta tarefa — ver Seção "Gaps" ao final.
+novos). 1 (CA-08.5) foi sinalizado como lacuna de implementação (não de teste),
+fora do escopo desta tarefa, e depois resolvido (Bloqueio 001) e coberto por
+fixture — ver Seção "Gaps" ao final. Situação atual: 62 de 62 cobertos.
 
 ## RF-03 — Esportes favoritos
 
@@ -60,7 +61,7 @@ escopo desta tarefa — ver Seção "Gaps" ao final.
 | CA-08.2 | `app/rotas/paginas/DetalheCampeonato.test.tsx` |
 | CA-08.3 | `app/rotas/paginas/DetalheCampeonato.test.tsx` — caso novo desta tarefa (`formato: 'grupos'`, tabela isola o grupo do time do torcedor); a cobertura anterior era só uma menção em docstring, sem exercitar `linha.grupo` de fato |
 | CA-08.4 | `app/rotas/paginas/DetalheCampeonato.test.tsx` |
-| CA-08.5 | **Não coberto — ver "Gaps" abaixo** |
+| CA-08.5 | `app/rotas/paginas/DetalheCampeonato.test.tsx` — 2 casos com fixture (com e sem `classificacaoFinalDoGrupo`), adicionados ao resolver o Bloqueio 001; nenhuma fonte real aciona esse caminho hoje — ver "Gaps" abaixo |
 | CA-08.6 | `app/design-system/componentes/LinhaPartida/LinhaPartida.test.tsx`; `app/rotas/paginas/DetalheCampeonato.test.tsx` |
 | CA-08.7 | `app/design-system/componentes/LinhaPartida/LinhaPartida.test.tsx`; `app/rotas/paginas/DetalheCampeonato.test.tsx` |
 | CA-08.8 | `app/design-system/componentes/LinhaPartida/LinhaPartida.test.tsx`; `app/rotas/paginas/DetalheCampeonato.test.tsx` |
@@ -134,24 +135,17 @@ escopo desta tarefa — ver Seção "Gaps" ao final.
 
 ## Gaps (fora do escopo de QA-02 — auditoria, não reimplementação)
 
+Nenhum gap aberto. O único item sinalizado por esta auditoria, CA-08.5, foi
+resolvido em 2026-09-06 (Bloqueio 001, `.md/BLOCKERS.md`, e nota de resolução em
+`.md/QA-REPORT.md`).
+
 - **CA-08.5** — "WHEN muda de formato, GIVEN o provedor reflete, THE SYSTEM
-  SHALL passar a CA-08.4 e manter a tabela final do grupo acessível." Em
-  `app/rotas/paginas/DetalheCampeonato.tsx`, `ehMataMata` zera
-  `dadosClassificacao` por completo sempre que `competicao.formato ===
-  'mata-mata'`, sem preservar nenhum acesso à tabela final do grupo anterior —
-  não existe, hoje, nenhum mecanismo (estado, rota, aba) que mantenha essa
-  tabela acessível após a virada de fase. Além disso, por decisão de detalhe já
-  registrada no próprio arquivo (linhas 45–58), a única fonte de classificação
-  hoje publicada é a do Brasileirão, cujo formato é sempre `'pontos-corridos'`
-  — nenhum dado real jamais aciona esse caminho de código. Escrever um teste
-  aqui exigiria simular um caminho de dado que não existe (`brasileirao.dados`
-  respondendo por uma competição de formato `'grupos'`/`'misto'` que muda para
-  `'mata-mata'`) e ainda assim o teste provaria a ausência do comportamento
-  exigido pelo CA — ou seja, a lacuna é de **implementação**, não de teste.
-  Como QA-02 é tarefa de auditoria/consolidação de testes (não de
-  reimplementação), este item é sinalizado ao `coordenador` para decidir se
-  vale a pena: (a) implementar a preservação da tabela final do grupo agora,
-  mesmo sem fonte de dado real que a exercite, ou (b) adiar até que uma fonte
-  de campeonato de grupos seja publicada (SPK-01 já registra que só o
-  Brasileirão tem cobertura garantida de tabela hoje). Não bloqueia as demais
-  61 entradas desta auditoria.
+  SHALL passar a CA-08.4 e manter a tabela final do grupo acessível." Na
+  auditoria, `DetalheCampeonato.tsx` zerava `dadosClassificacao` ao entrar em
+  mata-mata, sem preservar a tabela final do grupo: lacuna de **implementação**,
+  não de teste. Resolvida com o campo opcional `classificacaoFinalDoGrupo` e o
+  botão "VER TABELA DO GRUPO" (oculta por padrão, acessível sob demanda), coberta
+  por 2 casos com fixture em `DetalheCampeonato.test.tsx`. **Limitação que
+  permanece:** só o Brasileirão publica classificação, sempre `pontos-corridos`
+  (SPK-01), então nenhuma fonte real aciona esse caminho hoje — ele só é
+  exercitado por teste, até que uma fonte de grupos→mata-mata seja publicada.
