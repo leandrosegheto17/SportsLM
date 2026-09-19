@@ -760,7 +760,8 @@ Carioca (os dois últimos já ligados no SPK-01, commit `84fe09f`); Should = Ga�
 Mineiro; fora = todo o resto (Copa do Nordeste e Supercopa só no futuro). Sem fonte paga,
 cadastro ou API alternativa; lacuna assumida com "sem dados" honesto (I-32).
 
-**Status do lote**: **Concluído, aguardando validação**. Nenhum lote Validado foi
+**Status do lote**: **Validado com ressalvas e publicado** (ver o status ao fim da seção
+"Refatoração Lote-16", com REFAT-16-01 a -06 concluídas). Nenhum lote Validado foi
 reaberto: as tarefas abaixo editam arquivos de lotes anteriores (Lote 2, 5, 6, 10) sem
 alterar status, dependência ou decomposição deles (ver Seção 6, itens 13 e 14).
 
