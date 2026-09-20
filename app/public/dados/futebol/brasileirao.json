@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-20T17:14:41.447Z"
+    "ultimaAtualizacao": "2026-09-20T19:36:58.281Z"
   },
   "classificacao": [
     {
@@ -48,6 +48,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 3,
+      "clubeId": "fluminense",
+      "pontos": 48,
+      "jogos": 28,
+      "v": 13,
+      "e": 9,
+      "d": 6,
+      "gp": 42,
+      "gc": 35,
+      "sg": 7,
+      "aproveitamento": 57.14285714285714,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 4,
       "clubeId": "athletico-pr",
       "pontos": 46,
       "jogos": 27,
@@ -63,7 +79,7 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 4,
+      "posicao": 5,
       "clubeId": "bahia",
       "pontos": 46,
       "jogos": 27,
@@ -79,33 +95,17 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 5,
-      "clubeId": "fluminense",
-      "pontos": 45,
-      "jogos": 27,
-      "v": 12,
-      "e": 9,
-      "d": 6,
-      "gp": 41,
-      "gc": 35,
-      "sg": 6,
-      "aproveitamento": 55.55555555555556,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
       "posicao": 6,
       "clubeId": "cruzeiro",
-      "pontos": 42,
-      "jogos": 27,
+      "pontos": 43,
+      "jogos": 28,
       "v": 12,
-      "e": 6,
+      "e": 7,
       "d": 9,
       "gp": 39,
       "gc": 39,
       "sg": 0,
-      "aproveitamento": 51.85185185185185,
+      "aproveitamento": 51.19047619047619,
       "ultimosCinco": []
     },
     {
@@ -209,15 +209,15 @@
       "grupo": "Matchday",
       "posicao": 13,
       "clubeId": "vitoria",
-      "pontos": 33,
-      "jogos": 27,
+      "pontos": 34,
+      "jogos": 28,
       "v": 9,
-      "e": 6,
+      "e": 7,
       "d": 12,
       "gp": 27,
       "gc": 39,
       "sg": -12,
-      "aproveitamento": 40.74074074074074,
+      "aproveitamento": 40.476190476190474,
       "ultimosCinco": []
     },
     {
@@ -226,14 +226,14 @@
       "posicao": 14,
       "clubeId": "corinthians",
       "pontos": 32,
-      "jogos": 27,
+      "jogos": 28,
       "v": 8,
       "e": 8,
-      "d": 11,
+      "d": 12,
       "gp": 28,
-      "gc": 29,
-      "sg": -1,
-      "aproveitamento": 39.50617283950617,
+      "gc": 30,
+      "sg": -2,
+      "aproveitamento": 38.095238095238095,
       "ultimosCinco": []
     },
     {
@@ -4725,7 +4725,7 @@
       "dataHora": "2026-09-20T19:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
@@ -4738,7 +4738,7 @@
       "dataHora": "2026-09-20T19:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
