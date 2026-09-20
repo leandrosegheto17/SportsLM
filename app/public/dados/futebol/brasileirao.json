@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-20T00:13:41.932Z"
+    "ultimaAtualizacao": "2026-09-20T05:08:59.904Z"
   },
   "classificacao": [
     {
@@ -151,8 +151,8 @@
       "e": 8,
       "d": 10,
       "gp": 37,
-      "gc": 39,
-      "sg": -2,
+      "gc": 43,
+      "sg": -6,
       "aproveitamento": 45.23809523809524,
       "ultimosCinco": []
     },
@@ -176,6 +176,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 11,
+      "clubeId": "sao-paulo",
+      "pontos": 36,
+      "jogos": 27,
+      "v": 10,
+      "e": 6,
+      "d": 11,
+      "gp": 32,
+      "gc": 30,
+      "sg": 2,
+      "aproveitamento": 44.44444444444444,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 12,
       "clubeId": "botafogo",
       "pontos": 35,
       "jogos": 28,
@@ -186,22 +202,6 @@
       "gc": 45,
       "sg": -4,
       "aproveitamento": 41.66666666666667,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 12,
-      "clubeId": "sao-paulo",
-      "pontos": 34,
-      "jogos": 27,
-      "v": 9,
-      "e": 7,
-      "d": 11,
-      "gp": 31,
-      "gc": 30,
-      "sg": 1,
-      "aproveitamento": 41.9753086419753,
       "ultimosCinco": []
     },
     {
@@ -262,9 +262,9 @@
       "v": 8,
       "e": 7,
       "d": 12,
-      "gp": 30,
+      "gp": 34,
       "gc": 41,
-      "sg": -11,
+      "sg": -7,
       "aproveitamento": 38.2716049382716,
       "ultimosCinco": []
     },
@@ -272,22 +272,6 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 17,
-      "clubeId": "internacional",
-      "pontos": 29,
-      "jogos": 28,
-      "v": 6,
-      "e": 11,
-      "d": 11,
-      "gp": 30,
-      "gc": 35,
-      "sg": -5,
-      "aproveitamento": 34.523809523809526,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 18,
       "clubeId": "gremio",
       "pontos": 28,
       "jogos": 27,
@@ -298,6 +282,22 @@
       "gc": 38,
       "sg": -8,
       "aproveitamento": 34.5679012345679,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 18,
+      "clubeId": "internacional",
+      "pontos": 28,
+      "jogos": 28,
+      "v": 6,
+      "e": 10,
+      "d": 12,
+      "gp": 30,
+      "gc": 36,
+      "sg": -6,
+      "aproveitamento": 33.33333333333333,
       "ultimosCinco": []
     },
     {
@@ -4677,8 +4677,11 @@
       "dataHora": "2026-09-19T23:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 5,
+        "visitante": 0
+      }
     },
     {
       "id": "555017",
@@ -4690,8 +4693,11 @@
       "dataHora": "2026-09-20T00:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 0
+      }
     },
     {
       "id": "555014",
