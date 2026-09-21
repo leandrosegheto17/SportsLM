@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-20T22:07:39.580Z"
+    "ultimaAtualizacao": "2026-09-21T00:23:07.666Z"
   },
   "classificacao": [
     {
@@ -22,8 +22,8 @@
       "v": 18,
       "e": 6,
       "d": 4,
-      "gp": 54,
-      "gc": 22,
+      "gp": 55,
+      "gc": 23,
       "sg": 32,
       "aproveitamento": 71.42857142857143,
       "ultimosCinco": []
@@ -48,6 +48,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 3,
+      "clubeId": "athletico-pr",
+      "pontos": 49,
+      "jogos": 28,
+      "v": 14,
+      "e": 7,
+      "d": 7,
+      "gp": 43,
+      "gc": 32,
+      "sg": 11,
+      "aproveitamento": 58.333333333333336,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 4,
       "clubeId": "fluminense",
       "pontos": 48,
       "jogos": 28,
@@ -63,33 +79,17 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 4,
-      "clubeId": "athletico-pr",
-      "pontos": 46,
-      "jogos": 27,
-      "v": 13,
-      "e": 7,
-      "d": 7,
-      "gp": 41,
-      "gc": 31,
-      "sg": 10,
-      "aproveitamento": 56.79012345679012,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
       "posicao": 5,
       "clubeId": "bahia",
       "pontos": 46,
-      "jogos": 27,
+      "jogos": 28,
       "v": 12,
       "e": 10,
-      "d": 5,
-      "gp": 42,
-      "gc": 33,
-      "sg": 9,
-      "aproveitamento": 56.79012345679012,
+      "d": 6,
+      "gp": 43,
+      "gc": 35,
+      "sg": 8,
+      "aproveitamento": 54.761904761904766,
       "ultimosCinco": []
     },
     {
@@ -166,8 +166,8 @@
       "v": 10,
       "e": 6,
       "d": 11,
-      "gp": 32,
-      "gc": 30,
+      "gp": 33,
+      "gc": 31,
       "sg": 2,
       "aproveitamento": 44.44444444444444,
       "ultimosCinco": []
@@ -175,7 +175,7 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 10,
+      "posicao": 11,
       "clubeId": "sao-paulo",
       "pontos": 36,
       "jogos": 27,
@@ -4757,8 +4757,11 @@
       "dataHora": "2026-09-20T21:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 2,
+        "visitante": 1
+      }
     },
     {
       "id": "555010",
@@ -4770,7 +4773,7 @@
       "dataHora": "2026-09-20T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
