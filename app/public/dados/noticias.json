@@ -11,7 +11,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "6daba7692b8dd3e918e55a6b8fb6cfca7bbcee4f4fe48f2f6c306b45cf332b30",
@@ -25,7 +25,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "4d7b54cce9903a640543469cf5d3fdd763819a574fd3b39a789ce82ba4f66a68",
@@ -39,7 +39,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "e9c48703387572e4e9cbd2daa00d0040524cad1dbf0d0773fd7357fc76846eed",
@@ -53,7 +53,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "7da8718f4ed67123bc5e5a059ac0be12641e43fec9ac440fc08dfe91fb2ecede",
@@ -67,7 +67,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "076412b2e5c4baa2788096af825c8b235f752e6ebc7647c06f2274b280504d7f",
@@ -81,7 +81,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "03b919c8624b2f20eec2d4c1409fde0b951bee68294e75fc522d426efc9f8fb1",
@@ -95,7 +95,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "5e62e8175214a840dea222bea06642ff23e0e0eaec00c58fc6be5716c3293c34",
@@ -109,7 +109,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "7ee1f3cf8c450e4ffb87b791d04919e1718a272df47a8df6154aed10307c4e3f",
@@ -123,7 +123,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "794f480cb4b6ad3cb74785b6c563451ed0e1014765d26eff25a0b9caf04a5bb9",
@@ -137,21 +137,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "bda8848e0ea681be71d8f12b18612b922b6534fe5d5d0098f4cc8ddb82a3dd39",
-    "fonteId": "gazeta-esportiva",
-    "feedId": "gazeta-tenis",
-    "titulo": "Brasil abre 2 a 0 sobre a Suíça e fica a uma vitória de voltar aos Qualifiers da Copa Davis",
-    "resumo": "O Brasil encerrou o primeiro dia do confronto contra a Suíça, pelo Grupo Mundial I da Copa Davis, com vantagem de 2 a 0. João Fonseca venceu Dominic Stricker de virada, enquanto Gustavo Heide superou Stan Wawrinka e conquistou a maior vitória de sua carreira. Com o resultado, a equipe brasileira…",
-    "link": "https://www.gazetaesportiva.com/mais-esportes/tenis/brasil-abre-2-a-0-sobre-a-suica-e-fica-a-uma-vitoria-de-voltar-aos-qualifiers-da-copa-davis/",
-    "publicadoEm": "2026-09-19T09:28:23-03:00",
-    "dataEstimada": false,
-    "esporte": "tenis",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "dae9a9533c0cf5ae119288e980c542b3deadfa530470d38affcf9ac0ae1ed002",
@@ -165,7 +151,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "12f676dbec67900d06af0dda306919d47e676bf18e163919e9e843d2be433bd8",
@@ -179,7 +165,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "7f2d17d9e8947eaaa0f1beeb251fa874359d544c0a34fc945258a0926cda16cb",
@@ -193,21 +179,35 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "953d28c66283a1a23aa401b2f5fef717d316e67c03dcadfb204e35bbbdcb8116",
+    "id": "08edd347e266df493ceb5a85cc3b0f36f8fb558c77b590b08f26160124fa6e0f",
     "fonteId": "gazeta-esportiva",
-    "feedId": "gazeta-volei",
-    "titulo": "Brasil bate a Venezuela e mantém 100% de aproveitamento no Sul-Americano",
-    "resumo": "A Seleção Brasileira derrotou a Venezuela por 3 sets a 0, no Maracanãzinho, pela quarta rodada do Sul-Americano Masculino de Vôlei. Com o resultado, a equipe de Bernardinho segue invicta e com 100% de aproveitamento na competição. O post Brasil bate a Venezuela e mantém 100% de aproveitamento no…",
-    "link": "https://www.gazetaesportiva.com/mais-esportes/volei/brasil-bate-a-venezuela-e-mantem-100-de-aproveitamento-no-sul-americano/",
-    "publicadoEm": "2026-09-19T12:24:53-03:00",
+    "feedId": "gazeta-automobilismo",
+    "titulo": "Veja as fotos do Grande Prêmio do Azerbaijão da Fórmula 1",
+    "resumo": "Veja as fotos do Grande Prêmio do Azerbaijão de Fórmula 1, disputado neste sábado no circuito de rua de Baku. George Russell venceu a corrida, com Max Verstappen e Isack Hadjar completando o pódio. O post Veja as fotos do Grande Prêmio do Azerbaijão da Fórmula 1 apareceu primeiro em Gazeta…",
+    "link": "https://www.gazetaesportiva.com/motor/formula-1/fotos-gp-azerbaijao-formula-1/",
+    "publicadoEm": "2026-09-26T10:04:47-03:00",
     "dataEstimada": false,
-    "esporte": "volei-quadra",
+    "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "5586658661f59aa372e6fa4963dc44beca37a1bad9670bb32d3d3bfc703cb4a1",
+    "fonteId": "gazeta-esportiva",
+    "feedId": "gazeta-automobilismo",
+    "titulo": "George Russell vence GP do Azerbaijão de F1; Antonelli é 5º",
+    "resumo": "George Russell venceu o Grande Prêmio do Azerbaijão de Fórmula 1 neste sábado, em Baku. O britânico da Mercedes largou na pole e terminou à frente de Max Verstappen e Isack Hadjar, enquanto Kimi Antonelli, líder do campeonato, ficou na quinta colocação. O post George Russell vence GP do Azerbaijão…",
+    "link": "https://www.gazetaesportiva.com/motor/formula-1/george-russell-vence-gp-azerbaijao-formula-1/",
+    "publicadoEm": "2026-09-26T09:57:43-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9634e403ee5628575b9543b44c7669bf1ebf633e124edd77dd292ce8aed38cef",
@@ -221,7 +221,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "e3c0d4ee2e5bbd4112f9299b4ceabaf220a1bd54a0632528aaf53d7bc75bcdd7",
@@ -235,7 +235,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "88a2665578b85c2c8e9cfd20a28422a71a558bb9dab3705a1eb07d3e62f1cb7c",
@@ -249,7 +249,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "b6aa5d7039198c96873385774583895dfc48a8c8224f2149a907d49c9cb6bf00",
@@ -263,7 +263,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "7c5bdbf444e7ac935f8d406a9a78db0fbcfd8f91b773607c7f050221eef1fa7d",
@@ -277,7 +277,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "95efd99ec50849850b6302a108c7e955651c0b26367567dc82aeb826a9d4cf1a",
@@ -291,7 +291,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "fbc215d1c80365339e4c60fa1f8e6d9ba4e7a3aa510a4729119ee86a174730b4",
@@ -305,7 +305,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "52fe2f90ac58d6c4f6a88bbe4ed3051ab5c2373e4e2558ffcd2d680a238c743d",
@@ -319,7 +319,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "4bda7b70ce45e72a973a861daf55db79c2ccf4266348a22f49b71881ae305876",
@@ -333,7 +333,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "915a01ec10b648566228a9581d350ff921995882baebb49cb8c6a9f39e013025",
@@ -347,7 +347,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "b5a6f713636f0ca4df913d8eb7c3724f50f9ac186fe768406698a78dcb3fe8e7",
@@ -361,7 +361,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "75aa25feaf69abd1743ac44cd7a6990cc57202a5f0304fc36b9be76b10b7f364",
@@ -375,7 +375,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "1bf01b51af042c7427e21fb030a904441e3ffe15cf9f0a7749ec6f664710e308",
@@ -389,7 +389,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "66876e8606b1facd92c26d510daed878472442763ce6838d1b07654a84ba7e69",
@@ -403,7 +403,7 @@
     "esporte": "natacao",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "6f6a12daacc42c101b8ae09ef29d0855c3061ebafb2426230c98dcca24bdb1e4",
@@ -417,7 +417,7 @@
     "esporte": "atletismo",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "5a65ed86f2f8fc87832f137d56eb8c4c70f4cf5879e96c8abe271393205fb53a",
@@ -431,511 +431,637 @@
     "esporte": "atletismo",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "63f24d3ecf614c75a2af332bf479373e31e524b45149fed0071aa14a8c904d4d",
+    "id": "6fbf3428d5b2398c0c0207b7c89014e9f318c19dbd57a3bc1963671a8912fca7",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "19 anos sem Roberto Dias, melhor marcador de Pelé e maior jogador do SP",
-    "resumo": "Por Marcos Júnior Micheletti, da Redação do Portal Terceiro Tempo",
-    "link": "https://www.uol.com.br/esporte/colunas/milton-neves/2026/09/26/19-anos-sem-roberto-dias-melhor-marcador-de-pele-e-maior-jogador-do-sp.htm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
+    "titulo": "Diretor da NFL sobre gramado do Maracanã: 'Fizemos algumas melhorias'",
+    "resumo": "Nick Pappas, diretor de campos da NFL, comentou sobre o gramado do Maracanã ? alvo de muitas críticas nas últimas semanas ? e os ajustes feitos de acordo com as necessidades da liga. Neste domingo (27), o estádio recebe o confronto entre Dallas Cowboys e Baltimore Ravens, pela temporada regular da…",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/09/26/diretor-da-nfl-sobre-gramado-do-maracana-fizemos-algumas-melhorias.ghtm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
+    "dataEstimada": true,
+    "esporte": "futebol-americano",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "a28527a5ccf86fc8c65066af1b8edee4d353e26dfcb308d88e89439519538370",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "NBA: Stephen Curry acerta renovação com o GSW e abre mão de R$ 107 milhões",
+    "resumo": "O astro Stephen Curry, de 38 anos, acertou a extensão do contrato com o Golden State Warriors por mais duas temporadas. Segundo informações da ESPN dos Estados Unidos, o armador receberá U$ 116 milhões (aproximadamente R$ 620 milhões) com o novo acordo, e tem a player option para 2028/29, que…",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/09/26/nba-stephen-curry-acerta-renovacao-com-o-gsw-e-abre-mao-de-r-107-milhoes.htm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
+    "dataEstimada": true,
+    "esporte": "basquete",
+    "origemClassificacao": "lexico",
+    "grupoId": "grp-f9d44fa7",
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "ae7db33bfe74603e4eb6e6511ce75ed0e75f4fe1e221da97f26865e284dbfa5c",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Norris reclama após acidente com Colapinto: 'Não deveria estar na F1'",
+    "resumo": "O piloto britânico Lando Norris esbravejou após ser tocado pelo piloto argentino Franco Colapinto (Alpine) e, por isso, acertar o muro e ter que abandonar a corrida. Para ele, alguns pilotos não deveriam estar na Formula 1.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/09/26/norris-reclama-apos-acidente-com-colapinto-nao-deveria-estar-na-f1.ghtm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
+    "dataEstimada": true,
+    "esporte": "formula1",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "1aa1d3f5232f5afa7761122b23ee45ee45c4d6595fd2e7957e38221cdcf5b1f4",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Russell sobre briga com Antonelli por título: 'Confiante que posso lutar'",
+    "resumo": "George Russell, da Mercedes, exaltou sua vitória no GP do Azerbaijão e falou sobre a disputa pelo título com o companheiro de equipe Kimi Antonelli, que lidera o campeonato da Fórmula 1.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/09/26/russell-exalta-vitoria-e-disputa-com-kimi-confiante-de-que-posso-lutar.ghtm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "fb9992e3576945dfcdd3212ccb69773d9c7fe08c6c8079773954fb17c47d017d",
+    "id": "6ddc7627a62713fdd68d1e5e2e215a4702b23be0c507ea4ff840bdc1cf29c91e",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Brasil vs Argentina! Rivalidade intensa devolve protagonismo ao MMA feminino no UFC",
-    "resumo": "m confronto até poucos dias 'escondido' no card preliminar do UFC Vegas 121 roubou a cena e se tornou o principal assunto do evento deste sábado (26), no 'Meta Apex', em Las Vegas. Trazendo para os o...",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/ag-fight/2026/09/26/brasil-vs-argentina-rivalidade-intensa-devolve-protagonismo-ao-mma-feminino-no-ufc.htm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
-    "dataEstimada": true,
-    "esporte": "mma",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "b26fde4f1edf90b182d9a7a158bf072757d097952393f510274d280c18dbee3c",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Clássicos em Goiás e Pernambucano são os destaques na 30ª rodada da Série B",
-    "resumo": "sábado reservou dois grandes clássicos estaduais na sequência da 30ª rodada da Série B do Campeonato Brasileiro. No meio da tabela e na busca para se aproximar da zona de playoffs, acontecem os enco...",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/09/26/classicos-em-goias-e-pernambucano-sao-os-destaques-na-30-rodada-da-serie-b.htm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "7382556fd18c30bbdf741ab5b1e938b9b8818d403aaa4ededecf6fe74dba98f4",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Saiba como assistir ao UFC Vegas 121, card liderado por Raoni Barcelos vs Raul Rosas Jr",
-    "resumo": "Depois de seis finais de semana distantes, o Ultimate retorna a Las Vegas (EUA) neste sábado (26), para promover mais um de seus eventos 'Fight Night'. Liderado pelo duelo entre os pesos-galos (61 kg) Raoni Barcelos e Raul Rosas Jr, o UFV Vegas 121 contará com a transmissão, ao vivo e na íntegra,…",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/ag-fight/2026/09/26/saiba-como-assistir-ao-ufc-vegas-121-card-liderado-por-raoni-barcelos-vs-raul-rosas-jr.htm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
-    "dataEstimada": true,
-    "esporte": "mma",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "3d2e99cceb684245ba47eccb3a69268993ffb248be034407c7a11ac773a81e26",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Jogo da Espanha hoje pela Liga das Nações: que horas começa e onde assistir",
-    "resumo": "A Espanha visita a Inglaterra neste sábado (26), às 15h45 (de Brasília), em Wembley, em Londres, pela 1ª rodada da primeira fase da Liga das Nações 2027. O confronto é um dos principais da rodada de abertura e marca a estreia espanhola na fase de liga.",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/09/26/jogo-da-espanha-hoje-pela-liga-das-nacoes-que-horas-comeca-e-onde-assistir.ghtm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
+    "titulo": "Tien vence jogo duro com Cobolli e deixa tudo igual na Laver Cup",
+    "resumo": "Londres (Inglaterra) ? Abrindo o sábado de disputas na Laver Cup, o norte-americano Learner Tien venceu o duelo da nova geração contra o italiano Flavio Cobolli e garantiu o empate para o Time Mundo. Em uma partida bastante disputada, ele venceu com o placar final de 6/3, 2/6 e 10-7, depois de…",
+    "link": "https://tenisbrasil.uol.com.br/tien-vence-jogo-duro-com-cobolli-e-deixa-tudo-igual-na-laver-cup.html",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "816d16ba9c6114a128b44669e3e6df33657f4084d6b45c3e354b389fdc9ce901",
+    "id": "4a17bd287a0abad7951ddabb9ef7615dbd72902e76d1ccc255faa83122260aab",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Jogo da Inglaterra hoje pela Liga das Nações: que horas começa e onde assistir",
-    "resumo": "A Inglaterra enfrenta a Espanha neste sábado (26), às 15h45 (de Brasília), no estádio de Wembley, em Londres, pela 1ª rodada da primeira fase da Liga das Nações 2027. O confronto é um dos mais aguardados da rodada e abre a campanha inglesa na fase de liga.",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/09/26/jogo-da-inglaterra-hoje-pela-liga-das-nacoes-que-horas-comeca-e-onde-assistir.ghtm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
+    "titulo": "Alemanha escolhe Munique como candidata para sediar os Jogos Olímpicos de 2036, 2040 ou 2044",
+    "resumo": "Neste sábado (26), a Confederação Alemã de Esportes Olímpicos (DOSB) anunciou Munique como candidata do país para sediar os Jogos Olímpicos de Verão em 2036, 2040 ou 2044. A escolha da cidade ocorre dois dias após a desistência da capital Berlim, anunciada pelo prefeito local no meio da semana.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/09/26/alemanha-escolhe-munique-como-candidata-para-sediar-os-jogos-olimpicos-de-2036-2040-ou-2044.htm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
+    "dataEstimada": true,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": "grp-171cd381",
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "cb911e4a4aa0ee6e9a9eedfe27c926f8ee8a286dae15e5e16d9004b33bebcd74",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Bortoleto vê efeito positivo das novidades da Audi no GP: 'Muito promissor'",
+    "resumo": "Depois de sofrer com falta de aderência na classificação em um carro que tinha uma série de novidades, Gabriel Bortoleto saiu do GP do Azerbaijão bem mais positivo. A corrida deixou claro que o problema da sexta-feira foi uma questão de dificuldade em colocar temperatura nos pneus, e não uma falha…",
+    "link": "https://www.uol.com.br/esporte/colunas/pole-position/2026/09/26/bortoleto-ve-efeito-positivo-das-novidades-da-audi-no-gp-muito-promissor.htm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "f707e78ce04d8a9e37e29ea951871fb8df38498492e43b985e37e07c99a56c20",
+    "id": "6b5a4712db3afd83c3f394357b6e2f92740706b54f29923ac28fc2c1aa4d776b",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "As contradições e o recuo dos defensores das bets",
-    "resumo": "O governo cumpriu o que prometeu e vetou as bets.",
-    "link": "https://www.uol.com.br/esporte/futebol/colunas/juca-kfouri/2026/09/26/as-contradicoes-e-o-recuo-dos-defensores-das-bets.htm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
+    "titulo": "Cabeça de chave 1, Medvedev estreia com vitória em Hangzhou",
+    "resumo": "Hangzhou (China) ? O russo Daniil Medvedev abriu sua campanha no ATP 250 de Hangzhou com vitória. Entrando direto na segunda rodada, o cabeça de chave 1 venceu o francês Valentin Royer neste sábado com o placar final de 7/6 (7-3) e 6/3, em 1h49 de confronto. Medvedev alcançou sua 96ª quartas de…",
+    "link": "https://tenisbrasil.uol.com.br/cabeca-de-chave-1-medvedev-estreia-com-vitoria-em-hangzhou.html",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "c4690eb27e32a3e47cbbda35c26e0d2228a62dfca2b6dee2dcfcbaaf3ece8ea3",
+    "id": "fdc8a66effc55bb24e877676715df44ece1c862dd13b65922e8297eade61da59",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Como Rafael Câmara tomou a liderança da F2 e venceu sob os holofotes da F1",
-    "resumo": "O brasileiro Rafael Câmara fechou um fim de semana com programação intensa nas ruas de Baku, no Azerbaijão, com uma vitória, neste sábado (26), na segunda corrida principal da 12ª e antepenúltima etapa da Fórmula 2. O piloto da Invicta já tinha conseguido tomar a liderança depois do quarto lugar…",
-    "link": "https://www.uol.com.br/esporte/colunas/pole-position/2026/09/26/como-rafael-camara-tomou-a-lideranca-da-f2-e-venceu-sob-os-holofotes-da-f1.htm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
+    "titulo": "Ramon Dino lamenta 3º lugar no Mr. Olympia: 'Não era o que buscávamos'",
+    "resumo": "O fisiculturista Ramon Dino se pronunciou nas suas redes sociais após terminar o Mr.Olympia deste ano na terceira colocação. Em seu Instagram, Dino afirmou que o resultado não foi o esperado, mas que ele assume a responsabilidade.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/09/26/ramon-dino-lamenta-3-lugar-no-mr-olympia-nao-era-o-que-buscavamos.ghtm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "f2395a297d982c3e4dcdf697ff6af8d5c83ae665544bdc44767af4377cf0569c",
+    "id": "8db753cb7055edb1459ff899603e44a922d2987d1542f482a6a811c7252c9be1",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "MAC vê presidência do São Paulo como improvável: 'Tempo de ouro já passou'",
-    "resumo": "Ex-dirigente e atual conselheiro vitalício do São Paulo, o médico Marco Aurélio Cunha não coloca uma eventual candidatura à presidência do clube entre os planos para os próximos anos. Aos 72 anos, ele entende que o momento mais adequado para comandar o Tricolor já passou e afirma que, hoje, sua…",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/09/26/mac-ve-presidencia-do-sao-paulo-como-improvavel-tempo-de-ouro-ja-passou.ghtm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "d2aa54f9fcec66702e595d7acd4ea407dbe2d5e889c585bcd9b623a94c6f696d",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Palmeiras tenta saída de Teresa após afastamento por violência doméstica",
-    "resumo": "O atacante Felipe Teresa, do time sub-20 do Palmeiras, segue afastado das atividades do clube duas semanas após ser acusado pela ex-esposa de violência doméstica. O Alviverde busca um novo clube para o jogador.",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/09/26/palmeiras-busca-saida-de-felipe-teresa-afastado-por-violencia-domestica.ghtm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "cf36d90666f454bb8ea2f05bc37273ce1564fb42016700b22ec6d84a3c146ee0",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Corinthians x São Paulo: assista à final do Brasileirão Feminino no UOL",
-    "resumo": "Faltam apenas algumas horas para conhecermos as campeãs do Brasileirão Feminino 2026! Hoje, às 16h30, Corinthians e São Paulo se enfrentarão na primeira partida para definir o título da temporada. A bola vai rolar na Neo Química Arena, em São Paulo, casa das Brabas do Corinthians.",
-    "link": "https://economia.uol.com.br/noticias/redacao/2026/09/26/corinthians-x-sao-paulo-assista-a-final-do-brasileirao-feminino-no-uol.ghtm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "cb9ff904b36d6b306fdf70acb6a39a838fae37f8b900fd06706b370ecd09de58",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Grêmio anunciou patrocínio máster de bet 2 dias antes de veto do governo",
-    "resumo": "O veto às bets pegou o Grêmio em um momento delicado. O Tricolor Gaúcho havia acabado de anunciar o contrato de três anos com a casa de apostas Pitaco na quarta-feira (23), e, dois dias depois, se deparou com a decisão.",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/09/26/gremio-anunciou-patrocinio-master-de-bet-2-dias-antes-de-veto-do-governo.ghtm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "8c3680fac06cb87170df0b2f6b23cfc9db5597f85bd57750de16283f69353127",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Série C tem dois acessos encaminhados a três rodadas do fim; veja cenário",
-    "resumo": "A Série C do Brasileirão está próxima do fim, e o UOL mostra como está a luta pelo acesso a três rodadas do fim dos quadrangulares.",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/09/26/serie-c-luta-acesso-como-esta.ghtm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "8c4071106d51fc7b2825da0ee8abb2513969f67701e9ed0a3907f3909508e7b6",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Grama ruim de novo? Campo do 2º Brasil x Austrália teve jogo de rúgbi ontem",
-    "resumo": "Depois de Carlo Ancelotti criticar as condições do campo em Townsville, o gramado do segundo amistoso entre Brasil e Austrália, na próxima terça-feira, também está sob atenção. Quatro dias antes de receber as seleções, o Suncorp Stadium, em Brisbane, ainda tinha postes, linhas e números de rúgbi…",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/09/26/estadio-adapta-gramado-do-rugbi-para-futebol-em-96h-por-australia-x-brasil.ghtm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
+    "titulo": "Leylah confirma boa fase e decide Singapura contra 63ª do ranking",
+    "resumo": "Singapura (Singapura) ? Num duelo entre duas finalistas de Grand Slam, a canadense Leylah Fernandez confirmou o ótimo momento e, depois de perder facilmente o primeiro set, conseguiu grande reação, ao superar a polonesa Maja Chwalinska, com parciais de 1/6, 6/4 e 6/2. Sua adversária será a…",
+    "link": "https://tenisbrasil.uol.com.br/leylah-confirma-boa-fase-e-decide-singapura-contra-63a-do-ranking.html",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "0658b59107147051623d14c27a8e069cfa25bcee480099bff5d84590b5a550a9",
+    "id": "9a7d925688ab241e1a9c186c2b237d92ccc19068ac4be3076ecd0048dccfa05d",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Corinthians queria tempo de adaptação sem bet e vê 'terra quase arrasada'",
-    "resumo": "O Corinthians queria pelo menos 90 dias para se adaptar ao fim das casas de apostas no Brasil. O prazo, porém, não foi incluído na medida provisória assinada nesta sexta-feira (25) pelo presidente Luiz Inácio Lula da Silva (PT).",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/09/26/corinthians-queria-tempo-de-adaptacao-sem-bet-e-ve-terra-quase-arrasada.ghtm",
-    "publicadoEm": "2026-09-26T08:39:20-03:00",
+    "titulo": "Maracanã mostra gramado pronto para primeiro jogo da NFL no Rio",
+    "resumo": "O Maracanã está pronto para receber o primeiro jogo da NFL no Rio de Janeiro. O estádio divulgou nesta sexta-feira imagens do gramado preparado para o duelo entre Dallas Cowboys e Baltimore Ravens, marcado para domingo, às 17h25 (de Brasília).",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/09/26/maracana-mostra-gramado-pronto-para-primeiro-jogo-da-nfl-no-rio.htm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
+    "dataEstimada": true,
+    "esporte": "futebol-americano",
+    "origemClassificacao": "lexico",
+    "grupoId": "grp-83a149c5",
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "23cf5efd6a5d42d73a4a81a8378f18395a884e39b68662b403b7f88c642c149b",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Seul assiste à primeira final entre australianas desde 2017",
+    "resumo": "Seul (Coreia) ? Kimberly Birrell e Maya Joint concluíram a rodada dupla do sábado, provocada pelo mau tempo da véspera, e garantiram a primeira final totalmente australiana do circuito feminino desde 2017 e apenas a terceira deste século. Birell precisou de duas vitórias em três sets para chegar à…",
+    "link": "https://tenisbrasil.uol.com.br/seul-assiste-a-primeira-final-entre-australianas-desde-2017.html",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
+    "dataEstimada": true,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "aa2579431d978d6287a6d07a80921ef57941fe4a50eb95eb82a4b2383066d5ab",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Corinthians e São Paulo rivalizam em final do Brasileiro Feminino",
+    "resumo": "Em contraponto com suas equipes masculinas, Corinthians e São Paulo fizeram valer a hegemonia paulista no feminino e se enfrentam em busca da taça do Campeonato Brasileiro de 2026.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/09/26/corinthians-e-sao-paulo-rivalizam-em-final-do-brasileiro-feminino.htm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
     "dataEstimada": true,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "77c1c3ba19fd10fdafeaee80b16e32585a09cd9397dba60a6b745052983784be",
+    "id": "c901d55320543c40d74908e7fb7c7656f22a3c4e2ab2039429d726602407f6ef",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Decidido por 196 milésimos, GP teve 11ª chegada mais apertada da história",
+    "resumo": "Apenas 196 milésimos separaram George Russell e Max Verstappen na bandeirada final do GP do Azerbaijão, no que foi a 11ª chegada mais apertada dos 76 anos de história da Fórmula 1. E essa conta inclui provas que foram concluídas sob regime de Safety Car, como o GP da Austrália de 2023, quando…",
+    "link": "https://www.uol.com.br/esporte/colunas/pole-position/2026/09/26/decidido-por-196-milesimos-gp-teve-11-chegada-mais-apertada-da-historia.htm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
+    "dataEstimada": true,
+    "esporte": "formula1",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "8781ce57724e6fdec2dcc4cfbd4987a79ed247070cc8c800345a263a467d1254",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "F1: Russell diminui vantagem de Antonelli pelo título; veja classificação",
+    "resumo": "O britânico George Russell diminuiu em 15 pontos a desvantagem para o companheiro de equipe Andrea Kimi Antonelli após vencer o GP do Azerbaijão neste sábado (26).",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/09/26/f1-russell-diminui-vantagem-de-antonelli-pelo-titulo-veja-classificacao.ghtm",
+    "publicadoEm": "2026-09-26T12:34:49-03:00",
+    "dataEstimada": true,
+    "esporte": "formula1",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "884f506c11fd0ef7b22d3279ddc3d7195ecdcbc49e9a1730ee130fb51932c771",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "TEMPO REAL: acompanhe o GP do Azerbaijão ao vivo",
-    "resumo": "Acompanhe ao vivo a corrida do GP do Azerbaijão, 15ª etapa da temporada 2026 de Fórmula 1, a partir das 8h (horário de Brasília, GMT -3).",
-    "link": "https://www.f1mania.net/ao-vivo/",
-    "publicadoEm": "2026-09-26T07:50:40-03:00",
+    "titulo": "F1: Villeneuve defende estratégia da Red Bull em não aplicar ordens de equipe em Baku",
+    "resumo": "Jacuqe Villeneuve saiu em defesa da Red Bull e a estratégia aplicada para o GP do Azerbaijão da Fórmula 1 realizado neste sábado (26). Durante as voltas finais da corrida em Baku, Max Verstappen e Isack Hadjar estavam correndo próximos um ao outro. Apesar de o francês estar com vantagem de pneus,…",
+    "link": "https://www.f1mania.net/f1/f1-villeneuve-defende-estrategia-da-red-bull-em-nao-aplicar-ordens-de-equipe-em-baku/",
+    "publicadoEm": "2026-09-26T12:29:32-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "122d4c109fbdcf93b54c3f6df05f93b2eaca716686d2f003d32ec46b11b8c8f1",
+    "id": "f764af9c0365f139a346d027ed58e18ea18eceaaad286b320dd7b99373f20ac2",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Verstappen troca componentes do motor sem punição em Baku",
-    "resumo": "Max Verstappen vai disputar o GP do Azerbaijão de Fórmula 1 com novos componentes da unidade de potência, mas sem receber punição no grid de largada. O piloto da Red Bull permanece na oitava posição conquistada na classificação. De acordo com o relatório da FIA, Verstappen passou a utilizar um…",
-    "link": "https://www.f1mania.net/f1/f1-verstappen-troca-componentes-do-motor-sem-punicao-em-baku/",
-    "publicadoEm": "2026-09-26T07:21:51-03:00",
+    "titulo": "F1: Ferrari admite falta de ritmo e quer reação na Malásia",
+    "resumo": "A Ferrari terminou o GP do Azerbaijão de Fórmula 1 com Charles Leclerc em quarto e Lewis Hamilton em sexto, mas deixou o Azerbaijão consciente de que faltou desempenho para enfrentar os principais concorrentes. A equipe reconheceu que perdeu alguns décimos por volta durante a corrida em Baku e…",
+    "link": "https://www.f1mania.net/f1/f1-ferrari-admite-falta-de-ritmo-e-quer-reacao-na-malasia/",
+    "publicadoEm": "2026-09-26T12:18:25-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "91442f0c69f4786862750b213cd54f72b4da9350aa0e7320a5235a3dbeca9fb3",
+    "id": "224bbafd116eb48ae48e341dfce5554806eb60fffaa64d15db391d3ebae775fb",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Estratégia de uma parada domina em Baku, mas vento pode mudar tudo",
-    "resumo": "A estratégia de uma parada aparece como o caminho mais provável para o GP do Azerbaijão de Fórmula 1, mas Baku oferece várias combinações possíveis de pneus. A baixa degradação favorece stints longos, enquanto o histórico de neutralizações e o vento podem alterar completamente os planos durante a…",
-    "link": "https://www.f1mania.net/f1/f1-estrategia-de-uma-parada-domina-em-baku-mas-vento-pode-mudar-tudo/",
-    "publicadoEm": "2026-09-26T07:09:43-03:00",
+    "titulo": "F1: Hamilton dá respostas curtas sobre Vasseur em meio a rumores",
+    "resumo": "Lewis Hamilton foi direto ao ser questionado sobre os rumores envolvendo Christian Horner e a Ferrari. Após o GP do Azerbaijão de Fórmula 1 , o piloto britânico respondeu apenas 'sim', quando perguntado se confiava na continuidade do trabalho de Fred Vasseur no comando da equipe italiana. Horner,…",
+    "link": "https://www.f1mania.net/f1/f1-hamilton-da-respostas-curtas-sobre-vasseur-em-meio-a-rumores/",
+    "publicadoEm": "2026-09-26T12:14:28-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "a6505a418ee5d6de5b408208d031d69e7b6aa66aba0bcfa3b340d12aec59027c",
+    "id": "5f82c9a79a1ae73bf550c5cce0d30ba3dc0dee6fbbf77db7e34a17b0d65637f8",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: FIA divulga o grid de largada oficial do GP do Azerbaijão 2026",
-    "resumo": "A FIA confirmou o grid de largada oficial do GP do Azerbaijão 2026 de Fórmula 1, com George Russell na pole-position em Baku. Charles Leclerc completa a primeira fila, enquanto Oscar Piastri e Isack Hadjar aparecem logo atrás. Lando Norris larga em quinto, à frente de Lewis Hamilton, Pierre Gasly…",
-    "link": "https://www.f1mania.net/f1/f1-fia-divulga-o-grid-de-largada-oficial-do-gp-do-azerbaijao-2026/",
-    "publicadoEm": "2026-09-26T07:01:10-03:00",
+    "titulo": "F1: Williams vê atualização funcionar com Sainz pontuando",
+    "resumo": "A Williams deixou o final de semana da Fórmula 1 no Azerbaijão, com um ponto conquistado por Carlos Sainz e sinais positivos após a estreia de uma importante atualização no carro. O espanhol terminou em décimo, enquanto Alex Albon abandonou após um acidente. Sainz precisou se recuperar após a…",
+    "link": "https://www.f1mania.net/f1/f1-williams-ve-atualizacao-funcionar-com-sainz-pontuando/",
+    "publicadoEm": "2026-09-26T12:01:08-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "f51b7c1583d3bd971ee5cf0bb2305bdc53212f5628d9a65a3bfeb056a8080a5c",
+    "id": "d89626ae21547ec3dcbcdbec0504d2d7d7613420b29ff58d44ab9e4e02dac69d",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "GP do Azerbaijão 2026: o ao vivo da Corrida da F1 em Baku",
-    "resumo": "Acompanhe AO VIVO, em texto, o Grande Prêmio do Azerbaijão, 15ª etapa da temporada 2026 da Fórmula 1, que acontece neste sábado (26) a partir das 8h (horário de Brasília, GMT -3), em Baku. [adinserter block=\"33\"] [f1mania_live_session session_id=\"85\"]",
-    "link": "https://www.f1mania.net/f1/gp-do-azerbaijao-2026-o-ao-vivo-da-corrida-da-f1-em-baku/",
-    "publicadoEm": "2026-09-26T07:00:07-03:00",
+    "titulo": "F1: Russell exalta briga com Verstappen no fim do GP do Azerbaijão: “Excepcionalmente divertido”",
+    "resumo": "George Russell gostou do embate que teve com Max Verstappen nas últimas voltas do GP do Azerbaijão, com o holandês pressionando o líder da corrida até o momento da bandeira quadriculada. O britânico conseguiu uma vitória dominante nas ruas de Baku largando da pole-position, liderando todas as…",
+    "link": "https://www.f1mania.net/f1/f1-russell-exalta-briga-com-verstappen-no-fim-do-gp-do-azerbaijao-excepcionalmente-divertido/",
+    "publicadoEm": "2026-09-26T11:58:18-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "73398881054fb4d56fda53cf0aa8b3f323bcf45f3d763d42bb28bef699e11f18",
+    "id": "b29a680a46e78d9328230d52891d2ff0f4373bb6e327c403a685e3b42ac0c02c",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1 hoje? Veja o horário e onde assistir ao GP do Azerbaijão 2026",
-    "resumo": "A Fórmula 1 disputa neste sábado o GP do Azerbaijão 2026, 15ª etapa da temporada. A largada no circuito de rua de Baku está marcada para 08h00, no horário de Brasília (GMT -3). O F1MANIA.NET acompanha a corrida em tempo real em texto. O F1 TV Pro transmite a prova ao vivo com imagens, enquanto o…",
-    "link": "https://www.f1mania.net/f1/f1-hoje-veja-o-horario-e-onde-assistir-ao-gp-do-azerbaijao-2026/",
-    "publicadoEm": "2026-09-26T05:13:18-03:00",
+    "titulo": "F1: Colapinto se desculpa após acidente em relargada no Azerbaijão: “É uma decepção”",
+    "resumo": "Franco Colapinto pediu desculpas pelo acidente 'strike' que cometeu em uma das relargadas do GP do Azerbaijão da Fórmula 1 neste sábado (26). O argentino foi responsável pelo abandono do companheiro Pierre Gasly. No reinicio da prova após Alxander Albon provocar um carro de segurança na volta 31,…",
+    "link": "https://www.f1mania.net/f1/f1-colapinto-se-desculpa-apos-acidente-em-relargada-no-azerbaijao-e-uma-decepcao/",
+    "publicadoEm": "2026-09-26T11:41:33-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "59ec27028a0668ff8d0cc3e40d9fb1758b07d1ac087cb7e4ff6f5326c716c72a",
+    "id": "f047357910b084b8a5a76ad3da5465fcf2f73cbf1317a647f91a9c516df7e5c4",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Onde assistir à corrida do GP do Azerbaijão 2026 amanhã? Saiba aqui",
-    "resumo": "A Fórmula 1 disputa neste sábado o GP do Azerbaijão 2026, 15ª etapa da temporada. A corrida no circuito de rua de Baku terá largada às 08h00, no horário de Brasília (GMT -3). O F1MANIA.NET acompanha a prova em tempo real em texto. O F1 TV Pro transmite a corrida ao vivo com imagens, enquanto o…",
-    "link": "https://www.f1mania.net/f1/f1-onde-assistir-a-corrida-do-gp-do-azerbaijao-2026-amanha-saiba-aqui/",
-    "publicadoEm": "2026-09-25T19:09:27-03:00",
+    "titulo": "F1: Norris pede suspensão para Colapinto após acidente em Baku",
+    "resumo": "Lando Norris pediu uma suspensão de uma corrida para Franco Colapinto, após ser atingido pelo piloto da Alpine no GP do Azerbaijão de Fórmula 1 . O acidente aconteceu na 35ª volta e eliminou os dois, além do companheiro de equipe do argentino, Pierre Gasly. A batida ocorreu na relargada após o…",
+    "link": "https://www.f1mania.net/f1/f1-norris-pede-suspensao-para-colapinto-apos-acidente-em-baku/",
+    "publicadoEm": "2026-09-26T11:28:36-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "e1f75968ce3dbe98112e6e4d3f1ab46df8863096d07ce49f69186b9052bdd591",
+    "id": "2b49e0f5c1c57c9af24fa280ff19437436a15a2292f269459c2e8e671cbaef5d",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Bortoleto lamenta Baku e diz que teria ido ao Q2 “se fizesse esse tipo de volta em outra etapa”",
-    "resumo": "Gabriel Bortoleto falou um pouco mais sobre seu desempenho na classificação do GP do Azerbaijão da Fórmula 1, apontando como a Audi simplesmente não tem ritmo no final de semana. Os dias em Baku não estão sendo exatamente competitivos para o brasileiro. Após os treinos livres serem mais discretos,…",
-    "link": "https://www.f1mania.net/f1/f1-bortoleto-lamenta-baku-e-diz-que-teria-ido-ao-q2-se-fizesse-esse-tipo-de-volta-em-outra-etapa/",
-    "publicadoEm": "2026-09-25T18:10:42-03:00",
+    "titulo": "F1: Haas muito satisfeita com pontuação dupla em Baku",
+    "resumo": "A Haas teve uma corrida movimentada no GP do Azerbaijão de Fórmula 1 , com os dois carros na zona de pontuação, graças ao oitavo lugar de Esteban Ocon e ao nono de Oliver Bearman. O resultado foi recebido pela equipe como uma recompensa ao trabalho realizado nas últimas etapas. Ocon destacou que…",
+    "link": "https://www.f1mania.net/f1/f1-haas-muito-satisfeita-com-pontuacao-dupla-em-baku/",
+    "publicadoEm": "2026-09-26T11:27:41-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "f908a10263c4d081d9731e7bb24299ce309c5ab0d84ba4bb77d8386b11914863",
+    "id": "e5390685cd1e8ca233c88478f4c4a732c9da66d9b94574d0eace470d0ba442a7",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Russell faz pole com maior vantagem do ano; Antonelli tem pior quali",
-    "resumo": "George Russell conquistou a pole-position para o GP do Azerbaijão de Fórmula 1 com a maior vantagem registrada em uma classificação na temporada 2026. O piloto da Mercedes abriu 0s837 sobre Charles Leclerc e chegou à 12ª pole da carreira, a quinta do ano e a primeira em Baku. A Mercedes não…",
-    "link": "https://www.f1mania.net/f1/f1-russell-faz-pole-com-maior-vantagem-do-ano-antonelli-tem-pior-quali/",
-    "publicadoEm": "2026-09-25T17:56:06-03:00",
+    "titulo": "F1: Verstappen é eleito Piloto do Dia após P2 apertado em Baku",
+    "resumo": "Max Verstappen foi eleito o Piloto do Dia no GP do Azerbaijão de Fórmula 1 após terminar a corrida apenas 0s196 atrás do vencedor George Russell. O holandês largou da oitava posição e foi o único piloto capaz de acompanhar o ritmo do piloto da Mercedes nas voltas finais. Mesmo sem vencer uma…",
+    "link": "https://www.f1mania.net/f1/f1-verstappen-e-eleito-piloto-do-dia-apos-p2-apertado-em-baku/",
+    "publicadoEm": "2026-09-26T11:15:25-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "fb7f5624bd78221bc010ae36e975e3c70dd78534934c4e9960357231823402a3",
+    "id": "2caafe338230fc558475e6f4f1de91393e9326f67950c28190ba268f7df1ab02",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Russell larga favorito, mas Baku promete corrida imprevisível",
-    "resumo": "George Russell chega à corrida do GP do Azerbaijão de Fórmula 1 como o principal nome a ser batido. O piloto da Mercedes dominou a classificação, abriu mais de 0s8 no Q3 e larga da pole em um fim de semana no qual o carro mostrou vantagem clara de desempenho. A oportunidade ganha ainda mais peso…",
-    "link": "https://www.f1mania.net/f1/f1-russell-larga-favorito-mas-baku-promete-corrida-imprevisivel/",
-    "publicadoEm": "2026-09-25T17:31:25-03:00",
+    "titulo": "F1: Aston Martin tem corrida complicada em Baku com os dois carros abandonando",
+    "resumo": "A Aston Martin terminou o final de semana do GP do Azerbaijão de Fórmula 1 sem completar a corrida, com Fernando Alonso e Lance Stroll abandonando por problemas distintos. O espanhol deixou a prova na volta vinte, enquanto o canadense parou ainda na oitava volta. O abandono de Stroll aconteceu…",
+    "link": "https://www.f1mania.net/f1/f1-aston-martin-tem-corrida-complicada-em-baku-com-os-dois-carros-abandonando/",
+    "publicadoEm": "2026-09-26T11:14:43-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "7a0e5112e17c5d1bb38d98c896b06e8d50910c9b1b14593e0d6e24a0fba39856",
+    "id": "bd751f0d80498bedf47fd581a81ea7cb218378f858890854c33c679c90702afb",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Confira o grid de largada provisório do GP do Azerbaijão 2026",
-    "resumo": "A Fórmula 1 terá George Russell largando da pole-position no GP do Azerbaijão 2026. O piloto da Mercedes divide a primeira fila com Charles Leclerc, enquanto Oscar Piastri e Isack Hadjar aparecem logo atrás. Lando Norris parte em quinto, à frente de Lewis Hamilton, Pierre Gasly e Max Verstappen.…",
-    "link": "https://www.f1mania.net/f1/f1-confira-o-grid-de-largada-provisorio-do-gp-do-azerbaijao-2026/",
-    "publicadoEm": "2026-09-25T17:14:05-03:00",
+    "titulo": "F1: Bortoleto, Hadjar e Sainz são chamados pelos comissários após GP do Azerbaijão",
+    "resumo": "A FIA convocou múltiplos pilotos para dar explicações após o caótico GP do Azerbaijão da Fórmula 1, com Isack Hadjar, terceiro colocado, e Gabriel Bortoleto, entre eles O francês ficou colado na traseira de Max Verstappen por grande parte da disputa, chegando até mesmo a questionar a Red Bull se…",
+    "link": "https://www.f1mania.net/f1/f1-bortoleto-hadjar-e-sainz-sao-chamados-pelos-comissarios-apos-gp-do-azerbaijao/",
+    "publicadoEm": "2026-09-26T11:04:22-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "8cd7e81023f22622a979ba83df698e07c80e229caa50e045bec85bfc30e48721",
+    "id": "00979480ddeaddcb9a7f5328641e918feeb534cc989e36a1467c7c4fd4ffce24",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Russell faz piada com posição de largada de Antonelli lembrando de Monza",
-    "resumo": "George Russell brincou sobre a posição de largada de Kimi Antonelli para o GP do Azerbaijão da Fórmula 1. O britânico acredita que o italiano vai assumir a ponta rapidamente em Baku, mais veloz do que na Itália. A classificação foi longe do ideal para o líder do campeonato. Ainda no Q1, o piloto…",
-    "link": "https://www.f1mania.net/f1/f1-russell-faz-piada-com-posicao-de-largada-de-antonelli-lembrando-de-monza/",
-    "publicadoEm": "2026-09-25T16:54:29-03:00",
+    "titulo": "F1: Hadjar afirma ter ficado com o pulso “dormente” em retorno com pódio",
+    "resumo": "Isack Hadjar revelou que terminou o GP do Azerbaijão de Fórmula 1 com o pulso esquerdo 'dormente', mas considerou positivo seu retorno à Fórmula 1. O piloto da Red Bull Racing voltou às pistas após seis semanas de recuperação de uma fratura no pulso e conquistou o terceiro lugar em Baku. A corrida…",
+    "link": "https://www.f1mania.net/f1/f1-hadjar-afirma-ter-ficado-com-o-pulso-dormente-em-retorno-com-podio/",
+    "publicadoEm": "2026-09-26T10:54:25-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "6c1da8f834c2e75f45fbc8192addf68d2e8914cfb5af8ed150ab1ac4e2978532",
+    "id": "7ecf0cb493a1498cd55b525c0bdcdd47fc4eb16e7e669b157e5da14a8798d278",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Russell admite que vê Verstappen “como uma ameaça” para GP do Azerbaijão",
-    "resumo": "George Russell, que sai da pole-position no GP do Azerbaijão da Fórmula 1, acredita que Max Verstappen pode ser uma ameaça mesmo largando da oitava posição do grid. O britânico está na privilegiada posição de, quem sabe, conseguir diminuir a desvantagem para Kimi Antonelli no campeonato, uma vez…",
-    "link": "https://www.f1mania.net/f1/f1-russell-admite-que-ve-verstappen-como-uma-ameaca-para-gp-do-azerbaijao/",
-    "publicadoEm": "2026-09-25T16:39:56-03:00",
+    "titulo": "F1: Verstappen fala em primeiro stint difícil, mas exalta “boa corrida” no GP do Azerbaijão",
+    "resumo": "Max Verstappen conquistou mais um pódio na temporada 2026 da Fórmula 1 ao terminar na segunda colocação do GP do Azerbaijão da Fórmula 1 neste sábado (26), ficando apenas 0s196 do vencedor George Russell. O tetracampeão começou a prova em Baku apenas na oitava colocação após uma classificação…",
+    "link": "https://www.f1mania.net/f1/f1-verstappen-fala-em-primeiro-stint-dificil-mas-exalta-boa-corrida-no-gp-do-azerbaijao/",
+    "publicadoEm": "2026-09-26T10:45:28-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "d6cf15693bd5549f5760d57d331b9440fddecae29f97f3418c30db36155167ed",
+    "id": "2df77df4843663fa82f75ebce4c86410d80b6867a22cc9c23978bdf2c6085a44",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Confira as imagens desta sexta-feira do GP do Azerbaijão 2026",
-    "resumo": "George Russell conquistou a pole-position do GP do Azerbaijão de Fórmula 1 nesta sexta-feira (25), em Baku, com uma volta de 1:42.526s, abrindo 0.837s sobre Charles Leclerc. Oscar Piastri ficou em terceiro, apenas 0.001s atrás do piloto da Ferrari, seguido por Isack Hadjar e Lando Norris. Max…",
-    "link": "https://www.f1mania.net/f1/f1-confira-as-imagens-desta-sexta-feira-do-gp-do-azerbaijao-2026/",
-    "publicadoEm": "2026-09-25T16:38:12-03:00",
+    "titulo": "F1: Schumacher diz que Aston Martin deveria trocar motores Honda por Mercedes",
+    "resumo": "Ralf Schumacher defendeu que a Aston Martin encerre a parceria com a Honda e volte a utilizar unidades de potência da Mercedes. Para o ex-piloto de Fórmula 1 , a crise enfrentada pelo fabricante japonês se tornou um problema grave demais para a equipe ignorar. Em participação no podcast Backstage…",
+    "link": "https://www.f1mania.net/f1/f1-schumacher-diz-que-aston-martin-deveria-trocar-motores-honda-por-mercedes/",
+    "publicadoEm": "2026-09-26T10:42:23-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "b84b4d7d5022db2afeddbfdf80681b3978100b0a786dda7c212942e26ca10f0a",
+    "id": "bf1c445e6f742f659dc7e446f3d64de6fb986b70e19f5d7972b52d4ec1af2469",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Ocon se revolta após P14 na sessão de classificação no Azerbaijão",
-    "resumo": "Esteban Ocon terminou o Q2 do GP do Azerbaijão de Fórmula 1 em 14º, mas deixou a sessão de classificação especialmente irritado. O piloto da Haas acredita que tinha ritmo para avançar ao Q3 antes de ser prejudicado por uma bandeira amarela em sua última tentativa. O francês vinha apresentando bom…",
-    "link": "https://www.f1mania.net/f1/f1-ocon-se-revolta-apos-p14-na-sessao-de-classificacao-no-azerbaijao/",
-    "publicadoEm": "2026-09-25T16:28:22-03:00",
+    "titulo": "F1: Confira as fotos do GP do Azerbaijão 2026",
+    "resumo": "A vitória de George Russell no GP do Azerbaijão foi construída com uma largada segura e o controle da liderança em Baku, mesmo após a entrada do Safety Car provocada pela batida de Alexander Albon. A neutralização movimentou as estratégias, mas não impediu o piloto da Mercedes de conquistar o…",
+    "link": "https://www.f1mania.net/f1/f1-confira-as-fotos-do-gp-do-azerbaijao-2026/",
+    "publicadoEm": "2026-09-26T10:38:14-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "136f5fb51b2da3d02e506b3162f173d53c7fcb18e0f093e493f31a18fb94244c",
+    "id": "cb292ec9ed271e9c37adf917a76a636b0bd1ec4ef9af20c1af737d9d0344ecea",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Alonso admite que prioridade da Aston Martin em Baku é terminar a corrida",
-    "resumo": "Fernando Alonso terá uma corrida de recuperação pela frente no GP do Azerbaijão da Fórmula 1. Eliminado ainda no Q1 e classificado em 19º nesta sexta-feira (25), o espanhol brincou com o erro cometido em sua última tentativa, mas deixou claro que a principal preocupação da Aston Martin agora é…",
-    "link": "https://www.f1mania.net/f1/f1-alonso-admite-que-prioridade-da-aston-martin-em-baku-e-terminar-a-corrida/",
-    "publicadoEm": "2026-09-25T16:13:28-03:00",
+    "titulo": "F1: Bortoleto lamenta terminar fora dos pontos, mas exalta ritmo em Baku: “Isso me deixa feliz”",
+    "resumo": "Gabriel Bortoleto terminou o GP do Azerbaijão da Fórmula 1 deste sábado (26) fora da zona de pontuação. Em Baku, cruzou a linha de chegada na 13ª colocação e explicou um pouco mais o desenrolar de sua corrida. No circuito urbano, o brasileiro largou em 17º e no início da disputa, caiu para 18º.…",
+    "link": "https://www.f1mania.net/f1/f1-bortoleto-lamenta-terminar-fora-dos-pontos-mas-exalta-ritmo-em-baku-isso-me-deixa-feliz/",
+    "publicadoEm": "2026-09-26T10:30:12-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "213c1f47bae706b85ec920b3ccbfdccf5da86942dca36dd74fcedf548c51fbd4",
+    "id": "a5f0e29a33608ce5af77b2cf3789875d3dd0434a594cf520f97f263886c3c7a7",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Lawson aponta problema frustrante na Racing Bulls",
-    "resumo": "Liam Lawson vai largar fora do top 10 no GP do Azerbaijão de Fórmula 1 , depois de uma sessão de classificação difícil para a Racing Bulls. O neozelandês terminou o Q2 em 12º, mas avançou uma posição no grid devido à penalidade aplicada a Carlos Sainz da Williams. O principal obstáculo, segundo…",
-    "link": "https://www.f1mania.net/f1/f1-lawson-aponta-problema-frustrante-na-racing-bulls/",
-    "publicadoEm": "2026-09-25T16:08:25-03:00",
+    "titulo": "F1: Decisão sobre Catar e Abu Dhabi fica para outubro, segundo chefe da Haas",
+    "resumo": "A Fórmula 1 deve esperar até meados de outubro para definir onde será disputada a reta final da temporada 2026. Enquanto as etapas do Catar e de Abu Dhabi seguem sob incerteza, Ímola já recebeu autorização para preparar uma possível corrida em dezembro. O prazo foi confirmado por Ayao Komatsu,…",
+    "link": "https://www.f1mania.net/f1/f1-decisao-sobre-catar-e-abu-dhabi-fica-para-outubro-segundo-chefe-da-haas/",
+    "publicadoEm": "2026-09-26T10:22:18-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "7a9dbebb8f821f88ff758a494006649aaccc46bb926da89487f13bc3739ed4b2",
+    "id": "33ab426946fdc722e1a5edfeff023c23b83600cf1edfe7da40e354103d2611c3",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Hadjar revela impacto de ficar três GPs fora antes de Baku",
-    "resumo": "Isack Hadjar voltou à Fórmula 1 em grande estilo e garantiu o quarto lugar no grid de largada do GP do Azerbaijão. Após ficar fora das três etapas anteriores, o piloto da Red Bull Racing acredita que a falta de ritmo acumulado, custou uma posição ainda melhor. Hadjar não disputou os GPs da…",
-    "link": "https://www.f1mania.net/f1/f1-hadjar-revela-impacto-de-ficar-tres-gps-fora-antes-de-baku/",
-    "publicadoEm": "2026-09-25T15:52:38-03:00",
+    "titulo": "F1: Russell faz grand chelem e Mercedes amplia domínio em 2026",
+    "resumo": "George Russell venceu o GP do Azerbaijão de Fórmula 1 e conquistou o primeiro grand chelem da carreira. Foi a oitava vitória do britânico na F1, a terceira na temporada 2026 e a primeira em Baku. Russell voltou ao topo do pódio pela primeira vez desde o GP da Áustria e se tornou apenas o quarto…",
+    "link": "https://www.f1mania.net/f1/f1-russell-faz-grand-chelem-e-mercedes-amplia-dominio-em-2026/",
+    "publicadoEm": "2026-09-26T10:12:44-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "23374e0a1ffa093ff8c3602fc214dfe7bd827030b45ad4a7e3db40c13a5e9b6e",
+    "id": "8f6266571b3c1ad3948f92dc8329693c8051eb4f17b4e27d4a0037e5a0c598d8",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Ferrari reage em Baku e Leclerc admite surpresa com desempenho na classificação",
-    "resumo": "Charles Leclerc vai largar na primeira fila do GP do Azerbaijão da Fórmula 1, enquanto Lewis Hamilton parte da sexta posição. O resultado obtido na classificação desta sexta-feira (25) coloca a Ferrari em uma boa posição para a corrida em Baku, especialmente depois das dificuldades enfrentadas…",
-    "link": "https://www.f1mania.net/f1/f1-ferrari-reage-em-baku-e-leclerc-admite-surpresa-com-desempenho-na-classificacao/",
-    "publicadoEm": "2026-09-25T15:36:40-03:00",
+    "titulo": "F1: Russell comemora vitória no GP do Azerbaijão e diz que “me sinto mais eu novamente”",
+    "resumo": "George Russell voltou a vencer na temporada 2026 da Fórmula 1. Neste sábado (26), no GP do Azerbaijão, fez o melhor uso da pole-position para dominar a prova e conquistar o quarto triunfo do ano, fato bastante comemorado. A prova no circuito urbano de Baku teve um toque de caos. Foram dois…",
+    "link": "https://www.f1mania.net/f1/f1-russell-comemora-vitoria-no-gp-do-azerbaijao-e-diz-que-me-sinto-mais-eu-novamente/",
+    "publicadoEm": "2026-09-26T10:01:46-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "1a8f4e4ba8836a526443f66e3be99b2d30468a21a12c13cd9baa0aa08e605ba3",
+    "id": "6c69761f5ffc62f75f544f7980864ac1fe6967089e3a1bfc3701a96007823230",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Norris cobra investigação da McLaren após desvantagem nas retas",
-    "resumo": "Lando Norris terminou a sessão de classificação do GP do Azerbaijão de Fórmula 1 na quinta posição, mas deixou Baku cobrando uma investigação da McLaren sobre a perda de velocidade nas retas. O piloto britânico terminou o Q3 1s146 atrás de George Russell, que conquistou a pole. A diferença para a…",
-    "link": "https://www.f1mania.net/f1/f1-norris-cobra-investigacao-da-mclaren-apos-desvantagem-nas-retas/",
-    "publicadoEm": "2026-09-25T15:14:19-03:00",
+    "titulo": "F1: Confira o resultado completo do GP do Azerbaijão 2026",
+    "resumo": "George Russell venceu o GP do Azerbaijão de Fórmula 1 neste sábado (26), em Baku, após largar da pole-position e completar as 51 voltas na liderança. Max Verstappen, que partiu de oitavo, terminou em segundo, enquanto Isack Hadjar completou o pódio e garantiu dois carros da Red Bull entre os três…",
+    "link": "https://www.f1mania.net/f1/f1-confira-o-resultado-completo-do-gp-do-azerbaijao-2026/",
+    "publicadoEm": "2026-09-26T09:51:10-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "bab1468ae19a91f7fe082969d05ea80e0cf2055cb7bccec73a2403d222978324",
+    "id": "52b405be08a3be4f0c731e2871cf3871818c4362ef43d95337c03859ce06d9f7",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: McLaren supera dificuldades e garante duas posições no top-5 em Baku",
-    "resumo": "A McLaren conseguiu colocar seus dois carros entre os cinco primeiros no grid do GP do Azerbaijão 2026 da Fórmula 1. Oscar Piastri ficou em terceiro, a apenas um milésimo da primeira fila, enquanto Lando Norris terminou em quinto após perder desempenho na tentativa final do Q3 nesta sexta-feira…",
-    "link": "https://www.f1mania.net/f1/f1-mclaren-supera-dificuldades-e-garante-duas-posicoes-no-top-5-em-baku/",
-    "publicadoEm": "2026-09-25T14:57:53-03:00",
+    "titulo": "Confira a classificação do campeonato da F1 2026 após o GP do Azerbaijão",
+    "resumo": "Confira a classificação do Campeonato Mundial de Pilotos e Campeonato Mundial de Construtores da temporada 2026 de Fórmula 1 após o GP do Azerbaijão: MUNDIAL DE PILOTOS: 1) Kimi Antonelli, 302 pontos 2) George Russell, 236 3) Lewis Hamilton, 199 4) Lando Norris, 186 5) Charles Leclerc, 179 6) Max…",
+    "link": "https://www.f1mania.net/f1/confira-a-classificacao-do-campeonato-da-f1-2026-apos-o-gp-do-azerbaijao/",
+    "publicadoEm": "2026-09-26T09:46:31-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "0ee885603247f5f1be4e94dd418ec1bf1b952995b83fb33735ca5ba14c792cf3",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1: \"Estava pilotando como minha avó\", diz Antonelli sobre Baku",
+    "resumo": "Se a vitória de Andrea Kimi Antonelli no GP da Itália, largando de 19º, foi uma atuação para a história, o mesmo não pode ser dito de sua performance mais discreta no GP do Azerbaijão de Fórmula 1 deste sábado, uma prova que funcionou mais como controle de danos. Leia também: Fórmula 1F1: Russell…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-estava-pilotando-como-minha-avo-diz-antonelli-sobre-baku/10859326/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-09-26T12:27:19-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "b8b2a542b2be2de4ba661e5e997cd488c98344434d6d3fce62d36deb191d0b1d",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1: Russell detalha 'falha' no turbo na reta final de Baku contra Verstappen",
+    "resumo": "George Russell largou da pole position no GP do Azerbaijão de Fórmula 1 e teve um início de prova confortável, mas viu tudo mudar após um safety car. O britânico foi o primeiro a cruzar a linha de chegada em Baku, mas o fez com uma vantagem de apenas 0,1s em relação a Max Verstappen. Leia também:…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-russell-detalha-falha-no-turbo-na-reta-final-de-baku-contra-verstappen/10859285/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-09-26T11:51:10-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "a2dc6caa75693065a81f021ac33d2847537eec8cf7ec1e15c5a0ec23f629e3f3",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1: Colapinto quebra silêncio após causar strike em Baku e Norris pedir sua suspensão",
+    "resumo": "Franco Colapinto tratou de pedir desculpas pelo \"grande erro\" no GP do Azerbaijão de Fórmula 1 deste sábado (26) que resultou em um strike dele em seu companheiro de Alpine, Pierre Gasly, e Lando Norris, que iniciou o desastre da McLaren em Baku. Sem titubear, disse que \"jogou fora\" o trabalho da…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-gp-do-azerbaijao-colapinto-quebra-silencio-strike-norris-suspensao/10859269/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-09-26T11:36:40-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "b367c8096cd91746d91534298b4ff52dab2d36e1fef9752d17fa8af95a44a0f0",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1: 'Talvez tenham outros motivos'; Bortoleto critica tática da Audi em Baku após derrota para Nico",
+    "resumo": "Gabriel Bortoleto fechou o GP do Azerbaijão de Fórmula 1 deste sábado (26) apenas na 13ª colocação e ganhou posições ao aproveitar o 'caos' na Curva 1 após o safety car. O desempenho, porém, poderia ter sido melhor, segundo ele, não fosse um \"erro\" da Audi e uma estratégia de parada nos boxes que…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-bortoleto-gp-do-azerbaijao-talvez-tenham-motivos-critica-tatica-audi/10859271/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-09-26T11:11:18-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "9fa7108d3c3d0098bbf48895ee9fcc54ef839d65e33a4cc6cf015b94c6044617",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "Norris pede suspensão de Colapinto após batida no Azerbaijão: \"Não merece estar na F1\"",
+    "resumo": "Lando Norris teve um fim de semana difícil no GP do Azerbaijão e, apesar de estar figurando nas últimas posições de pontos após a primeira bandeira amarela, o piloto não completou a corrida da Fórmula 1 por ter sido coletado em uma batida entre as Alpines. Leia também: Fórmula 1F1: Russell passa…",
+    "link": "https://motorsport.uol.com.br/f1/news/norris-pede-suspensao-de-colapinto-apos-batida-no-azerbaijao-nao-merece-estar-na-f1/10859260/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-09-26T10:36:28-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "c9e6263ff78ca53243d00e52fbd157918a542614cb3d085671b26677165369f9",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1: Russell reduz vantagem de Antonelli após GP do Azerbaijão, mas 'abismo' segue; veja tabela",
+    "resumo": "Não foi de Andrea Kimi Antonelli a vitória no GP do Azerbaijão de Fórmula 1 deste sábado (26), mas mesmo com seu rival direto na briga pelo título, George Russell, triunfando em Baku, ele segue muito confortável na liderança do Mundial de Pilotos. A distância entre os dois é, agora, de 66 pontos,…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-classificacao-pilotos-equipes-gp-do-azerbaijao/10859248/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-09-26T10:32:13-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "b5ca6eb81e0fca42f77487540660038525422d4b7ceb8b100a07240024397deb",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1 AO VIVO: Russell segura Max, vence em Baku e respira; programa debate GP do Azerbaijão",
+    "resumo": "Tudo se encaminhava para uma vitória fácil de George Russell no GP do Azerbaijão de Fórmula 1 deste sábado (26), até a entrada de dois safety cars consecutivos que juntou o grid, resultou em acidentes e culminou em disputa acirrada entre o britânico da Mercedes e Max Verstappen, que não conquistou…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-ao-vivo-podio-programa-debate-gp-azerbaijao-russell-verstappen/10859195/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-09-26T10:07:41-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "aed2db8d2f2fab2607409c91761328326f5b82efcc8432a926d7fabee9dffddc",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1: Russell vence de ponta a ponta e Audi sofre; veja resultado completo do GP do Azerbaijão",
+    "resumo": "George Russell deu aulas neste sábado (26) em Baku e venceu o GP do Azerbaijão da Fórmula 1 de ponta a ponta, sofrendo pressão apenas nas últimas voltas contra Max Verstappen. Leia também: Fórmula 1F1 - Ocon desabafa após eliminação no Q2 em Baku: \"Não mereço toda esta m*rda\" Fórmula 1F1: Russell…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-russell-vence-de-ponta-a-ponta-e-audi-sofre-veja-resultado-completo-do-gp-do-azerbaijao/10859243/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-09-26T10:05:04-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "ff33b6fd8d794681cd707bb7eded94827192d64025c1d3743f56863a4e3adffa",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1: Russell passa ileso pelo caos de Baku, segura ímpeto de Verstappen e vence GP do Azerbaijão; Bortoleto é P13",
+    "resumo": "Vitória de George Russell no GP do Azerbaijão de Fórmula 1! Mesmo com a entrada de dois safety cars e a pressão de Max Verstappen até a linha de chegada, o britânico conseguiu passar ileso, manter a liderança e vencer. O pódio teve Max Verstappen em segundo e Isack Hadjar em terceiro. Gabriel…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-russell-passa-ileso-pelo-caos-de-baku-segura-impeto-de-verstappen-e-vence-gp-do-azerbaijao-borto/10859213/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-09-26T09:43:51-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "1e61425768eac446c5b7ffce34beac6e4b7077744105886ae2ea7330ec03c64c",
@@ -949,7 +1075,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "0e85bd0497c39062750b4069d63e9a545856749efd9a5ee8aec075b9c6249f8e",
@@ -963,7 +1089,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "0a149462a5b268068d513789be4e6c8ba13a7838126f693615d44c1682f9f7ca",
@@ -977,7 +1103,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "ae5be5aecfc6253260daa9a65e9446d81a2c7989ebedee5b8fcf16d8965e4604",
@@ -991,7 +1117,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "94fa60daf7d462c03e5ada90dc7c201e4d1edec8c63a088a835272e02de7048e",
@@ -1005,7 +1131,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "b17fe6b0faa03220047a3369095e66555c851cf9a884c47e6238a4e42db115a7",
@@ -1019,7 +1145,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "df0a4e013d382d65308b315f226e2977f82affa0f42ba08db0ec39655c7002bf",
@@ -1033,7 +1159,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "e387b8978962ee0f4d3da3fa09fcd37602b9db15c637d2183fa108e9b8de4fb8",
@@ -1047,7 +1173,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "cb410d51d06df0b659c00b4fdf98b41da53c6a7122a56bdc4e08e0a9feb0bcb8",
@@ -1061,7 +1187,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "d504d3f0004e1cb3ebc71bb5b2c08e2161bf36d65221444032ebd49297f3a7db",
@@ -1075,7 +1201,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "aaa535d9c23f2d7ec2069db8de46658191402d333f496b8bf3d93976fa415a76",
@@ -1089,7 +1215,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "896e9653c3807a5d20c8a73a3d4f40b39b8c6221a757e9fd2a7120d5f8aba5b4",
@@ -1103,7 +1229,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "df980960d0604c5c8751b029ebb6ed54f04c7fc48dbd7ba6e79b81629bd76c83",
@@ -1117,7 +1243,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "efba5a41e094751fe8474f6b6ed3136474866d776b13957c0429b1aa268555c3",
@@ -1131,7 +1257,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "31ce6be589d6ca7b32ded4f3e478b121375de504de64c0f7f6631d3fcb26d6eb",
@@ -1145,7 +1271,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9137f6b15ba8df9513b511ec4e58d6e1bef77848dad94e597803bf87e7601fd8",
@@ -1159,7 +1285,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "cf676070e99a03a67d36a9f979ddd5d2604e57ed0e101ea579a7610538435af5",
@@ -1173,7 +1299,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "1933caf7100e037c018fb2dc64db9ecce369b6a525b73e3ddd63876b39e1dd0c",
@@ -1187,7 +1313,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "a766af0036fe09399b6dd0eb573ce4bd48e3c79f7b7ad0f00e89c0d5ddfa9404",
@@ -1201,7 +1327,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "26211ec4f7029681f2708ecc647b4173cbbd64e17689ef3379502de042018572",
@@ -1215,7 +1341,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "e19e05b1f816bf973e1771d5a37180931b6e3ee39d3c2f28dfc5a558a0f25508",
@@ -1229,7 +1355,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "b9b8f41cdbe2069a464cf33204ec8b59ef2947b88d90986088e1eb46ecba8041",
@@ -1243,7 +1369,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "70591079f86e3bfff878c78827071cbf185af6469a2f1562997e650271661e40",
@@ -1257,7 +1383,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "c6fddc75aba0a14a941bbc9e754947ce20b4d09033f8c7c661b313b145b43c63",
@@ -1271,7 +1397,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "5525ff87fa4269f579d0f110370d22061498064ab609a0b939530fc728a8d44b",
@@ -1285,7 +1411,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9b4a3a1e9cd488dd640533ee945d41ffba946df1b3673744aa9ae744e8360e21",
@@ -1299,7 +1425,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "f9cb69ed0c1c9adcca183e95ad81f60ecb11adb52854d7f22fd2622143ac96de",
@@ -1313,7 +1439,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "50418ff1a7229c4d62808a1d42161eafbdc1d2767fad6ef4083336624d36a18b",
@@ -1327,7 +1453,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "6cf74f5b9d618488d6a187a86c6f13d7ef5d480b1ee9d65fb90fbe4f6fe0116c",
@@ -1341,7 +1467,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "36e19974826d68982dd9a28f07eba5f2e21c6474b05068a672d34a2eef1b453f",
@@ -1355,7 +1481,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "a597baa6970eccc2338050aa887cf6384a81d6b5c4f9249472368502258319c5",
@@ -1369,7 +1495,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "cc581d6afdc913e00fd04f66e11cdcd3e7753cb4757cf37abf0b99d6fc007a2d",
@@ -1383,7 +1509,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "356f335a023c4011e04e22b951751289cdde36d987e13192f72417684adcdd65",
@@ -1397,7 +1523,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "a972b95bda9c482822e415da5e9723c1a7295c65a934a9a247c2e368321e1c7b",
@@ -1411,7 +1537,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "c281fac3a884157f973c6e309e0a6faa0ffa0f7170ab936d4180b1a136be5e71",
@@ -1425,7 +1551,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "5cd539d07ce0417cd39e752518c44800cdded934fe513dffb6057f396a26f95f",
@@ -1439,7 +1565,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9adf93c68a81849aab4c464de182026abac99a3c8ec70ca3e8ce9df102cd6098",
@@ -1453,7 +1579,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "cef930bc5cc1ae44a567bc7d019620cff113e650baf3af7aae21f984404b2aa7",
@@ -1467,7 +1593,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "8be02f77fb040c6ac8f4f6ca218f1a877321b37c8e69cc605dfe9e4761479c8d",
@@ -1481,133 +1607,91 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "c1c7866ba57560eda8293d219c99f9bc2738c6ea5d8657175921e607f34e689b",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "Por que um GP de F1 tem 305 km de extensão? Veja como as regras de distâncias mudaram ao longo dos anos",
-    "resumo": "Tradicionalmente, um GP de Fórmula 1 tem 305 quilômetros de extensão. Ou, mais precisamente, uma corrida tem o número mínimo de voltas para ultrapassar os 305km de duração. Mas, em 2027, essa regra mudará, com o regulamento reduzindo o total para 290km. Leia também: Fórmula 1Companheiro de Câmara…",
-    "link": "https://motorsport.uol.com.br/f1/news/por-que-um-gp-de-f1-tem-305km-de-extensao-veja-como-as-regras-de-distancias-mudaram-ao-longo-dos-an/10858051/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-09-23T09:09:58-03:00",
+    "id": "cff7c99d7fe2684530b7ecc7686312b7a8a1017120231d676e0a83fc004c5cb1",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "NBA: Stephen Curry acerta renovação com os Warriors e abre mão de R$ 107 milhões",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/basquete/nba-stephen-curry-acerta-renovacao-com-os-warriors-e-abre-mao-de-r-107-milhoes/",
+    "publicadoEm": "2026-09-26T12:14:38-03:00",
     "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "esporte": "basquete",
+    "origemClassificacao": "lexico",
+    "grupoId": "grp-f9d44fa7",
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "7cda18fff3f720884d0fa4d54c3f9611730392a7f6c54c23d4019a6d7d18321e",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "F1 - Russell admite: Estou sofrendo dos mesmos problemas de Piastri",
-    "resumo": "Antes do GP do Azerbaijão, George Russell admitiu que tem enfrentado grandes dificuldades para se adaptar ao atual regulamento técnico da Fórmula 1, traçando um paralelo direto com os problemas relatados por Oscar Piastri. O editor recomenda: Fórmula 1F1: Russell explica decisão da Mercedes para…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-russell-admite-estou-sofrendo-com-os-mesmos-problemas-de-piastri/10858202/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-09-23T09:07:26-03:00",
+    "id": "b6ccca4be1b7bcf24da1250a79b8fd1bdd562474826c4078404e01450aa0008a",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Rafael Câmara vence em Baku e amplia vantagem na liderança da F2",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/velocidade/rafael-camara-vence-em-baku-e-amplia-vantagem-na-lideranca-da-f2/",
+    "publicadoEm": "2026-09-26T11:34:09-03:00",
     "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "802a4cad5fa3dd2c760e4148ba0cd1da922b4c360fd2ec47b1506a3313665785",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "F1: Russell explica decisão da Mercedes para não trocar motor no Azerbaijão",
-    "resumo": "Era esperado que George Russell fizesse mais uma troca de motor neste fim de semana no GP do Azerbaijão. No entanto, a Mercedes optou por adiar esse momento, visando o menor número de punições possível para o atual vice-líder do campeonato da Fórmula 1. Leia também: Fórmula 1F1: Com Câmara no…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-russell-explica-decisao-da-mercedes-para-nao-trocar-motor-no-azerbaijao/10858180/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-09-23T08:17:13-03:00",
+    "id": "31d07cdd5ce4e6efcee739d6383835f5c24e3fc7c44b1b418e0aac39c4f793a8",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Alemanha escolhe Munique como candidata para sediar os Jogos Olímpicos de 2036, 2040 ou 2044",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/alemanha-escolhe-munique-como-candidata-para-sediar-os-jogos-olimpicos-de-2036-2040-ou-2044/",
+    "publicadoEm": "2026-09-26T11:08:04-03:00",
     "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": "grp-171cd381",
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "e1fa9a1bf2b716f058b1a8c88c58e786642be17f115cf887f0fda7a7e8d60013",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "F1: Com Câmara no páreo, Ocon 'desiste' da vaga na Haas em 2027",
-    "resumo": "Esteban Ocon mudou o tom de sua resposta ao ser perguntado sobre seu futuro na Fórmula 1. O piloto enfrenta fortes rumores de que deixará de defender a Haas na próxima temporada, possivelmente sendo substituído por Rafael Câmara ou Leo Fornaroli. Leia também: Fórmula 1OFICIAL F1: Red Bull mantém…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-com-camara-no-pareo-ocon-desiste-da-vaga-na-haas-em-2027/10858163/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-09-23T07:40:21-03:00",
+    "id": "18b596e4bfa6f9e03bcb337ace944bb4ee01f5cebbd41d48937fc87fcfdf28ff",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Chapecoense volta à Colômbia e recebe homenagens do Atlético Nacional dez anos após tragédia",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/chapecoense-volta-a-colombia-e-recebe-homenagens-do-atletico-nacional-dez-anos-apos-tragedia/",
+    "publicadoEm": "2026-09-26T10:42:53-03:00",
     "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "ff61c26723b7012cf23d21a6c169e2e8af9eb61457b894de883633f83d0aff1c",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "OFICIAL F1: Red Bull mantém Hadjar ao lado de Verstappen para 2027",
-    "resumo": "A Red Bull confirmou que manterá uma dupla de pilotos inalterada na Fórmula 1 em 2027, com Isack Hadjar permanecendo ao lado de Max Verstappen. Hadjar foi promovido em 2026 após uma temporada de estreia na equipe-irmã RB, e impressionou com a sua velocidade naquele que historicamente tem sido um…",
-    "link": "https://motorsport.uol.com.br/f1/news/red-bull-mantem-isack-hadjar-ao-lado-de-max-verstappen-para-a-f1-2027/10858106/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-09-23T04:42:46-03:00",
+    "id": "ab9fc8210736728840e04447383371b39cf0d9c14635c1538f885eea6902e9d0",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "F1: Russell domina GP do Azerbaijão e vence a terceira em 2026; Bortoleto termina em 13º",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/velocidade/george-russell-domina-gp-do-azerbaijao-e-vence-a-terceira-em-2026-bortoleto-termina-em-13/",
+    "publicadoEm": "2026-09-26T09:55:21-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
+    "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "978b79f83baf6c5969c7b9cbc92e3832062184e8539c615fec620ead5af0c1ac",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "Companheiro de Câmara na F2, Durksen completa primeiro teste da F1 com Mercedes em Portimão",
-    "resumo": "Nesta terça-feira (22), Joshua Durksen se tornou o primeiro paraguaio da história a pilotar um carro de Fórmula 1. O piloto de 22 anos completou o programa de testes com a Mercedes no Autódromo Internacional do Algarve, em Portimão, Portugal. Leia também: Fórmula 1F1: Williams terá 'chassi 2.0' do…",
-    "link": "https://motorsport.uol.com.br/f1/news/companheiro-de-camara-na-f2-durksen-completa-primeiro-teste-da-f1-com-mercedes-em-portimao/10858033/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-09-22T16:05:27-03:00",
+    "id": "9c11f912c1a048d7e7204339b357a1daedfb681be26dcc6ee736b80b2b6a9375",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Torcedora de 8 anos em tratamento contra câncer realiza sonho de conhecer Neymar; assista",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/torcedora-de-8-anos-em-tratamento-contra-cancer-realiza-sonho-de-conhecer-neymar-assista/",
+    "publicadoEm": "2026-09-26T09:26:13-03:00",
     "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "888eee442e30414ffc4ddcbc855bde307d72d178b5d3795a77e27448c8bb6dd9",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "F1: McLaren revela nova logo e identidade visual reformulada",
-    "resumo": "A McLaren revelou nesta terça-feira (22) sua nova identidade visual. Uma das equipes mais tradicionais da Fórmula 1, a marca criada por Bruce McLaren busca, por meio de uma reformulação visual, conectar o passado, o presente e o futuro da empresa britânica. Leia também: Fórmula 1F1: McLaren terá…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-mclaren-revela-nova-logo-e-identidade-visual-reformulada/10858016/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-09-22T14:19:03-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "b8e56b86f63513d0dc285c7ae0d67a5b27cb4e63d2bdedd3bf73eab63e5685d3",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "F1: Williams terá 'chassi 2.0' do FW48 em Baku; saiba detalhes",
-    "resumo": "Em meio a um ano difícil na Fórmula 1, marcado pela falha no crash test anterior ao início da temporada e aos problemas de sobrepreso do modelo FW48, a Williams terá novidades no GP do Azerbaijão, disputado neste sábado em Baku. Neste fim de semana, a equipe vai introduzir quase \"versão 2.0\" do…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-williams-tera-chassi-20-do-fw48-em-baku-saiba-detalhes/10858020/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-09-22T14:09:47-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "81144ae6da2bfa175f6639ec21dc9e23f71ed3fbc2c17363cde1271a36574243",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "F1: McLaren terá novo pacote de atualizações para o GP do Azerbaijão",
-    "resumo": "Após um resultado em Madri comprometido pelo timing do safety car virtual, a McLaren quer mostrar mais força no GP do Azerbaijão de Fórmula 1 deste fim de semana. Mesmo com a pista de Baku não favorecendo os pontos fortes do MCL40, a equipe deve vir com um pacote de atualizações, além do retorno…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-mclaren-tera-novo-pacote-de-atualizacoes-para-o-gp-do-azerbaijao/10857993/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-09-22T12:40:43-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "8bffdb6d0cf508e7c191e9a63bea943144f8eeb5cf8f3b81adbfb3883407a1bf",
@@ -1620,8 +1704,8 @@
     "dataEstimada": false,
     "esporte": "futebol-americano",
     "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "grupoId": "grp-83a149c5",
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "47adeb553399512005cb5696e6d921bffc0cc751becce8bd29531f8a9d1398fd",
@@ -1635,7 +1719,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "12e526a4e79b739fa34309cd2f7e6601440b2fce6b43969e146b5f17934a4e53",
@@ -1649,7 +1733,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "96a2aa3498c2c427cd81c35639c2341b7b6cabb64dae59835e8ff11401b834f6",
@@ -1663,7 +1747,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "99b74dac5d7adf1200aa76da9fad7ad8a85607aa43a5dd11be86246e58ec42a6",
@@ -1677,7 +1761,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "f89c6567e519132c5856761002232e1a1e40539c4d596ea7a75af636f4ad0e49",
@@ -1691,7 +1775,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "1e2d4c456e53f2e688aa5a31a7f4e4ce55bd64a4892f9e572369c62bc01b125b",
@@ -1705,7 +1789,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "4bd6b79a7df8ecda85959587f88c2a820299de2990a46f0cc076dd3b3e9662d0",
@@ -1719,7 +1803,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "10a664968478064b76db708eefd518e08f55a52e4fe35af7e4c2f6cf15ea6eb3",
@@ -1733,7 +1817,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "8f83c9d7974c510f3ba43bb67893328f60c97ab9e24e9bda7b0a252f67aca524",
@@ -1747,7 +1831,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "01d18e968ad654d09b65a69ddf0d386a57aacd798243ec2913fa405efa8257db",
@@ -1761,7 +1845,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "f995bfa2318aa5afd86ecbe45bf103ef481bb662394038aaec6a35edc922a84e",
@@ -1775,7 +1859,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "bc90c78dfaa47cdf3bf00ca1236c00abc15e66bc4ad1b4d58c723be4e47507d5",
@@ -1789,7 +1873,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "734628d9354f0bad45f470116eb98d12f557339c282f596bbd0cbbb54f55d33b",
@@ -1803,7 +1887,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "398fdf512cdd0f209ce6fe363ca1138e26a0ec862309b8ad3c7583da47ea88bd",
@@ -1817,7 +1901,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "1c234c9bd4f766e3f91077f6410e444916faaa05dc523178484e37bd8175966d",
@@ -1831,7 +1915,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "be3b50dd2c1bb65ad9887599af7c0308659a21e030dadc2ea5a23fcd79118893",
@@ -1845,7 +1929,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "f9b7baff582717514263b45e43ad615d4251928f63ad575cbabb587a9bbd7a5b",
@@ -1859,7 +1943,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "46bbe3ab892e52c9af6c01fd860e4095cb4b95c37222e70465ac1c836d291f7f",
@@ -1873,7 +1957,7 @@
     "esporte": "formula1",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "3ae3ec0b1ebb93fb1caebb744b89c12611bf967a6b81af946eb869b6c15e2c36",
@@ -1887,21 +1971,7 @@
     "esporte": "formula1",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "7a56e794df94683648aaf49869b77740bae0372e5a142d87e38b43b194479edb",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Por que o contrato entre São Paulo e Ticketmaster gera tanto conflito nos bastidores do clube",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/rodrigo-capelo/por-que-o-contrato-entre-sao-paulo-e-ticketmaster-gera-tanto-conflito-nos-bastidores-do-clube/",
-    "publicadoEm": "2026-09-24T15:24:21-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "09fc8f4425ecbd2b1378f2a0ebd31b8935877bca2b3049b3b6ef7520044c9be4",
@@ -1915,7 +1985,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": "grp-5f198a3f",
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "f2bda4654a1b7822388a4dc9101c4f5d6e2f0b730482d01ccf420b35229e4b6d",
@@ -1929,7 +1999,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "83b2e783bbf0b2fcc5d668a420bc2412366d1b67594de53c376373cf1f429e4b",
@@ -1943,7 +2013,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "e85a86a2aa1e190f87e4c95564ffeab3aaf79f0f449563a0a14f19feea2807f0",
@@ -1957,7 +2027,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "b33680186c9fab7fc04498e656795f9a81e5adff6fca57f69dc0fa30a458b0b4",
@@ -1971,7 +2041,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "cdf66ef322671242907998be170162169c7cef1dfde7681e854f7c20d8c944e4",
@@ -1985,7 +2055,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "6d5049e8654e305ec3ac0c3bf5bccdb9cbf1b0f569c7fc70ca96368c32becf0b",
@@ -1999,7 +2069,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "0e076fbbf9275bf2492b54a5d89cbf5797574504e7ce02da092120804babd2c6",
@@ -2013,7 +2083,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "5a379f07c4a299eb362c0950afc1d6a129929d2203130265b74ab4a58f108c16",
@@ -2027,7 +2097,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "bf334595ce96c42f0c6edee096ca53d244331d3f3894e95fc4da91c51dc459fe",
@@ -2041,7 +2111,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "f41af2305c951fee0ef8f23e1b57c1a16f1c9231777a02c8abb0c41ca068192d",
@@ -2055,7 +2125,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "96446a492a40c4cce1872fb373e2fabee9b69e99927fec2cb406a2bfa0ac4204",
@@ -2069,7 +2139,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "5a3fbf2d79e5c5b4acdd5136590a10367635d4efa95ef32a0efbb392d810b1f8",
@@ -2083,7 +2153,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": "grp-c8821921",
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "a0b003c40d2355fa08d37985b5f749dfb7ebd9227b2a8a507c2605d093c0fd58",
@@ -2097,7 +2167,7 @@
     "esporte": "formula1",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "a914a5017f2183d0e85b0d4c62ade8c637662434742312dc86b6ddc1a848f2cc",
@@ -2111,7 +2181,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "6bc31eaa7cb1e7449a69ba7d5215f18ef6359bb95184971ae2214bb8a700f361",
@@ -2125,7 +2195,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "5e4f08408324d0aa06e38dcd46ce902241e44b98860781aba7bdff47173a1aec",
@@ -2139,7 +2209,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "b88a14eeb41f3681cedc03f2ed3884f3e7ec4640f221ffe4c1fe46b2a0d4cd48",
@@ -2153,7 +2223,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "90f346a16df887b3e47a3e62bc5a127924306363c3d261623f8cf2993ed9be0f",
@@ -2167,7 +2237,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9fc9b80ba2a26f512650a206c8fc67ecaccd5aead208a3ff0205800ecf99133b",
@@ -2181,7 +2251,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "cca34be6dcafed3e8323cfa09c3232782800bc81ace4d2e2736be1022544766c",
@@ -2195,7 +2265,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "c971e612fb5786cc728d92ef6eb0a3cca745d4aab96ad3bcdf971bed867957aa",
@@ -2209,7 +2279,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "e5e9bfbb2b9f217e10eb95be1273fc3cc2ff763703a11e070d2b20236725f5e7",
@@ -2223,7 +2293,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "061d903d2ecc09927c341b6cbf86ac48880f58fe313acb6b09cec27b04d3022c",
@@ -2237,7 +2307,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "35a8ef41a72cbbeb29d017e8353719f0e702562a91f88ee533dde8071ebfd0a1",
@@ -2251,7 +2321,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "e00d932e0c5a1713c06c933732c00340cf14a185f165180e781d9ebb17f20359",
@@ -2265,7 +2335,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "17918f9c4637d174f7b91b50fd4d79043736b8f4252a62a8fe0288b584e61643",
@@ -2279,7 +2349,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "6489312a33034328fdf0198e8fd675046699c805271b2c11e48e397aaae8337a",
@@ -2293,7 +2363,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "d3650014e7a14266b53198af19422d6f25c7c22166f5d962a64ed18fa01b4c01",
@@ -2307,7 +2377,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "8f70dc3e5ccd2cdb153a2c6874627d3720346e99d372b3a0d57eef9c56eac141",
@@ -2321,7 +2391,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "33433f37bd97a07975e32d9419b3b5d03d4b6ea7843164636536a5f6100cef53",
@@ -2335,21 +2405,7 @@
     "esporte": "formula1",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "ccd9fbcfa507db11a1d005b86c124724db3fad28795117e11a6679d36d25bc21",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "‘Não importa de onde você é, mas sim o que apresenta’, diz Petkovic sobre limite de estrangeiros",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/nao-importa-de-onde-voce-e-mas-sim-o-que-apresenta-diz-petkovic-sobre-limite-de-estrangeiros/",
-    "publicadoEm": "2026-09-24T12:30:00-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "16fc118fb5abfb82fc20f6ca2cf7c921ce32570d19a864250b696d646ab915bf",
@@ -2363,7 +2419,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "facb4e04d6f2f46a2983885dfc4c0156b89526d12c0697957bce5bfcf7f87c57",
@@ -2377,7 +2433,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "19dd60d856a6d49cdd50ba3c426a14ba31bc81de6af11f8bcb723aee64ae60e4",
@@ -2391,63 +2447,77 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "5901ff53a51e720664904b51e29d8707603b087fb089cbf6efa30cac102d7790",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Portugal x País de Gales pela Liga das Nações: onde assistir ao vivo, horário e escalação",
+    "id": "f9f3107b0f18a2149719880e38587854fbd4ba8f5c79ded6710e29bc87fa5d93",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Russell reencontra a vitória no Azerbaijão entre curvas, muros e diferença de 0,1s",
     "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/portugal-x-pais-de-gales-pela-liga-das-nacoes-onde-assistir-ao-vivo-horario-e-escalacao/",
-    "publicadoEm": "2026-09-24T14:45:00-03:00",
+    "link": "https://esportes.r7.com/prisma/entre-curvas/russell-reencontra-a-vitoria-no-azerbaijao-entre-curvas-muros-e-diferenca-de-01s-26092026/",
+    "publicadoEm": "2026-09-26T12:26:55-03:00",
     "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "97ae053469b8386f14f7d375ea2fb954b3be174a5cea36ac2073d8356749a9fc",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Holanda x Alemanha pela Liga das Nações: onde assistir ao vivo, horário e escalação",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/holanda-x-alemanha-pela-liga-das-nacoes-onde-assistir-ao-vivo-horario-e-escalacao/",
-    "publicadoEm": "2026-09-24T14:45:00-03:00",
+    "id": "dceb55ec8de57ea9b620006963b36dd5de56356711b22b9439fcb77d6965d324",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "ESTREIA DE ZIDANE COM GOL DE MBAPPÉ! ⚽🇫🇷",
+    "resumo": "ESTREIA DE ZIDANE COM GOL DE MBAPPÉ! ⚽🇫🇷 Pela Liga das Nações da UEFA, a França superou a Turquia com gol decisivo de Kylian Mbappé, garantindo o resultado positivo na estreia do técnico Zinèdine Zidane à frente da seleção francesa. Autor do gol da vitória, o camisa 10 acabou deixando o gramado…",
+    "link": "https://esportes.r7.com/tudo-de-esportes/estreia-de-zidane-com-gol-de-mbappe-26092026/",
+    "publicadoEm": "2026-09-26T11:56:25-03:00",
     "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "972e0c6e1d2007b34ffc05c4ff4aa45821cba6eacb7b4bfdd103efaba163d0a3",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Noruega x Dinamarca pela Liga das Nações: onde assistir ao vivo, horário e escalação",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/noruega-x-dinamarca-pela-liga-das-nacoes-onde-assistir-ao-vivo-horario-e-escalacao/",
-    "publicadoEm": "2026-09-24T14:45:00-03:00",
+    "id": "83879bafce0583e93360ecec6a9e91a61350962b841fbd1ae77e6c42029f3c1b",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "⚽ TURQUIA 0 X 1 FRANÇA | GOL DE MBAPPÉ NA ESTREIA DE ZIDANE, LESÃO E PREOCUPAÇÃO | NATIONS LEAGUE",
+    "resumo": "⚽ TURQUIA 0 X 1 FRANÇA – ESTREIA DE ZIDANE COM VITÓRIA E DRAMA COM LESÃO DE MBAPPÉ! Confira os melhores momentos da vitória da França sobre a Turquia pela Liga das Nações da UEFA! No reencontro histórico de Zinédine Zidane com os Bleus, agora como treinador da seleção francesa, Kylian Mbappé…",
+    "link": "https://esportes.r7.com/tudo-de-esportes/turquia-0-x-1-franca-gol-de-mbappe-na-estreia-de-zidane-lesao-e-preocupacao-nations-league-26092026/",
+    "publicadoEm": "2026-09-26T11:47:03-03:00",
     "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
-    "id": "5c28c717e72d8da02b8eaac8fe1282aa3f7ac8cb3e37c85fae0b04a73b1a609d",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Forlán estreia no Uruguai com dura virada no fim; Gallardo leva surra em debute no Equador",
+    "id": "16e3f4a5c3b207c7df428f68b025bc9b9bab02be01d4f9a90d7e8eec1828e357",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Rafael Câmara vence em Baku, assume liderança da F2 e ganha força por vaga na F1 em 2027",
     "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/forlan-estreia-no-uruguai-com-dura-virada-no-fim-gallardo-leva-surra-em-debute-no-equador/",
-    "publicadoEm": "2026-09-24T12:23:27-03:00",
+    "link": "https://esportes.r7.com/lance/rafael-camara-vence-em-baku-assume-lideranca-da-f2-e-ganha-forca-por-vaga-na-f1-em-2027-26092026/",
+    "publicadoEm": "2026-09-26T11:20:49-03:00",
     "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
+    "esporte": "formula1",
+    "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
+  },
+  {
+    "id": "6e2807b4e6390187af3b5efb346e482616cdec3457fc60f78f634992840acafb",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "LATINIZADOS #25 | COMEÇOU O CICLO DE 2030 PARA AS SELEÇÕES LATINAS",
+    "resumo": "A nova Data FIFA já coloca as seleções latino-americanas de olho no próximo grande desafio: a Copa do Mundo de 2030. E o ciclo começou com novidades importantes nos bancos de reservas, estreias de Marcelo Gallardo, Diego Forlán e Rafa Márquez, além de muita expectativa para o futuro do futebol…",
+    "link": "https://esportes.r7.com/tudo-de-esportes/latinizados-25-comecou-o-ciclo-de-2030-para-as-selecoes-latinas-26092026/",
+    "publicadoEm": "2026-09-26T10:54:37-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "0f828b3b06bd09d0f24e651c710413c221a32175807aaf25e4b19e5e94c358f1",
@@ -2461,7 +2531,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "67c762f7e25b1ecb68abeb351ccc0f150edbd1ed5865acf13f1bcdc7820f3274",
@@ -2475,7 +2545,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "809d37715f550eb908bf275e1ae9c940aac3392cd99328bbf2e5f0cd1c9afac7",
@@ -2489,7 +2559,7 @@
     "esporte": "formula1",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "e246c50ea1d1fb083e876e20cd4932f99f3c27b5690a32148a2a94c62d733420",
@@ -2503,7 +2573,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "15dc4f5f7b33d29faa93116c7ab64b6a50ecaad9ea84b667f140f4dc2ddebd8b",
@@ -2517,7 +2587,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "df5858c442fa478dd16963e73eb56b800e55e6e2f889bd4435c175dafe54e4ec",
@@ -2531,7 +2601,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9684b60f6983104db0aa8b9409a9a7c829713fcd840cfb835d3b76475c73dda6",
@@ -2545,7 +2615,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "5f3c0449503fc095a65859e1f04dbf92cd759819dd05a1f90abd1232a7f0cd1e",
@@ -2559,7 +2629,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "98bab9740fc9811eaa9f26ebf46f345bf0e74e4f8ae8f65bcc229d581e886ad3",
@@ -2573,7 +2643,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "889369771f2d0fefd86ec24a263e812e288761456fb1d3bd824e7d5f698a60fc",
@@ -2587,7 +2657,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "bf6b14aeb1d5b787cc961f0502c27b82bad8a6a859e0f008ca382b56d4d93a18",
@@ -2601,7 +2671,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "1b7a4f53eea1ddf5bfa61f5c4080564a7588d12d1bd55fcadb8f8e775ad329c1",
@@ -2615,7 +2685,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "00bf872214995091d6d81e000fdc6a41d06294f00fad28aa1da1a292e2555669",
@@ -2629,7 +2699,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "94f6a409e817544a034f91410079bbb5a205070374062af0393086da80e80439",
@@ -2643,7 +2713,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "2a15b3e72d4e82103458eac10bab59131dc59c02017d254afd6d22343a96318c",
@@ -2657,7 +2727,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "c4706b9f279f46e556c2eacb2618116efdec46837e4fae233b8b0e990c321dcc",
@@ -2671,7 +2741,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "f20b53aa5d00e646c91096c8205d55c09b3715bf74f626291255561953788775",
@@ -2685,7 +2755,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "b2a514ee1c81696e72f7818171a61e90a1f94812a9aa7008a788828415bf4ba4",
@@ -2699,7 +2769,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "dd1fee0c661a4db03b4443f23997065bc711fe5e1455342e30b2f377a18fed76",
@@ -2713,7 +2783,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "14348cad10c5396d05a5632b886af1976e859a95c9c2efe48afd24f2e13fd9c2",
@@ -2727,7 +2797,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "67be473784b5bf7cf9fefb11806c3f1e5c51e49e8f97b39122fd731c5d3dfe86",
@@ -2741,7 +2811,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "50620f627a29901c999520e0eeff2a9594f01ab70ce9be7cd9ae2133631ce707",
@@ -2755,7 +2825,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "76d8bf86e7444335da1106cc26a5499e4bc1743b32caab5ecff15f6909003d87",
@@ -2769,7 +2839,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "dfd15057c1e92bd4cf45880627a114620ae6f0fe9aeb54d9f8a4f8c66014b925",
@@ -2783,7 +2853,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "bd882f841b84284d91be009546730b1e8e4a550235ec91498b641bf9355fefc4",
@@ -2797,7 +2867,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "397ba36c503c7b14456c4a1a832b1ee3d0bd0b3ef81703e120daa7acc1a5b203",
@@ -2811,7 +2881,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9e43a66dbfbc1fed7c5cc985116e391ed9112bb48abe76a5ac1fdbf5d732f8c5",
@@ -2825,7 +2895,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "dd4105acdae0b80ae3018e595afc518187a9cc2f102461e662841d1651d50d38",
@@ -2839,7 +2909,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9d5917796d041bd72545cbb98c8614f4db40409f823fe8853847a1a0a4a162d7",
@@ -2853,7 +2923,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "f2c739ef34531a82d36f9d825a6558e1929fd43ff3149f799e05d9f4366aac82",
@@ -2867,7 +2937,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "12fc4b77c7b32faf992a6d99326b17e74b583d014b04ddcbfed8238c99fe5449",
@@ -2881,7 +2951,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "ec1db9fcdd1d11550fd118303bbb137964261a0108e69c52a0bf0e396b71f2af",
@@ -2895,7 +2965,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "62f94f3fda3301f8bd59417d1bd3690366006782ef86ed31575d9e182dac152f",
@@ -2909,7 +2979,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "83f902b04a68d5f543971129c5975d7c67c6f0131acf6e22dd152c1f7e1feb2f",
@@ -2923,7 +2993,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "17ab910e00d0735c08ca073ee035df2bbc35acfd95027190d5a64f08ff83e26c",
@@ -2937,7 +3007,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "cc9130e4bc15edecb982e9398326aa90e1a1d1176b3210358a681c7d4f8990be",
@@ -2951,7 +3021,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "5ea455691b8e89c1772bd25051b54dc955f358107d6649c6efcf514f5ac38db8",
@@ -2965,7 +3035,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "332841df9c7bae2b7756cdaba7e7ade47dbccff045c91a5aeff2cadb2d14d97e",
@@ -2979,7 +3049,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "c72f3f4d09ee7fae8f4701f24b9db9b5dce053eb09f54bc50f73d4af0d59c751",
@@ -2993,7 +3063,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "eefb280c7f1781f2957d3b147a93d310c2f866739f66ba40e285e7d34eb89ad6",
@@ -3007,7 +3077,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9b2cb9b68ace75f55aec017d29d477e5e514e1b65a6c86a73dce19aa618e0dab",
@@ -3021,7 +3091,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9eebc18fe45ff25cfeb06fd4758a82d6ce44870d134c9e5ff03df291bd0ab841",
@@ -3035,7 +3105,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9ba0617a6d22119d5c67e8e7c7064ad5a32d1420d2fb1621728e243a34742eae",
@@ -3049,7 +3119,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "64724f9712f61940f05189465864249db7682fe379d69ef8836d2bd66eaaf351",
@@ -3063,7 +3133,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "6bdacc9ca9db42a48a2c1810700d5e1ff7f6f819a265975ee15bbbabf11a8bed",
@@ -3077,7 +3147,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "ba9a71fd3886f9e2c00ac85d9a40eba1594182d152df1b6be6a5df21ae7baf4d",
@@ -3091,7 +3161,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "a9451756934519078bcab26ecf8fa69feae30160a547504146981a3e80f07636",
@@ -3105,7 +3175,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "a3ddd5e8644d3a79f9f3e4d0b19c4bef1d5cf1a20c16a87482d638f141c56cf8",
@@ -3119,7 +3189,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "7b0f4c03cda9edc2cc1ee00bde097cb1dedd4cad6215fec20f03b1ff9035e8ad",
@@ -3133,7 +3203,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "517065302ae43963c0a1c9586ad6c9350a0af7fd532601a29080160604654cc0",
@@ -3147,7 +3217,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9bbc92055745a5d26cda5270b854dd6031ae8643ec3607d0737649e02e0e7879",
@@ -3161,7 +3231,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "7988074db998c6aaf44f43013ebd1c159e26ab0581dfaf1f8b0e5ebf6a87d508",
@@ -3175,7 +3245,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "de93a7dc62d8337d2ccf84cd7839052041536e6ef1b25f6b3cea110504625ac5",
@@ -3189,7 +3259,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "76047af78412f2ff8edc9e20c17122b22aa3f08dcba46d142ecccd735466bb95",
@@ -3203,7 +3273,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   },
   {
     "id": "9ba3e5a729de77e03e3f938be7c595e340a7c8fe174cc9c5f3b42538960472d6",
@@ -3217,76 +3287,6 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "f2183a63314990dc410afea286b85fd01b2adbf3a4bed7b1b6039807ad2b3967",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Operário-PR x Ceará: odds, palpites e onde assistir",
-    "resumo": null,
-    "link": "https://esportes.r7.com/lance/onde-assistir/operario-pr-x-ceara-odds-palpites-e-onde-assistir-25092026/",
-    "publicadoEm": "2026-09-25T19:51:56-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "f962e71ac51e2582064b9e113e3c4f2533279336f118aa0193d1be3d6a2ff13c",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Goiás x Atlético-GO: odds, palpites e onde assistir",
-    "resumo": null,
-    "link": "https://esportes.r7.com/lance/onde-assistir/goias-x-atletico-go-odds-palpites-e-onde-assistir-25092026/",
-    "publicadoEm": "2026-09-25T19:51:44-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "83d435a259735f6ecbeafcd48fee4a20aa4648a5f047d328945855e91d911cd8",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "FRANÇA VENCE A TURQUIA PELA LIGA DAS NAÇÕES!",
-    "resumo": null,
-    "link": "https://esportes.r7.com/tudo-de-esportes/franca-vence-a-turquia-pela-liga-das-nacoes-25092026/",
-    "publicadoEm": "2026-09-25T19:27:59-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "b5f0c3867d18a6303286bd18f7a5d814df7d8e57facb69a473cfd75195b3e327",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "A JOGADORA PERFEITA PARA A ANA BENTO (A MELHOR JOGADORA DO MUNDO)",
-    "resumo": "O conhecimento que formou atletas de alto nível, agora ao seu alcance. Garanta a sua vaga no International Volleyball Program aproveitando a nossa condição especial. Use o cupom CBV50 e inscreva-se: https://www.tizan.com.br/ivp Conheça o DNA do LÍDER ESPORTIVO: https://www.tizan.com.br/dnadolider…",
-    "link": "https://esportes.r7.com/tudo-de-esportes/a-jogadora-perfeita-para-a-ana-bento-a-melhor-jogadora-do-mundo-25092026/",
-    "publicadoEm": "2026-09-25T19:00:31-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
-  },
-  {
-    "id": "f9619feac74eb158372237fd4eb183c6a7561e93afef61fe5c1baecaf66a125d",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "DIRETOR GERAL DO FUTEBOL FEMININO DO GRÊMIO FALA SOBRE NOVO CT",
-    "resumo": null,
-    "link": "https://esportes.r7.com/tudo-de-esportes/diretor-geral-do-futebol-feminino-do-gremio-fala-sobre-novo-ct-25092026/",
-    "publicadoEm": "2026-09-25T18:59:02-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-09-26T11:39:20.823Z"
+    "ingeridoEm": "2026-09-26T15:34:49.004Z"
   }
 ]
