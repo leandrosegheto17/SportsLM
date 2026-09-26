@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-26T15:34:58.056Z"
+      "ultimaAtualizacao": "2026-09-26T18:55:53.834Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -611,6 +611,47 @@
   },
   {
     "competicao": {
+      "id": "sul-americana",
+      "nome": "Copa Sul-Americana",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-03-03",
+        "fim": "2026-11-21"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-09-26T18:55:53.834Z"
+    },
+    "participacao": {
+      "competicaoId": "sul-americana",
+      "clubeId": "vasco",
+      "status": "em-andamento",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": [
+      {
+        "id": "2606044",
+        "competicaoId": "sul-americana",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "externo-135156",
+        "visitanteId": "vasco",
+        "dataHora": "2026-10-14",
+        "horarioDefinido": true,
+        "estadio": "Estadio Alberto José Armando",
+        "status": "agendada",
+        "placar": null,
+        "externo": {
+          "lado": "mandante",
+          "nome": "Boca Juniors"
+        }
+      }
+    ]
+  },
+  {
+    "competicao": {
       "id": "copa-do-brasil",
       "nome": "Copa do Brasil",
       "temporada": 2026,
@@ -620,7 +661,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-09-26T15:34:58.056Z"
+      "ultimaAtualizacao": "2026-09-26T18:55:53.834Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
@@ -661,29 +702,6 @@
         "placar": null
       }
     ]
-  },
-  {
-    "competicao": {
-      "id": "sul-americana",
-      "nome": "Copa Sul-Americana",
-      "temporada": 2026,
-      "formato": "misto",
-      "janela": {
-        "inicio": "2026-03-03",
-        "fim": "2026-11-21"
-      },
-      "provedor": "thesportsdb",
-      "ultimaAtualizacao": null
-    },
-    "participacao": {
-      "competicaoId": "sul-americana",
-      "clubeId": "vasco",
-      "status": "sem-dados",
-      "faseAtual": null,
-      "resultadoFinal": null,
-      "resumo": null
-    },
-    "partidas": []
   },
   {
     "competicao": {
