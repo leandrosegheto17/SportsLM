@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-27T15:44:30.445Z"
+    "ultimaAtualizacao": "2026-09-27T19:28:08.728Z"
   },
   "classificacao": [
     {
@@ -5066,51 +5066,12 @@
       "placar": null
     },
     {
-      "id": "555040",
-      "competicaoId": "brasileirao-serie-a",
-      "rodada": 31,
-      "fase": null,
-      "mandanteId": "athletico-pr",
-      "visitanteId": "palmeiras",
-      "dataHora": "2026-10-17T00:00:00Z",
-      "horarioDefinido": false,
-      "estadio": null,
-      "status": "agendada",
-      "placar": null
-    },
-    {
-      "id": "555041",
-      "competicaoId": "brasileirao-serie-a",
-      "rodada": 31,
-      "fase": null,
-      "mandanteId": "atletico-mg",
-      "visitanteId": "coritiba",
-      "dataHora": "2026-10-17T00:00:00Z",
-      "horarioDefinido": false,
-      "estadio": null,
-      "status": "agendada",
-      "placar": null
-    },
-    {
       "id": "555042",
       "competicaoId": "brasileirao-serie-a",
       "rodada": 31,
       "fase": null,
       "mandanteId": "bahia",
       "visitanteId": "flamengo",
-      "dataHora": "2026-10-17T00:00:00Z",
-      "horarioDefinido": false,
-      "estadio": null,
-      "status": "agendada",
-      "placar": null
-    },
-    {
-      "id": "555043",
-      "competicaoId": "brasileirao-serie-a",
-      "rodada": 31,
-      "fase": null,
-      "mandanteId": "botafogo",
-      "visitanteId": "chapecoense",
       "dataHora": "2026-10-17T00:00:00Z",
       "horarioDefinido": false,
       "estadio": null,
@@ -5183,14 +5144,53 @@
       "placar": null
     },
     {
+      "id": "555043",
+      "competicaoId": "brasileirao-serie-a",
+      "rodada": 31,
+      "fase": null,
+      "mandanteId": "botafogo",
+      "visitanteId": "chapecoense",
+      "dataHora": "2026-10-17T21:00:00Z",
+      "horarioDefinido": true,
+      "estadio": null,
+      "status": "agendada",
+      "placar": null
+    },
+    {
+      "id": "555041",
+      "competicaoId": "brasileirao-serie-a",
+      "rodada": 31,
+      "fase": null,
+      "mandanteId": "atletico-mg",
+      "visitanteId": "coritiba",
+      "dataHora": "2026-10-17T21:30:00Z",
+      "horarioDefinido": true,
+      "estadio": null,
+      "status": "agendada",
+      "placar": null
+    },
+    {
+      "id": "555040",
+      "competicaoId": "brasileirao-serie-a",
+      "rodada": 31,
+      "fase": null,
+      "mandanteId": "athletico-pr",
+      "visitanteId": "palmeiras",
+      "dataHora": "2026-10-17T22:30:00Z",
+      "horarioDefinido": true,
+      "estadio": null,
+      "status": "agendada",
+      "placar": null
+    },
+    {
       "id": "555049",
       "competicaoId": "brasileirao-serie-a",
       "rodada": 31,
       "fase": null,
       "mandanteId": "sao-paulo",
       "visitanteId": "vasco",
-      "dataHora": "2026-10-17T00:00:00Z",
-      "horarioDefinido": false,
+      "dataHora": "2026-10-18T00:00:00Z",
+      "horarioDefinido": true,
       "estadio": null,
       "status": "agendada",
       "placar": null
