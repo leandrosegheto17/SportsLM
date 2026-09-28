@@ -1,8 +1,8 @@
 {
-  "geradoEm": "2026-09-28T07:14:16.269Z",
+  "geradoEm": "2026-09-28T15:43:42.063Z",
   "fontes": {
     "ge": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "pulado",
       "itensNovos": 0,
       "falhasConsecutivas": 0,
@@ -10,7 +10,7 @@
       "instavelDesde": null
     },
     "espn-brasil": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "ok",
       "itensNovos": 0,
       "falhasConsecutivas": 0,
@@ -18,7 +18,7 @@
       "instavelDesde": null
     },
     "gazeta-esportiva": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "ok",
       "itensNovos": 342,
       "falhasConsecutivas": 0,
@@ -26,7 +26,7 @@
       "instavelDesde": null
     },
     "terra-esportes": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "falha",
       "itensNovos": 0,
       "falhasConsecutivas": 1,
@@ -34,7 +34,7 @@
       "instavelDesde": null
     },
     "uol-esporte": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "ok",
       "itensNovos": 15,
       "falhasConsecutivas": 0,
@@ -42,7 +42,7 @@
       "instavelDesde": null
     },
     "superesportes": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "falha",
       "itensNovos": 0,
       "falhasConsecutivas": 1,
@@ -50,7 +50,7 @@
       "instavelDesde": null
     },
     "f1mania": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "ok",
       "itensNovos": 21,
       "falhasConsecutivas": 0,
@@ -58,7 +58,7 @@
       "instavelDesde": null
     },
     "motorsport-brasil": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "ok",
       "itensNovos": 48,
       "falhasConsecutivas": 0,
@@ -66,15 +66,15 @@
       "instavelDesde": null
     },
     "estadao-esportes": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "ok",
-      "itensNovos": 61,
+      "itensNovos": 64,
       "falhasConsecutivas": 0,
       "instavel": false,
       "instavelDesde": null
     },
     "r7-esporte": {
-      "ultimaTentativa": "2026-09-28T07:14:08.218Z",
+      "ultimaTentativa": "2026-09-28T15:43:36.991Z",
       "resultado": "ok",
       "itensNovos": 100,
       "falhasConsecutivas": 0,
@@ -84,35 +84,34 @@
   },
   "distribuicaoClassificacao": {
     "basquete": 3,
-    "tenis": 7,
+    "tenis": 8,
     "volei-quadra": 1,
-    "formula1": 88,
+    "formula1": 89,
     "natacao": 1,
-    "atletismo": 2,
-    "futebol": 51,
-    "geral": 67,
-    "futebol-americano": 9,
-    "mma": 2,
-    "fora-do-recorte": 2,
-    "futsal": 1
+    "atletismo": 4,
+    "futebol": 48,
+    "geral": 71,
+    "futebol-americano": 6,
+    "mma": 1,
+    "fora-do-recorte": 2
   },
-  "gruposFormados": 7,
+  "gruposFormados": 8,
   "futebol": {
     "brasileirao-serie-a": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-09-28T07:14:16.269Z"
+      "ultimaAtualizacao": "2026-09-28T15:43:42.063Z"
     },
     "libertadores": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-09-28T07:14:16.269Z"
+      "ultimaAtualizacao": "2026-09-28T15:43:42.063Z"
     },
     "sul-americana": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-09-28T07:14:16.269Z"
+      "ultimaAtualizacao": "2026-09-28T15:43:42.063Z"
     },
     "copa-do-brasil": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-09-28T07:14:16.269Z"
+      "ultimaAtualizacao": "2026-09-28T15:43:42.063Z"
     },
     "paulista": {
       "resultado": "fora-da-janela",
