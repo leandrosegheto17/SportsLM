@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-29T07:11:55.584Z"
+      "ultimaAtualizacao": "2026-09-29T14:12:09.260Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -510,8 +510,8 @@
         "fase": null,
         "mandanteId": "remo",
         "visitanteId": "rb-bragantino",
-        "dataHora": "2026-10-17T00:00:00Z",
-        "horarioDefinido": false,
+        "dataHora": "2026-10-18T22:30:00Z",
+        "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
         "placar": null
@@ -523,8 +523,8 @@
         "fase": null,
         "mandanteId": "palmeiras",
         "visitanteId": "rb-bragantino",
-        "dataHora": "2026-10-24T00:00:00Z",
-        "horarioDefinido": false,
+        "dataHora": "2026-10-24T21:30:00Z",
+        "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
         "placar": null
@@ -620,7 +620,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-09-29T07:11:55.584Z"
+      "ultimaAtualizacao": "2026-09-29T14:12:09.260Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
@@ -643,7 +643,7 @@
         "fim": "2026-11-21"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-09-29T07:11:55.584Z"
+      "ultimaAtualizacao": "2026-09-29T14:12:09.260Z"
     },
     "participacao": {
       "competicaoId": "sul-americana",
