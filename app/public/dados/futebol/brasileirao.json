@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-28T21:31:56.961Z"
+    "ultimaAtualizacao": "2026-09-29T01:24:30.314Z"
   },
   "classificacao": [
     {
@@ -5066,6 +5066,19 @@
       "placar": null
     },
     {
+      "id": "555047",
+      "competicaoId": "brasileirao-serie-a",
+      "rodada": 31,
+      "fase": null,
+      "mandanteId": "mirassol",
+      "visitanteId": "internacional",
+      "dataHora": "2026-10-16T23:00:00Z",
+      "horarioDefinido": true,
+      "estadio": null,
+      "status": "agendada",
+      "placar": null
+    },
+    {
       "id": "555042",
       "competicaoId": "brasileirao-serie-a",
       "rodada": 31,
@@ -5111,19 +5124,6 @@
       "fase": null,
       "mandanteId": "gremio",
       "visitanteId": "cruzeiro",
-      "dataHora": "2026-10-17T00:00:00Z",
-      "horarioDefinido": false,
-      "estadio": null,
-      "status": "agendada",
-      "placar": null
-    },
-    {
-      "id": "555047",
-      "competicaoId": "brasileirao-serie-a",
-      "rodada": 31,
-      "fase": null,
-      "mandanteId": "mirassol",
-      "visitanteId": "internacional",
       "dataHora": "2026-10-17T00:00:00Z",
       "horarioDefinido": false,
       "estadio": null,
