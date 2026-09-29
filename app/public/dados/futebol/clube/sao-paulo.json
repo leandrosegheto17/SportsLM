@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-09-29T14:12:09.260Z"
+      "ultimaAtualizacao": "2026-09-29T19:32:14.741Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -536,8 +536,8 @@
         "fase": null,
         "mandanteId": "bahia",
         "visitanteId": "sao-paulo",
-        "dataHora": "2026-10-28T00:00:00Z",
-        "horarioDefinido": false,
+        "dataHora": "2026-10-29T00:30:00Z",
+        "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
         "placar": null
@@ -549,8 +549,8 @@
         "fase": null,
         "mandanteId": "sao-paulo",
         "visitanteId": "corinthians",
-        "dataHora": "2026-11-04T00:00:00Z",
-        "horarioDefinido": false,
+        "dataHora": "2026-11-05T00:30:00Z",
+        "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
         "placar": null
@@ -620,7 +620,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-09-29T14:12:09.260Z"
+      "ultimaAtualizacao": "2026-09-29T19:32:14.741Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
@@ -643,7 +643,7 @@
         "fim": "2026-11-21"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-09-29T14:12:09.260Z"
+      "ultimaAtualizacao": "2026-09-29T19:32:14.741Z"
     },
     "participacao": {
       "competicaoId": "sul-americana",
