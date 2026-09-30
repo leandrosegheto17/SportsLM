@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-09-30T02:15:05.261Z"
+    "ultimaAtualizacao": "2026-09-30T08:49:47.134Z"
   },
   "classificacao": [
     {
@@ -5293,7 +5293,7 @@
       "fase": null,
       "mandanteId": "santos",
       "visitanteId": "bahia",
-      "dataHora": "2026-10-24T23:00:00Z",
+      "dataHora": "2026-10-25T01:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
       "status": "agendada",
