@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-02T20:03:27.816Z"
+    "ultimaAtualizacao": "2026-10-02T23:55:41.527Z"
   },
   "classificacao": [
     {
@@ -129,15 +129,15 @@
       "grupo": "Matchday",
       "posicao": 8,
       "clubeId": "santos",
-      "pontos": 38,
-      "jogos": 27,
+      "pontos": 39,
+      "jogos": 28,
       "v": 10,
-      "e": 8,
+      "e": 9,
       "d": 9,
-      "gp": 41,
-      "gc": 40,
+      "gp": 42,
+      "gc": 41,
       "sg": 1,
-      "aproveitamento": 46.913580246913575,
+      "aproveitamento": 46.42857142857143,
       "ultimosCinco": []
     },
     {
@@ -160,6 +160,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 10,
+      "clubeId": "sao-paulo",
+      "pontos": 37,
+      "jogos": 28,
+      "v": 10,
+      "e": 7,
+      "d": 11,
+      "gp": 33,
+      "gc": 31,
+      "sg": 2,
+      "aproveitamento": 44.047619047619044,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 11,
       "clubeId": "rb-bragantino",
       "pontos": 36,
       "jogos": 27,
@@ -168,22 +184,6 @@
       "d": 11,
       "gp": 33,
       "gc": 31,
-      "sg": 2,
-      "aproveitamento": 44.44444444444444,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 11,
-      "clubeId": "sao-paulo",
-      "pontos": 36,
-      "jogos": 27,
-      "v": 10,
-      "e": 6,
-      "d": 11,
-      "gp": 32,
-      "gc": 30,
       "sg": 2,
       "aproveitamento": 44.44444444444444,
       "ultimosCinco": []
@@ -4789,7 +4789,7 @@
       "dataHora": "2026-10-02T23:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
