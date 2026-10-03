@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-03T18:07:11.875Z"
+    "ultimaAtualizacao": "2026-10-03T21:38:46.279Z"
   },
   "classificacao": [
     {
@@ -112,6 +112,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 7,
+      "clubeId": "atletico-mg",
+      "pontos": 41,
+      "jogos": 28,
+      "v": 11,
+      "e": 8,
+      "d": 9,
+      "gp": 36,
+      "gc": 32,
+      "sg": 4,
+      "aproveitamento": 48.80952380952381,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 8,
       "clubeId": "santos",
       "pontos": 41,
       "jogos": 28,
@@ -122,22 +138,6 @@
       "gc": 41,
       "sg": 2,
       "aproveitamento": 48.80952380952381,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 8,
-      "clubeId": "atletico-mg",
-      "pontos": 40,
-      "jogos": 27,
-      "v": 11,
-      "e": 7,
-      "d": 9,
-      "gp": 36,
-      "gc": 32,
-      "sg": 4,
-      "aproveitamento": 49.382716049382715,
       "ultimosCinco": []
     },
     {
@@ -161,15 +161,15 @@
       "grupo": "Matchday",
       "posicao": 10,
       "clubeId": "rb-bragantino",
-      "pontos": 36,
-      "jogos": 27,
+      "pontos": 37,
+      "jogos": 28,
       "v": 10,
-      "e": 6,
+      "e": 7,
       "d": 11,
       "gp": 33,
       "gc": 31,
       "sg": 2,
-      "aproveitamento": 44.44444444444444,
+      "aproveitamento": 44.047619047619044,
       "ultimosCinco": []
     },
     {
@@ -4805,7 +4805,7 @@
       "dataHora": "2026-10-03T21:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
