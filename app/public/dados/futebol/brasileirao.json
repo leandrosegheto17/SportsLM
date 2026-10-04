@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-03T21:38:46.279Z"
+    "ultimaAtualizacao": "2026-10-04T00:19:08.590Z"
   },
   "classificacao": [
     {
@@ -113,15 +113,15 @@
       "grupo": "Matchday",
       "posicao": 7,
       "clubeId": "atletico-mg",
-      "pontos": 41,
+      "pontos": 43,
       "jogos": 28,
-      "v": 11,
-      "e": 8,
+      "v": 12,
+      "e": 7,
       "d": 9,
-      "gp": 36,
+      "gp": 37,
       "gc": 32,
-      "sg": 4,
-      "aproveitamento": 48.80952380952381,
+      "sg": 5,
+      "aproveitamento": 51.19047619047619,
       "ultimosCinco": []
     },
     {
@@ -161,21 +161,21 @@
       "grupo": "Matchday",
       "posicao": 10,
       "clubeId": "rb-bragantino",
-      "pontos": 37,
+      "pontos": 36,
       "jogos": 28,
       "v": 10,
-      "e": 7,
-      "d": 11,
+      "e": 6,
+      "d": 12,
       "gp": 33,
-      "gc": 31,
-      "sg": 2,
-      "aproveitamento": 44.047619047619044,
+      "gc": 32,
+      "sg": 1,
+      "aproveitamento": 42.857142857142854,
       "ultimosCinco": []
     },
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 11,
+      "posicao": 10,
       "clubeId": "sao-paulo",
       "pontos": 36,
       "jogos": 28,
@@ -4805,8 +4805,11 @@
       "dataHora": "2026-10-03T21:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 0
+      }
     },
     {
       "id": "555022",
