@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-06T00:34:11.452Z"
+      "ultimaAtualizacao": "2026-10-06T07:06:58.527Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -500,7 +500,7 @@
         "fase": null,
         "mandanteId": "vasco",
         "visitanteId": "remo",
-        "dataHora": "2026-10-10T20:00:00Z",
+        "dataHora": "2026-10-10T21:00:00Z",
         "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
@@ -623,7 +623,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-06T00:34:11.452Z"
+      "ultimaAtualizacao": "2026-10-06T07:06:58.527Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
