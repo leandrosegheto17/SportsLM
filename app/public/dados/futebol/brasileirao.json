@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-07T22:34:01.028Z"
+    "ultimaAtualizacao": "2026-10-08T02:24:56.891Z"
   },
   "classificacao": [
     {
@@ -64,6 +64,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 4,
+      "clubeId": "cruzeiro",
+      "pontos": 48,
+      "jogos": 29,
+      "v": 14,
+      "e": 6,
+      "d": 9,
+      "gp": 44,
+      "gc": 40,
+      "sg": 4,
+      "aproveitamento": 55.172413793103445,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 5,
       "clubeId": "fluminense",
       "pontos": 48,
       "jogos": 28,
@@ -79,7 +95,7 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 5,
+      "posicao": 6,
       "clubeId": "bahia",
       "pontos": 46,
       "jogos": 28,
@@ -90,22 +106,6 @@
       "gc": 35,
       "sg": 8,
       "aproveitamento": 54.761904761904766,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 6,
-      "clubeId": "cruzeiro",
-      "pontos": 45,
-      "jogos": 28,
-      "v": 13,
-      "e": 6,
-      "d": 9,
-      "gp": 42,
-      "gc": 40,
-      "sg": 2,
-      "aproveitamento": 53.57142857142857,
       "ultimosCinco": []
     },
     {
@@ -166,8 +166,8 @@
       "v": 10,
       "e": 7,
       "d": 12,
-      "gp": 33,
-      "gc": 32,
+      "gp": 34,
+      "gc": 33,
       "sg": 1,
       "aproveitamento": 42.5287356321839,
       "ultimosCinco": []
@@ -178,62 +178,62 @@
       "posicao": 11,
       "clubeId": "sao-paulo",
       "pontos": 36,
-      "jogos": 28,
+      "jogos": 29,
       "v": 10,
       "e": 6,
-      "d": 12,
+      "d": 13,
       "gp": 33,
-      "gc": 32,
-      "sg": 1,
-      "aproveitamento": 42.857142857142854,
+      "gc": 34,
+      "sg": -1,
+      "aproveitamento": 41.37931034482759,
       "ultimosCinco": []
     },
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 12,
-      "clubeId": "botafogo",
-      "pontos": 35,
-      "jogos": 28,
-      "v": 9,
-      "e": 8,
-      "d": 11,
-      "gp": 41,
-      "gc": 45,
-      "sg": -4,
-      "aproveitamento": 41.66666666666667,
+      "clubeId": "vitoria",
+      "pontos": 36,
+      "jogos": 29,
+      "v": 10,
+      "e": 6,
+      "d": 13,
+      "gp": 32,
+      "gc": 42,
+      "sg": -10,
+      "aproveitamento": 41.37931034482759,
       "ultimosCinco": []
     },
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 13,
-      "clubeId": "vitoria",
-      "pontos": 33,
-      "jogos": 28,
+      "clubeId": "botafogo",
+      "pontos": 35,
+      "jogos": 29,
       "v": 9,
-      "e": 6,
-      "d": 13,
-      "gp": 28,
-      "gc": 42,
-      "sg": -14,
-      "aproveitamento": 39.285714285714285,
+      "e": 8,
+      "d": 12,
+      "gp": 42,
+      "gc": 47,
+      "sg": -5,
+      "aproveitamento": 40.229885057471265,
       "ultimosCinco": []
     },
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 14,
-      "clubeId": "corinthians",
-      "pontos": 33,
-      "jogos": 29,
-      "v": 8,
-      "e": 9,
+      "clubeId": "vasco",
+      "pontos": 34,
+      "jogos": 28,
+      "v": 9,
+      "e": 7,
       "d": 12,
-      "gp": 29,
-      "gc": 32,
-      "sg": -3,
-      "aproveitamento": 37.93103448275862,
+      "gp": 36,
+      "gc": 42,
+      "sg": -6,
+      "aproveitamento": 40.476190476190474,
       "ultimosCinco": []
     },
     {
@@ -246,8 +246,8 @@
       "v": 8,
       "e": 9,
       "d": 12,
-      "gp": 33,
-      "gc": 42,
+      "gp": 34,
+      "gc": 43,
       "sg": -9,
       "aproveitamento": 37.93103448275862,
       "ultimosCinco": []
@@ -256,48 +256,48 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 16,
-      "clubeId": "vasco",
-      "pontos": 31,
-      "jogos": 27,
+      "clubeId": "corinthians",
+      "pontos": 32,
+      "jogos": 29,
       "v": 8,
-      "e": 7,
-      "d": 12,
-      "gp": 34,
-      "gc": 41,
-      "sg": -7,
-      "aproveitamento": 38.2716049382716,
+      "e": 8,
+      "d": 13,
+      "gp": 30,
+      "gc": 34,
+      "sg": -4,
+      "aproveitamento": 36.7816091954023,
       "ultimosCinco": []
     },
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 17,
-      "clubeId": "gremio",
-      "pontos": 30,
+      "clubeId": "internacional",
+      "pontos": 31,
       "jogos": 29,
       "v": 7,
-      "e": 9,
-      "d": 13,
-      "gp": 30,
-      "gc": 38,
-      "sg": -8,
-      "aproveitamento": 34.48275862068966,
+      "e": 10,
+      "d": 12,
+      "gp": 32,
+      "gc": 37,
+      "sg": -5,
+      "aproveitamento": 35.63218390804598,
       "ultimosCinco": []
     },
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 18,
-      "clubeId": "internacional",
-      "pontos": 29,
+      "clubeId": "gremio",
+      "pontos": 30,
       "jogos": 29,
-      "v": 6,
-      "e": 11,
-      "d": 12,
-      "gp": 30,
-      "gc": 36,
-      "sg": -6,
-      "aproveitamento": 33.33333333333333,
+      "v": 7,
+      "e": 9,
+      "d": 13,
+      "gp": 31,
+      "gc": 39,
+      "sg": -8,
+      "aproveitamento": 34.48275862068966,
       "ultimosCinco": []
     },
     {
@@ -310,8 +310,8 @@
       "v": 5,
       "e": 9,
       "d": 15,
-      "gp": 32,
-      "gc": 47,
+      "gp": 33,
+      "gc": 48,
       "sg": -15,
       "aproveitamento": 27.586206896551722,
       "ultimosCinco": []
@@ -322,14 +322,14 @@
       "posicao": 20,
       "clubeId": "chapecoense",
       "pontos": 18,
-      "jogos": 27,
+      "jogos": 28,
       "v": 3,
       "e": 9,
-      "d": 15,
+      "d": 16,
       "gp": 29,
-      "gc": 53,
-      "sg": -24,
-      "aproveitamento": 22.22222222222222,
+      "gc": 57,
+      "sg": -28,
+      "aproveitamento": 21.428571428571427,
       "ultimosCinco": []
     }
   ],
@@ -4821,8 +4821,11 @@
       "dataHora": "2026-10-07T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 1
+      }
     },
     {
       "id": "555025",
@@ -4834,8 +4837,11 @@
       "dataHora": "2026-10-07T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 2,
+        "visitante": 1
+      }
     },
     {
       "id": "555027",
@@ -4847,8 +4853,11 @@
       "dataHora": "2026-10-07T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 1
+      }
     },
     {
       "id": "555029",
@@ -4860,8 +4869,11 @@
       "dataHora": "2026-10-07T23:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 4,
+        "visitante": 0
+      }
     },
     {
       "id": "555021",
@@ -4873,8 +4885,11 @@
       "dataHora": "2026-10-07T23:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 2,
+        "visitante": 2
+      }
     },
     {
       "id": "555023",
@@ -4886,7 +4901,7 @@
       "dataHora": "2026-10-08T00:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
