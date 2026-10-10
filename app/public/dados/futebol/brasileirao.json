@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-10T17:36:54.909Z"
+    "ultimaAtualizacao": "2026-10-10T21:02:00.923Z"
   },
   "classificacao": [
     {
@@ -225,15 +225,15 @@
       "grupo": "Matchday",
       "posicao": 14,
       "clubeId": "vasco",
-      "pontos": 34,
-      "jogos": 28,
+      "pontos": 35,
+      "jogos": 29,
       "v": 9,
-      "e": 7,
+      "e": 8,
       "d": 12,
       "gp": 36,
       "gc": 42,
       "sg": -6,
-      "aproveitamento": 40.476190476190474,
+      "aproveitamento": 40.229885057471265,
       "ultimosCinco": []
     },
     {
@@ -305,15 +305,15 @@
       "grupo": "Matchday",
       "posicao": 19,
       "clubeId": "remo",
-      "pontos": 24,
-      "jogos": 29,
+      "pontos": 25,
+      "jogos": 30,
       "v": 5,
-      "e": 9,
+      "e": 10,
       "d": 15,
       "gp": 33,
       "gc": 48,
       "sg": -15,
-      "aproveitamento": 27.586206896551722,
+      "aproveitamento": 27.77777777777778,
       "ultimosCinco": []
     },
     {
