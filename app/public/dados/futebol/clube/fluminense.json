@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-11T18:16:18.425Z"
+      "ultimaAtualizacao": "2026-10-11T22:14:57.903Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -19,15 +19,15 @@
       "faseAtual": null,
       "resultadoFinal": null,
       "resumo": {
-        "jogos": 29,
+        "jogos": 30,
         "v": 14,
         "e": 9,
-        "d": 6,
+        "d": 7,
         "gp": 48,
-        "gc": 36,
-        "sg": 12,
+        "gc": 37,
+        "sg": 11,
         "pontos": 51,
-        "aproveitamento": 58.620689655172406,
+        "aproveitamento": 56.666666666666664,
         "posicao": 3
       }
     },
@@ -506,7 +506,7 @@
         "dataHora": "2026-10-11T20:30:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "agendada",
+        "status": "aguardando-resultado",
         "placar": null
       },
       {
@@ -626,7 +626,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-11T18:16:18.425Z"
+      "ultimaAtualizacao": "2026-10-11T22:14:57.903Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
@@ -649,7 +649,7 @@
         "fim": "2026-11-28"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-11T18:16:18.425Z"
+      "ultimaAtualizacao": "2026-10-11T22:14:57.903Z"
     },
     "participacao": {
       "competicaoId": "libertadores",
