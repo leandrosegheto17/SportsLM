@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-10T21:02:00.923Z"
+    "ultimaAtualizacao": "2026-10-11T00:19:50.634Z"
   },
   "classificacao": [
     {
@@ -177,15 +177,15 @@
       "grupo": "Matchday",
       "posicao": 11,
       "clubeId": "sao-paulo",
-      "pontos": 36,
-      "jogos": 29,
+      "pontos": 37,
+      "jogos": 30,
       "v": 10,
-      "e": 6,
+      "e": 7,
       "d": 13,
       "gp": 33,
       "gc": 34,
       "sg": -1,
-      "aproveitamento": 41.37931034482759,
+      "aproveitamento": 41.11111111111111,
       "ultimosCinco": []
     },
     {
@@ -193,15 +193,15 @@
       "grupo": "Matchday",
       "posicao": 12,
       "clubeId": "vitoria",
-      "pontos": 36,
-      "jogos": 29,
+      "pontos": 37,
+      "jogos": 30,
       "v": 10,
-      "e": 6,
+      "e": 7,
       "d": 13,
       "gp": 32,
       "gc": 42,
       "sg": -10,
-      "aproveitamento": 41.37931034482759,
+      "aproveitamento": 41.11111111111111,
       "ultimosCinco": []
     },
     {
@@ -4981,8 +4981,11 @@
       "dataHora": "2026-10-10T21:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 0,
+        "visitante": 0
+      }
     },
     {
       "id": "555038",
@@ -4994,7 +4997,7 @@
       "dataHora": "2026-10-11T00:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {

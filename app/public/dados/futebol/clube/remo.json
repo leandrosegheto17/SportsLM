@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-10T21:02:00.923Z"
+      "ultimaAtualizacao": "2026-10-11T00:19:50.634Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -506,8 +506,11 @@
         "dataHora": "2026-10-10T21:00:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "agendada",
-        "placar": null
+        "status": "finalizada",
+        "placar": {
+          "mandante": 0,
+          "visitante": 0
+        }
       },
       {
         "id": "555048",
@@ -626,7 +629,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-10T21:02:00.923Z"
+      "ultimaAtualizacao": "2026-10-11T00:19:50.634Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
