@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-11T22:14:57.903Z"
+    "ultimaAtualizacao": "2026-10-12T01:31:19.025Z"
   },
   "classificacao": [
     {
@@ -39,8 +39,8 @@
       "e": 9,
       "d": 3,
       "gp": 52,
-      "gc": 21,
-      "sg": 31,
+      "gc": 22,
+      "sg": 30,
       "aproveitamento": 70,
       "ultimosCinco": []
     },
@@ -80,6 +80,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 5,
+      "clubeId": "bahia",
+      "pontos": 49,
+      "jogos": 30,
+      "v": 13,
+      "e": 10,
+      "d": 7,
+      "gp": 44,
+      "gc": 36,
+      "sg": 8,
+      "aproveitamento": 54.44444444444444,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 6,
       "clubeId": "cruzeiro",
       "pontos": 48,
       "jogos": 29,
@@ -95,7 +111,7 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 6,
+      "posicao": 7,
       "clubeId": "atletico-mg",
       "pontos": 47,
       "jogos": 30,
@@ -106,22 +122,6 @@
       "gc": 35,
       "sg": 6,
       "aproveitamento": 52.22222222222223,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 7,
-      "clubeId": "bahia",
-      "pontos": 46,
-      "jogos": 29,
-      "v": 12,
-      "e": 10,
-      "d": 7,
-      "gp": 43,
-      "gc": 36,
-      "sg": 7,
-      "aproveitamento": 52.87356321839081,
       "ultimosCinco": []
     },
     {
@@ -242,14 +242,14 @@
       "posicao": 15,
       "clubeId": "mirassol",
       "pontos": 33,
-      "jogos": 29,
+      "jogos": 30,
       "v": 8,
       "e": 9,
-      "d": 12,
+      "d": 13,
       "gp": 34,
-      "gc": 43,
-      "sg": -9,
-      "aproveitamento": 37.93103448275862,
+      "gc": 44,
+      "sg": -10,
+      "aproveitamento": 36.666666666666664,
       "ultimosCinco": []
     },
     {
@@ -262,9 +262,9 @@
       "v": 8,
       "e": 8,
       "d": 14,
-      "gp": 30,
+      "gp": 31,
       "gc": 38,
-      "sg": -8,
+      "sg": -7,
       "aproveitamento": 35.55555555555556,
       "ultimosCinco": []
     },
@@ -5029,8 +5029,11 @@
       "dataHora": "2026-10-11T20:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 0
+      }
     },
     {
       "id": "555036",
@@ -5042,8 +5045,11 @@
       "dataHora": "2026-10-11T20:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 1
+      }
     },
     {
       "id": "555037",
@@ -5055,8 +5061,11 @@
       "dataHora": "2026-10-11T20:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 4,
+        "visitante": 1
+      }
     },
     {
       "id": "555031",
@@ -5068,8 +5077,11 @@
       "dataHora": "2026-10-11T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 0
+      }
     },
     {
       "id": "555034",
