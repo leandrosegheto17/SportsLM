@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-12T17:16:35.098Z"
+      "ultimaAtualizacao": "2026-10-12T23:44:13.964Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -626,7 +626,7 @@
         "fim": "2026-11-21"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-12T17:16:35.098Z"
+      "ultimaAtualizacao": "2026-10-12T23:44:13.964Z"
     },
     "participacao": {
       "competicaoId": "sul-americana",
@@ -667,7 +667,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-12T17:16:35.098Z"
+      "ultimaAtualizacao": "2026-10-12T23:44:13.964Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
@@ -699,11 +699,11 @@
         "competicaoId": "copa-do-brasil",
         "rodada": null,
         "fase": null,
-        "mandanteId": "vasco",
-        "visitanteId": "palmeiras",
+        "mandanteId": "palmeiras",
+        "visitanteId": "vasco",
         "dataHora": "2026-11-01",
         "horarioDefinido": true,
-        "estadio": "Estádio São Januário",
+        "estadio": "Nubank Parque",
         "status": "agendada",
         "placar": null
       }
