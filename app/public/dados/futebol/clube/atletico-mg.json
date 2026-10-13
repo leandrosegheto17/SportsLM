@@ -1,6 +1,47 @@
 [
   {
     "competicao": {
+      "id": "sul-americana",
+      "nome": "Copa Sul-Americana",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-03-03",
+        "fim": "2026-11-21"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-10-13T23:35:28.109Z"
+    },
+    "participacao": {
+      "competicaoId": "sul-americana",
+      "clubeId": "atletico-mg",
+      "status": "em-andamento",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": [
+      {
+        "id": "2607486",
+        "competicaoId": "sul-americana",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "atletico-mg",
+        "visitanteId": "externo-138818",
+        "dataHora": "2026-10-14",
+        "horarioDefinido": true,
+        "estadio": "Arena MRV",
+        "status": "agendada",
+        "placar": null,
+        "externo": {
+          "lado": "visitante",
+          "nome": "Montevideo City Torque"
+        }
+      }
+    ]
+  },
+  {
+    "competicao": {
       "id": "brasileirao-serie-a",
       "nome": "Campeonato Brasileiro Série A",
       "temporada": 2026,
@@ -10,7 +51,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-13T19:44:14.677Z"
+      "ultimaAtualizacao": "2026-10-13T23:35:28.109Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -506,8 +547,11 @@
         "dataHora": "2026-10-11T19:00:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "agendada",
-        "placar": null
+        "status": "finalizada",
+        "placar": {
+          "mandante": 2,
+          "visitante": 1
+        }
       },
       {
         "id": "555041",
@@ -617,47 +661,6 @@
   },
   {
     "competicao": {
-      "id": "sul-americana",
-      "nome": "Copa Sul-Americana",
-      "temporada": 2026,
-      "formato": "misto",
-      "janela": {
-        "inicio": "2026-03-03",
-        "fim": "2026-11-21"
-      },
-      "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-13T19:44:14.677Z"
-    },
-    "participacao": {
-      "competicaoId": "sul-americana",
-      "clubeId": "atletico-mg",
-      "status": "em-andamento",
-      "faseAtual": null,
-      "resultadoFinal": null,
-      "resumo": null
-    },
-    "partidas": [
-      {
-        "id": "2607486",
-        "competicaoId": "sul-americana",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "atletico-mg",
-        "visitanteId": "externo-138818",
-        "dataHora": "2026-10-14",
-        "horarioDefinido": true,
-        "estadio": "Arena MRV",
-        "status": "agendada",
-        "placar": null,
-        "externo": {
-          "lado": "visitante",
-          "nome": "Montevideo City Torque"
-        }
-      }
-    ]
-  },
-  {
-    "competicao": {
       "id": "copa-do-brasil",
       "nome": "Copa do Brasil",
       "temporada": 2026,
@@ -667,7 +670,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-13T19:44:14.677Z"
+      "ultimaAtualizacao": "2026-10-13T23:35:28.109Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",

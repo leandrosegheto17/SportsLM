@@ -1,6 +1,43 @@
 [
   {
     "competicao": {
+      "id": "libertadores",
+      "nome": "Copa Libertadores da América",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-02-03",
+        "fim": "2026-11-28"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-10-13T23:35:28.109Z"
+    },
+    "participacao": {
+      "competicaoId": "libertadores",
+      "clubeId": "palmeiras",
+      "status": "em-andamento",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": [
+      {
+        "id": "2606267",
+        "competicaoId": "libertadores",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "fluminense",
+        "visitanteId": "palmeiras",
+        "dataHora": "2026-10-15",
+        "horarioDefinido": true,
+        "estadio": "Estádio do Maracanã",
+        "status": "agendada",
+        "placar": null
+      }
+    ]
+  },
+  {
+    "competicao": {
       "id": "brasileirao-serie-a",
       "nome": "Campeonato Brasileiro Série A",
       "temporada": 2026,
@@ -10,7 +47,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-13T19:44:14.677Z"
+      "ultimaAtualizacao": "2026-10-13T23:35:28.109Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -506,8 +543,11 @@
         "dataHora": "2026-10-11T20:30:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "agendada",
-        "placar": null
+        "status": "finalizada",
+        "placar": {
+          "mandante": 4,
+          "visitante": 1
+        }
       },
       {
         "id": "555040",
@@ -617,43 +657,6 @@
   },
   {
     "competicao": {
-      "id": "libertadores",
-      "nome": "Copa Libertadores da América",
-      "temporada": 2026,
-      "formato": "misto",
-      "janela": {
-        "inicio": "2026-02-03",
-        "fim": "2026-11-28"
-      },
-      "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-13T19:44:14.677Z"
-    },
-    "participacao": {
-      "competicaoId": "libertadores",
-      "clubeId": "palmeiras",
-      "status": "em-andamento",
-      "faseAtual": null,
-      "resultadoFinal": null,
-      "resumo": null
-    },
-    "partidas": [
-      {
-        "id": "2606267",
-        "competicaoId": "libertadores",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "fluminense",
-        "visitanteId": "palmeiras",
-        "dataHora": "2026-10-15",
-        "horarioDefinido": true,
-        "estadio": "Estádio do Maracanã",
-        "status": "agendada",
-        "placar": null
-      }
-    ]
-  },
-  {
-    "competicao": {
       "id": "copa-do-brasil",
       "nome": "Copa do Brasil",
       "temporada": 2026,
@@ -663,7 +666,7 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-13T19:44:14.677Z"
+      "ultimaAtualizacao": "2026-10-13T23:35:28.109Z"
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
