@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-15T18:51:36.604Z"
+      "ultimaAtualizacao": "2026-10-15T21:56:29.189Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -617,67 +617,6 @@
   },
   {
     "competicao": {
-      "id": "sul-americana",
-      "nome": "Copa Sul-Americana",
-      "temporada": 2026,
-      "formato": "misto",
-      "janela": {
-        "inicio": "2026-03-03",
-        "fim": "2026-11-21"
-      },
-      "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-15T18:51:36.604Z"
-    },
-    "participacao": {
-      "competicaoId": "sul-americana",
-      "clubeId": "vasco",
-      "status": "em-andamento",
-      "faseAtual": null,
-      "resultadoFinal": null,
-      "resumo": null
-    },
-    "partidas": [
-      {
-        "id": "2606044",
-        "competicaoId": "sul-americana",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "externo-135156",
-        "visitanteId": "vasco",
-        "dataHora": "2026-10-14",
-        "horarioDefinido": true,
-        "estadio": "Estadio Alberto José Armando",
-        "status": "finalizada",
-        "placar": {
-          "mandante": 0,
-          "visitante": 1
-        },
-        "externo": {
-          "lado": "mandante",
-          "nome": "Boca Juniors"
-        }
-      },
-      {
-        "id": "2606045",
-        "competicaoId": "sul-americana",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "vasco",
-        "visitanteId": "externo-135156",
-        "dataHora": "2026-10-21",
-        "horarioDefinido": true,
-        "estadio": "Estádio São Januário",
-        "status": "agendada",
-        "placar": null,
-        "externo": {
-          "lado": "visitante",
-          "nome": "Boca Juniors"
-        }
-      }
-    ]
-  },
-  {
-    "competicao": {
       "id": "copa-do-brasil",
       "nome": "Copa do Brasil",
       "temporada": 2026,
@@ -687,47 +626,40 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-15T18:51:36.604Z"
+      "ultimaAtualizacao": null
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
       "clubeId": "vasco",
-      "status": "em-andamento",
+      "status": "sem-dados",
       "faseAtual": null,
       "resultadoFinal": null,
       "resumo": null
     },
-    "partidas": [
-      {
-        "id": "2570523",
-        "competicaoId": "copa-do-brasil",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "vitoria",
-        "visitanteId": "vasco",
-        "dataHora": "2026-09-03",
-        "horarioDefinido": true,
-        "estadio": "Estádio Manoel Barradas",
-        "status": "finalizada",
-        "placar": {
-          "mandante": 0,
-          "visitante": 2
-        }
+    "partidas": []
+  },
+  {
+    "competicao": {
+      "id": "sul-americana",
+      "nome": "Copa Sul-Americana",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-03-03",
+        "fim": "2026-11-21"
       },
-      {
-        "id": "2599514",
-        "competicaoId": "copa-do-brasil",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "palmeiras",
-        "visitanteId": "vasco",
-        "dataHora": "2026-11-01",
-        "horarioDefinido": true,
-        "estadio": "Nubank Parque",
-        "status": "agendada",
-        "placar": null
-      }
-    ]
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": null
+    },
+    "participacao": {
+      "competicaoId": "sul-americana",
+      "clubeId": "vasco",
+      "status": "sem-dados",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": []
   },
   {
     "competicao": {

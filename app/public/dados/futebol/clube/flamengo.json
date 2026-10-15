@@ -1,47 +1,6 @@
 [
   {
     "competicao": {
-      "id": "libertadores",
-      "nome": "Copa Libertadores da América",
-      "temporada": 2026,
-      "formato": "misto",
-      "janela": {
-        "inicio": "2026-02-03",
-        "fim": "2026-11-28"
-      },
-      "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-15T18:51:36.604Z"
-    },
-    "participacao": {
-      "competicaoId": "libertadores",
-      "clubeId": "flamengo",
-      "status": "em-andamento",
-      "faseAtual": null,
-      "resultadoFinal": null,
-      "resumo": null
-    },
-    "partidas": [
-      {
-        "id": "2607182",
-        "competicaoId": "libertadores",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "externo-135160",
-        "visitanteId": "flamengo",
-        "dataHora": "2026-10-16",
-        "horarioDefinido": true,
-        "estadio": "Estadio Jorge Luis Hirschi",
-        "status": "agendada",
-        "placar": null,
-        "externo": {
-          "lado": "mandante",
-          "nome": "Estudiantes de La Plata"
-        }
-      }
-    ]
-  },
-  {
-    "competicao": {
       "id": "brasileirao-serie-a",
       "nome": "Campeonato Brasileiro Série A",
       "temporada": 2026,
@@ -51,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-15T18:51:36.604Z"
+      "ultimaAtualizacao": "2026-10-15T21:56:29.189Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -670,10 +629,33 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-15T18:51:36.604Z"
+      "ultimaAtualizacao": null
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
+      "clubeId": "flamengo",
+      "status": "sem-dados",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": []
+  },
+  {
+    "competicao": {
+      "id": "libertadores",
+      "nome": "Copa Libertadores da América",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-02-03",
+        "fim": "2026-11-28"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": null
+    },
+    "participacao": {
+      "competicaoId": "libertadores",
       "clubeId": "flamengo",
       "status": "sem-dados",
       "faseAtual": null,

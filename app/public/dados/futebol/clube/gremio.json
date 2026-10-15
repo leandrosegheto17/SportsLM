@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-15T18:51:36.604Z"
+      "ultimaAtualizacao": "2026-10-15T21:56:29.189Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -629,47 +629,17 @@
         "fim": "2026-11-04"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-15T18:51:36.604Z"
+      "ultimaAtualizacao": null
     },
     "participacao": {
       "competicaoId": "copa-do-brasil",
       "clubeId": "gremio",
-      "status": "em-andamento",
+      "status": "sem-dados",
       "faseAtual": null,
       "resultadoFinal": null,
       "resumo": null
     },
-    "partidas": [
-      {
-        "id": "2570522",
-        "competicaoId": "copa-do-brasil",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "gremio",
-        "visitanteId": "internacional",
-        "dataHora": "2026-09-03",
-        "horarioDefinido": true,
-        "estadio": "Arena do Grêmio",
-        "status": "finalizada",
-        "placar": {
-          "mandante": 3,
-          "visitante": 1
-        }
-      },
-      {
-        "id": "2599711",
-        "competicaoId": "copa-do-brasil",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "gremio",
-        "visitanteId": "atletico-mg",
-        "dataHora": "2026-11-01",
-        "horarioDefinido": true,
-        "estadio": "Arena do Grêmio",
-        "status": "agendada",
-        "placar": null
-      }
-    ]
+    "partidas": []
   },
   {
     "competicao": {
@@ -682,7 +652,7 @@
         "fim": "2026-11-21"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-15T18:51:36.604Z"
+      "ultimaAtualizacao": null
     },
     "participacao": {
       "competicaoId": "sul-americana",
