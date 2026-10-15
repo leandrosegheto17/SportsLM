@@ -1,8 +1,8 @@
 {
-  "geradoEm": "2026-10-15T00:26:00.764Z",
+  "geradoEm": "2026-10-15T05:00:23.551Z",
   "fontes": {
     "ge": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "pulado",
       "itensNovos": 0,
       "falhasConsecutivas": 0,
@@ -10,7 +10,7 @@
       "instavelDesde": null
     },
     "espn-brasil": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "ok",
       "itensNovos": 0,
       "falhasConsecutivas": 0,
@@ -18,7 +18,7 @@
       "instavelDesde": null
     },
     "gazeta-esportiva": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "ok",
       "itensNovos": 343,
       "falhasConsecutivas": 0,
@@ -26,7 +26,7 @@
       "instavelDesde": null
     },
     "terra-esportes": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "falha",
       "itensNovos": 0,
       "falhasConsecutivas": 1,
@@ -34,7 +34,7 @@
       "instavelDesde": null
     },
     "uol-esporte": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "ok",
       "itensNovos": 15,
       "falhasConsecutivas": 0,
@@ -42,7 +42,7 @@
       "instavelDesde": null
     },
     "superesportes": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "falha",
       "itensNovos": 0,
       "falhasConsecutivas": 1,
@@ -50,7 +50,7 @@
       "instavelDesde": null
     },
     "f1mania": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "ok",
       "itensNovos": 21,
       "falhasConsecutivas": 0,
@@ -58,7 +58,7 @@
       "instavelDesde": null
     },
     "motorsport-brasil": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "ok",
       "itensNovos": 49,
       "falhasConsecutivas": 0,
@@ -66,15 +66,15 @@
       "instavelDesde": null
     },
     "estadao-esportes": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "ok",
-      "itensNovos": 64,
+      "itensNovos": 70,
       "falhasConsecutivas": 0,
       "instavel": false,
       "instavelDesde": null
     },
     "r7-esporte": {
-      "ultimaTentativa": "2026-10-15T00:25:53.401Z",
+      "ultimaTentativa": "2026-10-15T05:00:16.080Z",
       "resultado": "ok",
       "itensNovos": 100,
       "falhasConsecutivas": 0,
@@ -87,30 +87,28 @@
     "tenis": 16,
     "volei-quadra": 1,
     "formula1": 84,
+    "futebol": 63,
+    "geral": 67,
     "fora-do-recorte": 1,
-    "futebol": 71,
-    "geral": 51,
-    "surfe": 1,
-    "futebol-americano": 1,
     "ginastica-artistica": 1
   },
-  "gruposFormados": 4,
+  "gruposFormados": 3,
   "futebol": {
     "brasileirao-serie-a": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-10-15T00:26:00.764Z"
+      "ultimaAtualizacao": "2026-10-15T05:00:23.551Z"
     },
     "libertadores": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-10-15T00:26:00.764Z"
+      "ultimaAtualizacao": "2026-10-15T05:00:23.551Z"
     },
     "sul-americana": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-10-15T00:26:00.764Z"
+      "ultimaAtualizacao": "2026-10-15T05:00:23.551Z"
     },
     "copa-do-brasil": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-10-15T00:26:00.764Z"
+      "ultimaAtualizacao": "2026-10-15T05:00:23.551Z"
     },
     "paulista": {
       "resultado": "fora-da-janela",
