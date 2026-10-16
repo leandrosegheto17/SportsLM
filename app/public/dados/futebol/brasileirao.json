@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-16T21:30:12.938Z"
+    "ultimaAtualizacao": "2026-10-16T23:47:42.214Z"
   },
   "classificacao": [
     {
@@ -241,21 +241,37 @@
       "grupo": "Matchday",
       "posicao": 15,
       "clubeId": "mirassol",
-      "pontos": 33,
-      "jogos": 30,
+      "pontos": 34,
+      "jogos": 31,
       "v": 8,
-      "e": 9,
+      "e": 10,
       "d": 13,
       "gp": 34,
       "gc": 44,
       "sg": -10,
-      "aproveitamento": 36.666666666666664,
+      "aproveitamento": 36.55913978494624,
       "ultimosCinco": []
     },
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 16,
+      "clubeId": "internacional",
+      "pontos": 33,
+      "jogos": 31,
+      "v": 7,
+      "e": 12,
+      "d": 12,
+      "gp": 33,
+      "gc": 38,
+      "sg": -5,
+      "aproveitamento": 35.483870967741936,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 17,
       "clubeId": "corinthians",
       "pontos": 32,
       "jogos": 30,
@@ -265,22 +281,6 @@
       "gp": 31,
       "gc": 38,
       "sg": -7,
-      "aproveitamento": 35.55555555555556,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 17,
-      "clubeId": "internacional",
-      "pontos": 32,
-      "jogos": 30,
-      "v": 7,
-      "e": 11,
-      "d": 12,
-      "gp": 33,
-      "gc": 38,
-      "sg": -5,
       "aproveitamento": 35.55555555555556,
       "ultimosCinco": []
     },
@@ -4997,8 +4997,11 @@
       "dataHora": "2026-10-11T00:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 2,
+        "visitante": 1
+      }
     },
     {
       "id": "555030",
@@ -5010,8 +5013,11 @@
       "dataHora": "2026-10-11T19:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 2,
+        "visitante": 1
+      }
     },
     {
       "id": "555035",
@@ -5023,8 +5029,11 @@
       "dataHora": "2026-10-11T20:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 0
+      }
     },
     {
       "id": "555036",
@@ -5036,8 +5045,11 @@
       "dataHora": "2026-10-11T20:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 1
+      }
     },
     {
       "id": "555037",
@@ -5049,8 +5061,11 @@
       "dataHora": "2026-10-11T20:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 4,
+        "visitante": 1
+      }
     },
     {
       "id": "555031",
@@ -5062,8 +5077,11 @@
       "dataHora": "2026-10-11T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 0
+      }
     },
     {
       "id": "555034",
@@ -5075,8 +5093,11 @@
       "dataHora": "2026-10-12T19:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 1
+      }
     },
     {
       "id": "555033",
@@ -5088,8 +5109,11 @@
       "dataHora": "2026-10-12T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 4
+      }
     },
     {
       "id": "555032",
@@ -5101,8 +5125,11 @@
       "dataHora": "2026-10-13T00:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 4,
+        "visitante": 2
+      }
     },
     {
       "id": "555047",
@@ -5114,7 +5141,7 @@
       "dataHora": "2026-10-16T23:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
