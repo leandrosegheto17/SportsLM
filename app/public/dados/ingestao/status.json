@@ -1,8 +1,8 @@
 {
-  "geradoEm": "2026-10-16T18:16:45.122Z",
+  "geradoEm": "2026-10-16T21:30:12.938Z",
   "fontes": {
     "ge": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "pulado",
       "itensNovos": 0,
       "falhasConsecutivas": 0,
@@ -10,7 +10,7 @@
       "instavelDesde": null
     },
     "espn-brasil": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "ok",
       "itensNovos": 0,
       "falhasConsecutivas": 0,
@@ -18,7 +18,7 @@
       "instavelDesde": null
     },
     "gazeta-esportiva": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "ok",
       "itensNovos": 343,
       "falhasConsecutivas": 0,
@@ -26,7 +26,7 @@
       "instavelDesde": null
     },
     "terra-esportes": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "falha",
       "itensNovos": 0,
       "falhasConsecutivas": 1,
@@ -34,7 +34,7 @@
       "instavelDesde": null
     },
     "uol-esporte": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "ok",
       "itensNovos": 15,
       "falhasConsecutivas": 0,
@@ -42,7 +42,7 @@
       "instavelDesde": null
     },
     "superesportes": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "falha",
       "itensNovos": 0,
       "falhasConsecutivas": 1,
@@ -50,7 +50,7 @@
       "instavelDesde": null
     },
     "f1mania": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "ok",
       "itensNovos": 21,
       "falhasConsecutivas": 0,
@@ -58,7 +58,7 @@
       "instavelDesde": null
     },
     "motorsport-brasil": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "ok",
       "itensNovos": 50,
       "falhasConsecutivas": 0,
@@ -66,15 +66,15 @@
       "instavelDesde": null
     },
     "estadao-esportes": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "ok",
-      "itensNovos": 60,
+      "itensNovos": 63,
       "falhasConsecutivas": 0,
       "instavel": false,
       "instavelDesde": null
     },
     "r7-esporte": {
-      "ultimaTentativa": "2026-10-16T18:16:38.835Z",
+      "ultimaTentativa": "2026-10-16T21:30:06.082Z",
       "resultado": "ok",
       "itensNovos": 100,
       "falhasConsecutivas": 0,
@@ -83,37 +83,35 @@
     }
   },
   "distribuicaoClassificacao": {
-    "basquete": 1,
-    "tenis": 19,
-    "volei-quadra": 3,
-    "formula1": 92,
+    "basquete": 4,
+    "tenis": 17,
+    "volei-quadra": 4,
+    "formula1": 91,
     "atletismo": 1,
-    "futebol": 45,
-    "geral": 74,
-    "mma": 2,
-    "skate": 1,
+    "geral": 65,
+    "judo": 5,
+    "futebol": 48,
+    "mma": 1,
+    "skate": 2,
     "fora-do-recorte": 1
   },
-  "gruposFormados": 4,
+  "gruposFormados": 3,
   "futebol": {
     "brasileirao-serie-a": {
       "resultado": "atualizada",
-      "ultimaAtualizacao": "2026-10-16T18:16:45.122Z"
+      "ultimaAtualizacao": "2026-10-16T21:30:12.938Z"
     },
     "libertadores": {
-      "resultado": "falha",
-      "ultimaAtualizacao": null,
-      "mensagemErro": "TheSportsDB respondeu HTTP 403 (classificação, liga 4501)"
+      "resultado": "atualizada",
+      "ultimaAtualizacao": "2026-10-16T21:30:12.938Z"
     },
     "sul-americana": {
-      "resultado": "falha",
-      "ultimaAtualizacao": null,
-      "mensagemErro": "TheSportsDB respondeu HTTP 403 (classificação, liga 4724)"
+      "resultado": "pausado-por-cota",
+      "ultimaAtualizacao": null
     },
     "copa-do-brasil": {
-      "resultado": "falha",
-      "ultimaAtualizacao": null,
-      "mensagemErro": "TheSportsDB respondeu HTTP 403 (partidas, liga 4725)"
+      "resultado": "pausado-por-cota",
+      "ultimaAtualizacao": null
     },
     "paulista": {
       "resultado": "fora-da-janela",
@@ -156,5 +154,5 @@
     "football-data-org": 2,
     "thesportsdb": 4
   },
-  "pausadoPorCota": false
+  "pausadoPorCota": true
 }
