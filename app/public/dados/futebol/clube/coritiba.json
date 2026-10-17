@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-17T19:59:35.542Z"
+      "ultimaAtualizacao": "2026-10-17T22:00:43.794Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -19,16 +19,16 @@
       "faseAtual": null,
       "resultadoFinal": null,
       "resumo": {
-        "jogos": 30,
+        "jogos": 31,
         "v": 10,
-        "e": 9,
+        "e": 10,
         "d": 11,
         "gp": 38,
         "gc": 48,
         "sg": -10,
-        "pontos": 39,
-        "aproveitamento": 43.333333333333336,
-        "posicao": 11
+        "pontos": 40,
+        "aproveitamento": 43.01075268817204,
+        "posicao": 10
       }
     },
     "partidas": [
@@ -522,7 +522,7 @@
         "dataHora": "2026-10-17T21:30:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "agendada",
+        "status": "aguardando-resultado",
         "placar": null
       },
       {
