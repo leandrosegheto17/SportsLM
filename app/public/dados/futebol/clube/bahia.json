@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-18T18:46:52.524Z"
+      "ultimaAtualizacao": "2026-10-18T21:14:15.569Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -28,7 +28,7 @@
         "sg": 8,
         "pontos": 49,
         "aproveitamento": 54.44444444444444,
-        "posicao": 6
+        "posicao": 7
       }
     },
     "partidas": [
@@ -652,7 +652,7 @@
         "fim": "2026-11-28"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-18T18:46:52.524Z"
+      "ultimaAtualizacao": null
     },
     "participacao": {
       "competicaoId": "libertadores",
