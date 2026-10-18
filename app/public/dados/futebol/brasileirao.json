@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-17T23:54:16.498Z"
+    "ultimaAtualizacao": "2026-10-18T02:38:52.752Z"
   },
   "classificacao": [
     {
@@ -128,6 +128,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 8,
+      "clubeId": "sao-paulo",
+      "pontos": 42,
+      "jogos": 31,
+      "v": 12,
+      "e": 6,
+      "d": 13,
+      "gp": 36,
+      "gc": 35,
+      "sg": 1,
+      "aproveitamento": 45.16129032258064,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 9,
       "clubeId": "santos",
       "pontos": 42,
       "jogos": 30,
@@ -143,7 +159,7 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 9,
+      "posicao": 10,
       "clubeId": "rb-bragantino",
       "pontos": 40,
       "jogos": 30,
@@ -154,22 +170,6 @@
       "gc": 35,
       "sg": 3,
       "aproveitamento": 44.44444444444444,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 10,
-      "clubeId": "sao-paulo",
-      "pontos": 39,
-      "jogos": 30,
-      "v": 11,
-      "e": 6,
-      "d": 13,
-      "gp": 35,
-      "gc": 35,
-      "sg": 0,
-      "aproveitamento": 43.333333333333336,
       "ultimosCinco": []
     },
     {
@@ -242,14 +242,14 @@
       "posicao": 15,
       "clubeId": "vasco",
       "pontos": 35,
-      "jogos": 29,
+      "jogos": 30,
       "v": 9,
       "e": 8,
-      "d": 12,
+      "d": 13,
       "gp": 36,
-      "gc": 42,
-      "sg": -6,
-      "aproveitamento": 40.229885057471265,
+      "gc": 43,
+      "sg": -7,
+      "aproveitamento": 38.88888888888889,
       "ultimosCinco": []
     },
     {
@@ -5189,8 +5189,11 @@
       "dataHora": "2026-10-17T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 0,
+        "visitante": 2
+      }
     },
     {
       "id": "555049",
@@ -5202,8 +5205,11 @@
       "dataHora": "2026-10-18T00:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 0
+      }
     },
     {
       "id": "555045",
