@@ -9,13 +9,29 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-18T21:14:15.569Z"
+    "ultimaAtualizacao": "2026-10-18T23:28:24.196Z"
   },
   "classificacao": [
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 1,
+      "clubeId": "flamengo",
+      "pontos": 67,
+      "jogos": 31,
+      "v": 20,
+      "e": 7,
+      "d": 4,
+      "gp": 61,
+      "gc": 25,
+      "sg": 36,
+      "aproveitamento": 72.04301075268818,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 2,
       "clubeId": "palmeiras",
       "pontos": 66,
       "jogos": 31,
@@ -26,22 +42,6 @@
       "gc": 22,
       "sg": 32,
       "aproveitamento": 70.96774193548387,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 2,
-      "clubeId": "flamengo",
-      "pontos": 64,
-      "jogos": 30,
-      "v": 19,
-      "e": 7,
-      "d": 4,
-      "gp": 58,
-      "gc": 25,
-      "sg": 33,
-      "aproveitamento": 71.11111111111111,
       "ultimosCinco": []
     },
     {
@@ -114,14 +114,14 @@
       "posicao": 7,
       "clubeId": "bahia",
       "pontos": 49,
-      "jogos": 30,
+      "jogos": 31,
       "v": 13,
       "e": 10,
-      "d": 7,
+      "d": 8,
       "gp": 44,
-      "gc": 36,
-      "sg": 8,
-      "aproveitamento": 54.44444444444444,
+      "gc": 39,
+      "sg": 5,
+      "aproveitamento": 52.68817204301075,
       "ultimosCinco": []
     },
     {
@@ -144,6 +144,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 9,
+      "clubeId": "rb-bragantino",
+      "pontos": 43,
+      "jogos": 31,
+      "v": 12,
+      "e": 7,
+      "d": 12,
+      "gp": 39,
+      "gc": 35,
+      "sg": 4,
+      "aproveitamento": 46.236559139784944,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 10,
       "clubeId": "sao-paulo",
       "pontos": 42,
       "jogos": 31,
@@ -154,22 +170,6 @@
       "gc": 35,
       "sg": 1,
       "aproveitamento": 45.16129032258064,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 10,
-      "clubeId": "rb-bragantino",
-      "pontos": 40,
-      "jogos": 30,
-      "v": 11,
-      "e": 7,
-      "d": 12,
-      "gp": 38,
-      "gc": 35,
-      "sg": 3,
-      "aproveitamento": 44.44444444444444,
       "ultimosCinco": []
     },
     {
@@ -306,14 +306,14 @@
       "posicao": 19,
       "clubeId": "remo",
       "pontos": 25,
-      "jogos": 30,
+      "jogos": 31,
       "v": 5,
       "e": 10,
-      "d": 15,
+      "d": 16,
       "gp": 33,
-      "gc": 48,
-      "sg": -15,
-      "aproveitamento": 27.77777777777778,
+      "gc": 49,
+      "sg": -16,
+      "aproveitamento": 26.881720430107524,
       "ultimosCinco": []
     },
     {
@@ -5253,7 +5253,7 @@
       "dataHora": "2026-10-18T21:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
@@ -5266,7 +5266,7 @@
       "dataHora": "2026-10-18T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "agendada",
+      "status": "aguardando-resultado",
       "placar": null
     },
     {
