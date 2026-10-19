@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-18T23:28:24.196Z"
+      "ultimaAtualizacao": "2026-10-19T01:32:06.134Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -522,8 +522,11 @@
         "dataHora": "2026-10-18T21:30:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "aguardando-resultado",
-        "placar": null
+        "status": "finalizada",
+        "placar": {
+          "mandante": 0,
+          "visitante": 3
+        }
       },
       {
         "id": "555053",
@@ -652,7 +655,7 @@
         "fim": "2026-11-28"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-18T23:28:24.196Z"
+      "ultimaAtualizacao": "2026-10-19T01:32:06.134Z"
     },
     "participacao": {
       "competicaoId": "libertadores",

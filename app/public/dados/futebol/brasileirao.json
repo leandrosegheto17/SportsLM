@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-18T23:28:24.196Z"
+    "ultimaAtualizacao": "2026-10-19T01:32:06.134Z"
   },
   "classificacao": [
     {
@@ -144,22 +144,6 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 9,
-      "clubeId": "rb-bragantino",
-      "pontos": 43,
-      "jogos": 31,
-      "v": 12,
-      "e": 7,
-      "d": 12,
-      "gp": 39,
-      "gc": 35,
-      "sg": 4,
-      "aproveitamento": 46.236559139784944,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 10,
       "clubeId": "sao-paulo",
       "pontos": 42,
       "jogos": 31,
@@ -170,6 +154,22 @@
       "gc": 35,
       "sg": 1,
       "aproveitamento": 45.16129032258064,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 10,
+      "clubeId": "rb-bragantino",
+      "pontos": 41,
+      "jogos": 31,
+      "v": 11,
+      "e": 8,
+      "d": 12,
+      "gp": 39,
+      "gc": 36,
+      "sg": 3,
+      "aproveitamento": 44.086021505376344,
       "ultimosCinco": []
     },
     {
@@ -305,15 +305,15 @@
       "grupo": "Matchday",
       "posicao": 19,
       "clubeId": "remo",
-      "pontos": 25,
+      "pontos": 26,
       "jogos": 31,
       "v": 5,
-      "e": 10,
-      "d": 16,
-      "gp": 33,
+      "e": 11,
+      "d": 15,
+      "gp": 34,
       "gc": 49,
-      "sg": -16,
-      "aproveitamento": 26.881720430107524,
+      "sg": -15,
+      "aproveitamento": 27.956989247311824,
       "ultimosCinco": []
     },
     {
@@ -5253,8 +5253,11 @@
       "dataHora": "2026-10-18T21:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 0,
+        "visitante": 3
+      }
     },
     {
       "id": "555048",
@@ -5266,8 +5269,11 @@
       "dataHora": "2026-10-18T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "aguardando-resultado",
-      "placar": null
+      "status": "finalizada",
+      "placar": {
+        "mandante": 1,
+        "visitante": 1
+      }
     },
     {
       "id": "555044",
