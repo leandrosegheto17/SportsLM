@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-19T20:04:27.169Z"
+      "ultimaAtualizacao": "2026-10-19T23:52:15.171Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -522,11 +522,8 @@
         "dataHora": "2026-10-18T22:30:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "finalizada",
-        "placar": {
-          "mandante": 1,
-          "visitante": 1
-        }
+        "status": "aguardando-resultado",
+        "placar": null
       },
       {
         "id": "555056",

@@ -9,7 +9,7 @@
       "fim": "2026-12-02"
     },
     "provedor": "football-data-org",
-    "ultimaAtualizacao": "2026-10-19T20:04:27.169Z"
+    "ultimaAtualizacao": "2026-10-19T23:52:15.171Z"
   },
   "classificacao": [
     {
@@ -176,6 +176,22 @@
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
       "posicao": 11,
+      "clubeId": "vitoria",
+      "pontos": 39,
+      "jogos": 31,
+      "v": 11,
+      "e": 6,
+      "d": 14,
+      "gp": 34,
+      "gc": 44,
+      "sg": -10,
+      "aproveitamento": 41.935483870967744,
+      "ultimosCinco": []
+    },
+    {
+      "competicaoId": "brasileirao-serie-a",
+      "grupo": "Matchday",
+      "posicao": 12,
       "clubeId": "botafogo",
       "pontos": 39,
       "jogos": 31,
@@ -191,7 +207,7 @@
     {
       "competicaoId": "brasileirao-serie-a",
       "grupo": "Matchday",
-      "posicao": 12,
+      "posicao": 13,
       "clubeId": "coritiba",
       "pontos": 39,
       "jogos": 31,
@@ -202,22 +218,6 @@
       "gc": 49,
       "sg": -11,
       "aproveitamento": 41.935483870967744,
-      "ultimosCinco": []
-    },
-    {
-      "competicaoId": "brasileirao-serie-a",
-      "grupo": "Matchday",
-      "posicao": 13,
-      "clubeId": "vitoria",
-      "pontos": 36,
-      "jogos": 30,
-      "v": 10,
-      "e": 6,
-      "d": 14,
-      "gp": 33,
-      "gc": 44,
-      "sg": -11,
-      "aproveitamento": 40,
       "ultimosCinco": []
     },
     {
@@ -258,14 +258,14 @@
       "posicao": 16,
       "clubeId": "corinthians",
       "pontos": 32,
-      "jogos": 30,
+      "jogos": 31,
       "v": 8,
       "e": 8,
-      "d": 14,
+      "d": 15,
       "gp": 31,
-      "gc": 38,
-      "sg": -7,
-      "aproveitamento": 35.55555555555556,
+      "gc": 39,
+      "sg": -8,
+      "aproveitamento": 34.40860215053764,
       "ultimosCinco": []
     },
     {
@@ -5269,11 +5269,8 @@
       "dataHora": "2026-10-18T22:30:00Z",
       "horarioDefinido": true,
       "estadio": null,
-      "status": "finalizada",
-      "placar": {
-        "mandante": 1,
-        "visitante": 1
-      }
+      "status": "aguardando-resultado",
+      "placar": null
     },
     {
       "id": "555044",
@@ -5497,6 +5494,19 @@
       "placar": null
     },
     {
+      "id": "555064",
+      "competicaoId": "brasileirao-serie-a",
+      "rodada": 33,
+      "fase": null,
+      "mandanteId": "coritiba",
+      "visitanteId": "vitoria",
+      "dataHora": "2026-10-29T22:30:00Z",
+      "horarioDefinido": true,
+      "estadio": null,
+      "status": "agendada",
+      "placar": null
+    },
+    {
       "id": "555069",
       "competicaoId": "brasileirao-serie-a",
       "rodada": 33,
@@ -5530,19 +5540,6 @@
       "mandanteId": "corinthians",
       "visitanteId": "mirassol",
       "dataHora": "2026-10-30T23:00:00Z",
-      "horarioDefinido": true,
-      "estadio": null,
-      "status": "agendada",
-      "placar": null
-    },
-    {
-      "id": "555064",
-      "competicaoId": "brasileirao-serie-a",
-      "rodada": 33,
-      "fase": null,
-      "mandanteId": "coritiba",
-      "visitanteId": "vitoria",
-      "dataHora": "2026-10-31T19:00:00Z",
       "horarioDefinido": true,
       "estadio": null,
       "status": "agendada",
