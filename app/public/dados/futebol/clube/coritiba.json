@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-19T06:43:55.725Z"
+      "ultimaAtualizacao": "2026-10-19T14:17:06.887Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -548,7 +548,7 @@
         "fase": null,
         "mandanteId": "coritiba",
         "visitanteId": "vitoria",
-        "dataHora": "2026-10-29T22:30:00Z",
+        "dataHora": "2026-10-31T19:00:00Z",
         "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
