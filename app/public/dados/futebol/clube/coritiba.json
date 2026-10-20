@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-19T23:52:15.171Z"
+      "ultimaAtualizacao": "2026-10-20T03:02:35.155Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -28,7 +28,7 @@
         "sg": -11,
         "pontos": 39,
         "aproveitamento": 41.935483870967744,
-        "posicao": 13
+        "posicao": 12
       }
     },
     "partidas": [
@@ -548,7 +548,7 @@
         "fase": null,
         "mandanteId": "coritiba",
         "visitanteId": "vitoria",
-        "dataHora": "2026-10-29T22:30:00Z",
+        "dataHora": "2026-10-31T19:00:00Z",
         "horarioDefinido": true,
         "estadio": null,
         "status": "agendada",
