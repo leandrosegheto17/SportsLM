@@ -1,5 +1,19 @@
 [
   {
+    "id": "1287940c572231e7c12c5b00391dc3acacb27415024330544ea266d14c755301",
+    "fonteId": "gazeta-esportiva",
+    "feedId": "gazeta-basquete",
+    "titulo": "NBA: veja duelos de abertura, favoritos e possíveis surpresas para a temporada 2026/27",
+    "resumo": "A temporada 2026/27 da NBA se inicia nesta terça-feira. Com o fim da pré-temporada na última sexta-feira, as equipes agora voltam suas atenções à principal competição de basquete do mundo. A disputa reúne times que buscam manter o protagonismo e jogadores que querem seguir no topo, mas também abre…",
+    "link": "https://www.gazetaesportiva.com/campeonatos/nba/nba-veja-duelos-de-abertura-favoritos-e-possiveis-surpresas-para-a-temporada-2026-27/",
+    "publicadoEm": "2026-10-20T07:00:54-03:00",
+    "dataEstimada": false,
+    "esporte": "basquete",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
     "id": "8eece444f8b4532f338d222b19b7e030ce33e4759ca7c0376924684d84f1748f",
     "fonteId": "gazeta-esportiva",
     "feedId": "gazeta-basquete",
@@ -11,7 +25,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f73a3433fc11e794ea876a052139b9ec16f8cd84624e2e60db788a6afc31ffe3",
@@ -25,7 +39,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "4bf11d322bcd4d987f74825692e51b20096737147234604d1287c7ea63659295",
@@ -39,7 +53,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "989c5116ce9082c8c8aae288190b12bd9ed984f2cb143f6fbfac161c15b9c5d7",
@@ -53,7 +67,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "3b7edccc488d4e69a7ac120323f7fe75180ee26a38aa4682e46cb17c4cb1b0ef",
@@ -67,7 +81,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "2734731707cbcb8685ed01e57d8857083ebded96e016b3fe4efcdf6ef43196c5",
@@ -81,7 +95,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "8c31600ebd7faeb69f919958ffdc5011dc4da4ae26e8490ce23304d535d4241d",
@@ -95,7 +109,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "caf62c9651ba2166fbf3ba9ea5e22bdd925876fe8cac4f8298510f3630f49522",
@@ -109,7 +123,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "97dbcfa3c92fb12bdce52b9611cfbc9e0ff5c00780bb1f50eadfd2d1b2f42726",
@@ -123,7 +137,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "b424b439e5d83f3d5f5abc3fbc4b67cabf0124194bc829fa8b4d6f771840fd5b",
@@ -137,7 +151,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "8e16d38783c8d6f044c80b97044d44c111fabb907ca5dfd62a8d648bec592166",
@@ -151,7 +165,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "97628496f4ad593afbfd522396796238872f9ba3d2d6a0a51ef548e9c29cd7bd",
@@ -165,7 +179,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "1e6ee3c00f440edc6c71942a223ce19b503f1a6a4e6df972a527c14b69a683d1",
@@ -179,7 +193,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "52c6ce8be8df42fe1ebc9eb17acdb495238c543872c05494c0f19686f3f25c3c",
@@ -193,7 +207,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "3f3069b4b188e48931ea772be791dd90fb3b3cd37c8f3b6293dd4fb21835db48",
@@ -207,7 +221,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f5acdd782175584fcb2b3056f67ce1ac6436881e73fb1ca18e88b45e3737b751",
@@ -221,7 +235,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "d72c39084fecb4241c73897e85f336f5f92c9c3e96f0954513d7f7ba5956954e",
@@ -235,7 +249,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "4ebbca9802b02b5444f86ef59088703d68f97f326e0f3944614d2df7289be7b7",
@@ -249,7 +263,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "bb353b4f71d74da365b4fbeaed45508a20ed827a1075dab4d2adeb9086ae373a",
@@ -263,7 +277,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "82cfd7447096553a5cb2a3c13a3e4a8cc34d17084bd3381282a55dc76c411e98",
@@ -277,7 +291,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "9c6fff8d07f813da16ba8b4e430547de5040e425d07b88cb51fdf6f160b67f14",
@@ -291,7 +305,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "710921e86f72ac39ca51b8b897d82bcd3999efe21e8f657a120053da77393bc0",
@@ -305,7 +319,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "9a3bbe913281c1087451336c61d5f2af65a58db43e131b7eaa37c91a4aaccb22",
@@ -319,7 +333,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "e78347b8e1aa9ee01ac1e4b8d6a0fe420e20965c3770c3579876d609462e4443",
@@ -333,7 +347,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f9beda15cb3ff3b33fd665d0e046d4e5147e86f2404e3a0ae4a531e41e22b47e",
@@ -347,7 +361,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "50284ab0a6da160802c186f3de8f463d3df23a69ab6a7970a80801c8c4d9bf66",
@@ -361,7 +375,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "7fc7494246bdf26594f446bb1a2f29e00de2e6f1e101825530ac08660695764e",
@@ -375,7 +389,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "1841b76a29b9b05a3148e18862471329b569983817958b0de9802caf82fb71b8",
@@ -389,7 +403,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "28b51226f77fdaa482090601c4ea33f1215b2075a4e9d90b74c172207bfed561",
@@ -403,7 +417,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "85680610a3018ab448c2fff474d69724a13fed35cd5db32ead1807bad72c002e",
@@ -417,7 +431,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "593042003da021fe264c4a4cc717b5747722016d209c2d5832a8e6b83bbc2c99",
@@ -431,7 +445,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "3737dba9b1e196f3e790712b9755ba58f389467ffb3001ebee74578d57954cc4",
@@ -445,7 +459,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "05b14d41f7ffd6534faa48d6bf77870d3e136d094fa35e5c4f7ac68105d42f56",
@@ -459,21 +473,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "96179a5c16544afdf36dd00cb02c7ae1330da3e02e54d9f7c2bf4562985415ba",
-    "fonteId": "gazeta-esportiva",
-    "feedId": "gazeta-automobilismo",
-    "titulo": "Fórmula 1 anuncia retorno à África com GP de Ruanda previsto para o início da década de 2030",
-    "resumo": "A Fórmula 1 anunciou um acordo de 10 anos para realizar o Grande Prêmio da África em Ruanda a partir do início da década de 2030. A corrida marcará o retorno da categoria ao continente africano pela primeira vez desde 1993. O evento será disputado em um novo circuito que será construído em…",
-    "link": "https://www.gazetaesportiva.com/motor/formula-1/formula-1-anuncia-retorno-africa-gp-ruanda/",
-    "publicadoEm": "2026-10-13T09:03:03-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "679ddb615aaedc7f49b8b43e71233399c972fbdcd8887db60885af10a4c1ff58",
@@ -487,217 +487,357 @@
     "esporte": "atletismo",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "3056b1a3a88e17763ec585b0ce48d063a96f7427ec0e3934da82f819e596ec82",
+    "id": "3c1e8a417fcf95f68e4d05be843aa87600a554f1375e1989a87059ac401e39e0",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Justiça manda Palmeiras exibir contratos e valores da venda de Allan",
-    "resumo": "A Justiça de São Paulo deu dez dias ao Palmeiras para apresentar os contratos que dão ao Figueirense parte da venda de Allan ao Manchester City. A ordem é da juíza Marcella Leal Restum, da 5ª Vara Cível Central.",
-    "link": "https://www.uol.com.br/esporte/colunas/pedro-lopes/2026/10/20/justica-manda-palmeiras-exibir-contratos-e-valores-da-venda-de-allan.htm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
+    "titulo": "'Situação desesperadora': Colunistas debatem crise no Corinthians",
+    "resumo": "O Corinthians vive uma \"situação desesperadora\" após empatar com o Vitória na Neo Química Arena, avaliou Danilo Lavieri no UOL News Esporte, do Canal UOL.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/situacao-desesperadora-diz-danilo-lavieri-sobre-crise-no-corinthians.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
     "dataEstimada": true,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "6473fb488d599cc400a0bc64c8913b09801485b58dae985be9c15fd621e16220",
+    "id": "03a2ffa956fc30ff79a8ade1333eb9d17ede0b9927a87a68bdadcfe149065807",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Vasco em ebulição por Maracanã e SAF encara Boca por glória após 26 anos",
-    "resumo": "Vasco terá o jogo mais importante do ano nesta terça-feira, quando faz a volta da semifinal da Sul-Americana contra o Boca Juniors. A partida está marcada para 21h30 (de Brasília) e, após semanas de...",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/vasco-sul-americana-semifinal-boca.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "02cb7b27d62807641a317d5f5323df615dfb7a33c2545d2841c46cadb24f929b",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Gabriel Jesus 'ressuscita' no Barça e tem início mais artilheiro da década",
-    "resumo": "A surpreendente transferência para o Barcelona tem feito Gabriel Jesus reviver os melhores momentos de sua carreira.",
-    "link": "https://www.uol.com.br/esporte/futebol/colunas/rafael-reis/2026/10/20/gabriel-jesus-ressuscita-no-barcelona-e-tem-melhor-inicio-da-decada.htm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
+    "titulo": "'Sigo arcando com as consequências', diz ex-Lazio acusado de mentir idade",
+    "resumo": "Joseph Minala, ex-meia da Lazio, relatou, em entrevista ao jornal argentino Olé, que ainda lida com as consequências mais de uma década após ser acusado de mentir sua idade quando ainda era adolescente.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/sigo-arcando-com-as-consequencias-diz-ex-lazio-que-teve-idade-contestada.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "8db6fbae33a1a34c736c80bbfc00c4f0e848dc358dbcab8f2d82b4ed1752df2e",
+    "id": "85e3d8bad5903d1ac225bb15649c71619073d729497d2dcb5270e1104943c8b1",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Como finais brasileiras e Copa do Brasil podem criar G9 no Brasileirão?",
-    "resumo": "Os clubes brasileiros podem ocupar 100% das finais sul-americanas: Palmeiras, Flamengo e Fluminense lutam por vagas na decisão da Libertadores, enquanto Vasco e Atlético-MG caminham para ser finalistas na Sul-Americana. Se isso acontecer, a possibilidade de o Brasileirão ter até um G9 cresce.",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/finais-brasileiras-g9-brasileirao.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "bc858f300ccc58ed421990d75d5dd2d6954206ab021f34c5eedbc8443b042cd4",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Sem Vitor Roque, quais são as opções do Palmeiras para decisão na Liberta?",
-    "resumo": "A presença de Vitor Roque entre os titulares do Palmeiras no jogo decisivo contra o Fluminense, pelas semifinais da Copa Libertadores, é improvável. O atacante perdeu os últimos dois treinos com o elenco, e a comissão técnica e o Núcleo de Saúde Performance adotam cautela com o atacante, de olho…",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/sem-vitor-roque-quais-sao-as-opcoes-do-palmeiras-para-decisao-na-liberta.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "6851f8bda52e8ca1859947d5927d2b51da9c9888c6fe21e6d3c38c5c529d8561",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Boca conta com 'milagre', mas precisa derrubar tabu para eliminar Vasco",
-    "resumo": "O Boca Juniors vai ao Maracanã encarar o Vasco hoje, pelo jogo de volta da semifinal da Sul-Americana, reforçado, mas precisando derrubar um tabu de seis anos. A bola rola às 21h30 (de Brasília).",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/boca-paredes-vasco-tabu-sul-americana.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "abf83ea2c0b5f65843b64f45a0e6348d5f115a740b5d1ad4023b9d6fa2f5755b",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Vimos o jogo do Corinthians ao lado de Seedorf: a noite do técnico na Arena",
-    "resumo": "A primeira vez de Seedorf na Neo Química Arena em um jogo do Corinthians começou com gestos discretos e poucas reações. Aos poucos, porém, o treinador entrou no clima da Fiel, até comemorar efusivamente o gol de empate e demonstrar nervosismo nos minutos finais da partida contra o Vitória.",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/vimos-o-jogo-do-corinthians-ao-lado-de-seedorf-a-noite-do-tecnico-na-arena.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "9b971e56ef06d464d613a29dbee88b727f35d57829a49c216944dca7598530b0",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Foi pênalti para o Corinthians contra o Vitória? Ex-árbitros são unânimes",
-    "resumo": "O Corinthians empatou com o Vitória por 1 a 1, nesta segunda-feira (19), na Neo Química Arena, em jogo válido pela 31ª rodada do Brasileirão. O gol da equipe alvinegra, marcado por Yuri Alberto, saiu após pênalti sofrido pelo volante André, após consulta do árbitro Sávio Pereira Sampaio ao VAR.…",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/ex-arbitros-penalti-corinthians-vitoria-brasileirao-2026.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "04b9f17a2d7cc9f0592ebc92e90d2ae537f7287be50999598b6126f22e638b66",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Por que GP dos EUA é palco na medida para a recuperação de Bortoleto",
-    "resumo": "Audi saiu empolgada da etapa de Singapura, e não foi apenas pelos pontos que Nico Hulkenberg marcou, tanto na sprint, quanto na corrida do domingo. E, sim, pelo que eles viram na telemetria: está cl...",
-    "link": "https://www.uol.com.br/esporte/colunas/pole-position/2026/10/20/por-que-gp-dos-eua-e-palco-na-medida-para-a-recuperacao-de-bortoleto.htm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
+    "titulo": "'Intocável é só o escudo do clube', diz Mourinho sobre Vini Jr. no Real",
+    "resumo": "José Mourinho afirmou que \"intocável\" no Real Madrid é apenas o escudo do clube, ao comentar a situação de Vini Jr. antes do jogo contra o RB Leipzig pela Champions League.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/intocavel-e-o-escudo-do-clube-diz-mourinho-ao-falar-sobre-vini-jr-no-real.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "aba2828d1e940f70b9fb7a721e115b4811f3a1064e65c64f903907f0b3eafb95",
+    "id": "83a0985eb22e2ae9022dd6e515d9f25128db52a574688cdc0cf6403291e123e6",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "PSG x Barcelona vale título simbólico e tem disputa de sucessores de Neymar",
-    "resumo": "Paris Saint-Germain e Barcelona fazem, nesta terça-feira (20), às 17h (horário de Brasília) um duelo prematuro por um título simbólico: apenas na terceira rodada da fase inicial da Champions League, franceses e catalães se enfrentam para contar ao planeta bola qual é o melhor time do mundo na…",
-    "link": "https://www.uol.com.br/esporte/futebol/colunas/futebol-pelo-mundo/2026/10/20/psg-x-barcelona-vale-titulo-simbolico-e-tem-disputa-de-sucessores-de-neymar.htm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
-    "dataEstimada": true,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "371c979e2c3debee1b947e85c84026c72f42b13db03157d8f0b002f1f6a8545f",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Globo encaminha compra dos direitos do Pan-2027 e reforça presença olímpica",
-    "resumo": "A Globo tem um acordo já avançado para retornar os diretos de transmissão do Pan Lima-2027. O movimento faz parte do fortalecimento da emissora no esporte olímpico neste ciclo dos Jogos. Não há transmissão da Globo do Pan desde 2007 na edição do Rio de Janeiro.",
-    "link": "https://www.uol.com.br/esporte/futebol/colunas/rodrigo-mattos/2026/10/20/globo-encaminha-compra-dos-direitos-do-pan-2027-e-reforca-presenca-olimpica.htm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
-    "dataEstimada": true,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "3dfac11207b40076a79534573081ed430a884963e1ffbc5e380d62822b55a867",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "São Paulo prioriza dívidas do elenco e deve pagar transfer ban em novembro",
-    "resumo": "O São Paulo deve deixar só para o próximo mês o pagamento do transfer ban da Fifa relacionado à contratação de Giuliano Galoppo, segundo apurou o UOL.",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/sao-paulo-prioriza-dividas-do-elenco-e-deve-pagar-transfer-ban-em-novembro.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
+    "titulo": "Corinthians entrou em parafuso, não ganha em lugar nenhum, diz Arnaldo",
+    "resumo": "O Corinthians \"entrou em parafuso\" e simplesmente não consegue mais vencer, afirmou Arnaldo Ribeiro no UOL News Esporte, do Canal UOL.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/corinthians-entrou-em-parafuso-nao-ganha-em-lugar-nenhum-diz-arnaldo.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
     "dataEstimada": true,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "e0ce1b1a67f6bac932efa4f9edf1d5d85b967e6e165edbb3de3a7a76dd95eb1e",
+    "id": "de35ad910b448521c13e6597bdb6db3be602d06a04fa642098ff11544f7f1b66",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Liverpool x Villarreal: horário e onde assistir ao jogo da Liga dos Campeões",
-    "resumo": "Liverpool e Villarreal jogam nesta terça-feira (20), às 16h (de Brasília), em Anfield Road, em Liverpool, pela 3ª rodada da Primeira Fase da Liga dos Campeões. Liverpool x Villarreal ao vivo: siga o jogo em tempo real no Placar UOL",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/liverpool-x-villarreal-horario-e-onde-assistir-ao-jogo-da-liga-dos-campeoes.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
+    "titulo": "Mourinho escala Vini Jr. na Champions, mas avisa: 'O que torna jogador intocável é rendimento'",
+    "resumo": "Suspenso por quatro jogos em LaLiga e, portanto, fora do clássico com o Barcelona, no domingo, Vini Jr. ainda goza de prestígio com o técnico José Mourinho e está confirmado para o confronto com o RB Leipzig, nesta quarta-feira, no Santiago Bernabéu, pela Champions League. O brasileiro, contudo,…",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/10/20/mourinho-escala-vini-jr-na-champions-mas-avisa-o-que-torna-jogador-intocavel-e-rendimento.htm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "96ca496cb8aa6a0f4e5d0ef0069f70451edf3e82b6bbe30a84e8ab887bc84e17",
+    "id": "9b3c118aace54006abdd0dc5271f369490c2895f64a26c86a7b713e101a1080a",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Fla e Palmeiras sobram, e Brasileiro tem 3º lugar mais distante da história",
-    "resumo": "Flamengo e Palmeiras criaram um \"G2\" no Campeonato Brasileiro e, de quebra, estabeleceram a maior diferença em relação ao terceiro colocado na era dos pontos corridos com 20 clubes (desde 2006).",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/brasileirao-distancia-terceiro-colocado.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
+    "titulo": "NBA: Ingressos para estreia de LeBron nos 76ers custam até R$ 52 mil",
+    "resumo": "Quem decidir ir de última hora à partida de estreia de LeBron James pelo Philadelphia 76ers terá de pagar caro. Hoje, a nova equipe do astro visita o New York Knicks, às 20h (de Brasília), na abertura da temporada da NBA.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/ingressos-estreia-lebron-76ers-nba.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
+    "dataEstimada": true,
+    "esporte": "basquete",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "a3d226886fa1b634fb61e09f908297fca29efe66adfcb78800096c398f9355b0",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Onde vai passar Manchester City x AEK pela Liga dos Campeões? Como assistir ao vivo",
+    "resumo": "Manchester City e AEK Atenas se enfrentam nesta terça-feira (20), às 16h (de Brasília), no Etihad Stadium, em Manchester, pela 3ª rodada da Primeira Fase da Liga dos Campeões.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/onde-vai-passar-manchester-city-x-aek-atenas-pela-liga-dos-campeoes-como-assistir-ao-vivo.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
+    "dataEstimada": true,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "5595960b6992be0bd58214775569bef062ced4a72af2514edfd2c731f05eaf72",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Onde vai passar PSG x Barcelona pela Liga dos Campeões? Como assistir ao vivo",
+    "resumo": "Paris Saint-Germain e Barcelona jogam nesta terça-feira (20), às 16h (de Brasília), no Parc des Princes, em Paris, pela 3ª rodada da Primeira Fase da Liga dos Campeões.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/onde-vai-passar-paris-saint-germain-x-barcelona-pela-liga-dos-campeoes-como-assistir-ao-vivo.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
+    "dataEstimada": true,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "bdfd87470f6fe2e59567071c857617925f4834adb8004c3119ef6de02cc9205f",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Onde vai passar Liverpool x Villarreal pela Liga dos Campeões? Como assistir ao vivo",
+    "resumo": "Liverpool e Villarreal se enfrentam nesta terça-feira (20), às 16h (de Brasília), em Anfield Road, em Liverpool, pela 3ª rodada da Primeira Fase da Liga dos Campeões.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/onde-vai-passar-liverpool-x-villarreal-pela-liga-dos-campeoes-como-assistir-ao-vivo.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
+    "dataEstimada": true,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "69aabe9ef9f46b2db8ae11d9ca05ea3fe52b21f166b794c82c2aff17a78a1958",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Seedorf teve início terrível no Corinthians, avalia Rômulo Mendonça",
+    "resumo": "O início de trabalho de Clarence Seedorf no Corinthians foi \"terrível\", com mudanças sem sentido na escalação e nas substituições no empate com o Vitória, avaliou Rômulo Mendonça no UOL News Esporte, do Canal UOL.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/inicio-do-seedorf-foi-terrivel-diz-romulo-mendonca-no-corinthians.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
     "dataEstimada": true,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "a7cc55872092139c9804793a3d57884b66de37c77539629ee4385b6eae311f3c",
+    "id": "e831c6e6d7730a7a904f159c0b85361a1ed26ab1271791d6a874041b616e96c8",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Vasco x Boca Juniors: horário e onde assistir ao jogo da Copa Sul-Americana",
-    "resumo": "Vasco e Boca Juniors decidem vaga na final da Copa Sul-Americana nesta terça-feira (20), às 21h30 (de Brasília), no Maracanã, no Rio de Janeiro.",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/vasco-x-boca-juniors-horario-e-onde-assistir-ao-jogo-da-copa-sul-americana.ghtm",
-    "publicadoEm": "2026-10-20T05:47:22-03:00",
+    "titulo": "Mit Cup: Chuva marca etapa de Limeira (SP) e acirra disputa pelo título",
+    "resumo": "A chuva e as mudanças de piso em Limeira (SP) deixaram a briga pelo título ainda mais apertada na penúltima etapa da Mitsubishi Cup 2026. A prova teve transmissão ao vivo do Canal UOL.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/mit-cup-chuva-marca-etapa-de-limeira-sp-e-acirra-disputa-pelo-titulo.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
+    "dataEstimada": true,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "e1cde28b8b3551ee0c90e7687dcf5c154972ec0f9be139dbffae2b4cce697e58",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Tsitsipas vence duelo de backhands de uma mão e supera a estreia",
+    "resumo": "Almaty (Cazaquistão) ? A temporada de recuperação do grego Stefanos Tsitsipas ganhou um novo capítulo nesta terça-feira com uma vitória na primeira rodada do ATP 250 de Almaty, batendo o norte-americano Aleksandar Kovacevic em três sets, com o placar final de 7/6 (11-9), 3/6, 6/3. Enfrentando…",
+    "link": "https://tenisbrasil.uol.com.br/tsitsipas-vence-duelo-de-backhands-de-uma-mao-e-supera-a-estreia.html",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
+    "dataEstimada": true,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "df093714e7f5b158137b4bc3d53c5db73f8def0de848e7ef8ad86ea9bd3feb95",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Árbitro que virou meme após amarelar Hulk apita Palmeiras x Fluminense",
+    "resumo": "O árbitro uruguaio Esteban Ostojich apitará Palmeiras e Fluminense, amanhã, pela volta da semifinal da Copa Libertadores e terá mais um encontro com o atacante Hulk após virar meme.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/hulk-arbitro-fluminense-palmeiras-libertadores.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
     "dataEstimada": true,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "c8f099f479f7d94ac1244f1af0e00599155717dcbad14396cb76fe199b0e9f96",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "'VAR salva Seedorf': estreia do holandês no Corinthians repercute em jornal espanhol",
+    "resumo": "O Corinthians realizou sua primeira partida sob o comando de Clarence Seedorf diante do Vitória e conquistou um empate em 1 a 1, na Neo Química Arena, pela 31ª rodada do Campeonato Brasileiro. Impedido, por questões burocráticas, de estar à beira do campo, o novo treinador assistiu das…",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/10/20/var-salva-seedorf-estreia-do-holandes-no-corinthians-repercute-em-jornal-espanhol.htm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
+    "dataEstimada": true,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": "grp-ab67d9c2",
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "ea28e47cd9f080e5f352d5d041782f5986542c7ac0f49a36fa8a6bb9b825e694",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Série B pode definir terceiro time rebaixado hoje; veja cenário",
+    "resumo": "A 34ª rodada da Série B do Brasileirão termina hoje e pode definir o terceiro time rebaixado. O Londrina faz jogo de vida ou morte contra o Cuiabá, às 19h30 (de Brasília), em casa.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/londrina-serie-b-rebaixamento-cenario.ghtm",
+    "publicadoEm": "2026-10-20T11:04:11-03:00",
+    "dataEstimada": true,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "dc688eca5f1c270e2659e4cd3f0d2b27cc68e373a831094e203fef128785c59a",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: GP dos Estados Unidos terá calor de 30°C após etapas com chuva",
+    "resumo": "A Fórmula 1 deve encontrar condições bem diferentes em Austin para o GP dos Estados Unidos, após a chuva que marcou as etapas de Singapura e Sepang. A previsão indica temperaturas próximas de 30°C e baixa probabilidade de precipitação durante todo o final de semana. De acordo com a previsão…",
+    "link": "https://www.f1mania.net/f1/f1-gp-dos-estados-unidos-tera-calor-de-30c-apos-etapas-com-chuva/",
+    "publicadoEm": "2026-10-20T10:52:06-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "89997923fbc29039704072618f62aa7ce4d3bdf4c38e434a1f3bca9f7c0111ab",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: Disputa por patente de peça usada nos carros da categoria chega à Justiça nos EUA",
+    "resumo": "Uma disputa judicial envolvendo um componente técnico da Fórmula 1 , chegou aos tribunais do Texas às vésperas do GP dos Estados Unidos. A empresa britânica Sentronics Holdings acusa a alemã Allengra de violar uma patente relacionada aos medidores de fluxo de combustível utilizados na categoria.…",
+    "link": "https://www.f1mania.net/f1/f1-disputa-por-patente-de-peca-usada-nos-carros-da-categoria-chega-a-justica-nos-eua/",
+    "publicadoEm": "2026-10-20T10:34:40-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "d9ccad93269d729f26792cbf4af639960b1c8aad64dadbbd54f716b04fd64a53",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: Norris diz que não precisa da aprovação externa: “Prefiro eu mesmo realizar as coisas”",
+    "resumo": "Lando Norris não está preocupado com a opinião do que os outros pensam dele contanto que prove para si mesmo que é capaz de performar na Fórmula 1. O campeão de 2025 tem sido bastante vocal durante sua carreira sobre suas batalhas com a saúde mental e a falta de autoconfiança. Inclusive, após…",
+    "link": "https://www.f1mania.net/f1/f1-norris-diz-que-nao-precisa-da-aprovacao-externa-prefiro-eu-mesmo-realizar-as-coisas/",
+    "publicadoEm": "2026-10-20T10:19:52-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "0089daa6b90f2909d8f4c3858aecbbd7ebd8139666506f12d7e5397bad3a5723",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: Verstappen esclarece sua posição sobre corridas no Oriente Médio",
+    "resumo": "Max Verstappen explicou suas declarações sobre a realização dos GPs do Catar e de Abu Dhabi em meio ao conflito no Oriente Médio. O tetracampeão de Fórmula 1 , negou ter afirmado que se recusaria a disputar as provas e disse confiar na decisão da categoria e da FIA. A manifestação ocorre após o…",
+    "link": "https://www.f1mania.net/f1/f1-verstappen-esclarece-sua-posicao-sobre-corridas-no-oriente-medio/",
+    "publicadoEm": "2026-10-20T09:58:25-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "3f4436385c18d993f02c547c10a323499ef494dd5c26f5601727eb339342c933",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: Verstappen diz que F1 deveria evitar corridas Sprint onde “não dá para ultrapassar”",
+    "resumo": "Max Verstappen criticou a escolha de alguns circuitos para receber a corrida Sprint da Fórmula 1, destacando que não deveriam acontecer em pistas que não dá para ultrapassar. O holandês venceu a Sprint em Singapura largando a pole-position, se aproveitando de um acidente de George Russell no final…",
+    "link": "https://www.f1mania.net/f1/f1-verstappen-diz-que-f1-deveria-evitar-corridas-sprint-onde-nao-da-para-ultrapassar/",
+    "publicadoEm": "2026-10-20T09:44:05-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "34c7f22f56cf3a4fa41fe5d659dad66051369be0ec8e0833c95dab0ff9c529c6",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: Hülkenberg mira dar à Audi “motivos para comemorar” com bom desempenho nos EUA",
+    "resumo": "Nico Hülkenberg está focado para o final de semana do GP dos Estados Unidos da Fórmula 1. Empurrado por um bom desempenho em Singapura, espera conseguir manter o ritmo para dar motivos para a Audi comemorar. Em Marina Bay, o alemão conseguiu terminar a prova na oitava colocação, somando mais…",
+    "link": "https://www.f1mania.net/f1/f1-hulkenberg-mira-dar-a-audi-motivos-para-comemorar-com-bom-desempenho-nos-eua/",
+    "publicadoEm": "2026-10-20T09:27:18-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "d1c45793af951751e62137930dbf44e4151fad2c1d0245fd978e2b2044410612",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: Bortoleto espera “começar com pé direito” rodada tripla com bom resultado nos EUA",
+    "resumo": "Gabriel Bortoleto está animado para o GP dos Estados Unidos da Fórmula 1 neste final de semana. O brasileiro destacou que está determinado a virar o cenário após as últimas etapas. O titular da Audi não teve as melhores das corridas nas últimas paradas do calendário. Inclusive, no GP de Singapura,…",
+    "link": "https://www.f1mania.net/f1/f1-bortoleto-espera-comecar-com-pe-direito-rodada-tripla-com-bom-resultado-nos-eua/",
+    "publicadoEm": "2026-10-20T09:09:07-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "9a8c4d2a5d6201360f9da189d0eb5dccc39aae77d0312e01bafe467a8c53e8d7",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: Quem venceu as últimas edições do GP dos Estados Unidos em Austin?",
+    "resumo": "Max Verstappen conquistou quatro das últimas cinco corridas no Circuito das Américas, enquanto Charles Leclerc interrompeu a sequência do holandês em 2024. A Fórmula 1 retorna ao Circuito das Américas neste fim de semana para a disputa do GP dos Estados Unidos 2026, 18ª etapa da temporada. A…",
+    "link": "https://www.f1mania.net/f1/f1-quem-venceu-as-ultimas-edicoes-do-gp-dos-estados-unidos-em-austin/",
+    "publicadoEm": "2026-10-20T08:33:07-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "711eebae323be4a45d41930ce7587212cb5be99267e1e4d582546fa9d9dd7434",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: Bortoleto x Hulkenberg: o que mostram as últimas cinco corridas da Audi em 2026?",
+    "resumo": "Alemão terminou à frente do brasileiro em quatro das últimas cinco etapas da Fórmula 1 e somou sete pontos no período, enquanto problemas mecânicos e abandonos complicaram a campanha de Bortoleto. Gabriel Bortoleto atravessa um dos momentos mais complicados de sua segunda temporada na Fórmula 1.…",
+    "link": "https://www.f1mania.net/f1/f1-bortoleto-x-hulkenberg-o-que-mostram-as-ultimas-cinco-corridas-da-audi-em-2026/",
+    "publicadoEm": "2026-10-20T07:58:35-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "5cc0dda0cc461f7faa1b458b19db07b499054cc94b960bf00a92648e28e82794",
+    "fonteId": "f1mania",
+    "feedId": "f1mania-f1",
+    "titulo": "F1: Conheça o Circuito das Américas, palco do GP dos Estados Unidos 2026",
+    "resumo": "Com 5,513 km de extensão e 20 curvas, o traçado de Austin combina mudanças de elevação, trechos de alta velocidade e fortes frenagens, exigindo equilíbrio dos carros da Fórmula 1. A Fórmula 1 desembarca em Austin, no Texas, para a disputa do GP dos Estados Unidos, 18ª etapa da temporada 2026. A…",
+    "link": "https://www.f1mania.net/f1/f1-conheca-o-circuito-das-americas-palco-do-gp-dos-estados-unidos-2026/",
+    "publicadoEm": "2026-10-20T07:32:27-03:00",
+    "dataEstimada": false,
+    "esporte": "formula1",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "2b04b8468cb7d19091d88582c23f95fadbeaa81391c05670ea7abe0ceeabaa6e",
@@ -711,7 +851,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "b28da848737f748dfeedf0ced83226cc10591d8a9af76f08506dd027cd791836",
@@ -725,7 +865,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "786112478d5423cb44331b033b3b863cd7cfd760fba82d6525d523866f1043eb",
@@ -739,7 +879,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "d26b2b06cd9989b49e8fe3eaf9ea18425ddc0d4f0fcda139c8e10ec4bd8a6af6",
@@ -753,7 +893,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "7de124ea37f110d27e7a9c3c71924fb17f09a5138ae619ea67f8570bda6cacfb",
@@ -767,13 +907,13 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "d0db5b1b5eb569daf5174f3e5145b6b63ad081bb4f9c60902558790ad75dfbc0",
     "fonteId": "f1mania",
     "feedId": "f1mania-f1",
-    "titulo": "F1: Presidente da Honda diz que atraso de dois ano comprometeu projeto com Aston Martin",
+    "titulo": "F1: Presidente da Honda diz que atraso de dois anos comprometeu projeto com Aston Martin",
     "resumo": "Koji Watanabe, presidente da Honda Racing Corporation, reconheceu que a fabricante japonesa perdeu dois anos no desenvolvimento da unidade de potência usada pela Aston Martin na Fórmula 1 em 2026. Ao avaliar o desempenho do motor nesta temporada, o dirigente também admitiu que o conjunto está…",
     "link": "https://www.f1mania.net/f1/f1-presidente-da-honda-diz-que-atraso-de-dois-ano-comprometeu-projeto-com-aston-martin/",
     "publicadoEm": "2026-10-19T17:13:00-03:00",
@@ -781,7 +921,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f06d674bf5869e2c24418399d4faffb98735878237e3768b5e198b8530339005",
@@ -795,7 +935,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "62a950302e83c7f1c930b295eda27b7e219b03adb2f73cf42ae54a5e752ec938",
@@ -809,7 +949,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0cdfbcf9ff8fa9c40e46956d958e3ebd9222e62e660d068eee958443c8cf49fc",
@@ -823,7 +963,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "9212a1b6a26e5efe645a8c1de23802d4dc9a6949e10a570609ea95b685c45215",
@@ -837,7 +977,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "1c4fd2ec7c2bf36a2d6a5714f914bfdc3749d7d6c461e7139c978a810bd2287e",
@@ -851,147 +991,49 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "19f42eb98a457af1c0cd9406ceec7f5636db684bd9532e6b777779c0404d5543",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: Red Bull prepara visual inspirado na Ford Raptor em Austin",
-    "resumo": "A Red Bull Racing vai adotar uma identidade visual especial no GP dos Estados Unidos de Fórmula 1 , no próximo final de semana em Austin, com Max Verstappen e Isack Hadjar usando macacões inspirados na picape Ford Raptor. A parceria com a fabricante também mudará a aparência dos boxes da equipe e…",
-    "link": "https://www.f1mania.net/f1/f1-red-bull-prepara-visual-inspirado-na-ford-raptor-em-austin/",
-    "publicadoEm": "2026-10-19T15:08:15-03:00",
+    "id": "dc720ebdc9709a7f7ed1a4b74609915550844d9fd0d90ba1a708b8affe0b2f67",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1: Horner revela \"reunião secreta\" com Hamilton em 2012 para levá-lo à Red Bull",
+    "resumo": "Christian Horner, ex-chefe de equipe da Red Bull, revelou em sua nova autobiografia, Driver, que Lewis Hamilton, antes de deixar a McLaren para ir para Mercedes, reuniu-se com ele e com Adrian Newey em 2012 para uma possível mudança do britânico para a escuderia austríaca na temporada 2013 da…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-horner-revela-reuniao-secreta-com-hamilton-em-2012-para-leva-lo-a-red-bull/10866510/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-10-20T10:43:27-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "0fe1d961e777a4518d1a025b30968d613978fe2fafc47849f7048fd7a252d64d",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: Haas leva pintura especial com tema do novo filme do Godzilla para GP dos EUA",
-    "resumo": "A Haas revelou uma pintura especial para o GP dos Estados Unidos da Fórmula 1, que acontece neste final de semana - se inspirando no novo filme do Godzilla. Godzilla Minus Zero será lançado nos cinemas do país no próximo dia 6 de novembro, com a equipe americana do grid usando a oportunidade de…",
-    "link": "https://www.f1mania.net/f1/f1-haas-leva-pintura-especial-com-tema-do-novo-filme-do-godzilla-para-gp-dos-eua/",
-    "publicadoEm": "2026-10-19T14:52:03-03:00",
+    "id": "2e77dda2d9d49a27c05a4fc546ce5844fbea0f3fce8a55b4f104bdf4a2b8d20d",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1 - Horner desmente interesse na Ferrari: \"Não seria boa opção\"",
+    "resumo": "Christian Horner foi demitido do cargo de chefe da Red Bull em julho de 2025, ainda no meio da temporada da Fórmula 1 e, desde então, não retornou ao paddock como era esperado. Leia também: Fórmula 1F1 - Horner pede revisão do sistema do teto orçamentário: \"Equipes estão gastando 500 milhões de…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-horner-desmente-interesse-na-ferrari-nao-seria-boa-opcao/10866493/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-10-20T09:54:21-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "8120a3dc73f12045be7e1ba44901408193d5b7462079c03a6df259d6df6d7031",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: Horner revela oferta para assumir papel de chefia na Mercedes",
-    "resumo": "Christian Horner revelou como recebeu, e recusou, uma oferta feita para trabalhar como chefe de equipe na Mercedes na Fórmula 1. O britânico lançou um livro onde conta suas histórias da carreira chamado Drive. Em uma das passagens, contou como em 2012, Niki Lauda ofereceu uma posição de chefia…",
-    "link": "https://www.f1mania.net/f1/f1-horner-revela-oferta-para-assumir-papel-de-chefia-na-mercedes/",
-    "publicadoEm": "2026-10-19T14:23:59-03:00",
+    "id": "10a5fbfeb1d1e45f2af81744f036bc782c68b9a9a03e9d2beaaad425a24a602d",
+    "fonteId": "motorsport-brasil",
+    "feedId": "motorsport-brasil-f1",
+    "titulo": "F1: Bortoleto mira reviravolta e retorno ao top 10 no GP dos EUA",
+    "resumo": "Gabriel Bortoleto segue em uma sequência de finais de semanas difíceis na Fórmula 1, mas vê com bons olhos o GP dos Estados Unidos, disputado na pista do Circuito das Américas, esperando uma reviravolta e o retorno ao top 10. O editor recomenda: Fórmula 1F1: Horner admite ter pressionado Masi…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-bortoleto-mira-reviravolta-e-retorno-ao-top-10-no-gp-dos-eua/10866505/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
+    "publicadoEm": "2026-10-20T09:45:41-03:00",
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "27cab760574c806f024a834febf29206c563e4a2fbbb9128cc99e40ec543e39a",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: Verstappen aponta diferenças entre as recuperações da Red Bull em 2025 e 2026",
-    "resumo": "Max Verstappen explicou por que a recuperação recente da Red Bull Racing na temporada 2026 da Fórmula 1 , é diferente da reação que levou a equipe a disputar o título na reta final da temporada passada. Após vencer as duas últimas etapas, o holandês destacou que os problemas enfrentados pelo RB22…",
-    "link": "https://www.f1mania.net/f1/f1-verstappen-aponta-diferencas-entre-as-recuperacoes-da-red-bull-em-2025-e-2026/",
-    "publicadoEm": "2026-10-19T14:08:47-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "62757adda0a720dee132daca59782540f0c89dd20fcc7e5236e2e232582c2797",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: Honda admite que perdeu dois anos no projeto de motor da Aston Martin",
-    "resumo": "A Honda reconheceu que está atrás das rivais no desenvolvimento da unidade de potência da Fórmula 1. Koji Watanabe, presidente da Honda Racing Corporation (HRC), admitiu que a fabricante japonesa começou o projeto tarde demais e acabou perdendo dois anos em relação aos concorrentes. Ele deixará o…",
-    "link": "https://www.f1mania.net/f1/f1-honda-admite-que-perdeu-dois-anos-no-projeto-de-motor-da-aston-martin/",
-    "publicadoEm": "2026-10-19T13:52:33-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "8a0caaf14d8bafcbd47c0889434d0133661208f12cd621a261e1feb1320f807a",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: Horner fala sobre desejo de Red Bull em Leclerc e diz que o via “frustrado na Ferrari”",
-    "resumo": "Christian Horner escreveu em seu livro 'Drive' que sentia que Charles Leclerc estava \"frustrado na Ferrari\" quando quis assinar com o monegasco para a Red Bull na Fórmula 1 - assunto que o piloto provavelmente terá de lidar no final de semana em Austin. Em um trecho da publicação, o ex-dirigente…",
-    "link": "https://www.f1mania.net/f1/f1-horner-escreve-sobre-desejo-de-red-bull-em-leclerc-e-o-via-frustrado-na-ferrari/",
-    "publicadoEm": "2026-10-19T13:36:50-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "ae1e5d61ea45d912a67c6caf7a63e34dd5ecde3047e96774377a659d8441728d",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: Verstappen terá novo engenheiro de corrida no GP dos Estados Unidos",
-    "resumo": "Max Verstappen vai começar a trabalhar com Tom Hart como engenheiro de corrida na Red Bull Racing, nesse próximo final de semana no GP dos Estados Unidos de Fórmula 1 , em Austin. A mudança faz parte da transição que antecede a saída de Gianpiero Lambiase, que deixará a equipe para trabalhar na…",
-    "link": "https://www.f1mania.net/f1/f1-verstappen-tera-novo-engenheiro-de-corrida-no-gp-dos-estados-unidos/",
-    "publicadoEm": "2026-10-19T13:12:53-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "440836a726511dcf4a19994e88746b240570f19785dfa53b4c755efa4b218cd9",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: McLaren ainda não definiu punição a Norris por incidente com Piastri",
-    "resumo": "A McLaren ainda precisa decidir se vai tomar alguma medida contra Lando Norris pelo acidente com Oscar Piastri na corrida sprint do GP de Singapura. O caso será discutido novamente em Austin, durante a realização do GP dos Estados Unidos, onde a equipe terá de definir como lidar com o episódio. Na…",
-    "link": "https://www.f1mania.net/f1/f1-mclaren-ainda-nao-definiu-punicao-a-norris-por-incidente-com-piastri/",
-    "publicadoEm": "2026-10-19T12:54:48-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "04df90eb7e9392af72edce6dc9b1f1b7b52014873ca686f96855f00614d3f62e",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: Confira o que Antonelli precisa para conquistar o título em Austin",
-    "resumo": "Kimi Antonelli pode conquistar o título de pilotos na Fórmula 1 , já neste próximo final de semana no GP dos Estados Unidos, em Austin. O italiano precisa vencer a corrida e contar com alguns resultados específicos de George Russell e Lewis Hamilton para garantir a taça antecipadamente. Líder do…",
-    "link": "https://www.f1mania.net/f1/f1-confira-o-que-antonelli-precisa-para-conquistar-o-titulo-em-austin/",
-    "publicadoEm": "2026-10-19T12:14:47-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "a7b3e646f054bbad3275a35f5d66865aac582539a046e428c43d157dfebac902",
-    "fonteId": "f1mania",
-    "feedId": "f1mania-f1",
-    "titulo": "F1: Chefe da Haas nega pressão da Ferrari por contratação de pilotos",
-    "resumo": "A Haas avaliou quatro pilotos antes de escolher Rafael Câmara para a temporada 2027 da Fórmula 1. Entre eles estava Ryo Hirakawa, apoiado pela Toyota, parceira da equipe. A decisão acabou favorecendo o brasileiro, que substituirá Esteban Ocon ao fim deste ano. Ayao Komatsu, chefe da Haas, chegou a…",
-    "link": "https://www.f1mania.net/f1/f1-chefe-da-haas-nega-pressao-da-ferrari-por-contratacao-de-pilotos/",
-    "publicadoEm": "2026-10-19T11:57:17-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0eb0c4a6dd0a8f92044e06c1e4dc02d790561f8be070b6217745efbe5275aa66",
@@ -1005,7 +1047,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "7a855e806d1558a7ee90a537aa40c1db60c2acd000faa68c964cce00f1af3d13",
@@ -1019,7 +1061,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "faaaf641a991d39bbd840fd6b8a94d0b0ee0b48e742aca7bf88af3e290f7e7dc",
@@ -1033,7 +1075,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "bd181757028f270d9cd973ea08782030c30a6b5b8d4916cffb702040000d9046",
@@ -1047,7 +1089,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0c02e66f8bae935741d681bb30219bc7f13941ccbf18ad3e964b79ccff286dd4",
@@ -1061,7 +1103,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "ecc4b4b9639956c0cea4b7795c5e7917b5f9914e6364c6084345d985d43b4543",
@@ -1075,7 +1117,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "e7fb10fb04c87b932f3cc0811907902f7adc981aca7a7da329235a9b1def09ce",
@@ -1089,7 +1131,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "a4c8dce55b19218e20221007314ab6abc69ceeadbd776fe95c36aecfe76fd791",
@@ -1103,7 +1145,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "450860ae3694d8d6fa35a503478b00380168e8261ef5a857911324aa02a0e7d8",
@@ -1117,7 +1159,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "b03990356cacf480a186ae2fb40799e3ecb0752bf2e6aeec0ec6d9cffcc5ba50",
@@ -1131,7 +1173,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "357b95a48c3a76483c6ab4bfd37a66bb8a9f27bf4b5257d2c27253ac6ed43b47",
@@ -1145,7 +1187,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "7758dc8a401afd5be13fa3aa71cb238817a3bec8ba16f15c9ed3343a3dad5172",
@@ -1159,7 +1201,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "71ed81c6ce062b0575afbc99a1d02e285979318f2fd89cc5925608ffbcc613df",
@@ -1173,7 +1215,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "8fe2f065355344c57220734375346354363e707528487148411cd4ca883255b4",
@@ -1187,7 +1229,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "472d3d112fcbcd096185ac8efef0b0244954679825526c8a5dab06ab59ae8e79",
@@ -1201,7 +1243,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "df74525800782000f0209183611be31363f02b76f26f9c52c99d44ae118c63b5",
@@ -1215,7 +1257,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "934d388e52b73db0b8647222f55d1f8a2d7dfe701d9b67ca8f47309f65259ec3",
@@ -1229,7 +1271,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0f2f5fcc86085625d168967fb194e47aa82680a5aa0c46e9650cf68f58da9982",
@@ -1243,7 +1285,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "7e915848a424e861611005322fccf9fad81889be7132986d62375e300555ae27",
@@ -1257,7 +1299,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "2fb5dc0a4621fbe39eca156a7e1fce53d489134427c6d62b03e8591dc5d16397",
@@ -1271,7 +1313,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "332c585078fc6378f6dfa5edb4320d222be9bd42be7f063d2083bba7b4e99680",
@@ -1285,7 +1327,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "13efe5e8e94601a44b6dfd92fd438af38a9d340bdbb0d6770ae5d8a00b9d23c4",
@@ -1299,7 +1341,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "ffc3db32a96112b03d9da994603aaf396cd0c97aaafcfc376a0e3f23bf7c99fd",
@@ -1313,7 +1355,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "9d0f1f4c8135dd3f5dedbae0b1019fb4b2b2cba910c53572e85656d592f8e72a",
@@ -1327,7 +1369,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "e1288490935a6be096a3ae9ab005c4311d43f2c6d573ab60df25486209da0317",
@@ -1341,7 +1383,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "bd53196e9be37dd682597d8ca3dbb2985a226788425acae116f35e03d7f555b5",
@@ -1355,7 +1397,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "719270fc5d1cfc4acf27a9ef31001e4e8d6c160e717e5d201c127279f0180a8a",
@@ -1369,7 +1411,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "7057847b785c1959a23be5cbcae8c141c58efa3113edc9e2f3922a308850e701",
@@ -1383,7 +1425,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "6a6c3c182807eaf88c28e17502f0c9226439dffc7621b8d8f6b8fd32970e262c",
@@ -1397,7 +1439,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f82cf87bce81dc942e4f736dde9789129004ab78520b6c7fc1bcd92b04aa5966",
@@ -1411,7 +1453,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "d60444f2b7917c7211868a35d8c4797b34e1a36df8abdce340b9f9848cc1b72e",
@@ -1425,7 +1467,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "59b93c9b28b6411088db770e91ca872290723c7da79ba60d5f45ef2b4fa675f4",
@@ -1439,7 +1481,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f981254a806548648e8451306c6e4e023ec59914f4c1755141c2e597bf330cce",
@@ -1453,7 +1495,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "2eecaa7493e627f69c01ac539914995d53dfbb4a322048c0b7e601ca905ddf4b",
@@ -1467,7 +1509,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "239c84ab7cd07a2201086022806398f6d72dd9b08a2e19049368d853ae5e01ee",
@@ -1481,7 +1523,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "cfc4909d11fa8a14edb820d4a8fafe7b03bd4a7ef1cb2151aca7c0c297893e47",
@@ -1495,7 +1537,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "ec2234c1a37665ba901e6f34683abb86387c7347436c1733bb17a4523b607e61",
@@ -1509,7 +1551,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "cd6dbf5a9b6b3ee4e9050c8b60202d46112f6fb5489d254c4196590feeb5b6a2",
@@ -1523,7 +1565,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "a32dd38f96182c9b496eedd9734d94f6befbb0cfee1f21783bd8a7b5970898b0",
@@ -1537,7 +1579,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "6fffcaf4c0e92356a52833a100a1ab279283f4a67bdf1ba65cad2be5a250e1c0",
@@ -1551,7 +1593,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "7cf69baf770848c7cb0be57b800fa10eec53901d3a64323b38860c21db86c322",
@@ -1565,7 +1607,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "ee910cae4734e834b70de812f6c009649d68164144854424fba59121c52f7cc8",
@@ -1579,7 +1621,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "934892fc2d885d918f72c7f2dd3b7384890bc3ad06648ed4ef752b52bfc11837",
@@ -1593,7 +1635,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "7cae33cda7f5d37f409c1fa5c62999239444ab9444c2acaff8a2c3f51652faf3",
@@ -1607,7 +1649,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "2dea24a8af918247210654ef565fa213475d39bfecbc5ada3bef9d707eb43fcd",
@@ -1621,7 +1663,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "6a6c9a1bc87757178e2283029c75ebe4d350c819c5407c35be17061d45365273",
@@ -1635,7 +1677,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "fef673e3db434e8b84c75e10eced59848db96249b235e3cea34327f840e07865",
@@ -1649,49 +1691,21 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "449eb4234627d8407786ab62201a9d0780cac655e2c43bccf37d5828a3e06ddd",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "F1 EXCLUSIVO: Bortoleto 'abre o coração' sobre futuro na Audi e 'comparações' com Antonelli e Hadjar",
-    "resumo": "Gabriel Bortoleto já viu Kimi Antonelli e Isack Hadjar subirem ao pódio na Fórmula 1. São pilotos da sua geração, com os quais compartilhou o grid de categorias de base. Ele os conhece, correu contra eles e sabe que os venceu. No entanto, suas carreiras passam por momentos distintos hoje, com o…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-bortoleto-abre-o-coracao-sobre-futuro-na-audi-e-comparacoes-com-antonelli-e-hadjar/10865028/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-10-14T08:13:34-03:00",
+    "id": "b5fbcf89e8bdd74bc517cf912dcc34bf495143c0a22e54115c5be2f45014a04e",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Mourinho escala Vini Jr. na Champions, mas avisa: ‘O único intocável é o escudo do Real Madrid’",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/mourinho-escala-vini-jr-na-champions-mas-avisa-o-unico-intocavel-e-o-escudo-do-real-madrid/",
+    "publicadoEm": "2026-10-20T10:30:33-03:00",
     "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "89f0c6e9b63ab7bb052babfba31c38a67c857a95ce48c1495e7a5caf977711b2",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "F1: McDonald’s e Red Bull lançam ‘O Pit Stop Perfeito' com novas miniaturas colecionáveis",
-    "resumo": "Foi dada a largada em mais uma etapa da parceria entre Red Bull e McDonald’s. A partir de 13 de outubro, o sabor e a energia da bebida chegam com uma nova experiência no cardápio do restaurante. Entre as novidades, está o lançamento do Red Bull Blue Raspberry Energizer, que mistura o energético…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-mcdonalds-e-red-bull-lancam-o-pit-stop-perfeito-com-novas-miniaturas-colecionaveis-/10865052/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-10-13T21:53:33-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "39cdc0cf7ee576bf6f1ac8bad81f92f6ae0dfd8f280a6f541c47c80b8deb580b",
-    "fonteId": "motorsport-brasil",
-    "feedId": "motorsport-brasil-f1",
-    "titulo": "F1: McLaren não consegue corrigir dirigibilidade do carro até 2027; entenda",
-    "resumo": "O chefe de equipe da McLaren, Andrea Stella, admitiu que não é possível melhorar as características de dirigibilidade do carro MCL40 “sem mudanças fundamentais”, o que só será possível a partir da temporada 2027 da Fórmula 1. O editor recomenda: Fórmula 1F1: Mercedes confirma que Russell e…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-mclaren-nao-consegue-corrigir-dirigibilidade-do-carro-ate-2027-entenda/10865008/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=br",
-    "publicadoEm": "2026-10-13T15:00:00-03:00",
-    "dataEstimada": false,
-    "esporte": "formula1",
-    "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f10d7b29df8db843ebe254088e7b204fe4afdd48ee6725a34332d024c0c50a87",
@@ -1705,49 +1719,7 @@
     "esporte": "basquete",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "2a1063c3f66ad693c921f34d2c227fcbf8e4b92e2b7f0345444168e6fd0c6d0a",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Por que é tão difícil para o Vasco jogar no Maracanã, controlado por Flamengo e Fluminense?",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/por-que-e-tao-dificil-para-o-vasco-jogar-no-maracana-controlado-por-flamengo-e-fluminense/",
-    "publicadoEm": "2026-10-20T05:30:00-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "66f129d68f42cc5cf9fcf2444e8e18d5bba9f9617ff0de82b773b1a5a44a7250",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Auxiliar do Corinthians ressalta união do grupo e aposta em evolução da equipe: ‘Acredito em todos’",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/auxiliar-do-corinthians-ressalta-uniao-do-grupo-e-aposta-em-evolucao-da-equipe-acredito-em-todos-npres/",
-    "publicadoEm": "2026-10-19T23:11:22-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "76d071c89e830ab4668bfcd4b8a8bf1bdf17b09178b836fad8f02ce60c02524a",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Corinthians pouco cria, mesmo com mais volume, fica empatado com o Vitória e continua colado no Z-4",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/corinthians-x-vitoria-31-rodada-campeonato-brasileiro-analise/",
-    "publicadoEm": "2026-10-19T22:05:43-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "fe1f932738353d6a219e13043b3c564e3a43ad01ec04a5e0c00345964cae3675",
@@ -1761,105 +1733,7 @@
     "esporte": "futebol-americano",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "c80334df2b11d86506e0b5c761c849eb9eebe66bc0270e02fe0bbd1d18250dff",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Seedorf assiste ao jogo do Corinthians da arquibancada e entra na festa da torcida; veja",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/seedorf-assiste-ao-jogo-do-corinthians-da-arquibancada-e-entra-na-festa-da-torcida-veja-npres/",
-    "publicadoEm": "2026-10-19T20:52:27-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "544a59679a00f38d7b94caedde5ecbdcc67cb9c3f40167dc02ea8d9987791afc",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Por que Seedorf não estará no banco comandando o Corinthians hoje?",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/por-que-seedorf-nao-estara-no-banco-comandando-o-corinthians-hoje-npres/",
-    "publicadoEm": "2026-10-19T19:30:00-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "e6986d4368dc1f0978db363497c8b45243a1b0eb9c2bf2a7c635f9e960503fe8",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Clássico entre Atlético-MG e Cruzeiro no sub-20 tem gol do meio-campo e briga generalizada; assista",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/classico-entre-atletico-mg-e-cruzeiro-no-sub-20-tem-gol-do-meio-campo-e-briga-generalizada-assista-npres/",
-    "publicadoEm": "2026-10-19T19:00:50-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "f7d8a81760867f02152973a91acd030e8dc4919fe421d62865a700885a66e566",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Corinthians x Vitória pelo Brasileirão: onde assistir ao vivo, horário e escalação",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/corinthians-x-vitoria-pelo-brasileirao-onde-assistir-ao-vivo-horario-e-escalacao-npres/",
-    "publicadoEm": "2026-10-19T19:00:05-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "85e63cca9ef79a39e7ed8adda3977e15d9c12ac4ae30b4380a92a7b8cf980494",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Goiás x Náutico pela Série B: onde assistir ao vivo, horário e escalação",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/goias-x-nautico-pela-serie-b-onde-assistir-ao-vivo-horario-e-escalacao/",
-    "publicadoEm": "2026-10-19T18:30:00-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "66ee2510fcac4cb4603d57edf615a55057137cba96390f19114c7f8c804a9910",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Rebeca se classifica para a final do salto e Brasil disputa cinco medalhas no Mundial de Ginástica",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/rebeca-se-classifica-para-a-final-do-salto-e-brasil-disputa-cinco-medalhas-no-mundial-de-ginastica-npres/",
-    "publicadoEm": "2026-10-19T17:43:52-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "5e5a08a4b68a53c3985ed20251a8854f972f848442c7af0a06aec79dc98c5872",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Corre com Lula explode no Brasil",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/corrida-para-todos/corre-com-lula-explode-no-brasil/",
-    "publicadoEm": "2026-10-19T17:44:31-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "6e0737442d25e0e53ba1fc5f3a7a4ef97a46151da86d7d88bc6a210782b79aed",
@@ -1873,119 +1747,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "8f62c8e2bdaa09c116a5312419bfae88433f4642ee68ce6bc55dba6f47c47103",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Brasil chega para o Mundial de Roterdã com retorno de ginasta após sete anos e jovens promessas",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/brasil-chega-para-o-mundial-de-roterda-com-retorno-de-ginasta-apos-sete-anos-e-jovens-promessas/",
-    "publicadoEm": "2026-10-19T05:30:00-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "2fbb6048e979ffd48094a5e3ea2d21afc1c41cfb1f7ff7429ba28c0b5bdd5d19",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Com Endrick titular pela primeira vez com Mourinho, Real Madrid vence Sevilla com dois de Mbappé",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/com-endrick-titular-pela-primeira-vez-com-mourinho-real-madrid-vence-sevilla-com-dois-de-mbappe/",
-    "publicadoEm": "2026-10-18T18:32:40-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "88c97c56f7fbbd91309d6cd9a04000b07234cdec87264fea3819adea78a9ef24",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Fabi Alvim, Alison “Mamute” e Ary Graça entram para o Hall da Fama do vôlei",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/volei/fabi-alvim-alison-mamute-e-ary-graca-entram-para-o-hall-da-fama-do-volei/",
-    "publicadoEm": "2026-10-18T08:47:53-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "55c82a684df0ca4ab77cd1e32980dc50296f6d3f3b2f7a4a2e005800a1d2cf9a",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Andreas Pereira foi expulso após chutar uma bola na outra, mas jogo deveria ter sido paralisado?",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/paulo-caravina/andreas-pereira-foi-expulso-apos-chutar-uma-bola-na-outra-mas-jogo-deveria-ter-sido-paralisado/",
-    "publicadoEm": "2026-10-18T00:07:38-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "1d21de900045626d1d8c593d932b0f802b3e0bd5293a68130fde176bc6e3c246",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Cristiano Ronaldo é punido por 30 dias e valor irrisório e pode reforçar Portugal em novembro",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/cristiano-ronaldo-e-punido-por-30-dias-e-valor-irrisorio-e-pode-reforcar-portugal-em-novembro/",
-    "publicadoEm": "2026-10-19T15:44:01-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "4a248d2c41a742d5bba08c24e3ae37897f19d692cd99d71c34ba8e2084b91124",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Raphinha está ‘pronto’ para ser titular contra o PSG na Champions, diz técnico do Barcelona",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/raphinha-esta-pronto-para-ser-titular-contra-o-psg-na-champions-diz-tecnico-do-barcelona/",
-    "publicadoEm": "2026-10-19T14:49:18-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "8db506003f79fa24cca71fc2cb7d926618da4696b2c68c0597b5487f9ab2a2be",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "São Paulo, Atlético-MG, Grêmio e Inter recebem prazo para pagar dívidas sob risco de transfer ban",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/sao-paulo-atletico-mg-gremio-e-inter-recebem-prazo-para-pagar-dividas-sob-risco-de-transfer-ban/",
-    "publicadoEm": "2026-10-19T12:36:56-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": "grp-823b4546",
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "b27f8343b8b5a12f350df1f84f6898e3d0833c2ebd194ac8d4353f991ab6331a",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Gabigol reencontra bom futebol e tem sua melhor temporada desde 2022",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/gabigol-reencontra-bom-futebol-e-tem-sua-melhor-temporada-desde-2022/",
-    "publicadoEm": "2026-10-19T11:09:29-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "67028a43a6d3de20af8e6fa473b8c4afe7cc0e741009df8426759749bd2c3367",
@@ -1999,7 +1761,301 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": "grp-9e73ab0c",
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "c3f0e56f884e36b4b6f176ad8a7a1bb13864cbc3dc6e9d3cc71171f5369c5a5b",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Ex-técnico detona Cristiano Ronaldo: ‘Não corria com a bola e nem sem a bola’",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/ex-tecnico-detona-cristiano-ronaldo-nao-corria-com-a-bola-e-nem-sem-a-bola/",
+    "publicadoEm": "2026-10-20T09:20:01-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "906c26ab92470730d96c4658db7d8dc3766582bae4b51ae615687c0ba3d70f32",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "‘VAR salva Seedorf’: estreia do holandês no Corinthians repercute em jornal espanhol",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/var-salva-seedorf-estreia-do-holandes-no-corinthians-repercute-em-jornal-espanhol-npres/",
+    "publicadoEm": "2026-10-20T09:07:24-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": "grp-ab67d9c2",
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "675cdef458147e85e70c351de193ff8fc1598ba56f8b5e781d57c7f7f2ff9d99",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Corinthians vê risco de rebaixamento subir para 43% após empate com o Vitória; veja probabilidades",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/corinthians-ve-risco-de-rebaixamento-subir-para-43-apos-empate-com-o-vitoria-veja-probabilidades/",
+    "publicadoEm": "2026-10-20T08:18:12-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "2a1063c3f66ad693c921f34d2c227fcbf8e4b92e2b7f0345444168e6fd0c6d0a",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Por que é tão difícil para o Vasco jogar no Maracanã, controlado por Flamengo e Fluminense?",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/por-que-e-tao-dificil-para-o-vasco-jogar-no-maracana-controlado-por-flamengo-e-fluminense/",
+    "publicadoEm": "2026-10-20T05:30:00-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "66f129d68f42cc5cf9fcf2444e8e18d5bba9f9617ff0de82b773b1a5a44a7250",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Auxiliar do Corinthians ressalta união do grupo e aposta em evolução da equipe: ‘Acredito em todos’",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/auxiliar-do-corinthians-ressalta-uniao-do-grupo-e-aposta-em-evolucao-da-equipe-acredito-em-todos-npres/",
+    "publicadoEm": "2026-10-19T23:11:22-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "76d071c89e830ab4668bfcd4b8a8bf1bdf17b09178b836fad8f02ce60c02524a",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Corinthians pouco cria, mesmo com mais volume, fica empatado com o Vitória e continua colado no Z-4",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/corinthians-x-vitoria-31-rodada-campeonato-brasileiro-analise/",
+    "publicadoEm": "2026-10-19T22:05:43-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "c80334df2b11d86506e0b5c761c849eb9eebe66bc0270e02fe0bbd1d18250dff",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Seedorf assiste ao jogo do Corinthians da arquibancada e entra na festa da torcida; veja",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/seedorf-assiste-ao-jogo-do-corinthians-da-arquibancada-e-entra-na-festa-da-torcida-veja-npres/",
+    "publicadoEm": "2026-10-19T20:52:27-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "544a59679a00f38d7b94caedde5ecbdcc67cb9c3f40167dc02ea8d9987791afc",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Por que Seedorf não estará no banco comandando o Corinthians hoje?",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/por-que-seedorf-nao-estara-no-banco-comandando-o-corinthians-hoje-npres/",
+    "publicadoEm": "2026-10-19T19:30:00-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "e6986d4368dc1f0978db363497c8b45243a1b0eb9c2bf2a7c635f9e960503fe8",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Clássico entre Atlético-MG e Cruzeiro no sub-20 tem gol do meio-campo e briga generalizada; assista",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/classico-entre-atletico-mg-e-cruzeiro-no-sub-20-tem-gol-do-meio-campo-e-briga-generalizada-assista-npres/",
+    "publicadoEm": "2026-10-19T19:00:50-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "f7d8a81760867f02152973a91acd030e8dc4919fe421d62865a700885a66e566",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Corinthians x Vitória pelo Brasileirão: onde assistir ao vivo, horário e escalação",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/corinthians-x-vitoria-pelo-brasileirao-onde-assistir-ao-vivo-horario-e-escalacao-npres/",
+    "publicadoEm": "2026-10-19T19:00:05-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "85e63cca9ef79a39e7ed8adda3977e15d9c12ac4ae30b4380a92a7b8cf980494",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Goiás x Náutico pela Série B: onde assistir ao vivo, horário e escalação",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/goias-x-nautico-pela-serie-b-onde-assistir-ao-vivo-horario-e-escalacao/",
+    "publicadoEm": "2026-10-19T18:30:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "66ee2510fcac4cb4603d57edf615a55057137cba96390f19114c7f8c804a9910",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Rebeca se classifica para a final do salto e Brasil disputa cinco medalhas no Mundial de Ginástica",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/rebeca-se-classifica-para-a-final-do-salto-e-brasil-disputa-cinco-medalhas-no-mundial-de-ginastica-npres/",
+    "publicadoEm": "2026-10-19T17:43:52-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "5e5a08a4b68a53c3985ed20251a8854f972f848442c7af0a06aec79dc98c5872",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Corre com Lula explode no Brasil",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/corrida-para-todos/corre-com-lula-explode-no-brasil/",
+    "publicadoEm": "2026-10-19T17:44:31-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "8f62c8e2bdaa09c116a5312419bfae88433f4642ee68ce6bc55dba6f47c47103",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Brasil chega para o Mundial de Roterdã com retorno de ginasta após sete anos e jovens promessas",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/brasil-chega-para-o-mundial-de-roterda-com-retorno-de-ginasta-apos-sete-anos-e-jovens-promessas/",
+    "publicadoEm": "2026-10-19T05:30:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "2fbb6048e979ffd48094a5e3ea2d21afc1c41cfb1f7ff7429ba28c0b5bdd5d19",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Com Endrick titular pela primeira vez com Mourinho, Real Madrid vence Sevilla com dois de Mbappé",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/com-endrick-titular-pela-primeira-vez-com-mourinho-real-madrid-vence-sevilla-com-dois-de-mbappe/",
+    "publicadoEm": "2026-10-18T18:32:40-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "88c97c56f7fbbd91309d6cd9a04000b07234cdec87264fea3819adea78a9ef24",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Fabi Alvim, Alison “Mamute” e Ary Graça entram para o Hall da Fama do vôlei",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/volei/fabi-alvim-alison-mamute-e-ary-graca-entram-para-o-hall-da-fama-do-volei/",
+    "publicadoEm": "2026-10-18T08:47:53-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "55c82a684df0ca4ab77cd1e32980dc50296f6d3f3b2f7a4a2e005800a1d2cf9a",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Andreas Pereira foi expulso após chutar uma bola na outra, mas jogo deveria ter sido paralisado?",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/paulo-caravina/andreas-pereira-foi-expulso-apos-chutar-uma-bola-na-outra-mas-jogo-deveria-ter-sido-paralisado/",
+    "publicadoEm": "2026-10-18T00:07:38-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "1d21de900045626d1d8c593d932b0f802b3e0bd5293a68130fde176bc6e3c246",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Cristiano Ronaldo é punido por 30 dias e valor irrisório e pode reforçar Portugal em novembro",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/cristiano-ronaldo-e-punido-por-30-dias-e-valor-irrisorio-e-pode-reforcar-portugal-em-novembro/",
+    "publicadoEm": "2026-10-19T15:44:01-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "4a248d2c41a742d5bba08c24e3ae37897f19d692cd99d71c34ba8e2084b91124",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Raphinha está ‘pronto’ para ser titular contra o PSG na Champions, diz técnico do Barcelona",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/raphinha-esta-pronto-para-ser-titular-contra-o-psg-na-champions-diz-tecnico-do-barcelona/",
+    "publicadoEm": "2026-10-19T14:49:18-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "8db506003f79fa24cca71fc2cb7d926618da4696b2c68c0597b5487f9ab2a2be",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "São Paulo, Atlético-MG, Grêmio e Inter recebem prazo para pagar dívidas sob risco de transfer ban",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/sao-paulo-atletico-mg-gremio-e-inter-recebem-prazo-para-pagar-dividas-sob-risco-de-transfer-ban/",
+    "publicadoEm": "2026-10-19T12:36:56-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": "grp-823b4546",
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "b27f8343b8b5a12f350df1f84f6898e3d0833c2ebd194ac8d4353f991ab6331a",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Gabigol reencontra bom futebol e tem sua melhor temporada desde 2022",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/gabigol-reencontra-bom-futebol-e-tem-sua-melhor-temporada-desde-2022/",
+    "publicadoEm": "2026-10-19T11:09:29-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "63ae29e7192999da1914c5fdaeba32a3e549384fc6656a56500fd43a4a6b0e47",
@@ -2013,7 +2069,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "1d48a07e8e0a70299354612ddc59754ffd0f0e69a2522066283a1619afd0500e",
@@ -2027,7 +2083,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "be9b9d2efa518a3e4fbe549eb50d5160d0130750dac0003007db615a02c296fb",
@@ -2041,7 +2097,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "217124c3a20d8bbe801ddf2422fa37381013d066d1fd0215f64aaa24a4f416bf",
@@ -2055,7 +2111,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f24d17d9cff6497ae927e841754d3ced59c248dfaf93580ebad783d7b12977ca",
@@ -2069,7 +2125,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f67e08a32b32af5b6ed1170edeebae850eaade40703331f7bcd3a47f06b24fc6",
@@ -2083,7 +2139,7 @@
     "esporte": "skate",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0ba3901eedc69a61278dd8bb6d1d8bc7eb58962aed42cf0d137c10d0902af20e",
@@ -2097,7 +2153,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "edf68929e0da49f2640de8b4d2ca5ab677a2de5885afe6b2eb2a689dac7bfd98",
@@ -2111,7 +2167,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "7ddc030dfbf2697fb7053d571903200941b9806739ca21337a416d20b03afaf7",
@@ -2125,7 +2181,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "aa10a551af613bffd3b37444dc7045002a074dcc2fabb312275a8919d8968b2f",
@@ -2139,7 +2195,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "56796823b3b38f035dd229a3f0a043414876049b52dc32179779ea4fd817ad1e",
@@ -2153,7 +2209,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "742a24983c763a53026fefca0281e2bbb3560988aad398433d1bb56d4353ca39",
@@ -2167,21 +2223,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "0074662bed96d9cba5c7aa103c4490fc70ca172034a572c2da8800d1f197a5c5",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Grêmio x Cruzeiro pelo Brasileirão: onde assistir ao vivo, horário e escalação",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/gremio-x-cruzeiro-pelo-brasileirao-onde-assistir-ao-vivo-horario-e-escalacao/",
-    "publicadoEm": "2026-10-18T15:00:00-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "d2fe6cfb1585245ca20b5ccb06844968234e2eb3875258714fd7c320efb6bb37",
@@ -2195,7 +2237,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0706ee1dce6b1534b34d7d2233e07d6b9596eb140e859b0db5a63267f3b5cc47",
@@ -2209,7 +2251,21 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "0074662bed96d9cba5c7aa103c4490fc70ca172034a572c2da8800d1f197a5c5",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Grêmio x Cruzeiro pelo Brasileirão: onde assistir ao vivo, horário e escalação",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/gremio-x-cruzeiro-pelo-brasileirao-onde-assistir-ao-vivo-horario-e-escalacao/",
+    "publicadoEm": "2026-10-18T15:00:00-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "728d5abf983ada37d3fbab344a2bb18b84dc9f5afa5441f10f20838daf99d657",
@@ -2223,7 +2279,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "db231cb0e8b469d61d6b94f43a804503c3cdab7612c4935dca14d9b82dfef1e9",
@@ -2237,7 +2293,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0f25932063db103f189c2a189cab908465b09699ad1ac16ad624243174988010",
@@ -2251,7 +2307,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "435330f2fa2f1b47555a364b554a728019ac7c7d4fef4f5cc7ab72c549e54cb2",
@@ -2265,91 +2321,63 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "f253dfd4457b5b53b5db69546467ac2bd2d6d4da6aaa19b98b1fa7b0fd058fe0",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Dibu Martinez passa por cirurgia na mandíbula após choque de cabeça e vira desfalque no Chelsea",
+    "id": "d6d498ae1b28877a71cbb72765eee98ce2ec8729ba94066cd3b94c0f5b7f3a6d",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Paredes usa próprio sangue para tratamento antes de Vasco X Boca",
     "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/dibu-martinez-passa-por-cirurgia-na-mandibula-apos-choque-de-cabeca-e-vira-desfalque-no-chelsea/",
-    "publicadoEm": "2026-10-18T09:57:27-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "9a4276c887629feef6ab094ee4808a2e0f130b5e7fab990d6017ee887d2d9ef0",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Dorival elogia São Paulo, mas reconhece campanha ruim: ‘Para a história do clube, é pouco’",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/dorival-elogia-sao-paulo-mas-reconhece-campanha-ruim-para-a-historia-do-clube-e-pouco/",
-    "publicadoEm": "2026-10-18T09:03:30-03:00",
+    "link": "https://esportes.r7.com/lance/paredes-usa-proprio-sangue-para-tratamento-antes-de-vasco-x-boca-20102026/",
+    "publicadoEm": "2026-10-20T10:53:39-03:00",
     "dataEstimada": false,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
-    "id": "6bf9bc7e4edfe78257aafe798f52409dfa5fe7941ef8d4e70c7c99cc92495b2e",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Leeds x Manchester United pela Premier League: onde assistir ao vivo, horário e escalação",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/leeds-x-manchester-united-pela-premier-league-onde-assistir-ao-vivo-horario-e-escalacao/",
-    "publicadoEm": "2026-10-18T09:00:00-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "2f05230e49b14a54bc3ed15d001ec67a683ff7c2bf1a5e03887c689eb49f6c9e",
+    "id": "c5c931a5a4f2750ae439d2dbf0d58b4aaa20535fe41eb0b10bf0772d94c67f5d",
     "fonteId": "r7-esporte",
     "feedId": "r7-esporte",
-    "titulo": "Giro do Apito ao vivo com Maurício Noriega e Sálvio Spínola",
-    "resumo": "Assista ao programa com Maurício Noriega e Sálvio Spínola! Os apresentadores comentam os lances mais polêmicos da arbitragem no fim de semana com a experiência de quem entende do assunto.",
-    "link": "https://esportes.r7.com/tudo-de-esportes/giro-do-apito-ao-vivo-com-mauricio-noriega-e-salvio-spinola-20102026/",
-    "publicadoEm": "2026-10-20T04:12:45-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "2fa4f0d5568376dc8c01deaaf2990097a19babb8e19fa3710d79b446c74b8346",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Maresca admite que é difícil substituir Haaland",
-    "resumo": "Enzo Maresca traz boas notícias sobre Erling Haaland, que pode entrar em campo contra o AEK Athens, no Etihad, pela Champions League.",
-    "link": "https://esportes.r7.com/futebol/maresca-admite-que-e-dificil-substituir-haaland-20102026/",
-    "publicadoEm": "2026-10-20T04:03:00-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "8ee207f82c7fb094a91424c96f5a98bd0d1605edcbb8e3ad410334d0f2b5880b",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "‘O São Caetano sabia. O Serginho jogava com problema cardíaco.’ ‘Medo? Tive quando a torcida do Corinthians invadiu o Pacaembu para nos pegar.’ Silvio Luiz",
-    "resumo": null,
-    "link": "https://esportes.r7.com/prisma/cosme-rimoli/o-sao-caetano-sabia-o-serginho-jogava-com-problema-cardiaco-medo-tive-quando-a-torcida-do-corinthians-invadiu-o-pacaembu-para-nos-pegar-silvio-luiz-20102026/",
-    "publicadoEm": "2026-10-20T02:45:17-03:00",
+    "titulo": "HUGO SOUZA COM MEDO| SUSPENSÃO NO VERDÃO| BRONCA NO SP| 50MI PRO VASCO| 12 TIMES COM DÍVIDA| GABI+",
+    "resumo": "NÃO ESQUEÇA DE DEIXAR LIKE, SE INSCREVER E COMENTAR! - Hugo Souza admite medo de rebaixamento no Corinthians - Conselho do Palmeiras aplica suspensão de 9 meses - Dorival toma bronca do presidente no São Paulo - Vasco atrás de R$ 50 milhões - Quais são os 12 times com problemas na agência de Fair…",
+    "link": "https://esportes.r7.com/tudo-de-esportes/hugo-souza-com-medo-suspensao-no-verdao-bronca-no-sp-50mi-pro-vasco-12-times-com-divida-gabi-20102026/",
+    "publicadoEm": "2026-10-20T10:32:37-03:00",
     "dataEstimada": false,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "b7ca67c98cd96d15ea94037d0ab6cd883ddb8d719744bc3c18060594a193b544",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Clima descontraído em treino do United antes de duelo contra o Como",
+    "resumo": "Clima descontraído no treino do Manchester United: Amad Diallo provoca Bryan Mbeumo em tom de brincadeira antes do duelo contra o Como pela Champions League.",
+    "link": "https://esportes.r7.com/futebol/clima-descontraido-em-treino-do-united-antes-de-duelo-contra-o-como-20102026/",
+    "publicadoEm": "2026-10-20T10:31:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "a6dd4453d1d9243492a3757425eecf2e47b369fc5a2444e9d3263b2303020a21",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Representar o Brasil orgulho e responsabilidade na base",
+    "resumo": "O conhecimento que formou atletas de alto nível, agora ao seu alcance. Garanta a sua vaga no International Volleyball Program aproveitando a nossa condição especial. Use o cupom CBV50 e inscreva-se: https://www.tizan.com.br/ivp Conheça o CBV CAMP: https://go.hotmart.com/N107436364B Tudo Para o Seu…",
+    "link": "https://esportes.r7.com/tudo-de-esportes/representar-o-brasil-orgulho-e-responsabilidade-na-base-20102026/",
+    "publicadoEm": "2026-10-20T09:00:33-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "12e39aa3896dc291a66347bf1de919e4a19c7bb8855f3f97173198c781e4423d",
@@ -2363,7 +2391,91 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "8ee207f82c7fb094a91424c96f5a98bd0d1605edcbb8e3ad410334d0f2b5880b",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "‘O São Caetano sabia. O Serginho jogava com problema cardíaco.’ ‘Medo? Tive quando a torcida do Corinthians invadiu o Pacaembu para nos pegar.’ Silvio Luiz",
+    "resumo": null,
+    "link": "https://esportes.r7.com/prisma/cosme-rimoli/o-sao-caetano-sabia-o-serginho-jogava-com-problema-cardiaco-medo-tive-quando-a-torcida-do-corinthians-invadiu-o-pacaembu-para-nos-pegar-silvio-luiz-20102026/",
+    "publicadoEm": "2026-10-20T02:45:17-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "2174d97fb555baf35002f93a23cd7e75a11f95a2b8ececf655ae0581796a18c2",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Atlético-MG anuncia camisas finalistas do ‘Manto da Massa’; confira os modelos",
+    "resumo": null,
+    "link": "https://esportes.r7.com/prisma/varal-fc/atletico-mg-anuncia-camisas-finalistas-do-manto-da-massa-confira-os-modelos-20102026/",
+    "publicadoEm": "2026-10-20T08:00:35-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "5f10ca0d67bdd1aeedce6760dc551fd2d3b3d8cb727e0802bf95d687b4146899",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "O SÃO CAETANO JÁ SABIA QUE SERGINHO TINHA UM PROBLEMA CARDÍACO. #shorts",
+    "resumo": "#shorts #shortsvideo #shortsyoutube #2026 #neymar #jornalismoesportivo #corinthians #brasil #corinthians #morumbi #recordtv REDE SOCIAL Instagram: @cosmerimoli",
+    "link": "https://esportes.r7.com/tudo-de-esportes/o-sao-caetano-ja-sabia-que-serginho-tinha-um-problema-cardiaco-shorts-20102026/",
+    "publicadoEm": "2026-10-20T08:00:30-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "77dfd9ab70c0117aa0487500f0c6dc054ec7b47f7ef94f004e4be8ca0967f3be",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Al Nassr x NEOM: onde assistir, horário e escalações",
+    "resumo": null,
+    "link": "https://esportes.r7.com/lance/onde-assistir/al-nassr-x-neom-onde-assistir-horario-e-escalacoes-20102026/",
+    "publicadoEm": "2026-10-20T07:03:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "2f05230e49b14a54bc3ed15d001ec67a683ff7c2bf1a5e03887c689eb49f6c9e",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Giro do Apito ao vivo com Maurício Noriega e Sálvio Spínola",
+    "resumo": "Assista ao programa com Maurício Noriega e Sálvio Spínola! Os apresentadores comentam os lances mais polêmicos da arbitragem no fim de semana com a experiência de quem entende do assunto.",
+    "link": "https://esportes.r7.com/tudo-de-esportes/giro-do-apito-ao-vivo-com-mauricio-noriega-e-salvio-spinola-20102026/",
+    "publicadoEm": "2026-10-20T04:12:45-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
+  },
+  {
+    "id": "2fa4f0d5568376dc8c01deaaf2990097a19babb8e19fa3710d79b446c74b8346",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Maresca admite que é difícil substituir Haaland",
+    "resumo": "Enzo Maresca traz boas notícias sobre Erling Haaland, que pode entrar em campo contra o AEK Athens, no Etihad, pela Champions League.",
+    "link": "https://esportes.r7.com/futebol/maresca-admite-que-e-dificil-substituir-haaland-20102026/",
+    "publicadoEm": "2026-10-20T04:03:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "5bdc86821d6af477807cafd1530e6103030965b81ac07cd62437a69cc184ef37",
@@ -2377,7 +2489,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "3f422738491cbbb4dd0a3b01c387c274227026ffbf0a8ec7ee05a12225e700d6",
@@ -2391,7 +2503,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0e8ab49056e807adfe25b036c06c5a044ff073a5afb96dcfbb870eb3325a66f1",
@@ -2405,7 +2517,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0d213e3a93faec257ac4ab32c9b31c9d45f45e32a91e7bc4bda9944f9eb7e4bb",
@@ -2419,7 +2531,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "b68459281a189c309f776d60cb93b94d92b1da4ffe38a9f10008abc819172c9b",
@@ -2433,7 +2545,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "c8e45e5c9d0d5acde23729360305bef47c0a689ecfa9c96a828ad0afed8a60c9",
@@ -2447,7 +2559,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "b864df62f27c1123a02527171ada112f8508af5e8b57560599fc2659fe45af66",
@@ -2461,7 +2573,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "c20340bb3803a2722397d9ef9cfe3e680475b05b8ac2054a18757c6dcc49af99",
@@ -2475,7 +2587,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "feb54a10e65302dff74ac6905a4710bcec6cd0140c111cd84f1dfaebc357f39a",
@@ -2489,7 +2601,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "4b7b274fc17798bdc8c482d4498155b556d74096f4b52168fa56f2fdd8654320",
@@ -2503,7 +2615,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "44df3fecf7a774ccafc4b5bbf0f0b56a9c5655afacc789474863c4762b5d3174",
@@ -2517,7 +2629,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "745f29799c0dcc9469540738fd017bdb4335b221a959a9f5054b797ca11c9b17",
@@ -2531,7 +2643,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "6cb55ca9a019fe8e87deff3b91aab022fcba377f82a58aaa248d787d914e243f",
@@ -2545,7 +2657,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "eb0b52b13acdf9101d9c97bb0f96a75327d7f681dfd1dad9f19530055a0d2d95",
@@ -2559,7 +2671,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "17ab910e00d0735c08ca073ee035df2bbc35acfd95027190d5a64f08ff83e26c",
@@ -2573,7 +2685,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "cc9130e4bc15edecb982e9398326aa90e1a1d1176b3210358a681c7d4f8990be",
@@ -2587,7 +2699,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "6bdacc9ca9db42a48a2c1810700d5e1ff7f6f819a265975ee15bbbabf11a8bed",
@@ -2601,7 +2713,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "a9451756934519078bcab26ecf8fa69feae30160a547504146981a3e80f07636",
@@ -2615,7 +2727,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "6d80711a1f4241e436f28d413c3040c3e3ec64c7af5b8de7eb988471f0d6e2b5",
@@ -2629,7 +2741,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "9f88749a5c1b06d084d19aa476d8c5f5e624f23e266b8a0153b9ef72377100e4",
@@ -2643,7 +2755,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "36a6c9904e6b499001a382b2d396c6d582abb03222869ba220d3d383ea3b40bf",
@@ -2657,7 +2769,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "46ea097622817bb15d33c92f0d758ddf261dcac30c75f2fc84bc4eb846f23709",
@@ -2671,7 +2783,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "bd650676a921541b27eba026b083ab1aa4eb4b2fe519189e0feae55468877ec0",
@@ -2685,7 +2797,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f368ba2f01c865ccfe896fbcb9b317220c75f6784568021d101e7537920363bd",
@@ -2699,7 +2811,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "537558dc26deaf76acc4f25fbddecc47c0e17cb2c7852b4ff0a2765af95dc443",
@@ -2713,7 +2825,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "6dcbf040d21b8db924145c41e265bc09797bee49c100b60080a5ec266043d3f8",
@@ -2727,7 +2839,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "246b8d8587d41ea4a16fbe191f1b6ab718d81adbc2d62ab434f2e214e9663b50",
@@ -2741,7 +2853,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "d561751a13e6d4642cdcd1a34c9207ba1edc85254f0d050f202475f7efc2b48e",
@@ -2755,7 +2867,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "9162ac2cfcf42f4738e559f1282fe618f3ff647ffd4bbfa517182d15a82089dc",
@@ -2769,7 +2881,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "9b6b697f2f0455a845b669b10de1f2444e2d336c207ec178628561be13602e1b",
@@ -2783,7 +2895,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "de93a7dc62d8337d2ccf84cd7839052041536e6ef1b25f6b3cea110504625ac5",
@@ -2797,7 +2909,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "0ff310c167ec6062997afb32dfe6a5deb4c04d428c4aa51390851b97e91f44d0",
@@ -2811,7 +2923,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "e53bc81f3c9e16cf4b6caeed1319ba4ca9c36d075d97c1a2567676f550fb106f",
@@ -2825,7 +2937,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "40e4d9dad4d17b526213d8b974d8aea7167cff51465ea56066f07fcd8d418c71",
@@ -2839,7 +2951,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "cca061ff73445d99a1edcf7bcb236212100670cc403b0a42bdd2f5fd0f989494",
@@ -2853,7 +2965,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "bb90a2a81d36d6bdfe5c8f20d06d27f67f440bca8342886a5ee07e30224e778b",
@@ -2867,7 +2979,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "62c1b2954cff41d706003a9f98e9cff753dc24ba0cf2f74f00084fc8e2a5f6fe",
@@ -2881,7 +2993,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "eb9fdc112f3d21862ba9b7f96298044cbd8fc1d759d2c0ea7367ff4ce83a4e15",
@@ -2895,7 +3007,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "d24da8bc2700734b73c042bfb2164bf92fdf11290957b035f0e6c41e5db1c2c4",
@@ -2909,7 +3021,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "97eeb6032500681da692c98de519eab9f84c40b4e90164d7cc8cb6bf1b24f35c",
@@ -2923,7 +3035,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "747f5ac7dc42c46fee34fd47e7159c5c675ae928c49427976ee1161ec0934db6",
@@ -2937,7 +3049,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "65dacf10cdaa774846a3552e04a7b60c1afd8c56cea1a7873073ae6b1454441b",
@@ -2951,7 +3063,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f89425ef680bad2722f9c1789b35f3e90a8032b09b6a684995638b922b724589",
@@ -2965,21 +3077,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "236e61e99dd9f68e15a64c6791e84dcd4d512eba2fb4724ca01dc9a0d6f8c098",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "A prova de fogo no final da temporada alviverde",
-    "resumo": null,
-    "link": "https://esportes.r7.com/prisma/arena-atual/a-prova-de-fogo-no-final-da-temporada-alviverde-19102026/",
-    "publicadoEm": "2026-10-19T16:36:59-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "e1305df8ee5b6cdd4714db0f728a2a6c739c52f1ff6efa43ff03c3ad5c07ae9f",
@@ -2993,7 +3091,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "c3d963e8a60a10fa7066c57d8b10b4061e63dc7c19c8078a6e8ff62ebc6f7d0f",
@@ -3007,7 +3105,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "f1cb51c0ca21ed41c5a393d221269fb84652e7aafc44c8018e2b4ce3222ffdbc",
@@ -3021,7 +3119,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "022b554683ba74b66efde37baf7ecc429b1bb2c043435beb42a5bc1a4ccef967",
@@ -3035,7 +3133,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "1b95509190a6043b1a4a7b3026d3e9ecb59a49956d5f85840e962bbfb9d3c31f",
@@ -3049,21 +3147,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "feb7bd78af95d39613cf0c0f24f5dcf8880c33e8930e9772a8ebbaff9b94d51a",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Al Hilal – Al Hazem 1 - 0 | GOL – Gabriel Teodoro Martinelli Silva",
-    "resumo": "Al Hilal – Al Hazem 1 - 0 | GOL – Gabriel Teodoro Martinelli Silva",
-    "link": "https://esportes.r7.com/futebol/al-hilal-al-hazem-1-0-gol-gabriel-teodoro-martinelli-silva-19102026/",
-    "publicadoEm": "2026-10-19T17:09:43-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   },
   {
     "id": "afcf98cdf95873d313d1a9424f6a6f503ce5aaa25c12b1325e28db4bea9f9670",
@@ -3077,76 +3161,6 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "235abef8a68c58f2c422c9864a465aa8587b085121bb1c801d3de349dc6d9788",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Flavinha e Rebeca Andrade lideram aparelhos no Mundial de Ginástica; veja notas",
-    "resumo": null,
-    "link": "https://esportes.r7.com/lance/onde-assistir/flavinha-e-rebeca-andrade-lideram-aparelhos-no-mundial-de-ginastica-veja-notas-19102026/",
-    "publicadoEm": "2026-10-19T17:06:25-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "3dfbb70deb60fd783919ff76125e74c9a35025c0e9a6d8e9c9ad2a9bad6054af",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Brasileirão 2026: Bahia fez uma das piores partidas na série A contra o Flamengo",
-    "resumo": "Uma noite para ser esquecida: o Bahia perdeu de 3x0 para o Flamengo e ficou fora do G4",
-    "link": "https://esportes.r7.com/prisma/blog-do-fabio-gomes/video/brasileirao-2026-bahia-fez-uma-das-piores-partidas-na-serie-a-contra-o-flamengo-19102026/",
-    "publicadoEm": "2026-10-19T16:04:47-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "15a49abd9698c8c943f80bd452e94bee55a0cc15029656da511cec6d99a1388c",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Santos alcança posto de melhor visitante do pós-Copa e bate marca da década no Brasileirão",
-    "resumo": "Equipe comandada por Cuca disputou oito partidas fora de casa, conquistando 18 pontos dos 24 jogados; técnico mira libertadores",
-    "link": "https://esportes.r7.com/lance/santos-alcanca-posto-de-melhor-visitante-do-pos-copa-e-bate-marca-da-decada-no-brasileirao-19102026/",
-    "publicadoEm": "2026-10-19T16:29:32-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "cdb91d62aa3f8b37305810a553cfc252993bf314f20a199bcbf9c1c35075b94e",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Leila pode levar Anderson Barros para o Vasco; vaga no Palmeiras tem favorito",
-    "resumo": null,
-    "link": "https://esportes.r7.com/prisma/blog-do-nicola/leila-pode-levar-anderson-barros-para-o-vasco-vaga-no-palmeiras-tem-favorito-19102026/",
-    "publicadoEm": "2026-10-19T15:56:35-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
-  },
-  {
-    "id": "d803118504f75f075dc7d46e83264c415dfabb81087a6dd80a14f952bf512f23",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Assista ao Giro do Apito desta segunda-feira (19), ao vivo, a partir das 15h30 #Shorts",
-    "resumo": null,
-    "link": "https://esportes.r7.com/tudo-de-esportes/assista-ao-giro-do-apito-desta-segunda-feira-19-ao-vivo-a-partir-das-15h30-shorts-19102026/",
-    "publicadoEm": "2026-10-19T15:45:07-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T08:47:22.202Z"
+    "ingeridoEm": "2026-10-20T14:04:11.317Z"
   }
 ]

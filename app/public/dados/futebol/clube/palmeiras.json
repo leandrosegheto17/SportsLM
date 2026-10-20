@@ -1,43 +1,6 @@
 [
   {
     "competicao": {
-      "id": "libertadores",
-      "nome": "Copa Libertadores da América",
-      "temporada": 2026,
-      "formato": "misto",
-      "janela": {
-        "inicio": "2026-02-03",
-        "fim": "2026-11-28"
-      },
-      "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-20T08:47:30.715Z"
-    },
-    "participacao": {
-      "competicaoId": "libertadores",
-      "clubeId": "palmeiras",
-      "status": "em-andamento",
-      "faseAtual": null,
-      "resultadoFinal": null,
-      "resumo": null
-    },
-    "partidas": [
-      {
-        "id": "2606268",
-        "competicaoId": "libertadores",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "palmeiras",
-        "visitanteId": "fluminense",
-        "dataHora": "2026-10-22",
-        "horarioDefinido": true,
-        "estadio": "Nubank Parque",
-        "status": "agendada",
-        "placar": null
-      }
-    ]
-  },
-  {
-    "competicao": {
       "id": "brasileirao-serie-a",
       "nome": "Campeonato Brasileiro Série A",
       "temporada": 2026,
@@ -47,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-20T08:47:30.715Z"
+      "ultimaAtualizacao": "2026-10-20T14:04:17.667Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -543,11 +506,8 @@
         "dataHora": "2026-10-11T20:30:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "finalizada",
-        "placar": {
-          "mandante": 4,
-          "visitante": 1
-        }
+        "status": "agendada",
+        "placar": null
       },
       {
         "id": "555040",
@@ -559,11 +519,8 @@
         "dataHora": "2026-10-17T22:30:00Z",
         "horarioDefinido": true,
         "estadio": null,
-        "status": "finalizada",
-        "placar": {
-          "mandante": 0,
-          "visitante": 2
-        }
+        "status": "agendada",
+        "placar": null
       },
       {
         "id": "555056",
@@ -653,6 +610,43 @@
         "dataHora": "2026-12-02T00:00:00Z",
         "horarioDefinido": false,
         "estadio": null,
+        "status": "agendada",
+        "placar": null
+      }
+    ]
+  },
+  {
+    "competicao": {
+      "id": "libertadores",
+      "nome": "Copa Libertadores da América",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-02-03",
+        "fim": "2026-11-28"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-10-20T14:04:17.667Z"
+    },
+    "participacao": {
+      "competicaoId": "libertadores",
+      "clubeId": "palmeiras",
+      "status": "em-andamento",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": [
+      {
+        "id": "2606268",
+        "competicaoId": "libertadores",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "palmeiras",
+        "visitanteId": "fluminense",
+        "dataHora": "2026-10-22",
+        "horarioDefinido": true,
+        "estadio": "Nubank Parque",
         "status": "agendada",
         "placar": null
       }
