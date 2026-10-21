@@ -1,5 +1,33 @@
 [
   {
+    "id": "1c5282cff81b23424bbd513f513261eb4f319d7d75e77c6d61931bf09e41d681",
+    "fonteId": "gazeta-esportiva",
+    "feedId": "gazeta-basquete",
+    "titulo": "Pistons buscam virada sobre os Celtics e vencem na abertura da temporada da NBA",
+    "resumo": "Detroit Pistons se recuperam de desvantagem de 22 pontos, derrotam o Boston Celtics por 121 a 113 e largam com vitória na temporada 2026/27 da NBA. O post Pistons buscam virada sobre os Celtics e vencem na abertura da temporada da NBA apareceu primeiro em Gazeta Esportiva .",
+    "link": "https://www.gazetaesportiva.com/campeonatos/nba/pistons-buscam-virada-sobre-os-celtics-e-vencem-na-abertura-da-temporada-da-nba/",
+    "publicadoEm": "2026-10-20T21:25:34-03:00",
+    "dataEstimada": false,
+    "esporte": "basquete",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "342240aeee21572a1970309db9508138a8e151a5837c302a164743c5b18b1fef",
+    "fonteId": "gazeta-esportiva",
+    "feedId": "gazeta-basquete",
+    "titulo": "Flamengo bate Botafogo e vence a primeira no NBB",
+    "resumo": "Neste terça-feira, o Flamengo superou o Botafogo por 81 a 71, no Maracanãzinho, no Rio de Janeiro, pela segunda rodada do Novo Basquete Brasileiro (NBB) e conquistou a primeira vitória na competição, depois de estrear com derrota para o Bauru. O post Flamengo bate Botafogo e vence a primeira no…",
+    "link": "https://www.gazetaesportiva.com/campeonatos/nbb-novo-basquete-brasil/flamengo-bate-botafogo-e-vence-a-primeira-no-nbb/",
+    "publicadoEm": "2026-10-20T19:48:22-03:00",
+    "dataEstimada": false,
+    "esporte": "basquete",
+    "origemClassificacao": "feed-fixado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
     "id": "55679652ff5767436a14fdbe11c632d766174c05eb9484f4e61157ac0b7dc899",
     "fonteId": "gazeta-esportiva",
     "feedId": "gazeta-basquete",
@@ -11,7 +39,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "1287940c572231e7c12c5b00391dc3acacb27415024330544ea266d14c755301",
@@ -25,7 +53,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "8eece444f8b4532f338d222b19b7e030ce33e4759ca7c0376924684d84f1748f",
@@ -39,7 +67,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f73a3433fc11e794ea876a052139b9ec16f8cd84624e2e60db788a6afc31ffe3",
@@ -53,7 +81,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "4bf11d322bcd4d987f74825692e51b20096737147234604d1287c7ea63659295",
@@ -67,7 +95,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "989c5116ce9082c8c8aae288190b12bd9ed984f2cb143f6fbfac161c15b9c5d7",
@@ -81,7 +109,7 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "3b7edccc488d4e69a7ac120323f7fe75180ee26a38aa4682e46cb17c4cb1b0ef",
@@ -95,21 +123,21 @@
     "esporte": "basquete",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
-    "id": "2734731707cbcb8685ed01e57d8857083ebded96e016b3fe4efcdf6ef43196c5",
+    "id": "a4fc9be447846353b940df4dcbef9c3d990454387c0f51e07702e45309e0ae09",
     "fonteId": "gazeta-esportiva",
-    "feedId": "gazeta-basquete",
-    "titulo": "NBB realiza lançamento da temporada 2026/27 em evento na Gávea",
-    "resumo": "A temporada de 2026/27 do NBB foi lançada oficilamente nesta terça-feira, em evento realizado na Gávea, sede do Flamengo, no Rio de Janeiro. Em sua 19ª edição, a competição chega cercado pela expectativa de uma competição de alto nível, com elencos renovados, jogadores experientes, jovens talentos…",
-    "link": "https://www.gazetaesportiva.com/campeonatos/nbb-novo-basquete-brasil/nbb-realiza-lancamento-da-temporada-2026-27-em-evento-na-gavea/",
-    "publicadoEm": "2026-10-13T19:12:04-03:00",
+    "feedId": "gazeta-tenis",
+    "titulo": "Orlando Luz e Rafael Matos estreiam com vitória no ATP de Bruxelas",
+    "resumo": "Orlando Luz e Rafael Matos estrearam com vitória no ATP 250 de Bruxelas, na Bélgica, nesta terça-feira. Os brasileiros venceram o britânico Luke Johnson e o holandês Sander Arends por 2 sets a 0, parciais de 7/5 e 6/4, em partida disputada no piso duro e coberto. O post Orlando Luz e Rafael Matos…",
+    "link": "https://www.gazetaesportiva.com/mais-esportes/tenis/orlando-luz-e-rafael-matos-estreiam-com-vitoria-no-atp-de-bruxelas/",
+    "publicadoEm": "2026-10-20T21:06:26-03:00",
     "dataEstimada": false,
-    "esporte": "basquete",
+    "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "842afb13cdf59c338a6d35e4b3eb001678c5812a9a8684b5a3407821ca3c41cc",
@@ -123,7 +151,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "8c31600ebd7faeb69f919958ffdc5011dc4da4ae26e8490ce23304d535d4241d",
@@ -137,7 +165,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "caf62c9651ba2166fbf3ba9ea5e22bdd925876fe8cac4f8298510f3630f49522",
@@ -151,7 +179,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "97dbcfa3c92fb12bdce52b9611cfbc9e0ff5c00780bb1f50eadfd2d1b2f42726",
@@ -165,7 +193,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "b424b439e5d83f3d5f5abc3fbc4b67cabf0124194bc829fa8b4d6f771840fd5b",
@@ -179,7 +207,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "8e16d38783c8d6f044c80b97044d44c111fabb907ca5dfd62a8d648bec592166",
@@ -193,7 +221,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "97628496f4ad593afbfd522396796238872f9ba3d2d6a0a51ef548e9c29cd7bd",
@@ -207,7 +235,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "1e6ee3c00f440edc6c71942a223ce19b503f1a6a4e6df972a527c14b69a683d1",
@@ -221,7 +249,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "52c6ce8be8df42fe1ebc9eb17acdb495238c543872c05494c0f19686f3f25c3c",
@@ -235,7 +263,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "3f3069b4b188e48931ea772be791dd90fb3b3cd37c8f3b6293dd4fb21835db48",
@@ -249,7 +277,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f5acdd782175584fcb2b3056f67ce1ac6436881e73fb1ca18e88b45e3737b751",
@@ -263,7 +291,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "d72c39084fecb4241c73897e85f336f5f92c9c3e96f0954513d7f7ba5956954e",
@@ -277,7 +305,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "4ebbca9802b02b5444f86ef59088703d68f97f326e0f3944614d2df7289be7b7",
@@ -291,7 +319,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "bb353b4f71d74da365b4fbeaed45508a20ed827a1075dab4d2adeb9086ae373a",
@@ -305,7 +333,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "82cfd7447096553a5cb2a3c13a3e4a8cc34d17084bd3381282a55dc76c411e98",
@@ -319,7 +347,7 @@
     "esporte": "tenis",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "710921e86f72ac39ca51b8b897d82bcd3999efe21e8f657a120053da77393bc0",
@@ -333,7 +361,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "9a3bbe913281c1087451336c61d5f2af65a58db43e131b7eaa37c91a4aaccb22",
@@ -347,7 +375,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "e78347b8e1aa9ee01ac1e4b8d6a0fe420e20965c3770c3579876d609462e4443",
@@ -361,7 +389,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f9beda15cb3ff3b33fd665d0e046d4e5147e86f2404e3a0ae4a531e41e22b47e",
@@ -375,7 +403,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "50284ab0a6da160802c186f3de8f463d3df23a69ab6a7970a80801c8c4d9bf66",
@@ -389,7 +417,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "7fc7494246bdf26594f446bb1a2f29e00de2e6f1e101825530ac08660695764e",
@@ -403,7 +431,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "1841b76a29b9b05a3148e18862471329b569983817958b0de9802caf82fb71b8",
@@ -417,7 +445,7 @@
     "esporte": "volei-quadra",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "ed9476c5f6c4751eaf80059fc967c62e49f030c3a634527430ebd11fef8bf4bc",
@@ -431,7 +459,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "28b51226f77fdaa482090601c4ea33f1215b2075a4e9d90b74c172207bfed561",
@@ -445,7 +473,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "85680610a3018ab448c2fff474d69724a13fed35cd5db32ead1807bad72c002e",
@@ -459,7 +487,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "593042003da021fe264c4a4cc717b5747722016d209c2d5832a8e6b83bbc2c99",
@@ -473,7 +501,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "3737dba9b1e196f3e790712b9755ba58f389467ffb3001ebee74578d57954cc4",
@@ -487,7 +515,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "05b14d41f7ffd6534faa48d6bf77870d3e136d094fa35e5c4f7ac68105d42f56",
@@ -501,7 +529,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "679ddb615aaedc7f49b8b43e71233399c972fbdcd8887db60885af10a4c1ff58",
@@ -515,217 +543,217 @@
     "esporte": "atletismo",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
-    "id": "2944fc95f611667f0f6def44d224601d0109cde8605de460063c7b43692e6e2f",
+    "id": "d67a8ff5359c404692f5e3904669aae5d3c3fad8cdbb29d34c8d53db23e44466",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Pedro Clerot volta a testar F3 após vitória na Espanha",
-    "resumo": "Pouco mais de um mês após o encerramento da temporada 2026 da Fórmula 3, Pedro Clerot voltou a pilotar um carro da categoria, que promove entre esta terça e quarta-feira a primeira das duas baterias de testes pós-campeonato. O brasileiro, que segue na equipe Rodin Motorsport para o campeonato do…",
-    "link": "https://motorsport.uol.com.br/f3/news/pedro-clerot-volta-a-testar-f3-apos-vitoria-na-espanha/10866568/",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
+    "titulo": "Marcelo Paz deixa o Corinthians em comum acordo com Osmar Stabile",
+    "resumo": "O Corinthians anunciou nesta terça-feira (20) a saída de Marcelo Paz do cargo de executivo de futebol. A decisão foi tomada em comum acordo, após reunião com o presidente Osmar Stabile.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/marcelo-paz-deixa-o-corinthians-em-comum-acordo-com-stabile.ghtm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
     "dataEstimada": true,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
-    "id": "d7c022aa49265fec7853615170cd50619efdc80f4fab4120e19666d7264bedcc",
+    "id": "cf4ff460b846a646421da16d1f03f510cd8a43b250af91ff97f06f16713dedc3",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "NFL leva futebol americano a 50 escolas da rede municipal de Guarulhos",
-    "resumo": "A NFL e a Prefeitura de Guarulhos lançam, nesta sexta-feira, 23, o NFL Flag nas escolas municipais. Com o objetivo de ampliar a presença do flag football, modalidade que deriva do futebol americano, no Brasil, a liga tem levado o esporte a diferentes regiões do País. A ação chegará a 50 unidades…",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/10/20/nfl-leva-futebol-americano-a-50-escolas-da-rede-municipal-de-guarulhos.htm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol-americano",
-    "origemClassificacao": "lexico",
-    "grupoId": "grp-800002e3",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "bf79c4384621a52554eb308c8f9620b7f69dae580b798571ae712b7dbd8cb284",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Fisiculturista desmaia no palco e morre aos 33 anos na Inglaterra",
-    "resumo": "O fisiculturista Mateusz Chmura, 33, morreu após desmaiar no palco durante uma competição na Inglaterra, segundo comunicado divulgado pela PCA Official.",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/fisiculturista-desmaia-no-palco-e-morre-aos-33-anos-na-inglaterra.ghtm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
-    "dataEstimada": true,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "9cee061db2f29cf7d1b275251b6a103a8858f8ddfe79c076ce634a5c31ebae17",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Raphinha admite chateação com substituição, mas ameniza: 'Está tudo certo'",
-    "resumo": "aphinha admitiu que ficou chateado com o técnico Hansi Flick por ter sido substituído com apenas 15 minutos do segundo tempo do confronto entre PSG x Barcelona, que terminou com vitória da equipe fra...",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/psg-x-barcelona-raphinha.ghtm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
+    "titulo": "PH e David titulares, Paredes no banco: veja escalações de Vasco x Boca",
+    "resumo": "Vasco e Boca Juniors (ARG) estão com as escalações iniciais definidas para o jogo de volta da semifinal da Copa Sul-Americana, marcado para 21h30 (de Brasília), nesta terça-feira (20), no Maracanã.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/vasco-boca-juniors-escalacao-semifinal-sul-americana-20-out.ghtm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
     "dataEstimada": true,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
-    "id": "6e01441401fc52d2eff61a43c9fe2c53275467e8bf3081fab0ab989d6e10d2bb",
+    "id": "1b94b4074d8bc1897ccff553250be1107e2a0fc82edd8becf17082d9ac359b32",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Jornal inglês admite erro e pede desculpas por fake news contra Infantino",
-    "resumo": "O jornal britânico \"The Times\" pediu desculpas ao presidente da Fifa, Gianni Infantino, após ter publicado que o dirigente recebia um \"segundo salário\" da entidade. O veículo havia noticiado a informação no dia 13 de outubro. A Fifa, desde então, negou irregularidades.",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/10/20/jornal-ingles-admite-erro-e-pede-desculpas-por-fake-news-contra-infantino.htm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
-    "dataEstimada": true,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": "grp-f9bbb4bd",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "845643892689f4817331a7649288f37dd59681e01c83901ff775bd7fcd2a98ab",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Palmeiras fecha preparação para Liberta sem Vitor Roque; veja provável time",
-    "resumo": "O Palmeiras finalizou a preparação para o jogo decisivo contra o Fluminense pela volta da semifinal da Copa Libertadores, com um treino no Nubank Parque na tarde de hoje, mas não contou com a presença de Vitor Roque.",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/palmeiras-fecha-preparacao-para-liberta-sem-vitor-roque-veja-provavel-time.ghtm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
+    "titulo": "Corinthians vai ser rebaixado para Série B? Juca e Mattos discutem crise",
+    "resumo": "O Corinthians dá sinais de que caminha para um novo rebaixamento no Brasileirão e vive um ambiente interno \"dramático\", disse o colunista Juca Kfouri no Cartão Vermelho, do Canal UOL.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/corinthians-vai-ser-rebaixado-juca-e-mattos-discutem-crise.ghtm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
     "dataEstimada": true,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
-    "id": "f2c5b15640f22eabd18e49b0d15235908dba477c222005e5be567df59cd1aeb5",
+    "id": "0413ee5ebc3ea263c6a4136231c80fd687677aa25a36ce68a7bbd9bbae204dd3",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Marcondes vence em três sets na estreia do challenger de Fort Worth",
-    "resumo": "Fort Worth (EUA) ? Único brasileiro no challenger 75 de Fort Worth, em quadras duras nos Estados Unidos, Igor Marcondes estreou com vitória nesta terça-feira. O paulista de 29 anos e 266º do ranking é o cabeça 7 do torneio venceu o convidado local Sebastian Gorzny, 406º colocado, por 7/5, 2/6 e…",
-    "link": "https://tenisbrasil.uol.com.br/marcondes-vence-em-tres-sets-na-estreia-do-challenger-de-fort-worth.html",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "4acdef76e97b2fe385a237e11e836b061cb2d5043d9d007847b8e96be36a6956",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Corinthians não estipula prazo para pagar dívida que pode render mais 6 meses de transfer ban",
-    "resumo": "O Corinthians não estabeleceu prazo para pagar a parcela atrasada de R$ 8 milhões referente ao acordo vigente na Câmara Nacional de Resolução de Disputas (CNRD), órgão vinculado à CBF. O vencimento se deu na segunda-feira, 19, conforme informado inicialmente pelo GE.",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/10/20/corinthians-nao-estipula-prazo-para-pagar-divida-que-pode-render-mais-6-meses-de-transfer-ban.htm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": "grp-67801948",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "3dca34f9c2f5765585604660ad74e8d22ba6013ab62007475ab1db9fb2ffc792",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Damazio e Carbone mantêm embalo e dez juvenis vencem na Bolívia",
-    "resumo": "Santa Cruz de la Sierra (Bolívia) ? Campeões do Australian Open Junior Series no último domingo, o mato-grossense Livas Damazio e a catarinense Maria Eduarda Carbone estrearam com vitória no J200 de Santa Cruz de la Sierra, em quadras de saibro na Bolívia. Ao todo, dez brasileiros passaram pela…",
-    "link": "https://tenisbrasil.uol.com.br/damazio-e-carbone-mantem-embalo-e-dez-juvenis-vencem-na-bolivia.html",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "497b5613c342750f4f6cc2b7345dae1360b4777032558fe1b118571d1859f224",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "Bola de Ouro abre votação para escolher maior de todos os tempos sem Pelé e Maradona",
-    "resumo": "A revista France Football abriu uma votação popular para eleger o maior vencedor da história da Bola de Ouro. Batizada de B.O.A.T. (\"Ballon d'Or of All Tim\"e, ou \"Bola de Ouro de todos os tempos\"), a iniciativa reúne dez lendas do futebol que conquistaram o prêmio pelo menos duas vezes. Entre os…",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/10/20/bola-de-ouro-abre-votacao-para-escolher-maior-de-todos-os-tempos-sem-pele-e-maradona.htm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
-    "dataEstimada": true,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": "grp-0a0d0aab",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "d79203692df859a25c6bab0d95a1d7b6088565ea1f05d8f0c04df5269defce97",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "PSG derrota Barcelona e mantém os 100% da Champions League; Liverpool vira e também lidera",
-    "resumo": "Paris Saint-Germain e Liverpool mantiveram nesta terça-feira os 100% de aproveitamento na fase de liga da Champions League, após a disputa da terceira rodada. O PSG, em jogo espetacular, derrotou em casa o Barcelona por 4 a 2, enquanto os ingleses bateram o Villarreal, de virada, por 4 a 3. 0 As…",
-    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/10/20/psg-derrota-barcelona-e-mantem-os-100-da-champions-league-liverpool-vira-e-tambem-lidera.htm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
-    "dataEstimada": true,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": "grp-c0b39ef5",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "7c84da935f162bad6d19ef13c6afb98dc7e58a055822b10c6434c188113bd036",
-    "fonteId": "uol-esporte",
-    "feedId": "uol-esporte",
-    "titulo": "F1 voltará a ter corridas de 305km em 2028 após redução temporária; saiba mais",
-    "resumo": "Aproximadamente um mês após anunciar que as corridas de Fórmula 1 serão mais curtas em 2027, a Federação Internacional de Automobilismo (FIA) confirmou que a medida só será válida para a próxima temporada. A partir de 2028, a distância habitual de 305km retornará. Leia também:Fórmula 1Barrichello…",
-    "link": "https://motorsport.uol.com.br/f1/news/f1-voltara-a-ter-corridas-de-305km-em-2028-apos-reducao-temporaria-saiba-mais/10866558/",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
+    "titulo": "F1 - FIA prevê realização das etapas do Catar e Abu Dhabi: \"Não levaríamos se fosse arriscado\"",
+    "resumo": "Mesmo em meio às atuais tensões no Oriente Médio, o presidente da FIA, Mohammed Ben Sulayem, está confiante de que as corridas de Fórmula 1 no Catar e em Abu Dhabi irão acontecer. Leia também:Fórmula 1F1 voltará a ter corridas de 305km em 2028 após redução temporária; saiba maisFórmula…",
+    "link": "https://motorsport.uol.com.br/f1/news/f1-fia-preve-realizacao-das-etapas-do-catar-e-abu-dhabi-nao-levariamos-se-fosse-arriscado/10866570/",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
     "dataEstimada": true,
     "esporte": "formula1",
     "origemClassificacao": "lexico",
-    "grupoId": "grp-0ed814cf",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "grupoId": "grp-44a3e6e1",
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
-    "id": "30b8dddf3b104d4021d53c49119df9fda54e6c339fc756756b6d40784bae4828",
+    "id": "73e92b1fb6c0a567a7ec7684e5d75058b1065167392a8442819c5aea67488e78",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "Goleadas, virada do Liverpool e show de Foden: os jogaços na Champions",
-    "resumo": "A terça-feira (20) foi um dia de grandes jogos e muitos gols pela terceira rodada da fase de liga das Champions League.",
-    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/terca-champions.ghtm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
+    "titulo": "Federação Turca suspende 147 dirigentes por violação de regras referentes a apostas esportivas",
+    "resumo": "A Federação Turca de Futebol divulgou, nesta terça-feira, 20, a suspensão de 147 dirigentes por violarem regras relacionadas a apostas esportivas. Os profissionais das duas principais ligas nacionais do país foram afastados das atividades por 45 dias.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/agencia/2026/10/20/federacao-turca-suspende-147-dirigentes-por-violacao-de-regras-referentes-a-apostas-esportivas.htm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
+    "dataEstimada": true,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": "grp-a5d94fe6",
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "f29b5f6cf3d0fd7ce489736d8cfb42939da142bc41ad6909a27e4775eae96b49",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "PSG x Barcelona foi 'recreativo': Colunistas analisam jogaço da Champions",
+    "resumo": "PSG x Barcelona teve cara de jogo \"recreativo\", com os dois times atacando o tempo todo e pouca preocupação defensiva, disse o colunista Rodrigo Mattos no Cartão Vermelho, do Canal UOL.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/psg-x-barcelona-foi-recreativo-colunistas-analisam-jogaco-da-liga-dos-campeoes.ghtm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
-    "id": "056274d07764fa303e3c16290c51863587da4c3e9d005643d628d0db46e744b0",
+    "id": "5970330157c9ad57b69a275a9dee3d713f4cd94cd3fafccc6218bf6720a21faa",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "McEnroe ironiza jejum dos EUA e exalta Nadal e Alcaraz",
-    "resumo": "Nova York (EUA) - John McEnroe usou os títulos de Rafael Nadal e Carlos Alcaraz para brincar com o jejum dos Estados Unidos nos torneios masculinos de Grand Slam. Durante participação no programa La Revuelta, exibido nesta segunda-feira pela televisão espanhola, o ex-número 1 do mundo comparou as…",
-    "link": "https://tenisbrasil.uol.com.br/mcenroe-ironiza-jejum-dos-eua-e-exalta-nadal-e-alcaraz.html",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
+    "titulo": "Transmissão ao vivo de Vasco x Boca Juniors pela Copa Sul-Americana: onde assistir",
+    "resumo": "Vasco e Boca Juniors se enfrentam nesta terça-feira (20), às 21h30 (de Brasília), no Maracanã, no Rio de Janeiro (RJ), pela semifinal da Copa Sul-Americana.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/transmissao-ao-vivo-de-vasco-x-boca-juniors-pela-copa-sul-americana-veja-onde-assistir.ghtm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
+    "dataEstimada": true,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "804ac23f9fef4ff98a581b9d7cbdf863221c143e79a3c9095df446ab46f1e2e4",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "MotoGP fará exibição durante GP dos Estados Unidos de F1; Pedrosa e Bulega irão para a pista",
+    "resumo": "Como adiantado pelo Motorsport.com em 29 de julho, o GP dos Estados Unidos de Fórmula 1 terá uma exibição da MotoGP, com o objetivo de apresentar o Mundial de motovelocidade aos fãs norte-americanos. No sábado, quatro motos irão para a pista, buscando a maior velocidade possível no traçado de…",
+    "link": "https://motorsport.uol.com.br/motogp/news/motogp-fara-exibicao-durante-gp-dos-estados-unidos-de-f1-pedrosa-e-bulega-irao-para-a-pista/10866569/",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
+    "dataEstimada": true,
+    "esporte": "formula1",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "65ce582d08d6c65afcaeff792973ac6e46ee25663cbe5573dcbb43988b533380",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Qual será a final da Libertadores? Colunistas debatem",
+    "resumo": "Quais times têm mais chances de disputar a Final da Libertadores? Os colunistas José Trajano, Juca Kfouri e Rodrigo Mattos analisaram as situações de Palmeiras, Flamengo, Fluminense e Estudiantes e deram seus palpites no Cartão Vermelho, do Canal UOL.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/qual-sera-a-final-da-libertadores-colunistas-debatem.ghtm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
+    "dataEstimada": true,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "771f1d3161f107bd40f3f17dc225d090364f82471bb321748eaa8b01097e7739",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Nakashima prevalece e pega algoz de Berrettini em Lyon",
+    "resumo": "Lyon (França) - Brandon Nakashima precisou de três sets para garantir vaga nas oitavas de final do ATP 250 de Lyon. Nesta terça-feira, o norte-americano superou o jovem sérvio Hamad Medjedovic por 7/6 (7-4), 6/7 (4-7) e 6/2, após 2h09 de confronto, no encerramento da programação do torneio…",
+    "link": "https://tenisbrasil.uol.com.br/nakashima-prevalece-e-pega-algoz-de-berrettini-em-lyon.html",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
-    "id": "312aafe81dcc4ee3f88a68935ffbc42e760b1435830db16ee51d7ec21e090da8",
+    "id": "74301a656da8f6affa75daaaed3d7fe3464f00b6aed1b7ce50008fd8413ce331",
     "fonteId": "uol-esporte",
     "feedId": "uol-esporte",
-    "titulo": "PSG sai dizimado de campo, mas mostra ao Barcelona quem é o rei da Europa",
-    "resumo": "a semana passada, escrevi que o Paris Saint-Germain, um time que costuma começar as temporadas em marcha lenta, seria colocado à prova na Liga dos Campeões da Europa. Afinal, jogos contra Manchester ...",
-    "link": "https://www.uol.com.br/esporte/colunas/julio-gomes/2026/10/20/psg-sai-dizimado-de-campo-mas-mostra-ao-barcelona-quem-e-o-rei-da-europa.htm",
-    "publicadoEm": "2026-10-20T19:01:42-03:00",
+    "titulo": "De olho em Natália Silva, Jasudavicius dispara no ranking após brilhar no UFC Canadá",
+    "resumo": "ealizado no último sábado (17), em Edmonton, o UFC Canadá produziu resultados de grande repercussão para o MMA local, especialmente nas duas lutas principais do show, nas quais brilharam os atletas d...",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/ag-fight/2026/10/20/de-olho-em-natalia-silva-jasudavicius-dispara-no-ranking-apos-brilhar-no-ufc-canada.htm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
+    "dataEstimada": true,
+    "esporte": "mma",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "315826945f19f452a03f9cedf78b3284a41e58363bf0d8029c6910f6d8d77070",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "NBA vai começar: quem são os favoritos nesta temporada?",
+    "resumo": "Rômulo Mendonça e Ricardo Bugarelli abriram a nova fase do Jararacas, o podcast no Canal UOL e no YouTube do UOL Esporte projetando a temporada da NBA, que inicia nesta terça-feira.",
+    "link": "https://www.uol.com.br/esporte/ultimas-noticias/2026/10/20/knicks-com-melhor-quinteto-philadelphia-nao-e-confiavel-a-nba-vai-comecar.ghtm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
+    "dataEstimada": true,
+    "esporte": "basquete",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "5f8ece24db754cb62defdd0a4477cf761f03ffe232b52811e7d76b39e4830672",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Corinthians volta a atrasar direitos de imagem e chega a 3º mês de dívida",
+    "resumo": "O Corinthians não pagou a parcela dos direitos de imagem do elenco masculino que venceu nesta terça-feira (20), conforme apurou o UOL.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/corinthians-volta-a-atrasar-direitos-de-imagem-e-chega-a-3-mes-de-divida.htm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
+    "dataEstimada": true,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "140df8e31f716651bfc856a400d1a417d0a89abefdec2dcae9ca1bd977cca88a",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "Cristiano Ronaldo perde pênalti e gol sem goleiro pelo Al-Nassr; assista",
+    "resumo": "Cristiano Ronaldo desperdiçou um pênalti e uma chance sem goleiro na vitória do Al-Nassr por 1 a 0 sobre o Neom, nesta terça-feira (20), pelo Campeonato Saudita, segundo o GE.",
+    "link": "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/10/20/cristiano-ronaldo-perde-penalti-e-gol-sem-goleiro-pelo-al-nassr.ghtm",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
+    "dataEstimada": true,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "29baab0f5abb33f9318e7f4af32ef2af3e3cd301697e839efcc370089fbe814a",
+    "fonteId": "uol-esporte",
+    "feedId": "uol-esporte",
+    "titulo": "SRB e Horse apresentam protótipo de nova categoria de picapes para 2027",
+    "resumo": "Nesta terça-feira, a Horse Powertrain e a Sports & Racing Brasil (SRB), que tem Thiago Marques como CEO, revelaram um primeiro vislumbre de como será o carro da nova categoria brasileira de picapes que estreará na temporada 2027. Leia também:NASCAR BrasilPilotos catarinenses vivem expectativa de…",
+    "link": "https://motorsport.uol.com.br/nascar-brasil-series/news/srb-e-horse-apresentam-prototipo-de-nova-categoria-de-picapes-para-2027/10866566/",
+    "publicadoEm": "2026-10-20T21:32:04-03:00",
     "dataEstimada": true,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f2c0235c0d42292312ffb88c8b02eac375114f06001dc34f3085333613c33b9b",
@@ -739,7 +767,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "5ae1f5f151cb860360eedb54f2c3c14bc73f3f3643557b9859aa6df119c076cf",
@@ -753,7 +781,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "26caf65ccb111206ace383b49a8eeb1a0d21397973bf8f0969f16b6f50d29db2",
@@ -767,7 +795,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "84640b6c5a50896f563f21921b35c83ee05268a918aeaa42ca6d0507086e6192",
@@ -781,7 +809,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "1ca44d695c7af4964852e5b4c9f15826582d3b98aacd1066853062a9cafcd0af",
@@ -795,7 +823,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "afb9e135dcc9d0733a7434ba17dd1d663094e7ec4b27820c173273babfc21893",
@@ -809,7 +837,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "9d35329c57c5de87305460ced37ac4a0ce517b136bb9ce552b39e48fd1135f36",
@@ -823,7 +851,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "cec51cb94b2f07c8b1db65d9093583fc35bdbd4ee356b8c9957c67582922335a",
@@ -837,7 +865,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "7f70243d185ef03b9122fd69b3b8b9c39d225b385e9edbcd8ee1f4490010ec16",
@@ -851,7 +879,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "b9b29efbac52e0eadf81a887f5c4736781d23fa80b493b1396fbe40c73bc729c",
@@ -865,7 +893,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "6072bf47cba4c56e430e6b181cb1e2f2b63600c414edcd77b1e7782da2428095",
@@ -879,7 +907,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f960b3e6f7837ff505b99fbd8f665135c26dd42751c158d08d09f4099becaa0f",
@@ -893,7 +921,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "79f775c8c0d36e677954b14277590812f50deda84bb232eb6d724d20d0f45ff6",
@@ -907,7 +935,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "33894fcedaa0657eddb088b175c2aaa06c2320cbade6f48c464bab713b9cb46b",
@@ -921,7 +949,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "9b07a1da0856d944200f3b110ec922f6e557fc3bf72d4c737f35833c15d87966",
@@ -935,7 +963,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "5764253b44e5c444e2e03ecf7713223badac0fe8e2eb7478437202649757f9b0",
@@ -949,7 +977,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "d1e27470bc9d63a77d8f321b53b846c014ad46d30c08729616b22fe5e3bcc5fc",
@@ -963,7 +991,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "89287dfdbf3122b62c7151d7c977ba48697f3f59c0ae7fd91ce60580569c1a33",
@@ -977,7 +1005,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "dacba968d6fd259a6bb1fd106a6540e749fa1e18e4798efc2f5b4b6d65dbdfd6",
@@ -991,7 +1019,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "355a36f7acbac687b7085e3eeef2410b10c2c2dccb769ea1c5afb744a9a47e75",
@@ -1005,7 +1033,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "00a295709080af0ef83b8bc892d82539681c082729bbb19aae48656d10d34cdc",
@@ -1019,7 +1047,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "e72ee9d03913ec63192b28b89db46f64b6fe618357baf3c94493fbcba20d7267",
@@ -1032,8 +1060,8 @@
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "grupoId": "grp-44a3e6e1",
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "3f92c85e0610457e2e4ef071caaa9a76b358bfa09b2daa17f507729885d022a6",
@@ -1046,8 +1074,8 @@
     "dataEstimada": false,
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
-    "grupoId": "grp-0ed814cf",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "cb4bb1fe0cc621f4bd560a27a5dc29d817379ff1b1683d3f2d06ddafe7445e8d",
@@ -1061,7 +1089,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "bd07c446785adcc7887b87a0758c31799efb33e7d2dd44405efdf15b6857188b",
@@ -1075,7 +1103,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "233090e7672f97ddae66fd8fc3d597f4de719933ab8f6c5f2ab57fc0b452f765",
@@ -1089,7 +1117,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "dc720ebdc9709a7f7ed1a4b74609915550844d9fd0d90ba1a708b8affe0b2f67",
@@ -1103,7 +1131,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2e77dda2d9d49a27c05a4fc546ce5844fbea0f3fce8a55b4f104bdf4a2b8d20d",
@@ -1117,7 +1145,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "10a5fbfeb1d1e45f2af81744f036bc782c68b9a9a03e9d2beaaad425a24a602d",
@@ -1131,7 +1159,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "0eb0c4a6dd0a8f92044e06c1e4dc02d790561f8be070b6217745efbe5275aa66",
@@ -1145,7 +1173,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "7a855e806d1558a7ee90a537aa40c1db60c2acd000faa68c964cce00f1af3d13",
@@ -1159,7 +1187,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "faaaf641a991d39bbd840fd6b8a94d0b0ee0b48e742aca7bf88af3e290f7e7dc",
@@ -1173,7 +1201,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "bd181757028f270d9cd973ea08782030c30a6b5b8d4916cffb702040000d9046",
@@ -1187,7 +1215,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "0c02e66f8bae935741d681bb30219bc7f13941ccbf18ad3e964b79ccff286dd4",
@@ -1201,7 +1229,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "ecc4b4b9639956c0cea4b7795c5e7917b5f9914e6364c6084345d985d43b4543",
@@ -1215,7 +1243,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "e7fb10fb04c87b932f3cc0811907902f7adc981aca7a7da329235a9b1def09ce",
@@ -1229,7 +1257,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "a4c8dce55b19218e20221007314ab6abc69ceeadbd776fe95c36aecfe76fd791",
@@ -1243,7 +1271,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "450860ae3694d8d6fa35a503478b00380168e8261ef5a857911324aa02a0e7d8",
@@ -1257,7 +1285,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "b03990356cacf480a186ae2fb40799e3ecb0752bf2e6aeec0ec6d9cffcc5ba50",
@@ -1271,7 +1299,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "357b95a48c3a76483c6ab4bfd37a66bb8a9f27bf4b5257d2c27253ac6ed43b47",
@@ -1285,7 +1313,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "7758dc8a401afd5be13fa3aa71cb238817a3bec8ba16f15c9ed3343a3dad5172",
@@ -1299,7 +1327,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "71ed81c6ce062b0575afbc99a1d02e285979318f2fd89cc5925608ffbcc613df",
@@ -1313,7 +1341,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "8fe2f065355344c57220734375346354363e707528487148411cd4ca883255b4",
@@ -1327,7 +1355,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "472d3d112fcbcd096185ac8efef0b0244954679825526c8a5dab06ab59ae8e79",
@@ -1341,7 +1369,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "df74525800782000f0209183611be31363f02b76f26f9c52c99d44ae118c63b5",
@@ -1355,7 +1383,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "934d388e52b73db0b8647222f55d1f8a2d7dfe701d9b67ca8f47309f65259ec3",
@@ -1369,7 +1397,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "0f2f5fcc86085625d168967fb194e47aa82680a5aa0c46e9650cf68f58da9982",
@@ -1383,7 +1411,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "7e915848a424e861611005322fccf9fad81889be7132986d62375e300555ae27",
@@ -1397,7 +1425,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2fb5dc0a4621fbe39eca156a7e1fce53d489134427c6d62b03e8591dc5d16397",
@@ -1411,7 +1439,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "332c585078fc6378f6dfa5edb4320d222be9bd42be7f063d2083bba7b4e99680",
@@ -1425,7 +1453,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "13efe5e8e94601a44b6dfd92fd438af38a9d340bdbb0d6770ae5d8a00b9d23c4",
@@ -1439,7 +1467,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "ffc3db32a96112b03d9da994603aaf396cd0c97aaafcfc376a0e3f23bf7c99fd",
@@ -1453,7 +1481,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "9d0f1f4c8135dd3f5dedbae0b1019fb4b2b2cba910c53572e85656d592f8e72a",
@@ -1467,7 +1495,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "e1288490935a6be096a3ae9ab005c4311d43f2c6d573ab60df25486209da0317",
@@ -1481,7 +1509,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "bd53196e9be37dd682597d8ca3dbb2985a226788425acae116f35e03d7f555b5",
@@ -1495,7 +1523,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "719270fc5d1cfc4acf27a9ef31001e4e8d6c160e717e5d201c127279f0180a8a",
@@ -1509,7 +1537,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "7057847b785c1959a23be5cbcae8c141c58efa3113edc9e2f3922a308850e701",
@@ -1523,7 +1551,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "6a6c3c182807eaf88c28e17502f0c9226439dffc7621b8d8f6b8fd32970e262c",
@@ -1537,7 +1565,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f82cf87bce81dc942e4f736dde9789129004ab78520b6c7fc1bcd92b04aa5966",
@@ -1551,7 +1579,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "d60444f2b7917c7211868a35d8c4797b34e1a36df8abdce340b9f9848cc1b72e",
@@ -1565,7 +1593,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "59b93c9b28b6411088db770e91ca872290723c7da79ba60d5f45ef2b4fa675f4",
@@ -1579,7 +1607,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f981254a806548648e8451306c6e4e023ec59914f4c1755141c2e597bf330cce",
@@ -1593,7 +1621,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2eecaa7493e627f69c01ac539914995d53dfbb4a322048c0b7e601ca905ddf4b",
@@ -1607,7 +1635,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "239c84ab7cd07a2201086022806398f6d72dd9b08a2e19049368d853ae5e01ee",
@@ -1621,7 +1649,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "cfc4909d11fa8a14edb820d4a8fafe7b03bd4a7ef1cb2151aca7c0c297893e47",
@@ -1635,7 +1663,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "ec2234c1a37665ba901e6f34683abb86387c7347436c1733bb17a4523b607e61",
@@ -1649,7 +1677,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "cd6dbf5a9b6b3ee4e9050c8b60202d46112f6fb5489d254c4196590feeb5b6a2",
@@ -1663,7 +1691,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "a32dd38f96182c9b496eedd9734d94f6befbb0cfee1f21783bd8a7b5970898b0",
@@ -1677,7 +1705,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "6fffcaf4c0e92356a52833a100a1ab279283f4a67bdf1ba65cad2be5a250e1c0",
@@ -1691,7 +1719,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "7cf69baf770848c7cb0be57b800fa10eec53901d3a64323b38860c21db86c322",
@@ -1705,7 +1733,7 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "ee910cae4734e834b70de812f6c009649d68164144854424fba59121c52f7cc8",
@@ -1719,7 +1747,63 @@
     "esporte": "formula1",
     "origemClassificacao": "feed-fixado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "c8be6a1de0b27be9b04598e2f0d83ab0156f460aafefca91f3edd491d82c5d7c",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Marcelo Paz deixa o Corinthians após pressão e protestos da torcida",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/marcelo-paz-deixa-o-corinthians-apos-pressao-e-protestos-da-torcida/",
+    "publicadoEm": "2026-10-20T20:54:11-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "562dd8fc90e39e602f26ad4423d086b17566d447d774b2bdba79d26cc477b426",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Vasco x Boca Juniors pela Copa Sul-Americana: onde assistir ao vivo, horário e escalação",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/vasco-x-boca-juniors-pela-copa-sul-americana-onde-assistir-ao-vivo-horario-e-escalacao-npres/",
+    "publicadoEm": "2026-10-20T20:30:00-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "58ccf720edde49b4c921dad75c8b97417acd2bff8cac7711d841152d7f3992a4",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Federação Turca suspende 147 dirigentes por violação de regras referentes a apostas esportivas",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/federacao-turca-suspende-147-dirigentes-por-violacao-de-regras-referentes-a-apostas-esportivas-npres/",
+    "publicadoEm": "2026-10-20T19:31:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": "grp-a5d94fe6",
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "6c5dd31c4d55dee6a84d354fb7ec62f4627c8af48b34a9849eb39d9ee3cd6c43",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Cuiabá pede extinção do plano de pagamento do Corinthians na CNRD após novo atraso",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/cuiaba-pede-extincao-do-plano-de-pagamento-do-corinthians-na-cnrd-apos-novo-atraso/",
+    "publicadoEm": "2026-10-20T19:11:41-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "9b807c0a34555fc0cf12f9644cc385d5a3384bcac849b2c8259c209a10fa0bbb",
@@ -1733,7 +1817,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "336c1daad1b80b15327cf0dc81d6e7be3df892b46c78886e5fb9ab7944139111",
@@ -1746,8 +1830,8 @@
     "dataEstimada": false,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
-    "grupoId": "grp-c0b39ef5",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "63901ea4f64bcd8afa4ee1910016504fdc7ab7aa60324915132090054772ed82",
@@ -1760,8 +1844,8 @@
     "dataEstimada": false,
     "esporte": "futebol-americano",
     "origemClassificacao": "lexico",
-    "grupoId": "grp-800002e3",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "501e720ae8b76f320f72f0979c7ed1ba18083a600a4dc6cb22d0966dc180dfbd",
@@ -1774,8 +1858,8 @@
     "dataEstimada": false,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
-    "grupoId": "grp-f9bbb4bd",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "0453f3b59c9df200d37b18ce904a647026d603bed46f01e5c94a89ff0d5a5a70",
@@ -1789,7 +1873,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "88c0c4c002b2b90acae6bcf80c7489b31764513565cd7a425a36d0b3b7c9e2c1",
@@ -1802,8 +1886,8 @@
     "dataEstimada": false,
     "esporte": "futebol",
     "origemClassificacao": "lexico",
-    "grupoId": "grp-67801948",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "cce7f0e95efd76043b8e74d2965ade1635fcea6b22493d100d39f030f5dd531b",
@@ -1816,8 +1900,8 @@
     "dataEstimada": false,
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
-    "grupoId": "grp-0a0d0aab",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "937af2b120406f9852c53107e9d9080a9873e1a01c19f53ec1a4fac15908f7a5",
@@ -1831,35 +1915,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "d42677efb9d8626446a18c4e4e517b287e3423627c2d0719f755274ee96d02af",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "PSG x Barcelona pela Champions League: onde assistir ao vivo, horário e escalação",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/psg-x-barcelona-pela-champions-league-onde-assistir-ao-vivo-horario-e-escalacao/",
-    "publicadoEm": "2026-10-20T15:00:00-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "fb50930c33bbe83fe2b25503a43cc7f0783df7dc9a795630412c0a91e2a6ae6e",
-    "fonteId": "estadao-esportes",
-    "feedId": "estadao-esportes",
-    "titulo": "Liverpool x Villarreal pela Champions League: onde assistir ao vivo, horário e escalação",
-    "resumo": null,
-    "link": "https://www.estadao.com.br/esportes/futebol/liverpool-x-villarreal-pela-champions-league-onde-assistir-ao-vivo-horario-e-escalacao/",
-    "publicadoEm": "2026-10-20T15:00:00-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "94ea5c592b91c4418bd7b13e5a4db3870d913b3ec1e774f9781d6b65fb533431",
@@ -1873,7 +1929,35 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "d42677efb9d8626446a18c4e4e517b287e3423627c2d0719f755274ee96d02af",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "PSG x Barcelona pela Champions League: onde assistir ao vivo, horário e escalação",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/psg-x-barcelona-pela-champions-league-onde-assistir-ao-vivo-horario-e-escalacao/",
+    "publicadoEm": "2026-10-20T15:00:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "fb50930c33bbe83fe2b25503a43cc7f0783df7dc9a795630412c0a91e2a6ae6e",
+    "fonteId": "estadao-esportes",
+    "feedId": "estadao-esportes",
+    "titulo": "Liverpool x Villarreal pela Champions League: onde assistir ao vivo, horário e escalação",
+    "resumo": null,
+    "link": "https://www.estadao.com.br/esportes/futebol/liverpool-x-villarreal-pela-champions-league-onde-assistir-ao-vivo-horario-e-escalacao/",
+    "publicadoEm": "2026-10-20T15:00:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f176e8bbf3df254dc09d1cd8da53780c436fb170166fa9f43e851e59990f6353",
@@ -1887,7 +1971,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "d327da842eeb8784a456fc293cb60e3a9761727c44cc34f44a784bfb3f91143c",
@@ -1901,7 +1985,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": "grp-fb63f219",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "74be296e6dcad6b979c0fe0db577006df1ebb35bfaa19bc1e1ec96c2c4317c31",
@@ -1915,7 +1999,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "63881efbd727c7eec45bf719b98f00070d4795e40a4e8887b395ba92d7a3ea3c",
@@ -1929,7 +2013,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "b5fbcf89e8bdd74bc517cf912dcc34bf495143c0a22e54115c5be2f45014a04e",
@@ -1943,7 +2027,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": "grp-0eab60ab",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f10d7b29df8db843ebe254088e7b204fe4afdd48ee6725a34332d024c0c50a87",
@@ -1957,7 +2041,7 @@
     "esporte": "basquete",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "fe1f932738353d6a219e13043b3c564e3a43ad01ec04a5e0c00345964cae3675",
@@ -1971,7 +2055,7 @@
     "esporte": "futebol-americano",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "6e0737442d25e0e53ba1fc5f3a7a4ef97a46151da86d7d88bc6a210782b79aed",
@@ -1985,7 +2069,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "67028a43a6d3de20af8e6fa473b8c4afe7cc0e741009df8426759749bd2c3367",
@@ -1999,7 +2083,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "c3f0e56f884e36b4b6f176ad8a7a1bb13864cbc3dc6e9d3cc71171f5369c5a5b",
@@ -2013,7 +2097,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": "grp-28e43851",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "906c26ab92470730d96c4658db7d8dc3766582bae4b51ae615687c0ba3d70f32",
@@ -2027,7 +2111,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": "grp-49fe17f6",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "675cdef458147e85e70c351de193ff8fc1598ba56f8b5e781d57c7f7f2ff9d99",
@@ -2041,7 +2125,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2a1063c3f66ad693c921f34d2c227fcbf8e4b92e2b7f0345444168e6fd0c6d0a",
@@ -2055,7 +2139,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "66f129d68f42cc5cf9fcf2444e8e18d5bba9f9617ff0de82b773b1a5a44a7250",
@@ -2069,7 +2153,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "76d071c89e830ab4668bfcd4b8a8bf1bdf17b09178b836fad8f02ce60c02524a",
@@ -2083,7 +2167,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "c80334df2b11d86506e0b5c761c849eb9eebe66bc0270e02fe0bbd1d18250dff",
@@ -2097,7 +2181,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "544a59679a00f38d7b94caedde5ecbdcc67cb9c3f40167dc02ea8d9987791afc",
@@ -2111,7 +2195,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "e6986d4368dc1f0978db363497c8b45243a1b0eb9c2bf2a7c635f9e960503fe8",
@@ -2125,7 +2209,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f7d8a81760867f02152973a91acd030e8dc4919fe421d62865a700885a66e566",
@@ -2139,7 +2223,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "85e63cca9ef79a39e7ed8adda3977e15d9c12ac4ae30b4380a92a7b8cf980494",
@@ -2153,7 +2237,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "66ee2510fcac4cb4603d57edf615a55057137cba96390f19114c7f8c804a9910",
@@ -2167,7 +2251,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "5e5a08a4b68a53c3985ed20251a8854f972f848442c7af0a06aec79dc98c5872",
@@ -2181,7 +2265,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "8f62c8e2bdaa09c116a5312419bfae88433f4642ee68ce6bc55dba6f47c47103",
@@ -2195,7 +2279,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2fbb6048e979ffd48094a5e3ea2d21afc1c41cfb1f7ff7429ba28c0b5bdd5d19",
@@ -2209,7 +2293,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "88c97c56f7fbbd91309d6cd9a04000b07234cdec87264fea3819adea78a9ef24",
@@ -2223,7 +2307,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "55c82a684df0ca4ab77cd1e32980dc50296f6d3f3b2f7a4a2e005800a1d2cf9a",
@@ -2237,7 +2321,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "1d21de900045626d1d8c593d932b0f802b3e0bd5293a68130fde176bc6e3c246",
@@ -2251,7 +2335,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "4a248d2c41a742d5bba08c24e3ae37897f19d692cd99d71c34ba8e2084b91124",
@@ -2265,7 +2349,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "8db506003f79fa24cca71fc2cb7d926618da4696b2c68c0597b5487f9ab2a2be",
@@ -2279,7 +2363,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "b27f8343b8b5a12f350df1f84f6898e3d0833c2ebd194ac8d4353f991ab6331a",
@@ -2293,7 +2377,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "63ae29e7192999da1914c5fdaeba32a3e549384fc6656a56500fd43a4a6b0e47",
@@ -2307,7 +2391,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "1d48a07e8e0a70299354612ddc59754ffd0f0e69a2522066283a1619afd0500e",
@@ -2321,7 +2405,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "be9b9d2efa518a3e4fbe549eb50d5160d0130750dac0003007db615a02c296fb",
@@ -2335,7 +2419,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "217124c3a20d8bbe801ddf2422fa37381013d066d1fd0215f64aaa24a4f416bf",
@@ -2349,7 +2433,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f24d17d9cff6497ae927e841754d3ced59c248dfaf93580ebad783d7b12977ca",
@@ -2363,7 +2447,105 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "de93a7dc62d8337d2ccf84cd7839052041536e6ef1b25f6b3cea110504625ac5",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Simulador Brasileirão Série A - 2026",
+    "resumo": "Simule o Campeonato Brasileiro Série A! Dê seus palpites, veja a classificação em tempo real e descubra quem será o campeão. Gratuito e fácil de usar.",
+    "link": "https://esportes.r7.com/futebol/campeonato-brasileiro-serie-a/simulador-do-brasileirao-serie-a-01012026/",
+    "publicadoEm": "2026-10-20T21:08:48-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "54a880fba83e7bf7959bf25b530c169c3819929a5635e5b648ace5480ca69214",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "GIRO DO MUNDO DA BOLA 20/10",
+    "resumo": null,
+    "link": "https://esportes.r7.com/tudo-de-esportes/giro-do-mundo-da-bola-2010-20102026/",
+    "publicadoEm": "2026-10-20T20:46:43-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "180581860279298056092e69ca4d72cc3f83f6edcbbc15c1f22470a3d89d49fd",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Arteta elogia zagueiros do Arsenal antes de teste duro contra Kane",
+    "resumo": "O técnico dos Gunners elogiou a parceria entre Ezri Konsa e Gabriel Magalhães antes do confronto do Arsenal com o Bayern de Munique de Harry Kane pela Champions League.",
+    "link": "https://esportes.r7.com/futebol/arteta-elogia-zagueiros-do-arsenal-antes-de-teste-duro-contra-kane-20102026/",
+    "publicadoEm": "2026-10-20T20:34:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "fefb057dd8d49bf179a0af913e8f2b8209fc2117eb0a46189d2ef5f36443a5b2",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Chivu defende jogadores antes de duelo com o Shakhtar: 'Assumo total responsabilidade'",
+    "resumo": "O técnico da Inter, Cristian Chivu, saiu em defesa do elenco diante das críticas antes do confronto contra o Shakhtar Donetsk pela Champions League.",
+    "link": "https://esportes.r7.com/futebol/chivu-defende-jogadores-antes-de-duelo-com-o-shakhtar-assumo-total-responsabilidade-20102026/",
+    "publicadoEm": "2026-10-20T20:30:00-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "a95227ede1b5485a4de2ade9e6ca503a39d2a00bbb00376151db468c0937f3eb",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "FAXINA NO CORINTHIANS JÁ TEM PRIMEIROS NOMES DEFINIDOS",
+    "resumo": "Quem não fica no Corinthians para 2027? #corinthians #timao #mercadodabola #nicola #informacao",
+    "link": "https://esportes.r7.com/tudo-de-esportes/faxina-no-corinthians-ja-tem-primeiros-nomes-definidos-20102026/",
+    "publicadoEm": "2026-10-20T20:00:00-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "2fcba3d8af0cb5d50d474d14edfdf9f820dcd8a0e595fa11cd8af522844db9b7",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "Diego Ribas relembra momento em que pisou no escudo tricolor: \"Fui folgado\" #EsporteRecord #Shorts",
+    "resumo": "➡️ Fique por dentro de mais notícias em nosso site oficial: https://esportes.r7.com/ Inscreva-se no canal R7: http://r7.com/sa1d Facebook: https://pt-br.facebook.com/R7Esportes/ Instagram: https://www.instagram.com/R7Esportes/ Twitter: https://twitter.com/r7esportes #R7Esportes #PortalR7",
+    "link": "https://esportes.r7.com/tudo-de-esportes/diego-ribas-relembra-momento-em-que-pisou-no-escudo-tricolor-fui-folgado-esporterecord-shorts-20102026/",
+    "publicadoEm": "2026-10-20T18:59:52-03:00",
+    "dataEstimada": false,
+    "esporte": "geral",
+    "origemClassificacao": "nao-classificado",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "7b1f6cd6669ddd865b20b0c5b8e6fc00b00ee79df9fa8609f1a260acb1796307",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "AO VIVO: CRISE NO TIMÃO, VASCO X BOCA, VERDÃO, FLA, SPFC, ZÊRO, GALO, GRENAL, MERCADO+",
+    "resumo": "NÃO ESQUECE DE DEIXAR LIKE, COMENTAR E SE INSCREVER!",
+    "link": "https://esportes.r7.com/tudo-de-esportes/ao-vivo-crise-no-timao-vasco-x-boca-verdao-fla-spfc-zero-galo-grenal-mercado-20102026/",
+    "publicadoEm": "2026-10-20T18:58:06-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "89cf4d9c9b3f297c6396499f70b590ee8c57dbab0201bfda4f0a1b5f21c0f4a0",
@@ -2377,7 +2559,21 @@
     "esporte": "mma",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
+  },
+  {
+    "id": "1377d6137fc9c0327229e82df3735c4656b18b2bbca8b54e65853bf8161ab95a",
+    "fonteId": "r7-esporte",
+    "feedId": "r7-esporte",
+    "titulo": "VASCO: FAÇANHA INÉDITA| PUNIÇÃO PESADA AO TIMÃO| E O TRANSFER DO SP| VERDÃO BUSCA QUINA| FLA, GRENAL",
+    "resumo": "NÃO ESQUEÇA DE DEIXAR LIKE, SE INSCREVER E COMENTAR! - Bastidores de Vasco x Boca Juniors - Corinthians corre risco de punição pesada após atrasar 2 parcelas - Por que São Paulo ainda não pagou o transfer ban que pode lhe tirar 6 pontos? - Palmeiras tenta 3ª série de 5 vitórias no ano - Flamengo…",
+    "link": "https://esportes.r7.com/tudo-de-esportes/vasco-facanha-inedita-punicao-pesada-ao-timao-e-o-transfer-do-sp-verdao-busca-quina-fla-grenal-20102026/",
+    "publicadoEm": "2026-10-20T18:36:13-03:00",
+    "dataEstimada": false,
+    "esporte": "futebol",
+    "origemClassificacao": "lexico",
+    "grupoId": null,
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "37d340553c29a96a7b6529de1c24edef7666ad0a84bd7687128246386b588685",
@@ -2391,7 +2587,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "4367405f3306a34870a18f8d7291020299ec3001d10554060da4d461f40771c5",
@@ -2405,21 +2601,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "de93a7dc62d8337d2ccf84cd7839052041536e6ef1b25f6b3cea110504625ac5",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Simulador Brasileirão Série A - 2026",
-    "resumo": "Simule o Campeonato Brasileiro Série A! Dê seus palpites, veja a classificação em tempo real e descubra quem será o campeão. Gratuito e fácil de usar.",
-    "link": "https://esportes.r7.com/futebol/campeonato-brasileiro-serie-a/simulador-do-brasileirao-serie-a-01012026/",
-    "publicadoEm": "2026-10-20T18:04:26-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "9bc5808afa5faef2756f542bcafe88971bad913b1ccc072907deece8e11500c9",
@@ -2433,7 +2615,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "d3716fb2903b0c0f004318fc99d435a198910b1a1894d57b26bc71c94f901811",
@@ -2447,7 +2629,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "59dbafe92a8a06cec43e44f267475db2f14c14461ac18984ae089bfb360c317d",
@@ -2461,7 +2643,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "bbf7d4601fc821a48efe5882748ac012081dfd2f4fad4c4ad630f08f17d23a5c",
@@ -2475,7 +2657,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "65a0399c413a471e62b99708bb276817c725e6a76aa0ffe7430a52244153ce44",
@@ -2489,7 +2671,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "c0e70a3d5d8fbaecece7012e650b2047699e841f619bc35c968c13335c39973f",
@@ -2503,7 +2685,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2eb8ee07a946ef10e6c6c19b327722903a0881adb7e182e2d0526028395ccd47",
@@ -2517,7 +2699,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f37415adfdb44601d00581fff8973a843072bca42502aca33638c96155918dfe",
@@ -2531,7 +2713,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "d671f4070dc052670c10b8415dba70acce26db007fe984df533f8b93eabae677",
@@ -2545,7 +2727,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": "grp-fb63f219",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "e08988489c8311d77527c718397e8cf7289fcc21ab94eda0dfe6bb36cc3a5ad9",
@@ -2559,7 +2741,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "a763a3387a0fb541f356043b61f91df4a054173125a618f7333b62b713cc1536",
@@ -2573,7 +2755,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "c41e69810d82fb4aad9f28d4b32302c9cfee14a9b4d0b1d2dca5d0a429176bab",
@@ -2587,7 +2769,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "6fa36de3b95a66cd4757be78722d1c0e18f205e5b7535e30487d9030b46a6dad",
@@ -2601,7 +2783,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "e810a4ec410e93b60846fe4338db3eccbb111bf7ed1f77aa32ee77383f17bd20",
@@ -2615,7 +2797,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "783dcc066420cff128b29b9e22b9348f9ac8b851bb7d477135aaf8aba5adc8c9",
@@ -2629,7 +2811,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "f450e1712bcb6a78d25ce6331a64dc893d9cba731a34478514007db1148a24f4",
@@ -2643,7 +2825,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "ac31f945fc59df94649237877540896712a1e3047a4f19f28916e6c11815409a",
@@ -2657,7 +2839,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "7f0e01b2adf3072e39368268e84eee9ad0e89f4e30a91813c62f68806e5c528c",
@@ -2671,7 +2853,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "b1d75b04bac97622c9ab1491b6f1d1d33c8e30c3858dcca8e5f020b397a3abd5",
@@ -2685,7 +2867,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "8a7a65446de5308e043b2fddccc80b6d714f663b6b27fdff1a09adc6347eee66",
@@ -2699,7 +2881,7 @@
     "esporte": "ginastica-artistica",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "a94a347df0ff2c6c197f75f087a4c6ce499006b1f1e4f8bca0a7ff3063623005",
@@ -2713,7 +2895,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "616cc9d070975ad88b635d06f5e7df3feed1e707fd41d180fb262baaeaa6128b",
@@ -2727,7 +2909,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "5b5bb69a3467da8ad81ec3d17c9a47624e6d8ffc5da185548e141e473a8a77a5",
@@ -2741,7 +2923,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "8eadce980ff4281ccd055e745fc1e84d6b86d74a04d16a2d2a485b3319db7c33",
@@ -2755,7 +2937,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "b5dbf7a1344d13f2334d26ffa5aefad72e9759dae4aeabe99ca5a159cd90e074",
@@ -2769,7 +2951,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "9257ff92bb8856cb381043e5b7471688a29fb8aa957536e28d29886d11e500c3",
@@ -2783,7 +2965,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": "grp-0eab60ab",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "6268fd7d5911f69f17da62b24f99c5794cf74e41541fa14c1056468daf4a95fe",
@@ -2797,7 +2979,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "01594bdde51d40e795594ad2e54ef01a9e38dd4fc348486d9a5ffe892d670fa0",
@@ -2811,7 +2993,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "76caa5e6174868ce7d0ddd53b54046c6e4fb59b1acdee9d15973c53bf4282785",
@@ -2825,7 +3007,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "b8ff21f6eba31098a812c82bd1b1a46cdb82ce81a6cd61ef1eff060751a995f0",
@@ -2839,7 +3021,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "53348f79236fa1907e1e6911ebc172347d8dfcb112969dec372cfe45c1e6a47d",
@@ -2853,7 +3035,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "9a0e5158885dba961fc5f45dacaf97b7eb7e10ca668056936d220c3e4590e41c",
@@ -2867,7 +3049,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "50976205aaf09c84ad8822fc42e10b1a7aeead15c26fec5bcc97600c7fe755cb",
@@ -2881,7 +3063,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": "grp-49fe17f6",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2b06c192e43b29943d39ae86ff2c4c91ab89a19e2acbca09a3c9eda5667d1b5e",
@@ -2895,7 +3077,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": "grp-28e43851",
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "d6d498ae1b28877a71cbb72765eee98ce2ec8729ba94066cd3b94c0f5b7f3a6d",
@@ -2909,7 +3091,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "c5c931a5a4f2750ae439d2dbf0d58b4aaa20535fe41eb0b10bf0772d94c67f5d",
@@ -2923,7 +3105,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "b7ca67c98cd96d15ea94037d0ab6cd883ddb8d719744bc3c18060594a193b544",
@@ -2937,7 +3119,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "a6dd4453d1d9243492a3757425eecf2e47b369fc5a2444e9d3263b2303020a21",
@@ -2951,7 +3133,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "12e39aa3896dc291a66347bf1de919e4a19c7bb8855f3f97173198c781e4423d",
@@ -2965,7 +3147,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "8ee207f82c7fb094a91424c96f5a98bd0d1605edcbb8e3ad410334d0f2b5880b",
@@ -2979,7 +3161,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2174d97fb555baf35002f93a23cd7e75a11f95a2b8ececf655ae0581796a18c2",
@@ -2993,7 +3175,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "5f10ca0d67bdd1aeedce6760dc551fd2d3b3d8cb727e0802bf95d687b4146899",
@@ -3007,7 +3189,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "77dfd9ab70c0117aa0487500f0c6dc054ec7b47f7ef94f004e4be8ca0967f3be",
@@ -3021,7 +3203,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2f05230e49b14a54bc3ed15d001ec67a683ff7c2bf1a5e03887c689eb49f6c9e",
@@ -3035,7 +3217,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "2fa4f0d5568376dc8c01deaaf2990097a19babb8e19fa3710d79b446c74b8346",
@@ -3049,7 +3231,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "5bdc86821d6af477807cafd1530e6103030965b81ac07cd62437a69cc184ef37",
@@ -3063,7 +3245,7 @@
     "esporte": "futebol",
     "origemClassificacao": "lexico",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "3f422738491cbbb4dd0a3b01c387c274227026ffbf0a8ec7ee05a12225e700d6",
@@ -3077,7 +3259,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "0e8ab49056e807adfe25b036c06c5a044ff073a5afb96dcfbb870eb3325a66f1",
@@ -3091,7 +3273,7 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   },
   {
     "id": "0d213e3a93faec257ac4ab32c9b31c9d45f45e32a91e7bc4bda9944f9eb7e4bb",
@@ -3105,104 +3287,6 @@
     "esporte": "geral",
     "origemClassificacao": "nao-classificado",
     "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "b68459281a189c309f776d60cb93b94d92b1da4ffe38a9f10008abc819172c9b",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Bellingham e companhia se preparam para o duelo contra o Sabah FK",
-    "resumo": "Confira o treino oficial do Borussia Dortmund no Estádio Olímpico de Baku, no Azerbaijão, enquanto a equipe de Niko Kovač se prepara para enfrentar o Sabah FK pela Champions League.",
-    "link": "https://esportes.r7.com/futebol/bellingham-e-companhia-se-preparam-para-o-duelo-contra-o-sabah-fk-20102026/",
-    "publicadoEm": "2026-10-20T00:55:00-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "c8e45e5c9d0d5acde23729360305bef47c0a689ecfa9c96a828ad0afed8a60c9",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "Melhores momentos: Seattle Sounders FC 1 x 1 CF Montréal (MLS)",
-    "resumo": "Melhores momentos: Seattle Sounders FC 1 x 1 CF Montréal (MLS)",
-    "link": "https://esportes.r7.com/futebol/melhores-momentos-seattle-sounders-fc-1-x-1-cf-montreal-mls-20102026/",
-    "publicadoEm": "2026-10-20T00:44:29-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "b864df62f27c1123a02527171ada112f8508af5e8b57560599fc2659fe45af66",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "GIRO DO MUNDO DA BOLA 19/10",
-    "resumo": null,
-    "link": "https://esportes.r7.com/tudo-de-esportes/giro-do-mundo-da-bola-1910-20102026/",
-    "publicadoEm": "2026-10-20T00:40:01-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "c20340bb3803a2722397d9ef9cfe3e680475b05b8ac2054a18757c6dcc49af99",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "JAMERSON AVALIA EMPATE E SALIENTA IMPORTÂNCIA DE PONTO CONQUISTADO",
-    "resumo": null,
-    "link": "https://esportes.r7.com/tudo-de-esportes/jamerson-avalia-empate-e-salienta-importancia-de-ponto-conquistado-20102026/",
-    "publicadoEm": "2026-10-20T00:31:54-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "feb54a10e65302dff74ac6905a4710bcec6cd0140c111cd84f1dfaebc357f39a",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "HUGO SOUZA AVALIA EMPATE E SALIENTA LUTA CONTRA O REBAIXAMENTO",
-    "resumo": null,
-    "link": "https://esportes.r7.com/tudo-de-esportes/hugo-souza-avalia-empate-e-salienta-luta-contra-o-rebaixamento-20102026/",
-    "publicadoEm": "2026-10-20T00:22:44-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "4b7b274fc17798bdc8c482d4498155b556d74096f4b52168fa56f2fdd8654320",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "O CORINTHIANS NÃO VAI CAIR PRA SÉRIE B",
-    "resumo": "Instagram: @pedroramiro Twitter: @_pedroramiro TikTok: @pedroramiroo Inscreva-se no Canal Oficial do Pedro Ramiro e fique por dentro de tudo o que rola no mundo do futebol! Aqui você encontra informações de mercado da bola, análises táticas, opiniões afiadas, entrevistas exclusivas e muito mais.…",
-    "link": "https://esportes.r7.com/tudo-de-esportes/o-corinthians-nao-vai-cair-pra-serie-b-20102026/",
-    "publicadoEm": "2026-10-20T00:20:22-03:00",
-    "dataEstimada": false,
-    "esporte": "futebol",
-    "origemClassificacao": "lexico",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
-  },
-  {
-    "id": "44df3fecf7a774ccafc4b5bbf0f0b56a9c5655afacc789474863c4762b5d3174",
-    "fonteId": "r7-esporte",
-    "feedId": "r7-esporte",
-    "titulo": "'MEDO? QUANDO CORINTIANOS TENTARAM INVADIR O PACAEMBU. A POLÍCIA NOS SALVOU'",
-    "resumo": "O Rogério Ceni me chamou e disse que eu estava sendo injustiçado, esquecido pela Seleção. Eu fiquei feliz demais. Para o Ceni me elogiar é porque eu estava jogando muito bem. E estava mesmo', recorda. Ninguém vestiu mais a camisa do São Caetano do que ele. Foram 451 partidas. Silvio Luiz viveu o…",
-    "link": "https://esportes.r7.com/tudo-de-esportes/medo-quando-corintianos-tentaram-invadir-o-pacaembu-a-policia-nos-salvou-20102026/",
-    "publicadoEm": "2026-10-20T00:15:26-03:00",
-    "dataEstimada": false,
-    "esporte": "geral",
-    "origemClassificacao": "nao-classificado",
-    "grupoId": null,
-    "ingeridoEm": "2026-10-20T22:01:42.053Z"
+    "ingeridoEm": "2026-10-21T00:32:04.639Z"
   }
 ]
