@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-22T20:43:45.987Z"
+      "ultimaAtualizacao": "2026-10-22T23:50:18.543Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -655,7 +655,7 @@
         "fim": "2026-11-21"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-22T20:43:45.987Z"
+      "ultimaAtualizacao": null
     },
     "participacao": {
       "competicaoId": "sul-americana",
@@ -665,28 +665,7 @@
       "resultadoFinal": null,
       "resumo": null
     },
-    "partidas": [
-      {
-        "id": "2607487",
-        "competicaoId": "sul-americana",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "externo-138818",
-        "visitanteId": "atletico-mg",
-        "dataHora": "2026-10-21",
-        "horarioDefinido": true,
-        "estadio": "Estadio Centenario",
-        "status": "finalizada",
-        "placar": {
-          "mandante": 2,
-          "visitante": 0
-        },
-        "externo": {
-          "lado": "mandante",
-          "nome": "Montevideo City Torque"
-        }
-      }
-    ]
+    "partidas": []
   },
   {
     "competicao": {
