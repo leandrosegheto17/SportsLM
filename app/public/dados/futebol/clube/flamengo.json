@@ -1,6 +1,47 @@
 [
   {
     "competicao": {
+      "id": "libertadores",
+      "nome": "Copa Libertadores da América",
+      "temporada": 2026,
+      "formato": "misto",
+      "janela": {
+        "inicio": "2026-02-03",
+        "fim": "2026-11-28"
+      },
+      "provedor": "thesportsdb",
+      "ultimaAtualizacao": "2026-10-22T01:10:51.762Z"
+    },
+    "participacao": {
+      "competicaoId": "libertadores",
+      "clubeId": "flamengo",
+      "status": "em-andamento",
+      "faseAtual": null,
+      "resultadoFinal": null,
+      "resumo": null
+    },
+    "partidas": [
+      {
+        "id": "2607183",
+        "competicaoId": "libertadores",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "flamengo",
+        "visitanteId": "externo-135160",
+        "dataHora": "2026-10-23",
+        "horarioDefinido": true,
+        "estadio": "Estádio do Maracanã",
+        "status": "agendada",
+        "placar": null,
+        "externo": {
+          "lado": "visitante",
+          "nome": "Estudiantes de La Plata"
+        }
+      }
+    ]
+  },
+  {
+    "competicao": {
       "id": "brasileirao-serie-a",
       "nome": "Campeonato Brasileiro Série A",
       "temporada": 2026,
@@ -10,7 +51,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-21T22:38:38.527Z"
+      "ultimaAtualizacao": "2026-10-22T01:10:51.762Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -643,50 +684,6 @@
       "resumo": null
     },
     "partidas": []
-  },
-  {
-    "competicao": {
-      "id": "libertadores",
-      "nome": "Copa Libertadores da América",
-      "temporada": 2026,
-      "formato": "misto",
-      "janela": {
-        "inicio": "2026-02-03",
-        "fim": "2026-11-28"
-      },
-      "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-21T22:38:38.527Z"
-    },
-    "participacao": {
-      "competicaoId": "libertadores",
-      "clubeId": "flamengo",
-      "status": "sem-dados",
-      "faseAtual": null,
-      "resultadoFinal": null,
-      "resumo": null
-    },
-    "partidas": [
-      {
-        "id": "2607182",
-        "competicaoId": "libertadores",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "externo-135160",
-        "visitanteId": "flamengo",
-        "dataHora": "2026-10-16",
-        "horarioDefinido": true,
-        "estadio": "Estadio Jorge Luis Hirschi",
-        "status": "finalizada",
-        "placar": {
-          "mandante": 0,
-          "visitante": 0
-        },
-        "externo": {
-          "lado": "mandante",
-          "nome": "Estudiantes de La Plata"
-        }
-      }
-    ]
   },
   {
     "competicao": {

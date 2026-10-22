@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-21T22:38:38.527Z"
+      "ultimaAtualizacao": "2026-10-22T01:10:51.762Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -652,7 +652,7 @@
         "fim": "2026-11-21"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": null
+      "ultimaAtualizacao": "2026-10-22T01:10:51.762Z"
     },
     "participacao": {
       "competicaoId": "sul-americana",
@@ -662,7 +662,28 @@
       "resultadoFinal": null,
       "resumo": null
     },
-    "partidas": []
+    "partidas": [
+      {
+        "id": "2606045",
+        "competicaoId": "sul-americana",
+        "rodada": null,
+        "fase": null,
+        "mandanteId": "vasco",
+        "visitanteId": "externo-135156",
+        "dataHora": "2026-10-21",
+        "horarioDefinido": true,
+        "estadio": "Estádio São Januário",
+        "status": "finalizada",
+        "placar": {
+          "mandante": 1,
+          "visitante": 3
+        },
+        "externo": {
+          "lado": "visitante",
+          "nome": "Boca Juniors"
+        }
+      }
+    ]
   },
   {
     "competicao": {
