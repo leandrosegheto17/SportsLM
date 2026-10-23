@@ -10,7 +10,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-23T13:42:47.022Z"
+      "ultimaAtualizacao": "2026-10-23T18:04:21.704Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
@@ -655,7 +655,7 @@
         "fim": "2026-11-28"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-23T13:42:47.022Z"
+      "ultimaAtualizacao": null
     },
     "participacao": {
       "competicaoId": "libertadores",
@@ -665,24 +665,7 @@
       "resultadoFinal": null,
       "resumo": null
     },
-    "partidas": [
-      {
-        "id": "2606268",
-        "competicaoId": "libertadores",
-        "rodada": null,
-        "fase": null,
-        "mandanteId": "palmeiras",
-        "visitanteId": "fluminense",
-        "dataHora": "2026-10-22",
-        "horarioDefinido": true,
-        "estadio": "Nubank Parque",
-        "status": "finalizada",
-        "placar": {
-          "mandante": 0,
-          "visitante": 1
-        }
-      }
-    ]
+    "partidas": []
   },
   {
     "competicao": {
