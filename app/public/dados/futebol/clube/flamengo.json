@@ -10,7 +10,7 @@
         "fim": "2026-11-28"
       },
       "provedor": "thesportsdb",
-      "ultimaAtualizacao": "2026-10-22T23:50:18.543Z"
+      "ultimaAtualizacao": "2026-10-23T02:59:41.020Z"
     },
     "participacao": {
       "competicaoId": "libertadores",
@@ -31,7 +31,7 @@
         "dataHora": "2026-10-23",
         "horarioDefinido": true,
         "estadio": "Estádio do Maracanã",
-        "status": "agendada",
+        "status": "aguardando-resultado",
         "placar": null,
         "externo": {
           "lado": "visitante",
@@ -51,7 +51,7 @@
         "fim": "2026-12-02"
       },
       "provedor": "football-data-org",
-      "ultimaAtualizacao": "2026-10-22T23:50:18.543Z"
+      "ultimaAtualizacao": "2026-10-23T02:59:41.020Z"
     },
     "participacao": {
       "competicaoId": "brasileirao-serie-a",
